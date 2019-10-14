@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby File.read(".ruby-version").chomp
+ruby "2.6.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.0"
@@ -44,6 +44,9 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem "listen", ">= 3.0.5", "< 3.3"
   gem "web-console", ">= 3.3.0"
+
+  # Add Junit formatter for rspec
+  gem "rspec_junit_formatter"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem "spring"
