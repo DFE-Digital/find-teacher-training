@@ -1,0 +1,457 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "resourceEnvironmentName": {
+      "type": "string",
+      "metadata": {
+        "description": "The prefix and environment of the resource."
+      }
+    },
+    "serviceName": {
+      "type": "string",
+      "metadata": {
+        "description": "The abbriviation of the service name to be used when naming a resource."
+      }
+    },
+    "keyVaultName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The name of the key vault."
+      }
+    },
+    "keyVaultResourceGroup": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The resource group for the key vault."
+      }
+    },
+    "customHostName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The custom hostname to add to the app service."
+      }
+    },
+    "certificateName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The name of the certificate in key vault."
+      }
+    },
+    "webpackerDevHost": {
+      "type": "string",
+      "defaultValue": "webpacker",
+      "metadata": {
+        "description": "Default webpacker dev host."
+      }
+    },
+    "dfeSignInSecret": {
+      "type": "string",
+      "metadata": {
+        "description": "Secret for dfe signin."
+      }
+    },
+    "dockerHubUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "the username associated with the dockerhub account"
+      }
+    },
+    "containerImageReference": {
+      "type": "string",
+      "metadata": {
+        "description": "The container image to pull from the server. Should be in image:tag format."
+      }
+    },
+    "assetsPreCompile": {
+      "type": "string",
+      "defaultValue": "true",
+      "metadata": {
+        "description": "Precompile assets."
+      }
+    },
+    "railsEnv": {
+      "type": "string",
+      "defaultValue": "production",
+      "metadata": {
+        "description": "Environment for the rails app."
+      }
+    },
+    "railsServeStaticFiles": {
+      "type": "string",
+      "defaultValue": "true",
+      "metadata": {
+        "description": "Serve static files."
+      }
+    },
+    "secretKeyBase": {
+      "type": "string",
+      "metadata": {
+        "description": "Secret Key Base."
+      }
+    },
+    "settingsManageBackendSecret": {
+      "type": "string",
+      "metadata": {
+        "description": "Auth secret for manage backend."
+      }
+    },
+    "sentryDSN": {
+      "type": "string",
+      "metadata": {
+        "description": "Connection string for Sentry monitoring."
+      }
+    },
+    "appServicePlanSize": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2",
+        "3"
+      ],
+      "defaultValue": "1"
+    },
+    "appServicePlanInstances": {
+      "type": "int",
+      "defaultValue": 1
+    },
+    "logstashHost": {
+      "type": "string",
+      "metadata": {
+        "description": "The host name of the logstash server."
+      }
+    },
+    "logstashPort": {
+      "type": "string",
+      "metadata": {
+        "description": "The port number for the logstash server connection."
+      }
+    },
+    "deployFrontDoor": {
+      "type": "string",
+      "defaultValue": "false",
+      "metadata": {
+        "description": "Control Azure Front Door service deployment."
+      }
+    }
+  },
+  "variables": {
+    "deploymentUrlBase": "https://raw.githubusercontent.com/DFE-Digital/bat-platform-building-blocks/master/templates/",
+    "resourceNamePrefix": "[toLower(concat(parameters('resourceEnvironmentName'),'-', parameters('serviceName')))]",
+    "keyvaultCertificateName": "[if(greater(length(parameters('certificateName')),0), parameters('certificateName'), replace(parameters('customHostName'), '.', '-'))]",
+    "appServiceName": "[concat(variables('resourceNamePrefix'), '-as')]",
+    "appServicePlanName": "[concat(variables('resourceNamePrefix'), '-asp')]",
+    "appServiceRuntimeStack": "[concat('DOCKER|', parameters('dockerHubUsername'), '/', parameters('containerImageReference'))]",
+    "frontDoorName": "[concat(variables('resourceNamePrefix'),'-fd')]",
+    "frontDoorAppServiceName": "[concat(variables('appServiceName'), '.azurewebsites.net')]",
+    "frontDoorWafPolicyName": "[replace(concat(variables('resourceNamePrefix'), '-wp'),'-', '')]",
+    "frontDoorWafMode": "Detection",
+    "storageAccountName": "[replace(concat(variables('frontDoorName'), 'str'), '-', '')]",
+    "workspaceName": "[concat(variables('resourceNamePrefix'),'-la')]",
+    "logAnalyticsResourceGroupName": "[toLower(concat(parameters('resourceEnvironmentName'),'-monitoring'))]",
+    "deployFrontDoor": "[toLower(parameters('deployFrontDoor'))]",
+    "backendPool": {
+      "name": "backendPool",
+      "backends": [
+        {
+          "address": "[variables('frontDoorAppServiceName')]",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "weight": 50,
+          "priority": 1,
+          "enabledState": "Enabled",
+          "backendHostHeader": "[variables('frontDoorAppServiceName')]"
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "name": "app-service-plan",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'app-service-plan.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "appServicePlanName": {
+            "value": "[variables('appServicePlanName')]"
+          },
+          "appServicePlanSize": {
+            "value": "[parameters('appServicePlanSize')]"
+          },
+          "appServicePlanInstances": {
+            "value": "[parameters('appServicePlanInstances')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "app-service-certificate",
+      "type": "Microsoft.Resources/deployments",
+      "condition": "[greater(length(parameters('certificateName')), 0)]",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'app-service-certificate.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "keyVaultCertificateName": {
+            "value": "[variables('keyVaultCertificateName')]"
+          },
+          "keyVaultName": {
+            "value": "[parameters('keyVaultName')]"
+          },
+          "keyVaultResourceGroup": {
+            "value": "[parameters('keyVaultResourceGroup')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "app-service",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'app-service-linux.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "appServiceName": {
+            "value": "[variables('appServiceName')]"
+          },
+          "appServicePlanResourceGroup": {
+            "value": "[resourceGroup().name]"
+          },
+          "appServicePlanName": {
+            "value": "[variables('appServicePlanName')]"
+          },
+          "runtimeStack": {
+            "value": "[variables('appServiceRuntimeStack')]"
+          },
+          "http20Enabled": {
+            "value": true
+          },
+          "appServiceAppSettings": {
+            "value": [
+              {
+                "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                "value": "[reference('app-insights').outputs.instrumentationKey.value]"
+              },
+              {
+                "name": "ASSETS_PRECOMPILE",
+                "value": "[parameters('assetsPreCompile')]"
+              },
+              {
+                "name": "RAILS_ENV",
+                "value": "[parameters('railsEnv')]"
+              },
+              {
+                "name": "RAILS_SERVE_STATIC_FILES",
+                "value": "[parameters('railsServeStaticFiles')]"
+              },
+              {
+                "name": "SECRET_KEY_BASE",
+                "value": "[parameters('secretKeyBase')]"
+              },
+              {
+                "name": "WEBPACKER_DEV_SERVER_HOST",
+                "value": "[parameters('webpackerDevHost')]"
+              },
+              {
+                "name": "SETTINGS__DFE_SIGNIN__SECRET",
+                "value": "[parameters('dfeSignInSecret')]"
+              },
+              {
+                "name": "SETTINGS__MANAGE_BACKEND__SECRET",
+                "value": "[parameters('settingsManageBackendSecret')]"
+              },
+              {
+                "name": "SENTRY_DSN",
+                "value": "[parameters('sentryDSN')]"
+              },
+              {
+                "name": "WEBSITE_SLOT_POLL_WORKER_FOR_CHANGE_NOTIFICATION",
+                "value": "0"
+              },
+              {
+                "name": "SETTINGS__LOGSTASH__HOST",
+                "value": "[parameters('logstashHost')]"
+              },
+              {
+                "name": "SETTINGS__LOGSTASH__PORT",
+                "value": "[parameters('logstashPort')]"
+              }
+            ]
+          },
+          "customHostName": {
+            "value": "[parameters('customHostName')]"
+          },
+          "certificateThumbprint": {
+            "value": "[if(greater(length(parameters('customHostname')), 0), reference('app-service-certificate', '2018-11-01').outputs.certificateThumbprint.value, '')]"
+          }
+        }
+      },
+      "dependsOn": [
+        "app-service-plan"
+      ]
+    },
+    {
+      "name": "app-service-logs",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'app-service-logs.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "appServiceName": {
+            "value": "[variables('appServiceName')]"
+          },
+          "httpLoggingEnabled": {
+            "value": true
+          }
+        }
+      },
+      "dependsOn": [
+        "app-service"
+      ]
+    },
+    {
+      "apiVersion": "2017-05-10",
+      "name": "app-insights",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'application-insights.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "appInsightsName": {
+            "value": "[variables('appServiceName')]"
+          },
+          "attachedService": {
+            "value": "[variables('appServiceName')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "storage-account",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "condition": "[equals(variables('deployFrontDoor'), 'true')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'storage-account.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "storageAccountName": {
+            "value": "[variables('storageAccountName')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "loganalytics-workspace",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "condition": "[equals(variables('deployFrontDoor'), 'true')]",
+      "resourceGroup": "[variables('logAnalyticsResourceGroupName')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('deploymentUrlBase'), 'loganalytics-workspace.json')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "workspaceName": {
+            "value": "[variables('workspaceName')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "front-door-with-waf",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2017-05-10",
+      "condition": "[equals(variables('deployFrontDoor'), 'true')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/DFE-Digital/bat-platform-building-blocks/131-secure-webapps-using-front-door-and-waf/templates/front-door-service.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "frontDoorName": {
+            "value": "[variables('frontDoorName')]"
+          },
+          "backendPool": {
+            "value": "[variables('backendPool')]"
+          },
+          "wafPolicyName": {
+            "value": "[variables('frontDoorWafPolicyName')]"
+          },
+          "wafMode": {
+            "value": "[variables('frontDoorWafMode')]"
+          },
+          "customDomainName": {
+            "value": "[parameters('customHostName')]"
+          },
+          "storageAccountName": {
+            "value": "[variables('storageAccountName')]"
+          },
+          "workspaceId": {
+            "value": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',variables('logAnalyticsResourceGroupName'),'/providers/Microsoft.OperationalInsights/workspaces/',variables('workspaceName'))]"
+          }
+        }
+      },
+      "dependsOn": [
+        "app-service",
+        "front-door-waf"
+      ]
+    },
+    {
+      "apiVersion": "2017-05-10",
+      "name": "front-door-waf",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/SkillsFundingAgency/das-platform-building-blocks/master/templates/front-door-waf-policy.json",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "policyName": {
+            "value": "[variables('frontDoorWafPolicyName')]"
+          },
+          "mode": {
+            "value": "[variables('frontDoorWafMode')]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "AppServiceName": {
+      "type": "string",
+      "value": "[variables('appServiceName')]"
+    }
+  }
+}
