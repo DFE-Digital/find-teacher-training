@@ -1,0 +1,20 @@
+inherit_gem:
+  govuk-lint: configs/rubocop/all.yml
+
+AllCops:
+  Exclude:
+    - "bin/rails"
+    - "bin/rake"
+    - "bin/setup"
+    - "bin/update"
+    - "bin/yarn"
+    - "bin/webpack"
+    - "bin/webpack-dev-server"
+    - "node_modules/**/*"
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/OutputSafety:
+  Enabled: false
+Rails/HelperInstanceVariable:
+  Enabled: false

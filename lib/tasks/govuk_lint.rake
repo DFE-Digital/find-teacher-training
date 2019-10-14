@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 desc "Lint ruby code"
 namespace :lint do
   task :ruby do
@@ -7,6 +9,6 @@ namespace :lint do
 
   task :scss do
     puts "Linting scss..."
-    system "bundle exec govuk-lint-sass app/webpacker/stylesheets"
+    system "bundle exec govuk-lint-sass app/webpacker/styles"
   end
 end

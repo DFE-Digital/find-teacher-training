@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Do yourself a favor and set these up right when you install the engine.
 
 CanonicalRails.setup do |config|
@@ -8,7 +10,7 @@ CanonicalRails.setup do |config|
   # This is the main host, not just the TLD, omit slashes and protocol. If you have more than one, pick the one you want to rank in search results.
 
   config.host = "www.find-postgraduate-teacher-training.service.gov.uk"
-  config.port# = '3002'
+  config.port # = '3002'
 
   # http://en.wikipedia.org/wiki/URL_normalization
   # Trailing slash represents semantics of a directory, ie a collection view - implying an :index get route;
@@ -16,12 +18,12 @@ CanonicalRails.setup do |config|
   #
   # Acts as a whitelist for routes to have trailing slashes
 
-  config.collection_actions# = [:index]
+  config.collection_actions # = [:index]
 
   # Parameter spamming can cause index dilution by creating seemingly different URLs with identical or near-identical content.
   # Unless whitelisted, these parameters will be omitted
 
-  config.whitelisted_parameters# = []
+  config.whitelisted_parameters # = []
 
   # Output a matching OpenGraph URL meta tag (og:url) with the canonical URL, as recommended by Facebook et al
   config.opengraph_url = true
