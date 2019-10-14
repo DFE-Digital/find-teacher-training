@@ -10,7 +10,7 @@
 
 1. Run `bundle install` to install the gem dependencies
 2. Run `yarn` to install node dependencies
-3. Run `bundle exec rails server` to launch the app on http://localhost:3000
+3. Run `bundle exec rails server` to launch the app on http://localhost:3002
 
 ## Running specs, linter(without auto correct) and annotate models and serializers
 
