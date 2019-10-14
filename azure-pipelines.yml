@@ -1,0 +1,112 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - "*"
+
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  IMAGE_NAME: '$(dockerHubUserName)/find-teacher-training'
+
+steps:
+- script: |
+    GIT_SHORT_SHA=$(echo $(Build.SourceVersion) | cut -c 1-7)
+    IMAGE_NAME_WITH_TAG=$(IMAGE_NAME):$GIT_SHORT_SHA
+    echo "##vso[build.updatebuildnumber]$GIT_SHORT_SHA"
+    echo "##vso[task.setvariable variable=IMAGE_NAME_WITH_TAG;]$IMAGE_NAME_WITH_TAG"
+  displayName: 'Set version number'
+
+- script: docker pull $(IMAGE_NAME):latest || true
+  displayName: "Pull latest docker image to cache"
+
+- task: Docker@1
+  displayName: Build image
+  inputs:
+    command: Build an image
+    imageName: $(IMAGE_NAME)
+    dockerFile: Dockerfile
+    arguments: '--cache-from $(IMAGE_NAME):latest'
+    addDefaultLabels: false
+
+- task: Docker@1
+  displayName: Run webpack
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: rails webpacker:compile
+    runInBackground: false
+
+- bash: |
+    docker run --rm $(IMAGE_NAME) rails spec SPEC_OPTS='--format RspecJunitFormatter' >rspec-results.xml
+    test_result=$?
+    cat rspec-results.xml
+    sed -i '$d;1,5d' rspec-results.xml
+    if [ "$test_result" == "0" ] ; then true ; else false ; fi
+  displayName: 'Run tests'
+
+- task: Docker@1
+  displayName: Run ruby linter
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: rubocop app config db lib spec --format clang
+    runInBackground: false
+
+- task: Docker@1
+  displayName: Run sass linter
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: govuk-lint-sass app/webpacker/stylesheets
+    runInBackground: false
+
+- task: Docker@1
+  displayName: Tag image with current build number $(Build.BuildNumber)
+  inputs:
+    command: Tag image
+    imageName: $(IMAGE_NAME)
+    arguments: $(IMAGE_NAME_WITH_TAG)
+
+- task: Docker@1
+  displayName: Docker Hub login
+  inputs:
+    command: login
+    containerregistrytype: Container Registry
+    dockerRegistryEndpoint: DfE Docker Hub
+
+- task: Docker@1
+  displayName: Push tagged image
+  inputs:
+    command: Push an image
+    imageName: $(IMAGE_NAME_WITH_TAG)
+
+- task: Docker@1
+  displayName: Push tagged image (latest) if master
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: Push an image
+    imageName: '$(IMAGE_NAME):latest'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+  inputs:
+    Contents: |
+     azure/**
+    TargetFolder: '$(build.artifactstagingdirectory)'
+    OverWrite: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: '*.xml'
+    failedTaskOnFailedTest: true
