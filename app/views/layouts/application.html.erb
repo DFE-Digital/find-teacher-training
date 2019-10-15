@@ -41,24 +41,21 @@
           <% end %>
         </div>
         <div class="govuk-header__content">
-          <%= link_to "Find Postgraduate Teacher Training", "/", class: "govuk-header__link govuk-header__link--service-name" %>
-          <button type="button" role="button" data-module="govuk-button" class="govuk-header__menu-button js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
-          <nav>
-            <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
-              <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
-                <%= link_to "Navigation item 1", "#", class: "govuk-header__link" %>
-              </li>
-              <li class="govuk-header__navigation-item">
-                <%= link_to "Navigation item 2", "#", class: "govuk-header__link" %>
-              </li>
-              <li class="govuk-header__navigation-item">
-                <%= link_to "Navigation item 3", "#", class: "govuk-header__link" %>
-              </li>
-            </ul>
-          </nav>
+          <%= link_to "Find postgraduate teacher training", "/", class: "govuk-header__link govuk-header__link--service-name" %>
         </div>
       </div>
     </header>
+
+    <div class="govuk-width-container">
+      <div class="govuk-phase-banner">
+        <p class="govuk-phase-banner__content">
+          <strong class="govuk-tag govuk-phase-banner__content__tag">BETA</strong>
+          <span class="govuk-phase-banner__text">
+            This is a new service - <%= link_to "take part in a short survey to tell us what you think", "https://docs.google.com/forms/d/e/1FAIpQLSeOpGpNzX19WUH-Hv0LnZmYKXnHhoLvK0_TH66xP8uNPlSpMw/viewform", class: "govuk-link" %>
+          </span>
+        </p>
+      </div>
+    </div>
 
     <div class="govuk-width-container">
       <main class="govuk-main-wrapper " id="main-content" role="main">
