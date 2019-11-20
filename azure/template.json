@@ -128,7 +128,7 @@
     "logstashPort": {
       "type": "string",
       "metadata": {
-        "description": "The port number for the logstash server connection."
+        "description": "The port number for the logstash server connection.  "
       }
     }
   },
