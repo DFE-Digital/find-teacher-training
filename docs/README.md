@@ -2,7 +2,7 @@
 
 Pull requests (PRs) provide an effective way to have code reviewed before it is merged to the codebase. Pull request triggers enable us to create pull request releases that deploy the PR code or PR builds to detect deployment issues before the code changes are merged. 
 We can use pull request triggers with code hosted on Azure Repos or GitHub. 
-![Image of Azure DevOps Pull Request Tigger Integration with Github](https://raw.githubusercontent.com/DFE-Digital/find-teacher-training/2443-Add-Docs/docs/PRAzureGitHub.png)
+![Image of Azure DevOps Pull Request Tigger Integration with Github](https://raw.githubusercontent.com/DFE-Digital/find-teacher-training/master/docs/PRAzureGitHub.png)
 <br/> 
 Details of setting up PR based build and release pipelines are discussed in this article here in detail: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/deploy-pull-request-builds?view=azure-devops
 One of the details missing from most of the articles found online is the decommissioning of the resources that gets deployed for PR validation when the PR is merged or closed. 
