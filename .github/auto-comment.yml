@@ -1,0 +1,6 @@
+# Comment to a new issue.
+pullRequestOpened: >
+  Auto pull request trigger is configured on this repository for PR validation.
+  To review the app deployed by this PR, please replace `####` in the URL given below with the first four characters of your branch name.
+  This could be your trello card number.
+  https://s121d02-####-find-as.azurewebsites.net/
