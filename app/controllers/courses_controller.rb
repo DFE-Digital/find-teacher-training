@@ -1,4 +1,3 @@
-require 'byebug'
 class CoursesController < ApplicationController
   def show
     @course = Course
