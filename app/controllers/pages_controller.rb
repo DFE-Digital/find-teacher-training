@@ -12,6 +12,10 @@ class PagesController < ApplicationController
   def accessibilty; end
 
   def show
-    render template: "pages/#{params[:page]}"
+    render template: "pages/#{page_param}"
+  end
+
+  def page_param
+    params.require(:page)
   end
 end
