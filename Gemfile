@@ -28,12 +28,26 @@ gem "foreman"
 # Canonical meta tag
 gem "canonical-rails"
 
+# Parsing JSON from an API
+gem "json_api_client"
+
+# Ability to render JSONAPI
+gem "jsonapi-deserializable"
+gem "jsonapi-renderer"
+gem "jsonapi-serializable"
+
+# Settings for the app
+gem "config"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
 
   # GOV.UK interpretation of rubocop for linting Ruby
   gem "govuk-lint"
+
+  # Factories to build models
+  gem "factory_bot_rails"
 
   # Debugging
   gem "pry-byebug"
@@ -62,6 +76,15 @@ group :test do
   gem "selenium-webdriver"
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem "chromedriver-helper"
+
+  # Get us some fake!
+  gem "faker"
+
+  # Page object for Capybara
+  gem "site_prism"
+
+  # Mock external requests
+  gem "webmock"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
