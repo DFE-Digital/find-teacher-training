@@ -4,12 +4,13 @@ class Base < JsonApiClient::Resource
       super(
         request_method,
         path,
+        headers: headers,
         params: params,
         body: body
       )
     end
   end
-  
+
   self.site = "#{Settings.manage_backend.base_url}/api/v3/"
   self.connection_class = MCBConnection
 

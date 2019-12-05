@@ -13,14 +13,13 @@ feature "Course show", type: :feature do
           course_code: "X130",
           provider: provider,
           provider_code: provider.provider_code,
-          recruitment_cycle: current_recruitment_cycle
-    )
+          recruitment_cycle: current_recruitment_cycle)
   end
 
   let(:current_recruitment_cycle) { build :recruitment_cycle }
 
   let(:course_page) { PageObjects::Page::Course.new }
-  let(:url) { "/recruitment_cycles/#{Settings.current_cycle}/providers/#{course.provider_code}/courses/#{course.course_code}"}
+  let(:url) { "/recruitment_cycles/#{Settings.current_cycle}/providers/#{course.provider_code}/courses/#{course.course_code}" }
 
   before do
     stub_api_v3_request(url, course.to_jsonapi)
