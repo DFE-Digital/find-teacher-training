@@ -67,6 +67,14 @@ steps:
     runInBackground: false
 
 - task: Docker@1
+  displayName: Run Brakeman static analysis
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: brakeman
+    runInBackground: false
+
+- task: Docker@1
   displayName: Tag image with current build number $(Build.BuildNumber)
   inputs:
     command: Tag image
