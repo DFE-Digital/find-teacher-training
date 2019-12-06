@@ -273,6 +273,8 @@ GEM
     selenium-webdriver (3.142.6)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sentry-raven (2.12.3)
+      faraday (>= 0.7.6, < 1.0)
     site_prism (3.4.1)
       addressable (~> 2.5)
       capybara (~> 3.3)
@@ -342,6 +344,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0.beta2)
   rspec_junit_formatter
   selenium-webdriver
+  sentry-raven
   site_prism
   spring
   spring-watcher-listen (~> 2.0.0)
