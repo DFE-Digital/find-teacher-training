@@ -1,0 +1,2 @@
+manage_backend:
+  base_url: http://localhost:3001
