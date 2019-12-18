@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ErrorsController < ActionController::Base
+class ErrorsController < ApplicationController
   layout "application"
 
   def not_found

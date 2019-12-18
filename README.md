@@ -33,5 +33,5 @@ bundle exec rubocop app config db lib spec Gemfile --format clang -a
 
 or
 
-bundle exec govuk-lint-sass app/webpacker/styles
+bundle exec scss-lint app/webpacker/styles
 ```
