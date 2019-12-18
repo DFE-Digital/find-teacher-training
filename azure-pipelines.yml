@@ -63,7 +63,7 @@ steps:
   inputs:
     command: Run an image
     imageName: $(IMAGE_NAME)
-    containerCommand: govuk-lint-sass app/webpacker/styles
+    containerCommand: scss-lint app/webpacker/styles
     runInBackground: false
 
 - task: Docker@1
