@@ -5,6 +5,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.6.1"
 
+# Decorate logic to keep it of the views and helper methods
+gem "draper"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.0"
 
@@ -42,9 +45,15 @@ gem "config"
 # Error tracking
 gem "sentry-raven"
 
+# Render nice markdown
+gem "redcarpet"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+
+  # Better use of test helpers such as save_and_open_page/screenshot
+  gem "launchy"
 
   # GOV.UK interpretation of rubocop for linting Ruby
   gem "rubocop-govuk"
@@ -61,6 +70,10 @@ group :development, :test do
 end
 
 group :development do
+  # For better errors
+  gem "better_errors"
+  gem "binding_of_caller"
+
   # Static analysis
   gem "brakeman"
 

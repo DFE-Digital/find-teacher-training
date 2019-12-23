@@ -1,1 +1,20 @@
 @import "../../../node_modules/govuk-frontend/govuk/all";
+
+@import "definition-list";
+
+.govuk-list--dash {
+  margin-bottom: govuk-spacing(8);
+  padding-left: govuk-spacing(3);
+
+  li {
+    position: relative;
+
+    &:before {
+      color: govuk-colour("dark-grey");
+      content: "\2013";
+      left: -16px;
+      position: absolute;
+      top: 0;
+    }
+  }
+}

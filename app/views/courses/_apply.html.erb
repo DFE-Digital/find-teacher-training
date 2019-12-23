@@ -1,0 +1,73 @@
+<%= content_for :before_body_close do %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= Settings.google.maps_api_key %>&callback=initLocationsMap" async defer></script>
+<% end %>
+
+<div class="govuk-!-margin-bottom-8">
+  <h2 class="govuk-heading-l" id="section-apply">Apply</h2>
+  <p class="govuk-body">
+    <%= link_to 'Apply on the UCAS website', 'https://2020.teachertraining.apply.ucas.com/apply/student/login.do', class: 'govuk-link' %>. You’ll need to register with UCAS before you can apply.
+  </p>
+  <p class="govuk-body">
+    Visit Get into Teaching for <%= link_to 'guidance on applying for teacher training', 'https://getintoteaching.education.gov.uk/how-to-apply/apply', class: 'govuk-link' %>.
+  </p>
+
+  <p class="govuk-body">
+    When you apply you’ll need these codes for the Choices section of your application form:
+  </p>
+  <div class="govuk-inset-text">
+    <ul class="govuk-list">
+      <li class="govuk-!-margin-bottom-2">
+        Training provider code:
+        <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold"><%= course.provider.provider_code %></span>
+      </li>
+      <li>
+        Training programme code:
+        <span class="govuk-!-display-block govuk-!-font-size-36 govuk-!-font-weight-bold"><%= course.course_code %></span>
+      </li>
+    </ul>
+  </div>
+  <h3 class="govuk-heading-m">Choose a training location</h3>
+  <p class="govuk-body">You’ll also need to choose a training location – select the relevant location name on the application form.</p>
+
+  <div id="locations-map" class="app-google-map" data-qa="course__locations_map"></div>
+
+  <table class="govuk-table app-table--vertical-align-middle" data-qa="course__choose_a_training_location">
+    <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+        <th class="govuk-table__header" scope="col">Location</th>
+        <th class="govuk-table__header" scope="col">Vacancies</th>
+        <th class="govuk-table__header" scope="col">Code</th>
+      </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+      <% course.preview_site_statuses.each do |site_status| %>
+        <tr class="govuk-table__row">
+          <td class="govuk-table__cell">
+            <strong><%= site_status.site.location_name %></strong>
+            <br>
+            <%= site_status.site.decorate.full_address %>
+          </td>
+          <td class="govuk-table__cell">
+            <%= site_status.has_vacancies? ? 'Yes' : 'No' %>
+          </td>
+          <td class="govuk-table__cell"><%= site_status.site.code %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  window.trainingLocations = [
+    <% course.preview_site_statuses.each do |site_status| %>
+      {
+        "code": "<%= site_status.site.code %>",
+        "name": "<%= site_status.site.location_name %>",
+        "lat": "<%= site_status.site.latitude.present? ? site_status.site.latitude : course.provider.latitude %>",
+        "lng": "<%= site_status.site.longitude.present? ? site_status.site.longitude : course.provider.longitude %>",
+        "address": "<%= site_status.site.decorate.full_address %>",
+        "vacancies": "<%= site_status.has_vacancies? ? "" : "No vacancies" %>"
+      },
+    <% end %>
+  ]
+</script>
