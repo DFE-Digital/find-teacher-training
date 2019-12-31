@@ -6,6 +6,8 @@ class ProviderDecorator < Draper::Decorator
   end
 
   def website
+    return if object.website.blank?
+
     object.website.start_with?("http") ? object.website : ("http://" + object.website)
   end
 end

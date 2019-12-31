@@ -11,8 +11,18 @@ describe ProviderDecorator do
 
   let(:decorated_provider) { provider.decorate }
 
-  it "returns a valid website URL" do
-    expect(decorated_provider.website).to eq("http://www.acmescitt.com")
+  describe "#website" do
+    let(:subject) { decorated_provider.website }
+
+    context "with website" do
+      it { is_expected.to eq("http://www.acmescitt.com") }
+    end
+
+    context "without website" do
+      let(:provider) { build(:provider, website: nil) }
+
+      it { is_expected.to eq(nil) }
+    end
   end
 
   it "returns the full address" do
