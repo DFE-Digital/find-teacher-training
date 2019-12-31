@@ -1,0 +1,10 @@
+<div class="govuk-!-margin-bottom-8">
+  <h2 class="govuk-heading-l" id="section-train-with-disabilities">Training with disabilities and other needs</h2>
+  <div data-qa="course__train_with_disabilities">
+    <% if course.provider.train_with_disability.present? %>
+      <%= markdown(course.provider.train_with_disability) %>
+    <% else %>
+      <p class="app-missing-section">Please add details about <%= link_to 'training with disabilities', about_provider_recruitment_cycle_path(course.provider.provider_code, course.provider.recruitment_cycle_year) %>.</p>
+    <% end %>
+  </div>
+</div>

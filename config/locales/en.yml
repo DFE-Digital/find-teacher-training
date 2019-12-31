@@ -27,7 +27,23 @@
 #   'true': 'foo'
 #
 # To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
+# available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  number:
+    currency:
+      format:
+        unit: "£"
+        delimiter: ","
+        separator: "."
+        precision: 0
+  date:
+    formats:
+      default: "%-d %B %Y"
+      short: "%B %Y"
+  qualifications:
+    qts: "QTS"
+    pgce: "PGCE only (without QTS)"
+    pgce_with_qts: "PGCE with QTS"
+    pgde: "PGDE only (without QTS)"
+    pgde_with_qts: "PGDE with QTS"

@@ -13,7 +13,7 @@ FactoryBot.define do
           # to be the name of the class as a symbol, and the value is the
           # serializer class.
           #
-          # For example: User: UserSerializer
+          # For example: User: CourseSerializer
           # This is done in two places, perhaps they should be unified?
           Course: CourseSerializer,
           Provider: ProviderSerializer,
