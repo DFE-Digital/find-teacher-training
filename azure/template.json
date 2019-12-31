@@ -130,6 +130,13 @@
       "metadata": {
         "description": "The port number for the logstash server connection."
       }
+    },
+    "resourceTags": {
+        "type": "object",
+        "defaultValue": {},
+        "metadata": {
+            "description": "List of resource tags as a JSON object"
+        }
     }
   },
   "variables": {
@@ -160,6 +167,9 @@
           },
           "appServicePlanInstances": {
             "value": "[parameters('appServicePlanInstances')]"
+          },
+          "resourceTags":{
+              "value": "[parameters('resourceTags')]"
           }
         }
       }
@@ -184,6 +194,9 @@
           },
           "keyVaultResourceGroup": {
             "value": "[parameters('keyVaultResourceGroup')]"
+          },
+          "resourceTags":{
+              "value": "[parameters('resourceTags')]"
           }
         }
       }
@@ -271,6 +284,9 @@
           },
           "certificateThumbprint": {
             "value": "[if(greater(length(parameters('customHostname')), 0), reference('app-service-certificate', '2018-11-01').outputs.certificateThumbprint.value, '')]"
+          },
+          "resourceTags":{
+              "value": "[parameters('resourceTags')]"
           }
         }
       },
@@ -294,6 +310,9 @@
           },
           "httpLoggingEnabled": {
             "value": true
+          },
+          "resourceTags":{
+              "value": "[parameters('resourceTags')]"
           }
         }
       },
@@ -317,6 +336,9 @@
           },
           "attachedService": {
             "value": "[variables('appServiceName')]"
+          },
+          "resourceTags":{
+              "value": "[parameters('resourceTags')]"
           }
         }
       }
