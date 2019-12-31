@@ -137,6 +137,12 @@
         "metadata": {
             "description": "List of resource tags as a JSON object"
         }
+    },
+    "settingsGoogleMapsAPIKey": {
+      "type": "string",
+      "metadata": {
+        "description": "API Key for Google Maps"
+      }
     }
   },
   "variables": {
@@ -276,6 +282,10 @@
               {
                 "name": "SETTINGS__LOGSTASH__PORT",
                 "value": "[parameters('logstashPort')]"
+              },
+              {
+                "name": "SETTINGS__GOOGLE__MAPS_API_KEY",
+                "value": "[parameters('settingsGoogleMapsAPIKey')]"
               }
             ]
           },
