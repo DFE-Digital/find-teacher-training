@@ -18,6 +18,9 @@ FactoryBot.define do
           Course: CourseSerializer,
           Provider: ProviderSerializer,
           RecruitmentCycle: RecruitmentCycleSerializer,
+          Site: SiteSerializer,
+          SiteStatus: SiteStatusSerializer,
+          Subject: SubjectSerializer,
         },
         include: opts[:include],
       )
