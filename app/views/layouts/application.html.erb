@@ -14,8 +14,7 @@
     <%= favicon_link_tag '/assets/images/govuk-apple-touch-icon-152x152.png', rel: 'apple-touch-icon', type: 'image/png', size: '152x152' %>
     <%= favicon_link_tag '/assets/images/govuk-apple-touch-icon-167x167.png', rel: 'apple-touch-icon', type: 'image/png', size: '167x167' %>
     <%= favicon_link_tag '/assets/images/govuk-apple-touch-icon-180x180.png', rel: 'apple-touch-icon', type: 'image/png', size: '180x180' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload', media: 'all' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= stylesheet_pack_tag 'application' %>
     <%= content_for(:head) %>
   </head>
 
@@ -99,5 +98,7 @@
         </div>
       </div>
     </footer>
+    <%= javascript_pack_tag 'application' %>
+    <%= content_for(:body_end) %>
   </body>
 </html>
