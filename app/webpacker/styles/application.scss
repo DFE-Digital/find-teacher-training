@@ -30,3 +30,7 @@
     width: 100%;
   }
 }
+
+.govuk-list li > .govuk-body:last-child {
+  margin-bottom: 0;
+}
