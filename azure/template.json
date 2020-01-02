@@ -49,12 +49,6 @@
         "description": "Default webpacker dev host."
       }
     },
-    "dfeSignInSecret": {
-      "type": "string",
-      "metadata": {
-        "description": "Secret for dfe signin."
-      }
-    },
     "dockerHubUsername": {
       "type": "string",
       "metadata": {
@@ -92,12 +86,6 @@
       "type": "string",
       "metadata": {
         "description": "Secret Key Base."
-      }
-    },
-    "settingsManageBackendSecret": {
-      "type": "string",
-      "metadata": {
-        "description": "Auth secret for manage backend."
       }
     },
     "sentryDSN": {
@@ -258,14 +246,6 @@
               {
                 "name": "WEBPACKER_DEV_SERVER_HOST",
                 "value": "[parameters('webpackerDevHost')]"
-              },
-              {
-                "name": "SETTINGS__DFE_SIGNIN__SECRET",
-                "value": "[parameters('dfeSignInSecret')]"
-              },
-              {
-                "name": "SETTINGS__MANAGE_BACKEND__SECRET",
-                "value": "[parameters('settingsManageBackendSecret')]"
               },
               {
                 "name": "SENTRY_DSN",
