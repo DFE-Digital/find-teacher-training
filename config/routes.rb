@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get "/500", to: "errors#internal_server_error", via: :all
 
   get "/course/:provider_code/:course_code", to: "courses#show", as: "course"
+  get "/results", to: "results#index", as: "results"
 end

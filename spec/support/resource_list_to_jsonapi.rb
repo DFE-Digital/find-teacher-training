@@ -16,6 +16,7 @@ def resource_list_to_jsonapi(resource_list, **opts)
     },
     include: opts[:include],
     meta: opts[:meta],
+    links: opts[:links],
   )
 
   # Somehow, the JSONAPI Serializer reifies these objects as 'nil' if they

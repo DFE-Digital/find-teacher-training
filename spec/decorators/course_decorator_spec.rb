@@ -3,7 +3,11 @@ require "rails_helper"
 describe CourseDecorator do
   let(:current_recruitment_cycle) { build :recruitment_cycle }
   let(:next_recruitment_cycle) { build :recruitment_cycle, :next_cycle }
-  let(:provider) { build(:provider, accredited_body?: false, website: "www.acmescitt.com") }
+  let(:provider) do
+    build(:provider,
+          accredited_body?: false,
+          website: "www.acmescitt.com")
+  end
   let(:english) { build(:subject, :english) }
   let(:biology) { build(:subject, :biology) }
   let(:mathematics) { build(:subject, :mathematics) }
@@ -31,11 +35,11 @@ describe CourseDecorator do
     build(:site_status, :full_time_and_part_time, site: site)
   end
 
-  let(:course_response) {
+  let(:course_response) do
     course.to_jsonapi(
       include: %i[sites provider accrediting_provider recruitment_cycle subjects],
     )
-  }
+  end
 
   let(:decorated_course) { course.decorate }
 
@@ -372,6 +376,46 @@ describe CourseDecorator do
           expect(decorated_course.has_early_career_payments?).to eq(true)
         end
       end
+    end
+  end
+
+  describe "#main_address" do
+    context "with a full address" do
+      let(:provider) do
+        build(:provider,
+              accredited_body?: false,
+              website: "www.acmescitt.com",
+              address1: "Building 64",
+              address2: "32 Copton Lane",
+              address3: "Bracknel",
+              address4: "Berkshire",
+              postcode: "NXT STP")
+      end
+
+      it "returns a full address" do
+        expect(decorated_course.main_address).to eq("Building 64, 32 Copton Lane, Bracknel, Berkshire, NXT STP")
+      end
+    end
+
+    context "with a partial address" do
+      let(:provider) do
+        build(:provider,
+              accredited_body?: false,
+              website: "www.acmescitt.com",
+              address1: "Building 64",
+              address2: "32 Copton Lane",
+              postcode: "NXT STP")
+      end
+
+      it "returns a partial address" do
+        expect(decorated_course.main_address).to eq("Building 64, 32 Copton Lane, NXT STP")
+      end
+    end
+  end
+
+  describe "#display_title" do
+    it "returns the course name with the course code" do
+      expect(decorated_course.display_title).to eq("Mathematics (A1)")
     end
   end
 end
