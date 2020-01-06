@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "pages#home"
-
-  get "/pages/:page", to: "pages#show"
+  root to: redirect(Settings.search_and_compare_ui.base_url)
 
   get "/terms-conditions", to: "pages#terms", as: "terms"
   get "/accessibility", to: "pages#accessibility", as: "accessibility"
