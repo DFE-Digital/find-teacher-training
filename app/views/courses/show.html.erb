@@ -1,5 +1,9 @@
 <%= content_for :page_title, "#{course.name_and_code} with #{course.provider.provider_name}" %>
 
+<%= content_for(:before_content) do %>
+  <div data-module="back-link"></div>
+<% end %>
+
 <h1 class="govuk-heading-xl">
   <span class="govuk-!-font-size-36" data-qa="course__provider_name"><%= course.provider.provider_name %></span><br>
   <%= course.name_and_code %>
