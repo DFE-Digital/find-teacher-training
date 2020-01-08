@@ -1,10 +1,6 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-schools">How school placements work</h2>
   <div data-qa="course__about_schools">
-    <% if course.how_school_placements_work.present? %>
-      <%= markdown(course.how_school_placements_work) %>
-    <% else %>
-      <p class="app-missing-section">Please add details for this section.</p>
-    <% end %>
+    <%= markdown(course.how_school_placements_work) %>
   </div>
 </div>

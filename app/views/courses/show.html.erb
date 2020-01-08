@@ -46,11 +46,15 @@
   <div class="govuk-grid-column-two-thirds">
     <h2 class="govuk-heading-m">Contents</h2>
     <ul class="govuk-list govuk-list--dash course-contents govuk-!-margin-bottom-8">
-      <li><%= link_to 'About the course', '#section-about', class: 'govuk-link' %></li>
+      <% if course.about_course.present? %>
+        <li><%= link_to 'About the course', '#section-about', class: 'govuk-link' %></li>
+      <% end %>
       <% if course.interview_process.present? %>
         <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
       <% end %>
-      <li><%= link_to 'How school placements work', '#section-schools', class: 'govuk-link' %></li>
+      <% if course.how_school_placements_work.present? %>
+        <li><%= link_to 'How school placements work', '#section-schools', class: 'govuk-link' %></li>
+      <% end %>
       <% if course.has_fees? %>
         <li><%= link_to 'Fees', '#section-fees', class: 'govuk-link' %></li>
       <% else %>
@@ -58,20 +62,28 @@
       <% end %>
       <li><%= link_to 'Financial support', '#section-financial-support', class: 'govuk-link' %></li>
       <li><%= link_to 'Requirements', '#section-entry', class: 'govuk-link' %></li>
-      <li><%= link_to 'About the training provider', '#section-about-provider', class: 'govuk-link' %></li>
-      <li><%= link_to 'Training with disabilities and other needs', '#section-train-with-disabilities', class: 'govuk-link' %></li>
+      <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
+        <li><%= link_to 'About the training provider', '#section-about-provider', class: 'govuk-link' %></li>
+      <% end %>
+      <% if course.provider.train_with_disability.present? %>
+        <li><%= link_to 'Training with disabilities and other needs', '#section-train-with-disabilities', class: 'govuk-link' %></li>
+      <% end %>
       <li><%= link_to 'Contact details', '#section-contact', class: 'govuk-link' %></li>
       <li><%= link_to 'Apply', '#section-apply', class: 'govuk-link' %></li>
       <li><%= link_to 'Support and advice', '#section-advice', class: 'govuk-link' %></li>
     </ul>
 
-    <%= render partial: 'courses/about_course' %>
+    <% if course.about_course.present? %>
+      <%= render partial: 'courses/about_course' %>
+    <% end %>
 
     <% if course.interview_process.present? %>
       <%= render partial: 'courses/interview_process' %>
     <% end %>
 
-    <%= render partial: 'courses/about_schools' %>
+    <% if course.how_school_placements_work.present? %>
+      <%= render partial: 'courses/about_schools' %>
+    <% end %>
 
     <% if course.has_fees? %>
       <%= render partial: 'courses/fees' %>
@@ -83,9 +95,13 @@
 
     <%= render partial: 'courses/entry_requirements_qualifications' %>
 
-    <%= render partial: 'courses/about_the_provider' %>
+    <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
+      <%= render partial: 'courses/about_the_provider' %>
+    <% end %>
 
-    <%= render partial: 'courses/train_with_disabilities' %>
+    <% if course.provider.train_with_disability.present? %>
+      <%= render partial: 'courses/train_with_disabilities' %>
+    <% end %>
 
     <%= render partial: 'courses/contact_details' %>
 

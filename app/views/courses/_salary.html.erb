@@ -2,7 +2,5 @@
   <h2 class="govuk-heading-l" id="section-salary">Salary</h2>
   <% if course.salary_details.present? %>
     <%= markdown(course.salary_details) %>
-  <% else %>
-    <p class="app-missing-section">Please add details for this section.</p>
   <% end %>
 </div>
