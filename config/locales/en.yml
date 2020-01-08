@@ -43,7 +43,7 @@ en:
       short: "%B %Y"
   qualifications:
     qts: "QTS"
-    pgce: "PGCE only (without QTS)"
+    pgce: "PGCE"
     pgce_with_qts: "PGCE with QTS"
-    pgde: "PGDE only (without QTS)"
+    pgde: "PGDE"
     pgde_with_qts: "PGDE with QTS"
