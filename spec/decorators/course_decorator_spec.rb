@@ -379,40 +379,6 @@ describe CourseDecorator do
     end
   end
 
-  describe "#main_address" do
-    context "with a full address" do
-      let(:provider) do
-        build(:provider,
-              accredited_body?: false,
-              website: "www.acmescitt.com",
-              address1: "Building 64",
-              address2: "32 Copton Lane",
-              address3: "Bracknel",
-              address4: "Berkshire",
-              postcode: "NXT STP")
-      end
-
-      it "returns a full address" do
-        expect(decorated_course.main_address).to eq("Building 64, 32 Copton Lane, Bracknel, Berkshire, NXT STP")
-      end
-    end
-
-    context "with a partial address" do
-      let(:provider) do
-        build(:provider,
-              accredited_body?: false,
-              website: "www.acmescitt.com",
-              address1: "Building 64",
-              address2: "32 Copton Lane",
-              postcode: "NXT STP")
-      end
-
-      it "returns a partial address" do
-        expect(decorated_course.main_address).to eq("Building 64, 32 Copton Lane, NXT STP")
-      end
-    end
-  end
-
   describe "#display_title" do
     it "returns the course name with the course code" do
       expect(decorated_course.display_title).to eq("Mathematics (A1)")

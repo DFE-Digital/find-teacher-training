@@ -111,16 +111,6 @@ class CourseDecorator < Draper::Decorator
     end
   end
 
-  def main_address
-    [
-      provider.address1,
-      provider.address2,
-      provider.address3,
-      provider.address4,
-      provider.postcode,
-    ].reject(&:blank?).join(", ")
-  end
-
   def display_title
     "#{name} (#{course_code})"
   end
