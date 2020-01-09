@@ -1,13 +1,11 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-entry">Requirements</h2>
-  <h3 class="govuk-heading-m">Qualifications</h3>
-  <div data-qa="course__required_qualifications">
-    <% if course.required_qualifications.present? %>
+  <% if course.required_qualifications.present? %>
+    <h3 class="govuk-heading-m">Qualifications</h3>
+    <div data-qa="course__required_qualifications">
       <%= markdown(course.required_qualifications) %>
-    <% else %>
-      <p class="app-missing-section">Please add details for this section.</p>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <% if course.personal_qualities.present? %>
     <h3 class="govuk-heading-m">Personal qualities</h3>
