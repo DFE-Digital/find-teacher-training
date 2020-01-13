@@ -28,6 +28,9 @@ gem "bootsnap", ">= 1.1.0", require: false
 # Manage multiple processes i.e. web server and webpack
 gem "foreman"
 
+# Kaminari, pagination templating
+gem "kaminari"
+
 # Canonical meta tag
 gem "canonical-rails"
 

@@ -24,10 +24,10 @@ module Helpers
     # TODO: Move this to be returned with the user.
     stub_api_v2_request(
       "/recruitment_cycles/#{Settings.current_cycle}/providers",
-      provider.to_jsonapi,
+      resource_to_jsonapi(provider),
     )
     Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:dfe]
-    stub_api_v2_request("/sessions", user.to_jsonapi, :post)
+    stub_api_v2_request("/sessions", resource_to_jsonapi(user), :post)
 
     disable_authorised_development_user
   end
@@ -48,7 +48,7 @@ module Helpers
       last_name: user.last_name,
     )
 
-    stub_api_v2_request("/sessions", user.to_jsonapi, :post)
+    stub_api_v2_request("/sessions", resource_to_jsonapi(user), :post)
 
     begin
       Settings[:authorised_user] = authorised_user
@@ -109,14 +109,14 @@ module Helpers
 
     url += "?#{query_params.to_param}" if query_params.any?
 
-    jsonapi_response ||= resource.to_jsonapi(include: include)
+    jsonapi_response ||= resource_to_jsonapi(resource, include: include)
     stub_api_v2_request(url, jsonapi_response, method, &validate_request_body)
   end
 
   def stub_api_v2_new_resource(resource, jsonapi_response = nil)
     url = url_for_new_resource(resource)
 
-    jsonapi_response ||= resource.to_jsonapi
+    jsonapi_response ||= resource_to_jsonapi(resource)
     stub_api_v2_request(url, jsonapi_response)
   end
 
@@ -133,7 +133,7 @@ module Helpers
       endpoint += "?#{query_params.to_param}" if query_params.any?
     end
 
-    jsonapi_response ||= resource_list_to_jsonapi(resources, include: include)
+    jsonapi_response ||= resource_to_jsonapi(resources, include: include)
     stub_api_v2_request(endpoint, jsonapi_response)
   end
 
@@ -142,12 +142,12 @@ module Helpers
                                             jsonapi_response: nil)
     url = url_for_resource(resource) + "/#{child_resource}"
 
-    jsonapi_response ||= resource_list_to_jsonapi([])
+    jsonapi_response ||= resource_to_jsonapi([])
     stub_api_v2_request(url, jsonapi_response)
   end
 
   def stub_api_v2_build_course(params = {})
-    jsonapi_response = course.to_jsonapi(include: [:subjects, :sites, :provider, :accrediting_provider, provider: [:sites]])
+    jsonapi_response = resource_to_jsonapi(course, include: [:subjects, :sites, :provider, :accrediting_provider, provider: [:sites]])
     jsonapi_response[:data][:meta] = course.meta
     jsonapi_response[:data][:errors] = course_errors_to_json_api(course)
     stub_api_v2_request(

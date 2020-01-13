@@ -111,6 +111,10 @@ class CourseDecorator < Draper::Decorator
     end
   end
 
+  def display_title
+    "#{name} (#{course_code})"
+  end
+
 private
 
   def find_max(attribute)
