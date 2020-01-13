@@ -36,9 +36,8 @@ describe CourseDecorator do
   end
 
   let(:course_response) do
-    course.to_jsonapi(
-      include: %i[sites provider accrediting_provider recruitment_cycle subjects],
-    )
+    resource_to_jsonapi(course,
+                        include: %i[sites provider accrediting_provider recruitment_cycle subjects])
   end
 
   let(:decorated_course) { course.decorate }

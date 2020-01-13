@@ -59,28 +59,26 @@ feature "Course show", type: :feature do
   end
 
   let(:accrediting_provider) { build(:provider) }
-  let(:course_response) do
-    course.to_jsonapi(
-      include: [
-        :sites,
-        :provider,
-        :accrediting_provider,
-        :recruitment_cycle,
-        :subjects,
-        site_statuses: :site,
-      ],
-    )
-  end
   let(:decorated_course) { course.decorate }
 
   before do
-    stub_api_v3_request(
-      "/recruitment_cycles/#{Settings.current_cycle}",
-      current_recruitment_cycle.to_jsonapi,
+    stub_api_v3_resource(
+      type: RecruitmentCycle,
+      params: {
+        recruitment_cycle_year: Settings.current_cycle,
+      },
+      resources: current_recruitment_cycle,
     )
-    stub_api_v3_request(
-      "/recruitment_cycles/#{Settings.current_cycle}/providers/#{course.provider_code}/courses/#{course.course_code}?include=subjects,site_statuses.site,provider.sites,accrediting_provider",
-      course_response,
+
+    stub_api_v3_resource(
+      type: Course,
+      params: {
+        recruitment_cycle_year: Settings.current_cycle,
+        provider_code: course.provider_code,
+        course_code: course.course_code,
+      },
+      resources: course,
+      include: ["subjects", "site_statuses.site", "provider.sites", "accrediting_provider"],
     )
 
     visit course_path(course.provider_code, course.course_code)

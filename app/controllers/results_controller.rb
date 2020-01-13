@@ -4,6 +4,7 @@ class ResultsController < ApplicationController
       .includes(:provider)
       .includes(:accrediting_provider)
       .includes(:financial_incentive)
+      .includes(:subjects)
       .where(recruitment_cycle_year: Settings.current_cycle)
       .where(provider_code: nil)
       .page(params[:page])

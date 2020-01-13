@@ -1,8 +1,8 @@
-def resource_list_to_jsonapi(resource_list, **opts)
+def resource_to_jsonapi(resource, **opts)
   renderer = JSONAPI::Serializable::Renderer.new
 
   jsonapi = renderer.render(
-    resource_list,
+    resource,
     class: {
       # This tells the renderer what serializers to use. The key is going
       # to be the name of the class as a symbol, and the value is the

@@ -50,14 +50,41 @@ feature "Search results", type: :feature do
   let(:accrediting_provider) { build(:provider) }
   let(:decorated_course) { course.decorate }
   let(:courses) { [course] }
+
   let(:courses_request) do
-    stub_api_v3_request(
-      "/recruitment_cycles/#{Settings.current_cycle}/providers/courses?fields%5Bcourses%5D=provider_code,course_code,name,description,funding_type,provider,accrediting_provider,subjects&fields%5Bproviders%5D=provider_name,address1,address2,address3,address4,postcode&include=provider,accrediting_provider,financial_incentive&page%5Bpage%5D=1&page%5Bper_page%5D=10",
-      resource_list_to_jsonapi(courses, include: %i[provider accrediting_provider subjects], links: {
-        last: "/recruitment_cycles/#{Settings.current_cycle}/providers/courses?fields%5Bcourses%5D=provider_code,course_code,name,description,funding_type,provider,accrediting_provider,subjects&fields%5Bproviders%5D=provider_name,address1,address2,address3,address4,postcode&include=provider,accrediting_provider,financial_incentive&page%5Bpage%5D=1&page%5Bper_page%5D=10",
-      }),
+    fields = {
+      courses: %i[provider_code course_code name description funding_type provider accrediting_provider subjects],
+      providers: %i[provider_name address1 address2 address3 address4 postcode],
+    }
+
+    params = {
+      recruitment_cycle_year: Settings.current_cycle,
+      provider_code: nil,
+    }
+
+    pagination = { page: page_index || 1, per_page: 10 }
+
+    include = %i[provider accrediting_provider financial_incentive subjects]
+
+    stub_api_v3_resource(
+      type: Course,
+      resources: courses,
+      params: params,
+      fields: fields,
+      include: include,
+      pagination: pagination,
+      links: {
+        last: api_v3_url(
+          type: Course,
+          params: params,
+          fields: fields,
+          include: include,
+          pagination: pagination,
+        ),
+      },
     )
   end
+
   let(:page_index) { nil }
 
   before do
@@ -119,15 +146,6 @@ feature "Search results", type: :feature do
   end
 
   context "with a second page" do
-    let(:courses_request) do
-      stub_api_v3_request(
-        "/recruitment_cycles/#{Settings.current_cycle}/providers/courses?fields%5Bcourses%5D=provider_code,course_code,name,description,funding_type,provider,accrediting_provider,subjects&fields%5Bproviders%5D=provider_name,address1,address2,address3,address4,postcode&include=provider,accrediting_provider,financial_incentive&page%5Bpage%5D=2&page%5Bper_page%5D=10",
-        resource_list_to_jsonapi(courses, include: %i[provider accrediting_provider subjects], links: {
-          last: "/recruitment_cycles/#{Settings.current_cycle}/providers/courses?fields%5Bcourses%5D=provider_code,course_code,name,description,funding_type,provider,accrediting_provider,subjects&fields%5Bproviders%5D=provider_name,address1,address2,address3,address4,postcode&include=provider,accrediting_provider,financial_incentive&page%5Bpage%5D=2&page%5Bper_page%5D=10",
-        }),
-      )
-    end
-
     let(:page_index) { 2 }
 
     it "requests the second page" do
