@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   def index
-    @courses = Course
+    query = Course
       .includes(:provider)
       .includes(:accrediting_provider)
       .includes(:financial_incentive)
@@ -25,6 +25,14 @@ class ResultsController < ApplicationController
           address3
           address4
           postcode
-        ]).all
+        ])
+
+    query = if params.dig(:sort, :field).nil?
+              query.order("provider.provider_name" => "asc")
+            else
+              query.order(params[:sort][:field] => params[:sort][:order].to_sym)
+            end
+
+    @courses = query.all
   end
 end

@@ -7,7 +7,7 @@ feature "Search results", type: :feature do
 
   let(:provider) do
     build(:provider,
-          provider_name: "ACME SCITT A0",
+          provider_name: "A provider",
           provider_code: "T92",
           website: "https://scitt.org",
           address1: "1 Long Rd",
@@ -16,7 +16,7 @@ feature "Search results", type: :feature do
 
   let(:provider2) do
     build(:provider,
-          provider_name: "ACME SCITT A0",
+          provider_name: "B provider",
           provider_code: "T92",
           website: "https://scitt.org",
           address1: "Building 64",
@@ -50,6 +50,7 @@ feature "Search results", type: :feature do
   let(:accrediting_provider) { build(:provider) }
   let(:decorated_course) { course.decorate }
   let(:courses) { [course] }
+  let(:sort) { "provider.provider_name" }
 
   let(:courses_request) do
     fields = {
@@ -82,15 +83,17 @@ feature "Search results", type: :feature do
           pagination: pagination,
         ),
       },
+      sort: sort,
     )
   end
 
   let(:page_index) { nil }
+  let(:page_params) { { page: page_index } }
 
   before do
     courses_request
 
-    visit results_path(page: page_index)
+    visit results_path(**page_params)
   end
 
   it "Requests the courses" do
@@ -141,6 +144,68 @@ feature "Search results", type: :feature do
         expect(second_course).not_to have_accrediting_provider
         expect(second_course.main_address.text).to eq("Building 64, 32 Copton Lane, Bracknel, Berkshire, NXT STP")
         expect(second_course).to have_selector("[href='#{course_path(provider_code: course2.provider_code, course_code: course2.course_code)}']")
+      end
+    end
+
+    context "orders courses by providers from A-Z" do
+      let(:page_params) { { page: page_index, sort: { field: "provider.provider_name", order: "asc" } } }
+      let(:sort) { "provider.provider_name" }
+
+      it "requests that the API order results" do
+        expect(courses_request).to have_been_requested
+      end
+
+      context "when the order was initially Z-A" do
+        let(:page_params) { { page: page_index, sort: { field: "provider.provider_name", order: "desc" } } }
+
+        before do
+        end
+
+        it "sorts A-Z when dropdown is selected" do
+          stub_api_v3_resource(
+            type: Course,
+            resources: courses,
+            params: params,
+            fields: fields,
+            include: include,
+            pagination: pagination,
+            links: {
+              last: api_v3_url(
+                type: Course,
+                params: params,
+                fields: fields,
+                include: include,
+                pagination: pagination,
+              ),
+            },
+            sort: "-provider.provider_name",
+          )
+          
+          results_page.sort_by_dropdown.select("Training provider (A-Z)")
+          results_page.update_button.click
+          expect(courses_request).to have_been_requested
+        end
+      end
+
+      it "changes the dropdown to reflect this" do
+      end
+
+      context "by default" do
+        let(:page_params) { { page: page_index } }
+        let(:sort) { "provider.provider_name" }
+
+        it "requests that the API order results" do
+          expect(courses_request).to have_been_requested
+        end
+      end
+    end
+
+    context "orders courses by providers from Z-A" do
+      let(:page_params) { { page: page_index, sort: { field: "provider.provider_name", order: "desc" } } }
+      let(:sort) { "-provider.provider_name" }
+
+      it "requests that the API order results" do
+        expect(courses_request).to have_been_requested
       end
     end
   end

@@ -9,9 +9,16 @@ module PageObjects
       element :main_address, '[data-qa="course__main_address"]'
     end
 
+    class SortByDropdown < SitePrism::Section
+
+    end
+
     class Results < SitePrism::Page
       sections :courses, CourseSection, '[data-qa="course"]'
 
+      section :sort_by_dropdown, SortByDropdown, '[data-qa="sort_by_dropdown"]'
+      element :update_button, '[data-qa="update_sorting"]'
+      
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
     end
