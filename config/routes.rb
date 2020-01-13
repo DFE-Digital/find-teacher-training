@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   scope module: "filters", path: "/results/filter" do
     get "studytype", to: "study_type#new"
     post "studytype", to: "study_type#create"
-
     get "vacancy", to: "vacancy#new"
     post "vacancy", to: "vacancy#create"
+    get "funding", to: "funding#new"
+    post "funding", to: "funding#create"
   end
 end
