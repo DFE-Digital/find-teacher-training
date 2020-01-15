@@ -1,2 +1,3 @@
 manage_backend:
   base_url: http://localhost:3001
+redirect_results_to_c_sharp: false
