@@ -10,6 +10,8 @@ module PageObjects
     end
 
     class Results < SitePrism::Page
+      set_url "/results{?query*}"
+
       sections :courses, CourseSection, '[data-qa="course"]'
 
       element :next_button, '[data-qa="next_button"]'

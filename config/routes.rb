@@ -14,4 +14,9 @@ Rails.application.routes.draw do
 
   get "/course/:provider_code/:course_code", to: "courses#show", as: "course"
   get "/results", to: "results#index", as: "results"
+
+  scope module: "filters", path: "/results/filter" do
+    get "studytype", to: "study_type#new"
+    post "studytype", to: "study_type#create"
+  end
 end
