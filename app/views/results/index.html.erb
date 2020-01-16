@@ -1,56 +1,55 @@
-<main class="govuk-main-wrapper" id="main-content" role="main">
-  <div class="govuk-width-container">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-full">
-          <h1 class="govuk-heading-xl">Teacher training courses</h1>
-      </div>
+<%= content_for :page_title, "#{number_with_delimiter(@courses.total_count)} courses" %>
+
+<div class="govuk-width-container">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-xl">Teacher training courses</h1>
     </div>
-
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-one-half">
-        <p class="govuk-body search-results__new-search">
-          <a href="/" class="govuk-link">New search</a>
-        </p>
-      </div>
-    </div>
-
-    <div class="search-results-header">
-    </div>
-
-    <ul class="govuk-list search-results">
-      <% @courses.each do |course| %>
-        <li data-qa="course">
-          <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
-            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "search-result-link", rel: "prev", data: { qa: "course__link" } do %>
-              <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
-              <br>
-              <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
-            <% end %>
-          </h3>
-          <dl class="govuk-list--description">
-            <dt class="govuk-list--description__label">Course</dt>
-            <dd data-qa="course__description"><%= course.description%></dd>
-          </dl>
-          <dl class="govuk-list--description">
-            <dt class="govuk-list--description__label">Financial support</dt>
-            <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-          </dl>
-          <% if course.accrediting_provider.present? %>
-            <dl class="govuk-list--description">
-              <dt>Accredited body</dt>
-              <dd data-qa="course__accrediting_provider"><%= course.accrediting_provider.provider_name %></dd>
-            </dl>
-          <% end %>
-          <dl class="govuk-list--description">
-            <dt class="govuk-list--description__label">Main address</dt>
-            <dd data-qa="course__main_address">
-              <%= course.provider.decorate.short_address %>
-            </dd>
-          </dl>
-        </li>
-      <% end %>
-    </ul>
-
-    <%= paginate @courses %>
   </div>
-</main>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-third">
+      filters go here
+    </div>
+    <div class="govuk-grid-column-two-thirds">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <p class="govuk-body search-results__count"><%= number_with_delimiter(@courses.total_count) %> courses found</p>
+        </div>
+        <div class="govuk-grid-column-one-half">
+          <p class="govuk-body search-results__new-search">
+            <%= link_to "New search", root_path, class: "govuk-link" %>
+          </p>
+        </div>
+      </div>
+      <ul class="govuk-list search-results">
+        <% @courses.each do |course| %>
+          <li data-qa="course">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
+              <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
+                <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
+                <br>
+                <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
+              <% end %>
+            </h3>
+            <dl class="govuk-list--description">
+              <dt class="govuk-list--description__label">Course</dt>
+              <dd data-qa="course__description"><%= course.description%></dd>
+              <dt class="govuk-list--description__label">Financial support</dt>
+              <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+              <% if course.accrediting_provider.present? %>
+                <dt>Accredited body</dt>
+                <dd data-qa="course__accrediting_provider"><%= course.accrediting_provider.provider_name %></dd>
+                <% end %>
+                  <dt class="govuk-list--description__label">Main address</dt>
+                  <dd data-qa="course__main_address">
+                <%= course.provider.decorate.short_address %>
+              </dd>
+            </dl>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @courses %>
+    </div>
+  </div>
+</div>

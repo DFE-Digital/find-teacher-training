@@ -1,0 +1,105 @@
+﻿// Document list pattern
+
+// Spacing to the left of the task list
+$course-parts-indent: 35px;
+
+.course-parts {
+  margin-top: govuk-spacing(2);
+
+  @include govuk-media-query($from: tablet) {
+    margin-top: (govuk-spacing(2) * 1.5);
+  }
+}
+
+.course-parts-section {
+  display: table;
+  @include govuk-font($size: 19);
+  margin-bottom: 15px;
+  padding-bottom: (govuk-spacing(2) / 6);
+}
+
+.course-parts-items {
+  margin-bottom: govuk-spacing(2);
+
+  @include govuk-media-query($from: tablet) {
+    margin-bottom: (govuk-spacing(2) * 2);
+  }
+}
+
+.course-parts-item {
+  padding-top: govuk-spacing(2);
+  padding-bottom: govuk-spacing(2);
+  @include govuk-clearfix;
+}
+
+.course-parts-item:first-child {
+  border-top: 1px solid $govuk-input-border-colour;
+}
+
+.course-part-task {
+  @include govuk-grid-column(two-thirds);
+  float: left;
+  @include govuk-font($size: 24);
+  margin: 0;
+}
+
+.course-part-task-action {
+  float: right;
+  margin-right: 0;
+  padding-top: 3px;
+}
+
+.course-part-tasks {
+  margin-top: 60px;
+
+  @include govuk-media-query($from: desktop) {
+    display: table;
+    width: 100%;
+  }
+
+  > * {
+    position: relative;
+
+    @include govuk-media-query($from: desktop) {
+      display: table-row;
+    }
+
+    > * {
+      display: block;
+
+      @include govuk-media-query($from: desktop) {
+        display: table-cell;
+        padding: em(12, 19) em(20, 19) em(9, 19) 0; // copied from Elements' td padding
+        margin: 0;
+      }
+    }
+
+    @include govuk-media-query($from: desktop) {
+      &:first-child > * {
+        padding-top: 0;
+      }
+    }
+  }
+
+  .course-part-label {
+    float: none;
+    display: block;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+
+  > *:first-child .course-part-label {
+    margin-top: 0;
+  }
+
+  .course-part-value {
+    float: none;
+    display: block;
+    padding: 0;
+    margin-bottom: 10px;
+
+    &--empty {
+      color: govuk-colour("dark-grey");
+    }
+  }
+}
