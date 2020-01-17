@@ -1,7 +1,7 @@
 require "rails_helper"
 
-feature "Study type filter", type: :feature do
-  let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
+feature "Vacancy filter", type: :feature do
+  let(:filter_page) { PageObjects::Page::ResultFilters::Vacancy.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:courses_request) do
     fields = {
@@ -39,66 +39,49 @@ feature "Study type filter", type: :feature do
 
   before { courses_request }
 
+  describe "Navigating to the page with no selected filters" do
+    it "Defaults to with vacancies" do
+      filter_page.load
+      expect(filter_page.with_vacancies.checked?).to eq(true)
+    end
+  end
+
   describe "Selecting an option" do
     before { filter_page.load }
 
-    it "Allows the user to select full time" do
-      filter_page.full_time.click
+    it "Allows the user to select with vacancies" do
+      filter_page.with_vacancies.click
       filter_page.find_courses.click
 
       expect_page_to_be_displayed_with_query_params(
         page: results_page,
         params: {
-          "fulltime" => "True",
-          "parttime" => "False",
+          "hasvacancies" => "True",
         },
       )
     end
 
-    it "Allows the user to select part time" do
-      filter_page.part_time.click
+    it "Allows the user to select with and without vacancies" do
+      filter_page.with_and_without_vacancies.click
       filter_page.find_courses.click
       expect_page_to_be_displayed_with_query_params(
         page: results_page,
         params: {
-          "fulltime" => "False",
-          "parttime" => "True",
-        },
-      )
-    end
-
-    it "Allows the user to select both full and part time" do
-      filter_page.full_time.click
-      filter_page.part_time.click
-      filter_page.find_courses.click
-      expect_page_to_be_displayed_with_query_params(
-        page: results_page,
-        params: {
-          "fulltime" => "True",
-          "parttime" => "True",
+          "hasvacancies" => "False",
         },
       )
     end
   end
 
   describe "Navigating to the page with currently selected filters" do
-    it "Allows the full time param to be pre-selected" do
-      filter_page.load(query: { fulltime: "True" })
-      expect(filter_page.full_time.checked?).to eq(true)
+    it "Preselects with vacancies" do
+      filter_page.load(query: { hasvacancies: "True" })
+      expect(filter_page.with_vacancies.checked?).to eq(true)
     end
 
-    it "Allows the part time param to be pre-selected" do
-      filter_page.load(query: { parttime: "True" })
-      expect(filter_page.part_time.checked?).to eq(true)
-    end
-  end
-
-  describe "Validation" do
-    it "Displays an error if neither option is selected" do
-      filter_page.load
-      filter_page.find_courses.click
-
-      expect(filter_page).to have_error
+    it "Preselects with and without vacancies" do
+      filter_page.load(query: { hasvacancies: "False" })
+      expect(filter_page.with_and_without_vacancies.checked?).to eq(true)
     end
   end
 end
