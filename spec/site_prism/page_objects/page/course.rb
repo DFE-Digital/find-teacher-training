@@ -42,6 +42,7 @@ module PageObjects
       element :course_apply, "#section-apply"
       element :choose_a_training_location_table, "[data-qa=course__choose_a_training_location]"
       element :locations_map, "[data-qa=course__locations_map]"
+      element :apply_link, "a[data-qa=course__apply_link]"
     end
   end
 end

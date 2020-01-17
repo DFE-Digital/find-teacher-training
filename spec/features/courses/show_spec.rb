@@ -229,6 +229,12 @@ feature "Course show", type: :feature do
       expect(course_page).to have_locations_map
 
       expect(course_page).to have_course_advice
+
+      expect(course_page.apply_link.text).to eq("Apply for this course")
+
+      expect(course_page.apply_link[:href]).to eq("https://www.apply-for-teacher-training.education.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}")
+
+      expect(course_page).not_to have_content("When you apply you’ll need these codes for the Choices section of your application form")
     end
   end
 
