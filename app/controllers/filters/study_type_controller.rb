@@ -1,5 +1,7 @@
 module Filters
   class StudyTypeController < ApplicationController
+    include FilterParameters
+
     def new; end
 
     def create
@@ -9,12 +11,6 @@ module Filters
       else
         redirect_to results_path(filter_params)
       end
-    end
-
-  private
-
-    def filter_params
-      params.permit(:fulltime, :parttime)
     end
   end
 end
