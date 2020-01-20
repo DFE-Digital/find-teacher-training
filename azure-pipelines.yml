@@ -47,7 +47,7 @@ steps:
     docker run --rm $(IMAGE_NAME) rails spec SPEC_OPTS='--format RspecJunitFormatter' >rspec-results.xml
     test_result=$?
     cat  --number rspec-results.xml
-    sed -i '$d;1,5d' rspec-results.xml
+    sed -i '$d;1,2d' rspec-results.xml
     if [ "$test_result" == "0" ] ; then true ; else false ; fi
   displayName: 'Run tests'
 
