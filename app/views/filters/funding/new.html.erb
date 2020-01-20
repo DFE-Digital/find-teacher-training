@@ -1,0 +1,42 @@
+<%= content_for :page_title, "Find courses that pay a salary" %>
+<% content_for :before_content do %>
+  <%= govuk_back_link_to(results_path) %>
+<% end %>
+
+<div class="govuk-width-container">
+  <h1 class="govuk-heading-xl">Find courses that pay a salary</h1>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <p class="govuk-body">
+        On a salaried course you’ll be paid and taxed as an unqualified teacher. The salary awarded will differ between schools – you should check the salary with the school before you apply.
+      </p>
+      <p class="govuk-body">
+        Salaried courses are not eligible for bursaries, scholarships or student finance. There are usually no course fees to pay.
+      </p>
+      <%= form_with url: funding_path do |form| %>
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <%= form.radio_button :funding,
+                                  '15',
+                                  class: 'govuk-radios__input',
+                                  checked: params[:funding] == '15' || params[:funding].blank?,
+                                  data: { qa: 'all_courses'} %>
+
+            <%= form.label :all_courses, "All courses (with or without a salary)", class: 'govuk-label govuk-radios__label' %>
+          </div>
+          <div class="govuk-radios__item">
+            <%= form.radio_button :funding,
+                                  '8',
+                                  class: 'govuk-radios__input',
+                                  checked: params[:funding] == '8',
+                                  data: { qa: 'salary_courses'} %>
+
+            <%= form.label :salary_courses, "Only courses that come with a salary", class: 'govuk-label govuk-radios__label' %>
+          </div>
+        </div>
+        <br>
+        <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: 'find_courses' } %>
+      <% end %>
+    </div>
+  </div>
+</div>

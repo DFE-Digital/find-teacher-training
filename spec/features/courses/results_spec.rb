@@ -5,6 +5,10 @@ feature "Search results", type: :feature do
     build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
   end
 
+  before do
+    allow(Settings).to receive(:redirect_results_to_c_sharp).and_return(false)
+  end
+
   let(:provider) do
     build(:provider,
           provider_name: "ACME SCITT A0",
