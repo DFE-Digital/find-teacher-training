@@ -1,4 +1,4 @@
-module Filters
+module ResultFilters
   class StudyTypeController < ApplicationController
     include FilterParameters
 

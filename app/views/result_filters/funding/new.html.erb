@@ -14,6 +14,7 @@
         Salaried courses are not eligible for bursaries, scholarships or student finance. There are usually no course fees to pay.
       </p>
       <%= form_with url: funding_path do |form| %>
+        <%= render 'result_filters/hidden_fields', form: form %>
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
             <%= form.radio_button :funding,

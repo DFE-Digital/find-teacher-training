@@ -80,5 +80,44 @@ feature "Funding filter", type: :feature do
         end
       end
     end
+
+    describe "QS parameters" do
+      before do
+        stub_results_page_request
+      end
+
+      it "passes querystring parameters to results" do
+        filter_page.load(query: { test: "value" })
+        filter_page.all_courses.click
+        filter_page.find_courses.click
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            "funding" => all_course_param_value_from_c_sharp,
+            "test" => "value",
+          },
+        )
+      end
+
+      it "passes arrays correctly" do
+        url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
+        PageObjects::Page::ResultFilters::Funding.set_url(url_with_array_params)
+
+        filter_page.load
+        filter_page.all_courses.click
+        filter_page.find_courses.click
+
+        expect(results_page).to be_displayed
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            "funding" => all_course_param_value_from_c_sharp,
+            "test" => %w(1 2),
+          },
+        )
+      end
+    end
   end
 end

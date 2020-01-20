@@ -84,4 +84,39 @@ feature "Vacancy filter", type: :feature do
       expect(filter_page.with_and_without_vacancies.checked?).to eq(true)
     end
   end
+
+  describe "QS parameters" do
+    it "passes querystring parameters to results" do
+      filter_page.load(query: { test: "value" })
+      filter_page.with_vacancies.click
+      filter_page.find_courses.click
+
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: {
+          "hasvacancies" => "True",
+          "test" => "value",
+        },
+      )
+    end
+
+    it "passes arrays correctly" do
+      url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
+      PageObjects::Page::ResultFilters::Vacancy.set_url(url_with_array_params)
+
+      filter_page.load
+      filter_page.with_vacancies.click
+      filter_page.find_courses.click
+
+      expect(results_page).to be_displayed
+
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: {
+          "hasvacancies" => "True",
+          "test" => %w(1 2),
+        },
+      )
+    end
+  end
 end

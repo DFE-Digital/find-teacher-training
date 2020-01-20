@@ -1,4 +1,4 @@
-module Filters
+module ResultFilters
   class VacancyController < ApplicationController
     include FilterParameters
 
