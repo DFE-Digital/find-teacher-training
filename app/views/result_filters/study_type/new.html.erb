@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Filter by study type" %>
 <% content_for :before_content do %>
-  <a href="<%= results_path %>" class="govuk-back-link">Back to search results</a>
+  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
 <% end %>
 
 <% if flash[:error] %>

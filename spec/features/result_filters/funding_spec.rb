@@ -21,8 +21,13 @@ feature "Funding filter", type: :feature do
       end
 
       it "navigates back to the results page" do
+        filter_page.load(query: { test: "params" })
         filter_page.back_link.click
-        expect(results_page).to be_displayed
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: { "test" => "params" },
+        )
       end
     end
 

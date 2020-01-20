@@ -4,6 +4,7 @@ module PageObjects
       class StudyType < SitePrism::Page
         set_url "/results/filter/studytype{?query*}"
 
+        element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'
         element :full_time, '[data-qa="full_time"]'
         element :part_time, '[data-qa="part_time"]'

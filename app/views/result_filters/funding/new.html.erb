@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Find courses that pay a salary" %>
 <% content_for :before_content do %>
-  <%= govuk_back_link_to(results_path) %>
+  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
 <% end %>
 
 <div class="govuk-width-container">

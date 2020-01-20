@@ -3,41 +3,22 @@ require "rails_helper"
 feature "Study type filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:courses_request) do
-    fields = {
-      courses: %i[provider_code course_code name description funding_type provider accrediting_provider subjects],
-      providers: %i[provider_name address1 address2 address3 address4 postcode],
-    }
 
-    params = {
-      recruitment_cycle_year: Settings.current_cycle,
-      provider_code: nil,
-    }
-
-    pagination = { page: 1, per_page: 10 }
-
-    include = %i[provider accrediting_provider financial_incentive subjects]
-
-    stub_api_v3_resource(
-      type: Course,
-      resources: [],
-      params: params,
-      fields: fields,
-      include: include,
-      pagination: pagination,
-      links: {
-        last: api_v3_url(
-          type: Course,
-          params: params,
-          fields: fields,
-          include: include,
-          pagination: pagination,
-        ),
-      },
-    )
+  before do
+    stub_results_page_request
   end
 
-  before { courses_request }
+  describe "back link" do
+    it "navigates back to the results page" do
+      filter_page.load(query: { test: "params" })
+      filter_page.back_link.click
+
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: { "test" => "params" },
+      )
+    end
+  end
 
   describe "Selecting an option" do
     before { filter_page.load }
