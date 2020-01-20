@@ -53,9 +53,9 @@ feature "Vacancy filter", type: :feature do
       filter_page.with_vacancies.click
       filter_page.find_courses.click
 
-      expect_page_to_be_displayed_with_query_params(
+      expect_page_to_be_displayed_with_query(
         page: results_page,
-        params: {
+        expected_query_params: {
           "hasvacancies" => "True",
         },
       )
@@ -64,9 +64,9 @@ feature "Vacancy filter", type: :feature do
     it "Allows the user to select with and without vacancies" do
       filter_page.with_and_without_vacancies.click
       filter_page.find_courses.click
-      expect_page_to_be_displayed_with_query_params(
+      expect_page_to_be_displayed_with_query(
         page: results_page,
-        params: {
+        expected_query_params: {
           "hasvacancies" => "False",
         },
       )

@@ -160,13 +160,10 @@ module Helpers
     allow(Settings).to receive(:key?).with(:authorised_user).and_return(false)
   end
 
-  def expect_page_to_be_displayed_with_query_params(page:, params:)
+  def expect_page_to_be_displayed_with_query(page:, expected_query_params:)
+    current_query_string = URI(current_url).query
     expect(page).to be_displayed
-
-    query_params = page.url_matches["query"]
-    params.each do |param_name, param_value|
-      expect(query_params[param_name]).to eq(param_value)
-    end
+    expect(Rack::Utils.parse_nested_query(current_query_string)).to eq(expected_query_params)
   end
 
 private

@@ -81,12 +81,4 @@ feature "Funding filter", type: :feature do
       end
     end
   end
-
-private
-
-  def expect_page_to_be_displayed_with_query(page:, expected_query_params:)
-    current_query_string = current_url.match('\?(.*)$')&.captures&.first
-    expect(page).to be_displayed
-    expect(Rack::Utils.parse_nested_query(current_query_string)).to eq(expected_query_params)
-  end
 end

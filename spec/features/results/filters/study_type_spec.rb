@@ -46,9 +46,9 @@ feature "Study type filter", type: :feature do
       filter_page.full_time.click
       filter_page.find_courses.click
 
-      expect_page_to_be_displayed_with_query_params(
+      expect_page_to_be_displayed_with_query(
         page: results_page,
-        params: {
+        expected_query_params: {
           "fulltime" => "True",
           "parttime" => "False",
         },
@@ -58,9 +58,9 @@ feature "Study type filter", type: :feature do
     it "Allows the user to select part time" do
       filter_page.part_time.click
       filter_page.find_courses.click
-      expect_page_to_be_displayed_with_query_params(
+      expect_page_to_be_displayed_with_query(
         page: results_page,
-        params: {
+        expected_query_params: {
           "fulltime" => "False",
           "parttime" => "True",
         },
@@ -71,9 +71,9 @@ feature "Study type filter", type: :feature do
       filter_page.full_time.click
       filter_page.part_time.click
       filter_page.find_courses.click
-      expect_page_to_be_displayed_with_query_params(
+      expect_page_to_be_displayed_with_query(
         page: results_page,
-        params: {
+        expected_query_params: {
           "fulltime" => "True",
           "parttime" => "True",
         },
