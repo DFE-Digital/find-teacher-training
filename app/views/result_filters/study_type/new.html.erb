@@ -1,6 +1,6 @@
 <%= content_for :page_title, "Filter by study type" %>
 <% content_for :before_content do %>
-  <a href="<%= results_path %>" class="govuk-back-link">Back to search results</a>
+  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
 <% end %>
 
 <% if flash[:error] %>
@@ -21,6 +21,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <%= form_with url: studytype_path, method: :post do |form| %>
+      <%= render 'result_filters/hidden_fields', form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend>
           <h1 class="govuk-heading-xl">Study type</h1>

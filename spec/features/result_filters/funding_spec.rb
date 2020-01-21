@@ -21,8 +21,13 @@ feature "Funding filter", type: :feature do
       end
 
       it "navigates back to the results page" do
+        filter_page.load(query: { test: "params" })
         filter_page.back_link.click
-        expect(results_page).to be_displayed
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: { "test" => "params" },
+        )
       end
     end
 
@@ -80,13 +85,44 @@ feature "Funding filter", type: :feature do
         end
       end
     end
-  end
 
-private
+    describe "QS parameters" do
+      before do
+        stub_results_page_request
+      end
 
-  def expect_page_to_be_displayed_with_query(page:, expected_query_params:)
-    current_query_string = current_url.match('\?(.*)$')&.captures&.first
-    expect(page).to be_displayed
-    expect(Rack::Utils.parse_nested_query(current_query_string)).to eq(expected_query_params)
+      it "passes querystring parameters to results" do
+        filter_page.load(query: { test: "value" })
+        filter_page.all_courses.click
+        filter_page.find_courses.click
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            "funding" => all_course_param_value_from_c_sharp,
+            "test" => "value",
+          },
+        )
+      end
+
+      it "passes arrays correctly" do
+        url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
+        PageObjects::Page::ResultFilters::Funding.set_url(url_with_array_params)
+
+        filter_page.load
+        filter_page.all_courses.click
+        filter_page.find_courses.click
+
+        expect(results_page).to be_displayed
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            "funding" => all_course_param_value_from_c_sharp,
+            "test" => %w(1 2),
+          },
+        )
+      end
+    end
   end
 end

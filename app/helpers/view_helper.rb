@@ -3,8 +3,8 @@ module ViewHelper
     link_to body, url, html_options
   end
 
-  def govuk_back_link_to(url)
-    govuk_link_to("Back", url, class: "govuk-back-link", data: { qa: "page-back" })
+  def govuk_back_link_to(url, link_text = "Back")
+    govuk_link_to(link_text, url, class: "govuk-back-link", data: { qa: "page-back" })
   end
 
   def bat_contact_email_address
