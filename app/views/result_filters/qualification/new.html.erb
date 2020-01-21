@@ -1,0 +1,107 @@
+<%= content_for :page_title, "Filter by qualification" %>
+<% content_for :before_content do %>
+  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "qualification-error" } %>
+
+    <%= form_with url: qualification_path, method: :post do |form| %>
+      <%= render 'result_filters/hidden_fields', exclude_keys: ["qualifications"], form: form %>
+      <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
+        <legend>
+          <h1 class="govuk-heading-xl">What you will get</h1>
+        </legend>
+
+        <div class="govuk-form-group <%= flash[:error] ? "govuk-form-group--error" : "" %>">
+          <% if flash[:error] %>
+            <span id="qualification-error" class="govuk-error-message">
+              <span class="govuk-visually-hidden">Error:</span> You must make at least one selection
+            </span>
+          <% end %>
+          <div class="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+              <%=
+                form.check_box(
+                  :qualifications,
+                  { 
+                    class: "govuk-checkboxes__input", 
+                    multiple: true, 
+                    data: { qa: 'qts_only' }, 
+                    checked: @view.qts_only_checked? 
+                  },
+                  "QtsOnly", 
+                  false
+                )
+              %>
+              <%= form.label :qualifications, value: "QtsOnly", class: "govuk-label govuk-checkboxes__label" do %>
+                <span class="govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-display-block">QTS only</span>
+                <p class="govuk-body">
+                  QTS (qualified teacher status) allows you to teach in state schools in England.
+                </p>
+                <p class="govuk-body">
+                  It may also allow you to teach in <%= link_to "the EU, the EEA and Switzerland", "https://www.gov.uk/eu-eea", class: "govuk-link" %>. You should check with the institution you’d like to teach in for confirmation. The status of QTS in these countries may change after the UK leaves the EU. Please check <%= link_to "GOV.UK", "https://www.gov.uk", class: "govuk-link" %> for updates.
+                </p>
+                <p class="govuk-body">
+                  To teach in the rest of the UK or internationally, you may wish to consider a ‘PGCE (or PGDE) with QTS’ qualification instead.
+                </p>
+              <% end %>
+            </div>
+
+            <div class="govuk-checkboxes__item">
+              <%=
+                form.check_box(
+                  :qualifications,
+                  { 
+                    class: "govuk-checkboxes__input", 
+                    multiple: true, 
+                    data: { qa: 'pgde_pgce_with_qts'}, 
+                    checked: @view.pgde_pgce_with_qts_checked?,
+                  },
+                  "PgdePgceWithQts", 
+                  false
+                )
+              %>
+              <%= form.label :qualifications, value: "PgdePgceWithQts", class: "govuk-label govuk-checkboxes__label" do %>
+                <span class="govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-display-block">PGCE (or PGDE) with QTS</span>
+                <p class="govuk-body">
+                  A PGCE (postgraduate certificate in education) with QTS allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally. Many PGCE courses include credits that count towards a Master’s degree.
+                </p>
+                <p class="govuk-body">
+                  Some providers offer a PGDE (postgraduate diploma in education) with QTS, which is equivalent to a PGCE. In some cases these courses offer more credits towards a Master’s degree than PGCE courses.
+                </p>
+              <% end %>
+            </div>
+
+            <div class="govuk-checkboxes__item">
+              <%=
+                form.check_box(
+                  :qualifications,
+                  { 
+                    class: "govuk-checkboxes__input",
+                    multiple: true,
+                    data: { qa: 'other'},
+                    checked: @view.other_checked?
+                  },
+                  "Other", 
+                  false
+                )
+              %>
+              <%= form.label :qualifications, value: "Other", class: "govuk-label govuk-checkboxes__label" do %>
+                <span class="govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-display-block">Further education (PGCE or PGDE without QTS)</span>
+                <p class="govuk-body">
+                  To teach further education you don’t need QTS. Instead you can study for a PGCE or PGDE without QTS.
+                </p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="govuk-form-group">
+        <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: 'find_courses' } %>
+      </div>
+    <% end %>
+  </div>
+</div>
