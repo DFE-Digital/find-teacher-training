@@ -1,6 +1,4 @@
 module FilterParameters
-private
-
   def filter_params
     custom_params = request.request_parameters.reject do |param|
       param == "utf8"
