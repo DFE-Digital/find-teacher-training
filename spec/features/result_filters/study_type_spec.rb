@@ -114,7 +114,7 @@ feature "Study type filter", type: :feature do
         expected_query_params: {
           "fulltime" => "False",
           "parttime" => "True",
-          "test" => %w(1 2),
+          "test" => "1,2",
         },
       )
     end
