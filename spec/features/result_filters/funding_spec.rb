@@ -106,7 +106,7 @@ feature "Funding filter", type: :feature do
       end
 
       it "passes arrays correctly" do
-        url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
+        url_with_array_params = "#{filter_page.url}?test=1,2"
         PageObjects::Page::ResultFilters::Funding.set_url(url_with_array_params)
 
         filter_page.load
@@ -119,7 +119,7 @@ feature "Funding filter", type: :feature do
           page: results_page,
           expected_query_params: {
             "funding" => all_course_param_value_from_c_sharp,
-            "test" => %w(1 2),
+            "test" => "1,2",
           },
         )
       end

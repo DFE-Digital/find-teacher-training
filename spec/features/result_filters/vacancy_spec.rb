@@ -95,7 +95,7 @@ feature "Vacancy filter", type: :feature do
         page: results_page,
         expected_query_params: {
           "hasvacancies" => "True",
-          "test" => %w(1 2),
+          "test" => "1,2",
         },
       )
     end
