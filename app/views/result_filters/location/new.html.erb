@@ -1,0 +1,38 @@
+<%= content_for :page_title, "Find courses by location or by training provider" %>
+<% content_for :before_content do %>
+  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
+<% end %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_with url: location_path, method: :post do |form| %>
+      <%= render 'result_filters/hidden_fields', exclude_keys: ["l"], form: form %>
+      <fieldset class="govuk-fieldset">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+          <h1 class="govuk-heading-xl">Find courses by location or by training provider</h1>
+        </legend>
+
+        <div class="govuk-form-group">
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <%=
+                form.radio_button(
+                  :l,
+                  "2",
+                  class: "govuk-radios__input",
+                  data: { qa: "across_england" },
+                  checked: params[:l] == "2"
+                )
+              %>
+              <%= form.label :l_2, "Across England", class: "govuk-label govuk-radios__label" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="govuk-form-group">
+          <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: 'find_courses' } %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
