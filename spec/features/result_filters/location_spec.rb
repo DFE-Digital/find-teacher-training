@@ -121,6 +121,15 @@ feature "Location filter", type: :feature do
     end
   end
 
+  describe "Validation" do
+    it "Displays an error if no option is selected" do
+      filter_page.load
+      filter_page.find_courses.click
+
+      expect(filter_page).to have_error
+    end
+  end
+
   describe "QS parameters" do
     it "passes querystring parameters to results" do
       filter_page.load(query: { test: "value" })
