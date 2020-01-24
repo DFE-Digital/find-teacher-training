@@ -22,5 +22,7 @@ Rails.application.routes.draw do
     post "vacancy", to: "vacancy#create"
     get "funding", to: "funding#new"
     post "funding", to: "funding#create"
+    get "qualification", to: "qualification#new"
+    post "qualification", to: "qualification#create"
   end
 end

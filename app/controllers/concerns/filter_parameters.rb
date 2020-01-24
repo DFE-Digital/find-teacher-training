@@ -1,7 +1,7 @@
 module FilterParameters
   def filter_params
     custom_params = request.request_parameters.reject do |param|
-      param == "utf8"
+      param.in? %w(utf8 authenticity_token)
     end
 
     custom_params_with_formatted_arrays = custom_params.to_h do |key, value|

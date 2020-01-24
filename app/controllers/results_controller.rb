@@ -40,7 +40,7 @@ private
 
     redirect_uri = URI(base_url)
     redirect_uri.path = "/results"
-    redirect_uri.query = query_string if query_string.present?
+    redirect_uri.query = query_string.gsub("%2C", ",") if query_string.present?
 
     redirect_to redirect_uri.to_s
   end

@@ -14,4 +14,9 @@ RSpec.describe "/results", type: :request do
     get "/results?test=one&test_two=%26booyah"
     expect(response).to redirect_to(Settings.search_and_compare_ui.base_url + "/results?test=one&test_two=%26booyah")
   end
+
+  it "decodes querystring commas" do
+    get "/results?test=one&test_two=booyah%2Ckasha"
+    expect(response).to redirect_to(Settings.search_and_compare_ui.base_url + "/results?test=one&test_two=booyah,kasha")
+  end
 end
