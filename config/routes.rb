@@ -16,10 +16,15 @@ Rails.application.routes.draw do
   get "/results", to: "results#index", as: "results"
 
   scope module: "result_filters", path: "/results/filter" do
+    get "location", to: "location#new"
+    post "location", to: "location#create"
+
     get "studytype", to: "study_type#new"
     post "studytype", to: "study_type#create"
+
     get "vacancy", to: "vacancy#new"
     post "vacancy", to: "vacancy#create"
+
     get "funding", to: "funding#new"
     post "funding", to: "funding#create"
     get "qualification", to: "qualification#new"
