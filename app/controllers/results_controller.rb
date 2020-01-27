@@ -2,6 +2,7 @@ class ResultsController < ApplicationController
   before_action :redirect_to_c_sharp
 
   def index
+    @results_view = ResultsView.new(query_parameters: request.query_parameters)
     @courses = Course
       .includes(:provider)
       .includes(:accrediting_provider)

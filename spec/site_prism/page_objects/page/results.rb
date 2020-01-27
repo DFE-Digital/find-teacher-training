@@ -16,6 +16,13 @@ module PageObjects
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
+
+      element :location_link, '[data-qa="filters__location_link"]'
+      element :subject_link, '[data-qa="filters__subject"]'
+      element :study_type_link, '[data-qa="filters__study_type_link"]'
+      element :qualification_link, '[data-qa="filters__qualification_link"]'
+      element :salary_link, '[data-qa="filters__salary_link"]'
+      element :vacancies_link, '[data-qa="filters__vacancies_link"]'
     end
   end
 end
