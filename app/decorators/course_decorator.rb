@@ -75,7 +75,7 @@ class CourseDecorator < Draper::Decorator
   end
 
   def salaried?
-    object.funding_type == "salary"
+    object.funding_type == "salary" || object.funding_type == "apprenticeship"
   end
 
   def apprenticeship?
