@@ -27,7 +27,11 @@ Rails.application.routes.draw do
 
     get "funding", to: "funding#new"
     post "funding", to: "funding#create"
+
     get "qualification", to: "qualification#new"
     post "qualification", to: "qualification#create"
+
+    get "subject", to: "subject#new"
+    post "subject", to: "subject#create"
   end
 end

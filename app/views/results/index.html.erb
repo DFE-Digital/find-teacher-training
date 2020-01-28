@@ -10,6 +10,26 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       filters go here
+      <div data-qa="filters">
+        <div>
+          <%=link_to "Change location or choose a provider", @results_view.filter_path_with_unescaped_commas(location_path), class: "govuk-link", data: { qa: "filters__location_link" }%>
+        </div>
+        <div>
+          <%=link_to "Change subjects", @results_view.filter_path_with_unescaped_commas(subject_path), class: "govuk-link", data: { qa: "filters__subject_link" }%>
+        </div>
+        <div>
+          <%=link_to "Change study type", @results_view.filter_path_with_unescaped_commas(studytype_path), class: "govuk-link", data: { qa: "filters__studytype_link" }%>
+        </div>
+        <div>
+          <%=link_to "Change qualifications", @results_view.filter_path_with_unescaped_commas(qualification_path), class: "govuk-link", data: { qa: "filters__qualifications_link" }%>
+        </div>
+        <div>
+          <%=link_to "Change salary option", @results_view.filter_path_with_unescaped_commas(funding_path), class: "govuk-link", data: { qa: "filters__salary_link" }%>
+        </div>
+        <div>
+          <%=link_to "Change vacancies", @results_view.filter_path_with_unescaped_commas(vacancy_path), class: "govuk-link", data: { qa: "filters__vacancy_link" }%>
+        </div>
+      </div>
     </div>
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-grid-row">
