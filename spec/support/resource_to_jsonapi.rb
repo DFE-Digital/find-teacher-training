@@ -13,6 +13,7 @@ def resource_to_jsonapi(resource, **opts)
       Site: SiteSerializer,
       SiteStatus: SiteStatusSerializer,
       Subject: SubjectSerializer,
+      SubjectArea: SubjectAreaSerializer,
     },
     include: opts[:include],
     meta: opts[:meta],

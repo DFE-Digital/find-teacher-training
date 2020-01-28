@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
   root to: redirect(Settings.search_and_compare_ui.base_url)
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     get "location", to: "location#new"
     post "location", to: "location#create"
 
+    get "subject", to: "subject#new"
+    post "subject", to: "subject#create"
+
     get "studytype", to: "study_type#new"
     post "studytype", to: "study_type#create"
 
@@ -35,3 +38,4 @@ Rails.application.routes.draw do
     post "subject", to: "subject#create"
   end
 end
+# rubocop:enable Metrics/BlockLength

@@ -25,6 +25,7 @@ FactoryBot.define do
     end
 
     trait :modern_languages do
+      id { 33 }
       subject_name { "Modern Languages" }
     end
 
@@ -38,6 +39,10 @@ FactoryBot.define do
 
     trait :japanese do
       subject_name { "Japanese" }
+    end
+
+    trait :primary do
+      subject_name { "Primary" }
     end
   end
 end
