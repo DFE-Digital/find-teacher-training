@@ -28,6 +28,9 @@ gem "bootsnap", ">= 1.1.0", require: false
 # Manage multiple processes i.e. web server and webpack
 gem "foreman"
 
+# Geocoding
+gem "geocoder"
+
 # Kaminari, pagination templating
 gem "kaminari"
 

@@ -154,6 +154,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     ffi (1.11.1)
     foreman (0.86.0)
+    geocoder (1.6.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashdiff (1.0.0)
@@ -370,6 +371,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   foreman
+  geocoder
   json_api_client
   jsonapi-deserializable
   jsonapi-renderer
