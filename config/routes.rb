@@ -36,6 +36,9 @@ Rails.application.routes.draw do
 
     get "subject", to: "subject#new"
     post "subject", to: "subject#create"
+
+    get "provider", to: "provider#new"
+    post "provider", to: "provider#create"
   end
 end
 # rubocop:enable Metrics/BlockLength

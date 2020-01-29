@@ -1,0 +1,7 @@
+<% @provider_suggestions.each do |provider| %>
+  <%= form_with url: provider_path, method: :post, data: {qa: "provider_suggestion" } do |form| %>
+    <%= render 'result_filters/hidden_fields', exclude_keys: ["query"], form: form %>
+    <%= form.hidden_field :query, value: provider.provider_name %>
+    <%= form.submit "#{provider.provider_name} (#{provider.provider_code})", name: nil, class: "govuk-button", data: { qa: 'provider_suggestion__submit' } %>
+  <% end %>
+<% end %>
