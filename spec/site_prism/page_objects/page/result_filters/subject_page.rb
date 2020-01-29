@@ -15,6 +15,7 @@ module PageObjects
       class SubjectPage < SitePrism::Page
         set_url "/results/filter/subject{?query*}"
         sections :subject_areas, SubjectAreaSection, '[data-qa="subject_area"]'
+        section :send_area, SubjectAreaSection, '[data-qa="send_area"]'
         element :continue, '[data-qa="continue"]'
       end
     end
