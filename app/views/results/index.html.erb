@@ -17,9 +17,7 @@
         <div>
           <%=link_to "Change subjects", @results_view.filter_path_with_unescaped_commas(subject_path), class: "govuk-link", data: { qa: "filters__subject_link" }%>
         </div>
-        <div>
-          <%=link_to "Change study type", @results_view.filter_path_with_unescaped_commas(studytype_path), class: "govuk-link", data: { qa: "filters__studytype_link" }%>
-        </div>
+        <%= render partial: 'results/study_type' %>
         <div>
           <%=link_to "Change qualifications", @results_view.filter_path_with_unescaped_commas(qualification_path), class: "govuk-link", data: { qa: "filters__qualifications_link" }%>
         </div>

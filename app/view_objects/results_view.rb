@@ -16,6 +16,14 @@ class ResultsView
     "#{base_path}?#{URI.encode_www_form(query_parameters_with_defaults)}".gsub("%2C", ",")
   end
 
+  def fulltime?
+    query_parameters["fulltime"].present? && query_parameters["fulltime"].downcase == "true"
+  end
+
+  def parttime?
+    query_parameters["parttime"].present? && query_parameters["parttime"].downcase == "true"
+  end
+
 private
 
   attr_reader :query_parameters
@@ -25,11 +33,11 @@ private
   end
 
   def fulltime_parameters
-    { "fulltime" => query_parameters["fulltime"].presence || "False" }
+    { "fulltime" => fulltime?.to_s.humanize }
   end
 
   def parttime_parameters
-    { "parttime" => query_parameters["parttime"].presence || "False" }
+    { "parttime" => parttime?.to_s.humanize }
   end
 
   def hasvacancies_parameters

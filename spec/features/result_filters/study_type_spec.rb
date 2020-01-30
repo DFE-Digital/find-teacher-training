@@ -20,25 +20,19 @@ feature "Study type filter", type: :feature do
     end
   end
 
-  describe "Selecting an option" do
+
+  describe "deselecting an option" do
     before { filter_page.load }
 
-    it "Allows the user to select full time" do
+    it "default full time and part time to true" do
+      expect(filter_page.full_time.checked?).to be true
+      expect(filter_page.part_time.checked?).to be true
+    end
+
+    it "Allows the user to deselect full time" do
       filter_page.full_time.click
       filter_page.find_courses.click
 
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "fulltime" => "True",
-          "parttime" => "False",
-        },
-      )
-    end
-
-    it "Allows the user to select part time" do
-      filter_page.part_time.click
-      filter_page.find_courses.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
@@ -48,9 +42,19 @@ feature "Study type filter", type: :feature do
       )
     end
 
-    it "Allows the user to select both full and part time" do
-      filter_page.full_time.click
+    it "Allows the user to deselect part time" do
       filter_page.part_time.click
+      filter_page.find_courses.click
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: {
+          "fulltime" => "True",
+          "parttime" => "False",
+        },
+      )
+    end
+
+    it "Allows the user to find courses" do
       filter_page.find_courses.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
@@ -77,6 +81,10 @@ feature "Study type filter", type: :feature do
   describe "Validation" do
     it "Displays an error if neither option is selected" do
       filter_page.load
+
+      filter_page.part_time.click
+      filter_page.full_time.click
+
       filter_page.find_courses.click
 
       expect(filter_page).to have_error
@@ -85,8 +93,8 @@ feature "Study type filter", type: :feature do
 
   describe "QS parameters" do
     it "passes querystring parameters to results" do
-      filter_page.load(query: { test: "value" })
-      filter_page.part_time.click
+      filter_page.load(query: { test: "value", parttime: "True" })
+
       filter_page.find_courses.click
 
       expect_page_to_be_displayed_with_query(
@@ -112,8 +120,8 @@ feature "Study type filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "fulltime" => "False",
-          "parttime" => "True",
+          "fulltime" => "True",
+          "parttime" => "False",
           "test" => "1,2",
         },
       )

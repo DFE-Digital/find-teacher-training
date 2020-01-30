@@ -9,17 +9,25 @@ module PageObjects
       element :main_address, '[data-qa="course__main_address"]'
     end
 
+    class StudyTypeSection < SitePrism::Section
+      element :subheading, "h2"
+      element :fulltime, '[data-qa="fulltime"]'
+      element :parttime, '[data-qa="parttime"]'
+      element :link, '[data-qa="link"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results{?query*}"
 
       sections :courses, CourseSection, '[data-qa="course"]'
+      section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
+
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
 
       element :location_link, '[data-qa="filters__location_link"]'
       element :subject_link, '[data-qa="filters__subject"]'
-      element :study_type_link, '[data-qa="filters__study_type_link"]'
       element :qualification_link, '[data-qa="filters__qualification_link"]'
       element :salary_link, '[data-qa="filters__salary_link"]'
       element :vacancies_link, '[data-qa="filters__vacancies_link"]'
