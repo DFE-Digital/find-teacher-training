@@ -5,3 +5,8 @@
     <%= form.submit "#{provider.provider_name} (#{provider.provider_code})", name: nil, class: "govuk-button", data: { qa: 'provider_suggestion__submit' } %>
   <% end %>
 <% end %>
+
+<%= form_with url: provider_path, method: :get, data: { qa: "search" } do |form| %>
+  <%= form.text_field :query, data: { qa: "search__input" } %>
+  <%= form.submit "Search again", name: nil, class: "govuk-button", data: { qa: 'search__submit' } %>
+<% end %>

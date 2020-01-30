@@ -11,6 +11,10 @@ module PageObjects
         element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'
 
+        section :search, '[data-qa="search"]' do
+          element :input, '[data-qa="search__input"]'
+          element :submit, '[data-qa="search__submit"]'
+        end
         sections :provider_suggestions, ProviderSuggestion, '[data-qa="provider_suggestion"]'
       end
     end

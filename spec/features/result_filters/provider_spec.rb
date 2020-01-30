@@ -49,16 +49,26 @@ feature "Provider filter", :focus, type: :feature do
     context "with existing params" do
       let(:query_params) { { other_param: "my other param" } }
 
-      it "preserves previous parameters" do
+      fit "preserves previous parameters" do
         provider_filter_page.provider_suggestions.first.submit.click
-        expect_page_to_be_displayed_with_query(
-          page: results_page,
-          expected_query_params: {
-            "other_param" => "my other param",
-            "query" => "ACME SCITT 2",
-          },
+        #We must do this because site_prism's URL system is broken
+        expect(results_page.url).to eq(current_path)
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "other_param" => "my other param",
+          "query" => "ACME SCITT 2",
         )
       end
     end
+  end
+
+  it "has a form with which to search again" do
+    provider_filter_page.search.input.fill_in(with: "ACME SCITT")
+    provider_filter_page.search.submit.click
+
+    expect(provider_filter_page.url).to eq(current_path)
+    expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+      "query" => "ACME SCITT",
+      "utf8" => "✓",
+    )
   end
 end

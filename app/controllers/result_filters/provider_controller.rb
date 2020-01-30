@@ -6,7 +6,7 @@ module ResultFilters
       @provider_suggestions = Provider
         .select(:provider_code, :provider_name)
         .where(recruitment_cycle_year: "2020")
-        .with_params(search: "ACME")
+        .with_params(search: params[:query])
         .all
     end
 
