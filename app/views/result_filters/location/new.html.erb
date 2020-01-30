@@ -43,10 +43,17 @@
                   checked: params[:l] == "3"
                 )
               %>
-              <%= form.text_field :query, data: {qa: "provider_search"} %>
-              <%= form.label :query, class: "govuk-label govuk-radios__label" do %>
+              <%= form.label :l_3, class: "govuk-label govuk-radios__label" do %>
                 By school, university or other training provider
               <% end %>
+            </div>
+            
+            <div class="govuk-radios__conditional">
+              <%= form.label :query, class: "govuk-label" do %>
+                School, university or other training provider
+              <% end %>
+              <span class="govuk-hint">Enter the name or provider code</span>
+              <%= form.text_field :query, class: "govuk-input", data: {qa: "provider_search"} %>
             </div>
           </div>
         </div>
