@@ -8,6 +8,8 @@ module ResultFilters
       if(!params[:l])
         flash[:error] = "Please choose an option"
         redirect_to location_path(params_without_unsupported_location_params)
+      elsif params[:l].to_i == 3
+        redirect_to provider_path(query: params[:query])
       else
         redirect_to results_path(params_without_unsupported_location_params)
       end

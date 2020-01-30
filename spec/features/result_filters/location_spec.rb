@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "Location filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
+  let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
   before do
@@ -32,6 +33,25 @@ feature "Location filter", type: :feature do
         expected_query_params: {
           "l" => "2",
         },
+      )
+    end
+
+    it "Allows the user to select by provider" do
+      stub_api_v3_resource(
+        type: Provider,
+        resources: [],
+        fields: { providers: %i[provider_code provider_name] },
+        params: { recruitment_cycle_year: 2020 },
+        search: "ACME",
+      )
+
+      filter_page.by_provider.click
+      filter_page.provider_search.fill_in(with: "ACME")
+      filter_page.find_courses.click
+
+      expect(provider_page.url).to eq(current_path)
+      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+        "query" => "ACME",
       )
     end
   end

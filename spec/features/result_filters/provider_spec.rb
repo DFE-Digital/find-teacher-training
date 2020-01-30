@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Provider filter", :focus, type: :feature do
+feature "Provider filter", type: :feature do
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
@@ -17,11 +17,13 @@ feature "Provider filter", :focus, type: :feature do
       resources: providers,
       fields: { providers: %i[provider_code provider_name] },
       params: { recruitment_cycle_year: 2020 },
-      search: "ACME",
+      search: search_term,
     )
   end
 
-  let(:query_params) { {} }
+  let(:search_term) { "ACME" }
+  let(:query_params) { { query: "ACME" } }
+
   before do
     stub_results_page_request
 
@@ -47,9 +49,9 @@ feature "Provider filter", :focus, type: :feature do
     end
 
     context "with existing params" do
-      let(:query_params) { { other_param: "my other param" } }
+      let(:query_params) { { other_param: "my other param", query: "ACME" } }
 
-      fit "preserves previous parameters" do
+      it "preserves previous parameters" do
         provider_filter_page.provider_suggestions.first.submit.click
         #We must do this because site_prism's URL system is broken
         expect(results_page.url).to eq(current_path)
@@ -62,6 +64,14 @@ feature "Provider filter", :focus, type: :feature do
   end
 
   it "has a form with which to search again" do
+    stub_api_v3_resource(
+      type: Provider,
+      resources: [],
+      fields: { providers: %i[provider_code provider_name] },
+      params: { recruitment_cycle_year: 2020 },
+      search: "ACME SCITT",
+    )
+
     provider_filter_page.search.expand.click
     provider_filter_page.search.input.fill_in(with: "ACME SCITT")
     provider_filter_page.search.submit.click

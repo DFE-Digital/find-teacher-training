@@ -32,6 +32,22 @@
               %>
               <%= form.label :l_2, "Across England", class: "govuk-label govuk-radios__label" %>
             </div>
+            <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <%=
+                form.radio_button(
+                  :l,
+                  "3",
+                  class: "govuk-radios__input",
+                  data: { qa: "by_provider" },
+                  checked: params[:l] == "3"
+                )
+              %>
+              <%= form.text_field :query, data: {qa: "provider_search"} %>
+              <%= form.label :query, class: "govuk-label govuk-radios__label" do %>
+                By school, university or other training provider
+              <% end %>
+            </div>
           </div>
         </div>
 
