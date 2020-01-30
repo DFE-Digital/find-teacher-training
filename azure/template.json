@@ -131,6 +131,12 @@
       "metadata": {
         "description": "API Key for Google Maps"
       }
+    },
+    "settingsGoogleGeoCodeAPIKey": {
+      "type": "string",
+      "metadata": {
+        "description": "API Key for Google Geocode"
+      }
     }
   },
   "variables": {
@@ -266,6 +272,10 @@
               {
                 "name": "SETTINGS__GOOGLE__MAPS_API_KEY",
                 "value": "[parameters('settingsGoogleMapsAPIKey')]"
+              },
+              {
+                "name": "SETTINGS__GCP_API_KEY",
+                "value": "[parameters('settingsGoogleGeoCodeAPIKey')]"
               }
             ]
           },
