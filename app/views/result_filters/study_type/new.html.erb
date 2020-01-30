@@ -21,11 +21,12 @@
             </span>
           <% end %>
           <div class="govuk-checkboxes">
+          <% default_to_true = (params[:fulltime] != "True" && params[:parttime] != "True")%>
             <div class="govuk-checkboxes__item">
               <%=
                 form.check_box(
                   :fulltime,
-                  { class: "govuk-checkboxes__input", data: { qa: 'full_time'}, checked: params[:fulltime] == "True" },
+                  { class: "govuk-checkboxes__input", data: { qa: 'full_time'}, checked: params[:fulltime] == "True" || default_to_true },
                   "True",
                   "False"
                 )
@@ -42,7 +43,7 @@
               <%=
                 form.check_box(
                   :parttime,
-                  { class: "govuk-checkboxes__input", data: { qa: 'part_time'}, checked: params[:parttime] == "True" },
+                  { class: "govuk-checkboxes__input", data: { qa: 'part_time'}, checked: params[:parttime] == "True" || default_to_true },
                   "True",
                   "False"
                 )
