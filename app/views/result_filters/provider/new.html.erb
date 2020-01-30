@@ -1,12 +1,40 @@
-<% @provider_suggestions.each do |provider| %>
-  <%= form_with url: provider_path, method: :post, data: {qa: "provider_suggestion" } do |form| %>
-    <%= render 'result_filters/hidden_fields', exclude_keys: ["query"], form: form %>
-    <%= form.hidden_field :query, value: provider.provider_name %>
-    <%= form.submit "#{provider.provider_name} (#{provider.provider_code})", name: nil, class: "govuk-button", data: { qa: 'provider_suggestion__submit' } %>
-  <% end %>
-<% end %>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+      <h1 class="govuk-heading-xl">Pick a provider</h1>
+    </legend>
+    <p>You searched for ‘<%= params["query"] %>’</p>
+    <p>We found these providers which matched your search:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <% @provider_suggestions.each do |provider| %>
+        <li>
+          <%= form_with url: provider_path, method: :post, data: {qa: "provider_suggestion" } do |form| %>
+            <%= render 'result_filters/hidden_fields', exclude_keys: ["query"], form: form %>
+            <%= form.hidden_field :query, value: provider.provider_name %>
+            <%= form.submit "#{provider.provider_name} (#{provider.provider_code})", name: nil, class: "override-button-default govuk-link", data: { qa: 'provider_suggestion__submit' } %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
 
-<%= form_with url: provider_path, method: :get, data: { qa: "search" } do |form| %>
-  <%= form.text_field :query, data: { qa: "search__input" } %>
-  <%= form.submit "Search again", name: nil, class: "govuk-button", data: { qa: 'search__submit' } %>
-<% end %>
+    <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+    <details class="govuk-details" role="group" data-qa="search">
+      <summary class="govuk-details__summary" data-qa="search__expand" role="button">
+        <span class="govuk-details__summary-text">Try another provider</span>
+      </summary>
+      <div class="govuk-details__text">
+        <%= form_with url: provider_path, method: :get do |form| %>
+          <fieldset class="govuk-fieldset">
+            <%= form.label :query, class: "govuk-label" do %>
+              <strong>School, university or other training provider</strong>
+              <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
+            <% end %>
+            <%= form.text_field :query, class: "govuk-input", data: { qa: "search__input" } %>
+            <%= form.submit "Search again", name: nil, class: "govuk-button", data: { qa: 'search__submit' } %>
+          </fieldset>
+        <% end %>
+      </div>
+    </details>
+  </div>
+</div>

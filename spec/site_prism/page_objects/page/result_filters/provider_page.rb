@@ -13,6 +13,7 @@ module PageObjects
 
         section :search, '[data-qa="search"]' do
           element :input, '[data-qa="search__input"]'
+          element :expand, '[data-qa="search__expand"]'
           element :submit, '[data-qa="search__submit"]'
         end
         sections :provider_suggestions, ProviderSuggestion, '[data-qa="provider_suggestion"]'

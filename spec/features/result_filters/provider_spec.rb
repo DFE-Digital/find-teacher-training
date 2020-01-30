@@ -62,6 +62,7 @@ feature "Provider filter", :focus, type: :feature do
   end
 
   it "has a form with which to search again" do
+    provider_filter_page.search.expand.click
     provider_filter_page.search.input.fill_in(with: "ACME SCITT")
     provider_filter_page.search.submit.click
 
