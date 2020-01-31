@@ -23,7 +23,7 @@ feature "Provider filter", type: :feature do
   end
 
   let(:search_term) { "ACME" }
-  let(:query_params) { { query: "ACME" } }
+  let(:query_params) { { query: search_term } }
 
   before do
     stub_results_page_request
@@ -31,6 +31,14 @@ feature "Provider filter", type: :feature do
     provider_request
 
     provider_filter_page.load(query: query_params)
+  end
+
+  context "with an empty search" do
+    let(:query_params) { "   " }
+
+    it "Displays an error if provider search is selected but empty" do
+      expect(location_filter_page).to have_error
+    end
   end
 
   context "with a query" do

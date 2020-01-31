@@ -3,6 +3,11 @@ module ResultFilters
     include FilterParameters
 
     def new
+      if params[:query].blank?
+        flash[:error] = "Training provider"
+        return redirect_back
+      end
+
       @provider_suggestions = Provider
         .select(:provider_code, :provider_name)
         .where(recruitment_cycle_year: "2020")
@@ -11,10 +16,14 @@ module ResultFilters
 
       if @provider_suggestions.count.zero?
         flash[:error] = "Training provider"
-        redirect_to location_path(filter_params)
+        redirect_back
       elsif @provider_suggestions.count == 1
         redirect_to results_path(filter_params.merge(query: @provider_suggestions.first.provider_name))
       end
+    end
+
+    def redirect_back
+      redirect_to location_path(filter_params)
     end
   end
 end
