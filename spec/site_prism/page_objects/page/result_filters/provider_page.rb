@@ -5,7 +5,7 @@ module PageObjects
         set_url "/results/filter/provider{?query*}"
 
         class ProviderSuggestion < SitePrism::Section
-          element :submit, '[data-qa="provider_suggestion__submit"]'
+          element :hyperlink, '[data-qa="provider_suggestion__link"]'
         end
 
         element :back_link, '[data-qa="page-back"]'

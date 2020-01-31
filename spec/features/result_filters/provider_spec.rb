@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Provider filter", type: :feature do
+feature "Provider filter", :focus, type: :feature do
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
@@ -34,12 +34,12 @@ feature "Provider filter", type: :feature do
 
   context "with a query" do
     it "queries the backend" do
-      expect(provider_filter_page.provider_suggestions.first.submit.value).to eq("#{providers.first.provider_name} (#{providers.first.provider_code})")
-      expect(provider_filter_page.provider_suggestions.second.submit.value).to eq("#{providers.second.provider_name} (#{providers.second.provider_code})")
+      expect(provider_filter_page.provider_suggestions.first.hyperlink.text).to eq("#{providers.first.provider_name} (#{providers.first.provider_code})")
+      expect(provider_filter_page.provider_suggestions.second.hyperlink.text).to eq("#{providers.second.provider_name} (#{providers.second.provider_code})")
     end
 
     it "links to the results page" do
-      provider_filter_page.provider_suggestions.first.submit.click
+      provider_filter_page.provider_suggestions.first.hyperlink.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
@@ -52,12 +52,27 @@ feature "Provider filter", type: :feature do
       let(:query_params) { { other_param: "my other param", query: "ACME" } }
 
       it "preserves previous parameters" do
-        provider_filter_page.provider_suggestions.first.submit.click
+        provider_filter_page.provider_suggestions.first.hyperlink.click
         #We must do this because site_prism's URL system is broken
         expect(results_page.url).to eq(current_path)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
           "other_param" => "my other param",
           "query" => "ACME SCITT 2",
+        )
+      end
+    end
+
+    context "with only one provider" do
+      let(:providers) do
+        [
+          build(:provider, provider_name: "ACME SCITT 4", provider_code: "4"),
+        ]
+      end
+
+      it "is automatically selected" do
+        expect(results_page.url).to eq(current_path)
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "query" => "ACME SCITT 4",
         )
       end
     end

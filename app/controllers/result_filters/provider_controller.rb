@@ -8,10 +8,10 @@ module ResultFilters
         .where(recruitment_cycle_year: "2020")
         .with_params(search: params[:query])
         .all
-    end
 
-    def create
-      redirect_to results_path(filter_params)
+      if @provider_suggestions.count == 1
+        redirect_to results_path(filter_params.merge(query: @provider_suggestions.first.provider_name))
+      end
     end
   end
 end
