@@ -1,12 +1,12 @@
 <% if flash[:error] %>
   <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary" data-ga-event-form="error" data-qa="error">
-    <h2 class="govuk-error-summary__title" id="error-summary-title">
+    <h2 class="govuk-error-summary__title" id="error-summary-title" data-qa="error__heading">
       You’ll need to correct some information.
     </h2>
     <div class="govuk-error-summary__body">
       <ul class="govuk-list govuk-error-summary__list">
         <li>
-          <a href="#<%=error_anchor_id%>"><%= flash[:error] %></a>
+          <a href="#<%=error_anchor_id%>" data-qa="error__text"><%= flash[:error] %></a>
         </li>
       </ul>
     </div>

@@ -38,10 +38,11 @@ feature "Location filter", type: :feature do
     end
 
     context "selecting by provider" do
-      it "the user can search by provider" do
+      let(:providers) { [build(:provider), build(:provider)] }
+      it "can search by provider" do
         stub_api_v3_resource(
           type: Provider,
-          resources: [],
+          resources: providers,
           fields: { providers: %i[provider_code provider_name] },
           params: { recruitment_cycle_year: 2020 },
           search: "ACME",
@@ -51,7 +52,7 @@ feature "Location filter", type: :feature do
         filter_page.provider_search.fill_in(with: "ACME")
         filter_page.find_courses.click
 
-        expect(provider_page.url).to eq(current_path)
+        expect(current_path).to eq(provider_page.url)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
           "l" => "3",
           "query" => "ACME",
@@ -64,7 +65,7 @@ feature "Location filter", type: :feature do
         it "preserves other selected options" do
           stub_api_v3_resource(
             type: Provider,
-            resources: [],
+            resources: providers,
             fields: { providers: %i[provider_code provider_name] },
             params: { recruitment_cycle_year: 2020 },
             search: "ACME",
@@ -74,7 +75,7 @@ feature "Location filter", type: :feature do
           filter_page.provider_search.fill_in(with: "ACME")
           filter_page.find_courses.click
 
-          expect(provider_page.url).to eq(current_path)
+          expect(current_path).to eq(provider_page.url)
           expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
             "l" => "3",
             "query" => "ACME",
@@ -195,14 +196,13 @@ feature "Location filter", type: :feature do
     end
 
     it "passes arrays correctly" do
-      url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
-      PageObjects::Page::ResultFilters::Location.set_url(url_with_array_params)
-
-      filter_page.load
+      #Site prism does not correctly handle array arguments
+      visit location_path(test: [1, 2])
       filter_page.across_england.click
       filter_page.find_courses.click
 
       expect(results_page).to be_displayed
+
 
       expect_page_to_be_displayed_with_query(
         page: results_page,

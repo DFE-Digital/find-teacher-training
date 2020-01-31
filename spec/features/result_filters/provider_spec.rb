@@ -1,7 +1,8 @@
 require "rails_helper"
 
-feature "Provider filter", :focus, type: :feature do
+feature "Provider filter", type: :feature do
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
+  let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:providers) do
@@ -76,12 +77,24 @@ feature "Provider filter", :focus, type: :feature do
         )
       end
     end
+
+    context "with no providers" do
+      let(:providers) do
+        []
+      end
+
+      it "redirects to location page with an error" do
+        expect(current_path).to eq(location_filter_page.url)
+        expect(location_filter_page.error_text.text).to eq("Training provider")
+        expect(location_filter_page.provider_error.text).to eq("Please enter the name of a training provider")
+      end
+    end
   end
 
   it "has a form with which to search again" do
     stub_api_v3_resource(
       type: Provider,
-      resources: [],
+      resources: providers,
       fields: { providers: %i[provider_code provider_name] },
       params: { recruitment_cycle_year: 2020 },
       search: "ACME SCITT",
@@ -91,7 +104,7 @@ feature "Provider filter", :focus, type: :feature do
     provider_filter_page.search.input.fill_in(with: "ACME SCITT")
     provider_filter_page.search.submit.click
 
-    expect(provider_filter_page.url).to eq(current_path)
+    expect(current_path).to eq(provider_filter_page.url)
     expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
       "query" => "ACME SCITT",
       "utf8" => "✓",

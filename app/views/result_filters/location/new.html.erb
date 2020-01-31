@@ -14,7 +14,7 @@
         </legend>
 
         <div class="govuk-form-group">
-          <% if flash[:error] %>
+          <% if flash[:error] == "Please choose an option" %>
             <span id="location-error" class="govuk-error-message">
               <span class="govuk-visually-hidden">Error:</span> Please choose an option
             </span>
@@ -47,13 +47,16 @@
                 By school, university or other training provider
               <% end %>
             </div>
-            
+
             <div class="govuk-radios__conditional">
               <%= form.label :query, class: "govuk-label" do %>
                 School, university or other training provider
+                <% if flash[:error] == "Training provider" %>
+                  <span class="govuk-error-message" data-qa="provider_error">Please enter the name of a training provider</span>
+                <% end %>
               <% end %>
               <span class="govuk-hint">Enter the name or provider code</span>
-              <%= form.text_field :query, class: "govuk-input", data: {qa: "provider_search"} %>
+              <%= form.text_field :query, class: "govuk-input", data: { qa: "provider_search" } %>
             </div>
           </div>
         </div>
