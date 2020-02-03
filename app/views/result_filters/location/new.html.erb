@@ -26,7 +26,7 @@
                   :l,
                   "2",
                   class: "govuk-radios__input",
-                  data: { qa: "across_england" },
+                  data: { qa: "across-england" },
                   checked: params[:l] == "2"
                 )
               %>
@@ -39,7 +39,7 @@
                   :l,
                   "3",
                   class: "govuk-radios__input",
-                  data: { qa: "by_provider" },
+                  data: { qa: "by-provider" },
                   checked: params[:l] == "3"
                 )
               %>
@@ -52,17 +52,17 @@
               <%= form.label :query, class: "govuk-label" do %>
                 School, university or other training provider
                 <% if flash[:error] == "Training provider" %>
-                  <span class="govuk-error-message" data-qa="provider_error">Please enter the name of a training provider</span>
+                  <span class="govuk-error-message" data-qa="provider-error">Please enter the name of a training provider</span>
                 <% end %>
               <% end %>
               <span class="govuk-hint">Enter the name or provider code</span>
-              <%= form.text_field :query, class: "govuk-input", data: { qa: "provider_search" } %>
+              <%= form.text_field :query, class: "govuk-input", data: { qa: "provider-search" } %>
             </div>
           </div>
         </div>
 
         <div class="govuk-form-group">
-          <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: 'find_courses' } %>
+          <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: "find-courses" } %>
         </div>
       </fieldset>
     <% end %>

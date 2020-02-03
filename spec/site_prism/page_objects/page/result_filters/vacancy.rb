@@ -8,7 +8,7 @@ module PageObjects
         element :error, '[data-qa="error"]'
         element :with_vacancies, '[data-qa="with_vacancies"]'
         element :with_and_without_vacancies, '[data-qa="with_and_without_vacancies"]'
-        element :find_courses, '[data-qa="find_courses"]'
+        element :find_courses, '[data-qa="find-courses"]'
       end
     end
   end

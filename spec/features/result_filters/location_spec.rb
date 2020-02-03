@@ -203,7 +203,6 @@ feature "Location filter", type: :feature do
 
       expect(results_page).to be_displayed
 
-
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
