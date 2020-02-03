@@ -19,7 +19,7 @@
               <span class="govuk-visually-hidden">Error:</span> Please choose an option
             </span>
           <% end %>
-          <div class="govuk-radios">
+          <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
             <div class="govuk-radios__item">
               <%=
                 form.radio_button(
@@ -39,7 +39,12 @@
                   :l,
                   "3",
                   class: "govuk-radios__input",
-                  data: { qa: "by-provider" },
+                  data: {
+                    qa: "by-provider",
+                  },
+                  aria: {
+                    controls: "query-container",
+                  },
                   checked: params[:l] == "3"
                 )
               %>
@@ -47,8 +52,7 @@
                 By school, university or other training provider
               <% end %>
             </div>
-
-            <div class="govuk-radios__conditional">
+            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="query-container">
               <%= form.label :query, class: "govuk-label" do %>
                 School, university or other training provider
                 <% if flash[:error] == "Training provider" %>
