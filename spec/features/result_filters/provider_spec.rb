@@ -94,7 +94,7 @@ feature "Provider filter", type: :feature do
       it "redirects to location page with an error" do
         expect(current_path).to eq(location_filter_page.url)
         expect(location_filter_page.error_text.text).to eq("Training provider")
-        expect(location_filter_page.provider_error.text).to eq("Please enter the name of a training provider")
+        expect(location_filter_page.provider_error.text).to eq("Error: Please enter the name of a training provider")
       end
     end
   end
