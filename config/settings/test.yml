@@ -1,3 +1,7 @@
 manage_backend:
   base_url: http://localhost:3001
 redirect_results_to_c_sharp: false
+find_teacher_training:
+  base_url: http://localhost:3002
+search_and_compare_ui:
+  base_url: http://localhost:5000

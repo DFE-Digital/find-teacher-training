@@ -25,13 +25,13 @@
               <%=
                 form.check_box(
                   :qualifications,
-                  { 
-                    class: "govuk-checkboxes__input", 
-                    multiple: true, 
-                    data: { qa: 'qts_only' }, 
-                    checked: @view.qts_only_checked? 
+                  {
+                    class: "govuk-checkboxes__input",
+                    multiple: true,
+                    data: { qa: 'qts_only' },
+                    checked: @view.qts_only_checked?
                   },
-                  "QtsOnly", 
+                  "QtsOnly",
                   false
                 )
               %>
@@ -53,13 +53,13 @@
               <%=
                 form.check_box(
                   :qualifications,
-                  { 
-                    class: "govuk-checkboxes__input", 
-                    multiple: true, 
-                    data: { qa: 'pgde_pgce_with_qts'}, 
+                  {
+                    class: "govuk-checkboxes__input",
+                    multiple: true,
+                    data: { qa: 'pgde_pgce_with_qts'},
                     checked: @view.pgde_pgce_with_qts_checked?,
                   },
-                  "PgdePgceWithQts", 
+                  "PgdePgceWithQts",
                   false
                 )
               %>
@@ -78,13 +78,13 @@
               <%=
                 form.check_box(
                   :qualifications,
-                  { 
+                  {
                     class: "govuk-checkboxes__input",
                     multiple: true,
                     data: { qa: 'other'},
                     checked: @view.other_checked?
                   },
-                  "Other", 
+                  "Other",
                   false
                 )
               %>

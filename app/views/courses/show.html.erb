@@ -1,7 +1,9 @@
 <%= content_for :page_title, "#{course.name_and_code} with #{course.provider.provider_name}" %>
 
-<%= content_for(:before_content) do %>
-  <div data-module="back-link"></div>
+<% if permitted_referrer? %>
+  <%= content_for(:before_content) do %>
+    <%= govuk_back_link_to(results_path(request.referrer), "Back to search results") %>
+  <% end %>
 <% end %>
 
 <h1 class="govuk-heading-xl">

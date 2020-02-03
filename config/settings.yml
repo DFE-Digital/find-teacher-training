@@ -6,6 +6,4 @@ google:
   maps_api_key: replace_me
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
-search_and_compare_ui:
-  base_url: http://localhost:5000
 redirect_results_to_c_sharp: true
