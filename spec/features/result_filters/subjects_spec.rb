@@ -79,7 +79,7 @@ feature "Subject filter", type: :feature do
         page: results_page,
         expected_query_params: {
           "subjects" => "31,1",
-          "senCourses" => "True",
+          "senCourses" => "true",
         },
       )
     end
@@ -87,8 +87,13 @@ feature "Subject filter", type: :feature do
 
   context "with previously selected subjects" do
     it "automatically selects the given checkboxes" do
-      subject_filter_page.load(query: { subjects: "31", senCourses: "True" })
+      subject_filter_page.load(query: { subjects: "31", senCourses: "true" })
       expect(subject_filter_page.subject_areas.first.subjects.first.checkbox).to be_checked
+      expect(subject_filter_page.send_area.subjects.first.checkbox).to be_checked
+    end
+
+    it "automatically selects the given checkboxes with C# casing" do
+      subject_filter_page.load(query: { senCourses: "True" })
       expect(subject_filter_page.send_area.subjects.first.checkbox).to be_checked
     end
   end
