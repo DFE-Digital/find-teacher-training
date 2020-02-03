@@ -39,6 +39,10 @@ feature "Provider filter", type: :feature do
     it "Displays an error if provider search is selected but empty" do
       expect(location_filter_page).to have_error
     end
+
+    it "Does not include the query parameter in the params" do
+      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq({})
+    end
   end
 
   context "with a query" do

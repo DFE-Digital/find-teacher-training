@@ -23,7 +23,7 @@ module ResultFilters
     end
 
     def redirect_back
-      redirect_to location_path(filter_params)
+      redirect_to location_path(filter_params.except(:query))
     end
   end
 end
