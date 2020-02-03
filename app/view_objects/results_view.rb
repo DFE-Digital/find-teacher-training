@@ -24,6 +24,10 @@ class ResultsView
     query_parameters["parttime"].present? && query_parameters["parttime"].downcase == "true"
   end
 
+  def hasvacancies?
+    query_parameters["hasvacancies"].blank? || query_parameters["hasvacancies"].downcase == "true"
+  end
+
 private
 
   attr_reader :query_parameters
@@ -41,7 +45,7 @@ private
   end
 
   def hasvacancies_parameters
-    { "hasvacancies" => query_parameters["hasvacancies"].presence || "True" }
+    { "hasvacancies" => hasvacancies?.to_s.humanize }
   end
 
   def sen_courses_parameters

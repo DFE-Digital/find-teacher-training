@@ -24,9 +24,7 @@
         <div>
           <%=link_to "Change salary option", @results_view.filter_path_with_unescaped_commas(funding_path), class: "govuk-link", data: { qa: "filters__salary_link" }%>
         </div>
-        <div>
-          <%=link_to "Change vacancies", @results_view.filter_path_with_unescaped_commas(vacancy_path), class: "govuk-link", data: { qa: "filters__vacancy_link" }%>
-        </div>
+        <%= render partial: 'results/vacancy' %>
       </div>
     </div>
     <div class="govuk-grid-column-two-thirds">

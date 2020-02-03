@@ -16,12 +16,18 @@ module PageObjects
       element :link, '[data-qa="link"]'
     end
 
+    class VacanciesSection < SitePrism::Section
+      element :subheading, "h2"
+      element :vacancies, '[data-qa="vacancies"]'
+      element :link, '[data-qa="link"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results{?query*}"
 
       sections :courses, CourseSection, '[data-qa="course"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
-
+      section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
