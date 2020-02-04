@@ -245,6 +245,22 @@ feature "Course show", type: :feature do
         expect(course_page).not_to have_back_link
       end
     end
+
+    context "When navigating to the course from search and compare UI" do
+      it "Does displays the back link" do
+        page.driver.header("Referer", Settings.search_and_compare_ui.base_url)
+        visit course_path(course.provider_code, course.course_code)
+        expect(course_page).to have_back_link
+      end
+    end
+
+    context "When navigating to the course from the current application" do
+      it "Does displays the back link" do
+        page.driver.header("Referer", page.driver.request.host_with_port)
+        visit course_path(course.provider_code, course.course_code)
+        expect(course_page).to have_back_link
+      end
+    end
   end
 
   def jsonapi_site_status(name, study_mode, status)
