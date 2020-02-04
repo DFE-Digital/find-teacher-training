@@ -37,10 +37,6 @@ feature "Subject filter", type: :feature do
       subject_filter_page.subject_areas.second.then do |subject_area|
         expect(subject_area.name.text).to eq("Secondary")
       end
-
-      subject_filter_page.send_area.then do |subject_area|
-        expect(subject_area.name.text).to eq("Special educational needs and disability (SEND)")
-      end
     end
 
     it "displays all subjects" do
