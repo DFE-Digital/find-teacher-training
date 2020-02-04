@@ -7,6 +7,13 @@ module ViewHelper
     govuk_link_to(link_text, url, class: "govuk-back-link", data: { qa: "page-back" })
   end
 
+  def permitted_referrer?
+    return false if request.referer.blank?
+
+    request.referer.start_with?(Settings.search_and_compare_ui.base_url) ||
+      request.referer.include?(request.host_with_port)
+  end
+
   def bat_contact_email_address
     Settings.service_support.contact_email_address
   end

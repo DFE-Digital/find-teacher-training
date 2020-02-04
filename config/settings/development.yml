@@ -1,2 +1,4 @@
 manage_backend:
   base_url: http://localhost:3001
+search_and_compare_ui:
+  base_url: http://localhost:5000
