@@ -22,12 +22,19 @@ module PageObjects
       element :link, '[data-qa="link"]'
     end
 
+    class FundingSection < SitePrism::Section
+      element :subheading, "h2"
+      element :funding, '[data-qa="funding"]'
+      element :link, '[data-qa="link"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results{?query*}"
 
       sections :courses, CourseSection, '[data-qa="course"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
+      section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
@@ -37,6 +44,7 @@ module PageObjects
       element :qualification_link, '[data-qa="filters__qualification_link"]'
       element :salary_link, '[data-qa="filters__salary_link"]'
       element :vacancies_link, '[data-qa="filters__vacancies_link"]'
+      element :funding_link, '[data-qa="filters__funding_link"]'
     end
   end
 end

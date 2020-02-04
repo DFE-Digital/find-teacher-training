@@ -1,0 +1,15 @@
+<div class="filter-form" data-qa="filters__funding">
+  <h2 class="govuk-heading-s filter-form__title">
+    Salary<span class="govuk-visually-hidden">:</span>
+  </h2>
+  <ul class="filter-form__value--list">
+    <li data-qa="funding">
+      <% if @results_view.with_salaries? %>
+        Only courses with a salary
+      <% else %>
+        Courses with and without salary
+      <% end %>
+    </li>
+  </ul>
+  <%= link_to "Change salary option", @results_view.filter_path_with_unescaped_commas(funding_path), class: "govuk-link", data: { qa: "link" } %>
+</div>
