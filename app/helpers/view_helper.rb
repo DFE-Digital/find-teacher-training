@@ -11,7 +11,7 @@ module ViewHelper
     return false if request.referer.blank?
 
     request.referer.start_with?(Settings.search_and_compare_ui.base_url) ||
-      request.referer.start_with?(request.host_with_port)
+      request.referer.include?(request.host_with_port)
   end
 
   def bat_contact_email_address

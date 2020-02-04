@@ -42,6 +42,12 @@ feature "View helpers", type: :helper do
         helper.request.headers.merge!(headers)
         expect(helper.permitted_referrer?).to eq(true)
       end
+
+      it "returns true with protocol on the start" do
+        headers = { "HTTP_REFERER": "http://#{helper.request.host_with_port}" }
+        helper.request.headers.merge!(headers)
+        expect(helper.permitted_referrer?).to eq(true)
+      end
     end
   end
 end
