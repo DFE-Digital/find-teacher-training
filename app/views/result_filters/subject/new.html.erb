@@ -48,6 +48,29 @@
               </div>
             </div>
           <% end %>
+          <div class="govuk-accordion__section" data-qa="send_area">
+            <div class="govuk-accordion__section-header">
+              <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
+                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="null-content-1" class="govuk-accordion__section-button" aria-expanded="<%= if params[:senCourses] == "true" then "true" else "false" end %>">
+                  Special educational needs and disability (SEND)
+                </button>
+              </h2>
+              <span class="govuk-accordion__icon" aria-hidden="true"></span>
+            </div>
+            <div class="govuk-accordion__section-content" aria-labelledby="accordion-heading-send">
+              <div class="govuk-checkboxes">
+                <div class="govuk-checkboxes__item" data-qa="subject">
+                  <%= f.check_box(:senCourses, { checked: params[:senCourses] == "true", data: {qa: "subject__checkbox"}, id: "subject_send", class: "govuk-checkboxes__input" }, 'true', nil) %>
+                  <%= f.label(:subjects, {for: "subject_send", data: {qa: "subject__name"}}, class: "govuk-label govuk-checkboxes__label") do %>
+                    <span class="govuk-checkboxes__label_text">
+                      Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
+                    </span>
+                    <span class="govuk-!-display-block"></span>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <%= f.submit("Find courses", name: nil, data: {qa: "continue"}, class: "govuk-button" )%>

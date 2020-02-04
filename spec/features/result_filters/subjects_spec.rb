@@ -26,6 +26,7 @@ feature "Subject filter", type: :feature do
   context "with no selected subjects" do
     it "doesn't expand the accordion" do
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="false"]')
+      expect(subject_filter_page.send_area.accordion_button).to match_selector('[aria-expanded="false"]')
     end
 
     it "displays all subject areas" do
@@ -47,6 +48,11 @@ feature "Subject filter", type: :feature do
           expect(subject.name.text).to eq(subject_areas.first.subjects.second.subject_name)
         end
       end
+      subject_filter_page.send_area.then do |subject_area|
+        subject_area.subjects.first.then do |subject|
+          expect(subject.name.text).to eq("Show only courses with a SEND specialism")
+        end
+      end
     end
 
     it "can select a checkbox and filter appropriately" do
@@ -63,11 +69,13 @@ feature "Subject filter", type: :feature do
     it "can select multiple checkboxes and filter appropriately" do
       subject_filter_page.subject_areas.first.subjects.first.checkbox.click
       subject_filter_page.subject_areas.first.subjects.second.checkbox.click
+      subject_filter_page.send_area.subjects.first.checkbox.click
       subject_filter_page.continue.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
           "subjects" => "31,1",
+          "senCourses" => "true",
         },
       )
     end
@@ -75,8 +83,14 @@ feature "Subject filter", type: :feature do
 
   context "with previously selected subjects" do
     it "automatically selects the given checkboxes" do
-      subject_filter_page.load(query: { subjects: "31" })
+      subject_filter_page.load(query: { subjects: "31", senCourses: "true" })
       expect(subject_filter_page.subject_areas.first.subjects.first.checkbox).to be_checked
+      expect(subject_filter_page.send_area.subjects.first.checkbox).to be_checked
+    end
+
+    it "automatically selects the given checkboxes with C# casing" do
+      subject_filter_page.load(query: { senCourses: "True" })
+      expect(subject_filter_page.send_area.subjects.first.checkbox).to be_checked
     end
   end
 
@@ -94,8 +108,9 @@ feature "Subject filter", type: :feature do
     end
 
     it "auto expands the accordion" do
-      subject_filter_page.load(query: { subjects: "31,1", other_param: "param_value" })
+      subject_filter_page.load(query: { subjects: "31,1", other_param: "param_value", senCourses: "True" })
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="true"]')
+      expect(subject_filter_page.send_area.accordion_button).to match_selector('[aria-expanded="true"]')
     end
   end
 
