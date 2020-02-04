@@ -111,5 +111,25 @@ feature "results", type: :feature do
         end
       end
     end
+
+    describe "qualifications filter" do
+      context "all selected" do
+        let(:params) { { qualifications: "QtsOnly,PgdePgceWithQts,Other" } }
+
+        it "displays text 'All qualifications'" do
+          expect(results_page.qualifications_filter.qualifications.first).to have_content("All qualifications")
+        end
+      end
+
+      context "two selected" do
+        let(:params) { { qualifications: "QtsOnly,PgdePgceWithQts" } }
+
+        it "displays text for each qualification" do
+          expect(results_page.qualifications_filter.qualifications.first).to have_content("QTS only")
+          expect(results_page.qualifications_filter.qualifications.last).to have_content("PGCE (or PGDE) with QTS")
+          expect(results_page.qualifications_filter.qualifications.count).to eq(2)
+        end
+      end
+    end
   end
 end

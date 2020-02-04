@@ -28,6 +28,22 @@ class ResultsView
     query_parameters["hasvacancies"].blank? || query_parameters["hasvacancies"].downcase == "true"
   end
 
+  def qts_only?
+    qualifications_parameters_array.include?("QtsOnly")
+  end
+
+  def pgce_or_pgde_with_qts?
+    qualifications_parameters_array.include?("PgdePgceWithQts")
+  end
+
+  def other_qualifications?
+    qualifications_parameters_array.include?("Other")
+  end
+
+  def all_qualifications?
+    qts_only? && pgce_or_pgde_with_qts? && other_qualifications?
+  end
+
   def with_salaries?
     query_parameters["funding"] == "8"
   end
@@ -54,5 +70,9 @@ private
 
   def sen_courses_parameters
     { "senCourses" => query_parameters["senCourses"].presence || "False" }
+  end
+
+  def qualifications_parameters_array
+    qualifications_parameters["qualifications"].split(",")
   end
 end
