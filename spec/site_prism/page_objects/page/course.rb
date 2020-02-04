@@ -43,6 +43,7 @@ module PageObjects
       element :choose_a_training_location_table, "[data-qa=course__choose_a_training_location]"
       element :locations_map, "[data-qa=course__locations_map]"
       element :apply_link, "a[data-qa=course__apply_link]"
+      element :back_link, "[data-qa=page-back]"
     end
   end
 end

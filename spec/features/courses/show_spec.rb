@@ -1,3 +1,4 @@
+# coding: utf-8
 require "rails_helper"
 
 feature "Course show", type: :feature do
@@ -235,6 +236,14 @@ feature "Course show", type: :feature do
       expect(course_page.apply_link[:href]).to eq("https://www.apply-for-teacher-training.education.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}")
 
       expect(course_page).not_to have_content("When you apply you’ll need these codes for the Choices section of your application form")
+    end
+  end
+
+  describe "Showing the back button" do
+    context "When navigating directly to the course" do
+      it "Does not display the back link" do
+        expect(course_page).not_to have_back_link
+      end
     end
   end
 
