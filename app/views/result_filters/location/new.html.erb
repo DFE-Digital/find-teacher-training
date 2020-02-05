@@ -69,7 +69,7 @@
                 <% end %>
               <% end %>
               <span class="govuk-hint">Enter the name or provider code</span>
-              <%= form.text_field :query, class: "govuk-input", data: { qa: "provider-search" } %>
+              <%= form.text_field :query, value: params[:query], class: "govuk-input", data: { qa: "provider-search" } %>
             </div>
           </div>
         </div>

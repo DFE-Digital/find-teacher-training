@@ -10,6 +10,13 @@ feature "Location filter", type: :feature do
     stub_results_page_request
   end
 
+  describe "default text" do
+    it "displays the query text specified in the params if it exists" do
+      filter_page.load(query: { query: "marble" })
+      expect(filter_page.provider_search.value).to eq("marble")
+    end
+  end
+
   describe "back link" do
     it "navigates back to the results page" do
       filter_page.load(query: { test: "params" })
