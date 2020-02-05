@@ -7,7 +7,7 @@ module PageObjects
         element :back_link, '[data-qa="page-back"]'
         element :all_courses, '[data-qa="all_courses"]'
         element :salary_courses, '[data-qa="salary_courses"]'
-        element :find_courses, '[data-qa="find_courses"]'
+        element :find_courses, '[data-qa="find-courses"]'
       end
     end
   end

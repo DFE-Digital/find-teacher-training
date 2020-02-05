@@ -1,6 +1,12 @@
 module FilterParameters
   def filter_params
-    custom_params = request.request_parameters.reject do |param|
+    if request.method == "GET"
+      parameters = request.query_parameters
+    elsif request.method == "POST"
+      parameters = request.request_parameters
+    end
+
+    custom_params = parameters.reject do |param|
       param.in? %w(utf8 authenticity_token)
     end
 

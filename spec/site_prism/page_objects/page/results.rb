@@ -23,7 +23,7 @@ module PageObjects
     end
 
     class Results < SitePrism::Page
-      set_url "/results{?query*}"
+      set_url "/results"
 
       sections :courses, CourseSection, '[data-qa="course"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'

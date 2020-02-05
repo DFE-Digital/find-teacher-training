@@ -5,7 +5,14 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "location-error" }%>
+    <%= render partial: "result_filters/error_message", locals: {
+      error_anchor_id:
+        if flash[:error] == "Please choose an option" then
+          "location-error"
+        elsif flash[:error] == "Training provider"
+          "provider-error"
+        end
+    }%>
     <%= form_with url: location_path, method: :post do |form| %>
       <%= render 'result_filters/hidden_fields', exclude_keys: ["l"], form: form %>
       <fieldset class="govuk-fieldset">
@@ -14,29 +21,60 @@
         </legend>
 
         <div class="govuk-form-group">
-          <% if flash[:error] %>
+          <% if flash[:error] == "Please choose an option" %>
             <span id="location-error" class="govuk-error-message">
               <span class="govuk-visually-hidden">Error:</span> Please choose an option
             </span>
           <% end %>
-          <div class="govuk-radios">
+          <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
             <div class="govuk-radios__item">
               <%=
                 form.radio_button(
                   :l,
                   "2",
                   class: "govuk-radios__input",
-                  data: { qa: "across_england" },
+                  data: { qa: "across-england" },
                   checked: params[:l] == "2"
                 )
               %>
               <%= form.label :l_2, "Across England", class: "govuk-label govuk-radios__label" %>
             </div>
+            <div class="govuk-radios__divider">or</div>
+            <div class="govuk-radios__item">
+              <%=
+                form.radio_button(
+                  :l,
+                  "3",
+                  class: "govuk-radios__input",
+                  data: {
+                    qa: "by-provider",
+                  },
+                  aria: {
+                    controls: "query-container",
+                  },
+                  checked: params[:l] == "3"
+                )
+              %>
+              <%= form.label :l_3, class: "govuk-label govuk-radios__label" do %>
+                By school, university or other training provider
+              <% end %>
+            </div>
+            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless flash[:error] ==  "Training provider" %>" id="query-container">
+              <%= form.label :query, class: "govuk-label" do %>
+                School, university or other training provider
+                <% if flash[:error] == "Training provider" %>
+                  <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
+                    <span class="govuk-visually-hidden">Error:</span> Please enter the name of a training provider
+                  </span>
+                <% end %>
+              <% end %>
+              <span class="govuk-hint">Enter the name or provider code</span>
+              <%= form.text_field :query, value: params[:query], class: "govuk-input", data: { qa: "provider-search" } %>
+            </div>
           </div>
         </div>
-
         <div class="govuk-form-group">
-          <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: 'find_courses' } %>
+          <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: "find-courses" } %>
         </div>
       </fieldset>
     <% end %>

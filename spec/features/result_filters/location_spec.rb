@@ -2,10 +2,19 @@ require "rails_helper"
 
 feature "Location filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
+  let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
+  let(:query_params) { {} }
 
   before do
     stub_results_page_request
+  end
+
+  describe "default text" do
+    it "displays the query text specified in the params if it exists" do
+      filter_page.load(query: { query: "marble" })
+      expect(filter_page.provider_search.value).to eq("marble")
+    end
   end
 
   describe "back link" do
@@ -21,7 +30,7 @@ feature "Location filter", type: :feature do
   end
 
   describe "Selecting an option" do
-    before { filter_page.load }
+    before { filter_page.load(query: query_params) }
 
     it "Allows the user to select across england" do
       filter_page.across_england.click
@@ -33,6 +42,54 @@ feature "Location filter", type: :feature do
           "l" => "2",
         },
       )
+    end
+
+    context "selecting by provider" do
+      let(:providers) { [build(:provider), build(:provider)] }
+      it "can search by provider" do
+        stub_api_v3_resource(
+          type: Provider,
+          resources: providers,
+          fields: { providers: %i[provider_code provider_name] },
+          params: { recruitment_cycle_year: 2020 },
+          search: "ACME",
+        )
+
+        filter_page.by_provider.click
+        filter_page.provider_search.fill_in(with: "ACME")
+        filter_page.find_courses.click
+
+        expect(current_path).to eq(provider_page.url)
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "l" => "3",
+          "query" => "ACME",
+        )
+      end
+
+      context "with selected options" do
+        let(:query_params) { { another_option: "option" } }
+
+        it "preserves other selected options" do
+          stub_api_v3_resource(
+            type: Provider,
+            resources: providers,
+            fields: { providers: %i[provider_code provider_name] },
+            params: { recruitment_cycle_year: 2020 },
+            search: "ACME",
+          )
+
+          filter_page.by_provider.click
+          filter_page.provider_search.fill_in(with: "ACME")
+          filter_page.find_courses.click
+
+          expect(current_path).to eq(provider_page.url)
+          expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+            "l" => "3",
+            "query" => "ACME",
+            "another_option" => "option",
+          )
+        end
+      end
     end
   end
 
@@ -146,10 +203,8 @@ feature "Location filter", type: :feature do
     end
 
     it "passes arrays correctly" do
-      url_with_array_params = "#{filter_page.url}?test[]=1&test[]=2"
-      PageObjects::Page::ResultFilters::Location.set_url(url_with_array_params)
-
-      filter_page.load
+      #Site prism does not correctly handle array arguments
+      visit location_path(test: [1, 2])
       filter_page.across_england.click
       filter_page.find_courses.click
 
