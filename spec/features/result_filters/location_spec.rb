@@ -52,14 +52,27 @@ feature "Location filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: location_filter_results_page,
         expected_query_params: {
-            "l" => "1",
-            "lat" => "51.4980188",
-            "lng" => "-0.1300436",
-            "loc" => "Westminster, London SW1P 3BT, UK",
-            "lq" => "SW1P 3BT",
-            "rad" => "5",
+          "l" => "1",
+          "lat" => "51.4980188",
+          "lng" => "-0.1300436",
+          "loc" => "Westminster, London SW1P 3BT, UK",
+          "lq" => "SW1P 3BT",
+          "rad" => "5",
         },
-          )
+      )
+    end
+
+    it "Allows the user to select across england" do
+      filter_page.across_england.click
+      filter_page.find_courses.click
+
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: {
+          "l" => "2",
+          "rad" => "20",
+        },
+      )
     end
 
     context "selecting by provider" do
@@ -115,26 +128,6 @@ feature "Location filter", type: :feature do
     it "Preselects across england" do
       filter_page.load(query: { l: 2 })
       expect(filter_page.across_england.checked?).to eq(true)
-    end
-
-    it "Allows the user to select across england" do
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-          "rad" => "20",
-        },
-      )
-    end
-  end
-
-  describe "Navigating to the page with currently selected filters" do
-    it "Preselects across england" do
-      filter_page.load(query: { l: 2 })
-      expect(filter_page.across_england).to be_checked
     end
   end
 

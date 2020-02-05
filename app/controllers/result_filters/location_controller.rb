@@ -8,7 +8,7 @@ module ResultFilters
 
     def create
       if params[:l] == "3"
-        redirect_to provider_path(params_for_provider_search)
+        redirect_to(provider_path(params_for_provider_search)) && return
       end
 
       form_params = strip(filter_params.clone)
