@@ -23,7 +23,10 @@ module ResultFilters
     end
 
     def redirect_back
-      redirect_to location_path(filter_params.except(:query))
+      redirect_params = filter_params
+      redirect_params = redirect_params.except(:query) if params[:query].blank?
+
+      redirect_to location_path(redirect_params)
     end
   end
 end
