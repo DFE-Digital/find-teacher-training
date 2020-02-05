@@ -35,7 +35,9 @@ module CsharpRailsSubjectConversionHelper
   end
 
   def csharp_rails_conversion_table
-    [{ csharp_id: "49", rails_id: "42", name: "Modern languages (other)" },
+    [{ csharp_id: nil, rails_id: "27", name: "Philosophy" },
+     { csharp_id: nil, rails_id: "33", name: "Modern Languages" },
+     { csharp_id: "49", rails_id: "42", name: "Modern languages (other)" },
      { csharp_id: "14", rails_id: "43", name: "Further education" },
      { csharp_id: "44", rails_id: "41", name: "Spanish" },
      { csharp_id: "41", rails_id: "40", name: "Russian" },
