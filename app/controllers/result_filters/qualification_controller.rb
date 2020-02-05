@@ -2,7 +2,7 @@ module ResultFilters
   class QualificationController < ApplicationController
     include FilterParameters
 
-    before_action :create_view
+    before_action :create_view, :build_results_filter_query_parameters
 
     def new; end
 
@@ -16,6 +16,11 @@ module ResultFilters
     end
 
   private
+
+    def build_results_filter_query_parameters
+      @results_filter_query_parameters = ResultsView.new(query_parameters: request.query_parameters)
+        .query_parameters_with_defaults
+    end
 
     def create_view
       @view = ResultFilters::QualificationView.new(params: params)
