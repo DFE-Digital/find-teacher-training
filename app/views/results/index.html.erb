@@ -22,7 +22,7 @@
           <%=link_to "Change qualifications", @results_view.filter_path_with_unescaped_commas(qualification_path), class: "govuk-link", data: { qa: "filters__qualifications_link" }%>
         </div>
         <div>
-          <%=link_to "Change salary option", @results_view.filter_path_with_unescaped_commas(funding_path), class: "govuk-link", data: { qa: "filters__salary_link" }%>
+          <%= render partial: 'results/funding' %>
         </div>
         <%= render partial: 'results/vacancy' %>
       </div>

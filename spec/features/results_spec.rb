@@ -86,6 +86,30 @@ feature "results", type: :feature do
           expect(results_page.vacancies_filter.link).to have_content("Change vacancies")
         end
       end
+
+      describe "salary filter" do
+        context "only courses with salaries" do
+          let(:params) { { funding: "8" } }
+
+          it "has salaries filter" do
+            expect(results_page.funding_filter.funding).to have_content("Only courses with a salary")
+          end
+        end
+
+        context "courses with and without salaries" do
+          let(:params) { { funding: "15" } }
+
+          it "has salaries filter" do
+            expect(results_page.funding_filter.funding).to have_content("Courses with and without salary")
+          end
+        end
+
+        context "without any parameters" do
+          it "defaults to courses with and without salaries" do
+            expect(results_page.funding_filter.funding).to have_content("Courses with and without salary")
+          end
+        end
+      end
     end
   end
 end

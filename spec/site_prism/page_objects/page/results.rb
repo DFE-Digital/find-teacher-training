@@ -22,12 +22,17 @@ module PageObjects
       element :link, '[data-qa="link"]'
     end
 
+    class FundingSection < SitePrism::Section
+      element :funding, '[data-qa="funding"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results"
 
       sections :courses, CourseSection, '[data-qa="course"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
+      section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'

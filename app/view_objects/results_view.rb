@@ -28,6 +28,10 @@ class ResultsView
     query_parameters["hasvacancies"].blank? || query_parameters["hasvacancies"].downcase == "true"
   end
 
+  def with_salaries?
+    query_parameters["funding"] == "8"
+  end
+
 private
 
   attr_reader :query_parameters
