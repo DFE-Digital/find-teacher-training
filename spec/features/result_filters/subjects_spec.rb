@@ -23,6 +23,25 @@ feature "Subject filter", type: :feature do
     subject_filter_page.load
   end
 
+  describe "back link" do
+    it "navigates back to the results page" do
+      subject_filter_page.load(query: { test: "params" })
+      subject_filter_page.back_link.click
+
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params:  {
+          "fulltime" => "False",
+          "hasvacancies" => "True",
+          "parttime" => "False",
+          "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
+          "senCourses" => "False",
+          "test" => "params",
+        },
+      )
+    end
+  end
+
   context "with no selected subjects" do
     it "doesn't expand the accordion" do
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="false"]')
