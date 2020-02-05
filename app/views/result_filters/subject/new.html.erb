@@ -37,7 +37,7 @@
                       <div class="govuk-checkboxes__item" data-qa="subject">
                         <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(id: subject.id), data: {qa: "subject__checkbox"}, id: "subject#{subject.id}", class: "govuk-checkboxes__input" }, subject.id, nil) %>
                           <%= f.label(:subjects, {for: "subject#{subject.id}", data: {qa: "subject__name"}}, class: "govuk-label govuk-checkboxes__label") do %>
-                          <span class="govuk-checkboxes__label_text">
+                          <span class="govuk-checkboxes__label-text">
                             <%= subject.subject_name %>
                           </span>
                           <span class="govuk-!-display-block"></span>
@@ -63,7 +63,7 @@
                 <div class="govuk-checkboxes__item" data-qa="subject">
                   <%= f.check_box(:senCourses, { checked: params[:senCourses] == "true", data: {qa: "subject__checkbox"}, id: "subject_send", class: "govuk-checkboxes__input" }, 'true', nil) %>
                   <%= f.label(:subjects, {for: "subject_send", data: {qa: "subject__name"}}, class: "govuk-label govuk-checkboxes__label") do %>
-                    <span class="govuk-checkboxes__label_text">
+                    <span class="govuk-checkboxes__label-text">
                       Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
                     </span>
                     <span class="govuk-!-display-block"></span>

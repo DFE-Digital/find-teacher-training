@@ -141,3 +141,9 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.govuk-checkboxes__label-text {
+  display: block;
+  font-weight: bold;
+  margin-bottom: govuk-spacing(1);
+}
