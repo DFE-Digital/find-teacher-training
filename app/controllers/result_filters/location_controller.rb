@@ -7,13 +7,19 @@ module ResultFilters
     def new; end
 
     def create
-      if(!params[:l])
-        flash[:error] = "Please choose an option"
-        redirect_to location_path(params_without_unsupported_location_params)
-      elsif params[:l] == "3"
+      if params[:l] == "3"
         redirect_to provider_path(params_for_provider_search)
+      end
+
+      form_params = strip(filter_params.clone)
+      form_object = LocationFilterForm.new(form_params)
+
+      if form_object.valid?
+        all_params = form_params.merge!(form_object.params)
+        redirect_to results_path(all_params)
       else
-        redirect_to results_path(params_without_unsupported_location_params)
+        flash[:error] = form_object.errors
+        redirect_to location_path(form_params)
       end
     end
 
@@ -28,8 +34,8 @@ module ResultFilters
       filter_params.except(:lat, :lng, :rad, :loc, :lq)
     end
 
-    def params_without_unsupported_location_params
-      filter_params.except(:lat, :lng, :rad, :query, :loc, :lq)
+    def strip(params)
+      params.reject { |_, v| v == "" }
     end
   end
 end

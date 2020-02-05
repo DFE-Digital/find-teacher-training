@@ -7,6 +7,7 @@ feature "Location filter", type: :feature do
   let(:query_params) { {} }
 
   before do
+    stub_geocoder
     stub_results_page_request
   end
 
@@ -39,16 +40,26 @@ feature "Location filter", type: :feature do
   describe "Selecting an option" do
     before { filter_page.load(query: query_params) }
 
-    it "Allows the user to select across england" do
-      filter_page.across_england.click
+    it "Allows the user to select 'by postcode, town or city'" do
+      location_filter_results_page = PageObjects::Page::ResultFilters::LocationFilterResults.new
+
+      filter_page.by_postcode_town_or_city.click
+      filter_page.location_query.set "SW1P 3BT"
+      filter_page.search_radius.select "5 miles"
+
       filter_page.find_courses.click
 
       expect_page_to_be_displayed_with_query(
-        page: results_page,
+        page: location_filter_results_page,
         expected_query_params: {
-          "l" => "2",
+            "l" => "1",
+            "lat" => "51.4980188",
+            "lng" => "-0.1300436",
+            "loc" => "Westminster, London SW1P 3BT, UK",
+            "lq" => "SW1P 3BT",
+            "rad" => "5",
         },
-      )
+          )
     end
 
     context "selecting by provider" do
@@ -106,8 +117,7 @@ feature "Location filter", type: :feature do
       expect(filter_page.across_england.checked?).to eq(true)
     end
 
-    it "Removes the lat filter" do
-      filter_page.load(query: { lat: "yes" })
+    it "Allows the user to select across england" do
       filter_page.across_england.click
       filter_page.find_courses.click
 
@@ -115,73 +125,16 @@ feature "Location filter", type: :feature do
         page: results_page,
         expected_query_params: {
           "l" => "2",
+          "rad" => "20",
         },
       )
     end
+  end
 
-    it "Removes the lng filter" do
-      filter_page.load(query: { lng: "yes" })
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-        },
-      )
-    end
-
-    it "Removes the rad filter" do
-      filter_page.load(query: { rad: "yes" })
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-        },
-      )
-    end
-
-    it "Removes the query filter" do
-      filter_page.load(query: { query: "yes" })
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-        },
-      )
-    end
-
-    it "Removes the loc filter" do
-      filter_page.load(query: { loc: "yes" })
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-        },
-      )
-    end
-
-    it "Removes the lq filter" do
-      filter_page.load(query: { lq: "yes" })
-      filter_page.across_england.click
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: results_page,
-        expected_query_params: {
-          "l" => "2",
-        },
-      )
+  describe "Navigating to the page with currently selected filters" do
+    it "Preselects across england" do
+      filter_page.load(query: { l: 2 })
+      expect(filter_page.across_england).to be_checked
     end
   end
 
@@ -191,6 +144,32 @@ feature "Location filter", type: :feature do
       filter_page.find_courses.click
 
       expect(filter_page).to have_error
+    end
+
+    it "Displays an error if location is selected but none is entered" do
+      filter_page.load
+      filter_page.by_postcode_town_or_city.click
+      filter_page.search_radius.select "5 miles"
+
+      filter_page.find_courses.click
+
+      expect(filter_page).to have_error
+      expect(filter_page).to have_location_error
+      expect(filter_page).to have_location_query
+      expect(filter_page).to have_select("rad", selected: "5 miles")
+    end
+
+    it "Displays an error if the the location is unknown" do
+      filter_page.load
+      filter_page.by_postcode_town_or_city.click
+      filter_page.location_query.set "Unknown location"
+
+      filter_page.find_courses.click
+
+      expect(filter_page).to have_error
+      expect(filter_page).to have_location_error
+      expect(filter_page).to have_location_query
+      expect(filter_page).to have_unknown_location
     end
   end
 
@@ -205,6 +184,7 @@ feature "Location filter", type: :feature do
         expected_query_params: {
           "l" => "2",
           "test" => "value",
+          "rad" => "20",
         },
       )
     end
@@ -222,6 +202,7 @@ feature "Location filter", type: :feature do
         expected_query_params: {
           "l" => "2",
           "test" => "1,2",
+          "rad" => "20",
         },
       )
     end
