@@ -7,7 +7,7 @@ module ResultFilters
     def new; end
 
     def create
-      if params[:l] == "3"
+      if provider_option_selected?
         redirect_to(provider_path(params_for_provider_search)) && return
       end
 
@@ -28,6 +28,10 @@ module ResultFilters
     def build_results_filter_query_parameters
       @results_filter_query_parameters = ResultsView.new(query_parameters: request.query_parameters)
         .query_parameters_with_defaults
+    end
+
+    def provider_option_selected?
+      filter_params[:l] == "3"
     end
 
     def params_for_provider_search

@@ -7,12 +7,12 @@ module ResultFilters
 
     def initialize(params)
       @params = params
-      @errors = nil
+      @errors = []
     end
 
     def valid?
       validate
-      @errors.nil?
+      @errors.empty?
     end
 
   private
@@ -20,10 +20,10 @@ module ResultFilters
     def validate
       case selected_option
       when NO_OPTION
-        handle_no_option
+        @errors = ["Please choose an option"]
       when LOCATION_OPTION
         if location_query.nil?
-          handle_missing_location
+          @errors = ["Postcode, town, or city", "Please enter a postcode, city or town in England"]
         else
           handle_location_option
         end
@@ -36,16 +36,8 @@ module ResultFilters
         @params.merge!(geocode_params)
         @valid = true
       else
-        @errors = "We couldn't find this location, please check your input and try again"
+        @errors = ["Postcode, town or city", "We couldn't find this location, please check your input and try again"]
       end
-    end
-
-    def handle_missing_location
-      @errors = "Please enter a postcode, town or city in England"
-    end
-
-    def handle_no_option
-      @errors = "Please choose an option"
     end
 
     def geocode_params_for(query)

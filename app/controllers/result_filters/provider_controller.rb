@@ -4,7 +4,7 @@ module ResultFilters
 
     def new
       if params[:query].blank?
-        flash[:error] = "Training provider"
+        flash[:error] = ["Training provider"]
         return redirect_back
       end
 
@@ -15,7 +15,7 @@ module ResultFilters
         .all
 
       if @provider_suggestions.count.zero?
-        flash[:error] = "Training provider"
+        flash[:error] = ["Training provider"]
         redirect_back
       elsif @provider_suggestions.count == 1
         redirect_to results_path(filter_params.merge(query: @provider_suggestions.first.provider_name))

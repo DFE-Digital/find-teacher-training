@@ -16,7 +16,7 @@ module ResultFilters
 
         it "has error" do
           subject.valid?
-          expect(subject.errors).to eq("Please choose an option")
+          expect(subject.errors).to eq(["Please choose an option"])
         end
 
         it "has empty params" do
@@ -34,7 +34,7 @@ module ResultFilters
 
         it "has error" do
           subject.valid?
-          expect(subject.errors).to eq("We couldn't find this location, please check your input and try again")
+          expect(subject.errors).to eq(["Postcode, town or city", "We couldn't find this location, please check your input and try again"])
         end
 
         it "has params" do
@@ -52,7 +52,7 @@ module ResultFilters
 
         it "has no errors" do
           subject.valid?
-          expect(subject.errors).to be_nil
+          expect(subject.errors).to be_empty
         end
 
         it "has params" do
