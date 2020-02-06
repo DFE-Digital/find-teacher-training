@@ -1,6 +1,7 @@
 <%= content_for :page_title, "Find courses by location or by training provider" %>
+
 <% content_for :before_content do %>
-  <%= govuk_back_link_to(results_path(request.query_parameters), "Back to search results") %>
+  <%= govuk_back_link_to(results_path(@results_filter_query_parameters), "Back to search results") %>
 <% end %>
 
 <div class="govuk-grid-row">

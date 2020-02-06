@@ -23,7 +23,14 @@ feature "Qualifications filter", type: :feature do
 
         expect_page_to_be_displayed_with_query(
           page: results_page,
-          expected_query_params: { "test" => "params" },
+          expected_query_params:  {
+            "fulltime" => "False",
+            "hasvacancies" => "True",
+            "parttime" => "False",
+            "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
+            "senCourses" => "False",
+            "test" => "params",
+          },
         )
       end
     end

@@ -15,6 +15,8 @@ module PageObjects
           sections :subjects, Subject, '[data-qa="subject"]'
         end
 
+        element :back_link, '[data-qa="page-back"]'
+
         sections :subject_areas, SubjectAreaSection, '[data-qa="subject_area"]'
         section :send_area, SubjectAreaSection, '[data-qa="send_area"]'
         element :continue, '[data-qa="continue"]'
