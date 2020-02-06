@@ -13,6 +13,27 @@ RSpec.describe ResultsView do
     }
   end
 
+  let(:subject_areas) do
+    [
+      build(:subject_area, subjects: [
+        build(:subject, :primary, id: 1),
+        build(:subject, :biology, id: 2),
+        build(:subject, :english, id: 3),
+        build(:subject, :mathematics, id: 4),
+        build(:subject, :french, id: 5),
+        ]),
+      build(:subject_area, :secondary),
+    ]
+  end
+
+  before do
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: subject_areas,
+      include: [:subjects],
+    )
+  end
+
   describe "query_parameters_with_defaults" do
     subject { described_class.new(query_parameters: query_parameters).query_parameters_with_defaults }
 
@@ -153,6 +174,36 @@ RSpec.describe ResultsView do
       it "returns false" do
         expect(results_view.all_qualifications?).to be_falsy
       end
+    end
+  end
+
+  describe "#number_of_subjects_selected" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "query_parameters don't have subjects set" do
+      let(:parameter_hash) { {} }
+
+      it "returns the number of all subjects" do
+        expect(results_view.number_of_subjects_selected).to eq(5)
+      end
+    end
+
+    context "query_parameters have subjects set" do
+      let(:parameter_hash) { { "subjects" => "1,2,3" } }
+
+      it "returns the number of all subjects" do
+        expect(results_view.number_of_subjects_selected).to eq(3)
+      end
+    end
+  end
+
+  describe "#number_of_extra_subjects" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    let(:parameter_hash) { { "subjects" => "1,2,3,4,5" } }
+
+    it "returns the number of the extra subjects" do
+      expect(results_view.number_of_extra_subjects).to eq(1)
     end
   end
 end

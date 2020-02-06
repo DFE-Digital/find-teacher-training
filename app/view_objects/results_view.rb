@@ -1,4 +1,6 @@
 class ResultsView
+  NUMBER_OF_SUBJECTS_DISPLAYED = 4
+
   def initialize(query_parameters:)
     @query_parameters = query_parameters
   end
@@ -46,6 +48,20 @@ class ResultsView
 
   def with_salaries?
     query_parameters["funding"] == "8"
+  end
+
+
+  def number_of_subjects_selected
+    if query_parameters["subjects"].blank?
+      return SubjectArea.includes(:subjects).all
+        .map(&:subjects).flatten.length
+    end
+
+    query_parameters["subjects"].split(",").count
+  end
+
+  def number_of_extra_subjects
+    number_of_subjects_selected - NUMBER_OF_SUBJECTS_DISPLAYED
   end
 
 private

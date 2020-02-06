@@ -160,6 +160,7 @@ feature "results", type: :feature do
           expect(results_page.subjects_filter).to have_content("English")
           expect(results_page.subjects_filter).to have_content("French")
           expect(results_page.subjects_filter).to have_content("Mathematics")
+          expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
         end
       end
 
@@ -176,11 +177,12 @@ feature "results", type: :feature do
       context "more than 4 subjects selected" do
         let(:params) { { subjects: "31,1,12,24,13" } }
 
-        it "displays first 4 subjects" do
+        it "displays first 4 subjects and number of extra courses selected" do
           expect(results_page.subjects_filter).to have_content("Biology")
           expect(results_page.subjects_filter).to have_content("English")
           expect(results_page.subjects_filter).to have_content("French")
           expect(results_page.subjects_filter).to have_content("Mathematics")
+          expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
         end
       end
     end

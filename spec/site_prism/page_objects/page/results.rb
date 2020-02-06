@@ -11,6 +11,7 @@ module PageObjects
 
     class SubjectsSection < SitePrism::Section
       elements :subjects, '[data-qa="subjects"]'
+      element :extra_subjects, '[data-qa="extra_subjects"]'
     end
 
     class StudyTypeSection < SitePrism::Section
