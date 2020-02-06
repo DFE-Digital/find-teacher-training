@@ -9,6 +9,10 @@ module PageObjects
       element :main_address, '[data-qa="course__main_address"]'
     end
 
+    class SubjectsSection < SitePrism::Section
+      elements :subjects, '[data-qa="subjects"]'
+    end
+
     class StudyTypeSection < SitePrism::Section
       element :subheading, "h2"
       element :fulltime, '[data-qa="fulltime"]'
@@ -34,6 +38,7 @@ module PageObjects
       set_url "/results"
 
       sections :courses, CourseSection, '[data-qa="course"]'
+      section :subjects_filter, SubjectsSection, '[data-qa="filters__subjects"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
       section :qualifications_filter, QualificationsSection, '[data-qa="filters__qualifications"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'

@@ -1,0 +1,11 @@
+<div class="filter-form" data-qa="filters__subjects">
+  <h2 class="govuk-heading-s filter-form__title">
+    Subjects<span class="govuk-visually-hidden">:</span>
+  </h2>
+  <ul class="filter-form__value--list">
+    <% @subjects.each do |subject| %>
+        <li data-qa="subjects"><%= subject.subject_name %></li>
+    <% end %>
+  </ul>
+  <%= link_to "Change subjects", @results_view.filter_path_with_unescaped_commas(subject_path), class: "govuk-link", data: { qa: "link" } %>
+</div>

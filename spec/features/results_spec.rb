@@ -3,9 +3,28 @@ require "rails_helper"
 feature "results", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:params) {}
+  let(:subject_areas) do
+    [
+      build(:subject_area, subjects: [
+        build(:subject, :primary, id: 1),
+        build(:subject, :biology, id: 10),
+        build(:subject, :english, id: 21),
+        build(:subject, :mathematics, id: 25),
+        build(:subject, :french, id: 34),
+        ]),
+      build(:subject_area, :secondary),
+    ]
+  end
 
   before do
     stub_results_page_request
+
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: subject_areas,
+      include: [:subjects],
+    )
+
     visit results_path(params)
   end
 
@@ -128,6 +147,40 @@ feature "results", type: :feature do
           expect(results_page.qualifications_filter.qualifications.first).to have_content("QTS only")
           expect(results_page.qualifications_filter.qualifications.last).to have_content("PGCE (or PGDE) with QTS")
           expect(results_page.qualifications_filter.qualifications.count).to eq(2)
+        end
+      end
+    end
+
+    describe "subjects filter" do
+      context "no subjects selected" do
+        let(:params) { { subjects: {} } }
+
+        it "defaults to all subjects" do
+          expect(results_page.subjects_filter).to have_content("Biology")
+          expect(results_page.subjects_filter).to have_content("English")
+          expect(results_page.subjects_filter).to have_content("French")
+          expect(results_page.subjects_filter).to have_content("Mathematics")
+        end
+      end
+
+      context "up to 4 subjects selected" do
+        let(:params) { { subjects: "31,1" } }
+
+        it "displays all selected subjects in alphabetical order" do
+          expect(results_page.subjects_filter).to have_content("Biology")
+          expect(results_page.subjects_filter).to have_content("Primary")
+          expect("Biology").to appear_before("Primary")
+        end
+      end
+
+      context "more than 4 subjects selected" do
+        let(:params) { { subjects: "31,1,12,24,13" } }
+
+        it "displays first 4 subjects" do
+          expect(results_page.subjects_filter).to have_content("Biology")
+          expect(results_page.subjects_filter).to have_content("English")
+          expect(results_page.subjects_filter).to have_content("French")
+          expect(results_page.subjects_filter).to have_content("Mathematics")
         end
       end
     end

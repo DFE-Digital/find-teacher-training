@@ -14,9 +14,8 @@
         <div>
           <%=link_to "Change location or choose a provider", @results_view.filter_path_with_unescaped_commas(location_path), class: "govuk-link", data: { qa: "filters__location_link" }%>
         </div>
-        <div>
-          <%=link_to "Change subjects", @results_view.filter_path_with_unescaped_commas(subject_path), class: "govuk-link", data: { qa: "filters__subject_link" }%>
-        </div>
+        <%= render partial: 'results/subjects' %>
+
         <%= render partial: 'results/study_type' %>
 
         <%= render partial: 'results/qualifications' %>
