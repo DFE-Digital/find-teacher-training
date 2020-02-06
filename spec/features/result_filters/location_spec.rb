@@ -136,7 +136,7 @@ feature "Location filter", type: :feature do
       filter_page.load
       filter_page.find_courses.click
 
-      expect(filter_page).to have_error
+      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPlease choose an option")
     end
 
     it "Displays an error if location is selected but none is entered" do
@@ -146,8 +146,8 @@ feature "Location filter", type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page).to have_error
-      expect(filter_page).to have_location_error
+      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
+      expect(filter_page.location_error.text).to eq("Error: Please enter a postcode, city or town in England")
       expect(filter_page).to have_location_query
       expect(filter_page).to have_select("rad", selected: "5 miles")
     end
@@ -159,8 +159,8 @@ feature "Location filter", type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page).to have_error
-      expect(filter_page).to have_location_error
+      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
+      expect(filter_page.location_error.text).to eq("Error: We couldn't find this location, please check your input and try again")
       expect(filter_page).to have_location_query
       expect(filter_page).to have_unknown_location
     end
