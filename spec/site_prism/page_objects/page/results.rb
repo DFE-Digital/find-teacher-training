@@ -10,6 +10,7 @@ module PageObjects
     end
 
     class SubjectsSection < SitePrism::Section
+      element :send_courses, '[data-qa="send_courses"]'
       elements :subjects, '[data-qa="subjects"]'
       element :extra_subjects, '[data-qa="extra_subjects"]'
     end

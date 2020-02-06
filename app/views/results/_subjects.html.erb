@@ -3,6 +3,10 @@
     Subjects<span class="govuk-visually-hidden">:</span>
   </h2>
   <ul class="filter-form__value--list">
+    <% if @results_view.send_courses? %>
+      <li data-qa="send_courses">Only SEND courses</li>
+    <% end %>
+
     <% @subjects.each do |subject| %>
         <li data-qa="subjects"><%= subject.subject_name %></li>
     <% end %>

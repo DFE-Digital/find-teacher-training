@@ -50,6 +50,9 @@ class ResultsView
     query_parameters["funding"] == "8"
   end
 
+  def send_courses?
+    query_parameters["senCourses"].present? && query_parameters["senCourses"].downcase == "true"
+  end
 
   def number_of_subjects_selected
     if query_parameters["subjects"].blank?

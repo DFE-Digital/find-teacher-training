@@ -177,6 +177,26 @@ RSpec.describe ResultsView do
     end
   end
 
+  describe "#send_courses?" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "when the senCourses is True" do
+      let(:parameter_hash) { { "senCourses" => "True" } }
+
+      it "returns true" do
+        expect(results_view.send_courses?).to be_truthy
+      end
+    end
+
+    context "when the senCourses is nil" do
+      let(:parameter_hash) { {} }
+
+      it "returns false" do
+        expect(results_view.send_courses?).to be_falsy
+      end
+    end
+  end
+
   describe "#number_of_subjects_selected" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 

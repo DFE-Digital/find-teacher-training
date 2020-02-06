@@ -155,7 +155,8 @@ feature "results", type: :feature do
       context "no subjects selected" do
         let(:params) { { subjects: {} } }
 
-        it "defaults to all subjects" do
+        it "defaults to all subjects without 'Only SEND courses'" do
+          expect(results_page.subjects_filter).not_to have_send_courses
           expect(results_page.subjects_filter).to have_content("Biology")
           expect(results_page.subjects_filter).to have_content("English")
           expect(results_page.subjects_filter).to have_content("French")
@@ -168,6 +169,7 @@ feature "results", type: :feature do
         let(:params) { { subjects: "31,1" } }
 
         it "displays all selected subjects in alphabetical order" do
+          expect(results_page.subjects_filter).not_to have_send_courses
           expect(results_page.subjects_filter).to have_content("Biology")
           expect(results_page.subjects_filter).to have_content("Primary")
           expect("Biology").to appear_before("Primary")
@@ -183,6 +185,20 @@ feature "results", type: :feature do
           expect(results_page.subjects_filter).to have_content("French")
           expect(results_page.subjects_filter).to have_content("Mathematics")
           expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
+        end
+
+        context "'Only SEND courses' selected" do
+          let(:params) { { subjects: "31,1,12,24,13", senCourses: "true" } }
+
+          it "displays 'Only SEND courses' at the top of the list and doesn't count towards 4 items rule" do
+            expect(results_page.subjects_filter.send_courses).to have_content("Only SEND courses")
+            expect(results_page.subjects_filter).to have_content("Biology")
+            expect(results_page.subjects_filter).to have_content("English")
+            expect(results_page.subjects_filter).to have_content("French")
+            expect(results_page.subjects_filter).to have_content("Mathematics")
+            expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
+            expect("Only SEND courses").to appear_before("Biology")
+          end
         end
       end
     end
