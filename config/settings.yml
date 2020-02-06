@@ -7,3 +7,4 @@ google:
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 redirect_results_to_c_sharp: true
+gcp_api_key: please_change_me

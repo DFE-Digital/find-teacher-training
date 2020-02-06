@@ -47,3 +47,12 @@ en:
     pgce_with_qts: "PGCE with QTS"
     pgde: "PGDE"
     pgde_with_qts: "PGDE with QTS"
+  location_filter:
+    errors:
+      no_option: "Please choose an option"
+      unknown_location: "We couldn't find this location, please check your input and try again"
+      missing_location: "Please enter a postcode, city or town in England"
+      missing_provider: "Please enter the name of a training provider"
+    fields:
+      location: "Postcode, town or city"
+      provider: "Training provider"
