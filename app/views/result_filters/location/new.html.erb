@@ -8,11 +8,11 @@
   <div class="govuk-grid-column-two-thirds">
     <%= render partial: "result_filters/error_message", locals: {
       error_anchor_id:
-        if flash[:error] && flash[:error].include?("Please choose an option")
+        if no_option_selected?
           "search-options"
-        elsif flash[:error] && flash[:error].include?("Postcode, town, or city")
+        elsif location_error?
           "location-error"
-        elsif flash[:error] && flash[:error].include?("Training provider")
+        elsif provider_error?
           "provider-error"
         end
     } %>
@@ -38,13 +38,13 @@
               <%= form.label :l_1, "By postcode, town or city", class: "govuk-label govuk-radios__label" %>
             </div>
             <div
-              class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless flash[:error] && flash[:error].include?("Please enter a postcode, city or town in England") %>"
+              class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless location_error? %>"
               id="location-conditional">
               <div class="govuk-form-group">
                 <%= form.label :lq, "Postcode, town or city", class: "govuk-label" %>
-                <% if flash[:error] && flash[:error].count > 1 %>
+                <% if location_error? %>
                   <div class="govuk-error-message" id="location-error" data-qa="location-error">
-                    <span class="govuk-visually-hidden">Error:</span><%= flash[:error].last  %>
+                    <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last  %>
                   </div>
                 <% end %>
                 <%=
@@ -106,13 +106,13 @@
                 By school, university or other training provider
               <% end %>
             </div>
-            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless flash[:error] && flash[:error].include?("Training provider") %>" id="query-container">
+            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless provider_error? %>" id="query-container">
 
               <%= form.label :query, class: "govuk-label" do %>
                 School, university or other training provider
-                <% if flash[:error] && flash[:error].include?("Training provider") %>
+                <% if provider_error? %>
                    <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
-                     <span class="govuk-visually-hidden">Error:</span> Please enter the name of a training provider
+                     <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
                    </span>
                 <% end %>
               <% end %>
