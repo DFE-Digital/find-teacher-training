@@ -40,11 +40,11 @@
             <div
               class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless location_error? %>"
               id="location-conditional">
-              <div class="govuk-form-group">
+              <div class="govuk-form-group <%= "govuk-form-group--error" if location_error? %>">
                 <%= form.label :lq, "Postcode, town or city", class: "govuk-label" %>
                 <% if location_error? %>
                   <div class="govuk-error-message" id="location-error" data-qa="location-error">
-                    <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last  %>
+                    <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
                   </div>
                 <% end %>
                 <%=
@@ -59,19 +59,19 @@
               <div class="govuk-form-group">
                 <%= form.label :rad, "Within", class: "govuk-label" %>
                 <%= form.select :rad,
-                  options_for_select(
-                    [
-                      ["5 miles", "5"],
-                      ["10 miles", "10"],
-                      ["20 miles", "20"],
-                      ["50 miles", "50"],
-                      ["100 miles", "100"],
-                    ],
-                    [request.params[:rad] || "20"]
-                  ),
-                  {include_blank: false},
-                  data: {qa: 'search-radius'},
-                  class: 'govuk-select govuk-!-width-one-half'
+                                options_for_select(
+                                  [
+                                    ["5 miles", "5"],
+                                    ["10 miles", "10"],
+                                    ["20 miles", "20"],
+                                    ["50 miles", "50"],
+                                    ["100 miles", "100"],
+                                  ],
+                                  [request.params[:rad] || "20"]
+                                ),
+                                {include_blank: false},
+                                data: {qa: 'search-radius'},
+                                class: 'govuk-select govuk-!-width-one-half'
                 %>
               </div>
             </div>
@@ -107,17 +107,18 @@
               <% end %>
             </div>
             <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless provider_error? %>" id="query-container">
-
-              <%= form.label :query, class: "govuk-label" do %>
-                School, university or other training provider
-                <% if provider_error? %>
-                   <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
-                     <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
-                   </span>
+              <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>">
+                <%= form.label :query, class: "govuk-label" do %>
+                  School, university or other training provider
+                  <% if provider_error? %>
+                  <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
+                    <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
+                  </span>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span class="govuk-hint">Enter the name or provider code</span>
-              <%= form.text_field :query, value: params[:query], class: "govuk-input", data: {qa: "provider-search"} %>
+                <span class="govuk-hint">Enter the name or provider code</span>
+                <%= form.text_field :query, value: params[:query], class: "govuk-input", data: {qa: "provider-search"} %>
+              </div>
             </div>
           </div>
         </div>
