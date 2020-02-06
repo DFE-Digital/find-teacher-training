@@ -4,6 +4,14 @@ feature "Qualifications filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Qualification.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
+  before do
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+    )
+  end
+
   describe "qualification page" do
     before { filter_page.load }
 

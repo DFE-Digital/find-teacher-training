@@ -52,4 +52,10 @@ def stub_results_page_request
       ),
     },
   )
+
+  stub_api_v3_resource(
+    type: SubjectArea,
+    resources: nil,
+    include: [:subjects],
+  )
 end

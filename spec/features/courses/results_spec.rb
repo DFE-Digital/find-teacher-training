@@ -89,9 +89,19 @@ feature "Search results", type: :feature do
     )
   end
 
+  let(:subject_request) do
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+    )
+  end
+
   let(:page_index) { nil }
 
   before do
+    subject_request
+
     courses_request
 
     visit results_path(page: page_index)
