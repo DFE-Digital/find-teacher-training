@@ -75,4 +75,84 @@ RSpec.describe ResultsView do
       expect(subject).to eq(expected_path)
     end
   end
+
+  describe "#qts_only?" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "when the hash includes 'QTS only'" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly,PgdePgceWithQts" } }
+
+      it "returns true" do
+        expect(results_view.qts_only?).to be_truthy
+      end
+    end
+
+    context "when the hash does not include 'QTS only'" do
+      let(:parameter_hash) { { "qualifications" => "Other" } }
+
+      it "returns false" do
+        expect(results_view.qts_only?).to be_falsy
+      end
+    end
+  end
+
+  describe "#pgce_or_pgde_with_qts?" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "when the hash includes 'PGCE (or PGDE) with QTS'" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly,PgdePgceWithQts" } }
+
+      it "returns true" do
+        expect(results_view.pgce_or_pgde_with_qts?).to be_truthy
+      end
+    end
+
+    context "when the hash does not include 'PGCE (or PGDE) with QTS'" do
+      let(:parameter_hash) { { "qualifications" => "Other" } }
+
+      it "returns false" do
+        expect(results_view.pgce_or_pgde_with_qts?).to be_falsy
+      end
+    end
+  end
+
+  describe "#other_qualifications?" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "when the hash includes 'Further Education (PGCE or PGDE without QTS)'" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly,Other" } }
+
+      it "returns true" do
+        expect(results_view.other_qualifications?).to be_truthy
+      end
+    end
+
+    context "when the hash does not include 'Further Education (PGCE or PGDE without QTS)'" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly" } }
+
+      it "returns false" do
+        expect(results_view.other_qualifications?).to be_falsy
+      end
+    end
+  end
+
+  describe "#all_qualifications?" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "when all selected'" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly,PgdePgceWithQts,Other" } }
+
+      it "returns true" do
+        expect(results_view.all_qualifications?).to be_truthy
+      end
+    end
+
+    context "when not all selected" do
+      let(:parameter_hash) { { "qualifications" => "QtsOnly" } }
+
+      it "returns false" do
+        expect(results_view.all_qualifications?).to be_falsy
+      end
+    end
+  end
 end

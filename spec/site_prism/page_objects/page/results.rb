@@ -22,6 +22,10 @@ module PageObjects
       element :link, '[data-qa="link"]'
     end
 
+    class QualificationsSection < SitePrism::Section
+      elements :qualifications, '[data-qa="qualifications"]'
+    end
+
     class FundingSection < SitePrism::Section
       element :funding, '[data-qa="funding"]'
     end
@@ -31,6 +35,7 @@ module PageObjects
 
       sections :courses, CourseSection, '[data-qa="course"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
+      section :qualifications_filter, QualificationsSection, '[data-qa="filters__qualifications"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
 
