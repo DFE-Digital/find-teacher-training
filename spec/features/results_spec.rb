@@ -161,6 +161,9 @@ feature "results", type: :feature do
           expect(results_page.subjects_filter).to have_content("English")
           expect(results_page.subjects_filter).to have_content("French")
           expect(results_page.subjects_filter).to have_content("Mathematics")
+          expect("Biology").to appear_before("English")
+          expect("English").to appear_before("French")
+          expect("French").to appear_before("Mathematics")
           expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
         end
       end

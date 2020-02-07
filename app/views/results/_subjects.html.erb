@@ -8,7 +8,7 @@
     <% end %>
 
     <% @subjects.each do |subject| %>
-        <li data-qa="subjects"><%= subject.subject_name %></li>
+      <li data-qa="subjects"><%= subject.subject_name %></li>
     <% end %>
 
     <% if @results_view.number_of_extra_subjects.positive? %>
