@@ -45,14 +45,11 @@ const initAutocomplete = ($el, $input) => {
           inputValue: result => result && result.name,
           suggestion: result => result && `${result.name} (${result.code})`
         },
-        onConfirm: option => ($input.value = option ? option.code : ""),
-        autoselect: true
+        onConfirm: option => (input.value = option ? option.code : ""),
+        confirmOnBlur: false
       });
 
-      // Hijack the original input to submit the selected provider_code.
-      input.id = `old-${input.id}`;
-      input.name = "autocompleted_provider_code";
-      input.type = "hidden";
+      input.parentNode.removeChild(input);
     }
   } catch(err) {
     console.error("Failed to initialise provider autocomplete:", err);
