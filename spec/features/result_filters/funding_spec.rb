@@ -7,6 +7,14 @@ feature "Funding filter", type: :feature do
   let(:salary_course_param_value_from_c_sharp) { "8" }
   let(:all_course_param_value_from_c_sharp) { "15" }
 
+  before do
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+    )
+  end
+
   describe "funding page" do
     before { filter_page.load }
 
