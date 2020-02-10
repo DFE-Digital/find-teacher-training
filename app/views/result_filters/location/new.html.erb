@@ -111,13 +111,17 @@
                 <%= form.label :query, class: "govuk-label" do %>
                   School, university or other training provider
                   <% if provider_error? %>
-                  <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
+                    <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
                     <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
                   </span>
                   <% end %>
                 <% end %>
                 <span class="govuk-hint">Enter the name or provider code</span>
-                <%= form.text_field :query, value: params[:query], class: "govuk-input", data: {qa: "provider-search"} %>
+                <%= form.text_field :query,
+                                    value: params[:query],
+                                    class: "govuk-input",
+                                    data: {qa: "provider-search"} %>
+                <div id="provider-autocomplete" class="govuk-body"></div>
               </div>
             </div>
           </div>
