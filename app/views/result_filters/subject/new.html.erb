@@ -31,7 +31,7 @@
               </div>
               <div class="govuk-accordion__section-content" aria-labelledby="accordion-heading-<%= subject_area.typename.downcase %>">
                 <div class="govuk-checkboxes">
-                  <% subject_area.subjects.each do |subject| %>
+                  <% subject_area.subjects.sort_by{ |subject| subject.subject_name }.each do |subject| %>
                     <%# C# doesn't have a distinct modern languages subject %>
                     <% unless subject.subject_name == "Modern Languages" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
