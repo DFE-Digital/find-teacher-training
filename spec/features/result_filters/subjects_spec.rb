@@ -61,10 +61,10 @@ feature "Subject filter", type: :feature do
     it "displays all subjects" do
       subject_filter_page.subject_areas.first.then do |subject_area|
         subject_area.subjects.first.then do |subject|
-          expect(subject.name.text).to eq(subject_areas.first.subjects.first.subject_name)
+          expect(subject.name.text).to eq(subject_areas.first.subjects.second.subject_name)
         end
         subject_area.subjects.second.then do |subject|
-          expect(subject.name.text).to eq(subject_areas.first.subjects.second.subject_name)
+          expect(subject.name.text).to eq(subject_areas.first.subjects.first.subject_name)
         end
       end
       subject_filter_page.send_area.then do |subject_area|
@@ -80,7 +80,7 @@ feature "Subject filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "subjects" => "31",
+          "subjects" => "1",
         },
       )
     end
@@ -93,7 +93,7 @@ feature "Subject filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "subjects" => "31,1",
+          "subjects" => "1,31",
           "senCourses" => "true",
         },
       )
@@ -102,7 +102,7 @@ feature "Subject filter", type: :feature do
 
   context "with previously selected subjects" do
     it "automatically selects the given checkboxes" do
-      subject_filter_page.load(query: { subjects: "31", senCourses: "true" })
+      subject_filter_page.load(query: { subjects: "1", senCourses: "true" })
       expect(subject_filter_page.subject_areas.first.subjects.first.checkbox).to be_checked
       expect(subject_filter_page.send_area.subjects.first.checkbox).to be_checked
     end
@@ -115,19 +115,19 @@ feature "Subject filter", type: :feature do
 
   context "with existing parameters" do
     it "only changes the subjects params" do
-      subject_filter_page.load(query: { subjects: "31,1", other_param: "param_value" })
+      subject_filter_page.load(query: { subjects: "1,31", other_param: "param_value" })
       subject_filter_page.continue.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "subjects" => "31,1",
+          "subjects" => "1,31",
           "other_param" => "param_value",
         },
       )
     end
 
     it "auto expands the accordion" do
-      subject_filter_page.load(query: { subjects: "31,1", other_param: "param_value", senCourses: "True" })
+      subject_filter_page.load(query: { subjects: "1,31", other_param: "param_value", senCourses: "True" })
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="true"]')
       expect(subject_filter_page.send_area.accordion_button).to match_selector('[aria-expanded="true"]')
     end
