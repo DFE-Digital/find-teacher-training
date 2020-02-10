@@ -73,6 +73,12 @@ RSpec.describe ResultsView do
       it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
     end
 
+    context "query_parameters not lose track of 'l' used by C# radio buttons" do
+      let(:parameter_hash) { { "l" => "2" } }
+
+      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+    end
+
     context "parameters without default present in query_parameters" do
       let(:parameter_hash) { {  "lat" => "52.3812321", "lng" => "-3.9440235" } }
 
@@ -225,5 +231,84 @@ RSpec.describe ResultsView do
     it "returns the number of the extra subjects" do
       expect(results_view.number_of_extra_subjects).to eq(1)
     end
+  end
+
+  describe "#location" do
+    subject { described_class.new(query_parameters: parameter_hash).location }
+
+    context "when loc is passed" do
+      let(:parameter_hash) { { "loc" => "Hogwarts" } }
+
+      it { is_expected.to eq("Hogwarts") }
+    end
+
+    context "when loc is not passed" do
+      let(:parameter_hash) { {} }
+      it { is_expected.to eq("Across England") }
+    end
+  end
+
+  describe "#distance" do
+    subject { described_class.new(query_parameters: parameter_hash).distance }
+
+    context "when rad is passed" do
+      let(:parameter_hash) { { "rad" => "10" } }
+
+      it { is_expected.to eq("10") }
+    end
+  end
+
+  describe "#show_map?" do
+    subject { described_class.new(query_parameters: parameter_hash).show_map? }
+
+    context "when lng, lat and rad are passed" do
+      let(:parameter_hash) { { "lng" => "0.3", "lat" => "0.2", "rad" => "10" } }
+
+      it { is_expected.to be(true) }
+    end
+
+    context "when only rad is passed" do
+      let(:parameter_hash) { { "rad" => "10" } }
+
+      it { is_expected.to be(false) }
+    end
+
+    context "when only lat is passed" do
+      let(:parameter_hash) { { "lat" => "0.10" } }
+
+      it { is_expected.to be(false) }
+    end
+
+    context "when only lng is passed" do
+      let(:parameter_hash) { { "lng" => "1.0" } }
+
+      it { is_expected.to be(false) }
+    end
+
+    context "when no params are passed" do
+      let(:parameter_hash) { {} }
+
+      it { is_expected.to be(false) }
+    end
+  end
+
+  describe "#map_image_url" do
+    subject { described_class.new(query_parameters: parameter_hash).map_image_url }
+
+    let(:parameter_hash) do
+      {
+        "loc" => "Hogwarts, Reading, UK",
+        "rad" => "10",
+        "lng" => "-27.1504002",
+        "lat" => "-109.3042697",
+      }
+    end
+
+    before do
+      allow(Settings).to receive_message_chain(:google, :maps_api_key).and_return("yellowskullkey")
+      allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return("https://maps.googleapis.com/maps/api/staticmap")
+    end
+
+    it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
   end
 end

@@ -67,6 +67,28 @@ class ResultsView
     number_of_subjects_selected - NUMBER_OF_SUBJECTS_DISPLAYED
   end
 
+  def location
+    query_parameters["loc"] || "Across England"
+  end
+
+  def distance
+    query_parameters["rad"]
+  end
+
+  def show_map?
+    latitude.present? && longitude.present? && distance.present?
+  end
+
+  def map_image_url
+    "#{Settings.google.maps_api_url}\
+?key=#{Settings.google.maps_api_key}\
+&center=#{latitude},#{longitude}\
+&zoom=#{google_map_zoom}\
+&size=300x200\
+&scale=2\
+&markers=#{latitude},#{longitude}"
+  end
+
 private
 
   attr_reader :query_parameters
@@ -93,5 +115,30 @@ private
 
   def qualifications_parameters_array
     qualifications_parameters["qualifications"].split(",")
+  end
+
+  def latitude
+    query_parameters["lat"]
+  end
+
+  def longitude
+    query_parameters["lng"]
+  end
+
+  def google_map_zoom
+    case distance
+    when "5"
+      "12"
+    when "10"
+      "11"
+    when "20"
+      "10"
+    when "50"
+      "9"
+    when "100"
+      "8"
+    else
+      "14"
+    end
   end
 end
