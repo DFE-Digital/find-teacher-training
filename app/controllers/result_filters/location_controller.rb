@@ -9,11 +9,12 @@ module ResultFilters
     def create
       if provider_option_selected?
         redirect_to(provider_path(params_for_provider_search)) && return
+      elsif across_england_option_selected?
+        redirect_to(results_path(params_for_across_england_search)) && return
       end
 
       form_params = strip(filter_params.clone)
       form_object = LocationFilterForm.new(form_params)
-
       if form_object.valid?
         all_params = form_params.merge!(form_object.params)
         redirect_to results_path(all_params)
@@ -30,12 +31,20 @@ module ResultFilters
         .query_parameters_with_defaults
     end
 
+    def across_england_option_selected?
+      filter_params[:l] == "2"
+    end
+
     def provider_option_selected?
       filter_params[:l] == "3"
     end
 
     def params_for_provider_search
       filter_params.except(:lat, :lng, :rad, :loc, :lq)
+    end
+
+    def params_for_across_england_search
+      filter_params.except(:lat, :lng, :rad, :loc, :lq, :query)
     end
 
     def strip(params)
