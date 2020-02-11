@@ -70,7 +70,6 @@ feature "Location filter", type: :feature do
         page: results_page,
         expected_query_params: {
           "l" => "2",
-          "rad" => "20",
         },
       )
     end
@@ -177,7 +176,6 @@ feature "Location filter", type: :feature do
         expected_query_params: {
           "l" => "2",
           "test" => "value",
-          "rad" => "20",
         },
       )
     end
@@ -195,7 +193,6 @@ feature "Location filter", type: :feature do
         expected_query_params: {
           "l" => "2",
           "test" => "1,2",
-          "rad" => "20",
         },
       )
     end
