@@ -1,3 +1,5 @@
+// TODO rewrite this to use more of GOVUK Frontend  mixin and styling
+
 .pub-c-pagination {
   display: block;
   margin-top: 30px;
@@ -42,15 +44,6 @@
   display: block;
   padding: 15px;
   text-decoration: none;
-}
-
-.pub-c-pagination__link:visited {
-  color: $govuk-link-colour;
-}
-
-.pub-c-pagination__link:hover,
-.pub-c-pagination__link:active {
-  background-color: govuk-colour("light-grey");
 }
 
 .pub-c-pagination__link-title {
