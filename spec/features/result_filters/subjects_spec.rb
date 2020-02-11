@@ -42,6 +42,23 @@ feature "Subject filter", type: :feature do
     end
   end
 
+  context "check each accordion section" do
+    it "has aria-control set to the section-content id" do
+      subject_filter_page.subject_areas.each_with_index { |accordion_section, counter|
+        subject_area_name = subject_areas[counter].typename.downcase
+        control_id = "#{subject_area_name}-content-#{counter}"
+        section_button = accordion_section.find(".govuk-accordion__section-button")
+
+        expect(section_button["aria-controls"]).to eq(control_id)
+        expect(accordion_section).to have_selector("div##{control_id}")
+      }
+
+      # Check SEND section
+      expect(subject_filter_page.send_area.accordion_button["aria-controls"]).to eq("send-content")
+      expect(subject_filter_page.send_area).to have_selector("div#send-content")
+    end
+  end
+
   context "with no selected subjects" do
     it "doesn't expand the accordion" do
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="false"]')
