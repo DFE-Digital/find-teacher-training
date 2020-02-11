@@ -54,7 +54,13 @@
                             <% financial_info.concat(".") %>
                           <% end %>
                           <span class="govuk-body" data-qa="subject__info"><%= financial_info %></span>
-                          <span class="govuk-!-display-block"></span>
+
+                          <% if subject.subject_knowledge_enhancement_course_available %>
+                            <span class="govuk-!-display-block" data-qa="subject__ske_course">
+                              You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? "also" : "" %> take a
+                              <%= link_to "subject knowledge enhancement (SKE) course", "https://getintoteaching.education.gov.uk/explore-my-options/teacher-training-routes/subject-knowledge-enhancement-ske-courses", class: "govuk-link" %>.
+                            </span>
+                          <% end %>
                         <% end %>
                       </div>
                     <% end %>

@@ -7,6 +7,7 @@ FactoryBot.define do
     bursary_amount { nil }
     scholarship { nil }
     early_career_payments { nil }
+    subject_knowledge_enhancement_course_available { false }
 
     trait :english do
       subject_name { "English" }

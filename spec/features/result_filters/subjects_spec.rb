@@ -8,10 +8,10 @@ feature "Subject filter", type: :feature do
     [
       build(:subject_area, subjects: [
         build(:subject, :primary, id: 1, bursary_amount: "1000"),
-        build(:subject, :biology, id: 10, scholarship: "2000"),
+        build(:subject, :biology, id: 10, scholarship: "2000", subject_knowledge_enhancement_course_available: true),
         build(:subject, :russian, id: 38, bursary_amount: "3000", scholarship: "4000", early_career_payments: "1000"),
         ]),
-      build(:subject_area, :secondary, subjects: [build(:subject, :english, id: 12)]),
+      build(:subject_area, :secondary, subjects: [build(:subject, :english, id: 12, subject_knowledge_enhancement_course_available: true)]),
     ]
   end
 
@@ -98,20 +98,24 @@ feature "Subject filter", type: :feature do
         subject_area.subjects.first.then do |subject|
           expect(subject.name.text).to eq(subject_areas.first.subjects.second.subject_name)
           expect(subject.info.text).to eq(expected_financial_info[0])
+          expect(subject.ske_course.text).to eq("You can also take a subject knowledge enhancement (SKE) course.")
         end
         subject_area.subjects.second.then do |subject|
           expect(subject.name.text).to eq(subject_areas.first.subjects.first.subject_name)
           expect(subject.info.text).to eq(expected_financial_info[1])
+          expect(subject).not_to have_ske_course
         end
         subject_area.subjects.third.then do |subject|
           expect(subject.name.text).to eq(subject_areas.first.subjects.third.subject_name)
           expect(subject.info.text).to eq(expected_financial_info[2])
+          expect(subject).not_to have_ske_course
         end
       end
       subject_filter_page.subject_areas.second.then do |subject_area|
         subject_area.subjects.first.then do |subject|
           expect(subject.name.text).to eq(subject_areas.second.subjects.first.subject_name)
           expect(subject.info.text).to eq(expected_financial_info[3])
+          expect(subject.ske_course.text).to eq("You can take a subject knowledge enhancement (SKE) course.")
         end
       end
       subject_filter_page.send_area.then do |subject_area|
