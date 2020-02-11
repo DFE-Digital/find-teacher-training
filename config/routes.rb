@@ -5,10 +5,8 @@ Rails.application.routes.draw do
     root to: "location#start"
   end
 
-  if Settings.redirect_results_to_c_sharp
-    get "/start/subject", to: redirect { |_params, request| ["#{Settings.search_and_compare_ui.base_url}/start/subject", request.query_string.presence&.gsub("%2C", ",")].compact.join("?") }, as: "start_subject"
-  else # Stub until we add the start subject page
-    get "/start/subject", to: "errors#not_found", as: "start_subject"
+  scope module: "result_filters", path: "/start" do
+    get "subject", to: "subject#start", as: "start_subject"
   end
 
   get "/terms-conditions", to: "pages#terms", as: "terms"

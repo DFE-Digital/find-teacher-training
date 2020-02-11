@@ -48,18 +48,31 @@ feature "Subject filter", type: :feature do
 
   context "check each accordion section" do
     it "has aria-control set to the section-content id" do
-      subject_filter_page.subject_areas.each_with_index { |accordion_section, counter|
+      subject_filter_page.subject_areas.each_with_index do |accordion_section, counter|
         subject_area_name = subject_areas[counter].typename.downcase
         control_id = "#{subject_area_name}-content-#{counter}"
         section_button = accordion_section.find(".govuk-accordion__section-button")
 
         expect(section_button["aria-controls"]).to eq(control_id)
         expect(accordion_section).to have_selector("div##{control_id}")
-      }
+      end
 
       # Check SEND section
       expect(subject_filter_page.send_area.accordion_button["aria-controls"]).to eq("send-content")
       expect(subject_filter_page.send_area).to have_selector("div#send-content")
+    end
+  end
+
+  context "on the start page" do
+    it "has a back link to the root page" do
+      visit start_subject_path
+      subject_filter_page.back_link.click
+      expect(URI(current_url).path).to eq("/")
+    end
+
+    it "the submit button displays 'Continue'" do
+      visit start_subject_path
+      expect(subject_filter_page.continue.value).to eq("Continue")
     end
   end
 
