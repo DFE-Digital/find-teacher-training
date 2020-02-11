@@ -1,7 +1,10 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
-  root to: redirect(Settings.search_and_compare_ui.base_url)
+  #root to: redirect(Settings.search_and_compare_ui.base_url)
+  scope module: "result_filters" do
+    root to: "location#start"
+  end
 
   get "/terms-conditions", to: "pages#terms", as: "terms"
   get "/accessibility", to: "pages#accessibility", as: "accessibility"

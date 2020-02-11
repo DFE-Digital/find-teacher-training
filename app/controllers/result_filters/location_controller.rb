@@ -6,6 +6,8 @@ module ResultFilters
 
     def new; end
 
+    def start; end
+
     def create
       if provider_option_selected?
         redirect_to(provider_path(params_for_provider_search)) && return

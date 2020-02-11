@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Location filter", type: :feature do
+feature "Location filter", :focus, type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -34,6 +34,18 @@ feature "Location filter", type: :feature do
           "test" => "params",
         },
       )
+    end
+
+    context "on the start page" do
+      it "has no back link" do
+        visit root_path
+        expect(filter_page).not_to have_back_link
+      end
+
+      it "the submit button displays 'Continue'" do
+        visit root_path
+        expect(filter_page.find_courses.value).to eq("Continue")
+      end
     end
   end
 
