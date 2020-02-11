@@ -60,9 +60,14 @@ feature "Subject filter", type: :feature do
   end
 
   context "with no selected subjects" do
-    it "doesn't expand the accordion" do
+    it "should set assistive technology attributes appropriately" do
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="false"]')
       expect(subject_filter_page.send_area.accordion_button).to match_selector('[aria-expanded="false"]')
+    end
+
+    it "should not expand any accordion sections" do
+      expect(subject_filter_page.subject_areas.first).to have_no_css(".govuk-accordion__section--expanded")
+      expect(subject_filter_page.send_area).to have_no_css(".govuk-accordion__section--expanded")
     end
 
     it "displays all subject areas" do
@@ -143,10 +148,17 @@ feature "Subject filter", type: :feature do
       )
     end
 
-    it "auto expands the accordion" do
+    it "should set assistive technology attributes appropriately" do
       subject_filter_page.load(query: { subjects: "1,31", other_param: "param_value", senCourses: "True" })
       expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="true"]')
       expect(subject_filter_page.send_area.accordion_button).to match_selector('[aria-expanded="true"]')
+    end
+
+    it "should expand any appropriate accordion sections" do
+      subject_filter_page.load(query: { subjects: "1,31", other_param: "param_value", senCourses: "True" })
+      expect(subject_filter_page.subject_areas.first.root_element).to match_selector(".govuk-accordion__section--expanded")
+      expect(subject_filter_page.subject_areas.second.root_element).not_to match_selector(".govuk-accordion__section--expanded")
+      expect(subject_filter_page.send_area.root_element).to match_selector(".govuk-accordion__section--expanded")
     end
   end
 
