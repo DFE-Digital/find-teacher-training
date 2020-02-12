@@ -9,20 +9,17 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
-      filters go here
       <div data-qa="filters">
-        <div>
-          <%=link_to "Change location or choose a provider", @results_view.filter_path_with_unescaped_commas(location_path), class: "govuk-link", data: { qa: "filters__location_link" }%>
-        </div>
+        <%= render partial: 'results/location' %>
+
         <%= render partial: 'results/subjects' %>
 
         <%= render partial: 'results/study_type' %>
 
         <%= render partial: 'results/qualifications' %>
 
-        <div>
-          <%= render partial: 'results/funding' %>
-        </div>
+        <%= render partial: 'results/funding' %>
+
         <%= render partial: 'results/vacancy' %>
       </div>
     </div>
