@@ -30,6 +30,9 @@ export const request = endpoint => {
 const initAutocomplete = ($el, $input) => {
   const input = document.getElementById($input);
   const el = document.getElementById($el);
+  const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
+  const suggestionTemplate = result =>
+    typeof result === "string" ? result : result && `${result.name} (${result.providerCode})`;
 
   try {
     if(input) {
@@ -42,8 +45,8 @@ const initAutocomplete = ($el, $input) => {
         minLength: 3,
         source: request("/provider-suggestions"),
         templates: {
-          inputValue: result => result && result.name,
-          suggestion: result => result && `${result.name} (${result.code})`
+          inputValue: inputValueTemplate,
+          suggestion: suggestionTemplate
         },
         onConfirm: option => (input.value = option ? option.code : ""),
         confirmOnBlur: false
