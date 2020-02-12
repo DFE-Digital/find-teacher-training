@@ -6,11 +6,21 @@ module ResultFilters
 
     def new; end
 
+    def start
+      flash[:start_wizard] = true
+    end
+
     def create
       if provider_option_selected?
-        redirect_to(provider_path(params_for_provider_search)) && return
+        redirect_to(provider_path(params_for_provider_search))
+        return
       elsif across_england_option_selected?
-        redirect_to(results_path(params_for_across_england_search)) && return
+        if flash[:start_wizard]
+          redirect_to(start_subject_path(params_for_across_england_search))
+        else
+          redirect_to(results_path(params_for_across_england_search))
+        end
+        return
       end
 
       form_params = strip(filter_params.clone)
