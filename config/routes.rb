@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get "/course/:provider_code/:course_code", to: "courses#show", as: "course"
   get "/results", to: "results#index", as: "results"
 
+  get "/provider-suggestions", to: "provider_suggestions#index"
+
   scope module: "result_filters", path: "/results/filter" do
     get "location", to: "location#new"
     post "location", to: "location#create"
