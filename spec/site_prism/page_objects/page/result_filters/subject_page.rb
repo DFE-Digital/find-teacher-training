@@ -7,6 +7,8 @@ module PageObjects
         class SubjectAreaSection < SitePrism::Section
           class Subject < SitePrism::Section
             element :name, '[data-qa="subject__name"]'
+            element :info, '[data-qa="subject__info"]'
+            element :ske_course, '[data-qa="subject__ske_course"]'
             element :checkbox, '[data-qa="subject__checkbox"]'
           end
 
