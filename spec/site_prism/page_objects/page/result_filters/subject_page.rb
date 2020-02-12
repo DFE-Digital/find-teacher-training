@@ -12,6 +12,7 @@ module PageObjects
             element :checkbox, '[data-qa="subject__checkbox"]'
           end
 
+          element :legend, '[data-qa="subject_area__legend"]'
           element :name, '[data-qa="subject_area__name"]'
           element :accordion_button, '[data-qa="subject_area__accordion_button"]'
           sections :subjects, Subject, '[data-qa="subject"]'
