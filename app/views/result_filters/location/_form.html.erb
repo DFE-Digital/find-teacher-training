@@ -48,7 +48,7 @@
                     :lq,
                     value: "#{request.params[:lq]}",
                     class: "govuk-input",
-                    data: {qa: "location-query"},
+                    data: {qa: "location-query", url: location_suggestions_path},
                   )
                 %>
               </div>
@@ -118,7 +118,7 @@
                                     id: "provider",
                                     value: params[:query],
                                     class: "govuk-input",
-                                    data: {qa: "provider-search"} %>
+                                    data: {qa: "provider-search", url: provider_suggestions_path} %>
                 <div id="provider-autocomplete" class="govuk-body"></div>
               </div>
             </div>

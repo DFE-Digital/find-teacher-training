@@ -32,7 +32,7 @@ const initAutocomplete = ($el, $input) => {
   const el = document.getElementById($el);
   const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
   const suggestionTemplate = result =>
-    typeof result === "string" ? result : result && `${result.name} (${result.providerCode})`;
+    typeof result === "string" ? result : result && `${result.name} (${result.code})`;
 
   try {
     if(input) {
@@ -43,7 +43,7 @@ const initAutocomplete = ($el, $input) => {
         name: input.name,
         defaultValue: input.value,
         minLength: 3,
-        source: request("/provider-suggestions"),
+        source: request(input.getAttribute("data-url")),
         templates: {
           inputValue: inputValueTemplate,
           suggestion: suggestionTemplate

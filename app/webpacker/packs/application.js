@@ -12,4 +12,5 @@ window.initLocationsMap = initLocationsMap;
 const $backLink = document.querySelector('[data-module="back-link"]');
 new backLink($backLink).init();
 
+initAutocomplete("location-autocomplete", "location");
 initAutocomplete("provider-autocomplete", "provider");
