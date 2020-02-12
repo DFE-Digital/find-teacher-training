@@ -7,16 +7,7 @@ def resource_list_to_jsonapi(resource_list, **opts)
       # This tells the renderer what serializers to use. The key is going
       # to be the name of the class as a symbol, and the value is the
       # serializer class.
-      # Course: CourseSerializer,
-      # Provider: ProviderSerializer,
-      # RecruitmentCycle: RecruitmentCycleSerializer,
-      # Site: SiteSerializer,
-      # SiteStatus: SiteStatusSerializer,
-      # User: UserSerializer,
       ProviderSuggestion: ProviderSuggestionSerializer,
-      # Subject: SubjectSerializer,
-      # AccessRequest: AccessRequestSerializer,
-      # Organisation: OrganisationSerializer,
     },
     include: opts[:include],
     meta: opts[:meta],
