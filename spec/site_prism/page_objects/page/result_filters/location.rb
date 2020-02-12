@@ -13,6 +13,7 @@ module PageObjects
         element :provider_error, '[data-qa="provider-error"]'
         element :provider_search, '[data-qa="provider-search"]'
         element :find_courses, '[data-qa="find-courses"]'
+        element :location_conditional, '[data-qa="location-conditional"]'
         element :location_error, '[data-qa="location-error"]'
         element :by_postcode_town_or_city, '[data-qa="by_postcode_town_or_city"]'
         element :location_query, '[data-qa="location-query"]'
