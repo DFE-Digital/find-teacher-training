@@ -19,17 +19,17 @@
 
 
         <div class="accordion govuk-form-group" data-module="govuk-accordion">
-          <% @subject_areas.each do |subject_area| %>
+          <% @subject_areas.each_with_index do |subject_area, counter| %>
             <div class="govuk-accordion__section" data-qa="subject_area">
               <div class="govuk-accordion__section-header">
                 <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-                  <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="null-content-1" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) then "true" else "false" end %>">
+                  <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) then "true" else "false" end %>">
                     <%= subject_area.name %>
                   </button>
                 </h2>
                 <span class="govuk-accordion__icon" aria-hidden="true"></span>
               </div>
-              <div class="govuk-accordion__section-content" aria-labelledby="accordion-heading-<%= subject_area.typename.downcase %>">
+              <div id="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-content" aria-labelledby="accordion-heading-<%= subject_area.typename.downcase %>">
                 <div class="govuk-checkboxes">
                   <% subject_area.subjects.sort_by{ |subject| subject.subject_name }.each do |subject| %>
                     <%# C# doesn't have a distinct modern languages subject %>
@@ -52,13 +52,13 @@
           <div class="govuk-accordion__section" data-qa="send_area">
             <div class="govuk-accordion__section-header">
               <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="null-content-1" class="govuk-accordion__section-button" aria-expanded="<%= if params[:senCourses] == "true" then "true" else "false" end %>">
+                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="send-content" class="govuk-accordion__section-button" aria-expanded="<%= if params[:senCourses] == "true" then "true" else "false" end %>">
                   Special educational needs and disability (SEND)
                 </button>
               </h2>
               <span class="govuk-accordion__icon" aria-hidden="true"></span>
             </div>
-            <div class="govuk-accordion__section-content" aria-labelledby="accordion-heading-send">
+            <div id="send-content" class="govuk-accordion__section-content" aria-labelledby="accordion-heading-send">
               <div class="govuk-checkboxes">
                 <div class="govuk-checkboxes__item" data-qa="subject">
                   <%= f.check_box(:senCourses, { checked: params[:senCourses] == "true", data: {qa: "subject__checkbox"}, id: "subject_send", class: "govuk-checkboxes__input" }, 'true', nil) %>
