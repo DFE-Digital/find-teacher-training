@@ -20,7 +20,7 @@
 
         <div class="accordion govuk-form-group" data-module="govuk-accordion">
           <% @subject_areas.each_with_index do |subject_area, counter| %>
-            <div class="govuk-accordion__section" data-qa="subject_area">
+            <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) then " govuk-accordion__section--expanded" end %>" data-qa="subject_area">
               <div class="govuk-accordion__section-header">
                 <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
                   <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) then "true" else "false" end %>">
@@ -49,7 +49,7 @@
               </div>
             </div>
           <% end %>
-          <div class="govuk-accordion__section" data-qa="send_area">
+          <div class="govuk-accordion__section<%= if params[:senCourses] == "true" then " govuk-accordion__section--expanded" end %>" data-qa="send_area">
             <div class="govuk-accordion__section-header">
               <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
                 <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="send-content" class="govuk-accordion__section-button" aria-expanded="<%= if params[:senCourses] == "true" then "true" else "false" end %>">
