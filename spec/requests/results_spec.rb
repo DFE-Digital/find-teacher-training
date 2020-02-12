@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "/results", type: :request do
+describe "/results", type: :request do
   before do
     allow(Settings).to receive(:redirect_results_to_c_sharp).and_return(true)
   end

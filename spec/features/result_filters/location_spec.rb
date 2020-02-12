@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Location filter", :focus, type: :feature do
+feature "Location filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -45,6 +45,18 @@ feature "Location filter", :focus, type: :feature do
       it "the submit button displays 'Continue'" do
         visit root_path
         expect(filter_page.find_courses.value).to eq("Continue")
+      end
+
+      it "Allows the user to select across england" do
+        visit root_path
+
+        filter_page.across_england.click
+        filter_page.find_courses.click
+
+        URI(current_url).then do |uri|
+          expect(uri.path).to eq("/start/subject")
+          expect(uri.query).to eq("l=2")
+        end
       end
     end
   end
