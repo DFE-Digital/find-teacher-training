@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "/results", to: "results#index", as: "results"
 
   get "/provider-suggestions", to: "provider_suggestions#index"
+  get "/location-suggestions", to: "location_suggestions#index"
 
   scope module: "result_filters", path: "/results/filter" do
     get "location", to: "location#new"

@@ -1,2 +1,0 @@
-describe Provider do
-end

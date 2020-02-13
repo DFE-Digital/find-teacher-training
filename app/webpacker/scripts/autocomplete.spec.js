@@ -1,4 +1,4 @@
-import initAutocomplete, { request} from "./autocomplete";
+import initAutocomplete, { request } from "./autocomplete";
 
 const abortMock = jest.fn();
 global.XMLHttpRequest = jest.fn(() => ({
@@ -20,7 +20,13 @@ describe("Autocomplete", () => {
         </div>
       `;
 
-      initAutocomplete("autocomplete-container", "input");
+      initAutocomplete(
+        {
+          element: "autocomplete-container",
+          input: "input",
+          path: "/endpoint"
+        }
+      );
     });
 
     it("should instantiate an autocomplete", () => {

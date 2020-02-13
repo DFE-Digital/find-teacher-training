@@ -5,7 +5,10 @@ current_cycle: 2020
 google:
   maps_api_key: replace_me
   maps_api_url: https://maps.googleapis.com/maps/api/staticmap
+  gcp_api_key: replace_me
+  places_api_host: "https://maps.googleapis.com"
+  places_api_path: "/maps/api/place/autocomplete/json"
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 redirect_results_to_c_sharp: true
-gcp_api_key: please_change_me
+
