@@ -148,9 +148,21 @@ feature "Location filter", type: :feature do
   end
 
   describe "Navigating to the page with currently selected filters" do
+    it "Preselects by postcode, town or city and reveals the content" do
+      filter_page.load(query: { l: 1 })
+      expect(filter_page.by_postcode_town_or_city.checked?).to eq(true)
+      expect(filter_page.location_conditional).not_to match_selector(".govuk-radios__conditional--hidden")
+    end
+
     it "Preselects across england" do
       filter_page.load(query: { l: 2 })
       expect(filter_page.across_england.checked?).to eq(true)
+    end
+
+    it "Preselects by school, university or other training provider and reveals the content" do
+      filter_page.load(query: { l: 3 })
+      expect(filter_page.by_provider.checked?).to eq(true)
+      expect(filter_page.by_provider_conditional).not_to match_selector(".govuk-radios__conditional--hidden")
     end
   end
 
