@@ -1,6 +1,6 @@
 class Course < Base
   belongs_to :recruitment_cycle, through: :provider, param: :recruitment_cycle_year
-  belongs_to :provider, param: :provider_code
+  belongs_to :provider, param: :provider_code, shallow_path: true
   has_many :site_statuses
   has_many :sites, through: :site_statuses, source: :site
   has_many :subjects
