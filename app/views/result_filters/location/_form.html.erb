@@ -34,7 +34,7 @@
               <%= form.label :l_1, "By postcode, town or city", class: "govuk-label govuk-radios__label" %>
             </div>
             <div
-              class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless location_error? || params[:l] == "1" %>"
+              class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "1" %>"
               id="location-conditional" data-qa="location-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if location_error? %>">
                 <%= form.label :lq, "Postcode, town or city", class: "govuk-label" %>
