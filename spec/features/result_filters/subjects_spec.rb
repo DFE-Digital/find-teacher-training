@@ -215,4 +215,16 @@ feature "Subject filter", type: :feature do
       expect(subject_filter_page.subject_areas.first.subjects.length).to eq(0)
     end
   end
+
+  context "with the design and technology subject" do
+    let(:subject_areas) do
+      [
+        build(:subject_area, subjects: [build(:subject, :design_and_technology)]),
+      ]
+    end
+
+    it "displays additional content" do
+      expect(subject_filter_page.subject_areas.first.subjects.first.name.text).to eq("Design and technology – also includes food, product design, textiles, and systems and control")
+    end
+  end
 end

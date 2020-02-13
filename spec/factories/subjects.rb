@@ -45,5 +45,9 @@ FactoryBot.define do
     trait :primary do
       subject_name { "Primary" }
     end
+
+    trait :design_and_technology do
+      subject_name { "Design and technology" }
+    end
   end
 end
