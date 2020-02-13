@@ -15,12 +15,35 @@ feature "Funding filter", type: :feature do
     )
   end
 
+  let(:default_url) do
+    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses?include=provider&filter[vacancies]=true&page%5Bpage%5D=1&page%5Bper_page%5D=10"
+  end
+
+  describe "viewing results without explicitly selecting a filter" do
+    before do
+      stub_request(
+        :get,
+        default_url,
+      ).to_return(
+        body: File.new("spec/fixtures/api_responses/courses.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+    end
+
+    it "lists only courses with vacancies" do
+      results_page.load
+
+      expect(results_page.funding_filter.funding.text).to eq("Courses with and without salary")
+      expect(results_page.courses.count).to eq(2)
+    end
+  end
+
   describe "selecting a filter" do
     context "selecting all courses" do
       before do
         stub_request(
           :get,
-          "http://localhost:3001/api/v3/recruitment_cycles/2020/courses?include=provider&page%5Bpage%5D=1&page%5Bper_page%5D=10",
+          default_url,
         ).to_return(
           {
             body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -51,7 +74,7 @@ feature "Funding filter", type: :feature do
       before do
         stub_request(
           :get,
-          "http://localhost:3001/api/v3/recruitment_cycles/2020/courses?include=provider&page%5Bpage%5D=1&page%5Bper_page%5D=10",
+          default_url,
         ).to_return(
           body: File.new("spec/fixtures/api_responses/empty_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -59,7 +82,7 @@ feature "Funding filter", type: :feature do
 
         stub_request(
           :get,
-          "http://localhost:3001/api/v3/recruitment_cycles/2020/courses?include=provider&filter[funding]=salary&page%5Bpage%5D=1&page%5Bper_page%5D=10",
+          "http://localhost:3001/api/v3/recruitment_cycles/2020/courses?include=provider&filter[funding]=salary&filter[vacancies]=true&page%5Bpage%5D=1&page%5Bper_page%5D=10",
         ).to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },

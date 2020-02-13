@@ -104,6 +104,7 @@ class ResultsView
                      .where(recruitment_cycle_year: Settings.current_cycle)
 
                    base_query = base_query.where(funding: "salary") if with_salaries?
+                   base_query = base_query.where(vacancies: hasvacancies?)
 
                    base_query
                      .page(query_parameters[:page] || 1)
