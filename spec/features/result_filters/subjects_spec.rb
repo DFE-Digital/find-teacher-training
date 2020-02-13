@@ -233,4 +233,17 @@ feature "Subject filter", type: :feature do
       expect(subject_filter_page.subject_areas.first.subjects.first.name.text).to eq("Design and technology – also includes food, product design, textiles, and systems and control")
     end
   end
+
+  describe "Validation" do
+    context "no subject selected" do
+      before do
+        subject_filter_page.load
+        subject_filter_page.continue.click
+      end
+
+      it "displays an error" do
+        expect(subject_filter_page).to have_error
+      end
+    end
+  end
 end
