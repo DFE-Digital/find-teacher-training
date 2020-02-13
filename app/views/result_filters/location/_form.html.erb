@@ -46,11 +46,13 @@
                 <%=
                   form.text_field(
                     :lq,
+                    id: "location",
                     value: "#{request.params[:lq]}",
                     class: "govuk-input",
-                    data: {qa: "location-query", url: location_suggestions_path},
+                    data: {qa: "location-query"},
                   )
                 %>
+                <div id="location-autocomplete" class="govuk-body"></div>
               </div>
               <div class="govuk-form-group">
                 <%= form.label :rad, "Within", class: "govuk-label" %>
@@ -118,7 +120,7 @@
                                     id: "provider",
                                     value: params[:query],
                                     class: "govuk-input",
-                                    data: {qa: "provider-search", url: provider_suggestions_path} %>
+                                    data: {qa: "provider-search"} %>
                 <div id="provider-autocomplete" class="govuk-body"></div>
               </div>
             </div>

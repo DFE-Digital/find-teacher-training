@@ -20,7 +20,13 @@ describe("Autocomplete", () => {
         </div>
       `;
 
-      initAutocomplete("autocomplete-container", "input");
+      initAutocomplete(
+        {
+          element: "autocomplete-container",
+          input: "input",
+          path: "/endpoint"
+        }
+      );
     });
 
     it("should instantiate an autocomplete", () => {

@@ -6,11 +6,6 @@ exports[`Autocomplete initAutocomplete should instantiate an autocomplete 1`] = 
 >
   
           
-  <input
-    id="old-input"
-    name="autocompleted_provider_code"
-    type="hidden"
-  />
   
           
   <div
@@ -41,7 +36,7 @@ exports[`Autocomplete initAutocomplete should instantiate an autocomplete 1`] = 
       </div>
       
       <input
-        aria-autocomplete="both"
+        aria-autocomplete="list"
         aria-describedby="input__assistiveHint"
         aria-expanded="false"
         aria-owns="input__listbox"
