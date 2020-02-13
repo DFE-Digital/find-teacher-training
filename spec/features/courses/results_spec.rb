@@ -61,10 +61,7 @@ feature "Search results", type: :feature do
       providers: %i[provider_name address1 address2 address3 address4 postcode],
     }
 
-    params = {
-      recruitment_cycle_year: Settings.current_cycle,
-      provider_code: nil,
-    }
+    params = { recruitment_cycle_year: Settings.current_cycle }
 
     pagination = { page: page_index || 1, per_page: 10 }
 
