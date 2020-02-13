@@ -35,6 +35,9 @@
                           <%= f.label(:subjects, {for: "subject#{subject.id}"}, class: "govuk-label govuk-checkboxes__label") do %>
                           <span class="govuk-checkboxes__label-text" data-qa="subject__name">
                             <%= subject.subject_name %>
+                            <% if subject.subject_name == "Design and technology" %>
+                              – also includes food, product design, textiles, and systems and control
+                            <% end %>
                           </span>
 
                           <% if subject.decorate.has_scholarship_and_bursary? %>
