@@ -13,14 +13,14 @@ describe LocationSuggestion do
     }
     let(:params) {
       {
-        key: Settings.gcp_api_key,
+        key: Settings.google.gcp_api_key,
         language: "en",
         input: query,
         components: "country:uk",
         types: "geocode",
       }.to_query
     }
-    let(:url) { "https://maps.googleapis.com/maps/api/place/autocomplete/json?#{params}" }
+    let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
 
     let(:location_suggestions) do
       LocationSuggestion.suggest(query)
