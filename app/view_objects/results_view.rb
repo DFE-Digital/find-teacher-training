@@ -105,6 +105,7 @@ class ResultsView
 
                    base_query = base_query.where(funding: "salary") if with_salaries?
                    base_query = base_query.where(vacancies: hasvacancies?)
+                   base_query = base_query.where(study_type: study_type) if study_type.present?
 
                    base_query
                      .page(query_parameters[:page] || 1)
@@ -167,5 +168,11 @@ private
     else
       "14"
     end
+  end
+
+  def study_type
+    return "full_time,part_time" if fulltime? && parttime?
+    return "full_time" if fulltime?
+    return "part_time" if parttime?
   end
 end
