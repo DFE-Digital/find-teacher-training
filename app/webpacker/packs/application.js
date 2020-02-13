@@ -1,9 +1,11 @@
 import "../styles/application.scss";
+import "../images/option-select-toggle-sprite.png";
 import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
 import { initAll } from "govuk-frontend";
 import initLocationsMap from "scripts/locations-map";
 import backLink from "scripts/back-link";
 import initAutocomplete from "scripts/autocomplete";
+import toggle from "scripts/toggle";
 
 initAll();
 
@@ -11,6 +13,9 @@ window.initLocationsMap = initLocationsMap;
 
 const $backLink = document.querySelector('[data-module="back-link"]');
 new backLink($backLink).init();
+
+const $toggle = document.querySelector('[data-module="toggle"]');
+new toggle($toggle).init();
 
 initAutocomplete(
   {
