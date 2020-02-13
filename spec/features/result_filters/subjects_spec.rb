@@ -61,6 +61,12 @@ feature "Subject filter", type: :feature do
       expect(subject_filter_page.send_area.accordion_button["aria-controls"]).to eq("send-content")
       expect(subject_filter_page.send_area).to have_selector("div#send-content")
     end
+
+    it "has a fieldset and legend for each subject area" do
+      subject_filter_page.subject_areas.each_with_index { |subject, counter|
+        expect(subject.legend.text).to eq("Choose from the following #{subject_areas[counter].name} subjects")
+      }
+    end
   end
 
   context "on the start page" do
