@@ -43,6 +43,11 @@ module PageObjects
       element :link, '[data-qa="change_link"]'
     end
 
+    class ProviderSection < SitePrism::Section
+      element :name, '[data-qa="provider_name"]'
+      element :link, '[data-qa="change_link"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results"
 
@@ -53,7 +58,9 @@ module PageObjects
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
       section :location_filter, LocationSection, '[data-qa="filters__location"]'
+      section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
 
+      element :provider_title, '[data-qa="provider_title"]'
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
 

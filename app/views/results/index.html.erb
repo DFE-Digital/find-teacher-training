@@ -3,18 +3,27 @@
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <h1 class="govuk-heading-xl">Teacher training courses</h1>
+      <% if @results_view.provider_filter? %>
+        <h1 class="govuk-heading-xl" data-qa="provider_title">
+          <span class="govuk-caption-l">Teacher training courses</span>
+          <%= @results_view.provider %>
+        </h1>
+      <% else %>
+        <h1 class="govuk-heading-xl">Teacher training courses</h1>
+      <% end %>
     </div>
   </div>
-
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-one-third">
       <div class="govuk-toggle" data-module="toggle">
         <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
-          Filter the results
         </button>
         <div class="govuk-toggle__target" id="searchFilters" data-qa="filters">
-          <%= render partial: 'results/location' %>
+          <% if @results_view.provider_filter? %>
+            <%= render partial: 'results/provider' %>
+          <% else %>
+            <%= render partial: 'results/location' %>
+          <% end %>
           <%= render partial: 'results/subjects' %>
           <%= render partial: 'results/study_type' %>
           <%= render partial: 'results/qualifications' %>

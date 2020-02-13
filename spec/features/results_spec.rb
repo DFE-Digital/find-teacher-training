@@ -231,18 +231,36 @@ feature "results", type: :feature do
             rad: "10",
             lng: "-27.1504002",
             lat: "-109.3042697",
+            l: "1",
           }
         end
 
         it "displays the location filter" do
           expected_url = "https://maps.googleapis.com/maps/api/staticmap?key=alohomora&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002"
+          expect(results_page).to_not have_provider_filter
           expect(results_page.location_filter.name).to have_content("Hogwarts, Reading, UK")
           expect(results_page.location_filter.distance).to have_content("Within 10 miles of the pin")
           expect(results_page.location_filter.map["src"]).to have_content(expected_url)
           results_page.location_filter.link.click
           location_filter_uri = URI(current_url)
           expect(location_filter_uri.path).to eq("/results/filter/location")
-          expect(location_filter_uri.query).to eq("lat=-109.3042697&lng=-27.1504002&loc=Hogwarts,+Reading,+UK&rad=10&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
+          expect(location_filter_uri.query).to eq("l=1&lat=-109.3042697&lng=-27.1504002&loc=Hogwarts,+Reading,+UK&rad=10&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
+        end
+      end
+    end
+
+    describe "provider filter" do
+      context "provider selected" do
+        let(:params) { { query: "Junior Middle Lower Upper Second Fifth High", l: "3" } }
+
+        it "displays the provider filter" do
+          expect(results_page.provider_title).to have_content("Junior Middle Lower Upper Second Fifth High")
+          expect(results_page).to_not have_location_filter
+          expect(results_page.provider_filter.name).to have_content("Junior Middle Lower Upper Second Fifth High")
+          results_page.provider_filter.link.click
+          provider_filter_uri = URI(current_url)
+          expect(provider_filter_uri.path).to eq("/results/filter/location")
+          expect(provider_filter_uri.query).to eq("l=3&query=Junior+Middle+Lower+Upper+Second+Fifth+High&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
         end
       end
     end
