@@ -281,7 +281,7 @@
                 "value": "[parameters('settingsGoogleMapsAPIKey')]"
               },
               {
-                "name": "SETTINGS__GCP_API_KEY",
+                "name": "SETTINGS__GOOGLE__GCP_API_KEY",
                 "value": "[parameters('settingsGoogleGeocodeAPIKey')]"
               },
               {
