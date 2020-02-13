@@ -4,6 +4,7 @@ manage_backend:
 current_cycle: 2020
 google:
   maps_api_key: replace_me
+  maps_api_url: https://maps.googleapis.com/maps/api/staticmap
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 redirect_results_to_c_sharp: true

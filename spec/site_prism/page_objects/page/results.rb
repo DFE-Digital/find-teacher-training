@@ -36,6 +36,13 @@ module PageObjects
       element :funding, '[data-qa="funding"]'
     end
 
+    class LocationSection < SitePrism::Section
+      element :name, '[data-qa="location_name"]'
+      element :distance, '[data-qa="distance"]'
+      element :map, '[data-qa="map"]'
+      element :link, '[data-qa="change_link"]'
+    end
+
     class Results < SitePrism::Page
       set_url "/results"
 
@@ -45,6 +52,7 @@ module PageObjects
       section :qualifications_filter, QualificationsSection, '[data-qa="filters__qualifications"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
+      section :location_filter, LocationSection, '[data-qa="filters__location"]'
 
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
