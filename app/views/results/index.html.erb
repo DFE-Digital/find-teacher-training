@@ -1,4 +1,4 @@
-<%= content_for :page_title, "#{number_with_delimiter(@courses.total_count)} courses" %>
+<%= content_for :page_title, "#{number_with_delimiter(@results_view.total_course_count)} courses" %>
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
@@ -9,7 +9,7 @@
           <%= @results_view.provider %>
         </h1>
       <% else %>
-        <h1 class="govuk-heading-xl">Teacher training courses</h1>
+        <h1 class="govuk-heading-xl" data-qa="heading">Teacher training courses</h1>
       <% end %>
     </div>
   </div>
@@ -35,7 +35,7 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__count"><%= number_with_delimiter(@courses.total_count) %> courses found</p>
+          <p class="govuk-body search-results__count"><%= number_with_delimiter(@results_view.total_course_count) %> courses found</p>
         </div>
         <div class="govuk-grid-column-one-half">
           <p class="govuk-body search-results__new-search">
@@ -44,7 +44,7 @@
         </div>
       </div>
       <ul class="govuk-list search-results">
-        <% @courses.each do |course| %>
+        <% @results_view.courses.each do |course| %>
           <li data-qa="course">
             <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
               <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
@@ -70,7 +70,7 @@
           </li>
         <% end %>
       </ul>
-      <%= paginate @courses %>
+      <%= paginate @results_view.courses %>
     </div>
   </div>
 </div>

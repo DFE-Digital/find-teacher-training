@@ -81,12 +81,12 @@ class ResultsView
 
   def map_image_url
     "#{Settings.google.maps_api_url}\
-?key=#{Settings.google.maps_api_key}\
-&center=#{latitude},#{longitude}\
-&zoom=#{google_map_zoom}\
-&size=300x200\
-&scale=2\
-&markers=#{latitude},#{longitude}"
+    ?key=#{Settings.google.maps_api_key}\
+    &center=#{latitude},#{longitude}\
+    &zoom=#{google_map_zoom}\
+    &size=300x200\
+    &scale=2\
+    &markers=#{latitude},#{longitude}"
   end
 
   def provider
@@ -95,6 +95,24 @@ class ResultsView
 
   def provider_filter?
     query_parameters["l"] == "3"
+  end
+
+  def courses
+    @courses ||= begin
+                   base_query = Course
+                     .includes(:provider)
+                     .where(recruitment_cycle_year: Settings.current_cycle)
+
+                   base_query = base_query.where(funding: "salary") if with_salaries?
+
+                   base_query
+                     .page(query_parameters[:page] || 1)
+                     .per(10)
+                 end
+  end
+
+  def total_course_count
+    courses.total_count
   end
 
 private
