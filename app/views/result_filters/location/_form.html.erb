@@ -102,7 +102,8 @@
                 By school, university or other training provider
               <% end %>
             </div>
-            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless request.params[:query] || provider_error? %>" id="query-container">
+            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "3" %>"
+              id="query-container" data-qa="by-provider-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>">
                 <%= form.label :query, class: "govuk-label" do %>
                   School, university or other training provider

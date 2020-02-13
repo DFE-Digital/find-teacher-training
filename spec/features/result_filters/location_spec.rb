@@ -158,6 +158,12 @@ feature "Location filter", type: :feature do
       filter_page.load(query: { l: 2 })
       expect(filter_page.across_england.checked?).to eq(true)
     end
+
+    it "Preselects by school, university or other training provider and reveals the content" do
+      filter_page.load(query: { l: 3 })
+      expect(filter_page.by_provider.checked?).to eq(true)
+      expect(filter_page.by_provider_conditional).not_to match_selector(".govuk-radios__conditional--hidden")
+    end
   end
 
   describe "Validation" do

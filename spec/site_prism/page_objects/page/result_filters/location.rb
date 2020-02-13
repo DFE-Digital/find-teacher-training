@@ -10,6 +10,7 @@ module PageObjects
         element :error_heading, '[data-qa="error__heading"]'
         element :across_england, '[data-qa="across-england"]'
         element :by_provider, '[data-qa="by-provider"]'
+        element :by_provider_conditional, '[data-qa="by-provider-conditional"]'
         element :provider_error, '[data-qa="provider-error"]'
         element :provider_search, '[data-qa="provider-search"]'
         element :find_courses, '[data-qa="find-courses"]'
