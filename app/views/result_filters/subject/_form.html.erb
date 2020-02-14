@@ -2,7 +2,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "result_filters/error_message" %>
+    <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "subject1" } %>
 
     <%= form_with(url: subject_path, method: :post) do |f| %>
       <%= render 'result_filters/hidden_fields', exclude_keys: ["subjects"], form: f %>
@@ -16,10 +16,10 @@
 
       <div class="accordion govuk-form-group" data-module="govuk-accordion">
         <% @subject_areas.each_with_index do |subject_area, counter| %>
-          <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) then " govuk-accordion__section--expanded" end %>" data-qa="subject_area">
+          <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) || (counter == 0 && no_subject_selected_error?) then " govuk-accordion__section--expanded" end %>" data-qa="subject_area">
             <div class="govuk-accordion__section-header">
               <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) then "true" else "false" end %>">
+                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) || (counter == 0 && no_subject_selected_error?) then "true" else "false" end %>">
                   <%= subject_area.name %>
                 </button>
               </h2>

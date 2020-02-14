@@ -244,6 +244,14 @@ feature "Subject filter", type: :feature do
       it "displays an error" do
         expect(subject_filter_page).to have_error
       end
+
+      it "expands the first accordion and sets assistive technology attributes appropriately" do
+        expect(subject_filter_page.subject_areas.first.root_element).to match_selector(".govuk-accordion__section--expanded")
+        expect(subject_filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="true"]')
+
+        expect(subject_filter_page.subject_areas.second.root_element).not_to match_selector(".govuk-accordion__section--expanded")
+        expect(subject_filter_page.subject_areas.second.accordion_button).not_to match_selector('[aria-expanded="true"]')
+      end
     end
   end
 end

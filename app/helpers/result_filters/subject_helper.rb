@@ -15,5 +15,11 @@ module ResultFilters
 
       (params["subjects"] & subject_area.subjects.map(&:id)).any?
     end
+
+    def no_subject_selected_error?
+      return false if flash[:error].nil?
+
+      flash[:error].include?(I18n.t("subject_filter.errors.no_option"))
+    end
   end
 end
