@@ -6,10 +6,7 @@ import initLocationsMap from "scripts/locations-map";
 import backLink from "scripts/back-link";
 import initAutocomplete from "scripts/autocomplete";
 import toggle from "scripts/toggle";
-import { initFormAnalytics, initExternalLinkAnalytics, initNavigationAnalytics } from "scripts/analytics.js";
-import scrollTracking from "scripts/scroll-tracking";
-import copyTracking from "scripts/copy-tracking";
-import noResultsTracking from "scripts/no-results-tracking";
+import { loadAnalytics } from "scripts/analytics.js";
 
 initAll();
 
@@ -36,17 +33,6 @@ initAutocomplete(
   }
 );
 
-if (typeof ga !== "undefined") {
-  initFormAnalytics();
-  initExternalLinkAnalytics();
-  initNavigationAnalytics();
+initAutocomplete("provider-autocomplete", "provider");
 
-  const $page = document.querySelector('[data-module*="ga-track"]');
-  new scrollTracking($page).init();
-  new copyTracking($page).init();
-
-  const $searchInput = document.querySelector('[data-module="track-no-provider-results"]');
-  new noResultsTracking($searchInput).init();
-} else {
-  console.log("Google Analytics `window.ga` object not found. Skipping analytics.");
-}
+loadAnalytics()
