@@ -2,25 +2,28 @@ require "rails_helper"
 
 feature "results", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
+  let(:sort) { "provider.provider_name,name" }
   let(:params) {}
-
   let(:default_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
 
-  let(:base_parameters) do
+  let(:base_parameters) { results_page_parameters("sort" => sort) }
+
+  let(:results_page_request) do
     {
-      "filter[vacancies]" => "true",
-      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
-      "include" => "provider",
-      "page[page]" => 1,
-      "page[per_page]" => 10,
+      course_stub: stub_request(:get, default_url)
+        .with(query: base_parameters)
+        .to_return(
+          body: courses,
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      ),
     }
   end
 
-  let(:courses) {
+  let(:courses) do
     File.new("spec/fixtures/api_responses/courses.json")
-  }
+  end
 
   before do
     stub_request(
@@ -31,12 +34,7 @@ feature "results", type: :feature do
       headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
 
-    stub_request(:get, default_url)
-      .with(query: base_parameters)
-      .to_return(
-        body: courses,
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+    results_page_request
 
     allow(Settings).to receive_message_chain(:google, :maps_api_key).and_return("alohomora")
     allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return("https://maps.googleapis.com/maps/api/staticmap")
@@ -51,9 +49,9 @@ feature "results", type: :feature do
     end
 
     context "when API return no courses" do
-      let(:courses) {
+      let(:courses) do
         File.new("spec/fixtures/api_responses/empty_courses.json")
-      }
+      end
 
       it "displays the correct course count" do
         expect(results_page.course_count).to have_content("0 courses found")
@@ -118,6 +116,115 @@ feature "results", type: :feature do
     it "has location filter" do
       expect(results_page.location_filter.name).to have_content("Across England")
       expect(results_page.location_filter).to have_no_distance
+    end
+  end
+
+  context "provider sorting" do
+    let(:ascending_stub) do
+      stub_request(:get, default_url)
+        .with(query: results_page_parameters("sort" => "provider.provider_name,name"))
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        )
+    end
+
+    let(:descending_stub) do
+      stub_request(:get, default_url)
+        .with(query: results_page_parameters("sort" => "-provider.provider_name,-name"))
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        )
+    end
+
+    before do
+      ascending_stub
+      descending_stub
+    end
+
+    describe "hides ordering" do
+      let(:sort) { "provider.provider_name,name" }
+      let(:params) { { l: "3" } }
+
+      it "does not display the sort form" do
+        expect(results_page).not_to have_sort_form
+      end
+    end
+
+    context "descending" do
+      let(:sort) { "-provider.provider_name,-name" }
+      let(:params) { { sortby: "1", l: "2" } }
+
+      it "requests that the backend sorts the data" do
+        expect(descending_stub).to have_been_requested
+      end
+
+      it "is automatically selected" do
+        expect(results_page.sort_form.options.descending).to be_selected
+      end
+
+      it "can be changed to ascending" do
+        results_page.sort_form.options.ascending.select_option
+        results_page.sort_form.submit.click
+
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "sortby" => "0",
+          "l" => "2",
+        )
+      end
+    end
+
+    context "ascending" do
+      let(:sort) { "provider.provider_name,name" }
+      let(:params) { { sortby: "0", l: "2" } }
+
+      it "requests that the backend sorts the data" do
+        expect(ascending_stub).to have_been_requested
+      end
+
+      it "is automatically selected" do
+        expect(results_page.sort_form.options.ascending).to be_selected
+      end
+
+      it "can be changed to descending" do
+        results_page.sort_form.options.descending.select_option
+        results_page.sort_form.submit.click
+
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "sortby" => "1",
+          "l" => "2",
+        )
+      end
+    end
+  end
+
+  describe "study type filter" do
+    let(:base_parameters) { results_page_parameters("filter[study_type]" => study_type, "sort" => sort) }
+
+    context "for full time only" do
+      let(:study_type) { "full_time" }
+
+      let(:params) { { fulltime: "True", parttime: "False" } }
+
+      it "has study type filter for full time only " do
+        expect(results_page.study_type_filter.subheading).to have_content("Study type:")
+        expect(results_page.study_type_filter.fulltime).to have_content("Full time (12 months)")
+        expect(results_page.study_type_filter).not_to have_parttime
+        expect(results_page.study_type_filter.link).to have_content("Change study type")
+      end
+    end
+
+    context "for part time only" do
+      let(:study_type) { "part_time" }
+      let(:params) { { fulltime: "False", parttime: "True" } }
+
+      it "has study type filter for part time only" do
+        expect(results_page.study_type_filter.subheading).to have_content("Study type:")
+        expect(results_page.study_type_filter).not_to have_fulltime
+        expect(results_page.study_type_filter.parttime).to have_content("Part time (18 - 24 months)")
+        expect(results_page.study_type_filter.link).to have_content("Change study type")
+      end
     end
   end
 

@@ -2,23 +2,30 @@ require "rails_helper"
 
 feature "Search results", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:base_parameters) {
-    { "filter[vacancies]" => "true",
-      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
-      "include" => "provider",
-      "page[page]" => 1,
-      "page[per_page]" => 10 }
-  }
 
-  let(:courses_request) {
+  let(:base_parameters) { results_page_parameters }
+
+  let(:courses_request) do
     url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
     stub_request(:get, url)
       .with(query: base_parameters)
       .to_return(
         body: File.new("spec/fixtures/api_responses/courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
-  }
+      )
+  end
+
+  let(:subject) do
+    build(:subject,
+          :english,
+          scholarship: "2000",
+          bursary_amount: "4000",
+          early_career_payments: "1000")
+  end
+
+  let(:accrediting_provider) { build(:provider) }
+  let(:decorated_course) { course.decorate }
+  let(:courses) { [course] }
 
   let(:subject_request) do
     stub_api_v3_resource(

@@ -105,6 +105,8 @@ class ResultsView
                    base_query = base_query.where(send_courses: true) if send_courses?
 
                    base_query
+                     .order("provider.provider_name": results_order)
+                     .order("name": results_order)
                      .page(query_parameters[:page] || 1)
                      .per(10)
                  end
@@ -121,6 +123,16 @@ class ResultsView
 private
 
   attr_reader :query_parameters
+
+  def provider_option_selected?
+    filter_params[:l] == "3"
+  end
+
+  def results_order
+    return :desc if query_parameters[:sortby] == "1"
+
+    :asc
+  end
 
   def qualifications_parameters
     { "qualifications" => query_parameters["qualifications"].presence || "QtsOnly,PgdePgceWithQts,Other" }

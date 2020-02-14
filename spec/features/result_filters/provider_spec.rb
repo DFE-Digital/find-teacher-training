@@ -15,15 +15,7 @@ feature "Provider filter", type: :feature do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
   end
 
-  let(:base_parameters) do
-    {
-      "filter[vacancies]" => "true",
-      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
-      "include" => "provider",
-      "page[page]" => 1,
-      "page[per_page]" => 10,
-    }
-  end
+  let(:base_parameters) { results_page_parameters }
 
   let(:search_term) { "ACME" }
   let(:query_params) { { query: search_term } }

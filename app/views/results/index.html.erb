@@ -43,6 +43,41 @@
           </p>
         </div>
       </div>
+      <% unless @results_view.provider_filter? %>
+        <div class="search-results-header">
+          <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                  <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
+                    <%= render 'shared/hidden_fields',
+                      form: form,
+                      exclude_keys: [:sortby]
+                    %>
+
+                    <div class="govuk-form-group">
+                      <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
+                      <%= form.select(
+                        :sortby,
+                        options_for_select([
+                            ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+                            ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }]
+                          ],
+                          selected: params[:sortby]
+                        ),
+                        {},
+                        {
+                          class: "govuk-select trigger-result-update sortby-selector",
+                          onchange: "this.form.submit()",
+                          role: "listbox",
+                          "data-qa": "sort-form__options"
+                        }
+                      ) %>
+                    </div>
+                    <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
+                  <% end %>
+              </div>
+          </div>
+        </div>
+      <% end %>
       <ul class="govuk-list search-results">
         <% @results_view.courses.each do |course| %>
           <li data-qa="course">
