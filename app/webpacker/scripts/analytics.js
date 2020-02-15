@@ -1,55 +1,61 @@
 import scrollTracking from "./scroll-tracking";
 import copyTracking from "./copy-tracking";
 import noResultsTracking from "./no-results-tracking";
+import { fetchConsentedToCookieValue } from './cookie-helper'
 
 const triggerAnalyticsEvent = (category, action) => {
-  ga("send", "event", {
-    eventCategory: category,
-    eventAction: action,
-    transport: "beacon"
-  });
+  if (fetchConsentedToCookieValue()) {
+    ga("send", "event", {
+      eventCategory: category,
+      eventAction: action,
+      transport: "beacon"
+    });
+  }
 };
 
 /** @description Dynamically downloads our analytical platform (GA)
  * @param {string} trackingCode Google Analytical unique tracking code
  * @return {number}
  */
-export const loadAnalytics = (trackingCode) => {
+const loadAnalytics = (trackingCode) => {
   /* jshint ignore:start */
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', trackingCode || 'UA-112932657-1', 'auto');
-  ga('set', 'transport', 'beacon');
-  ga('set', 'anonymizeIp', true);
+  if (fetchConsentedToCookieValue()) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  if (location.search) {
-    var search = location.search;
-    var params = ['lat', 'lng', 'loc', 'lq'];
-    for( let param = 0; param < params.length; param++ ){
-      search = search.replace( new RegExp( '([?&])'+params[param]+'(=[^&]*)?&?', 'gi' ), '$1' );
+    ga('create', trackingCode || 'UA-112932657-1', 'auto');
+    ga('set', 'transport', 'beacon');
+    ga('set', 'anonymizeIp', true);
+
+    if (location.search) {
+      var search = location.search;
+      var params = ['lat', 'lng', 'loc', 'lq'];
+      for( let param = 0; param < params.length; param++ ){
+        search = search.replace( new RegExp( '([?&])'+params[param]+'(=[^&]*)?&?', 'gi' ), '$1' );
+      }
+      ga('set', 'location', window.location.protocol + "//" + window.location.host + window.location.pathname + search)
     }
-    ga('set', 'location', window.location.protocol + "//" + window.location.host + window.location.pathname + search)
+
+    ga('send', 'pageview');
+
+    initFormAnalytics();
+    initExternalLinkAnalytics();
+    initNavigationAnalytics();
+
+    const $page = document.querySelector('[data-module*="ga-track"]');
+    new scrollTracking($page).init();
+    new copyTracking($page).init();
+
+    const $searchInput = document.querySelector('[data-module="track-no-provider-results"]');
+    new noResultsTracking($searchInput).init();
   }
-
-  ga('send', 'pageview');
-
-  initFormAnalytics();
-  initExternalLinkAnalytics();
-  initNavigationAnalytics();
-
-  const $page = document.querySelector('[data-module*="ga-track"]');
-  new scrollTracking($page).init();
-  new copyTracking($page).init();
-
-  const $searchInput = document.querySelector('[data-module="track-no-provider-results"]');
-  new noResultsTracking($searchInput).init();
   /* jshint ignore:end */
 }
 
-export const initFormAnalytics = () => {
+const initFormAnalytics = () => {
   // How to use:
   //
   // 1. Attach `data-ga-event-form="Helpful Namespace"` to <form> elements
@@ -84,7 +90,7 @@ export const initFormAnalytics = () => {
   }
 };
 
-export const initExternalLinkAnalytics = () => {
+const initExternalLinkAnalytics = () => {
   // This will attach event listeners to all links with hrefs that point to external resource.
 
   const externalLinkSelector = 'a[href^="http"]:not([href*="' + window.location.hostname + '"])';
@@ -100,7 +106,7 @@ export const initExternalLinkAnalytics = () => {
   }
 };
 
-export const initNavigationAnalytics = () => {
+const initNavigationAnalytics = () => {
   // How to use:
   //
   // 1. Attach `data-ga-event-navigation="Helpful Namespace"` to a container that has links
@@ -130,3 +136,12 @@ export const initNavigationAnalytics = () => {
     attachAnalyticsToNav($navs[i]);
   }
 };
+
+
+export {
+  loadAnalytics,
+  initExternalLinkAnalytics,
+  initFormAnalytics,
+  initNavigationAnalytics,
+  triggerAnalyticsEvent
+}
