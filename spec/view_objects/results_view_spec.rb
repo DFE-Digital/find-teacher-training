@@ -311,4 +311,24 @@ RSpec.describe ResultsView do
 
     it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
   end
+
+  describe "#provider" do
+    subject { described_class.new(query_parameters: parameter_hash).provider }
+
+    context "when query is passed" do
+      let(:parameter_hash) { { "query" => "Kamino" } }
+
+      it { is_expected.to eq("Kamino") }
+    end
+  end
+
+  describe "#provider_filter?" do
+    subject { described_class.new(query_parameters: parameter_hash).provider_filter? }
+
+    context "when l param is set to 3" do
+      let(:parameter_hash) { { "l" => "3" } }
+
+      it { is_expected.to be(true) }
+    end
+  end
 end

@@ -89,6 +89,14 @@ class ResultsView
 &markers=#{latitude},#{longitude}"
   end
 
+  def provider
+    query_parameters["query"]
+  end
+
+  def provider_filter?
+    query_parameters["l"] == "3"
+  end
+
 private
 
   attr_reader :query_parameters
