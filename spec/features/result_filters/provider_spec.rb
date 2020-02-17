@@ -46,7 +46,7 @@ feature "Provider filter", type: :feature do
   end
 
   context "with a query" do
-    it "queries the backend" do
+    it "queries the API" do
       expect(provider_filter_page.provider_suggestions.first.hyperlink.text).to eq("#{providers.first.provider_name} (#{providers.first.provider_code})")
       expect(provider_filter_page.provider_suggestions.second.hyperlink.text).to eq("#{providers.second.provider_name} (#{providers.second.provider_code})")
     end
