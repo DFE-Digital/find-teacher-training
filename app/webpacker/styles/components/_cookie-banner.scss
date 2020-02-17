@@ -1,17 +1,25 @@
 .app-cookie-banner {
-  @include govuk-font(16);
-  @include govuk-text-colour;
-  box-sizing: border-box;
-  display: none;
-  padding-top: govuk-spacing(3);
-  padding-bottom: govuk-spacing(3);
-  background-color: lighten(desaturate(govuk-colour("light-blue"), 8.46), 42.55);
-  width: 100%;
+  @include govuk-responsive-padding(3, 'top');
+  @include govuk-responsive-padding(2, 'bottom');
+  background-color: govuk-colour('light-grey');
 }
 
-.app-cookie-banner__message {
-  margin: 0;
-  @include govuk-width-container;
+.app-cookie-banner--hidden {
+  display: none;
+}
+
+.app-cookie-banner__line-message {
+  line-height: 2;
+  padding-left: govuk-spacing(0);
+
+  @include govuk-media-query($from: tablet) {
+    padding-left: govuk-spacing(2);
+  }
+}
+
+.app-cookie-banner__link {
+  // To match links styling in the footer
+  color: govuk-colour('black') !important;
 }
 
 @include govuk-media-query($media-type: print) {

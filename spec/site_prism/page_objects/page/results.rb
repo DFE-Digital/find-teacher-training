@@ -1,5 +1,11 @@
 module PageObjects
   module Page
+    class CookieBannerSection < SitePrism::Section
+      element :cookies_info_link, '[data-qa="cookie-banner__info-link"]'
+      element :accept_all_cookies, '[data-qa="cookie-banner__accept"]'
+      element :set_preference_link, '[data-qa="cookie-banner__preference-link"]'
+    end
+
     class CourseSection < SitePrism::Section
       element :provider_name, '[data-qa="course__provider_name"]'
       element :description, '[data-qa="course__description"]'
@@ -51,6 +57,7 @@ module PageObjects
     class Results < SitePrism::Page
       set_url "/results"
 
+      section :cookie_banner, CookieBannerSection, '[data-qa="cookie-banner"]'
       sections :courses, CourseSection, '[data-qa="course"]'
       section :subjects_filter, SubjectsSection, '[data-qa="filters__subjects"]'
       section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
