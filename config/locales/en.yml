@@ -56,3 +56,6 @@ en:
     fields:
       location: "Postcode, town or city"
       provider: "Training provider"
+  subject_filter:
+    errors:
+      no_option: "Please choose at least one subject"

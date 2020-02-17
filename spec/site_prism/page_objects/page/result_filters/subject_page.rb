@@ -19,6 +19,7 @@ module PageObjects
         end
 
         element :back_link, '[data-qa="page-back"]'
+        element :error, '[data-qa="error"]'
 
         sections :subject_areas, SubjectAreaSection, '[data-qa="subject_area"]'
         section :send_area, SubjectAreaSection, '[data-qa="send_area"]'
