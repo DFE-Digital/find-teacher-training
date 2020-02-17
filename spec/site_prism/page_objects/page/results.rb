@@ -36,6 +36,10 @@ module PageObjects
 
     class QualificationsSection < SitePrism::Section
       elements :qualifications, '[data-qa="qualifications"]'
+      element :link, '[data-qa="link"]'
+      element :qts_only, '[data-qa="qts_only"]'
+      element :pgde_pgce_with_qts, '[data-qa="pgde_pgce_with_qts"]'
+      element :other_qualifications, '[data-qa="other_qualifications"]'
     end
 
     class FundingSection < SitePrism::Section

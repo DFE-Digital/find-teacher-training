@@ -12,7 +12,7 @@
       <%= render 'result_filters/hidden_fields', exclude_keys: ["qualifications"], form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend>
-          <h1 class="govuk-heading-xl">What you will get</h1>
+          <h1 class="govuk-heading-xl" data-qa="heading">What you will get</h1>
         </legend>
 
         <div class="govuk-form-group <%= flash[:error] ? "govuk-form-group--error" : "" %>">

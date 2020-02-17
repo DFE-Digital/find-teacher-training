@@ -16,6 +16,14 @@ feature "Study type filter", type: :feature do
     }
   end
 
+  before do
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+        )
+  end
+
   describe "viewing results without explicitly selecting a filter" do
     before do
       stub_request(:get, url)
@@ -49,7 +57,7 @@ feature "Study type filter", type: :feature do
     context "deselecting full time" do
       before do
         stub_request(:get, url)
-          .with( query: base_parameters.merge("filter[study_type]" => "part_time"))
+          .with(query: base_parameters.merge("filter[study_type]" => "part_time"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
