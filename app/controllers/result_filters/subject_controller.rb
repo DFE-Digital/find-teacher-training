@@ -11,12 +11,19 @@ module ResultFilters
 
     def new; end
 
-    def start; end
+    def start
+      flash[:start_wizard] = true
+    end
 
     def create
       if params[:subjects].blank? && (params[:senCourses].blank? || params[:senCourses] == "false")
         flash[:error] = [I18n.t("subject_filter.errors.no_option")]
-        redirect_to subject_path(filter_params)
+
+        if flash[:start_wizard]
+          redirect_to(start_subject_path(filter_params))
+        else
+          redirect_to subject_path(filter_params)
+        end
       else
         redirect_to results_path(filter_params.merge(subjects: convert_rails_subject_id_params_to_csharp))
       end
