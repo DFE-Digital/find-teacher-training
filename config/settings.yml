@@ -1,5 +1,5 @@
-manage_backend:
-  # URL of the API app (manage-courses-backend)
+teacher_training_api:
+  # URL of the API app (teacher-training-api)
   base_url: http://localhost:3001
 current_cycle: 2020
 google:
@@ -11,4 +11,3 @@ google:
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 redirect_results_to_c_sharp: true
-
