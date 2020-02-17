@@ -3,83 +3,33 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <p class="govuk-body">‘Find postgraduate teacher training’ puts small files (known as ‘cookies’) onto your computer to collect information about how you use the site.</p>
-
-      <p class="govuk-body">Cookies are used to:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>measure how you use the this service so it can be updated and improved based on your needs</li>
-        <li>remember the notifications you’ve seen so that we don’t show them to you again</li>
-        <li>remember who you are when you have logged in so we can show you your information and information relevant to you</li>
-      </ul>
-
-      <p class="govuk-body">‘Find postgraduate teacher training’ cookies aren’t used to identify you personally.</p>
-      <p class="govuk-body">Find out more about <a href="http://www.aboutcookies.org/" rel="external" class="govuk-link">how to manage cookies</a>.</p>
+      <%= render partial: 'cookie-preferances-form' %>
 
       <h2 class="govuk-heading-l">How we use cookies</h2>
 
-      <h3 class="govuk-heading-m">Measuring website usage (Google Analytics)</h3>
+      <h3 class="govuk-heading-m">Essential cookies</h3>
 
-      <p class="govuk-body">We use Google Analytics software to collect information about how you use ‘Find postgraduate teacher training’. We do this to help make sure the site is meeting the needs of its users and to help us make improvements. </p>
-
-      <p class="govuk-body">Google Analytics stores information about:</p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>the pages you visit on ‘Find postgraduate teacher training’</li>
-        <li>how long you spend on each page</li>
-        <li>how you got to the site</li>
-        <li>what you click on while you’re visiting the site</li>
-      </ul>
-
-      <p class="govuk-body">We don’t allow Google to use or share our analytics data.</p>
-
-      <p class="govuk-body">Google Analytics sets the following cookies:</p>
+      <p class="govuk-body">Essential ‘Find postgraduate teacher training’ cookies include:</p>
 
       <table class="govuk-table">
         <thead class="govuk-table__header">
-          <tr>
-            <th class="govuk-table__header">Name</th>
-            <th class="govuk-table__header">Purpose</th>
-            <th class="govuk-table__header">Expires</th>
-          </tr>
+        <tr>
+          <th class="govuk-table__header">Name</th>
+          <th class="govuk-table__header">Purpose</th>
+          <th class="govuk-table__header">Expires</th>
+        </tr>
         </thead>
         <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_ga</td>
-            <td class="govuk-table__cell">Used to distinguish anonymous users</td>
-            <td class="govuk-table__cell">2 years</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_gid</td>
-            <td class="govuk-table__cell">Used to distinguish anonymous users</td>
-            <td class="govuk-table__cell">24 hours</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_gat_gtag_UA_112932657_1</td>
-            <td class="govuk-table__cell">Throttle requests</td>
-            <td class="govuk-table__cell">10 minutes</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p class="govuk-body">You can opt out of <a href="https://tools.google.com/dlpage/gaoptout" rel="external" class="govuk-link">Google Analytics</a>.</p>
-
-      <h3 class="govuk-heading-m">Our introductory message</h3>
-
-      <p class="govuk-body">You may see a pop-up welcome message when you first visit ‘Find postgraduate teacher training’. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
-
-      <table class="govuk-table">
-        <thead class="govuk-table__header">
-          <tr>
-            <th class="govuk-table__header">Name</th>
-            <th class="govuk-table__header">Purpose</th>
-            <th class="govuk-table__header">Expires</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <tr>
-            <td class="govuk-table__cell">seen_cookie_message</td>
-            <td class="govuk-table__cell">Show cookie policy banner on first visit only</td>
-            <td class="govuk-table__cell">1 month</td>
-          </tr>
+        <tr>
+          <td class="govuk-table__cell">_find_teacher_training_session</td>
+          <td class="govuk-table__cell">Stores encrypted session data</td>
+          <td class="govuk-table__cell">When you close your browser</td>
+        </tr>
+        <tr>
+          <td class="govuk-table__cell">cookie_policy</td>
+          <td class="govuk-table__cell">Saves your cookie consent settings</td>
+          <td class="govuk-table__cell">1 year</td>
+        </tr>
         </tbody>
       </table>
     </div>
