@@ -58,6 +58,14 @@ feature "Location filter", type: :feature do
           expect(uri.query).to eq("l=2")
         end
       end
+
+      it "stays on start page after validations" do
+        visit root_path
+        filter_page.find_courses.click
+
+        expect(filter_page).to have_error
+        expect(page).to have_current_path(root_path, ignore_query: true)
+      end
     end
   end
 
@@ -172,6 +180,8 @@ feature "Location filter", type: :feature do
       filter_page.find_courses.click
 
       expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPlease choose an option")
+
+      expect(page).to have_current_path(location_path, ignore_query: true)
     end
 
     it "Displays an error if location is selected but none is entered" do

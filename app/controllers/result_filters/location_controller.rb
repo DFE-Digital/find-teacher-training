@@ -30,7 +30,11 @@ module ResultFilters
         redirect_to results_path(all_params)
       else
         flash[:error] = form_object.errors
-        redirect_to location_path(form_params)
+        if flash[:start_wizard]
+          redirect_to root_path(form_params)
+        else
+          redirect_to location_path(form_params)
+        end
       end
     end
 
