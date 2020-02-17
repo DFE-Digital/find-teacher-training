@@ -30,6 +30,7 @@ feature "Subject filter", type: :feature do
   describe "back link" do
     it "navigates back to the results page" do
       subject_filter_page.load(query: { test: "params" })
+      expect(subject_filter_page.back_link.text).to eq("Back to search results")
       subject_filter_page.back_link.click
 
       expect_page_to_be_displayed_with_query(
@@ -72,12 +73,24 @@ feature "Subject filter", type: :feature do
   context "on the start page" do
     it "has a back link to the root page" do
       visit start_subject_path
+      expect(subject_filter_page.back_link.text).to eq("Back to location")
       subject_filter_page.back_link.click
       expect(URI(current_url).path).to eq("/")
     end
 
     it "the submit button displays 'Continue'" do
       visit start_subject_path
+      expect(subject_filter_page.continue.value).to eq("Continue")
+    end
+
+    it "stays on start page after failed validation" do
+      visit start_subject_path
+      subject_filter_page.continue.click
+
+      expect(subject_filter_page).to have_error
+
+      expect(subject_filter_page.back_link.text).to eq("Back to location")
+      expect(page).to have_current_path(start_subject_path, ignore_query: true)
       expect(subject_filter_page.continue.value).to eq("Continue")
     end
   end
@@ -234,6 +247,17 @@ feature "Subject filter", type: :feature do
     end
   end
 
+  describe "subject filter page" do
+    before do
+      subject_filter_page.load
+    end
+    it "displays 'Back to search results' for the back link" do
+      expect(subject_filter_page.back_link.text).to eq("Back to search results")
+    end
+    it "displays 'Find courses' for the continue" do
+      expect(subject_filter_page.continue.value).to eq("Find courses")
+    end
+  end
   describe "Validation" do
     context "no subject selected" do
       before do
@@ -251,6 +275,12 @@ feature "Subject filter", type: :feature do
 
         expect(subject_filter_page.subject_areas.second.root_element).not_to match_selector(".govuk-accordion__section--expanded")
         expect(subject_filter_page.subject_areas.second.accordion_button).not_to match_selector('[aria-expanded="true"]')
+      end
+
+      it "stays on the subject filter page" do
+        expect(subject_filter_page.back_link.text).to eq("Back to search results")
+        expect(page).to have_current_path(subject_path, ignore_query: true)
+        expect(subject_filter_page.continue.value).to eq("Find courses")
       end
     end
   end
