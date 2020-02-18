@@ -11,18 +11,22 @@ FactoryBot.define do
 
     trait :english do
       subject_name { "English" }
+      subject_code { "Q3" }
     end
 
     trait :mathematics do
       subject_name { "Mathematics" }
+      subject_code { "G1" }
     end
 
     trait :biology do
       subject_name { "Biology" }
+      subject_code { "C1" }
     end
 
     trait :english_with_primary do
       subject_name { "English with primary" }
+      subject_code { "01" }
     end
 
     trait :modern_languages do
@@ -32,22 +36,27 @@ FactoryBot.define do
 
     trait :russian do
       subject_name { "Russian" }
+      subject_code { "21" }
     end
 
     trait :french do
       subject_name { "French" }
+      subject_code { "15" }
     end
 
     trait :japanese do
       subject_name { "Japanese" }
+      subject_code { "19" }
     end
 
     trait :primary do
       subject_name { "Primary" }
+      subject_code { "00" }
     end
 
     trait :design_and_technology do
       subject_name { "Design and technology" }
+      subject_code { "DT" }
     end
   end
 end

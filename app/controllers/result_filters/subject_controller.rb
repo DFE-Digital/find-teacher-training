@@ -25,14 +25,14 @@ module ResultFilters
           redirect_to subject_path(filter_params)
         end
       else
-        redirect_to results_path(filter_params.merge(subjects: convert_rails_subject_id_params_to_csharp))
+        redirect_to results_path(filter_params.merge(subjects: convert_subject_code_params_to_csharp))
       end
     end
 
   private
 
     def convert_csharp_params_to_rails
-      params["subjects"] = convert_csharp_subject_id_params_to_rails if convert_csharp_subject_id_params_to_rails.present?
+      params["subjects"] = convert_csharp_subject_id_params_to_subject_code if convert_csharp_subject_id_params_to_subject_code.present?
     end
 
     def build_subject_areas
