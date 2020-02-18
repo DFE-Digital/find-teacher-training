@@ -1,4 +1,4 @@
-<%= content_for :page_title, "#{number_with_delimiter(@results_view.total_course_count)} courses" %>
+<%= content_for :page_title, "#{number_with_delimiter(@results_view.course_count)} courses" %>
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
@@ -35,7 +35,7 @@
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__count"><%= number_with_delimiter(@results_view.total_course_count) %> courses found</p>
+          <p class="govuk-body search-results__count" data-qa="course-count"><%= number_with_delimiter(@results_view.course_count) %> courses found</p>
         </div>
         <div class="govuk-grid-column-one-half">
           <p class="govuk-body search-results__new-search">

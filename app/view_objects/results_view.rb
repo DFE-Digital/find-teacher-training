@@ -114,8 +114,8 @@ class ResultsView
                  end
   end
 
-  def total_course_count
-    courses.total_count
+  def course_count
+    courses.count
   end
 
 private

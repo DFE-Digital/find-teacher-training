@@ -29,6 +29,10 @@ feature "results", type: :feature do
     }
   end
 
+  let(:courses) {
+    File.new("spec/fixtures/api_responses/courses.json")
+  }
+
   before do
     stub_api_v3_resource(
       type: SubjectArea,
@@ -39,13 +43,31 @@ feature "results", type: :feature do
     stub_request(:get, default_url)
       .with(query: base_parameters)
       .to_return(
-        body: File.new("spec/fixtures/api_responses/courses.json"),
+        body: courses,
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
 
     allow(Settings).to receive_message_chain(:google, :maps_api_key).and_return("alohomora")
     allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return("https://maps.googleapis.com/maps/api/staticmap")
     visit results_path(params)
+  end
+
+  describe "course count" do
+    context "when API returns two courses" do
+      it "displays the correct course count" do
+        expect(results_page.course_count).to have_content("2 courses found")
+      end
+    end
+
+    context "when API return no courses" do
+      let(:courses) {
+        File.new("spec/fixtures/api_responses/empty_courses.json")
+      }
+
+      it "displays the correct course count" do
+        expect(results_page.course_count).to have_content("0 courses found")
+      end
+    end
   end
 
   describe "filters defaults without query string" do

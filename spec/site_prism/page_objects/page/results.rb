@@ -78,7 +78,7 @@ module PageObjects
       element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
-
+      element :course_count, '[data-qa="course-count"]'
       element :location_link, '[data-qa="filters__location_link"]'
       element :subject_link, '[data-qa="filters__subject"]'
       element :qualification_link, '[data-qa="filters__qualification_link"]'
