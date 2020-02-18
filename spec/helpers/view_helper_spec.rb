@@ -49,5 +49,13 @@ feature "View helpers", type: :helper do
         expect(helper.permitted_referrer?).to eq(true)
       end
     end
+
+    context "with any other valid referrer" do
+      it "returns true" do
+        headers = { "HTTP_REFERER": "http://localhost:9000" }
+        helper.request.headers.merge!(headers)
+        expect(helper.permitted_referrer?).to eq(true)
+      end
+    end
   end
 end
