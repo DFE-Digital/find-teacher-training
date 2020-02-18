@@ -17,19 +17,19 @@ describe("Analytics", () => {
       document.head.appendChild(document.createElement('script'));
     })
   
-    it('adds dynamically adds a script tag', () => {
+    it('dynamically adds a script tag', () => {
       loadAnalytics()
       // GTM will have a src and it will be the only script tag
       expect(document.querySelectorAll('script[src]')).toHaveLength(1)
     })
 
-    it ('takes uses a default tracking ID', () => {
+    it ('uses a default tracking ID', () => {
       loadAnalytics()
       const createGAInstanceWithID = ga.mock.calls[0][1]
       expect(createGAInstanceWithID).toEqual('UA-112932657-1')
     })
 
-    it ('takes accepts a custom tracking ID', () => {
+    it ('accepts a custom tracking ID', () => {
       loadAnalytics('NoT-a-Real-ID-123')
 
       const createGAInstanceWithID = ga.mock.calls[0][1]
