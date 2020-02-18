@@ -81,12 +81,12 @@ class ResultsView
 
   def map_image_url
     "#{Settings.google.maps_api_url}\
-    ?key=#{Settings.google.maps_api_key}\
-    &center=#{latitude},#{longitude}\
-    &zoom=#{google_map_zoom}\
-    &size=300x200\
-    &scale=2\
-    &markers=#{latitude},#{longitude}"
+?key=#{Settings.google.maps_api_key}\
+&center=#{latitude},#{longitude}\
+&zoom=#{google_map_zoom}\
+&size=300x200\
+&scale=2\
+&markers=#{latitude},#{longitude}"
   end
 
   def provider
