@@ -1,4 +1,6 @@
 class ResultsView
+  include CsharpRailsSubjectConversionHelper
+
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
 
   def initialize(query_parameters:)
@@ -52,15 +54,6 @@ class ResultsView
 
   def send_courses?
     query_parameters["senCourses"].present? && query_parameters["senCourses"].downcase == "true"
-  end
-
-  def number_of_subjects_selected
-    if query_parameters["subjects"].blank?
-      return SubjectArea.includes(:subjects).all
-        .map(&:subjects).flatten.length
-    end
-
-    query_parameters["subjects"].split(",").count
   end
 
   def number_of_extra_subjects
@@ -118,6 +111,10 @@ class ResultsView
     courses.count
   end
 
+  def subjects
+    subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
+  end
+
 private
 
   attr_reader :query_parameters
@@ -144,6 +141,18 @@ private
 
   def qualifications_parameters_array
     qualifications_parameters["qualifications"].split(",")
+  end
+
+  def subject_parameters
+    query_parameters["subjects"].present? ? { "subjects" => query_parameters["subjects"].presence } : {}
+  end
+
+  def subject_parameters_array
+    (subject_parameters["subjects"] || "").split(",")
+  end
+
+  def subject_codes
+    csharp_array_to_subject_codes(subject_parameters_array)
   end
 
   def latitude
@@ -179,5 +188,19 @@ private
 
   def qualifications
     query_parameters["qualifications"] || "QtsOnly,PgdePgceWithQts,Other"
+  end
+
+  def filtered_subjects
+    all_matching = all_subjects.select { |subject| subject_codes.include?(subject.subject_code) }
+    all_matching[0...NUMBER_OF_SUBJECTS_DISPLAYED]
+  end
+
+  def all_subjects
+    @all_subjects ||= SubjectArea.includes(:subjects).all
+      .map(&:subjects).flatten.sort_by(&:subject_name)
+  end
+
+  def number_of_subjects_selected
+    subject_parameters_array.any? ? subject_parameters_array.length : all_subjects.count
   end
 end

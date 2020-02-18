@@ -16,12 +16,13 @@ RSpec.describe ResultsView do
   let(:subject_areas) do
     [
       build(:subject_area, subjects: [
-        build(:subject, :primary, id: 1),
-        build(:subject, :biology, id: 2),
-        build(:subject, :english, id: 3),
-        build(:subject, :mathematics, id: 4),
-        build(:subject, :french, id: 5),
-        ]),
+        build(:subject, :primary),
+        build(:subject, :biology),
+        build(:subject, :english),
+        build(:subject, :mathematics),
+        build(:subject, :french),
+        build(:subject, :russian),
+      ]),
       build(:subject_area, :secondary),
     ]
   end
@@ -91,6 +92,15 @@ RSpec.describe ResultsView do
       it "filters them out" do
         expect(subject).to eq(default_parameters.merge({}))
       end
+    end
+
+    context "query_parameters have subjects set" do
+      #TODO the query parameters are currently C# DB ids. They are converted internally
+      #in this class but should also be C# parameters when they are output here
+      #This will change when we fully switch to Rails
+
+      let(:parameter_hash) { { "subjects" => "14,41,20" } }
+      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
     end
   end
 
@@ -203,33 +213,23 @@ RSpec.describe ResultsView do
     end
   end
 
-  describe "#number_of_subjects_selected" do
-    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
-
-    context "query_parameters don't have subjects set" do
-      let(:parameter_hash) { {} }
-
-      it "returns the number of all subjects" do
-        expect(results_view.number_of_subjects_selected).to eq(5)
-      end
-    end
-
-    context "query_parameters have subjects set" do
-      let(:parameter_hash) { { "subjects" => "1,2,3" } }
-
-      it "returns the number of all subjects" do
-        expect(results_view.number_of_subjects_selected).to eq(3)
-      end
-    end
-  end
-
   describe "#number_of_extra_subjects" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
-    let(:parameter_hash) { { "subjects" => "1,2,3,4,5" } }
+    context "more than NUMBER_OF_SUBJECTS_DISPLAYED subjects are selected" do
+      let(:parameter_hash) { { "subjects" => "1,2,3,4,5" } }
 
-    it "returns the number of the extra subjects" do
-      expect(results_view.number_of_extra_subjects).to eq(1)
+      it "returns the number of the extra subjects" do
+        expect(results_view.number_of_extra_subjects).to eq(1)
+      end
+    end
+
+    context "no subjects are selected" do
+      let(:parameter_hash) { {} }
+
+      it "returns the total number subjects - NUMBER_OF_SUBJECTS_DISPLAYED" do
+        expect(results_view.number_of_extra_subjects).to eq(2)
+      end
     end
   end
 
@@ -337,6 +337,54 @@ RSpec.describe ResultsView do
       let(:parameter_hash) { { "l" => "3" } }
 
       it { is_expected.to be(true) }
+    end
+  end
+
+  describe "#subjects" do
+    context "when no parameters are passed" do
+      let(:results_view) { described_class.new(query_parameters: {}) }
+
+      it "returns the first four subjects in alphabetical order" do
+        expect(results_view.subjects.map(&:subject_name)).to eq(
+          %w(
+            Biology
+            English
+            French
+            Mathematics
+          ),
+        )
+      end
+
+      context "when subject parameters are passed" do
+        let(:results_view) do
+          described_class.new(query_parameters: {
+            "subjects" => [
+              french_csharp_id,
+              russian_csharp_id,
+              primary_csharp_id,
+              spanish_csharp_id,
+              mathematics_csharp_id,
+            ].join(","),
+          })
+        end
+
+        let(:french_csharp_id) { 13 }
+        let(:primary_csharp_id) { 31 }
+        let(:spanish_csharp_id) { 44 }
+        let(:mathematics_csharp_id) { 24 }
+        let(:russian_csharp_id) { 41 }
+
+        it "returns the first four matching subjects in alphabetical order" do
+          expect(results_view.subjects.map(&:subject_name)).to eq(
+            %w(
+              French
+              Mathematics
+              Primary
+              Russian
+            ),
+          )
+        end
+      end
     end
   end
 end

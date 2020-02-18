@@ -7,7 +7,7 @@
       <li data-qa="send_courses">Only SEND courses</li>
     <% end %>
 
-    <% @subjects.each do |subject| %>
+    <% @results_view.subjects.each do |subject| %>
       <li data-qa="subjects"><%= subject.subject_name %></li>
     <% end %>
 
