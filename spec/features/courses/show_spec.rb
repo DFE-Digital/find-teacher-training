@@ -105,7 +105,7 @@ feature "Course show", type: :feature do
       )
 
       expect(course_page.qualifications).to have_content(
-        "Postgraduate certificate in education (PGCE) with qualified teacher status (QTS)",
+        "PGCE with QTS",
       )
 
       expect(course_page.funding_option).to have_content(
