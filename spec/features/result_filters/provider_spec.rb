@@ -12,6 +12,20 @@ feature "Provider filter", type: :feature do
     ]
   end
 
+  let(:default_url) do
+    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+
+  let(:base_parameters) do
+    {
+      "filter[vacancies]" => "true",
+      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
+      "include" => "provider",
+      "page[page]" => 1,
+      "page[per_page]" => 10,
+    }
+  end
+
   let(:provider_request) do
     stub_api_v3_resource(
       type: Provider,
@@ -26,7 +40,18 @@ feature "Provider filter", type: :feature do
   let(:query_params) { { query: search_term } }
 
   before do
-    stub_results_page_request
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+    )
+
+    stub_request(:get, default_url)
+      .with(query: base_parameters)
+      .to_return(
+        body: File.new("spec/fixtures/api_responses/courses.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+    )
 
     provider_request
 

@@ -44,6 +44,8 @@ module PageObjects
 
     class FundingSection < SitePrism::Section
       element :funding, '[data-qa="funding"]'
+      element :with_or_without_salary, '[data-qa="with-or-without-salary"]'
+      element :with_salary, '[data-qa="with-salary"]'
       element :link, '[data-qa="link"]'
     end
 

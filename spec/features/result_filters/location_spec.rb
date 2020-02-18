@@ -5,10 +5,35 @@ feature "Location filter", type: :feature do
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
+  let(:default_url) do
+    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+
+  let(:base_parameters) do
+    {
+        "filter[vacancies]" => "true",
+        "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
+        "include" => "provider",
+        "page[page]" => 1,
+        "page[per_page]" => 10,
+    }
+  end
 
   before do
     stub_geocoder
-    stub_results_page_request
+
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+        )
+
+    stub_request(:get, default_url)
+        .with(query: base_parameters)
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
   end
 
   describe "default text" do

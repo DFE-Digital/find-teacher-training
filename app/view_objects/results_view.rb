@@ -106,7 +106,7 @@ class ResultsView
                    base_query = base_query.where(funding: "salary") if with_salaries?
                    base_query = base_query.where(vacancies: hasvacancies?)
                    base_query = base_query.where(study_type: study_type) if study_type.present?
-                   base_query = base_query.where(qualifications: query_parameters["qualifications"]) if query_parameters["qualifications"].present?
+                   base_query = base_query.where(qualifications: qualifications)
 
                    base_query
                      .page(query_parameters[:page] || 1)
@@ -178,6 +178,6 @@ private
   end
 
   def qualifications
-    query_parameters["qualifications"].present? && query_parameters["qualifications"]
+    query_parameters["qualifications"] || "QtsOnly,PgdePgceWithQts,Other"
   end
 end
