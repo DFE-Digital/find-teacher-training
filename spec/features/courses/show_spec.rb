@@ -248,18 +248,24 @@ feature "Course show", type: :feature do
     end
 
     context "When navigating to the course from search and compare UI" do
+      let(:referer) { "#{Settings.search_and_compare_ui.base_url}/results" }
+
       it "Does displays the back link" do
-        page.driver.header("Referer", Settings.search_and_compare_ui.base_url)
+        page.driver.header("Referer", referer)
         visit course_path(course.provider_code, course.course_code)
         expect(course_page).to have_back_link
+        expect(course_page.back_link[:href]).to eq referer
       end
     end
 
     context "When navigating to the course from the current application" do
+      let(:referer) { "http://#{page.driver.request.host_with_port}/results" }
+
       it "Does displays the back link" do
-        page.driver.header("Referer", page.driver.request.host_with_port)
+        page.driver.header("Referer", referer)
         visit course_path(course.provider_code, course.course_code)
         expect(course_page).to have_back_link
+        expect(course_page.back_link[:href]).to eq referer
       end
     end
   end
