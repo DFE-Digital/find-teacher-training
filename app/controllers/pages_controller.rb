@@ -5,7 +5,5 @@ class PagesController < ApplicationController
 
   def privacy; end
 
-  def cookie_preferences; end
-
   def accessibilty; end
 end

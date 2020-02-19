@@ -1,4 +1,5 @@
-<div class="app-cookie-preferances">
+<div class="app-cookie-preferences">
+  <%= render partial: "cookie_preferences/error_message", locals: { error_anchor_id: "cookie-consent-accept" } %>
   <h2 class="govuk-heading-l">Cookie that measure website use</h2>
   <p class="govuk-body">
     We use Google Analytics software to collect information about how you use ‘Find postgraduate teacher training’.
@@ -12,7 +13,7 @@
     <li>what you click on while you’re visiting the site</li>
   </ul>
   <p class="govuk-body">We don’t allow Google to use or share our analytics data.</p>
-  <form action="">
+  <%= form_with url: create_cookie_preferences_path, method: :post do |form| %>
     <div class="govuk-form-group">
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
@@ -22,13 +23,30 @@
         </legend>
         <div class="govuk-radios">
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="cookie-consent-accept" name="cookie-consent" type="radio" value="yes">
+            <%=
+              form.radio_button(
+                :cookie_consent,
+                true,
+                id: "cookie-consent-accept",
+                class: "govuk-radios__input",
+                data: { qa: "cookie-consent-accept" },
+              )
+            %>
             <label class="govuk-label govuk-radios__label" for="cookie-consent-accept">
               Yes, opt-in to Google Analytic cookies
             </label>
+
           </div>
           <div class="govuk-radios__item">
-            <input class="govuk-radios__input" id="cookie-consent-deny" name="cookie-consent" type="radio" value="no">
+            <%=
+              form.radio_button(
+                :cookie_consent,
+                false,
+                id: "cookie-consent-deny",
+                class: "govuk-radios__input",
+                data: { qa: "cookie-consent-deny" },
+              )
+            %>
             <label class="govuk-label govuk-radios__label" for="cookie-consent-deny">
               No, do not track my website usage
             </label>
@@ -36,6 +54,6 @@
         </div>
       </fieldset>
     </div>
-    <button class="govuk-button">Save changes</button>
-  </form>
+    <%= form.submit "Save changes", name: nil, class: "govuk-button", data: { qa: "save-changes" } %>
+  <% end %>
 </div>
