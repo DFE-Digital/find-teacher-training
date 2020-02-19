@@ -6,8 +6,11 @@ feature "Funding filter", type: :feature do
 
   let(:salary_course_param_value_from_c_sharp) { "8" }
   let(:all_course_param_value_from_c_sharp) { "15" }
-  let(:default_url) do
+  let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+  let(:subjects_url) do
+    "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
   let(:base_parameters) do
@@ -21,11 +24,7 @@ feature "Funding filter", type: :feature do
   end
 
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-    )
+    stub_request(:get, subjects_url)
   end
 
   describe "Funding filter page" do
@@ -38,7 +37,7 @@ feature "Funding filter", type: :feature do
 
     describe "back link" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -94,7 +93,7 @@ feature "Funding filter", type: :feature do
 
   describe "viewing results without explicitly selecting a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -112,7 +111,7 @@ feature "Funding filter", type: :feature do
 
   describe "applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -122,7 +121,7 @@ feature "Funding filter", type: :feature do
 
     context "selecting all courses" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -148,7 +147,7 @@ feature "Funding filter", type: :feature do
 
     context "selecting salary only courses" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[funding]" => "salary"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -175,14 +174,14 @@ feature "Funding filter", type: :feature do
 
   describe "submitting without applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other"))
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),

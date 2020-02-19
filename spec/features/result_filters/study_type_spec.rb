@@ -3,8 +3,11 @@ require "rails_helper"
 feature "Study type filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:default_url) do
+  let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+  let(:subjects_url) do
+    "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
   let(:base_parameters) do
@@ -18,11 +21,7 @@ feature "Study type filter", type: :feature do
   end
 
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-    )
+    stub_request(:get, subjects_url)
   end
 
   describe "Study type filter page" do
@@ -35,7 +34,7 @@ feature "Study type filter", type: :feature do
 
     describe "back link" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -89,7 +88,7 @@ feature "Study type filter", type: :feature do
 
   describe "viewing results without explicitly selecting a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -109,7 +108,7 @@ feature "Study type filter", type: :feature do
 
   describe "applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -119,7 +118,7 @@ feature "Study type filter", type: :feature do
 
     context "deselecting full time" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "part_time"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -144,7 +143,7 @@ feature "Study type filter", type: :feature do
 
     context "deselecting part time" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "full_time"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -183,7 +182,7 @@ feature "Study type filter", type: :feature do
 
     context "submitting without deselection" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "full_time,part_time"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),

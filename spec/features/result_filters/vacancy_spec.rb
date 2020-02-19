@@ -3,8 +3,11 @@ require "rails_helper"
 feature "Vacancy filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Vacancy.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:default_url) do
+  let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+  let(:subjects_url) do
+    "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
   let(:base_parameters) do
@@ -18,11 +21,7 @@ feature "Vacancy filter", type: :feature do
   end
 
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-    )
+    stub_request(:get, subjects_url)
   end
 
   describe "Vacancy filter page" do
@@ -35,7 +34,7 @@ feature "Vacancy filter", type: :feature do
 
     describe "back link" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -76,7 +75,7 @@ feature "Vacancy filter", type: :feature do
 
   describe "viewing results without explicitly selecting a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -94,7 +93,7 @@ feature "Vacancy filter", type: :feature do
 
   describe "applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -104,7 +103,7 @@ feature "Vacancy filter", type: :feature do
 
     context "selecting courses with or without vacancies" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[vacancies]" => "false"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -129,7 +128,7 @@ feature "Vacancy filter", type: :feature do
 
     context "selecting courses with vacancies" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[vacancies]" => "true"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),

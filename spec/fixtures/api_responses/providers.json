@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "id": "3",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A0",
+        "provider_name": "ACME SCITT 0"
+      }
+    },
+    {
+      "id": "4",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A1",
+        "provider_name": "ACME SCITT 1"
+      }
+    },
+    {
+      "id": "5",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A2",
+        "provider_name": "ACME SCITT 2"
+      }
+    },
+    {
+      "id": "6",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A3",
+        "provider_name": "ACME SCITT 3"
+      }
+    },
+    {
+      "id": "7",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A4",
+        "provider_name": "ACME SCITT 4"
+      }
+    },
+    {
+      "id": "8",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A5",
+        "provider_name": "ACME SCITT 5"
+      }
+    },
+    {
+      "id": "9",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A6",
+        "provider_name": "ACME SCITT 6"
+      }
+    },
+    {
+      "id": "10",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A7",
+        "provider_name": "ACME SCITT 7"
+      }
+    },
+    {
+      "id": "11",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A8",
+        "provider_name": "ACME SCITT 8"
+      }
+    },
+    {
+      "id": "12",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A9",
+        "provider_name": "ACME SCITT 9"
+      }
+    },
+    {
+      "id": "1",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A01",
+        "provider_name": "Acme SCITT"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}

@@ -5,8 +5,11 @@ feature "Location filter", type: :feature do
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
-  let(:default_url) do
+  let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+  let(:subjects_url) do
+    "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
   let(:base_parameters) do
@@ -22,13 +25,9 @@ feature "Location filter", type: :feature do
   before do
     stub_geocoder
 
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-        )
+    stub_request(:get, subjects_url)
 
-    stub_request(:get, default_url)
+    stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),

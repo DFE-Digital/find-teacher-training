@@ -3,8 +3,11 @@ require "rails_helper"
 feature "Qualifications filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Qualification.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:default_url) do
+  let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+  end
+  let(:subjects_url) do
+    "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
   let(:base_parameters) do
@@ -18,11 +21,7 @@ feature "Qualifications filter", type: :feature do
   end
 
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-    )
+    stub_request(:get, subjects_url)
   end
 
   describe "Qualification filter page" do
@@ -35,7 +34,7 @@ feature "Qualifications filter", type: :feature do
 
     describe "back link" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -90,7 +89,7 @@ feature "Qualifications filter", type: :feature do
 
   describe "viewing results without explicitly selecting a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -108,7 +107,7 @@ feature "Qualifications filter", type: :feature do
 
   describe "applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -118,7 +117,7 @@ feature "Qualifications filter", type: :feature do
 
     context "deselecting courses with 'qts only' qualification" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualifications]" => "PgdePgceWithQts,Other"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -145,7 +144,7 @@ feature "Qualifications filter", type: :feature do
 
     context "deselecting courses that with 'pgde with qts' qualification" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,Other"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -172,7 +171,7 @@ feature "Qualifications filter", type: :feature do
 
     context "deselecting courses with 'further education' qualification" do
       before do
-        stub_request(:get, default_url)
+        stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
@@ -216,14 +215,14 @@ feature "Qualifications filter", type: :feature do
 
   describe "submitting without applying a filter" do
     before do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other"))
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
