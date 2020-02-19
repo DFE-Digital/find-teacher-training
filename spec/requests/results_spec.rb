@@ -2,7 +2,29 @@ require "rails_helper"
 
 describe "/results", type: :request do
   before do
+    default_url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+
+    base_parameters = {
+      "filter[vacancies]" => "true",
+      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
+      "include" => "provider",
+      "page[page]" => 1,
+      "page[per_page]" => 10,
+    }
     allow(Settings).to receive(:redirect_results_to_c_sharp).and_return(true)
+
+    stub_api_v3_resource(
+      type: SubjectArea,
+      resources: nil,
+      include: [:subjects],
+    )
+
+    stub_request(:get, default_url)
+        .with(query: base_parameters)
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        )
   end
 
   it "redirects to c sharp version" do

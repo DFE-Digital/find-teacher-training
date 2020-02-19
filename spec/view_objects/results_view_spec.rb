@@ -292,6 +292,14 @@ RSpec.describe ResultsView do
     end
   end
 
+  describe "#courses" do
+    let(:results_view) { described_class.new(query_parameters: {}) }
+
+    it "returns an JSON query builder" do
+      expect(results_view.courses).to be_a(JsonApiClient::Query::Builder)
+    end
+  end
+
   describe "#map_image_url" do
     subject { described_class.new(query_parameters: parameter_hash).map_image_url }
 

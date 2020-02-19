@@ -4,6 +4,7 @@ module PageObjects
       class Qualification < SitePrism::Page
         set_url "/results/filter/qualification{?query*}"
 
+        element :heading, '[data-qa="heading"]'
         element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'
         element :qts_only, '[data-qa="qts_only"]'

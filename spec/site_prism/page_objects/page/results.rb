@@ -36,10 +36,17 @@ module PageObjects
 
     class QualificationsSection < SitePrism::Section
       elements :qualifications, '[data-qa="qualifications"]'
+      element :link, '[data-qa="link"]'
+      element :qts_only, '[data-qa="qts_only"]'
+      element :pgde_pgce_with_qts, '[data-qa="pgde_pgce_with_qts"]'
+      element :other_qualifications, '[data-qa="other_qualifications"]'
     end
 
     class FundingSection < SitePrism::Section
       element :funding, '[data-qa="funding"]'
+      element :with_or_without_salary, '[data-qa="with-or-without-salary"]'
+      element :with_salary, '[data-qa="with-salary"]'
+      element :link, '[data-qa="link"]'
     end
 
     class LocationSection < SitePrism::Section
@@ -68,9 +75,10 @@ module PageObjects
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
 
       element :provider_title, '[data-qa="provider_title"]'
+      element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'
-
+      element :course_count, '[data-qa="course-count"]'
       element :location_link, '[data-qa="filters__location_link"]'
       element :subject_link, '[data-qa="filters__subject"]'
       element :qualification_link, '[data-qa="filters__qualification_link"]'

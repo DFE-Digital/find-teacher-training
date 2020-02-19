@@ -97,6 +97,27 @@ class ResultsView
     query_parameters["l"] == "3"
   end
 
+  def courses
+    @courses ||= begin
+                   base_query = Course
+                     .includes(:provider)
+                     .where(recruitment_cycle_year: Settings.current_cycle)
+
+                   base_query = base_query.where(funding: "salary") if with_salaries?
+                   base_query = base_query.where(vacancies: hasvacancies?)
+                   base_query = base_query.where(study_type: study_type) if study_type.present?
+                   base_query = base_query.where(qualifications: qualifications)
+
+                   base_query
+                     .page(query_parameters[:page] || 1)
+                     .per(10)
+                 end
+  end
+
+  def course_count
+    courses.count
+  end
+
 private
 
   attr_reader :query_parameters
@@ -148,5 +169,15 @@ private
     else
       "14"
     end
+  end
+
+  def study_type
+    return "full_time,part_time" if fulltime? && parttime?
+    return "full_time" if fulltime?
+    return "part_time" if parttime?
+  end
+
+  def qualifications
+    query_parameters["qualifications"] || "QtsOnly,PgdePgceWithQts,Other"
   end
 end
