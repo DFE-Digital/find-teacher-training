@@ -6,7 +6,7 @@
 
     <%= form_with(url: subject_path, method: :post) do |f| %>
       <%= render 'result_filters/hidden_fields', exclude_keys: ["subjects"], form: f %>
-      <h1 class="govuk-heading-xl">Find courses by subject</h1>
+      <h1 class="govuk-heading-xl" data-qa="heading">Find courses by subject</h1>
 
       <p class="govuk-body">Select the subjects you want to teach.</p>
       <h2 class="govuk-heading-m">Get financial support</h2>

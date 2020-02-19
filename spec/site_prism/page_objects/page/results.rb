@@ -19,6 +19,7 @@ module PageObjects
       element :send_courses, '[data-qa="send_courses"]'
       elements :subjects, '[data-qa="subjects"]'
       element :extra_subjects, '[data-qa="extra_subjects"]'
+      element :link, '[data-qa="link"]'
     end
 
     class StudyTypeSection < SitePrism::Section

@@ -14,6 +14,7 @@ class ResultsView
       .merge(parttime_parameters)
       .merge(hasvacancies_parameters)
       .merge(sen_courses_parameters)
+      .merge(subject_parameters)
   end
 
   def filter_path_with_unescaped_commas(base_path)
@@ -100,6 +101,8 @@ class ResultsView
                    base_query = base_query.where(vacancies: hasvacancies?)
                    base_query = base_query.where(study_type: study_type) if study_type.present?
                    base_query = base_query.where(qualifications: qualifications)
+                   base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
+                   base_query = base_query.where(send_courses: true) if send_courses?
 
                    base_query
                      .page(query_parameters[:page] || 1)

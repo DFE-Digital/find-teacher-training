@@ -1,5 +1,4 @@
 class ResultsController < ApplicationController
-
   before_action :redirect_to_c_sharp
 
   def index
