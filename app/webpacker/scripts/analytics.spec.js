@@ -1,10 +1,52 @@
-import { initFormAnalytics, initExternalLinkAnalytics, initNavigationAnalytics } from "./analytics"
+import { initFormAnalytics, 
+  initExternalLinkAnalytics, 
+  initNavigationAnalytics, 
+  loadAnalytics } from "./analytics"
 
 global.ga = jest.fn()
 
 describe("Analytics", () => {
   afterEach(() => {
     global.ga.mockClear()
+  })
+
+  describe("loadAnalytics", () => {
+    beforeEach(() => {
+      // GTM needs a script tag on the page so we create an emptry script
+      // tag. It doesn't have an attributes so we can ignore it in the tests
+      document.head.appendChild(document.createElement('script'));
+    })
+  
+    it('dynamically adds a script tag', () => {
+      loadAnalytics()
+      // GTM will have a src and it will be the only script tag
+      expect(document.querySelectorAll('script[src]')).toHaveLength(1)
+    })
+
+    it ('uses a default tracking ID', () => {
+      loadAnalytics()
+      const createGAInstanceWithID = ga.mock.calls[0][1]
+      expect(createGAInstanceWithID).toEqual('UA-112932657-1')
+    })
+
+    it ('accepts a custom tracking ID', () => {
+      loadAnalytics('NoT-a-Real-ID-123')
+
+      const createGAInstanceWithID = ga.mock.calls[0][1]
+      expect(createGAInstanceWithID).toEqual('NoT-a-Real-ID-123')
+    })
+
+    it ('records a page view', () => {
+      loadAnalytics()
+      const sendPageView = ga.mock.calls.filter(currentvalue => {if (currentvalue[0] === 'send') return currentvalue })[0]
+      expect(sendPageView[1]).toEqual('pageview')
+    })
+
+    it ('anonymises the users IP Address', () => {
+      loadAnalytics()
+      const sendPageView = ga.mock.calls.filter(currentvalue => {if (currentvalue[1] === 'anonymizeIp') return currentvalue })[0]
+      expect(sendPageView[2]).toEqual(true)
+    })
   })
 
   describe("initFormAnalytics", () => {

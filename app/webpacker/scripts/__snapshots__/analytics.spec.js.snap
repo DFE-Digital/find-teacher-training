@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Analytics initExternalLinkAnalytics triggers correct GA events when users click on external links 1`] = `
+Array [
+  Array [
+    "send",
+    "event",
+    Object {
+      "eventAction": "http://example.com",
+      "eventCategory": "External Link Clicked",
+      "transport": "beacon",
+    },
+  ],
+  Array [
+    "send",
+    "event",
+    Object {
+      "eventAction": "https://google.com",
+      "eventCategory": "External Link Clicked",
+      "transport": "beacon",
+    },
+  ],
+]
+`;
+
+exports[`Analytics initFormAnalytics triggers correct GA event when users submit with checked checkboxes 1`] = `
+Array [
+  Array [
+    "send",
+    "event",
+    Object {
+      "eventAction": "A ticked item, Another ticked item",
+      "eventCategory": "Form: Some form",
+      "transport": "beacon",
+    },
+  ],
+]
+`;
+
+exports[`Analytics initNavigationAnalytics triggers correct GA events when users click on navigation links 1`] = `
+Array [
+  Array [
+    "send",
+    "event",
+    Object {
+      "eventAction": "#about",
+      "eventCategory": "Some navigation Navigation Link Clicked",
+      "transport": "beacon",
+    },
+  ],
+  Array [
+    "send",
+    "event",
+    Object {
+      "eventAction": "http://example.com",
+      "eventCategory": "Some navigation Navigation Link Clicked",
+      "transport": "beacon",
+    },
+  ],
+]
+`;
