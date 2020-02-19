@@ -49,4 +49,9 @@ feature "cookie banner", type: :feature do
     expect(results_page.cookie_banner).to have_accept_all_cookies
     expect(results_page.cookie_banner).to have_set_preference_link
   end
+
+  it "does not display on the cookies page" do
+    visit cookies_path
+    expect(page).not_to have_selector('[data-qa="cookie-banner"]')
+  end
 end
