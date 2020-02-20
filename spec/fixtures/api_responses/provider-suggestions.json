@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "3",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A0",
+        "provider_name": "ACME SCITT 0",
+        "recruitment_cycle_year": "2020"
+      }
+    },
+    {
+      "id": "1",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "A01",
+        "provider_name": "Acme SCITT",
+        "recruitment_cycle_year": "2020"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}
