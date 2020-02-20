@@ -19,15 +19,7 @@ feature "cookie banner", type: :feature do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
 
-  let(:base_parameters) do
-    {
-      "filter[vacancies]" => "true",
-      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
-      "include" => "provider",
-      "page[page]" => 1,
-      "page[per_page]" => 10,
-    }
-  end
+  let(:base_parameters) { results_page_parameters }
 
   before do
     stub_request(:get, default_url)

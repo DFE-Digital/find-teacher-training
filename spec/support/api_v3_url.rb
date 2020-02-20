@@ -1,4 +1,4 @@
-def api_v3_url(type:, params:, fields: nil, include: nil, pagination: nil, search: nil)
+def api_v3_url(type:, params:, fields: nil, include: nil, pagination: nil, search: nil, sort: nil)
   query_params = {}
   unless fields.nil?
     query_params[:fields] = fields.to_h do |model_name, model_fields|
@@ -8,6 +8,7 @@ def api_v3_url(type:, params:, fields: nil, include: nil, pagination: nil, searc
   query_params[:include] = include.join(",") unless include.nil?
   query_params[:page] = pagination unless pagination.nil?
   query_params[:search] = search unless search.nil?
+  query_params[:sort] = sort unless sort.nil?
   key = params[type.primary_key]
 
   url = "/#{type.path(**params)}"

@@ -9,7 +9,7 @@
     <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "qualification-error" } %>
 
     <%= form_with url: qualification_path, method: :post do |form| %>
-      <%= render 'result_filters/hidden_fields', exclude_keys: ["qualifications"], form: form %>
+      <%= render "shared/hidden_fields", exclude_keys: ["qualifications"], form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend>
           <h1 class="govuk-heading-xl" data-qa="heading">What you will get</h1>

@@ -13,15 +13,7 @@ feature "Funding filter", type: :feature do
     "http://localhost:3001/api/v3/subject_areas?include=subjects"
   end
 
-  let(:base_parameters) do
-    {
-      "filter[vacancies]" => "true",
-      "filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other",
-      "include" => "provider",
-      "page[page]" => 1,
-      "page[per_page]" => 10,
-    }
-  end
+  let(:base_parameters) { results_page_parameters }
 
   before do
     stub_request(:get, subjects_url)

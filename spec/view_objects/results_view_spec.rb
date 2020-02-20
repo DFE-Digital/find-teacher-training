@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ResultsView do
+describe ResultsView do
   let(:query_parameters) { ActionController::Parameters.new(parameter_hash) }
 
   let(:default_parameters) do
@@ -295,7 +295,7 @@ RSpec.describe ResultsView do
   describe "#courses" do
     let(:results_view) { described_class.new(query_parameters: {}) }
 
-    it "returns an JSON query builder" do
+    it "returns a JSON query builder" do
       expect(results_view.courses).to be_a(JsonApiClient::Query::Builder)
     end
   end
@@ -337,6 +337,12 @@ RSpec.describe ResultsView do
       let(:parameter_hash) { { "l" => "3" } }
 
       it { is_expected.to be(true) }
+    end
+
+    context "when l param is not set to 3" do
+      let(:parameter_hash) { { "l" => "2" } }
+
+      it { is_expected.to be(false) }
     end
   end
 
