@@ -1,21 +1,8 @@
 class ResultsController < ApplicationController
-  include CsharpRailsSubjectConversionHelper
   before_action :redirect_to_c_sharp
 
   def index
     @results_view = ResultsView.new(query_parameters: request.query_parameters)
-
-    @subjects =
-      if params["subjects"].present?
-        SubjectArea.includes(:subjects).all
-          .map(&:subjects).flatten
-          .select { |subject| rails_to_csharp_subject_id(id: subject.id).in?(subjects_params_array) }
-          .sort_by(&:subject_name)[0..3]
-      else
-        SubjectArea.includes(:subjects).all
-          .map(&:subjects).flatten
-          .sort_by(&:subject_name)[0..3]
-      end
   end
 
 private

@@ -6,7 +6,7 @@
 
     <%= form_with(url: subject_path, method: :post) do |f| %>
       <%= render 'result_filters/hidden_fields', exclude_keys: ["subjects"], form: f %>
-      <h1 class="govuk-heading-xl">Find courses by subject</h1>
+      <h1 class="govuk-heading-xl" data-qa="heading">Find courses by subject</h1>
 
       <p class="govuk-body">Select the subjects you want to teach.</p>
       <h2 class="govuk-heading-m">Get financial support</h2>
@@ -35,8 +35,8 @@
                     <%# C# doesn't have a distinct modern languages subject %>
                     <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
-                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(id: subject.id), data: {qa: "subject__checkbox"}, id: "subject#{subject.id}", class: "govuk-checkboxes__input" }, subject.id, nil) %>
-                        <%= f.label(:subjects, {for: "subject#{subject.id}"}, class: "govuk-label govuk-checkboxes__label") do %>
+                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(id: subject.subject_code), data: {qa: "subject__checkbox"}, id: "subject#{subject.subject_code}", class: "govuk-checkboxes__input" }, subject.subject_code, nil) %>
+                        <%= f.label(:subjects, {for: "subject#{subject.subject_code}"}, class: "govuk-label govuk-checkboxes__label") do %>
                           <span class="govuk-checkboxes__label-text" data-qa="subject__name">
                             <%= subject.subject_name %>
                             <% if subject.subject_name == "Design and technology" %>

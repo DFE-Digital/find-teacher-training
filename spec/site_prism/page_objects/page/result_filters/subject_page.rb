@@ -18,6 +18,7 @@ module PageObjects
           sections :subjects, Subject, '[data-qa="subject"]'
         end
 
+        element :heading, '[data-qa="heading"]'
         element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'
 

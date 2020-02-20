@@ -3,18 +3,7 @@ require "rails_helper"
 feature "results", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:params) {}
-  let(:subject_areas) do
-    [
-      build(:subject_area, subjects: [
-        build(:subject, :primary, id: 1),
-        build(:subject, :biology, id: 10),
-        build(:subject, :english, id: 21),
-        build(:subject, :mathematics, id: 25),
-        build(:subject, :french, id: 34),
-      ]),
-      build(:subject_area, :secondary),
-    ]
-  end
+
   let(:default_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
@@ -34,10 +23,12 @@ feature "results", type: :feature do
   }
 
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: subject_areas,
-      include: [:subjects],
+    stub_request(
+      :get,
+      "http://localhost:3001/api/v3/subject_areas?include=subjects",
+    ).to_return(
+      body: File.new("spec/fixtures/api_responses/subject_areas.json"),
+      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
 
     stub_request(:get, default_url)
@@ -93,6 +84,19 @@ feature "results", type: :feature do
       expect(location_filter_uri.path).to eq("/results/filter/location")
       expect(location_filter_uri.query).to eq("qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
     end
+
+    it "has subjects filter" do
+      expect(results_page.subjects_filter.subjects.map(&:text))
+        .to match_array(
+          [
+            "Art and design",
+            "Biology",
+            "Business studies",
+            "Chemistry",
+          ],
+      )
+      expect(results_page.subjects_filter.extra_subjects.text).to eq("and 39 more...")
+    end
   end
 
   describe "filters defaults with query string" do
@@ -114,61 +118,6 @@ feature "results", type: :feature do
     it "has location filter" do
       expect(results_page.location_filter.name).to have_content("Across England")
       expect(results_page.location_filter).to have_no_distance
-    end
-  end
-
-  describe "subjects filter" do
-    context "no subjects selected" do
-      let(:params) { { subjects: {} } }
-
-      it "defaults to all subjects without 'Only SEND courses'" do
-        expect(results_page.subjects_filter).not_to have_send_courses
-        expect(results_page.subjects_filter).to have_content("Biology")
-        expect(results_page.subjects_filter).to have_content("English")
-        expect(results_page.subjects_filter).to have_content("French")
-        expect(results_page.subjects_filter).to have_content("Mathematics")
-        expect("Biology").to appear_before("English")
-        expect("English").to appear_before("French")
-        expect("French").to appear_before("Mathematics")
-        expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
-      end
-    end
-
-    context "up to 4 subjects selected" do
-      let(:params) { { subjects: "31,1" } }
-
-      it "displays all selected subjects in alphabetical order" do
-        expect(results_page.subjects_filter).not_to have_send_courses
-        expect(results_page.subjects_filter).to have_content("Biology")
-        expect(results_page.subjects_filter).to have_content("Primary")
-        expect("Biology").to appear_before("Primary")
-      end
-    end
-
-    context "more than 4 subjects selected" do
-      let(:params) { { subjects: "31,1,12,24,13" } }
-
-      it "displays first 4 subjects and number of extra courses selected" do
-        expect(results_page.subjects_filter).to have_content("Biology")
-        expect(results_page.subjects_filter).to have_content("English")
-        expect(results_page.subjects_filter).to have_content("French")
-        expect(results_page.subjects_filter).to have_content("Mathematics")
-        expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
-      end
-
-      context "'Only SEND courses' selected" do
-        let(:params) { { subjects: "31,1,12,24,13", senCourses: "true" } }
-
-        it "displays 'Only SEND courses' at the top of the list and doesn't count towards 4 items rule" do
-          expect(results_page.subjects_filter.send_courses).to have_content("Only SEND courses")
-          expect(results_page.subjects_filter).to have_content("Biology")
-          expect(results_page.subjects_filter).to have_content("English")
-          expect(results_page.subjects_filter).to have_content("French")
-          expect(results_page.subjects_filter).to have_content("Mathematics")
-          expect(results_page.subjects_filter.extra_subjects).to have_content("and 1 more...")
-          expect("Only SEND courses").to appear_before("Biology")
-        end
-      end
     end
   end
 
