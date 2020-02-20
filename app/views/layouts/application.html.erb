@@ -25,7 +25,7 @@
     </script>
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-    <%= render partial: 'layouts/cookie-banner' unless current_page?(cookies_path)%>
+    <%= render partial: 'layouts/cookie-banner' unless current_page?(cookie_preferences_path)%>
     <header class="govuk-header" role="banner" data-module="govuk-header">
       <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
@@ -81,7 +81,7 @@
                 <%= mail_to "becomingateacher@digital.education.gov.uk", "Give feedback or report a problem", class: "govuk-footer__link" %>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <%= link_to "Cookies", cookies_path, class: "govuk-footer__link" %>
+                <%= link_to "Cookies", cookie_preferences_path, class: "govuk-footer__link" %>
               </li>
               <li class="govuk-footer__inline-list-item">
                 <%= link_to "Privacy policy", privacy_path, class: "govuk-footer__link" %>

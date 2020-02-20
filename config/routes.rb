@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/terms-conditions", to: "pages#terms", as: "terms"
   get "/accessibility", to: "pages#accessibility", as: "accessibility"
   get "/privacy-policy", to: "pages#privacy", as: "privacy"
-  get "/cookies", to: "pages#cookies", as: "cookies"
+  get "/cookie-preferences", to: "pages#cookie_preferences", as: "cookie_preferences"
 
   get "/404", to: "errors#not_found", via: :all
   get "/422", to: "errors#unprocessable_entity", via: :all
