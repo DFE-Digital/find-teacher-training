@@ -51,7 +51,7 @@ feature "cookie banner", type: :feature do
   end
 
   it "does not display on the cookies page" do
-    visit cookies_path
+    visit cookie_preferences_path
     expect(page).not_to have_selector('[data-qa="cookie-banner"]')
   end
 end
