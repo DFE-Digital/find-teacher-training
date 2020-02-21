@@ -1,15 +1,8 @@
+import { triggerAnalyticsEvent } from './analytics'
+
 function CopyTracking($module) {
   this.$module = $module;
 }
-
-const triggerAnalyticsEvent = (category, action) => {
-  ga("send", "event", {
-    eventCategory: category,
-    eventAction: action,
-    transport: "beacon",
-    nonInteraction: true
-  });
-};
 
 CopyTracking.prototype.init = function() {
   const $module = this.$module;
@@ -21,7 +14,7 @@ CopyTracking.prototype.init = function() {
   $module.addEventListener("copy", e => {
     if (event.clipboardData) {
       const selectedText = window.getSelection().toString();
-      triggerAnalyticsEvent("Page: Copying", selectedText);
+      triggerAnalyticsEvent("Page: Copying", selectedText, true);
     }
   });
 };

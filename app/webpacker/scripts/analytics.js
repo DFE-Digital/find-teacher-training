@@ -3,13 +3,17 @@ import copyTracking from "./copy-tracking";
 import noResultsTracking from "./no-results-tracking";
 import { fetchConsentedToCookieValue } from './cookie-helper'
 
-const triggerAnalyticsEvent = (category, action) => {
+const triggerAnalyticsEvent = (category, action, flagNonInteraction) => {
+  let options = {
+    eventCategory: category,
+    eventAction: action,
+    transport: "beacon"
+  }
+
+  if (flagNonInteraction){ options.nonInteraction = true }
+
   if (fetchConsentedToCookieValue()) {
-    ga("send", "event", {
-      eventCategory: category,
-      eventAction: action,
-      transport: "beacon"
-    });
+    ga("send", "event", options);
   }
 };
 
