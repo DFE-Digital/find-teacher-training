@@ -17,7 +17,6 @@ Toggle.prototype.init = function () {
 
   // Handle $toggleButton click events
   $toggleButton.addEventListener('click', this.handleClick.bind(this))
-    console.log(';hello work')
 }
 
 /**
