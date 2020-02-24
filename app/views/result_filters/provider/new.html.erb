@@ -23,7 +23,7 @@
         <span class="govuk-details__summary-text">Try another provider</span>
       </summary>
       <div class="govuk-details__text">
-        <%= form_with url: provider_path, method: :get do |form| %>
+        <%= form_with url: provider_path, method: :get, data: { "ga-event-form" => "Provider" } do |form| %>
           <fieldset class="govuk-fieldset">
             <%= form.label :query, class: "govuk-label" do %>
               <strong>School, university or other training provider</strong>
