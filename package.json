@@ -13,11 +13,15 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint:js": "standard"
   },
   "jest": {
     "roots": [
       "app"
     ]
+  },
+  "standard": {
+    "env": [ "jest" ]
   }
 }

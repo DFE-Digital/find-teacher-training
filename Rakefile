@@ -7,4 +7,5 @@ Rails.application.load_tasks
 
 task lint_ruby: ["lint:ruby"]
 task lint_scss: ["lint:scss"]
-task default: %i[spec js_spec lint_ruby lint_scss]
+
+task default: %i[spec js_spec lint_ruby lint_scss js_lint]
