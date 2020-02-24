@@ -42,19 +42,9 @@ feature "results", type: :feature do
   end
 
   describe "course count" do
-    context "when API returns two courses" do
+    context "when API returns courses" do
       it "displays the correct course count" do
-        expect(results_page.course_count).to have_content("2 courses found")
-      end
-    end
-
-    context "when API return no courses" do
-      let(:courses) do
-        File.new("spec/fixtures/api_responses/empty_courses.json")
-      end
-
-      it "displays the correct course count" do
-        expect(results_page.course_count).to have_content("0 courses found")
+        expect(results_page.course_count).to have_content("8,900 courses found")
       end
     end
   end
