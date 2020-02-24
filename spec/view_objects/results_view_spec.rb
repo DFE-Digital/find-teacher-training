@@ -354,6 +354,23 @@ describe ResultsView do
     end
   end
 
+  describe "#course_count" do
+    subject { described_class.new(query_parameters: {}).course_count }
+
+    context "there are 8900 results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to be(8900) }
+    end
+  end
+
   describe "#subjects" do
     context "when no parameters are passed" do
       let(:results_view) { described_class.new(query_parameters: {}) }
