@@ -15,7 +15,7 @@ RSpec.feature "Cookie consent", type: :feature do
 
   scenario "Consent to cookies" do
     visit cookie_preferences_path
-    page.choose("Yes, opt-in to Google Analytic cookies")
+    page.choose("Yes, opt-in to Google Analytics cookies")
     click_button "Save changes"
 
     expect(page).to have_text(I18n.t("cookie_preferences.success"))
