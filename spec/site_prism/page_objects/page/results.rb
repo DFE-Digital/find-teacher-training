@@ -82,7 +82,6 @@ module PageObjects
       section :location_filter, LocationSection, '[data-qa="filters__location"]'
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
 
-      element :provider_title, '[data-qa="provider_title"]'
       element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'

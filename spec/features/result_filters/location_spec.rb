@@ -22,9 +22,51 @@ feature "Location filter", type: :feature do
     stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/empty_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
             )
+  end
+
+  describe "filtering by provider" do
+    before do
+      stub_request(
+        :get,
+        "http://localhost:3001/api/v3/recruitment_cycles/2020/providers",
+      ).with(
+        query: {
+          "fields[providers]" => "provider_code,provider_name",
+          "search" => "ACME",
+        },
+      ).to_return(
+        body: File.new("spec/fixtures/api_responses/providers.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+
+      stub_request(:get, courses_url)
+        .with(
+          query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
+        )
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+    end
+
+    it "displays the courses" do
+      results_page.load
+      results_page.location_filter.link.click
+      filter_page.by_provider.click
+      filter_page.provider_search.fill_in(with: "ACME")
+      filter_page.find_courses.click
+
+      expect(provider_page.heading.text).to eq("Pick a provider")
+      provider_page.provider_suggestions[0].hyperlink.click
+
+      expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
+      expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
+      expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
+      expect(results_page.courses.count).to eq(2)
+    end
   end
 
   describe "default text" do

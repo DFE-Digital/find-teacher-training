@@ -24,11 +24,14 @@ feature "Provider filter", type: :feature do
     stub_request(:get, subjects_url)
 
     stub_request(:get, courses_url)
-      .with(query: base_parameters)
-      .to_return(
+      .with(
+        query: base_parameters.merge(
+          "filter[provider.provider_name]" => "ACME SCITT 0",
+        ),
+      ).to_return(
         body: File.new("spec/fixtures/api_responses/courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   context "with an empty search" do
