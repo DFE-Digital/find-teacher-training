@@ -1,41 +1,41 @@
-import accessibleAutocomplete from "accessible-autocomplete";
+import accessibleAutocomplete from 'accessible-autocomplete'
 
 export const request = endpoint => {
-  let xhr = null; // Hoist this call so that we can abort previous requests.
+  let xhr = null // Hoist this call so that we can abort previous requests.
 
   return (query, callback) => {
     if (xhr && xhr.readyState !== XMLHttpRequest.DONE) {
-      xhr.abort();
+      xhr.abort()
     }
-    const path = `${endpoint}?query=${query}`;
+    const path = `${endpoint}?query=${query}`
 
-    xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", evt => {
-      let results = [];
+    xhr = new XMLHttpRequest()
+    xhr.addEventListener('load', evt => {
+      let results = []
       try {
-        results = JSON.parse(xhr.responseText);
+        results = JSON.parse(xhr.responseText)
       } catch (err) {
         console.error(
           `Failed to parse results from endpoint ${path}, error is:`,
           err
-        );
+        )
       }
-      callback(results);
-    });
-    xhr.open("GET", path);
-    xhr.send();
-  };
-};
+      callback(results)
+    })
+    xhr.open('GET', path)
+    xhr.send()
+  }
+}
 
-const initAutocomplete = ({element, input, path}) => {
-  const $input = document.getElementById(input);
-  const $el = document.getElementById(element);
-  const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
+const initAutocomplete = ({ element, input, path }) => {
+  const $input = document.getElementById(input)
+  const $el = document.getElementById(element)
+  const inputValueTemplate = result => (typeof result === 'string' ? result : result && result.name)
   const suggestionTemplate = result =>
-    typeof result === "string" ? result : result && `${result.name} (${result.code})`;
+    typeof result === 'string' ? result : result && `${result.name} (${result.code})`
 
   try {
-    if($input) {
+    if ($input) {
       accessibleAutocomplete({
         element: $el,
         id: $input.id,
@@ -48,15 +48,15 @@ const initAutocomplete = ({element, input, path}) => {
           inputValue: inputValueTemplate,
           suggestion: suggestionTemplate
         },
-        onConfirm: option => ($input.value = option ? option.code : ""),
+        onConfirm: option => ($input.value = option ? option.code : ''),
         confirmOnBlur: false
-      });
+      })
 
-      $input.parentNode.removeChild($input);
+      $input.parentNode.removeChild($input)
     }
-  } catch(err) {
-    console.error("Failed to initialise provider autocomplete:", err);
+  } catch (err) {
+    console.error('Failed to initialise provider autocomplete:', err)
   }
-};
+}
 
-export default initAutocomplete;
+export default initAutocomplete

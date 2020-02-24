@@ -1,12 +1,12 @@
 jest.mock('./analytics', () => {
-  return { loadAnalytics : jest.fn() }
+  return { loadAnalytics: jest.fn() }
 })
 
 jest.mock('./cookie-helper')
 
 import CookieBanner from './cookie-banner'
 import { loadAnalytics } from './analytics'
-import {setConsentedToCookie, fetchConsentedToCookieValue,checkConsentedToCookieExists} from './cookie-helper'
+import { setConsentedToCookie, checkConsentedToCookieExists } from './cookie-helper'
 
 const templateHTML = `
   <div class="app-cookie-banner app-cookie-banner--hidden" data-module="app-cookie-banner" aria-label="Cookie banner" role="region" data-qa="cookie-banner">
@@ -22,48 +22,44 @@ const templateHTML = `
         </span>
       </p>
     </div>
-  </div>`;
+  </div>`
 
 describe('CookieBanner', () => {
-  
   beforeEach(() => {
-    document.body.innerHTML = templateHTML    
+    document.body.innerHTML = templateHTML
   })
 
   describe('constructor', () => {
     beforeEach(() => {
-      document.body.innerHTML = templateHTML    
+      document.body.innerHTML = templateHTML
     })
-  
+
     afterEach(() => {
       jest.clearAllMocks()
-    }) 
+    })
 
     it('doesn\'t run if theres no cookie banner markup', () => {
       document.body.innerHTML = ''
       const banner = new CookieBanner()
       expect(banner.$module).toBeNull()
-    } )
+    })
 
     it('binds event to "Accept" button', () => {
-      checkConsentedToCookieExists.mockImplementationOnce(() => false);
-      jest.spyOn(CookieBanner.prototype, 'bindEvents');
+      checkConsentedToCookieExists.mockImplementationOnce(() => false)
+      jest.spyOn(CookieBanner.prototype, 'bindEvents')
       new CookieBanner()
       expect(CookieBanner.prototype.bindEvents).toHaveBeenCalledTimes(1)
     })
 
     it('displays the Cookie Banner if user has not consented/rejected', () => {
-      
-      checkConsentedToCookieExists.mockImplementationOnce(() => false);
-      
+      checkConsentedToCookieExists.mockImplementationOnce(() => false)
       const banner = new CookieBanner()
       expect(banner.$module.className).not.toContain('app-cookie-banner--hidden')
       expect(banner.$module.className).toContain('app-cookie-banner')
     })
 
     it('hides the Cookie Banner if user has consented/rejected', () => {
-      checkConsentedToCookieExists.mockImplementationOnce(() => true );
-      
+      checkConsentedToCookieExists.mockImplementationOnce(() => true)
       const banner = new CookieBanner()
       expect(banner.$module.className).toContain('app-cookie-banner--hidden')
       expect(banner.$module.className).toContain('app-cookie-banner')
