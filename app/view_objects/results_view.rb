@@ -1,6 +1,7 @@
 class ResultsView
   include CsharpRailsSubjectConversionHelper
 
+  MAXIMUM_NUMBER_OF_SUBJECTS = 43
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
 
   def initialize(query_parameters:)
@@ -58,6 +59,8 @@ class ResultsView
   end
 
   def number_of_extra_subjects
+    return 37 if number_of_subjects_selected == MAXIMUM_NUMBER_OF_SUBJECTS
+
     number_of_subjects_selected - NUMBER_OF_SUBJECTS_DISPLAYED
   end
 

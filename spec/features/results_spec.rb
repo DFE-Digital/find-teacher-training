@@ -93,7 +93,7 @@ feature "results", type: :feature do
             "Chemistry",
           ],
       )
-      expect(results_page.subjects_filter.extra_subjects.text).to eq("and 39 more...")
+      expect(results_page.subjects_filter.extra_subjects.text).to eq("and 37 more...")
     end
   end
 

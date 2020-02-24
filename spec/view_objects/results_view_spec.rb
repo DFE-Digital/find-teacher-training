@@ -216,6 +216,14 @@ describe ResultsView do
   describe "#number_of_extra_subjects" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
+    context "The maximum number of subjects are selected" do
+      let(:parameter_hash) { { "subjects" => (1..43).to_a.join(",") } }
+
+      it "Returns the number of extra subjects - 2" do
+        expect(results_view.number_of_extra_subjects).to eq(37)
+      end
+    end
+
     context "more than NUMBER_OF_SUBJECTS_DISPLAYED subjects are selected" do
       let(:parameter_hash) { { "subjects" => "1,2,3,4,5" } }
 
