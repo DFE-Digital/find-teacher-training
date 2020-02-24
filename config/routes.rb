@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get "/422", to: "errors#unprocessable_entity", via: :all
   get "/500", to: "errors#internal_server_error", via: :all
 
+  resource :sitemap, only: :show
+
   get "/course/:provider_code/:course_code", to: "courses#show", as: "course"
   get "/results", to: "results#index", as: "results"
 
