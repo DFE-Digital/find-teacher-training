@@ -135,7 +135,7 @@ feature "results", type: :feature do
 
     describe "hides ordering" do
       let(:sort) { "provider.provider_name,name" }
-      let(:params) { { l: "3" } }
+      let(:params) { { l: "3", query: "2AT" } }
 
       it "does not display the sort form" do
         expect(results_page).not_to have_sort_form
@@ -242,6 +242,7 @@ feature "results", type: :feature do
           rad: "10",
           lng: "-27.1504002",
           lat: "-109.3042697",
+          l: 1,
         }
       end
 
@@ -253,7 +254,27 @@ feature "results", type: :feature do
         results_page.location_filter.link.click
         location_filter_uri = URI(current_url)
         expect(location_filter_uri.path).to eq("/results/filter/location")
-        expect(location_filter_uri.query).to eq("lat=-109.3042697&lng=-27.1504002&loc=Hogwarts,+Reading,+UK&rad=10&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
+        expect(location_filter_uri.query).to eq("l=1&lat=-109.3042697&lng=-27.1504002&loc=Hogwarts,+Reading,+UK&rad=10&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
+      end
+    end
+
+    context "location with blank provider name" do
+      let(:params) do
+        {
+          l: 3,
+          query: "",
+          qualifications: "QtsOnly,PgdePgceWithQts,Other",
+          fulltime: "False",
+          parttime: "False",
+          hasvacancies: "True",
+          senCourses: "False",
+        }
+      end
+
+      it "falls back to l2 (Across England)" do
+        location_filter_uri = URI(current_url)
+        expect(location_filter_uri.path).to eq("/results")
+        expect(location_filter_uri.query).to eq("fulltime=False&hasvacancies=True&l=2&parttime=False&qualifications=QtsOnly%2CPgdePgceWithQts%2COther&senCourses=False")
       end
     end
   end
