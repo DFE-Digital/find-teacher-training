@@ -29,6 +29,7 @@
                 true,
                 id: "cookie-consent-accept",
                 class: "govuk-radios__input",
+                checked: cookies["consented-to-cookies"] == "true",
                 data: { qa: "cookie-consent-accept" },
               )
             %>
@@ -44,6 +45,7 @@
                 false,
                 id: "cookie-consent-deny",
                 class: "govuk-radios__input",
+                checked: cookies["consented-to-cookies"] == "false",
                 data: { qa: "cookie-consent-deny" },
               )
             %>
