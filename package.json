@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "jest": "^25.1.0",
+    "standard": "^14.3.1",
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
