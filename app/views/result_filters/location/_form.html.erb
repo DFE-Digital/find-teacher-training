@@ -12,7 +12,7 @@
           "provider-error"
         end
     } %>
-    <%= form_with url: location_path, method: :post do |form| %>
+    <%= form_with url: location_path, method: :post, data: { "ga-event-form" => "Location" } do |form| %>
       <%= render "shared/hidden_fields", exclude_keys: ["l"], form: form %>
       <fieldset class="govuk-fieldset" role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
@@ -106,7 +106,7 @@
             </div>
             <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "3" %>"
               id="query-container" data-qa="by-provider-conditional">
-              <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>">
+              <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>" data-module="track-no-provider-results">
                 <%= form.label :query, class: "govuk-label" do %>
                   School, university or other training provider
                   <% if provider_error? %>
