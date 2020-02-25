@@ -221,29 +221,6 @@ feature "results", type: :feature do
   end
 
   describe "location filter" do
-    context "location selected within 10 miles" do
-      let(:params) do
-        {
-          loc: "Hogwarts, Reading, UK",
-          rad: "10",
-          lng: "-27.1504002",
-          lat: "-109.3042697",
-          l: 1,
-        }
-      end
-
-      it "displays the location filter" do
-        expected_url = "https://maps.googleapis.com/maps/api/staticmap?key=alohomora&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002"
-        expect(results_page.location_filter.name).to have_content("Hogwarts, Reading, UK")
-        expect(results_page.location_filter.distance).to have_content("Within 10 miles of the pin")
-        expect(results_page.location_filter.map["src"]).to have_content(expected_url)
-        results_page.location_filter.link.click
-        location_filter_uri = URI(current_url)
-        expect(location_filter_uri.path).to eq("/results/filter/location")
-        expect(location_filter_uri.query).to eq("l=1&lat=-109.3042697&lng=-27.1504002&loc=Hogwarts,+Reading,+UK&rad=10&qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
-      end
-    end
-
     context "location with blank provider name" do
       let(:params) do
         {

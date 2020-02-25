@@ -69,6 +69,35 @@ feature "Location filter", type: :feature do
     end
   end
 
+  describe "filtering by location" do
+    before do
+      stub_request(:get, courses_url)
+        .with(
+          query: base_parameters.merge("filter[longitude]" => "-0.1300436",
+                                       "filter[latitude]" => "51.4980188",
+                                       "filter[radius]" => "20"),
+        )
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/courses.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+    end
+
+    it "displays the courses" do
+      results_page.load
+      results_page.location_filter.link.click
+      filter_page.by_postcode_town_or_city.click
+      filter_page.location_query.fill_in(with: "SW1P 3BT")
+      filter_page.find_courses.click
+
+      expect(results_page.heading.text).to eq("Teacher training courses")
+
+      expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
+      expect(results_page.location_filter.map).to be_present
+      expect(results_page.courses.count).to eq(2)
+    end
+  end
+
   describe "default text" do
     it "displays the query text specified in the params if it exists" do
       filter_page.load(query: { query: "marble" })
@@ -129,28 +158,6 @@ feature "Location filter", type: :feature do
 
   describe "Selecting an option" do
     before { filter_page.load(query: query_params) }
-
-    it "Allows the user to select 'by postcode, town or city'" do
-      location_filter_results_page = PageObjects::Page::ResultFilters::LocationFilterResults.new
-
-      filter_page.by_postcode_town_or_city.click
-      filter_page.location_query.set "SW1P 3BT"
-      filter_page.search_radius.select "5 miles"
-
-      filter_page.find_courses.click
-
-      expect_page_to_be_displayed_with_query(
-        page: location_filter_results_page,
-        expected_query_params: {
-          "l" => "1",
-          "lat" => "51.4980188",
-          "lng" => "-0.1300436",
-          "loc" => "Westminster, London SW1P 3BT, UK",
-          "lq" => "SW1P 3BT",
-          "rad" => "5",
-        },
-      )
-    end
 
     it "Allows the user to select across england" do
       filter_page.across_england.click
