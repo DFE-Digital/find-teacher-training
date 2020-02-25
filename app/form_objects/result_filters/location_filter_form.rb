@@ -41,13 +41,12 @@ module ResultFilters
     end
 
     def geocode_params_for(query)
-      results = Geocoder.search(query, components: "country:UK")
-      england_results = results.select { |r| r.state == "England" }.first
-      if england_results
+      results = Geocoder.search(query, components: "country:UK").first
+      if results
         {
-            lat: england_results.latitude,
-            lng: england_results.longitude,
-            loc: england_results.address,
+            lat: results.latitude,
+            lng: results.longitude,
+            loc: results.address,
             lq: location_query,
         }
       end
