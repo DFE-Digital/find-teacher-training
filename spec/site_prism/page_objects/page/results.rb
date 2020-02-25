@@ -49,12 +49,12 @@ module PageObjects
         element :name, '[data-qa="location_name"]'
         element :distance, '[data-qa="distance"]'
         element :map, '[data-qa="map"]'
-        element :link, '[data-qa="change_link"]'
+        element :link, '[data-qa="link"]'
       end
 
       class ProviderSection < SitePrism::Section
         element :name, '[data-qa="provider_name"]'
-        element :link, '[data-qa="change_link"]'
+        element :link, '[data-qa="link"]'
       end
 
       class FundingSection < SitePrism::Section
@@ -82,7 +82,6 @@ module PageObjects
       section :location_filter, LocationSection, '[data-qa="filters__location"]'
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
 
-      element :provider_title, '[data-qa="provider_title"]'
       element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'
       element :previous_button, '[data-qa="previous_button"]'

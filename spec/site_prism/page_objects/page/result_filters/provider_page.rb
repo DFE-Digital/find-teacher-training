@@ -8,6 +8,7 @@ module PageObjects
           element :hyperlink, '[data-qa="provider_suggestion__link"]'
         end
 
+        element :heading, '[data-qa="heading"]'
         element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'
 

@@ -106,6 +106,7 @@ class ResultsView
                    base_query = base_query.where(qualifications: qualifications)
                    base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
                    base_query = base_query.where(send_courses: true) if send_courses?
+                   base_query = base_query.where("provider.provider_name" => provider) if provider.present?
 
                    base_query
                      .order("provider.provider_name": results_order)
