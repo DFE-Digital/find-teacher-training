@@ -25,11 +25,14 @@
       <div class="govuk-details__text">
         <%= form_with url: provider_path, method: :get do |form| %>
           <fieldset class="govuk-fieldset">
-            <%= form.label :query, class: "govuk-label" do %>
-              <strong>School, university or other training provider</strong>
-              <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
-            <% end %>
-            <%= form.text_field :query, class: "govuk-input", data: { qa: "search__input" } %>
+            <div class="govuk-form-group">
+              <%= form.label :query, class: "govuk-label" do %>
+                <strong>School, university or other training provider</strong>
+                <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
+              <% end %>
+              <%= form.text_field :query, class: "govuk-input", data: { qa: "search__input" } %>
+            </div>
+
             <%= form.submit "Search again", name: nil, class: "govuk-button", data: { qa: 'search__submit' } %>
           </fieldset>
         <% end %>
