@@ -61,6 +61,14 @@ steps:
     runInBackground: false
 
 - task: Docker@1
+  displayName: Run JS linter
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: npm run lint:js
+    runInBackground: false
+    
+- task: Docker@1
   displayName: Run sass linter
   inputs:
     command: Run an image
