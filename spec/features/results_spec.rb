@@ -10,6 +10,7 @@ feature "results", type: :feature do
 
   let(:base_parameters) { results_page_parameters("sort" => sort) }
 
+
   let(:results_page_request) do
     {
       course_stub: stub_request(:get, default_url)
@@ -134,6 +135,7 @@ feature "results", type: :feature do
     end
 
     describe "hides ordering" do
+      let(:base_parameters) { results_page_parameters("sort" => sort, "filter[provider.provider_name]" => "2AT") }
       let(:sort) { "provider.provider_name,name" }
       let(:params) { { l: "3", query: "2AT" } }
 
