@@ -72,6 +72,10 @@ module PageObjects
         element :submit, '[data-qa="sort-form__submit"]'
       end
 
+      class SuggestionsSection < SitePrism::Section
+        elements :suggestions, '[data-qa="suggestions-section__suggestion"]'
+      end
+
       section :cookie_banner, CookieBannerSection, '[data-qa="cookie-banner"]'
       sections :courses, CourseSection, '[data-qa="course"]'
       section :subjects_filter, SubjectsSection, '[data-qa="filters__subjects"]'
@@ -93,6 +97,7 @@ module PageObjects
       element :vacancies_link, '[data-qa="filters__vacancies_link"]'
 
       section :sort_form, SortFormSection, '[data-qa="sort-form"]'
+      section :suggestions_section, SuggestionsSection, '[data-qa="suggestions-section"]'
     end
   end
 end

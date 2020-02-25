@@ -49,6 +49,46 @@ feature "results", type: :feature do
     end
   end
 
+  fdescribe "search suggestions" do
+    context "when the API returns 3 or more courses" do
+      it "does not show any search suggestions" do
+        expect(results_page).not_to have_suggestions_section
+      end
+    end
+
+    context "when the API returns less than 3 courses" do
+      let(:courses) do
+        File.new("spec/fixtures/api_responses/empty_courses.json")
+      end
+
+      let(:base_parameters) { results_page_parameters("rad" => "5", "sort" => sort) }
+      let(:results_page_request) do
+        {
+          less_specific_course_stub: stub_request(:get, default_url)
+            .with(query: base_parameters)
+            .to_return(
+              body: File.new("spec/fixtures/api_responses/courses.json"),
+              headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          ),
+          course_stub: stub_request(:get, default_url)
+            .with(query: base_parameters)
+            .to_return(
+              body: courses,
+              headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          ),
+        }
+      end
+
+      it "requests data for a less specific search" do
+        expect(results_page_request[:less_specific_course_stub]).to have_been_requested
+      end
+
+      xit "shows search suggestions" do
+        expect(results_page).not_to have_suggestions_section
+      end
+    end
+  end
+
   describe "filters defaults without query string" do
     it "has study type filter" do
       expect(results_page.study_type_filter.subheading).to have_content("Study type:")
