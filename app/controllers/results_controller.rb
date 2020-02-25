@@ -18,8 +18,6 @@ private
     @results_view.provider_filter? && @results_view.provider.blank?
   end
 
-private
-
   def redirect_to_c_sharp
     return unless Settings.redirect_results_to_c_sharp
 
