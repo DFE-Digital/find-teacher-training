@@ -3,7 +3,7 @@
     "@rails/webpacker": "^4.2.2",
     "accessible-autocomplete": "^2.0.2",
     "copy-webpack-plugin": "^5.1.1",
-    "govuk-frontend": "^3.3.0",
+    "govuk-frontend": "^3.5.0",
     "lodash.throttle": "^4.1.1",
     "set-value": "^3.0.1"
   },
