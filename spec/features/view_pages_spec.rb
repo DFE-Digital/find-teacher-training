@@ -3,12 +3,6 @@
 require "rails_helper"
 
 RSpec.feature "View pages", type: :feature do
-  scenario "Navigate to cookies" do
-    visit cookie_preferences_path
-
-    expect(page).to have_text("Cookies")
-  end
-
   scenario "Navigate to privacy" do
     visit privacy_path
 

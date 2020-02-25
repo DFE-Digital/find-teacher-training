@@ -1,15 +1,8 @@
+import { triggerAnalyticsEvent } from './analytics'
+
 function NoResultsTracking($module) {
   this.$module = $module;
 }
-
-const triggerAnalyticsEvent = (category, action) => {
-  ga("send", "event", {
-    eventCategory: category,
-    eventAction: action,
-    transport: "beacon",
-    nonInteraction: true
-  });
-};
 
 NoResultsTracking.prototype.init = function() {
   const $module = this.$module;
@@ -22,7 +15,7 @@ NoResultsTracking.prototype.init = function() {
 
   if ($errorMessage) {
     const searchTerm = document.querySelector("#provider").value;
-    triggerAnalyticsEvent("Search by provider: No Results", searchTerm);
+    triggerAnalyticsEvent("Search by provider: No Results", searchTerm, true);
   }
 };
 

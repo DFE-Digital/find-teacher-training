@@ -7,6 +7,7 @@ import backLink from "scripts/back-link";
 import initAutocomplete from "scripts/autocomplete";
 import toggle from "scripts/toggle";
 import { loadAnalytics } from "scripts/analytics.js";
+import initCookieBanner from "scripts/cookie-banner";
 
 initAll();
 
@@ -33,6 +34,5 @@ initAutocomplete(
   }
 );
 
-initAutocomplete("provider-autocomplete", "provider");
-
 loadAnalytics()
+new initCookieBanner();

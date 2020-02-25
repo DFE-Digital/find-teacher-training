@@ -6,8 +6,8 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "study-type-error" } %>
-    <%= form_with url: studytype_path, method: :post, data: { "ga-event-form" => "Study Type" } do |form| %>
+    <%= render partial: "shared/error_message", locals: { error_anchor_id: "study-type-error" } %>
+    <%= form_with url: studytype_path, method: :post do |form| %>
       <%= render "shared/hidden_fields", exclude_keys: ["fulltime", "parttime"], form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend>

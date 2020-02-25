@@ -2,7 +2,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "result_filters/error_message", locals: { error_anchor_id: "subject1" } %>
+    <%= render partial: "shared/error_message", locals: { error_anchor_id: "subject1" } %>
 
     <%= form_with(url: subject_path, method: :post, data: { "ga-event-form" => "Subject" }) do |f| %>
       <%= render "shared/hidden_fields", exclude_keys: ["subjects"], form: f %>

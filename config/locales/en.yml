@@ -59,3 +59,6 @@ en:
   subject_filter:
     errors:
       no_option: "Please choose at least one subject"
+  cookie_preferences:
+    no_option_error: "Please choose an option"
+    success: "Your cookie preferences have been saved"

@@ -1,17 +1,9 @@
 import throttle from "lodash.throttle";
+import { triggerAnalyticsEvent } from './analytics'
 
 function ScrollTracking($module) {
   this.$module = $module;
 }
-
-const triggerAnalyticsEvent = (category, action) => {
-  ga("send", "event", {
-    eventCategory: category,
-    eventAction: action,
-    transport: "beacon",
-    nonInteraction: true
-  });
-};
 
 let scrolledPastOneThird = false;
 let scrolledPastTwoThirds = false;
@@ -26,13 +18,13 @@ function onScroll() {
   const percent = parseInt(((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100);
   if (percent >= 33 && percent < 66 && !scrolledPastOneThird) {
     scrolledPastOneThird = true;
-    triggerAnalyticsEvent("Page: Scrolling", "33%");
+    triggerAnalyticsEvent("Page: Scrolling", "33%", true);
   } else if (percent >= 66 && percent < 90 && !scrolledPastTwoThirds) {
     scrolledPastTwoThirds = true;
-    triggerAnalyticsEvent("Page: Scrolling", "66%");
+    triggerAnalyticsEvent("Page: Scrolling", "66%", true );
   } else if (percent >= 90 && !scrolledToBottom) {
     scrolledToBottom = true;
-    triggerAnalyticsEvent("Page: Scrolling", "99%");
+    triggerAnalyticsEvent("Page: Scrolling", "99%", true);
   }
 }
 

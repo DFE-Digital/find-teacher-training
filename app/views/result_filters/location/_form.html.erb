@@ -2,7 +2,7 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "result_filters/error_message", locals: {
+    <%= render partial: "shared/error_message", locals: {
       error_anchor_id:
         if no_option_selected?
           "search-options"

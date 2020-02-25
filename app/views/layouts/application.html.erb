@@ -58,6 +58,16 @@
       </div>
       <%= yield(:before_content) %>
       <main class="govuk-main-wrapper " id="main-content" role="main">
+        <% if flash[:success] %>
+          <div class="govuk-success-summary" aria-labelledby="success-message" tabindex="-1" role="alert">
+            <div class="govuk-success-summary__title">
+              <h2 class="govuk-heading-m" id="success-message">
+                <%= flash[:success] %>
+              </h2>
+            </div>
+          </div>
+        <% end %>
+        
         <%= yield %>
       </main>
     </div>
