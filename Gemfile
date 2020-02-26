@@ -109,6 +109,9 @@ group :test do
   # Get us some fake!
   gem "faker"
 
+  # Show test coverage %
+  gem "simplecov", require: false
+
   # Page object for Capybara
   gem "site_prism"
 
