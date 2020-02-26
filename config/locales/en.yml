@@ -52,7 +52,7 @@ en:
       no_option: "Please choose an option"
       unknown_location: "We couldn't find this location, please check your input and try again"
       missing_location: "Please enter a postcode, city or town in England"
-      missing_provider: "Please enter the name of a training provider"
+      missing_provider: "We couldn't find this provider, please check your input and try again"
     fields:
       location: "Postcode, town or city"
       provider: "Training provider"
