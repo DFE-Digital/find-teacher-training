@@ -1,6 +1,9 @@
 require "rails_helper"
 
-RSpec.describe CookiePreferencesController, type: :controller do
+# The cookie expiry date is not accessible via capybara
+# so we need to test cookies as a unit test via a controller spec
+# rather than an integration test via a request spec
+describe CookiePreferencesController, type: :controller do
   describe "GET #new" do
     it "returns http success" do
       get :new
