@@ -156,7 +156,7 @@ feature "Location filter", type: :feature do
     end
   end
 
-  describe "Selecting an option" do
+  describe "filtering to Across England" do
     before { filter_page.load(query: query_params) }
 
     it "Allows the user to select across england" do
@@ -170,10 +170,37 @@ feature "Location filter", type: :feature do
         },
       )
     end
+  end
 
-    context "selecting by provider" do
-      let(:providers) { [build(:provider), build(:provider)] }
-      it "can search by provider" do
+  context "filtering by provider" do
+    before { filter_page.load(query: query_params) }
+
+    let(:providers) { [build(:provider), build(:provider)] }
+
+    it "can search by provider" do
+      stub_api_v3_resource(
+        type: Provider,
+        resources: providers,
+        fields: { providers: %i[provider_code provider_name] },
+        params: { recruitment_cycle_year: 2020 },
+        search: "ACME",
+      )
+
+      filter_page.by_provider.click
+      filter_page.provider_search.fill_in(with: "ACME")
+      filter_page.find_courses.click
+
+      expect(current_path).to eq(provider_page.url)
+      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+        "l" => "3",
+        "query" => "ACME",
+      )
+    end
+
+    context "with selected options" do
+      let(:query_params) { { another_option: "option" } }
+
+      it "preserves other selected options" do
         stub_api_v3_resource(
           type: Provider,
           resources: providers,
@@ -190,32 +217,8 @@ feature "Location filter", type: :feature do
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
           "l" => "3",
           "query" => "ACME",
+          "another_option" => "option",
         )
-      end
-
-      context "with selected options" do
-        let(:query_params) { { another_option: "option" } }
-
-        it "preserves other selected options" do
-          stub_api_v3_resource(
-            type: Provider,
-            resources: providers,
-            fields: { providers: %i[provider_code provider_name] },
-            params: { recruitment_cycle_year: 2020 },
-            search: "ACME",
-          )
-
-          filter_page.by_provider.click
-          filter_page.provider_search.fill_in(with: "ACME")
-          filter_page.find_courses.click
-
-          expect(current_path).to eq(provider_page.url)
-          expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-            "l" => "3",
-            "query" => "ACME",
-            "another_option" => "option",
-          )
-        end
       end
     end
   end
