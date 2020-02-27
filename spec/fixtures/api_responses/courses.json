@@ -1055,6 +1055,9 @@
       }
     }
   ],
+  "meta": {
+    "count": 8900
+  },
   "links": {
     "next": "/api/v3/recruitment_cycles/2020/courses?filter%5Bfunding%5D=salary\u0026include=provider\u0026page%5Bpage%5D=2\u0026page%5Bper_page%5D=2",
     "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Bfunding%5D=salary\u0026include=provider\u0026page%5Bpage%5D=890\u0026page%5Bper_page%5D=2"

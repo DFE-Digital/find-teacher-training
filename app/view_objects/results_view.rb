@@ -117,7 +117,7 @@ class ResultsView
   end
 
   def course_count
-    courses.total_count
+    courses.meta["count"]
   end
 
   def subjects
