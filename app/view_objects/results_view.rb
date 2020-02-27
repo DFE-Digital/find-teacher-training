@@ -5,6 +5,7 @@ class ResultsView
   MAXIMUM_NUMBER_OF_SUBJECTS = 43
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
   DISTANCE = "2".freeze
+  SUGGESTED_SEARCH_THRESHOLD = 3
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -203,6 +204,10 @@ class ResultsView
 
   def subjects
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
+  end
+
+  def suggested_search_visible?
+    course_count < SUGGESTED_SEARCH_THRESHOLD
   end
 
 private

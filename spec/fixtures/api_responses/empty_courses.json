@@ -1,5 +1,8 @@
 {
   "data": [],
+  "meta": {
+    "count": 0
+  },
   "links": {
     "last": "/api/v3/recruitment_cycles/2020/providers/B1T/courses?page%5Bpage%5D=1"
   },
