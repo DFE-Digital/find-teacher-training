@@ -1,6 +1,8 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
+  get :healthcheck, controller: :heartbeat
+
   scope module: "result_filters" do
     root to: "location#start"
   end
