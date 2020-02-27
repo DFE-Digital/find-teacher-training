@@ -68,12 +68,12 @@ class ResultsView
     query_parameters["loc"] || "Across England"
   end
 
-  def distance
+  def radius
     query_parameters["rad"]
   end
 
   def show_map?
-    latitude.present? && longitude.present? && distance.present?
+    latitude.present? && longitude.present? && radius.present?
   end
 
   def map_image_url
@@ -88,6 +88,14 @@ class ResultsView
 
   def provider
     query_parameters["query"]
+  end
+
+  def location_filter?
+    query_parameters["l"] == "1"
+  end
+
+  def england_filter?
+    query_parameters["l"] == "2"
   end
 
   def provider_filter?
@@ -106,6 +114,13 @@ class ResultsView
                    base_query = base_query.where(qualifications: qualifications)
                    base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
                    base_query = base_query.where(send_courses: true) if send_courses?
+
+                   if location_filter?
+                     base_query = base_query.where("latitude" => latitude)
+                     base_query = base_query.where("longitude" => longitude)
+                     base_query = base_query.where("radius" => radius)
+                   end
+
                    base_query = base_query.where("provider.provider_name" => provider) if provider.present?
 
                    base_query
@@ -127,10 +142,6 @@ class ResultsView
 private
 
   attr_reader :query_parameters
-
-  def provider_option_selected?
-    filter_params[:l] == "3"
-  end
 
   def results_order
     return :desc if query_parameters[:sortby] == "1"
@@ -183,7 +194,7 @@ private
   end
 
   def google_map_zoom
-    case distance
+    case radius
     when "5"
       "12"
     when "10"

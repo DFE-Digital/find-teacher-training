@@ -256,8 +256,8 @@ describe ResultsView do
     end
   end
 
-  describe "#distance" do
-    subject { described_class.new(query_parameters: parameter_hash).distance }
+  describe "#radius" do
+    subject { described_class.new(query_parameters: parameter_hash).radius }
 
     context "when rad is passed" do
       let(:parameter_hash) { { "rad" => "10" } }
@@ -335,6 +335,38 @@ describe ResultsView do
       let(:parameter_hash) { { "query" => "Kamino" } }
 
       it { is_expected.to eq("Kamino") }
+    end
+  end
+
+  describe "#location_filter?" do
+    subject { described_class.new(query_parameters: parameter_hash).location_filter? }
+
+    context "when l param is set to 1" do
+      let(:parameter_hash) { { "l" => "1" } }
+
+      it { is_expected.to be(true) }
+    end
+
+    context "when l param is not set to 1" do
+      let(:parameter_hash) { { "l" => "2" } }
+
+      it { is_expected.to be(false) }
+    end
+  end
+
+  describe "#england_filter?" do
+    subject { described_class.new(query_parameters: parameter_hash).england_filter? }
+
+    context "when l param is set to 2" do
+      let(:parameter_hash) { { "l" => "2" } }
+
+      it { is_expected.to be(true) }
+    end
+
+    context "when l param is not set to 2" do
+      let(:parameter_hash) { { "l" => "3" } }
+
+      it { is_expected.to be(false) }
     end
   end
 

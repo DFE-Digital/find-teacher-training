@@ -7,10 +7,10 @@
       <%= @results_view.location %>
       <% if @results_view.show_map? %>
         <span class="govuk-caption-m" data-qa="distance">Within
-          <%= @results_view.distance %>
+          <%= @results_view.radius %>
          miles of the pin</span>
         <img src="<%= @results_view.map_image_url %>"
-             alt="Map showing <%= @results_view.distance %> miles
+             alt="Map showing <%= @results_view.radius %> miles
              of <%= @results_view.location %>"class="filter-form__map"
              data-qa="map" />
       <% end %>
