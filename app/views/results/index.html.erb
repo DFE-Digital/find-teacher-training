@@ -92,6 +92,10 @@
             <dl class="govuk-list--description">
               <dt class="govuk-list--description__label">Course</dt>
               <dd data-qa="course__description"><%= course.description%></dd>
+              <% if @results_view.location_filter?  %>
+                <dt class="govuk-list--description__label">Distance</dt>
+                <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> miles <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
+              <% end %>
               <dt class="govuk-list--description__label">Financial support</dt>
               <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
               <% if course.accrediting_provider.present? %>
