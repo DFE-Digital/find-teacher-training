@@ -1,6 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
+  get :ping, controller: :heartbeat
   get :healthcheck, controller: :heartbeat
 
   scope module: "result_filters" do
