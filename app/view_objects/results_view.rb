@@ -137,10 +137,8 @@ class ResultsView
   end
 
   def site_distance(course)
-    query_location = Geokit::LatLng.new(latitude.to_f, longitude.to_f)
-
     distances = course.sites.map do |site|
-      query_location.distance_to("#{site[:latitude]},#{site[:longitude]}")
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
     end
 
     min_distance = distances.min
@@ -152,11 +150,33 @@ class ResultsView
     end
   end
 
+  def nearest_address(course)
+    ordered_sites = course.sites.sort_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    sites_addresses = ordered_sites.map do |address|
+      [
+        address.address1,
+        address.address2,
+        address.address3,
+        address.address4,
+        address.postcode,
+      ].select(&:present?).join(", ").html_safe
+    end
+
+    sites_addresses.first
+  end
+
   def subjects
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
 
 private
+
+  def lat_long
+    Geokit::LatLng.new(latitude.to_f, longitude.to_f)
+  end
 
   attr_reader :query_parameters
 

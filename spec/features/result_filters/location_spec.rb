@@ -63,6 +63,7 @@ feature "Location filter", type: :feature do
       provider_page.provider_suggestions[0].hyperlink.click
 
       expect(results_page.courses.first.site_distance_to_location_query).to_not be_present
+      expect(results_page.courses.first.nearest_address).to_not be_present
 
       expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
       expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
@@ -95,6 +96,7 @@ feature "Location filter", type: :feature do
       expect(results_page.heading.text).to eq("Teacher training courses")
 
       expect(results_page.courses.first.site_distance_to_location_query).to be_present
+      expect(results_page.courses.first.nearest_address).to be_present
 
       expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
       expect(results_page.location_filter.map).to be_present
