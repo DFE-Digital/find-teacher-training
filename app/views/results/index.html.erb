@@ -104,10 +104,12 @@
                 <dt>Accredited body</dt>
                 <dd data-qa="course__accrediting_provider"><%= course.accrediting_provider.provider_name %></dd>
               <% end %>
-              <dt class="govuk-list--description__label">Main address</dt>
-              <dd data-qa="course__main_address">
-                <%= course.provider.decorate.short_address %>
-              </dd>
+              <% unless @results_view.location_filter?  %>
+                <dt class="govuk-list--description__label">Main address</dt>
+                <dd data-qa="course__main_address">
+                  <%= course.provider.decorate.short_address %>
+                </dd>
+              <% end %>
             </dl>
           </li>
         <% end %>
