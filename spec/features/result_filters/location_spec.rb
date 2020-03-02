@@ -47,7 +47,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -61,6 +61,10 @@ feature "Location filter", type: :feature do
 
       expect(provider_page.heading.text).to eq("Pick a provider")
       provider_page.provider_suggestions[0].hyperlink.click
+
+      expect(results_page.courses.first).to have_main_address
+      expect(results_page.courses.first).not_to have_site_distance_to_location_query
+      expect(results_page.courses.first).not_to have_nearest_address
 
       expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
       expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
@@ -78,7 +82,7 @@ feature "Location filter", type: :feature do
                                        "filter[radius]" => "20"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -91,6 +95,10 @@ feature "Location filter", type: :feature do
       filter_page.find_courses.click
 
       expect(results_page.heading.text).to eq("Teacher training courses")
+
+      expect(results_page.courses.first).to have_site_distance_to_location_query
+      expect(results_page.courses.first).to have_nearest_address
+      expect(results_page.courses.first).not_to have_main_address
 
       expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
       expect(results_page.location_filter.map).to be_present

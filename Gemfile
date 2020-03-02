@@ -51,6 +51,9 @@ gem "jsonapi-serializable"
 # Settings for the app
 gem "config"
 
+# Calculate distance between two locations
+gem "geokit"
+
 # Error tracking
 gem "sentry-raven"
 

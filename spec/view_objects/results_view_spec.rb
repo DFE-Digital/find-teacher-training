@@ -450,4 +450,55 @@ describe ResultsView do
       end
     end
   end
+
+  describe "#site_distance" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    context "greater than 1 mile" do
+      let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+
+      it "calculates the distance to the closest site, rounding to one decimal place" do
+        course = build(:course, sites: [
+          build(:site, latitude: 51.5079, longitude: 0.0877),
+          build(:site, latitude: 54.9783, longitude: 1.6178),
+        ])
+
+        expect(results_view.site_distance(course)).to eq(2)
+      end
+    end
+
+    context "less than 1 mile" do
+      let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+
+      it "calculates the distance to the closest site, rounding to one decimal place" do
+        course = build(:course, sites: [
+          build(:site, latitude: 51.4985, longitude: 0.1367),
+          build(:site, latitude: 54.9783, longitude: 1.6178),
+        ])
+
+        expect(results_view.site_distance(course)).to eq(0.1)
+      end
+    end
+  end
+
+  describe "#nearest_address" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+    let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+
+    it "returns the address to the nearest site" do
+      course = build(:course, sites: [
+        build(:site,
+              latitude: 51.4985,
+              longitude: 0.1367,
+              address1: "10 Windy Way",
+              address2: "Witham",
+              address3: "Essex",
+              address4: "UK",
+              postcode: "CM8 2SD"),
+        build(:site, latitude: 54.9783, longitude: 1.6178),
+      ])
+
+      expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+    end
+  end
 end

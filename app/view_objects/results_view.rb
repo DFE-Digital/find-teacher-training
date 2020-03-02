@@ -1,3 +1,4 @@
+require "geokit"
 class ResultsView
   include CsharpRailsSubjectConversionHelper
 
@@ -105,7 +106,7 @@ class ResultsView
   def courses
     @courses ||= begin
                    base_query = Course
-                     .includes(:provider)
+                     .includes(:provider).includes(:sites)
                      .where(recruitment_cycle_year: Settings.current_cycle)
 
                    base_query = base_query.where(funding: "salary") if with_salaries?
@@ -135,11 +136,47 @@ class ResultsView
     courses.meta["count"]
   end
 
+  def site_distance(course)
+    distances = course.sites.map do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    min_distance = distances.min
+
+    if min_distance < 1
+      min_distance.round(1)
+    else
+      min_distance.round(0)
+    end
+  end
+
+  def nearest_address(course)
+    ordered_sites = course.sites.sort_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    sites_addresses = ordered_sites.map do |address|
+      [
+        address.address1,
+        address.address2,
+        address.address3,
+        address.address4,
+        address.postcode,
+      ].select(&:present?).join(", ").html_safe
+    end
+
+    sites_addresses.first
+  end
+
   def subjects
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
 
 private
+
+  def lat_long
+    Geokit::LatLng.new(latitude.to_f, longitude.to_f)
+  end
 
   attr_reader :query_parameters
 
