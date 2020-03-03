@@ -501,4 +501,31 @@ describe ResultsView do
       expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
     end
   end
+
+  describe "#sort_options" do
+    context "location query" do
+      subject { described_class.new(query_parameters: { "l" => "1" }).sort_options }
+      it {
+        is_expected.to eq(
+          [
+            ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+            ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
+            ["Distance", 2, { "data-qa": "sort-form__options__distance" }],
+          ],
+        )
+      }
+    end
+
+    context "all other queries" do
+      subject { described_class.new(query_parameters: {}).sort_options }
+      it {
+        is_expected.to eq(
+          [
+            ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+            ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
+          ],
+        )
+      }
+    end
+  end
 end

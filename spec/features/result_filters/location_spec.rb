@@ -79,7 +79,8 @@ feature "Location filter", type: :feature do
         .with(
           query: base_parameters.merge("filter[longitude]" => "-0.1300436",
                                        "filter[latitude]" => "51.4980188",
-                                       "filter[radius]" => "20"),
+                                       "filter[radius]" => "20",
+                                       "sort" => "distance"),
         )
         .to_return(
           body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
@@ -228,6 +229,40 @@ feature "Location filter", type: :feature do
           "another_option" => "option",
         )
       end
+    end
+  end
+
+  describe "distance sorting" do
+    let(:distance_stub) do
+      stub_request(:get, courses_url)
+        .with(
+          query: base_parameters.merge("filter[longitude]" => "-0.1300436",
+                                       "filter[latitude]" => "51.4980188",
+                                       "filter[radius]" => "20",
+                                       "sort" => "distance"),
+          )
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+    end
+
+    before do
+      distance_stub
+
+      filter_page.load
+
+      filter_page.by_postcode_town_or_city.click
+      filter_page.location_query.fill_in(with: "SW1P 3BT")
+      filter_page.find_courses.click
+    end
+
+    it "requests that the backend sorts the data" do
+      expect(distance_stub).to have_been_requested
+    end
+
+    it "is automatically selected" do
+      expect(results_page.sort_form.options.distance).to be_selected
     end
   end
 
