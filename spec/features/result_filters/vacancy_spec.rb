@@ -88,7 +88,7 @@ feature "Vacancy filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end

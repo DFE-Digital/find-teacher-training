@@ -23,7 +23,7 @@ feature "Location filter", type: :feature do
     stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
             )
   end
@@ -48,7 +48,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -70,7 +70,7 @@ feature "Location filter", type: :feature do
       expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
       expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
       expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(4)
     end
   end
 
@@ -84,7 +84,7 @@ feature "Location filter", type: :feature do
                                        "sort" => "distance"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -104,7 +104,7 @@ feature "Location filter", type: :feature do
 
       expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
       expect(results_page.location_filter.map).to be_present
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(4)
     end
 
     describe "when using the wizard" do
@@ -258,7 +258,7 @@ feature "Location filter", type: :feature do
                                        "sort" => "distance"),
           )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses_with_sites.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
     end

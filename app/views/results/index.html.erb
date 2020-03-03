@@ -115,6 +115,20 @@
           </li>
         <% end %>
       </ul>
+
+      <% if @results_view.suggested_search_visible? %>
+        <div data-qa="suggested_searches">
+          <h3 class="govuk-heading-m" data-qa="suggested_search_heading">Suggested searches</h3>
+          <p class="govuk-body" data-qa="suggested_search_description">You can find:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <%- @results_view.suggested_search_links.each do |link| %>
+            <li data-qa="suggested_search_link">
+              <a href="<%=link.url%>" class="govuk-link" data-qa="link"><%=link.text%></a>
+            </li>
+          <%- end -%>
+          </ul>
+        </div>
+      <% end %>
       <%= paginate @results_view.courses %>
     </div>
   </div>

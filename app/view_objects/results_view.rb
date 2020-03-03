@@ -6,6 +6,7 @@ class ResultsView
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
   DISTANCE = "2".freeze
   SUGGESTED_SEARCH_THRESHOLD = 3
+  MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -21,8 +22,8 @@ class ResultsView
       .merge(subject_parameters)
   end
 
-  def filter_path_with_unescaped_commas(base_path)
-    "#{base_path}?#{URI.encode_www_form(query_parameters_with_defaults)}".gsub("%2C", ",")
+  def filter_path_with_unescaped_commas(base_path, parameters: query_parameters_with_defaults)
+    UnescapedQueryStringService.call(base_path: base_path, parameters: parameters)
   end
 
   def fulltime?
@@ -132,25 +133,7 @@ class ResultsView
 
   def courses
     @courses ||= begin
-                   base_query = Course
-                     .includes(:provider).includes(:sites).includes(:subjects)
-                     .where(recruitment_cycle_year: Settings.current_cycle)
-
-                   base_query = base_query.where(funding: "salary") if with_salaries?
-                   base_query = base_query.where(has_vacancies: hasvacancies?)
-                   base_query = base_query.where(study_type: study_type) if study_type.present?
-
-                   base_query = base_query.where(qualification: qualification.join(",")) unless all_qualifications?
-                   base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
-                   base_query = base_query.where(send_courses: true) if send_courses?
-
-                   if location_filter?
-                     base_query = base_query.where("latitude" => latitude)
-                     base_query = base_query.where("longitude" => longitude)
-                     base_query = base_query.where("radius" => radius)
-                   end
-
-                   base_query = base_query.where("provider.provider_name" => provider) if provider.present?
+                   base_query = course_query(include_location: location_filter?)
 
                    base_query = if sort_by_distance?
                                   base_query.order(:distance)
@@ -207,7 +190,27 @@ class ResultsView
   end
 
   def suggested_search_visible?
-    course_count < SUGGESTED_SEARCH_THRESHOLD
+    course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any?
+  end
+
+  def suggested_search_links
+    @suggested_search_links ||= begin
+                                  all_links = []
+                                  radii_for_suggestions.each do |radius|
+                                    break if filter_links(all_links).count == 2
+
+                                    all_links << SuggestedSearchLink.new(
+                                      radius: radius,
+                                      count: course_counter(radius_to_check: radius),
+                                      parameters: query_parameters_with_defaults,
+                                    )
+                                  end
+                                  filter_links(all_links)
+                                end
+  end
+
+  def no_results_found?
+    course_count.zero?
   end
 
 private
@@ -315,5 +318,44 @@ private
 
   def number_of_subjects_selected
     subject_parameters_array.any? ? subject_parameters_array.length : all_subjects.count
+  end
+
+  def course_counter(radius_to_check: nil)
+    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check).all.meta["count"]
+  end
+
+  def course_query(include_location:, radius_to_query: radius)
+    base_query = Course
+      .includes(:provider).includes(:sites).includes(:subjects)
+      .where(recruitment_cycle_year: Settings.current_cycle)
+
+    base_query = base_query.where(funding: "salary") if with_salaries?
+    base_query = base_query.where(has_vacancies: hasvacancies?)
+    base_query = base_query.where(study_type: study_type) if study_type.present?
+
+    base_query = base_query.where(qualification: qualification.join(",")) unless all_qualifications?
+    base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
+    base_query = base_query.where(send_courses: true) if send_courses?
+
+    if include_location
+      base_query = base_query.where("latitude" => latitude)
+      base_query = base_query.where("longitude" => longitude)
+      base_query = base_query.where("radius" => radius_to_query)
+    end
+
+    base_query = base_query.where("provider.provider_name" => provider) if provider.present?
+    base_query
+  end
+
+  def filter_links(links)
+    links
+      .uniq(&:count)
+      .reject { |link| link.count <= course_count }
+      .take(MAXIMUM_NUMBER_OF_SUGGESTED_LINKS)
+  end
+
+  def radii_for_suggestions
+    radius_for_all_england = nil
+    [10, 20, 50].reject { |rad| rad <= radius.to_i } << radius_for_all_england
   end
 end
