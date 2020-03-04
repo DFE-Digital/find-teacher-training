@@ -23,7 +23,7 @@ module ResultFilters
         return
       end
 
-      form_params = strip(filter_params.clone)
+      form_params = strip(filter_params.clone).merge(sortby: ResultsView::DISTANCE)
       form_object = LocationFilterForm.new(form_params)
       if form_object.valid?
         all_params = form_params.merge!(form_object.params)

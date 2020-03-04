@@ -4,6 +4,7 @@ class ResultsView
 
   MAXIMUM_NUMBER_OF_SUBJECTS = 43
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
+  DISTANCE = "2".freeze
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -73,6 +74,10 @@ class ResultsView
     query_parameters["rad"]
   end
 
+  def sort_by
+    query_parameters["sortby"]
+  end
+
   def show_map?
     latitude.present? && longitude.present? && radius.present?
   end
@@ -103,6 +108,23 @@ class ResultsView
     query_parameters["l"] == "3"
   end
 
+  def sort_by_distance?
+    sort_by == DISTANCE
+  end
+
+  def sort_options
+    if location_filter?
+      [
+        ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+        ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
+        ["Distance", 2, { "data-qa": "sort-form__options__distance" }],
+      ]
+    else
+      [["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+       ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }]]
+    end
+  end
+
   def courses
     @courses ||= begin
                    base_query = Course
@@ -124,9 +146,15 @@ class ResultsView
 
                    base_query = base_query.where("provider.provider_name" => provider) if provider.present?
 
+                   base_query = if sort_by_distance?
+                                  base_query.order(:distance)
+                                else
+                                  base_query
+                                    .order("provider.provider_name": results_order)
+                                    .order("name": results_order)
+                                end
+
                    base_query
-                     .order("provider.provider_name": results_order)
-                     .order("name": results_order)
                      .page(query_parameters[:page] || 1)
                      .per(10)
                  end
