@@ -141,6 +141,43 @@ feature "suggested searches", type: :feature do
         end
       end
     end
+
+    context "no courses are found in the suggested searches" do
+      before do
+        results_page_request(radius: 5, results_to_return: 0)
+        suggested_search_count_request(radius: 10, results_to_return: 0)
+        suggested_search_count_request(radius: 20, results_to_return: 0)
+        suggested_search_count_request(radius: 50, results_to_return: 0)
+        suggested_search_count_across_england(results_to_return: 0)
+      end
+
+      it "doesn't show the link if there are no courses found" do
+        filter_page.load
+        filter_page.by_postcode_town_or_city.click
+        filter_page.location_query.set "SW1P 3BT"
+        filter_page.search_radius.select "5 miles"
+
+        filter_page.find_courses.click
+        expect(results_page).not_to have_suggested_search_links
+      end
+    end
+
+    context "there are no results in any suggested searches" do
+      before do
+        results_page_request(radius: 50, results_to_return: 0)
+        suggested_search_count_across_england(results_to_return: 0)
+      end
+
+      it "doesn't show the suggested searches section" do
+        filter_page.load
+        filter_page.by_postcode_town_or_city.click
+        filter_page.location_query.set "SW1P 3BT"
+        filter_page.search_radius.select "50 miles"
+
+        filter_page.find_courses.click
+        expect(results_page).not_to have_suggested_searches
+      end
+    end
   end
 
   context "a search with more than 3 results" do

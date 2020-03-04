@@ -406,7 +406,7 @@ describe ResultsView do
   describe "#course_count" do
     subject { described_class.new(query_parameters: {}).course_count }
 
-    context "there are 8900 results" do
+    context "there are more than three results" do
       before do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
@@ -643,6 +643,36 @@ describe ResultsView do
           ],
         )
       }
+    end
+  end
+
+  describe "#no_results_found?" do
+    subject { described_class.new(query_parameters: {}).no_results_found? }
+
+    context "there are more than three results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq(false) }
+    end
+
+    context "there are no results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
+      end
+
+      it { is_expected.to eq(true) }
     end
   end
 end
