@@ -128,7 +128,7 @@ class ResultsView
   def courses
     @courses ||= begin
                    base_query = Course
-                     .includes(:provider).includes(:sites)
+                     .includes(:provider).includes(:sites).includes(:subjects)
                      .where(recruitment_cycle_year: Settings.current_cycle)
 
                    base_query = base_query.where(funding: "salary") if with_salaries?
