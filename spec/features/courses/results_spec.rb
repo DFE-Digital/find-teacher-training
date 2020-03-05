@@ -55,7 +55,7 @@ feature "Search results", type: :feature do
         expect(first_course.name.text).to eq("Mathematics (2VMB)")
         expect(first_course.provider_name.text).to eq("South East Learning Alliance")
         expect(first_course.description.text).to eq("QTS full time with salary")
-        expect(first_course).not_to have_accrediting_provider
+        expect(first_course.accrediting_provider.text).to eq("e-Qualitas")
         expect(first_course.funding_options.text).to eq("Salary")
         expect(first_course.main_address.text).to eq("South East Learning Alliance, Riddlesdown Collegiate, Purley, South Croydon, Surrey, CR8 1EX")
       end
@@ -65,7 +65,7 @@ feature "Search results", type: :feature do
         expect(second_course.provider_name.text).to eq("Delta Teaching School Alliance")
         expect(second_course.description.text).to eq("PGCE with QTS full time with salary")
         expect(second_course.funding_options.text).to eq("Salary")
-        expect(second_course).not_to have_accrediting_provider
+        expect(second_course.accrediting_provider.text).to eq("Sheffield Hallam University")
         expect(second_course.main_address.text).to eq("Education House, Spawd Bone Lane, Knottingley, West Yorkshire, WF11 0EP")
       end
     end
