@@ -95,9 +95,9 @@
               <% end %>
               <dt class="govuk-list--description__label">Financial support</dt>
               <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-              <% if course.accrediting_provider.present? %>
+              <% if course['accrediting_provider'].present? %>
                 <dt>Accredited body</dt>
-                <dd data-qa="course__accrediting_provider"><%= course.accrediting_provider.provider_name %></dd>
+                <dd data-qa="course__accrediting_provider"><%= course['accrediting_provider']['provider_name'] %></dd>
               <% end %>
               <% unless @results_view.location_filter?  %>
                 <dt class="govuk-list--description__label">Main address</dt>
