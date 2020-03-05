@@ -2,6 +2,7 @@ require "rails_helper"
 
 feature "Location filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
+  let(:start_page) { PageObjects::Page::Start.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
@@ -104,6 +105,21 @@ feature "Location filter", type: :feature do
       expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
       expect(results_page.location_filter.map).to be_present
       expect(results_page.courses.count).to eq(2)
+    end
+
+    describe "when using the wizard" do
+      it "progresses to next step instead of going straight to results" do
+        start_page.load
+        start_page.by_postcode_town_or_city.click
+        start_page.location_query.fill_in(with: "SW1P 3BT")
+        start_page.find_courses.click
+
+        URI(current_url).then do |uri|
+          expect(uri.path).to eq("/start/subject")
+          expect(uri.query)
+            .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=20&sortby=2")
+        end
+      end
     end
   end
 
