@@ -3,12 +3,14 @@ require "rails_helper"
 describe "/sitemap.xml", type: :request do
   let(:provider) { build(:provider, provider_code: "T92") }
   let(:current_recruitment_cycle) { build :recruitment_cycle }
+  let(:changed_at) { Time.zone.now }
   let(:course) do
     build(:course,
           course_code: "X102",
           provider: provider,
           provider_code: provider.provider_code,
-          recruitment_cycle: current_recruitment_cycle)
+          recruitment_cycle: current_recruitment_cycle,
+          changed_at: changed_at)
   end
 
   before do
@@ -25,8 +27,14 @@ describe "/sitemap.xml", type: :request do
       params: {
         recruitment_cycle_year: Settings.current_cycle,
       },
+      pagination: {
+        page: 1,
+        per_page: 20_000,
+      },
       resources: course,
-      include: %w[provider],
+      fields: {
+        courses: %w[course_code provider_code changed_at],
+      },
     )
 
     get "/sitemap.xml"
@@ -46,7 +54,7 @@ describe "/sitemap.xml", type: :request do
           </url>
           <url>
             <loc>http://www.example.com/course/T92/X102</loc>
-            <lastmod>2019-01-01</lastmod>
+            <lastmod>#{changed_at.to_date.strftime('%Y-%m-%d')}</lastmod>
           </url>
         </urlset>
       XML

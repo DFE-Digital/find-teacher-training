@@ -11,7 +11,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.9", "xmlns:xhtml"
   @courses.each do |course|
     xml.url do
       xml.loc course_url(course.provider_code, course.course_code)
-      xml.lastmod course.last_published_at.to_date.strftime("%Y-%m-%d")
+      xml.lastmod course.changed_at.to_date.strftime("%Y-%m-%d")
     end
   end
 end
