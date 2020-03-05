@@ -13,7 +13,7 @@ module ResultFilters
     def create
       # if searching for specific provider go to results page
       if provider_option_selected?
-        redirect_to(provider_path(params_for_provider_search))
+        redirect_to(provider_path(get_params_for_selected_option({})))
         return
       end
 
@@ -21,14 +21,7 @@ module ResultFilters
       form_object = LocationFilterForm.new(form_params)
       if form_object.valid?
         all_params = form_params.merge!(form_object.params)
-
-        if location_option_selected?
-          submitted_params = params_for_location_search(all_params)
-        elsif across_england_option_selected?
-          submitted_params = params_for_across_england_search(all_params)
-        end
-
-        redirect_to(next_step(submitted_params))
+        redirect_to(next_step(all_params))
       else
         flash[:error] = form_object.errors
         back_to_current_page_if_error(form_params)
@@ -54,23 +47,22 @@ module ResultFilters
       filter_params[:l] == "3"
     end
 
-    def params_for_location_search(params)
-      params.except(:query)
-    end
-
-    def params_for_across_england_search(params)
-      params.except(:lat, :lng, :rad, :loc, :lq, :query, :sortby)
-    end
-
-    def params_for_provider_search
-      filter_params.except(:lat, :lng, :rad, :loc, :lq)
+    def get_params_for_selected_option(all_params)
+      if location_option_selected?
+        all_params.except(:query)
+      elsif across_england_option_selected?
+        all_params.except(:lat, :lng, :rad, :loc, :lq, :query, :sortby)
+      elsif provider_option_selected?
+        filter_params.except(:lat, :lng, :rad, :loc, :lq)
+      end
     end
 
     def strip(params)
       params.reject { |_, v| v == "" }
     end
 
-    def next_step(submitted_params)
+    def next_step(all_params)
+      submitted_params = get_params_for_selected_option(all_params)
       if flash[:start_wizard]
         start_subject_path(submitted_params)
       else
