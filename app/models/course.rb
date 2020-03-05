@@ -10,6 +10,7 @@ class Course < Base
   property :maths, type: :string
   property :english, type: :string
   property :science, type: :string
+  property :changed_at, type: :time
 
   self.primary_key = :course_code
 
