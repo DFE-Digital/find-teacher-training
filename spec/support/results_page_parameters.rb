@@ -1,6 +1,6 @@
 def results_page_parameters(parameters = {})
   {
-    "filter[vacancies]" => "true",
+    "filter[has_vacancies]" => "true",
     "include" => "provider,sites,subjects",
     "page[page]" => 1,
     "page[per_page]" => 10,

@@ -136,7 +136,7 @@ class ResultsView
                      .where(recruitment_cycle_year: Settings.current_cycle)
 
                    base_query = base_query.where(funding: "salary") if with_salaries?
-                   base_query = base_query.where(vacancies: hasvacancies?)
+                   base_query = base_query.where(has_vacancies: hasvacancies?)
                    base_query = base_query.where(study_type: study_type) if study_type.present?
 
                    base_query = base_query.where(qualification: qualification.join(",")) unless all_qualifications?
