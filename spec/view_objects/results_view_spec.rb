@@ -675,4 +675,47 @@ describe ResultsView do
       it { is_expected.to eq(true) }
     end
   end
+
+  describe "#number_of_courses_string" do
+    subject { described_class.new(query_parameters: {}).number_of_courses_string }
+
+    context "there are two results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq("2 courses") }
+    end
+
+    context "there is one result" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/one_course_with_sites.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq("1 course") }
+    end
+
+    context "there are no results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
+      end
+
+      it { is_expected.to eq("No courses") }
+    end
+  end
 end

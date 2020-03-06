@@ -1,6 +1,7 @@
 require "geokit"
 class ResultsView
   include CsharpRailsSubjectConversionHelper
+  include ActionView::Helpers::NumberHelper
 
   MAXIMUM_NUMBER_OF_SUBJECTS = 43
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
@@ -211,6 +212,17 @@ class ResultsView
 
   def no_results_found?
     course_count.zero?
+  end
+
+  def number_of_courses_string
+    case course_count
+    when 0
+      "No courses"
+    when 1
+      "1 course"
+    else
+      "#{number_with_delimiter(course_count)} courses"
+    end
   end
 
 private
