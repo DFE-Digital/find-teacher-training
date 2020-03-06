@@ -195,4 +195,39 @@ feature "suggested searches", type: :feature do
       expect(results_page).not_to have_suggested_search_links
     end
   end
+
+  context "a search filtered by provider with 2 results" do
+    before do
+      stub_request(
+        :get,
+        "http://localhost:3001/api/v3/recruitment_cycles/2020/providers",
+      ).with(
+        query: {
+          "fields[providers]" => "provider_code,provider_name",
+          "search" => "ACME",
+        },
+      ).to_return(
+        body: File.new("spec/fixtures/api_responses/providers.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+
+      stub_request(:get, courses_url)
+        .with(
+          query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
+        )
+        .to_return(
+          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+    end
+
+    it "doesn't show suggested searches" do
+      filter_page.load
+      filter_page.by_provider.click
+      filter_page.provider_search.fill_in(with: "ACME")
+      filter_page.find_courses.click
+
+      expect(results_page).not_to have_suggested_search_links
+    end
+  end
 end
