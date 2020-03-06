@@ -17,6 +17,7 @@ module PageObjects
         element :main_address, '[data-qa="course__main_address"]'
         elements :site_distance_to_location_query, '[data-qa="course__site_distance"]'
         elements :nearest_address, '[data-qa="course__nearest_address"]'
+        elements :show_vacanices, '[data-qa="course__has_vacancies"]'
       end
 
       class SubjectsSection < SitePrism::Section

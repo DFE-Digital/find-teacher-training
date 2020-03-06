@@ -115,6 +115,10 @@ class CourseDecorator < Draper::Decorator
     "#{name} (#{course_code})"
   end
 
+  def has_vacancies?
+    object.has_vacancies? ? "Yes" : "No"
+  end
+
 private
 
   def find_max(attribute)

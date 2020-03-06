@@ -27,7 +27,8 @@ describe CourseDecorator do
           subjects: subjects,
           open_for_applications?: true,
           last_published_at: "2019-03-05T14:42:34Z",
-          recruitment_cycle: current_recruitment_cycle
+          recruitment_cycle: current_recruitment_cycle,
+          has_vacancies?: true
   end
   let(:start_date) { Time.zone.local(2019) }
   let(:site) { build(:site) }
@@ -387,6 +388,12 @@ describe CourseDecorator do
   describe "#display_title" do
     it "returns the course name with the course code" do
       expect(decorated_course.display_title).to eq("Mathematics (A1)")
+    end
+  end
+
+  describe "has_vacancies?" do
+    it "returns if the course has vacancies" do
+      expect(decorated_course.has_vacancies?).to eq("Yes")
     end
   end
 end
