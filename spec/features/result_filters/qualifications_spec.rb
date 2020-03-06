@@ -110,7 +110,7 @@ feature "Qualifications filter", type: :feature do
     context "deselecting courses with 'qts only' qualification" do
       before do
         stub_request(:get, courses_url)
-          .with(query: base_parameters.merge("filter[qualifications]" => "PgdePgceWithQts,Other"))
+          .with(query: base_parameters.merge("filter[qualification]" => "pgce_with_qts,pgde_with_qts,pgce,pgde"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -137,7 +137,7 @@ feature "Qualifications filter", type: :feature do
     context "deselecting courses that with 'pgde with qts' qualification" do
       before do
         stub_request(:get, courses_url)
-          .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,Other"))
+          .with(query: base_parameters.merge("filter[qualification]" => "qts,pgce,pgde"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -164,7 +164,7 @@ feature "Qualifications filter", type: :feature do
     context "deselecting courses with 'further education' qualification" do
       before do
         stub_request(:get, courses_url)
-          .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts"))
+          .with(query: base_parameters.merge("filter[qualification]" => "qts,pgce_with_qts,pgde_with_qts"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -215,7 +215,7 @@ feature "Qualifications filter", type: :feature do
       )
 
       stub_request(:get, courses_url)
-        .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other"))
+        .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
