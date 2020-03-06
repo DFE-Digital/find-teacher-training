@@ -96,7 +96,7 @@ feature "Vacancy filter", type: :feature do
     context "selecting courses with or without vacancies" do
       before do
         stub_request(:get, courses_url)
-          .with(query: base_parameters.merge("filter[vacancies]" => "false"))
+          .with(query: base_parameters.merge("filter[has_vacancies]" => "false"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -121,7 +121,7 @@ feature "Vacancy filter", type: :feature do
     context "selecting courses with vacancies" do
       before do
         stub_request(:get, courses_url)
-          .with(query: base_parameters.merge("filter[vacancies]" => "true"))
+          .with(query: base_parameters.merge("filter[has_vacancies]" => "true"))
           .to_return(
             body: File.new("spec/fixtures/api_responses/courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
