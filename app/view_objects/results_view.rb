@@ -138,7 +138,8 @@ class ResultsView
                    base_query = base_query.where(funding: "salary") if with_salaries?
                    base_query = base_query.where(vacancies: hasvacancies?)
                    base_query = base_query.where(study_type: study_type) if study_type.present?
-                   base_query = base_query.where(qualifications: qualifications)
+
+                   base_query = base_query.where(qualification: qualification.join(",")) unless all_qualifications?
                    base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
                    base_query = base_query.where(send_courses: true) if send_courses?
 
@@ -205,6 +206,14 @@ class ResultsView
   end
 
 private
+
+  def qualification
+    qualification = []
+    qualification |= %w[qts] if qts_only?
+    qualification |= %w[pgce_with_qts pgde_with_qts] if pgce_or_pgde_with_qts?
+    qualification |= %w[pgce pgde] if other_qualifications?
+    qualification
+  end
 
   def lat_long
     Geokit::LatLng.new(latitude.to_f, longitude.to_f)
