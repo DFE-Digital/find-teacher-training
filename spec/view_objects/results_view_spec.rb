@@ -386,6 +386,22 @@ describe ResultsView do
     end
   end
 
+  describe "#vacancy_filter?" do
+    subject { described_class.new(query_parameters: parameter_hash).vacancy_filter? }
+
+    context "when hasvacancies param is set to True" do
+      let(:parameter_hash) { { "hasvacancies" => "True" } }
+
+      it { is_expected.to be(false) }
+    end
+
+    context "when hasvacancies param is set to False" do
+      let(:parameter_hash) { { "hasvacancies" => "False" } }
+
+      it { is_expected.to be(true) }
+    end
+  end
+
   describe "#course_count" do
     subject { described_class.new(query_parameters: {}).course_count }
 

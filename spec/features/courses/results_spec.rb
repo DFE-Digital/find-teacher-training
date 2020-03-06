@@ -58,6 +58,7 @@ feature "Search results", type: :feature do
         expect(first_course.accrediting_provider.text).to eq("e-Qualitas")
         expect(first_course.funding_options.text).to eq("Salary")
         expect(first_course.main_address.text).to eq("South East Learning Alliance, Riddlesdown Collegiate, Purley, South Croydon, Surrey, CR8 1EX")
+        expect(first_course).not_to have_show_vacanices
       end
 
       results_page.courses.second.then do |second_course|
@@ -67,6 +68,7 @@ feature "Search results", type: :feature do
         expect(second_course.funding_options.text).to eq("Salary")
         expect(second_course.accrediting_provider.text).to eq("Sheffield Hallam University")
         expect(second_course.main_address.text).to eq("Education House, Spawd Bone Lane, Knottingley, West Yorkshire, WF11 0EP")
+        expect(second_course).not_to have_show_vacanices
       end
     end
   end

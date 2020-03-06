@@ -108,6 +108,10 @@ class ResultsView
     query_parameters["l"] == "3"
   end
 
+  def vacancy_filter?
+    query_parameters["hasvacancies"] == "False"
+  end
+
   def sort_by_distance?
     sort_by == DISTANCE
   end
