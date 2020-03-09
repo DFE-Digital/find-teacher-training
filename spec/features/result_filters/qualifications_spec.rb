@@ -29,7 +29,7 @@ feature "Qualifications filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -84,7 +84,7 @@ feature "Qualifications filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -93,7 +93,7 @@ feature "Qualifications filter", type: :feature do
       results_page.load
 
       expect(results_page.qualifications_filter).to have_qualifications
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -112,7 +112,7 @@ feature "Qualifications filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualification]" => "pgce_with_qts,pgde_with_qts,pgce,pgde"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -130,7 +130,7 @@ feature "Qualifications filter", type: :feature do
         expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
         expect(results_page.qualifications_filter).to have_other_qualifications
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -139,7 +139,7 @@ feature "Qualifications filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualification]" => "qts,pgce,pgde"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -157,7 +157,7 @@ feature "Qualifications filter", type: :feature do
         expect(results_page.qualifications_filter).to have_qts_only
         expect(results_page.qualifications_filter).to have_other_qualifications
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -166,7 +166,7 @@ feature "Qualifications filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[qualification]" => "qts,pgce_with_qts,pgde_with_qts"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -184,7 +184,7 @@ feature "Qualifications filter", type: :feature do
         expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
         expect(results_page.qualifications_filter).to have_qts_only
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -210,14 +210,14 @@ feature "Qualifications filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -232,7 +232,7 @@ feature "Qualifications filter", type: :feature do
       expect(results_page.heading.text).to eq("Teacher training courses")
       expect(results_page.qualifications_filter).to have_qualifications
 
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 end

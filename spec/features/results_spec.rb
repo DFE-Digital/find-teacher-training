@@ -23,7 +23,7 @@ feature "results", type: :feature do
   end
 
   let(:courses) do
-    File.new("spec/fixtures/api_responses/courses.json")
+    File.new("spec/fixtures/api_responses/ten_courses.json")
   end
 
   before do
@@ -45,7 +45,7 @@ feature "results", type: :feature do
   describe "course count" do
     context "when API returns courses" do
       it "displays the correct course count" do
-        expect(results_page.course_count).to have_content("8,900 courses found")
+        expect(results_page.course_count).to have_content("10 courses found")
       end
     end
   end
@@ -115,7 +115,7 @@ feature "results", type: :feature do
       stub_request(:get, default_url)
         .with(query: results_page_parameters("sort" => "provider.provider_name,name"))
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
     end
@@ -124,7 +124,7 @@ feature "results", type: :feature do
       stub_request(:get, default_url)
         .with(query: results_page_parameters("sort" => "-provider.provider_name,-name"))
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
     end

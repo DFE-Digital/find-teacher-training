@@ -29,7 +29,7 @@ feature "Study type filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -83,7 +83,7 @@ feature "Study type filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -94,7 +94,7 @@ feature "Study type filter", type: :feature do
       expect(results_page.study_type_filter).to have_parttime
       expect(results_page.study_type_filter).to have_fulltime
 
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -113,7 +113,7 @@ feature "Study type filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "part_time"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -129,7 +129,7 @@ feature "Study type filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.study_type_filter).to have_parttime
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -138,7 +138,7 @@ feature "Study type filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "full_time"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -154,7 +154,7 @@ feature "Study type filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.study_type_filter).to have_fulltime
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -177,7 +177,7 @@ feature "Study type filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[study_type]" => "full_time,part_time"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -196,7 +196,7 @@ feature "Study type filter", type: :feature do
 
         expect(results_page.study_type_filter).to have_parttime
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
   end

@@ -32,7 +32,7 @@ feature "Funding filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -88,7 +88,7 @@ feature "Funding filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -97,7 +97,7 @@ feature "Funding filter", type: :feature do
       results_page.load
 
       expect(results_page.funding_filter).to have_with_or_without_salary
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -116,7 +116,7 @@ feature "Funding filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -133,7 +133,7 @@ feature "Funding filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.funding_filter.with_or_without_salary.text).to eq("Courses with and without salary")
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -142,7 +142,7 @@ feature "Funding filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[funding]" => "salary"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -159,7 +159,7 @@ feature "Funding filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.funding_filter.with_salary.text).to eq("Only courses with a salary")
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
   end
@@ -169,14 +169,14 @@ feature "Funding filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
       stub_request(:get, courses_url)
         .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other"))
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -185,7 +185,7 @@ feature "Funding filter", type: :feature do
       results_page.load
 
       expect(results_page.funding_filter.with_or_without_salary.text).to eq("Courses with and without salary")
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 end

@@ -48,7 +48,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/four_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -84,7 +84,7 @@ feature "Location filter", type: :feature do
                                        "sort" => "distance"),
           )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses_with_site_statuses_and_sites.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
 
@@ -270,7 +270,7 @@ feature "Location filter", type: :feature do
                                        "sort" => "distance"),
           )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses_with_site_statuses_and_sites.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
     end

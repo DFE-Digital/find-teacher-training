@@ -411,12 +411,12 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
 
-      it { is_expected.to be(8900) }
+      it { is_expected.to be(10) }
     end
 
     context "there are no results" do
@@ -513,7 +513,7 @@ describe ResultsView do
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
                 .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
                 .to_return(
-                  body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+                  body: File.new("spec/fixtures/api_responses/four_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
               )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
@@ -663,7 +663,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
@@ -693,7 +693,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+            body: File.new("spec/fixtures/api_responses/two_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
@@ -706,7 +706,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/one_course_with_sites.json"),
+            body: File.new("spec/fixtures/api_responses/one_course.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
