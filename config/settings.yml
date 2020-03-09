@@ -1,3 +1,4 @@
+application_name: find-teacher-training
 teacher_training_api:
   # URL of the API app (teacher-training-api)
   base_url: http://localhost:3001
@@ -11,3 +12,9 @@ google:
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 redirect_results_to_c_sharp: true
+logstash:
+  type: tcp
+  host: # Our hostname here
+  port: # Our port here
+  ssl_enable: true
+log_level: info
