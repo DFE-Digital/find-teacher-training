@@ -35,7 +35,7 @@
         "about_accrediting_body": null,
         "provider_code": "T92",
         "recruitment_cycle_year": "2020",
-        "about_course": "SCITT (School Centred Initial Teacher Training) is a school-based route into becoming a qualified teacher and achieving QTS. The course lasts for one year full-time, from September to July. Most of the course is spent in school, where successful applicants are placed in a class under the supervision and guidance of a mentor.\r\n\r\nTrainees will complete their year’s training at [Oakthorpe Primary School](https://www.oakthorpe.enfield.sch.uk/), an Ofsted graded ‘outstanding’ school situated in the London Borough of Enfield. \r\n\r\n\r\nAll trainees on the 2Schools Consortium SCITT Programme have the opportunity to work towards a PGCE (Primary Education) award which will be validated by the University of East London as well as Qualified Teacher Status (awarded by 2Schools Consortium, the Teacher Training provider). \r\n\r\nTRAINING SESSIONS\r\nTrainees will be required to attend a weekly face-to-face training session (during the Autumn and Spring term at Hazelwood Sports Centre and 2 at UEL Startford campus) delivered  by a range of experienced teachers, outstanding practitioners and leading figures in their field.\r\n\r\nASSESSMENT\r\n\r\n\r\nTeaching is assessed against Qualified Teacher Status (QTS) Standards, on three teaching practices across two school placements. \r\n\r\nAssessment of the teaching is carried out regularly through observations of lessons, discussion and feedback on academic tasks and assignments.\r\n\r\nA personalised training plan guides the trainee through weekly expectations of their learning through class based activities, tasks and assignments and out of school training.\r\n\r\nCOURSE TIMETABLE\r\n\r\nTerm 1:        \r\n\r\n* 4 days per week in school, observing and shadowing the class teacher, increasing to teaching 4 sessions per week by the end of term\r\n\r\n* Every Thursday- training all day\r\n\r\n* 2 academic assignments and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 2:        \r\n\r\n* 4 days per week in school in a different Key Stage, then in a different school (contrasting setting) observing and shadowing class teacher, increasing to 3-4 days teaching\r\n\r\n* Most Thursdays- training all day\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 3: \r\n\r\n* 5 days teaching up to 85% of the week in main placement school.\r\nTraining will take place up to 3 times over the course of the term\r\n\r\n* Collation of evidence for Standards files \r\n\r\n* Final moderation consisting of one lesson observation, discussion and scrutiny of Standards Files\r\n\r\nIf you would like to find out more or have questions please contact us by [post, phone, fax or email](http://www.2schools.org/contact/).\r\n",
+        "about_course": "SCITT (School Centred Initial Teacher Training) is a school-based route into becoming a qualified teacher and achieving QTS. The course lasts for one year full-time, from September to July. Most of the course is spent in school, where successful applicants are placed in a class under the supervision and guidance of a mentor.\r\n\r\nTrainees will complete their year’s training at [Oakthorpe Primary School](https://www.oakthorpe.enfield.sch.uk/), an Ofsted graded ‘outstanding’ school situated in the London Borough of Enfield. \r\n\r\n\r\nAll trainees on the 2Schools Consortium SCITT Programme have the opportunity to work towards a PGCE (Primary Education) award which will be validated by the University of East London as well as Qualified Teacher Status (awarded by 2Schools Consortium, the Teacher Training provider). \r\n\r\nTRAINING SESSIONS\r\nTrainees will be required to attend a weekly face-to-face training session (during the Autumn and Spring term at Hazelwood Sports Centre and 2 at UEL Startford campus) delivered  by a range of experienced teachers, outstanding practitioners and leading figures in their field.\r\n\r\nASSESSMENT\r\n\r\n\r\nTeaching is assessed against Qualified Teacher Status (QTS) Standards, on three teaching practices across two school placements. \r\n\r\nAssessment of the teaching is carried out regularly through observations of lessons, discussion and feedback on academic tasks and assignments.\r\n\r\nA personalised training plan guides the trainee through weekly expectations of their learning through class based activities, tasks and assignments and out of school training.\r\n\r\nCOURSE TIMETABLE\r\n\r\nTerm 1:        \r\n\r\n* 4 days per week in school, observing and shadowing the class teacher, increasing to teaching 4 sessions per week by the end of term\r\n\r\n* Every Thursday- training all day\r\n\r\n* 2 academic assignments and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 2:        \r\n\r\n* 4 days per week in school in a different Key Stage, then in a different school (contrasting setting) observing and shadowing class teacher, increasing to 3-4 days teaching\r\n\r\n* Most Thursdays- training all day\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 3: \r\n\r\n* 5 days teaching up to 85% of the week in main placement school.\r\nTraining will take place up to 3 times over the course of the term\r\n\r\n* Collation of evidence for Standards files \r\n\r\n* Final moderation consisting of one lesson observation, discussion and scrutiny of Standards Files\r\n\r\nIf you would like to find out more or have questions please contact us by [post, phone, fax or email](http://www.2schools.org/foo/).\r\n",
         "course_length": "OneYear",
         "fee_details": null,
         "fee_international": null,
@@ -193,6 +193,170 @@
           ]
         }
       }
+    },
+    {
+      "id": "12936237",
+      "type": "courses",
+      "attributes": {
+        "findable?": true,
+        "open_for_applications?": true,
+        "has_vacancies?": true,
+        "course_code": "AK12",
+        "name": "Art and design",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "description": "PGCE with QTS full time",
+        "content_status": "published",
+        "ucas_status": "running",
+        "funding_type": "fee",
+        "level": "secondary",
+        "is_send?": false,
+        "english": "equivalence_test",
+        "maths": "equivalence_test",
+        "science": "not_required",
+        "gcse_subjects_required": [
+          "maths",
+          "english"
+        ],
+        "age_range_in_years": "11_to_16",
+        "accrediting_provider": null,
+        "accrediting_provider_code": null,
+        "changed_at": "2019-11-05T10:56:06.230Z",
+        "start_date": "September 2020",
+        "applications_open_from": "2019-10-25",
+        "last_published_at": "2019-11-05T10:56:06Z",
+        "about_accrediting_body": null,
+        "provider_code": "2AT",
+        "recruitment_cycle_year": "2020",
+        "about_course": "Our secondary courses are designed and taught by a dedicated team of practising teachers. Each is based on developing each trainee with a bespoke plan and experience designed to make you the best teacher you can be. All programmes are an 11-16 programme with a post 16 enhancement. It is taught by practising art/design teachers, including specialist leaders of education. You will be placed in two schools for your assessed placement from across our partnership schools in West Yorkshire. The normal pattern of the year is to be in your placement school for four days per week and to attend our training programme one day per week. We have very experienced mentors who are there to guide and support trainees throughout their training year and you will have the opportunity to visit a variety of schools on training days to broaden your experience and understanding. We provide all our trainees with their own laptop during the programme and have a dedicated website for trainee support and resources. All trainees are registered with the University of Huddersfield for a  PGCE. We are looking for candidates with normally either a degree in their subject or related to it, or for candidates with a non-related degree an A level in the subject at C or above.",
+        "course_length": "OneYear",
+        "fee_details": "",
+        "fee_international": null,
+        "fee_uk_eu": 9250,
+        "financial_support": "ITT bursaries are provided by the government. We are responsible for making the bursary payments to eligible students. The bursaries are given to UK and EU students only (so you must meet the residency eligibility criteria set for statutory student finance) and depend on which ITT course subject you are studying and the degree you currently hold. To find out what bursaries are available and the eligibility criteria please visit https://getintoteaching.education.gov.uk/funding-and-salary/overview. You do not need to apply for a bursary, this is processed automatically upon enrolment by us.\r\n\r\nTo find out how the scholarships and bursaries are paid please visit https://getintoteaching.education.gov.uk/funding-and-salary/overview .  We will provide eligible students with payment information with their entitlement letter. Students will need to sign eligibility declaration forms before starting the course and during the course in order to receive payment of the bursary. ",
+        "how_school_placements_work": "Our programme places you in two schools from within the partnership across the year and you will work across two key stages; key stage 3 (11-14) and 4 (14-16) with post-16 enhancement. Our Secondary partners are based in Halifax, Huddersfield, Bradford \u0026 Leeds. Partnering with local schools in the area, we feel fully encompasses the geographical, social and economic diversity of West Yorkshire, offering our alliance breadth and depth. A key strength of our partnership is the diversity of schools; your two placement schools will be contrasting and the range of children and teachers you will work with will come from across the entire alliance ensuring you are trained to teach in all schools from the very start of your career.",
+        "interview_process": "Interviews take place throughout the year, they include an interview with a selected panel of staff, a short activity for a group of pupils and a written test to assess your literacy and numeracy.",
+        "other_requirements": "* It would be helpful to have spent time in school to ensure you have an understanding of the role of the teacher. This is something we can help with if you struggle to find a school experience place.  \r\n\r\n* You will also need to undertake an enhanced DBS check and an occupational health check",
+        "personal_qualities": "We are first and foremost looking for potential!  This is a training programme so we do not expect you to be the finished article but we are looking for people who are committed to teaching as a career, who are highly motivated, reflective and creative.  ",
+        "required_qualifications": "* GCSE grades (or equivalent) at grade C or above in English and maths\r\n* A subject relevant degree usually at 2:2 or above.\r\n* In some cases we would require you to complete a subject knowledge enhancement programme as a condition of acceptance on the course",
+        "salary_details": null
+      },
+      "relationships": {
+        "provider": {
+          "data": {
+            "type": "providers",
+            "id": "13996"
+          }
+        },
+        "accrediting_provider": {
+          "meta": {
+            "included": false
+          }
+        },
+        "site_statuses": {
+          "data": [
+            {
+              "type": "site_statuses",
+              "id": "22344093"
+            }
+          ]
+        },
+        "sites": {
+          "meta": {
+            "included": false
+          }
+        },
+        "subjects": {
+          "data": [
+            {
+              "type": "subjects",
+              "id": "8"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "12925682",
+      "type": "courses",
+      "attributes": {
+        "findable?": true,
+        "open_for_applications?": true,
+        "has_vacancies?": true,
+        "course_code": "3CXD",
+        "name": "Biology",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "description": "PGCE with QTS full time",
+        "content_status": "published",
+        "ucas_status": "running",
+        "funding_type": "fee",
+        "level": "secondary",
+        "is_send?": false,
+        "english": "equivalence_test",
+        "maths": "equivalence_test",
+        "science": null,
+        "gcse_subjects_required": [
+          "maths",
+          "english"
+        ],
+        "age_range_in_years": null,
+        "accrediting_provider": null,
+        "accrediting_provider_code": null,
+        "changed_at": "2019-09-25T08:11:02.854Z",
+        "start_date": "September 2020",
+        "applications_open_from": "2019-10-08",
+        "last_published_at": "2019-09-25T08:11:02Z",
+        "about_accrediting_body": null,
+        "provider_code": "2AT",
+        "recruitment_cycle_year": "2020",
+        "about_course": "Our secondary courses are designed and taught by a dedicated team of practising teachers. Each is based on developing each trainee with a bespoke plan and experience designed to make you the best teacher you can be. All programmes are an 11-16 programme with a post 16 enhancement. It is taught by practising science teachers, including specialist leaders of education. You will be placed in two schools for your assessed placement from across our partnership schools in West Yorkshire. The normal pattern of the year is to be in your placement school for four days per week and to attend our training programme one day per week. We have very experienced mentors who are there to guide and support trainees throughout their training year and you will have the opportunity to visit a variety of schools on training days to broaden your experience and understanding. We provide all our trainees with their own laptop during the programme and have a dedicated website for trainee support and resources. All trainees are registered with the University of Huddersfield for a  PGCE. We are looking for candidates with normally either a degree in their subject or related to it or for candidates with a non related degree and an A level in the subject at C or above.",
+        "course_length": "OneYear",
+        "fee_details": "",
+        "fee_international": null,
+        "fee_uk_eu": 9250,
+        "financial_support": "ITT bursaries are provided by the government. We are responsible for making the bursary payments to eligible students. The bursaries are given to UK and EU students only (so you must meet the residency eligibility criteria set for statutory student finance) and depend on which ITT course subject you are studying and the degree you currently hold. To find out what bursaries are available and the eligibility criteria please visit https://getintoteaching.education.gov.uk/funding-and-salary/overview. You do not need to apply for a bursary, this is processed automatically upon enrolment by us.\r\n\r\nTo find out how the scholarships and bursaries are paid please visit https://getintoteaching.education.gov.uk/funding-and-salary/overview .  We will provide eligible students with payment information with their entitlement letter. Students will need to sign eligibility declaration forms before starting the course and during the course in order to receive payment of the bursary. ",
+        "how_school_placements_work": "Our programme places you in two schools from within the partnership across the year and you will work across two key stages; key stage 3 (11-14) and 4 (14-16) with post 16 enhancement. Our Secondary partners are based in Halifax, Huddersfield, Bradford \u0026 Leeds. Partnering with local schools in the area, we feel fully encompasses the geographical, social and economic diversity of West Yorkshire, offering our alliance breadth and depth. A key strength of our partnership is the diversity of schools; your two placement schools will be contrasting and the range of children and teachers you will work with will come from across the entire alliance ensuring you are trained to teach in all schools from the very start of your career.",
+        "interview_process": "Interviews take place throughout the year, they include an interview with a selected panel of staff, a short activity for a group of pupils and a written test to asses your literacy and numeracy.",
+        "other_requirements": "* It would be helpful to have spent time in school to ensure you have an understanding of the role of the teacher.   This is something we can help with if you struggle to find a school experience place.  \r\n\r\n* You will also need to undertake an enhanced DBS check and an occupational health check",
+        "personal_qualities": "We are first and foremost looking for potential!  This is a training programme so we do not expect you to be the finished article but we are looking for people who are committed to teaching as a career, who are highly motivated, reflective and creative.  ",
+        "required_qualifications": "* GCSE grades (or equivalent) at grade C or above in English and maths\r\n* A subject relevant degree usually at 2:2 or above.  \r\n* In some cases we would require you to complete a subject knowledge enhancement programme as a condition of acceptance on the course",
+        "salary_details": null
+      },
+      "relationships": {
+        "provider": {
+          "data": {
+            "type": "providers",
+            "id": "13996"
+          }
+        },
+        "accrediting_provider": {
+          "meta": {
+            "included": false
+          }
+        },
+        "site_statuses": {
+          "data": [
+            {
+              "type": "site_statuses",
+              "id": "22324439"
+            }
+          ]
+        },
+        "sites": {
+          "meta": {
+            "included": false
+          }
+        },
+        "subjects": {
+          "data": [
+            {
+              "type": "subjects",
+              "id": "10"
+            }
+          ]
+        }
+      }
     }
   ],
   "included": [
@@ -215,7 +379,7 @@
         "address4": "London",
         "postcode": "N13 6BY",
         "region_code": "london",
-        "telephone": "02085123456",
+        "telephone": "0895123456",
         "email": "foo@bar.com",
         "website": "",
         "recruitment_cycle_year": "2020",
@@ -343,6 +507,112 @@
       }
     },
     {
+      "id": "13996",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "2AT",
+        "provider_name": "AA Teamworks West Yorkshire SCITT",
+        "accredited_body?": true,
+        "can_add_more_sites?": true,
+        "accredited_bodies": [],
+        "train_with_us": "Training with AA Teamworks is a great way to kick start your teaching career, beginning your time in school from the start of the programme, trainees are fully immersed into school life, building up their confidence and school contact time as they go on. We offer both primary and secondary training in a wide range of subjects and work with a collection of schools in the local area. We offer diverse teaching placements, ensuring trainees have experience in different types of school environments, preparing you for when you complete the programme and begin your NQT year. AA Teamworks is one of only 33 schools to be awarded research school status by the Education Endowment Fund (EEF) \u0026 The Department for Education (DfE) giving our trainees access to the latest evidence-based practices before anyone else. Out teaching team are dedicated and experienced educators who work with us to create a personalised learning experience.  Once training is complete AA Teamworks recommend you for QTS status and a PGCE is awarded from The University of Huddersfield. Working with The University of Huddersfield also provides our trainee with full access to all their facilities.   Applicants who do not qualify for a DfE bursary are awarded a bursary by us of £500 and all trainees are provided with a laptop for thier use through the programme.",
+        "train_with_disability": "At AA Teamworks we are fully committed to supporting every student regardless of their needs. Our current training facilities also comply with the current accessibility legislation.  \r\n",
+        "latitude": 53.6896047,
+        "longitude": -1.8706233,
+        "address1": "AA Teamworks W Yorks SCITT - The Greetland Academy ",
+        "address2": "Stainland Road, Greetland",
+        "address3": "Halifax",
+        "address4": "West Yorkshire",
+        "postcode": " HX4 8LS",
+        "region_code": "yorkshire_and_the_humber",
+        "telephone": "01422 123456",
+        "email": "foo@bar.com",
+        "website": "http://www.teamworkstsa.org/home-page-s-c-i-t-t-teacher-training/",
+        "recruitment_cycle_year": "2020",
+        "admin_contact": null,
+        "utt_contact": null,
+        "web_link_contact": null,
+        "fraud_contact": null,
+        "finance_contact": null,
+        "gt12_contact": null,
+        "application_alert_contact": null,
+        "type_of_gt12": "coming_or_not",
+        "send_application_alerts": "all"
+      },
+      "relationships": {
+        "sites": {
+          "meta": {
+            "included": false
+          }
+        },
+        "courses": {
+          "meta": {
+            "count": 16
+          }
+        }
+      }
+    },
+    {
+      "id": "22344093",
+      "type": "site_statuses",
+      "attributes": {
+        "vac_status": "full_time_vacancies",
+        "publish": "published",
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11212415"
+          }
+        }
+      }
+    },
+    {
+      "id": "8",
+      "type": "subjects",
+      "attributes": {
+        "subject_name": "Art and design",
+        "subject_code": "W1",
+        "bursary_amount": "9000",
+        "early_career_payments": null,
+        "scholarship": null,
+        "subject_knowledge_enhancement_course_available": false
+      }
+    },
+    {
+      "id": "22324439",
+      "type": "site_statuses",
+      "attributes": {
+        "vac_status": "full_time_vacancies",
+        "publish": "published",
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11212415"
+          }
+        }
+      }
+    },
+    {
+      "id": "10",
+      "type": "subjects",
+      "attributes": {
+        "subject_name": "Biology",
+        "subject_code": "C1",
+        "bursary_amount": "26000",
+        "early_career_payments": null,
+        "scholarship": null,
+        "subject_knowledge_enhancement_course_available": true
+      }
+    },
+    {
       "id": "11214484",
       "type": "sites",
       "attributes": {
@@ -375,14 +645,31 @@
         "longitude": -1.3173158,
         "recruitment_cycle_year": "2020"
       }
+    },
+    {
+      "id": "11212415",
+      "type": "sites",
+      "attributes": {
+        "code": "-",
+        "location_name": "Main Site",
+        "address1": "AA Teamworks W Yorks SCITT",
+        "address2": "School Street",
+        "address3": "Greetland",
+        "address4": "Halifax",
+        "postcode": "HX4 8JB",
+        "region_code": "yorkshire_and_the_humber",
+        "latitude": 53.6896047,
+        "longitude": -1.8706233,
+        "recruitment_cycle_year": "2020"
+      }
     }
   ],
   "links": {
-    "next": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=2\u0026page%5Bper_page%5D=2\u0026sort=provider.provider_name%2Cname",
-    "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=5723\u0026page%5Bper_page%5D=2\u0026sort=provider.provider_name%2Cname"
+    "next": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=2\u0026page%5Bper_page%5D=4\u0026sort=provider.provider_name%2Cname",
+    "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=2861\u0026page%5Bper_page%5D=4\u0026sort=provider.provider_name%2Cname"
   },
   "meta": {
-    "count": 2
+    "count": 4
   },
   "jsonapi": {
     "version": "1.0"

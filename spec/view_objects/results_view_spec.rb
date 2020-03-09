@@ -411,12 +411,12 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
 
-      it { is_expected.to be(8900) }
+      it { is_expected.to be(10) }
     end
 
     context "there are no results" do
@@ -513,7 +513,7 @@ describe ResultsView do
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
                 .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
                 .to_return(
-                  body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+                  body: File.new("spec/fixtures/api_responses/four_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
               )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
@@ -571,26 +571,32 @@ describe ResultsView do
   describe "#site_distance" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
-    context "greater than 1 mile" do
+    context "closest site distance is greater than 1 mile" do
       let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
 
       it "calculates the distance to the closest site, rounding to one decimal place" do
-        course = build(:course, sites: [
-          build(:site, latitude: 51.5079, longitude: 0.0877),
-          build(:site, latitude: 54.9783, longitude: 1.6178),
+        site1 = build(:site, latitude: 51.5079, longitude: 0.0877, address1: "1 Foo Street", postcode: "BAA0NE")
+        site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: "2 Foo Street", postcode: "BAA0NE")
+
+        course = build(:course, site_statuses: [
+          build(:site_status, :full_time_and_part_time, site: site1),
+          build(:site_status, :full_time_and_part_time, site: site2),
         ])
 
         expect(results_view.site_distance(course)).to eq(2)
       end
     end
 
-    context "less than 1 mile" do
+    context "closest site distance is less than 1 mile" do
       let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
 
       it "calculates the distance to the closest site, rounding to one decimal place" do
-        course = build(:course, sites: [
-          build(:site, latitude: 51.4985, longitude: 0.1367),
-          build(:site, latitude: 54.9783, longitude: 1.6178),
+        site1 = build(:site, latitude: 51.4985, longitude: 0.1367, address1: "1 Foo Street", postcode: "BAA0NE")
+        site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: "2 Foo Street", postcode: "BAA0NE")
+
+        course = build(:course, site_statuses: [
+          build(:site_status, :full_time_and_part_time, site: site1),
+          build(:site_status, :full_time_and_part_time, site: site2),
         ])
 
         expect(results_view.site_distance(course)).to eq(0.1)
@@ -603,16 +609,19 @@ describe ResultsView do
     let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
 
     it "returns the address to the nearest site" do
-      course = build(:course, sites: [
-        build(:site,
-              latitude: 51.4985,
-              longitude: 0.1367,
-              address1: "10 Windy Way",
-              address2: "Witham",
-              address3: "Essex",
-              address4: "UK",
-              postcode: "CM8 2SD"),
-        build(:site, latitude: 54.9783, longitude: 1.6178),
+      site1 = build(:site,
+                    latitude: 51.4985,
+                    longitude: 0.1367,
+                    address1: "10 Windy Way",
+                    address2: "Witham",
+                    address3: "Essex",
+                    address4: "UK",
+                    postcode: "CM8 2SD")
+      site2 = build(:site, latitude: 54.9783, longitude: 1.6178)
+
+      course = build(:course, site_statuses: [
+        build(:site_status, :full_time_and_part_time, site: site1),
+        build(:site_status, :full_time_and_part_time, site: site2),
       ])
 
       expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
@@ -654,7 +663,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
@@ -684,7 +693,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+            body: File.new("spec/fixtures/api_responses/two_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end
@@ -697,7 +706,7 @@ describe ResultsView do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/one_course_with_sites.json"),
+            body: File.new("spec/fixtures/api_responses/one_course.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
       end

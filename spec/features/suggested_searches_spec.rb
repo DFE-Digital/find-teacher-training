@@ -55,11 +55,11 @@ feature "suggested searches", type: :feature do
                 when 0
                   "empty_courses.json"
                 when 2
-                  "two_courses_with_sites.json"
+                  "two_courses.json"
                 when 4
-                  "four_courses_with_sites.json"
+                  "four_courses.json"
                 when 10
-                  "ten_courses_with_sites.json"
+                  "ten_courses.json"
                 end
 
     File.new("spec/fixtures/api_responses/#{file_name}")
@@ -216,7 +216,7 @@ feature "suggested searches", type: :feature do
           query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/two_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end

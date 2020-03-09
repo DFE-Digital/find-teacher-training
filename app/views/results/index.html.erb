@@ -84,42 +84,6 @@
               </div>
             </div>
         <% end %>
-        <ul class="govuk-list search-results">
-          <% @results_view.courses.each do |course| %>
-            <li data-qa="course">
-              <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
-                <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
-                  <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
-                  <br>
-                  <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
-                <% end %>
-              </h3>
-              <dl class="govuk-list--description">
-                <dt class="govuk-list--description__label">Course</dt>
-                <dd data-qa="course__description"><%= course.description%></dd>
-                <% if @results_view.location_filter?  %>
-                  <dt class="govuk-list--description__label">Distance</dt>
-                  <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> miles <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
-                  <dt class="govuk-list--description__label">Nearest address</dt>
-                  <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
-                <% end %>
-                <dt class="govuk-list--description__label">Financial support</dt>
-                <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-                <% if course['accrediting_provider'].present? %>
-                  <dt>Accredited body</dt>
-                  <dd data-qa="course__accrediting_provider"><%= course['accrediting_provider']['provider_name'] %></dd>
-                <% end %>
-                <% unless @results_view.location_filter?  %>
-                  <dt class="govuk-list--description__label">Main address</dt>
-                  <dd data-qa="course__main_address">
-                    <%= course.provider.decorate.short_address %>
-                  </dd>
-                <% end %>
-              </dl>
-            </li>
-          <% end %>
-        </ul>
-        <%= paginate @results_view.courses %>
       <% end %>
       <% if @results_view.suggested_search_visible? %>
         <div class="govuk-grid-row" data-qa="suggested_searches">
@@ -134,6 +98,50 @@
           </ul>
         </div>
       <% end %>
+      <ul class="govuk-list search-results">
+        <% @results_view.courses.each do |course| %>
+          <li data-qa="course">
+            <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
+              <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
+                <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
+                <br>
+                <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
+              <% end %>
+            </h3>
+            <dl class="govuk-list--description">
+              <dt class="govuk-list--description__label">Course</dt>
+              <dd data-qa="course__description"><%= course.description%></dd>
+              <% if @results_view.location_filter? && @results_view.has_sites?(course)  %>
+                <dt class="govuk-list--description__label">Distance</dt>
+                <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
+                <% if @results_view.nearest_address(course).present? %>
+                  <dt class="govuk-list--description__label">Nearest address</dt>
+                  <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
+                <% end  %>
+              <% end %>
+              <dt class="govuk-list--description__label">Financial support</dt>
+              <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+              <% if course['accrediting_provider'].present? %>
+                <dt>Accredited body</dt>
+                <dd data-qa="course__accrediting_provider"><%= course['accrediting_provider']['provider_name'] %></dd>
+              <% end %>
+              <% unless @results_view.location_filter?  %>
+                <dt class="govuk-list--description__label">Main address</dt>
+                <dd data-qa="course__main_address">
+                  <%= course.provider.decorate.short_address %>
+                </dd>
+              <% end %>
+              <% if @results_view.vacancy_filter?  %>
+                <dt class="govuk-list--description__label">Vacancies</dt>
+                <dd data-qa="course__has_vacancies">
+                  <%= course.decorate.has_vacancies? %>
+                </dd>
+              <% end %>
+            </dl>
+          </li>
+        <% end %>
+      </ul>
+      <%= paginate @results_view.courses %>
     </div>
   </div>
 </div>

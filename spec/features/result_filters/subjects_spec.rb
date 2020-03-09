@@ -18,7 +18,7 @@ feature "Subject filter", type: :feature do
     stub_request(:get, courses_url)
       .with(query: base_parameters)
       .to_return(
-        body: File.new("spec/fixtures/api_responses/courses.json"),
+        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
 
@@ -48,7 +48,7 @@ feature "Subject filter", type: :feature do
             "filter[subjects]" => "00,F1",
         ))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -74,7 +74,7 @@ feature "Subject filter", type: :feature do
         )
         expect(results_page.subjects_filter).not_to have_extra_subjects
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -85,7 +85,7 @@ feature "Subject filter", type: :feature do
             "filter[subjects]" => "00,01,F1,Q8,P3",
         ))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -116,7 +116,7 @@ feature "Subject filter", type: :feature do
         )
         expect(results_page.subjects_filter.extra_subjects.text).to eq("and 1 more...")
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
   end
@@ -129,7 +129,7 @@ feature "Subject filter", type: :feature do
           "filter[send_courses]" => "true",
       ))
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -157,7 +157,7 @@ feature "Subject filter", type: :feature do
       )
       expect(results_page.subjects_filter).not_to have_extra_subjects
 
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -326,7 +326,7 @@ feature "Subject filter", type: :feature do
           "filter[subjects]" => "00,01",
       ))
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end

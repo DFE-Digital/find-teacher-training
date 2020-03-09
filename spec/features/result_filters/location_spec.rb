@@ -48,7 +48,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
         )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/four_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -82,29 +82,41 @@ feature "Location filter", type: :feature do
                                        "filter[latitude]" => "51.4980188",
                                        "filter[radius]" => "20",
                                        "sort" => "distance"),
-        )
+          )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
-    end
+          )
 
-    it "displays the courses" do
       results_page.load
       results_page.location_filter.link.click
       filter_page.by_postcode_town_or_city.click
       filter_page.location_query.fill_in(with: "SW1P 3BT")
       filter_page.find_courses.click
+    end
 
-      expect(results_page.heading.text).to eq("Teacher training courses")
+    context "course has sites" do
+      it "displays the courses" do
+        expect(results_page.heading.text).to eq("Teacher training courses")
 
-      expect(results_page.courses.first).to have_site_distance_to_location_query
-      expect(results_page.courses.first).to have_nearest_address
-      expect(results_page.courses.first).not_to have_main_address
+        expect(results_page.courses.first).to have_site_distance_to_location_query
+        expect(results_page.courses.first).to have_nearest_address
+        expect(results_page.courses.first).not_to have_main_address
 
-      expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
-      expect(results_page.location_filter.map).to be_present
-      expect(results_page.courses.count).to eq(4)
+        expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
+        expect(results_page.location_filter.map).to be_present
+        expect(results_page.courses.count).to eq(10)
+      end
+    end
+
+    context "course with one site that has no address" do
+      # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
+      # 'nearest site' or 'distance to site' info
+      it "does not display nearest site information" do
+        expect(results_page.heading.text).to eq("Teacher training courses")
+        expect(results_page.courses.fifth).not_to have_site_distance_to_location_query
+        expect(results_page.courses.fifth).not_to have_nearest_address
+      end
     end
 
     describe "when using the wizard" do
@@ -258,7 +270,7 @@ feature "Location filter", type: :feature do
                                        "sort" => "distance"),
           )
         .to_return(
-          body: File.new("spec/fixtures/api_responses/ten_courses_with_sites.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
           )
     end

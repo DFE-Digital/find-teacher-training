@@ -10,7 +10,7 @@ feature "Search results", type: :feature do
     stub_request(:get, url)
       .with(query: base_parameters)
       .to_return(
-        body: File.new("spec/fixtures/api_responses/courses.json"),
+        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
   end
@@ -51,24 +51,16 @@ feature "Search results", type: :feature do
 
   context "multiple courses" do
     it "Lists all courses" do
-      results_page.courses.first.then do |first_course|
-        expect(first_course.name.text).to eq("Mathematics (2VMB)")
-        expect(first_course.provider_name.text).to eq("South East Learning Alliance")
-        expect(first_course.description.text).to eq("QTS full time with salary")
-        expect(first_course.accrediting_provider.text).to eq("e-Qualitas")
-        expect(first_course.funding_options.text).to eq("Salary")
-        expect(first_course.main_address.text).to eq("South East Learning Alliance, Riddlesdown Collegiate, Purley, South Croydon, Surrey, CR8 1EX")
-        expect(first_course).not_to have_show_vacanices
-      end
+      expect(results_page.courses.count).to eq(10)
 
-      results_page.courses.second.then do |second_course|
-        expect(second_course.name.text).to eq("English (26Q6)")
-        expect(second_course.provider_name.text).to eq("Delta Teaching School Alliance")
-        expect(second_course.description.text).to eq("PGCE with QTS full time with salary")
-        expect(second_course.funding_options.text).to eq("Salary")
-        expect(second_course.accrediting_provider.text).to eq("Sheffield Hallam University")
-        expect(second_course.main_address.text).to eq("Education House, Spawd Bone Lane, Knottingley, West Yorkshire, WF11 0EP")
-        expect(second_course).not_to have_show_vacanices
+      results_page.courses.first.then do |first_course|
+        expect(first_course.name.text).to eq("Geography (385N)")
+        expect(first_course.provider_name.text).to eq("BHSSA")
+        expect(first_course.description.text).to eq("PGCE with QTS full time")
+        expect(first_course.accrediting_provider.text).to eq("University of Brighton")
+        expect(first_course.funding_options.text).to eq("Student finance if you’re eligible")
+        expect(first_course.main_address.text).to eq("Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA")
+        expect(first_course).not_to have_show_vacanices
       end
     end
   end

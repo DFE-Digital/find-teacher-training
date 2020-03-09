@@ -29,7 +29,7 @@ feature "Vacancy filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters)
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -70,7 +70,7 @@ feature "Vacancy filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
-          body: File.new("spec/fixtures/api_responses/courses.json"),
+          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
     end
@@ -79,7 +79,7 @@ feature "Vacancy filter", type: :feature do
       results_page.load
 
       expect(results_page.vacancies_filter.vacancies.text).to eq("Only courses with vacancies")
-      expect(results_page.courses.count).to eq(2)
+      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -98,7 +98,7 @@ feature "Vacancy filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[has_vacancies]" => "false"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -114,7 +114,7 @@ feature "Vacancy filter", type: :feature do
 
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.vacancies_filter.vacancies.text).to eq("Courses with and without vacancies")
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -123,7 +123,7 @@ feature "Vacancy filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge("filter[has_vacancies]" => "true"))
           .to_return(
-            body: File.new("spec/fixtures/api_responses/courses.json"),
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
         )
       end
@@ -140,7 +140,7 @@ feature "Vacancy filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.vacancies_filter.vacancies.text).to eq("Only courses with vacancies")
 
-        expect(results_page.courses.count).to eq(2)
+        expect(results_page.courses.count).to eq(10)
       end
     end
   end

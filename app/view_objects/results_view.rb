@@ -155,13 +155,12 @@ class ResultsView
   end
 
   def site_distance(course)
-    distances = course.sites.map do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
-    end
+    distances = new_or_running_sites_for(course).
+      map { |site| lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}") }
 
     min_distance = distances.min
 
-    if min_distance < 1
+    if min_distance && min_distance < 1
       min_distance.round(1)
     else
       min_distance.round(0)
@@ -169,21 +168,20 @@ class ResultsView
   end
 
   def nearest_address(course)
-    ordered_sites = course.sites.sort_by do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
-    end
+    nearest_address = new_or_running_sites_for(course).
+      min_by { |site| lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}") }
 
-    sites_addresses = ordered_sites.map do |address|
-      [
-        address.address1,
-        address.address2,
-        address.address3,
-        address.address4,
-        address.postcode,
-      ].select(&:present?).join(", ").html_safe
-    end
+    [
+      nearest_address.address1,
+      nearest_address.address2,
+      nearest_address.address3,
+      nearest_address.address4,
+      nearest_address.postcode,
+    ].select(&:present?).join(", ").html_safe
+  end
 
-    sites_addresses.first
+  def has_sites?(course)
+    !new_or_running_sites_for(course).empty?
   end
 
   def subjects
@@ -233,6 +231,18 @@ private
     qualification |= %w[pgce_with_qts pgde_with_qts] if pgce_or_pgde_with_qts?
     qualification |= %w[pgce pgde] if other_qualifications?
     qualification
+  end
+
+  def new_or_running_sites_for(course)
+    course.
+      site_statuses.
+      select(&:new_or_running?).
+      map(&:site).
+      reject do |site|
+      # Sites that have no address details whatsoever are not to be considered
+      # when calculating '#nearest_address' or '#site_distance'
+        [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
+      end
   end
 
   def lat_long
@@ -337,9 +347,11 @@ private
   end
 
   def course_query(include_location:, radius_to_query: radius)
-    base_query = Course
-      .includes(:provider).includes(:sites).includes(:subjects)
-      .where(recruitment_cycle_year: Settings.current_cycle)
+    base_query = Course.
+      includes(site_statuses: [:site]).
+      includes(:provider).
+      includes(:subjects).
+      where(recruitment_cycle_year: Settings.current_cycle)
 
     base_query = base_query.where(funding: "salary") if with_salaries?
     base_query = base_query.where(has_vacancies: hasvacancies?)
