@@ -233,12 +233,12 @@ feature "Subject filter", type: :feature do
       filter_page.subject_areas.each_with_index do |accordion_section, counter|
         section_button = accordion_section.find(".govuk-accordion__section-button")
         expect(section_button["aria-controls"]).to eq(expected_control_ids[counter])
-        expect(accordion_section).to have_selector("div##{expected_control_ids[counter]}")
+        expect(accordion_section.root_element).to have_selector("##{expected_control_ids[counter]}")
       end
 
       # Check SEND section
       expect(filter_page.send_area.accordion_button["aria-controls"]).to eq("send-content")
-      expect(filter_page.send_area).to have_selector("div#send-content")
+      expect(filter_page.send_area.root_element).to have_selector("div#send-content")
     end
 
     it "has a fieldset and legend for each subject area" do
@@ -284,8 +284,8 @@ feature "Subject filter", type: :feature do
     end
 
     it "should not expand any accordion sections" do
-      expect(filter_page.subject_areas.first).to have_no_css(".govuk-accordion__section--expanded")
-      expect(filter_page.send_area).to have_no_css(".govuk-accordion__section--expanded")
+      expect(filter_page.subject_areas.first.root_element).to have_no_css(".govuk-accordion__section--expanded")
+      expect(filter_page.send_area.root_element).to have_no_css(".govuk-accordion__section--expanded")
     end
 
     it "displays all subject areas" do
