@@ -99,9 +99,11 @@
                 <dd data-qa="course__description"><%= course.description%></dd>
                 <% if @results_view.location_filter?  %>
                   <dt class="govuk-list--description__label">Distance</dt>
-                  <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> miles <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
-                  <dt class="govuk-list--description__label">Nearest address</dt>
-                  <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
+                  <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
+                  <% if @results_view.nearest_address(course).present? %>
+                    <dt class="govuk-list--description__label">Nearest address</dt>
+                    <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
+                  <% end  %>
                 <% end %>
                 <dt class="govuk-list--description__label">Financial support</dt>
                 <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
@@ -113,6 +115,12 @@
                   <dt class="govuk-list--description__label">Main address</dt>
                   <dd data-qa="course__main_address">
                     <%= course.provider.decorate.short_address %>
+                  </dd>
+                <% end %>
+                <% if @results_view.vacancy_filter?  %>
+                  <dt class="govuk-list--description__label">Vacancies</dt>
+                  <dd data-qa="course__has_vacancies">
+                    <%= course.decorate.has_vacancies? %>
                   </dd>
                 <% end %>
               </dl>
