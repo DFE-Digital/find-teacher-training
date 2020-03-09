@@ -11,6 +11,12 @@ gem "draper"
 # http client
 gem "httparty"
 
+# Offshore logging
+gem "logstash-logger"
+
+# Semantic Logger makes logs pretty
+gem "rails_semantic_logger"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.2"
 
