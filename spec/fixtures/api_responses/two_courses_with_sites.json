@@ -1131,7 +1131,7 @@
     "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Blatitude%5D=51.504524\u0026filter%5Blongitude%5D=-0.0961128\u0026filter%5Bqualifications%5D=QtsOnly%2CPgdePgceWithQts%2COther\u0026filter%5Bradius%5D=20\u0026filter%5Bvacancies%5D=true\u0026include=provider%2Csites\u0026page%5Bpage%5D=420\u0026page%5Bper_page%5D=10\u0026sort=provider.provider_name%2Cname"
   },
   "meta": {
-    "count": 4207
+    "count": 2
   },
   "jsonapi": {
     "version": "1.0"

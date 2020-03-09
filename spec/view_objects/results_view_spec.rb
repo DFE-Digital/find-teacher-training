@@ -108,8 +108,9 @@ describe ResultsView do
     subject { described_class.new(query_parameters: default_parameters).filter_path_with_unescaped_commas("/test") }
 
     it "appends an unescaped querystring to the passed path" do
-      expected_path = "/test?qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False"
-      expect(subject).to eq(expected_path)
+      expect(UnescapedQueryStringService).to receive(:call).with(base_path: "/test", parameters: default_parameters)
+        .and_return("test_result")
+      expect(subject).to eq("test_result")
     end
   end
 
@@ -405,7 +406,7 @@ describe ResultsView do
   describe "#course_count" do
     subject { described_class.new(query_parameters: {}).course_count }
 
-    context "there are 8900 results" do
+    context "there are more than three results" do
       before do
         stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
           .with(query: results_page_parameters)
@@ -416,6 +417,19 @@ describe ResultsView do
       end
 
       it { is_expected.to be(8900) }
+    end
+
+    context "there are no results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
+      end
+
+      it { is_expected.to be(0) }
     end
   end
 
@@ -462,6 +476,93 @@ describe ResultsView do
               Russian
             ),
           )
+        end
+      end
+
+      describe "#suggested_search_visible?" do
+        subject { described_class.new(query_parameters: { "lat" => "0.1", "lng" => "2.4", "rad" => "5" }).suggested_search_visible? }
+
+        def suggested_search_count_parameters
+          results_page_parameters.reject do |k, _v|
+            ["page[page]", "page[per_page]", "sort"].include?(k)
+          end
+        end
+
+        context "there are more than three results" do
+          before do
+            stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+              .with(query: results_page_parameters)
+              .to_return(
+                body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+                headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+          end
+
+          it { is_expected.to be(false) }
+        end
+
+        context "there are less than three results" do
+          context "there are suggested courses found" do
+            before do
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: results_page_parameters)
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/two_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+                  )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/four_courses_with_sites.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20))
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+            end
+
+            it { is_expected.to be(true) }
+          end
+
+          context "there are no suggested courses found" do
+            before do
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: results_page_parameters)
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/two_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+                  )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20))
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 50))
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+                .with(query: suggested_search_count_parameters)
+                .to_return(
+                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+            end
+
+            it { is_expected.to be(false) }
+          end
         end
       end
     end
@@ -542,6 +643,79 @@ describe ResultsView do
           ],
         )
       }
+    end
+  end
+
+  describe "#no_results_found?" do
+    subject { described_class.new(query_parameters: {}).no_results_found? }
+
+    context "there are more than three results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq(false) }
+    end
+
+    context "there are no results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
+      end
+
+      it { is_expected.to eq(true) }
+    end
+  end
+
+  describe "#number_of_courses_string" do
+    subject { described_class.new(query_parameters: {}).number_of_courses_string }
+
+    context "there are two results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/two_courses_with_sites.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq("2 courses") }
+    end
+
+    context "there is one result" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/one_course_with_sites.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+      end
+
+      it { is_expected.to eq("1 course") }
+    end
+
+    context "there are no results" do
+      before do
+        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/empty_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
+      end
+
+      it { is_expected.to eq("No courses") }
     end
   end
 end

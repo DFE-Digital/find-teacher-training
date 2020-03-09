@@ -1,4 +1,4 @@
-<%= content_for :page_title, "#{number_with_delimiter(@results_view.course_count)} courses" %>
+<%= content_for :page_title, "#{@results_view.number_of_courses_string}" %>
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
@@ -34,88 +34,106 @@
       </div>
     </div>
     <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__count" data-qa="course-count"><%= number_with_delimiter(@results_view.course_count) %> courses found</p>
-        </div>
-        <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__new-search">
-            <%= link_to "New search", root_path, class: "govuk-link" %>
+      <% if @results_view.no_results_found?%>
+        <div class="govuk-grid-row">
+          <h2 class="govuk-heading-l">
+            There are no courses matching your&nbsp;search
+          </h2>
+          <p class="govuk-body">
+            You can <%= link_to "try another search", root_path, class: "govuk-link" %>, for example by changing subject or location.
           </p>
         </div>
-      </div>
-      <% unless @results_view.provider_filter? %>
-        <div class="search-results-header">
-          <div class="govuk-grid-row">
-              <div class="govuk-grid-column-full">
-                  <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
-                    <%= render 'shared/hidden_fields',
-                      form: form,
-                      exclude_keys: ["sortby"]
-                    %>
-
-                    <div class="govuk-form-group">
-                      <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
-                      <%= form.select(
-                        :sortby,
-                        options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
-                        {},
-                        {
-                          class: "govuk-select trigger-result-update sortby-selector",
-                          onchange: "this.form.submit()",
-                          role: "listbox",
-                          "data-qa": "sort-form__options"
-                        }
-                      ) %>
-                    </div>
-                    <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
-                  <% end %>
-              </div>
+      <% else %>
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-one-half">
+            <p class="govuk-body search-results__count" data-qa="course-count"><%= @results_view.number_of_courses_string %> found</p>
+          </div>
+          <div class="govuk-grid-column-one-half">
+            <p class="govuk-body search-results__new-search">
+              <%= link_to "New search", root_path, class: "govuk-link" %>
+            </p>
           </div>
         </div>
-      <% end %>
-      <ul class="govuk-list search-results">
-        <% @results_view.courses.each do |course| %>
-          <li data-qa="course">
-            <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
-              <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
-                <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
-                <br>
-                <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
-              <% end %>
-            </h3>
-            <dl class="govuk-list--description">
-              <dt class="govuk-list--description__label">Course</dt>
-              <dd data-qa="course__description"><%= course.description%></dd>
-              <% if @results_view.location_filter?  %>
-                <dt class="govuk-list--description__label">Distance</dt>
-                <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> miles <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
-                <dt class="govuk-list--description__label">Nearest address</dt>
-                <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
-              <% end %>
-              <dt class="govuk-list--description__label">Financial support</dt>
-              <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-              <% if course['accrediting_provider'].present? %>
-                <dt>Accredited body</dt>
-                <dd data-qa="course__accrediting_provider"><%= course['accrediting_provider']['provider_name'] %></dd>
-              <% end %>
-              <% unless @results_view.location_filter?  %>
-                <dt class="govuk-list--description__label">Main address</dt>
-                <dd data-qa="course__main_address">
-                  <%= course.provider.decorate.short_address %>
-                </dd>
-              <% end %>
-              <% if @results_view.vacancy_filter?  %>
-                <dt class="govuk-list--description__label">Vacancies</dt>
-                <dd data-qa="course__has_vacancies">
-                  <%= course.decorate.has_vacancies? %>
-                </dd>
-              <% end %>
-            </dl>
-          </li>
+        <% unless @results_view.provider_filter? %>
+          <div class="search-results-header">
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                    <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
+                      <%= render 'shared/hidden_fields',
+                        form: form,
+                        exclude_keys: ["sortby"]
+                      %>
+
+                      <div class="govuk-form-group">
+                        <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
+                        <%= form.select(
+                          :sortby,
+                          options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
+                          {},
+                          {
+                            class: "govuk-select trigger-result-update sortby-selector",
+                            onchange: "this.form.submit()",
+                            role: "listbox",
+                            "data-qa": "sort-form__options"
+                          }
+                        ) %>
+                      </div>
+                      <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
+                    <% end %>
+                </div>
+              </div>
+            </div>
         <% end %>
-      </ul>
-      <%= paginate @results_view.courses %>
+        <ul class="govuk-list search-results">
+          <% @results_view.courses.each do |course| %>
+            <li data-qa="course">
+              <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
+                <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
+                  <span data-qa="course__provider_name" class="govuk-!-font-size-19"><%= course.provider.provider_name %></span>
+                  <br>
+                  <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
+                <% end %>
+              </h3>
+              <dl class="govuk-list--description">
+                <dt class="govuk-list--description__label">Course</dt>
+                <dd data-qa="course__description"><%= course.description%></dd>
+                <% if @results_view.location_filter?  %>
+                  <dt class="govuk-list--description__label">Distance</dt>
+                  <dd data-qa="course__site_distance"><%= @results_view.site_distance(course) %> miles <span class="govuk-list--description__hint">to the training provider or their nearest training location</span></dd>
+                  <dt class="govuk-list--description__label">Nearest address</dt>
+                  <dd data-qa="course__nearest_address"><%= @results_view.nearest_address(course) %></dd>
+                <% end %>
+                <dt class="govuk-list--description__label">Financial support</dt>
+                <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+                <% if course['accrediting_provider'].present? %>
+                  <dt>Accredited body</dt>
+                  <dd data-qa="course__accrediting_provider"><%= course['accrediting_provider']['provider_name'] %></dd>
+                <% end %>
+                <% unless @results_view.location_filter?  %>
+                  <dt class="govuk-list--description__label">Main address</dt>
+                  <dd data-qa="course__main_address">
+                    <%= course.provider.decorate.short_address %>
+                  </dd>
+                <% end %>
+              </dl>
+            </li>
+          <% end %>
+        </ul>
+        <%= paginate @results_view.courses %>
+      <% end %>
+      <% if @results_view.suggested_search_visible? %>
+        <div class="govuk-grid-row" data-qa="suggested_searches">
+          <h3 class="govuk-heading-m" data-qa="suggested_search_heading">Suggested searches</h3>
+          <p class="govuk-body" data-qa="suggested_search_description">You can find:</p>
+          <ul class="govuk-list govuk-list--bullet">
+            <%- @results_view.suggested_search_links.each do |link| %>
+            <li data-qa="suggested_search_link">
+              <a href="<%=link.url%>" class="govuk-link" data-qa="link"><%=link.text%></a>
+            </li>
+          <%- end -%>
+          </ul>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

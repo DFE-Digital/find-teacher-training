@@ -76,6 +76,10 @@ module PageObjects
         element :submit, '[data-qa="sort-form__submit"]'
       end
 
+      class SuggestedSearchLinkSection < SitePrism::Section
+        element :link, '[data-qa="link"]'
+      end
+
       section :cookie_banner, CookieBannerSection, '[data-qa="cookie-banner"]'
       sections :courses, CourseSection, '[data-qa="course"]'
       section :subjects_filter, SubjectsSection, '[data-qa="filters__subjects"]'
@@ -95,6 +99,12 @@ module PageObjects
       element :qualification_link, '[data-qa="filters__qualification_link"]'
       element :salary_link, '[data-qa="filters__salary_link"]'
       element :vacancies_link, '[data-qa="filters__vacancies_link"]'
+
+
+      element :suggested_searches, '[data-qa="suggested_searches"]'
+      element :suggested_search_heading, '[data-qa="suggested_search_heading"]'
+      element :suggested_search_description, '[data-qa="suggested_search_description"]'
+      sections :suggested_search_links, SuggestedSearchLinkSection, '[data-qa="suggested_search_link"]'
 
       section :sort_form, SortFormSection, '[data-qa="sort-form"]'
     end
