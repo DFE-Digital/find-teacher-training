@@ -21,7 +21,7 @@ describe ApplicationController, type: :controller do
     it "sets the request_id in the payload to the request uuid" do
       payload = {}
 
-      allow(RequestStore).to receive(:store).and_return({ request_id: request_uuid })
+      allow(RequestStore).to receive(:store).and_return(request_id: request_uuid)
 
       controller.__send__(:append_info_to_payload, payload)
 
