@@ -415,6 +415,7 @@ DEPENDENCIES
   rails (~> 6.0.2)
   rails_semantic_logger
   redcarpet
+  request_store
   rspec-rails (~> 4.0.0.beta4)
   rspec_junit_formatter
   rubocop-govuk

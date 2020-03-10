@@ -20,6 +20,9 @@ gem "rails_semantic_logger"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.0.2"
 
+# Thread-safe global state
+gem "request_store"
+
 # Use Puma as the app server
 gem "puma", "~> 4.3"
 
