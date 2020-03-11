@@ -5,7 +5,7 @@
     <%= render partial: "shared/error_message", locals: { error_anchor_id: "subject1" } %>
 
     <%= form_with(url: subject_path, method: :post, data: { "ga-event-form" => "Subject" }) do |f| %>
-      <%= render "shared/hidden_fields", exclude_keys: ["subjects"], form: f %>
+      <%= render "shared/hidden_fields", exclude_keys: %w(subjects senCourses), form: f %>
       <h1 class="govuk-heading-xl" data-qa="heading">Find courses by subject</h1>
 
       <p class="govuk-body">Select the subjects you want to teach.</p>
