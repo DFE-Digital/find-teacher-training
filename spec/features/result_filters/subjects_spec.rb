@@ -317,6 +317,32 @@ feature "Subject filter", type: :feature do
       filter_page.load(query: { senCourses: "True" })
       expect(filter_page.send_area.subjects.first.checkbox).to be_checked
     end
+
+    it "lets you unselect SEND and other subjects" do
+      stub_request(:get, courses_url)
+          .with(query: base_parameters.merge(
+            "filter[subjects]" => "01",
+              ))
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+      filter_page.load(query: { subjects: "31", senCourses: "true" })
+      filter_page.subject_areas.first.subjects[0].checkbox.click # unselect
+      filter_page.subject_areas.first.subjects[1].checkbox.click # select a different one
+      filter_page.send_area.subjects.first.checkbox.click # unselect
+
+      filter_page.continue.click
+
+      expect(results_page.subjects_filter).not_to have_send_courses
+      expect(results_page.subjects_filter.subjects.map(&:text))
+          .to eq(
+            [
+                "Primary with English",
+            ],
+                  )
+      expect(results_page.subjects_filter).not_to have_extra_subjects
+    end
   end
 
   context "with existing parameters" do
