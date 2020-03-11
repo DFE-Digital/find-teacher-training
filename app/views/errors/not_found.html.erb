@@ -1,9 +1,14 @@
-<main role="main" class="govuk-main-wrapper" id="main-content">
+<%= content_for :page_title, "Page not found" %>
+
+<div class="govuk-width-container">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-xl">The page you were looking for doesn't exist.</h1>
-      <p class="govuk-body">You may have mistyped the address or the page may have moved.</p>
-      <p class="govuk-body">If you are the application owner check the logs for more information.</p>
+      <h1 class="govuk-heading-xl">Page not found</h1>
+      <p class="govuk-body">If you entered a web address please check it was correct.</p>
+      <p class="govuk-body">
+        <%= govuk_mail_to(Settings.service_support.contact_email_address, "Contact the Becoming a Teacher team")%>
+        if you believe you are seeing this message in error.
+      </p>
     </div>
   </div>
-</main>
+</div>
