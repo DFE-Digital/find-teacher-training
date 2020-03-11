@@ -1,4 +1,5 @@
 require "geokit"
+
 class ResultsView
   include CsharpRailsSubjectConversionHelper
   include ActionView::Helpers::NumberHelper
@@ -155,8 +156,9 @@ class ResultsView
   end
 
   def site_distance(course)
-    distances = new_or_running_sites_for(course).
-      map { |site| lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}") }
+    distances = new_or_running_sites_for(course).map do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
 
     min_distance = distances.min
 
@@ -168,8 +170,9 @@ class ResultsView
   end
 
   def nearest_address(course)
-    nearest_address = new_or_running_sites_for(course).
-      min_by { |site| lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}") }
+    nearest_address = new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
 
     [
       nearest_address.address1,
@@ -234,7 +237,7 @@ private
   end
 
   def new_or_running_sites_for(course)
-    course.
+    sites = course.
       site_statuses.
       select(&:new_or_running?).
       map(&:site).
@@ -243,6 +246,10 @@ private
       # when calculating '#nearest_address' or '#site_distance'
         [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
       end
+
+    sites.reject do |site|
+      site.latitude.blank? || site.longitude.blank?
+    end
   end
 
   def lat_long
