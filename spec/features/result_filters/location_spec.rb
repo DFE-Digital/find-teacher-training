@@ -190,6 +190,18 @@ feature "Location filter", type: :feature do
         expect(filter_page).to have_error
         expect(page).to have_current_path(root_path, ignore_query: true)
       end
+
+      context "selecting 'By school, university or other training provider'" do
+        it "stays on start page after validations" do
+          visit root_path
+
+          filter_page.by_provider.click
+          filter_page.find_courses.click
+
+          expect(filter_page).to have_error
+          expect(page).to have_current_path(root_path, ignore_query: true)
+        end
+      end
     end
   end
 
