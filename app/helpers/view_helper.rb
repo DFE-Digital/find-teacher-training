@@ -1,4 +1,8 @@
 module ViewHelper
+  def govuk_mail_to(email, name = nil, html_options = {}, &block)
+    mail_to(email, name, html_options.merge(class: "govuk-link"), &block)
+  end
+
   def govuk_link_to(body, url = body, html_options = { class: "govuk-link" })
     link_to body, url, html_options
   end
