@@ -60,16 +60,14 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # Logging
+  config.log_tags = [:request_id] # Prepend all log lines with the following tags.
+  config.log_level = Settings.log_level
 
-  # Use a different logger for distributed setups.
-  # require 'syslog/logger'
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
-
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  if Settings.logstash.host && Settings.logstash.port
+    config.logger = LogStashLogger.new(Settings.logstash.to_h)
+  else
+    config.logger = ActiveSupport::Logger.new(STDOUT)
+    config.logger.warn("logstash not configured, falling back to standard Rails logging")
   end
 end
