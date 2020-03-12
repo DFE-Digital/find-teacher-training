@@ -1,6 +1,7 @@
 module ResultFilters
   class LocationController < ApplicationController
     include FilterParameters
+    include QuerySanitizer
 
     before_action :build_results_filter_query_parameters
 
@@ -11,13 +12,17 @@ module ResultFilters
     end
 
     def create
+      sanitized_params = filter_params.
+        clone.
+        merge("query" => strip_non_ascii(provider_query), "lq" => strip_non_ascii(location_query))
+
       # if searching for specific provider go to results page
       if provider_option_selected?
-        redirect_to(provider_path(get_params_for_selected_option({})))
+        redirect_to(provider_path(get_params_for_selected_option(sanitized_params)))
         return
       end
 
-      form_params = strip(filter_params.clone).merge(sortby: ResultsView::DISTANCE)
+      form_params = strip_empty(sanitized_params.clone).merge(sortby: ResultsView::DISTANCE)
       form_object = LocationFilterForm.new(form_params)
       if form_object.valid?
         all_params = form_params.merge!(form_object.params)
@@ -29,6 +34,14 @@ module ResultFilters
     end
 
   private
+
+    def location_query
+      filter_params["lq"]
+    end
+
+    def provider_query
+      filter_params["query"]
+    end
 
     def build_results_filter_query_parameters
       @results_filter_query_parameters = ResultsView.new(query_parameters: request.query_parameters)
@@ -53,11 +66,11 @@ module ResultFilters
       elsif across_england_option_selected?
         all_params.except(:lat, :lng, :rad, :loc, :lq, :query, :sortby)
       elsif provider_option_selected?
-        filter_params.except(:lat, :lng, :rad, :loc, :lq)
+        all_params.except(:lat, :lng, :rad, :loc, :lq)
       end
     end
 
-    def strip(params)
+    def strip_empty(params)
       params.reject { |_, v| v == "" }
     end
 

@@ -53,83 +53,143 @@ feature "Location filter", type: :feature do
       )
     end
 
-    it "displays the courses" do
-      results_page.load
-      results_page.location_filter.link.click
-      filter_page.by_provider.click
-      filter_page.provider_search.fill_in(with: "ACME")
-      filter_page.find_courses.click
+    context "a valid query containing only ASCII characters" do
+      it "displays the courses" do
+        results_page.load
+        results_page.location_filter.link.click
+        filter_page.by_provider.click
+        filter_page.provider_search.fill_in(with: "ACME")
+        filter_page.find_courses.click
 
-      expect(provider_page.heading.text).to eq("Pick a provider")
-      provider_page.provider_suggestions[0].hyperlink.click
+        expect(provider_page.heading.text).to eq("Pick a provider")
+        provider_page.provider_suggestions[0].hyperlink.click
 
-      expect(results_page.courses.first).to have_main_address
-      expect(results_page.courses.first).not_to have_site_distance_to_location_query
-      expect(results_page.courses.first).not_to have_nearest_address
+        expect(results_page.courses.first).to have_main_address
+        expect(results_page.courses.first).not_to have_site_distance_to_location_query
+        expect(results_page.courses.first).not_to have_nearest_address
 
-      expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
-      expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
-      expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
-      expect(results_page.courses.count).to eq(4)
+        expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
+        expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
+        expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
+        expect(results_page.courses.count).to eq(4)
+      end
+    end
+
+    context "an invalid query containing non-ASCII characters" do
+      it "displays the courses" do
+        filter_page.load
+        filter_page.by_provider.click
+        filter_page.provider_search.fill_in(with: "ACME’’’’’’’’’’’")
+        filter_page.find_courses.click
+
+        expect(provider_page.heading.text).to eq("Pick a provider")
+        provider_page.provider_suggestions[0].hyperlink.click
+
+        expect(results_page.courses.first).to have_main_address
+        expect(results_page.courses.first).not_to have_site_distance_to_location_query
+        expect(results_page.courses.first).not_to have_nearest_address
+
+        expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
+        expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
+        expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
+        expect(results_page.courses.count).to eq(4)
+      end
     end
   end
 
   describe "filtering by location" do
-    before do
-      stub_request(:get, courses_url)
-        .with(
-          query: base_parameters.merge("filter[longitude]" => "-0.1300436",
-                                       "filter[latitude]" => "51.4980188",
-                                       "filter[radius]" => "20",
-                                       "sort" => "distance"),
-          )
-        .to_return(
-          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
-          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-          )
+    context "valid query with ASCII characters" do
+      before do
+        stub_request(:get, courses_url)
+          .with(
+            query: base_parameters.merge("filter[longitude]" => "-0.1300436",
+                                         "filter[latitude]" => "51.4980188",
+                                         "filter[radius]" => "20",
+                                         "sort" => "distance"),
+            )
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
 
-      results_page.load
-      results_page.location_filter.link.click
-      filter_page.by_postcode_town_or_city.click
-      filter_page.location_query.fill_in(with: "SW1P 3BT")
-      filter_page.find_courses.click
-    end
+        results_page.load
+        results_page.location_filter.link.click
+        filter_page.by_postcode_town_or_city.click
+        filter_page.location_query.fill_in(with: "SW1P 3BT")
+        filter_page.find_courses.click
+      end
 
-    context "course has sites" do
-      it "displays the courses" do
-        expect(results_page.heading.text).to eq("Teacher training courses")
+      context "course has sites" do
+        it "displays the courses" do
+          expect(results_page.heading.text).to eq("Teacher training courses")
 
-        expect(results_page.courses.first).to have_site_distance_to_location_query
-        expect(results_page.courses.first).to have_nearest_address
-        expect(results_page.courses.first).not_to have_main_address
+          expect(results_page.courses.first).to have_site_distance_to_location_query
+          expect(results_page.courses.first).to have_nearest_address
+          expect(results_page.courses.first).not_to have_main_address
 
-        expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
-        expect(results_page.location_filter.map).to be_present
-        expect(results_page.courses.count).to eq(10)
+          expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
+          expect(results_page.location_filter.map).to be_present
+          expect(results_page.courses.count).to eq(10)
+        end
+      end
+
+      context "course with one site that has no address" do
+        # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
+        # 'nearest site' or 'distance to site' info
+        it "does not display nearest site information" do
+          expect(results_page.heading.text).to eq("Teacher training courses")
+          expect(results_page.courses.fifth).not_to have_site_distance_to_location_query
+          expect(results_page.courses.fifth).not_to have_nearest_address
+        end
+      end
+
+      describe "when using the wizard" do
+        it "progresses to next step instead of going straight to results" do
+          start_page.load
+          start_page.by_postcode_town_or_city.click
+          start_page.location_query.fill_in(with: "SW1P 3BT")
+          start_page.find_courses.click
+
+          URI(current_url).then do |uri|
+            expect(uri.path).to eq("/start/subject")
+            expect(uri.query)
+              .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=20&sortby=2")
+          end
+        end
       end
     end
 
-    context "course with one site that has no address" do
-      # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
-      # 'nearest site' or 'distance to site' info
-      it "does not display nearest site information" do
-        expect(results_page.heading.text).to eq("Teacher training courses")
-        expect(results_page.courses.fifth).not_to have_site_distance_to_location_query
-        expect(results_page.courses.fifth).not_to have_nearest_address
+    context "invalid query containing non-ASCII characters" do
+      before do
+        stub_request(:get, courses_url)
+          .with(
+            query: base_parameters.merge("filter[longitude]" => "-0.1300436",
+                                         "filter[latitude]" => "51.4980188",
+                                         "filter[radius]" => "20",
+                                         "sort" => "distance"),
+            )
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
       end
-    end
 
-    describe "when using the wizard" do
-      it "progresses to next step instead of going straight to results" do
-        start_page.load
-        start_page.by_postcode_town_or_city.click
-        start_page.location_query.fill_in(with: "SW1P 3BT")
-        start_page.find_courses.click
+      context "course has sites" do
+        it "displays the courses" do
+          filter_page.load
+          filter_page.by_postcode_town_or_city.click
+          filter_page.location_query.fill_in(with: "SW1P 3BT’’’’’’’’")
+          filter_page.find_courses.click
 
-        URI(current_url).then do |uri|
-          expect(uri.path).to eq("/start/subject")
-          expect(uri.query)
-            .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=20&sortby=2")
+          expect(results_page.heading.text).to eq("Teacher training courses")
+
+          expect(results_page.courses.first).to have_site_distance_to_location_query
+          expect(results_page.courses.first).to have_nearest_address
+          expect(results_page.courses.first).not_to have_main_address
+
+          expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
+          expect(results_page.location_filter.map).to be_present
+          expect(results_page.courses.count).to eq(10)
         end
       end
     end

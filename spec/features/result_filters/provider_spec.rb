@@ -132,26 +132,51 @@ feature "Provider filter", type: :feature do
   end
 
   context "Searching" do
-    let(:search_term) { "ACME SCITT" }
-    before do
-      stub_request(:get, providers_url)
-        .to_return(
-          body: File.new("spec/fixtures/api_responses/providers.json"),
-          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+    context "valid search term" do
+      let(:search_term) { "ACME SCITT" }
+      before do
+        stub_request(:get, providers_url)
+          .to_return(
+            body: File.new("spec/fixtures/api_responses/providers.json"),
+            headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+            )
 
-      provider_filter_page.load(query: query_params)
-    end
-    it "has a form with which to search again" do
-      provider_filter_page.search.expand.click
-      provider_filter_page.search.input.fill_in(with: "ACME SCITT")
-      provider_filter_page.search.submit.click
+        provider_filter_page.load(query: query_params)
+      end
+      it "has a form with which to search again" do
+        provider_filter_page.search.expand.click
+        provider_filter_page.search.input.fill_in(with: "ACME SCITT")
+        provider_filter_page.search.submit.click
 
-      expect(current_path).to eq(provider_filter_page.url)
-      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-        "query" => "ACME SCITT",
-        "utf8" => "✓",
-      )
+        expect(current_path).to eq(provider_filter_page.url)
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          "query" => "ACME SCITT",
+          "utf8" => "✓",
+                                                                            )
+      end
+      context "search term containing ASCII characters" do
+        let(:search_term) { "Kings" }
+        before do
+          stub_request(:get, providers_url)
+            .to_return(
+              body: File.new("spec/fixtures/api_responses/providers.json"),
+              headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+              )
+
+          provider_filter_page.load(query: query_params)
+        end
+        it "has a form with which to search again" do
+          provider_filter_page.search.expand.click
+          provider_filter_page.search.input.fill_in(with: "King’s")
+          provider_filter_page.search.submit.click
+
+          expect(current_path).to eq(provider_filter_page.url)
+          expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+            "query" => "King’s",
+            "utf8" => "✓",
+                                                                              )
+        end
+      end
     end
   end
 end
