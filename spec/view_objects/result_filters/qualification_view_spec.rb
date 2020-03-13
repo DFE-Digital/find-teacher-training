@@ -17,12 +17,12 @@ module ResultFilters
 
       context "when qualifications is empty" do
         let(:params) { { qualifications: "" } }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
 
-      context "when qualifications is not in the parameters" do
+      context "when qualifications" do
         let(:params) { {} }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
     end
 
@@ -41,12 +41,12 @@ module ResultFilters
 
       context "when qualifications is empty" do
         let(:params) { { qualifications: "" } }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
 
       context "when qualifications is nil" do
         let(:params) { {} }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
     end
 
@@ -65,12 +65,12 @@ module ResultFilters
 
       context "when qualifications is empty" do
         let(:params) { { qualifications: "" } }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
 
       context "when qualifications is nil" do
         let(:params) { {} }
-        it { is_expected.to eq(true) }
+        it { is_expected.to eq(false) }
       end
     end
 

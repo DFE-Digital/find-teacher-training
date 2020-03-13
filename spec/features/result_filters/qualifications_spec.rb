@@ -52,22 +52,9 @@ feature "Qualifications filter", type: :feature do
       end
     end
 
-    describe "pre-populating values" do
-      context "with no qualifications parameters" do
-        it "checks all boxes" do
-          expect(filter_page.qts_only).to be_checked
-          expect(filter_page.pgde_pgce_with_qts).to be_checked
-          expect(filter_page.other).to be_checked
-        end
-      end
-    end
-
     describe "validation" do
       context "when no qualification is selected" do
         it "shows an error message" do
-          filter_page.qts_only.click
-          filter_page.pgde_pgce_with_qts.click
-          filter_page.other.click
           filter_page.find_courses.click
 
           expect(filter_page).to have_error
