@@ -11,7 +11,7 @@ module ResultFilters
         redirect_to results_path(filter_params)
       else
         flash[:error] = "Please choose at least one qualification"
-        redirect_to qualification_path(filter_params.merge(qualifications: "none"))
+        redirect_to qualification_path(filter_params)
       end
     end
 

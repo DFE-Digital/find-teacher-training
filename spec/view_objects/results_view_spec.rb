@@ -181,7 +181,7 @@ describe ResultsView do
       let(:parameter_hash) { { "qualifications" => "QtsOnly,PgdePgceWithQts,Other" } }
 
       it "returns true" do
-        expect(results_view.all_qualifications?).to be_truthy
+        expect(results_view.all_qualifications?).to eq(true)
       end
     end
 
@@ -189,7 +189,7 @@ describe ResultsView do
       let(:parameter_hash) { { "qualifications" => "QtsOnly" } }
 
       it "returns false" do
-        expect(results_view.all_qualifications?).to be_falsy
+        expect(results_view.all_qualifications?).to eq(false)
       end
     end
   end
