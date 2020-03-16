@@ -279,13 +279,13 @@ GEM
     rexml (3.2.4)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
-    rspec-expectations (3.9.0)
+    rspec-expectations (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-rails (4.0.0.beta4)
+    rspec-rails (4.0.0.rc1)
       actionpack (>= 4.2)
       activesupport (>= 4.2)
       railties (>= 4.2)
@@ -381,7 +381,7 @@ GEM
     websocket-extensions (0.1.4)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.2.2)
+    zeitwerk (2.3.0)
 
 PLATFORMS
   ruby
@@ -416,7 +416,7 @@ DEPENDENCIES
   rails_semantic_logger
   redcarpet
   request_store
-  rspec-rails (~> 4.0.0.beta4)
+  rspec-rails (~> 4.0.0.rc1)
   rspec_junit_formatter
   rubocop-govuk
   scss_lint-govuk
