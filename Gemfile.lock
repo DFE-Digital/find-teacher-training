@@ -62,6 +62,7 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    application_insights (0.5.6)
     ast (2.4.0)
     better_errors (2.6.0)
       coderay (>= 1.0.0)
@@ -223,6 +224,7 @@ GEM
     parallel (1.19.1)
     parser (2.7.0.4)
       ast (~> 2.4.0)
+    pkg-config (1.4.1)
     pry (0.12.2)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -387,6 +389,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  application_insights
   better_errors
   binding_of_caller
   bootsnap (>= 1.1.0)
@@ -410,6 +413,7 @@ DEPENDENCIES
   launchy
   listen (>= 3.0.5, < 3.3)
   logstash-logger
+  pkg-config (~> 1.4.1)
   pry-byebug
   puma (~> 4.3)
   rails (~> 6.0.2)

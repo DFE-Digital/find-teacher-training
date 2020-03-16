@@ -5,6 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.6.1"
 
+# App Insights for Azure
+gem "application_insights"
+gem "pkg-config", "~> 1.4.1"
+
 # Decorate logic to keep it of the views and helper methods
 gem "draper"
 
