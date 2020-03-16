@@ -7,7 +7,9 @@ export const request = endpoint => {
     if (xhr && xhr.readyState !== XMLHttpRequest.DONE) {
       xhr.abort();
     }
-    const path = `${endpoint}?query=${query}`;
+
+    let encodedQuery = encodeURIComponent(query);
+    const path = `${endpoint}?query=${encodedQuery}`;
 
     xhr = new XMLHttpRequest();
     xhr.addEventListener("load", evt => {
