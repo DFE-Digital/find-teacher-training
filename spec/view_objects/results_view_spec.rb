@@ -741,4 +741,49 @@ describe ResultsView do
       it { is_expected.to eq("No courses") }
     end
   end
+
+  describe "#total_pages" do
+    let(:parameter_hash) { {} }
+
+    subject { described_class.new(query_parameters: query_parameters) }
+
+    def stub_request_with_meta_count(count)
+      stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        .with(query: results_page_parameters)
+        .to_return(
+          body: { meta: { count: count } }.to_json,
+          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+          )
+    end
+
+    context "where there are no results" do
+      before do
+        stub_request_with_meta_count(0)
+      end
+
+      it "should return 0 pages" do
+        expect(subject.total_pages).to eql(0)
+      end
+    end
+
+    context "where there are 10 results" do
+      before do
+        stub_request_with_meta_count(10)
+      end
+
+      it "should return 1 page" do
+        expect(subject.total_pages).to eql(1)
+      end
+    end
+
+    context "where there are 20 results" do
+      before do
+        stub_request_with_meta_count(20)
+      end
+
+      it "should return 2 pages" do
+        expect(subject.total_pages).to eql(2)
+      end
+    end
+  end
 end
