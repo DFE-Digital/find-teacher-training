@@ -24,7 +24,7 @@ describe "heartbeat requests" do
       end
 
       it "returns JSON" do
-        expect(response.content_type).to eq("application/json")
+        expect(response.media_type).to eq("application/json")
       end
 
       it "returns the expected response report" do
