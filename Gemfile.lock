@@ -76,7 +76,7 @@ GEM
     brakeman (4.8.0)
     builder (3.2.4)
     byebug (11.1.1)
-    canonical-rails (0.2.6)
+    canonical-rails (0.2.8)
       rails (>= 4.1, < 6.1)
     capybara (3.31.0)
       addressable
