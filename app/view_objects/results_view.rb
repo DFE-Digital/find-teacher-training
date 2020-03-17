@@ -9,6 +9,7 @@ class ResultsView
   DISTANCE = "2".freeze
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
+  RESULTS_PER_PAGE = 10
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -147,12 +148,16 @@ class ResultsView
 
                    base_query
                      .page(query_parameters[:page] || 1)
-                     .per(10)
+                     .per(results_per_page)
                  end
   end
 
   def course_count
     courses.meta["count"]
+  end
+
+  def total_pages
+    (course_count.to_f / results_per_page).ceil
   end
 
   def site_distance(course)
@@ -227,6 +232,10 @@ class ResultsView
   end
 
 private
+
+  def results_per_page
+    RESULTS_PER_PAGE
+  end
 
   def qualification
     qualification = []
