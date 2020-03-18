@@ -61,13 +61,10 @@
       <p class="govuk-body">
         If you think we’re not meeting accessibility requirements, or you’d like to access
         any information in a different format (such as accessible PDF, large print, easy read,
-        audio recording or braille), contact
-        <%= mail_to "becomingateacher@digital.education.gov.uk", "becomingateacher@digital.education.gov.uk", class: "govuk-link" %>.
-        Include 'Accessibility issues' in the subject line of your email.
+        audio recording or braille), contact <%=  bat_contact_mail_to(subject: "Accessibility issues") %>.
       </p>
 
       <h3 class="govuk-heading-m">Enforcement procedure</h3>
-      The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.
 
       <p class="govuk-body">
         The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector
