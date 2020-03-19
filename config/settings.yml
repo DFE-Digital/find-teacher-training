@@ -11,7 +11,6 @@ google:
   places_api_path: "/maps/api/place/autocomplete/json"
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
-redirect_results_to_c_sharp: true
 logstash:
   type: tcp
   host: # Our hostname here
