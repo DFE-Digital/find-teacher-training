@@ -1,6 +1,5 @@
 teacher_training_api:
   base_url: http://localhost:3001
-redirect_results_to_c_sharp: false
 search_and_compare_ui:
   base_url: http://localhost:5000
 valid_referers:

@@ -145,13 +145,6 @@
         "description": "API Key for Google Geocode"
       }
     },
-    "settingsRedirectResultsToCSharp": {
-      "type": "bool",
-      "defaultValue": true,
-      "metadata": {
-        "description": "Redirect Results page To CSharp"
-      }
-    }
   },
   "variables": {
     "deploymentUrlBase": "https://raw.githubusercontent.com/DFE-Digital/bat-platform-building-blocks/master/templates/",
@@ -294,10 +287,6 @@
                 "name": "SETTINGS__GOOGLE__GCP_API_KEY",
                 "value": "[parameters('settingsGoogleGeocodeAPIKey')]"
               },
-              {
-                "name": "SETTINGS__REDIRECT_RESULTS_TO_C_SHARP",
-                "value": "[parameters('settingsRedirectResultsToCSharp')]"
-              }
             ]
           },
           "customHostName": {
