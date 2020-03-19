@@ -26,8 +26,17 @@ describe SuggestedSearchLink do
     end
 
     describe "#url" do
-      subject { super().url }
-      it { is_expected.to eq("/results?lat=5&lng=-5&rad=10&loc=Shetlands&lq=2") }
+      it "produces the correct URL" do
+        uri = URI(subject.url)
+        expect(uri.path).to eq("/results")
+        expect(Rack::Utils.parse_nested_query(uri.query)).to eq({
+          "lat" => "5",
+          "lng" => "-5",
+          "rad" => "10",
+          "loc" => "Shetlands",
+          "lq" => "2",
+        })
+      end
     end
   end
 end

@@ -22,7 +22,7 @@
                   "True",
                   class: "govuk-radios__input",
                   data: { qa: "with_vacancies" },
-                  checked: params[:hasvacancies] == "True" || params[:hasvacancies].blank?
+                  checked: params[:hasvacancies] == "true" || params[:hasvacancies].blank?
                 )
               %>
               <%= form.label :hasvacancies_true, "Only courses with vacancies", class: "govuk-label govuk-radios__label" %>
@@ -35,7 +35,7 @@
                   "False",
                   class: "govuk-radios__input",
                   data: { qa: "with_and_without_vacancies" },
-                  checked: params[:hasvacancies] == "False"
+                  checked: params[:hasvacancies] == "false"
                 )
               %>
               <%= form.label :hasvacancies_false, "Courses with and without vacancies", class: "govuk-label govuk-radios__label" %>

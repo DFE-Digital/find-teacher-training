@@ -1,21 +1,19 @@
 #These functions are barely tested and temporary, they should be removed when the results page is filtering in Rails
 module CsharpRailsSubjectConversionHelper
   def convert_csharp_subject_id_params_to_subject_code
-    deserialize_array_filter_param("subjects")&.map do |subject|
+    params["subjects"]&.map do |subject|
       csharp_to_subject_code(id: subject)
     end
   end
 
   def convert_subject_code_params_to_csharp
-    new_subjects = params["subjects"]&.map do |subject|
+    params["subjects"]&.map do |subject|
       subject_code_to_csharp_subject_id(id: subject)
     end
-
-    serialize_array_filter_param(new_subjects)
   end
 
   def csharp_array_to_subject_codes(csharp_id_array)
-    csharp_id_array.map { |csharp_id| csharp_to_subject_code(id: csharp_id) }
+    csharp_id_array&.map { |csharp_id| csharp_to_subject_code(id: csharp_id) }
   end
 
   def csharp_to_subject_code(id:)

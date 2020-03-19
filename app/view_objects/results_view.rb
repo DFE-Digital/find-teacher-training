@@ -30,27 +30,37 @@ class ResultsView
   end
 
   def fulltime?
-    query_parameters["fulltime"].present? && query_parameters["fulltime"].downcase == "true"
+    return false if query_parameters["fulltime"].nil?
+
+    query_parameters["fulltime"] == "true"
   end
 
   def parttime?
-    query_parameters["parttime"].present? && query_parameters["parttime"].downcase == "true"
+    return false if query_parameters["parttime"].nil?
+
+    query_parameters["parttime"] == "true"
   end
 
   def hasvacancies?
-    query_parameters["hasvacancies"].blank? || query_parameters["hasvacancies"].downcase == "true"
+    return true if query_parameters["hasvacancies"].nil?
+
+    query_parameters["hasvacancies"] == "true"
+  end
+
+  def sen_courses?
+    query_parameters["senCourses"] == "true"
   end
 
   def qts_only?
-    qualifications_parameters_array.include?("QtsOnly")
+    qualifications.include?("QtsOnly")
   end
 
   def pgce_or_pgde_with_qts?
-    qualifications_parameters_array.include?("PgdePgceWithQts")
+    qualifications.include?("PgdePgceWithQts")
   end
 
   def other_qualifications?
-    qualifications_parameters_array.include?("Other")
+    qualifications.include?("Other")
   end
 
   def all_qualifications?
@@ -242,6 +252,7 @@ private
     qualification |= %w[qts] if qts_only?
     qualification |= %w[pgce_with_qts pgde_with_qts] if pgce_or_pgde_with_qts?
     qualification |= %w[pgce pgde] if other_qualifications?
+
     qualification
   end
 
@@ -274,27 +285,23 @@ private
   end
 
   def qualifications_parameters
-    { "qualifications" => query_parameters["qualifications"].presence || "QtsOnly,PgdePgceWithQts,Other" }
+    { "qualifications" => query_parameters["qualifications"].presence || %w[QtsOnly PgdePgceWithQts Other] }
   end
 
   def fulltime_parameters
-    { "fulltime" => fulltime?.to_s.humanize }
+    { "fulltime" => fulltime? }
   end
 
   def parttime_parameters
-    { "parttime" => parttime?.to_s.humanize }
+    { "parttime" => parttime? }
   end
 
   def hasvacancies_parameters
-    { "hasvacancies" => hasvacancies?.to_s.humanize }
+    { "hasvacancies" => hasvacancies? }
   end
 
   def sen_courses_parameters
-    { "senCourses" => query_parameters["senCourses"].presence || "False" }
-  end
-
-  def qualifications_parameters_array
-    qualifications_parameters["qualifications"].split(",")
+    { "senCourses" => sen_courses? }
   end
 
   def subject_parameters
@@ -302,7 +309,7 @@ private
   end
 
   def subject_parameters_array
-    (subject_parameters["subjects"] || "").split(",")
+    query_parameters["subjects"] || []
   end
 
   def subject_codes
@@ -341,7 +348,7 @@ private
   end
 
   def qualifications
-    query_parameters["qualifications"] || "QtsOnly,PgdePgceWithQts,Other"
+    query_parameters["qualifications"] || %w[QtsOnly PgdePgceWithQts Other]
   end
 
   def filtered_subjects

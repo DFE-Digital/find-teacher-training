@@ -63,7 +63,6 @@ feature "Subject filter", type: :feature do
 
         filter_page.continue.click
 
-
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
@@ -208,11 +207,11 @@ feature "Subject filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params:  {
-          "fulltime" => "False",
-          "hasvacancies" => "True",
-          "parttime" => "False",
-          "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
-          "senCourses" => "False",
+          "fulltime" => "false",
+          "hasvacancies" => "true",
+          "parttime" => "false",
+          "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+          "senCourses" => "false",
           "test" => "params",
         },
       )
@@ -308,7 +307,7 @@ feature "Subject filter", type: :feature do
 
   context "with previously selected subjects" do
     it "automatically selects the given checkboxes" do
-      filter_page.load(query: { subjects: "31", senCourses: "true" })
+      visit subject_path(subjects: %w[31], senCourses: "true")
       expect(filter_page.subject_areas.first.subjects.first.checkbox).to be_checked
       expect(filter_page.send_area.subjects.first.checkbox).to be_checked
     end
@@ -327,7 +326,8 @@ feature "Subject filter", type: :feature do
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
               )
-      filter_page.load(query: { subjects: "31", senCourses: "true" })
+
+      visit subject_path(subjects: %w[31], senCourses: "true")
       filter_page.subject_areas.first.subjects[0].checkbox.click # unselect
       filter_page.subject_areas.first.subjects[1].checkbox.click # select a different one
       filter_page.send_area.subjects.first.checkbox.click # unselect
@@ -358,12 +358,12 @@ feature "Subject filter", type: :feature do
     end
 
     it "only changes the subjects params" do
-      filter_page.load(query: { subjects: "32,31", other_param: "param_value" })
+      visit subject_path(subjects: %w[32 31], other_param: "param_value")
       filter_page.continue.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "subjects" => "31,32",
+          "subjects" => %w[31 32],
           "other_param" => "param_value",
         },
       )

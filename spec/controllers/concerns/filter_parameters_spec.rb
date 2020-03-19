@@ -28,24 +28,6 @@ RSpec.describe FilterParameters do
   end
 
   describe "#filter_params" do
-    context "GET" do
-      context "when rails parameters are present" do
-        let(:query_parameters) { { "utf8" => true, "authenticity_token" => "token", "test" => "test" } }
-
-        it "they are stripped" do
-          expect(subject.filter_params).to eq({ "test" => "test" })
-        end
-      end
-
-      context "when an array parameter is present" do
-        let(:query_parameters) { { "test" => [1, 2, 3] } }
-
-        it "serializes them to a comma separated string" do
-          expect(subject.filter_params["test"]).to eq("1,2,3")
-        end
-      end
-    end
-
     context "POST" do
       let(:verb) { "POST" }
       let(:request_parameters) { { "test" => "request" } }
@@ -63,13 +45,6 @@ RSpec.describe FilterParameters do
       it "returns the query parameters" do
         expect(subject.filter_params).to eq({ "test" => "test" })
       end
-    end
-  end
-
-  describe "#deserialize_array_filter_param" do
-    let(:query_parameters) { { "test" => "1,2,3" } }
-    it "splits comma separated strings" do
-      expect(subject.deserialize_array_filter_param("test")).to match_array(%w(1 2 3))
     end
   end
 

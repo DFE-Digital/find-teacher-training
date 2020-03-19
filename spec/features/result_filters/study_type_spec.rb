@@ -24,6 +24,26 @@ feature "Study type filter", type: :feature do
       expect(page).to have_content("Study type")
     end
 
+    describe "Navigating to the page with currently selected filters" do
+      it "Preselects with fulltime" do
+        filter_page.load(query: { fulltime: "true" })
+        expect(filter_page.full_time.checked?).to eq(true)
+        expect(filter_page.part_time.checked?).to eq(false)
+      end
+
+      it "Preselects with parttime" do
+        filter_page.load(query: { parttime: "true" })
+        expect(filter_page.full_time.checked?).to eq(false)
+        expect(filter_page.part_time.checked?).to eq(true)
+      end
+
+      it "Preselects all" do
+        filter_page.load
+        expect(filter_page.full_time.checked?).to eq(true)
+        expect(filter_page.part_time.checked?).to eq(true)
+      end
+    end
+
     describe "back link" do
       before do
         stub_request(:get, courses_url)
@@ -41,11 +61,11 @@ feature "Study type filter", type: :feature do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            "fulltime" => "False",
-            "hasvacancies" => "True",
-            "parttime" => "False",
-            "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
-            "senCourses" => "False",
+            "fulltime" => "false",
+            "hasvacancies" => "true",
+            "parttime" => "false",
+            "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+            "senCourses" => "false",
             "test" => "params",
           },
         )
@@ -54,12 +74,12 @@ feature "Study type filter", type: :feature do
 
     describe "Navigating to the page with currently selected filters" do
       it "Allows the full time param to be pre-selected" do
-        filter_page.load(query: { fulltime: "True" })
+        filter_page.load(query: { fulltime: "true" })
         expect(filter_page.full_time.checked?).to eq(true)
       end
 
       it "Allows the part time param to be pre-selected" do
-        filter_page.load(query: { parttime: "True" })
+        filter_page.load(query: { parttime: "true" })
         expect(filter_page.part_time.checked?).to eq(true)
       end
     end
