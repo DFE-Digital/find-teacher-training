@@ -1,6 +1,4 @@
 class HeartbeatController < ActionController::API
-  include HTTParty
-
   def ping
     render body: "PONG"
   end
@@ -18,7 +16,7 @@ class HeartbeatController < ActionController::API
 private
 
   def api_alive?
-    response = HeartbeatController.get("#{Settings.teacher_training_api.base_url}/healthcheck")
+    response = HTTParty.get("#{Settings.teacher_training_api.base_url}/healthcheck")
     response.success?
   rescue StandardError
     false
