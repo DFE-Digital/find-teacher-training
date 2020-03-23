@@ -240,7 +240,7 @@ feature "Location filter", type: :feature do
       filter_page.find_courses.click
 
       expect(current_path).to eq(provider_page.url)
-      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+      expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
         "l" => "3",
         "query" => "ACME",
       )
@@ -263,7 +263,7 @@ feature "Location filter", type: :feature do
         filter_page.find_courses.click
 
         expect(current_path).to eq(provider_page.url)
-        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
           "l" => "3",
           "query" => "ACME",
           "another_option" => "option",
