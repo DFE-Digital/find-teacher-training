@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-- Ruby 2.6.1
-- NodeJS 8.11.x
+- Ruby 2.6.5
+- NodeJS 12.16.x
 - Yarn 1.12.x
 
 ## Setting up the app in development
