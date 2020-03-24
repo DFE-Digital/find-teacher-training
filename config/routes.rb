@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 
 Rails.application.routes.draw do
-  constraints(host: /www2\.|\.education\./) do
+  constraints(host: /^www2\.|\.education\./) do
     match "/(*path)" => redirect { |_, req| "#{Settings.base_url}#{req.fullpath}" },
       via: %i[get post put]
   end
