@@ -5,20 +5,29 @@
     <%= render partial: "shared/error_message", locals: {
       error_anchor_id:
         if no_option_selected?
-          "search-options"
+          "l_1"
         elsif location_error?
-          "location-error"
+          "location"
         elsif provider_error?
-          "provider-error"
+          "provider"
         end
     } %>
     <%= form_with url: location_path, method: :post, data: { "ga-event-form" => "Location" } do |form| %>
-      <%= render "shared/hidden_fields", exclude_keys: ["l"], form: form %>
+      <%= render "shared/hidden_fields", exclude_keys: %w(l query rad), form: form %>
       <fieldset class="govuk-fieldset" role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-heading-xl">Find courses by location or by training provider</h1>
         </legend>
-        <div class="govuk-form-group" id="search-options">
+        <div class="govuk-form-group<%= " govuk-form-group--error" if flash[:error] %>" id="search-options">
+          <% if flash[:error] and location_error? === false and provider_error? === false%>
+            <p class="govuk-error-message">
+              <% if flash[:error].kind_of?(Array) %>
+                <%= flash[:error].first %>
+              <% else %>
+                <%= flash[:error] %>
+              <% end %>
+            </p>
+          <% end %>
           <div class="govuk-radios" data-module="govuk-radios">
             <div class="govuk-radios__item">
               <%=
@@ -37,7 +46,7 @@
               class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "1" %>"
               id="location-conditional" data-qa="location-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if location_error? %>">
-                <%= form.label :lq, "Postcode, town or city", class: "govuk-label" %>
+                <%= form.label :lq, "Postcode, town or city", { class: "govuk-label", for: "location"} %>
                 <% if location_error? %>
                   <div class="govuk-error-message" id="location-error" data-qa="location-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
@@ -107,15 +116,15 @@
             <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "3" %>"
               id="query-container" data-qa="by-provider-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>" data-module="track-no-provider-results">
-                <%= form.label :query, class: "govuk-label" do %>
+                <%= form.label :query, {class: "govuk-label", for: "provider" } do %>
                   School, university or other training provider
+                  <span class="govuk-hint">Enter the name or provider code</span>
                   <% if provider_error? %>
                     <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
                     <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
                   </span>
                   <% end %>
                 <% end %>
-                <span class="govuk-hint">Enter the name or provider code</span>
                 <%= form.text_field :query,
                                     id: "provider",
                                     value: params[:query],
@@ -127,9 +136,7 @@
           </div>
         </div>
       </fieldset>
-      <div class="govuk-form-group">
-        <%= form.submit local_assigns[:submit_button_text], name: nil, class: "govuk-button", data: {qa: 'find-courses'} %>
-      </div>
+      <%= form.submit local_assigns[:submit_button_text], name: nil, class: "govuk-button", data: {qa: 'find-courses'} %>
     <% end %>
   </div>
 </div>
