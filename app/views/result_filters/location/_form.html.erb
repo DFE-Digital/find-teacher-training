@@ -46,7 +46,7 @@
               class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "1" %>"
               id="location-conditional" data-qa="location-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if location_error? %>">
-                <%= form.label :lq, "Postcode, town or city", class: "govuk-label" %>
+                <%= form.label :lq, "Postcode, town or city", { class: "govuk-label", for: "location"} %>
                 <% if location_error? %>
                   <div class="govuk-error-message" id="location-error" data-qa="location-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
@@ -116,7 +116,7 @@
             <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "3" %>"
               id="query-container" data-qa="by-provider-conditional">
               <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>" data-module="track-no-provider-results">
-                <%= form.label :query, class: "govuk-label" do %>
+                <%= form.label :query, {class: "govuk-label", for: "provider" } do %>
                   School, university or other training provider
                   <span class="govuk-hint">Enter the name or provider code</span>
                   <% if provider_error? %>
