@@ -28,6 +28,24 @@ RSpec.describe FilterParameters do
   end
 
   describe "#filter_params" do
+    context "GET" do
+      context "when rails parameters are present" do
+        let(:query_parameters) { { "utf8" => true, "authenticity_token" => "token", "test" => "test" } }
+
+        it "they are stripped" do
+          expect(subject.filter_params).to eq({ "test" => "test" })
+        end
+      end
+
+      context "when pagination parameters are present" do
+        let(:query_parameters) { { "page" => 3, "test" => "test" }.with_indifferent_access }
+
+        it "they are stripped" do
+          expect(subject.filter_params).to eq({ "test" => "test" })
+        end
+      end
+    end
+
     context "POST" do
       let(:verb) { "POST" }
       let(:request_parameters) { { "test" => "request" } }
@@ -35,6 +53,14 @@ RSpec.describe FilterParameters do
 
       it "uses request_parameters" do
         expect(subject.filter_params["test"]).to eq("request")
+      end
+
+      context "when pagination parameters are present" do
+        let(:request_parameters) { { "page" => 3, "test" => "test" } }
+
+        it "they are stripped" do
+          expect(subject.filter_params).to eq({ "test" => "test" })
+        end
       end
     end
 
