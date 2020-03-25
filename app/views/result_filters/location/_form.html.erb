@@ -18,7 +18,16 @@
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
           <h1 class="govuk-heading-xl">Find courses by location or by training provider</h1>
         </legend>
-        <div class="govuk-form-group" id="search-options">
+        <div class="govuk-form-group<%= " govuk-form-group--error" if flash[:error] %>" id="search-options">
+          <% if flash[:error] and location_error? === false and provider_error? === false%>
+            <p class="govuk-error-message">
+              <% if flash[:error].kind_of?(Array) %>
+                <%= flash[:error].first %>
+              <% else %>
+                <%= flash[:error] %>
+              <% end %>
+            </p>
+          <% end %>
           <div class="govuk-radios" data-module="govuk-radios">
             <div class="govuk-radios__item">
               <%=
@@ -127,9 +136,7 @@
           </div>
         </div>
       </fieldset>
-      <div class="govuk-form-group">
-        <%= form.submit local_assigns[:submit_button_text], name: nil, class: "govuk-button", data: {qa: 'find-courses'} %>
-      </div>
+      <%= form.submit local_assigns[:submit_button_text], name: nil, class: "govuk-button", data: {qa: 'find-courses'} %>
     <% end %>
   </div>
 </div>
