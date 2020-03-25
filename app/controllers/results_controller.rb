@@ -2,12 +2,12 @@ class ResultsController < ApplicationController
   def index
     @results_view = ResultsView.new(query_parameters: request.query_parameters)
 
-    if filtering_by_blank_provider?
-      params_hash = request.query_parameters.merge(l: 2)
-      params_hash.delete("query")
+    # if filtering_by_blank_provider?
+    #   params_hash = request.query_parameters.merge(l: 2)
+    #   params_hash.delete("query")
 
-      redirect_to results_path(params_hash)
-    end
+    #   redirect_to results_path(params_hash)
+    # end
   end
 
 private

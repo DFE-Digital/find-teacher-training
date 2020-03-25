@@ -220,7 +220,7 @@ feature "results", type: :feature do
     end
   end
 
-  describe "location filter" do
+  xdescribe "location filter" do
     context "location with blank provider name" do
       let(:params) do
         {
