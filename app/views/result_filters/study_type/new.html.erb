@@ -21,7 +21,7 @@
             </span>
           <% end %>
           <div class="govuk-checkboxes">
-          <% default_to_true = (params[:fulltime] != "True" && params[:parttime] != "True")%>
+          <% default_to_true = (params[:fulltime] != "True" && params[:parttime] != "True") && flash[:error].nil? %>
             <div class="govuk-checkboxes__item">
               <%=
                 form.check_box(
