@@ -219,26 +219,4 @@ feature "results", type: :feature do
       end
     end
   end
-
-  describe "location filter" do
-    context "location with blank provider name" do
-      let(:params) do
-        {
-          l: 3,
-          query: "",
-          qualifications: "QtsOnly,PgdePgceWithQts,Other",
-          fulltime: "False",
-          parttime: "False",
-          hasvacancies: "True",
-          senCourses: "False",
-        }
-      end
-
-      it "falls back to l2 (Across England)" do
-        location_filter_uri = URI(current_url)
-        expect(location_filter_uri.path).to eq("/results")
-        expect(location_filter_uri.query).to eq("fulltime=False&hasvacancies=True&l=2&parttime=False&qualifications=QtsOnly%2CPgdePgceWithQts%2COther&senCourses=False")
-      end
-    end
-  end
 end
