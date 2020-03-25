@@ -5,11 +5,11 @@
     <%= render partial: "shared/error_message", locals: {
       error_anchor_id:
         if no_option_selected?
-          "search-options"
+          "l_1"
         elsif location_error?
-          "location-error"
+          "location"
         elsif provider_error?
-          "provider-error"
+          "provider"
         end
     } %>
     <%= form_with url: location_path, method: :post, data: { "ga-event-form" => "Location" } do |form| %>
