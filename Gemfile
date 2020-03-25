@@ -91,7 +91,7 @@ group :development, :test do
   gem "pry-byebug"
 
   # Testing framework
-  gem "rspec-rails", "~> 4.0.0.rc1"
+  gem "rspec-rails", "~> 4.0.0"
 end
 
 group :development do
