@@ -18,7 +18,9 @@ module ResultFilters
         flash[:error] = [I18n.t("location_filter.fields.provider")]
         redirect_back
       elsif @provider_suggestions.count == 1
-        redirect_to results_path(filter_params.merge(query: @provider_suggestions.first.provider_name))
+        redirect_to results_path(
+          filter_params_without_previous_parameters.merge(query: @provider_suggestions.first.provider_name),
+        )
       end
     end
 

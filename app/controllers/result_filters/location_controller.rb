@@ -19,20 +19,22 @@ module ResultFilters
 
       form_params = strip(filter_params.clone).merge(sortby: ResultsView::DISTANCE)
       form_object = LocationFilterForm.new(form_params)
+
       if form_object.valid?
-        all_params = form_params.merge!(form_object.params)
-        redirect_to(next_step(all_params))
+        parameters_with_geocode_added_and_previous_removed = remove_previous_parameters(form_params.merge(form_object.params))
+        redirect_to(next_step(parameters_with_geocode_added_and_previous_removed))
       else
         flash[:error] = form_object.errors
-        back_to_current_page_if_error(form_params)
+        back_to_current_page_if_error(merge_previous_parameters(form_params))
       end
     end
 
   private
 
     def build_results_filter_query_parameters
-      @results_filter_query_parameters = ResultsView.new(query_parameters: request.query_parameters)
-        .query_parameters_with_defaults
+      @results_filter_query_parameters = merge_previous_parameters(
+        ResultsView.new(query_parameters: request.query_parameters).query_parameters_with_defaults,
+      )
     end
 
     def location_option_selected?
