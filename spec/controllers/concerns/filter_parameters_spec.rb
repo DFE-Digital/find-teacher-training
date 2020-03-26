@@ -55,6 +55,15 @@ RSpec.describe FilterParameters do
         expect(subject.filter_params["test"]).to eq("request")
       end
     end
+
+    context "HEAD" do
+      let(:verb) { "HEAD" }
+      let(:query_parameters) { { "utf8" => true, "authenticity_token" => "token", "test" => "test" } }
+
+      it "returns the query parameters" do
+        expect(subject.filter_params).to eq({ "test" => "test" })
+      end
+    end
   end
 
   describe "#deserialize_array_filter_param" do

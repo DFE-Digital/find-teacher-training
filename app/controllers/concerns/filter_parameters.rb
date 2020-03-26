@@ -42,7 +42,7 @@ private
   end
 
   def parameters
-    return request.query_parameters if request.method == "GET"
+    return request.query_parameters if %w(GET HEAD).include?(request.method)
 
     request.request_parameters
   end
