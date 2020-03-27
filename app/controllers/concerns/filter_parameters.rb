@@ -3,7 +3,7 @@ module FilterParameters
 
   def filter_params
     parameters.reject do |param|
-      param.in? %w(utf8 authenticity_token)
+      param.in? %w(utf8 authenticity_token page)
     end
   end
 
@@ -20,6 +20,8 @@ module FilterParameters
 
     remove_previous_parameters(all_parameters)
   end
+
+private
 
   def parameters
     return request.query_parameters if %w(GET HEAD).include?(request.method)
