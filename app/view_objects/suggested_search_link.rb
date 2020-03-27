@@ -1,14 +1,16 @@
 class SuggestedSearchLink
-  attr_reader :radius, :count, :parameters
+  include ActionView::Helpers::TextHelper
+  attr_reader :radius, :count, :parameters, :including_non_salaried
 
-  def initialize(radius:, count:, parameters:)
+  def initialize(radius:, count:, parameters:, including_non_salaried: false)
     @radius = radius
     @count = count
     @parameters = parameters
+    @including_non_salaried = including_non_salaried
   end
 
   def text
-    count_prefix = "#{count} course#{'s' if count != 1} "
+    count_prefix = "#{pluralize(count, 'course')} #{'with or without a salary ' if including_non_salaried}"
     count_prefix + (all_england? ? "across England" : "within #{radius} miles")
   end
 

@@ -211,19 +211,24 @@ class ResultsView
   end
 
   def suggested_search_links
-    @suggested_search_links ||= begin
-                                  all_links = []
-                                  radii_for_suggestions.each do |radius|
-                                    break if filter_links(all_links).count == 2
+    all_links = []
 
-                                    all_links << SuggestedSearchLink.new(
-                                      radius: radius,
-                                      count: course_counter(radius_to_check: radius),
-                                      parameters: query_parameters_with_defaults,
-                                    )
-                                  end
-                                  filter_links(all_links)
-                                end
+    if with_salaries?
+      first_link = suggested_search_link_including_unsalaried(current_radius: radius)
+      all_links << first_link if first_link.present?
+    end
+
+    radii_for_suggestions.each do |radius|
+      break if filter_links(all_links).count == 2
+
+      all_links << SuggestedSearchLink.new(
+        radius: radius,
+        count: course_counter(radius_to_check: radius),
+        parameters: query_parameters_with_defaults,
+      )
+    end
+
+    @suggested_search_links ||= filter_links(all_links)
   end
 
   def no_results_found?
@@ -365,18 +370,18 @@ private
     subject_parameters_array.any? ? subject_parameters_array.length : all_subjects.count
   end
 
-  def course_counter(radius_to_check: nil)
-    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check).all.meta["count"]
+  def course_counter(radius_to_check: nil, include_salary: true)
+    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary).all.meta["count"]
   end
 
-  def course_query(include_location:, radius_to_query: radius)
+  def course_query(include_location:, radius_to_query: radius, include_salary: true)
     base_query = Course.
       includes(site_statuses: [:site]).
       includes(:provider).
       includes(:subjects).
       where(recruitment_cycle_year: Settings.current_cycle)
 
-    base_query = base_query.where(funding: "salary") if with_salaries?
+    base_query = base_query.where(funding: "salary") if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: hasvacancies?)
     base_query = base_query.where(study_type: study_type) if study_type.present?
 
@@ -404,5 +409,28 @@ private
   def radii_for_suggestions
     radius_for_all_england = nil
     [10, 20, 50].reject { |rad| rad <= radius.to_i } << radius_for_all_england
+  end
+
+  def suggested_search_link_including_unsalaried(current_radius:)
+    suggested_search_link = nil
+
+    radii_including_current = [current_radius] + radii_for_suggestions
+
+    radii_including_current.each do |radius|
+      break if suggested_search_link.present?
+
+      count = course_counter(radius_to_check: radius, include_salary: false)
+
+      if count > course_count
+        suggested_search_link = SuggestedSearchLink.new(
+          radius: radius,
+          count: count,
+          parameters: query_parameters_with_defaults.except("funding"),
+          including_non_salaried: true,
+        )
+      end
+    end
+
+    suggested_search_link
   end
 end
