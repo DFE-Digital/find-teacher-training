@@ -3,13 +3,23 @@ require "rails_helper"
 describe ResultsView do
   let(:query_parameters) { ActionController::Parameters.new(parameter_hash) }
 
-  let(:default_parameters) do
+  let(:default_output_parameters) do
     {
-      "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
-      "fulltime" => "False",
-      "parttime" => "False",
-      "hasvacancies" => "True",
-      "senCourses" => "False",
+      "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+      "fulltime" => false,
+      "parttime" => false,
+      "hasvacancies" => true,
+      "senCourses" => false,
+    }
+  end
+
+  let(:default_query_parameters) do
+    {
+      "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+      "fulltime" => "false",
+      "parttime" => "false",
+      "hasvacancies" => "true",
+      "senCourses" => "false",
     }
   end
 
@@ -35,62 +45,62 @@ describe ResultsView do
     )
   end
 
-  describe "query_parameters_with_defaults" do
+  describe "#query_parameters_with_defaults" do
     subject { described_class.new(query_parameters: query_parameters).query_parameters_with_defaults }
 
     context "params are empty" do
       let(:parameter_hash) { {} }
 
-      it { is_expected.to eq(default_parameters) }
+      it { is_expected.to eq(default_output_parameters) }
     end
 
     context "query_parameters have qualifications set" do
       let(:parameter_hash) { { "qualifications" => "Other" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge(parameter_hash)) }
     end
 
     context "query_parameters have fulltime set" do
-      let(:parameter_hash) { { "fulltime" => "True" } }
+      let(:parameter_hash) { { "fulltime" => "true" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge("fulltime" => true)) }
     end
 
     context "query_parameters have parttime set" do
-      let(:parameter_hash) { { "parttime" => "True" } }
+      let(:parameter_hash) { { "parttime" => "true" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge("parttime" => true)) }
     end
 
     context "query_parameters have hasvacancies set" do
-      let(:parameter_hash) { { "hasvacancies" => "False" } }
+      let(:parameter_hash) { { "hasvacancies" => "false" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge("hasvacancies" => false)) }
     end
 
     context "query_parameters have senCourses set" do
-      let(:parameter_hash) { { "senCourses" => "False" } }
+      let(:parameter_hash) { { "senCourses" => "false" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge("senCourses" => false)) }
     end
 
     context "query_parameters not lose track of 'l' used by C# radio buttons" do
       let(:parameter_hash) { { "l" => "2" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge(parameter_hash)) }
     end
 
     context "parameters without default present in query_parameters" do
-      let(:parameter_hash) { {  "lat" => "52.3812321", "lng" => "-3.9440235" } }
+      let(:parameter_hash) { { "lat" => "52.3812321", "lng" => "-3.9440235" } }
 
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge(parameter_hash)) }
     end
 
     context "rails specific parameters are present" do
-      let(:parameter_hash) { { "utf8" => true, "authenticity_token" => "booyah" } }
+      let(:parameter_hash) { { "utf8" => "true", "authenticity_token" => "booyah" } }
 
       it "filters them out" do
-        expect(subject).to eq(default_parameters.merge({}))
+        expect(subject).to eq(default_output_parameters.merge({}))
       end
     end
 
@@ -100,15 +110,15 @@ describe ResultsView do
       #This will change when we fully switch to Rails
 
       let(:parameter_hash) { { "subjects" => "14,41,20" } }
-      it { is_expected.to eq(default_parameters.merge(parameter_hash)) }
+      it { is_expected.to eq(default_output_parameters.merge(parameter_hash)) }
     end
   end
 
   describe "filter_path_with_unescaped_commas" do
-    subject { described_class.new(query_parameters: default_parameters).filter_path_with_unescaped_commas("/test") }
+    subject { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas("/test") }
 
     it "appends an unescaped querystring to the passed path" do
-      expect(UnescapedQueryStringService).to receive(:call).with(base_path: "/test", parameters: default_parameters)
+      expect(UnescapedQueryStringService).to receive(:call).with(base_path: "/test", parameters: default_output_parameters)
         .and_return("test_result")
       expect(subject).to eq("test_result")
     end
@@ -118,7 +128,7 @@ describe ResultsView do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
     context "when the hash includes 'QTS only'" do
-      let(:parameter_hash) { { "qualifications" => "QtsOnly,PgdePgceWithQts" } }
+      let(:parameter_hash) { { "qualifications" => %w[QtsOnly PgdePgceWithQts] } }
 
       it "returns true" do
         expect(results_view.qts_only?).to be_truthy
@@ -126,7 +136,7 @@ describe ResultsView do
     end
 
     context "when the hash does not include 'QTS only'" do
-      let(:parameter_hash) { { "qualifications" => "Other" } }
+      let(:parameter_hash) { { "qualifications" => %w[Other] } }
 
       it "returns false" do
         expect(results_view.qts_only?).to be_falsy
@@ -218,7 +228,7 @@ describe ResultsView do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
     context "The maximum number of subjects are selected" do
-      let(:parameter_hash) { { "subjects" => (1..43).to_a.join(",") } }
+      let(:parameter_hash) { { "subjects" => (1..43).to_a } }
 
       it "Returns the number of extra subjects - 2" do
         expect(results_view.number_of_extra_subjects).to eq(37)
@@ -226,7 +236,7 @@ describe ResultsView do
     end
 
     context "more than NUMBER_OF_SUBJECTS_DISPLAYED subjects are selected" do
-      let(:parameter_hash) { { "subjects" => "1,2,3,4,5" } }
+      let(:parameter_hash) { { "subjects" => %w[1 2 3 4 5] } }
 
       it "returns the number of the extra subjects" do
         expect(results_view.number_of_extra_subjects).to eq(1)
@@ -457,15 +467,15 @@ describe ResultsView do
               primary_csharp_id,
               spanish_csharp_id,
               mathematics_csharp_id,
-            ].join(","),
+            ],
           })
         end
 
-        let(:french_csharp_id) { 13 }
-        let(:primary_csharp_id) { 31 }
-        let(:spanish_csharp_id) { 44 }
-        let(:mathematics_csharp_id) { 24 }
-        let(:russian_csharp_id) { 41 }
+        let(:french_csharp_id) { "13" }
+        let(:primary_csharp_id) { "31" }
+        let(:spanish_csharp_id) { "44" }
+        let(:mathematics_csharp_id) { "24" }
+        let(:russian_csharp_id) { "41" }
 
         it "returns the first four matching subjects in alphabetical order" do
           expect(results_view.subjects.map(&:subject_name)).to eq(

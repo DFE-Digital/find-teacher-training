@@ -41,11 +41,11 @@ feature "Vacancy filter", type: :feature do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            "fulltime" => "False",
-            "hasvacancies" => "True",
-            "parttime" => "False",
-            "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
-            "senCourses" => "False",
+            "fulltime" => "false",
+            "hasvacancies" => "true",
+            "parttime" => "false",
+            "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+            "senCourses" => "false",
             "test" => "params",
           },
         )
@@ -54,12 +54,12 @@ feature "Vacancy filter", type: :feature do
 
     describe "Navigating to the page with currently selected filters" do
       it "Preselects with vacancies" do
-        filter_page.load(query: { hasvacancies: "True" })
+        filter_page.load(query: { hasvacancies: "true" })
         expect(filter_page.with_vacancies.checked?).to eq(true)
       end
 
       it "Preselects with and without vacancies" do
-        filter_page.load(query: { hasvacancies: "False" })
+        filter_page.load(query: { hasvacancies: "false" })
         expect(filter_page.with_and_without_vacancies.checked?).to eq(true)
       end
     end

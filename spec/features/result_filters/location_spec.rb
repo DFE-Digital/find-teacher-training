@@ -150,11 +150,11 @@ feature "Location filter", type: :feature do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          "fulltime" => "False",
-          "hasvacancies" => "True",
-          "parttime" => "False",
-          "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
-          "senCourses" => "False",
+          "fulltime" => "false",
+          "hasvacancies" => "true",
+          "parttime" => "false",
+          "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+          "senCourses" => "false",
           "test" => "params",
         },
       )
@@ -389,7 +389,7 @@ feature "Location filter", type: :feature do
         page: results_page,
         expected_query_params: {
           "l" => "2",
-          "test" => "1,2",
+          "test" => %w[1 2],
         },
       )
     end

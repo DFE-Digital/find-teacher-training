@@ -10,7 +10,6 @@ feature "results", type: :feature do
 
   let(:base_parameters) { results_page_parameters("sort" => sort) }
 
-
   let(:results_page_request) do
     {
       course_stub: stub_request(:get, default_url)
@@ -71,7 +70,13 @@ feature "results", type: :feature do
       results_page.location_filter.link.click
       location_filter_uri = URI(current_url)
       expect(location_filter_uri.path).to eq("/results/filter/location")
-      expect(location_filter_uri.query).to eq("qualifications=QtsOnly,PgdePgceWithQts,Other&fulltime=False&parttime=False&hasvacancies=True&senCourses=False")
+      expect(Rack::Utils.parse_nested_query(location_filter_uri.query)).to eq({
+        "fulltime" => "false",
+        "hasvacancies" => "true",
+        "parttime" => "false",
+        "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+        "senCourses" => "false",
+      })
     end
 
     it "has subjects filter" do
@@ -89,7 +94,7 @@ feature "results", type: :feature do
   end
 
   describe "filters defaults with query string" do
-    let(:params) { { fulltime: "False", parttime: "False", hasvacancies: "True" } }
+    let(:params) { { fulltime: "false", parttime: "false", hasvacancies: "true" } }
 
     it "has study type filter" do
       expect(results_page.study_type_filter.subheading).to have_content("Study type:")
@@ -197,7 +202,7 @@ feature "results", type: :feature do
     context "for full time only" do
       let(:study_type) { "full_time" }
 
-      let(:params) { { fulltime: "True", parttime: "False" } }
+      let(:params) { { fulltime: "true", parttime: "false" } }
 
       it "has study type filter for full time only " do
         expect(results_page.study_type_filter.subheading).to have_content("Study type:")
@@ -209,7 +214,7 @@ feature "results", type: :feature do
 
     context "for part time only" do
       let(:study_type) { "part_time" }
-      let(:params) { { fulltime: "False", parttime: "True" } }
+      let(:params) { { fulltime: "false", parttime: "true" } }
 
       it "has study type filter for part time only" do
         expect(results_page.study_type_filter.subheading).to have_content("Study type:")
@@ -217,6 +222,65 @@ feature "results", type: :feature do
         expect(results_page.study_type_filter.parttime).to have_content("Part time (18 - 24 months)")
         expect(results_page.study_type_filter.link).to have_content("Change study type")
       end
+    end
+  end
+
+  describe "location filter" do
+    context "location with blank provider name" do
+      let(:params) do
+        {
+          l: 2,
+          query: "",
+          qualifications: %w[QtsOnly PgdePgceWithQts Other],
+          fulltime: "false",
+          parttime: "false",
+          hasvacancies: "true",
+          senCourses: "false",
+        }
+      end
+
+      it "falls back to l2 (Across England)" do
+        location_filter_uri = URI(current_url)
+        expect(location_filter_uri.path).to eq("/results")
+        expect(Rack::Utils.parse_nested_query(location_filter_uri.query)).to eq({
+          "fulltime" => "false",
+          "hasvacancies" => "true",
+          "l" => "2",
+          "parttime" => "false",
+          "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+          "senCourses" => "false",
+          "query" => "",
+        })
+      end
+    end
+  end
+
+  context "with C# parameters" do
+    let(:base_parameters) { results_page_parameters("sort" => sort, "filter[subjects]" => "C1,08,F1") }
+
+    let(:params) do
+      {
+        l: 2,
+        query: "",
+        qualifications: "QtsOnly,PgdePgceWithQts,Other",
+        subjects: "1,2,3",
+        fulltime: "False",
+        parttime: "False",
+        hasvacancies: "True",
+        senCourses: "False",
+        funding: "15",
+      }
+    end
+
+    it "sets all parameters correctly" do
+      expect(results_page.location_filter.name).to have_content("Across England")
+      expect(results_page.subjects_filter.subjects.map(&:text))
+        .to match_array(["Biology", "Business studies", "Chemistry"])
+      expect(results_page.study_type_filter.fulltime).to have_content("Full time (12 months)")
+      expect(results_page.study_type_filter.parttime).to have_content("Part time (18 - 24 months)")
+      expect(results_page.qualifications_filter).to have_content("All qualifications")
+      expect(results_page.funding_filter).to have_with_or_without_salary
+      expect(results_page.vacancies_filter).to have_content("Only courses with vacancies")
     end
   end
 end

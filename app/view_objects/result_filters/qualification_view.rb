@@ -1,7 +1,7 @@
 module ResultFilters
   class QualificationView
     def initialize(params:)
-      @qualifications_parameter = params[:qualifications] || ""
+      @qualifications_parameter = params[:qualifications]
     end
 
     def qts_only_checked?
@@ -17,19 +17,19 @@ module ResultFilters
     end
 
     def qualification_selected?
-      parameter_array.any?
+      return false if qualifications_parameter.nil?
+
+      qualifications_parameter.any?
     end
 
   private
 
     attr_reader :qualifications_parameter
 
-    def parameter_array
-      qualifications_parameter.split(",")
-    end
-
     def checked?(param_value)
-      parameter_array.include?(param_value)
+      return false if qualifications_parameter.nil?
+
+      param_value.in?(qualifications_parameter)
     end
   end
 end

@@ -100,7 +100,6 @@ module PageObjects
       element :salary_link, '[data-qa="filters__salary_link"]'
       element :vacancies_link, '[data-qa="filters__vacancies_link"]'
 
-
       element :suggested_searches, '[data-qa="suggested_searches"]'
       element :suggested_search_heading, '[data-qa="suggested_search_heading"]'
       element :suggested_search_description, '[data-qa="suggested_search_description"]'
