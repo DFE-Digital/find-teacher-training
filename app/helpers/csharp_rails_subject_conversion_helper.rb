@@ -21,7 +21,13 @@ module CsharpRailsSubjectConversionHelper
       entry[:csharp_id] == id
     end
 
-    raise "An unregistered subject id was specified: #{id}" if rails_data.nil?
+    # A user may somehow end up with a subject that doesn't exist.
+    # If we weren't converting subject IDs, this wouldn't be an issue
+    # but since we are, we will just return a subject id that will never exist.
+    # This workaround means that removing this entire module will be easier in
+    # future because we don't need to do any extra work to ensure a subject
+    # exists.
+    return "[non-existent subject code]" if rails_data.nil?
 
     rails_data[:subject_code]
   end
@@ -31,7 +37,7 @@ module CsharpRailsSubjectConversionHelper
       entry[:subject_code] == id
     end
 
-    raise "An unregistered subject id was specified: #{id}" if csharp_data.nil?
+    return "[non-existent subject id]" if csharp_data.nil?
 
     csharp_data[:csharp_id]
   end
