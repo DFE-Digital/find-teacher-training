@@ -9,14 +9,11 @@ feature "Funding filter", type: :feature do
   let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
 
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_request(:get, subjects_url)
+    stub_subjects_request
   end
 
   describe "Funding filter page" do
@@ -55,7 +52,7 @@ feature "Funding filter", type: :feature do
       end
     end
 
-    describe "Pre populated value" do
+    describe "pre populated value" do
       context "with no salary_filter parameter" do
         it "the all_courses button is selected by default" do
           expect(filter_page.all_courses).to be_checked

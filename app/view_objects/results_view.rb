@@ -362,8 +362,7 @@ private
   end
 
   def all_subjects
-    @all_subjects ||= SubjectArea.includes(:subjects).all
-      .map(&:subjects).flatten.sort_by(&:subject_name)
+    @all_subjects ||= Subject.select(:subject_name, :subject_code).order(:subject_name).all
   end
 
   def number_of_subjects_selected

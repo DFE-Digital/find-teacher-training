@@ -8,11 +8,17 @@ feature "Subject filter", type: :feature do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
 
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
-
   let(:base_parameters) { results_page_parameters }
+
+  let(:stub_subject_areas_request) do
+    stub_request(
+      :get,
+      "http://localhost:3001/api/v3/subject_areas?include=subjects",
+    ).to_return(
+      body: File.new("spec/fixtures/api_responses/subject_areas.json"),
+      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+    )
+  end
 
   before do
     stub_request(:get, courses_url)
@@ -22,13 +28,9 @@ feature "Subject filter", type: :feature do
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
 
-    stub_request(
-      :get,
-      subjects_url,
-    ).to_return(
-      body: File.new("spec/fixtures/api_responses/subject_areas.json"),
-      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+    stub_subject_areas_request
+
+    stub_subjects_request
   end
 
   describe "applying a filter" do

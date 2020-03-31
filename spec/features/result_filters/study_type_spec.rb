@@ -6,14 +6,11 @@ feature "Study type filter", type: :feature do
   let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
 
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_request(:get, subjects_url)
+    stub_subjects_request
   end
 
   describe "Study type filter page" do

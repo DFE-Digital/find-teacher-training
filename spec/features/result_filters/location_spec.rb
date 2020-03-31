@@ -9,23 +9,24 @@ feature "Location filter", type: :feature do
   let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
 
   let(:base_parameters) { results_page_parameters }
 
+  let(:stub_subject_area_request) do
+    stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects")
+  end
+
   before do
     stub_geocoder
-
-    stub_request(:get, subjects_url)
+    stub_subject_area_request
+    stub_subjects_request
 
     stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new("spec/fixtures/api_responses/ten_courses.json"),
-          headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-            )
+      .with(query: base_parameters)
+      .to_return(
+        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+    )
   end
 
   describe "filtering by provider" do

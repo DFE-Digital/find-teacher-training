@@ -15,23 +15,25 @@ feature "cookie banner", type: :feature do
         build(:subject_area, :secondary),
     ]
   end
+
   let(:default_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
 
   let(:base_parameters) { results_page_parameters }
 
-  before do
+  def stub_results_request
     stub_request(:get, default_url)
       .with(query: base_parameters)
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+    )
+  end
 
-    stub_api_v3_resource(type: SubjectArea,
-                          resources: subject_areas,
-                          include: [:subjects])
+  before do
+    stub_results_request
+    stub_subjects_request
 
     visit results_path(params)
   end

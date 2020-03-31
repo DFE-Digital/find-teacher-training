@@ -10,7 +10,13 @@ describe "Suggested salary searches" do
   end
 
   def stub_subjects
-    stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects")
+    stub_request(
+      :get,
+      "http://localhost:3001/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
+    ).to_return(
+      body: File.new("spec/fixtures/api_responses/subjects_sorted_name_code.json"),
+      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+    )
   end
 
   def course_fixture_for(results:)

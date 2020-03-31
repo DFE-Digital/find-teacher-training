@@ -8,9 +8,7 @@ feature "Provider filter", type: :feature do
   let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
+
   let(:providers_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
   end
@@ -21,7 +19,7 @@ feature "Provider filter", type: :feature do
   let(:query_params) { { query: search_term } }
 
   before do
-    stub_request(:get, subjects_url)
+    stub_subjects_request
 
     stub_request(:get, courses_url)
       .with(
