@@ -1,7 +1,13 @@
 #These functions are barely tested and temporary, they should be removed when the results page is filtering in Rails
 module CsharpRailsSubjectConversionHelper
   def convert_csharp_subject_id_params_to_subject_code
-    params["subjects"]&.map do |subject|
+    subjects = if params["subjects"].is_a?(String)
+                 params["subjects"].split(",")
+               else
+                 params["subjects"]
+               end
+
+    subjects&.map do |subject|
       csharp_to_subject_code(id: subject)
     end
   end
