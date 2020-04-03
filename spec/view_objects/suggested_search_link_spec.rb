@@ -39,4 +39,18 @@ describe SuggestedSearchLink do
       end
     end
   end
+
+  context "including_non_salaried is true" do
+    let(:parameters) { { "lat" => "5", "lng" => "-5", "rad" => "10", "loc" => "Shetlands", "lq" => "2" } }
+    subject { described_class.new(radius: nil, count: "5", parameters: parameters, including_non_salaried: true).text }
+
+    it { is_expected.to eq("5 non-salaried courses across England") }
+  end
+
+  context "explicit_salary_filter is true" do
+    let(:parameters) { { "lat" => "5", "lng" => "-5", "rad" => "10", "loc" => "Shetlands", "lq" => "2" } }
+    subject { described_class.new(radius: nil, count: "5", parameters: parameters, explicit_salary_filter: true).text }
+
+    it { is_expected.to eq("5 salaried courses across England") }
+  end
 end
