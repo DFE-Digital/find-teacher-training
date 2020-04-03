@@ -5,16 +5,6 @@ feature "Search results", type: :feature do
 
   let(:base_parameters) { results_page_parameters }
 
-  let(:courses_request) do
-    url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-    stub_request(:get, url)
-      .with(query: base_parameters)
-      .to_return(
-        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
-  end
-
   let(:subject) do
     build(:subject,
           :english,
@@ -27,26 +17,27 @@ feature "Search results", type: :feature do
   let(:decorated_course) { course.decorate }
   let(:courses) { [course] }
 
-  let(:subject_request) do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: nil,
-      include: [:subjects],
-    )
-  end
-
   let(:page_index) { nil }
 
-  before do
-    subject_request
+  let(:stub_courses_request) do
+    url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    stub_request(:get, url)
+      .with(query: base_parameters)
+      .to_return(
+        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
+        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      )
+  end
 
-    courses_request
+  before do
+    stub_subjects_request
+    stub_courses_request
 
     visit results_path(page: page_index)
   end
 
-  it "Requests the courses" do
-    expect(courses_request).to have_been_requested
+  it "requests the courses" do
+    expect(stub_courses_request).to have_been_requested
   end
 
   context "multiple courses" do
@@ -71,7 +62,7 @@ feature "Search results", type: :feature do
     end
 
     it "requests the second page" do
-      expect(courses_request).to have_been_requested
+      expect(stub_courses_request).to have_been_requested
     end
   end
 end

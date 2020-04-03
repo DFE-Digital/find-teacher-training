@@ -9,13 +9,9 @@ feature "Location filter back link", type: :feature do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
 
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
-
   before do
     stub_results_page_request
-    stub_request(:get, subjects_url)
+    stub_subjects_request
   end
 
   context "before the location filter form has been submitted" do

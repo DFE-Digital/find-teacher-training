@@ -7,10 +7,9 @@ feature "suggested searches", type: :feature do
   let(:courses_url) do
     "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
   end
-  let(:subjects_url) do
-    "http://localhost:3001/api/v3/subject_areas?include=subjects"
-  end
+
   let(:base_parameters) { results_page_parameters("sort" => sort) }
+
   def suggested_search_count_parameters
     base_parameters.reject do |k, _v|
       ["page[page]", "page[per_page]", "sort"].include?(k)
@@ -20,7 +19,7 @@ feature "suggested searches", type: :feature do
   before do
     stub_geocoder
 
-    stub_request(:get, subjects_url)
+    stub_subjects_request
   end
 
   def results_page_request(radius:, results_to_return:)

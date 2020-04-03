@@ -23,25 +23,13 @@ describe ResultsView do
     }
   end
 
-  let(:subject_areas) do
-    [
-      build(:subject_area, subjects: [
-        build(:subject, :primary),
-        build(:subject, :biology),
-        build(:subject, :english),
-        build(:subject, :mathematics),
-        build(:subject, :french),
-        build(:subject, :russian),
-      ]),
-      build(:subject_area, :secondary),
-    ]
-  end
-
   before do
-    stub_api_v3_resource(
-      type: SubjectArea,
-      resources: subject_areas,
-      include: [:subjects],
+    stub_request(
+      :get,
+      "http://localhost:3001/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
+    ).to_return(
+      body: File.new("spec/fixtures/api_responses/subjects_sorted_name_code.json"),
+      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
     )
   end
 
@@ -247,7 +235,7 @@ describe ResultsView do
       let(:parameter_hash) { {} }
 
       it "returns the total number subjects - NUMBER_OF_SUBJECTS_DISPLAYED" do
-        expect(results_view.number_of_extra_subjects).to eq(2)
+        expect(results_view.number_of_extra_subjects).to eq(37)
       end
     end
   end
@@ -449,12 +437,12 @@ describe ResultsView do
 
       it "returns the first four subjects in alphabetical order" do
         expect(results_view.subjects.map(&:subject_name)).to eq(
-          %w(
-            Biology
-            English
-            French
-            Mathematics
-          ),
+          [
+            "Art and design",
+            "Biology",
+            "Business studies",
+            "Chemistry",
+          ],
         )
       end
 
