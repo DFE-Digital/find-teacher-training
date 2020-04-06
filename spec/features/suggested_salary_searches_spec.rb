@@ -1,3 +1,5 @@
+require "rails_helper"
+
 describe "Suggested salary searches" do
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -125,8 +127,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 5 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 10 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 5 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 10 miles")
         end
       end
 
@@ -142,8 +144,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 10 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 10 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 10 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 10 miles")
         end
       end
 
@@ -186,8 +188,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 10 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 20 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 10 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 20 miles")
         end
       end
 
@@ -203,8 +205,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 20 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 20 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 20 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 20 miles")
         end
       end
     end
@@ -225,8 +227,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 20 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 50 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 20 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 50 miles")
         end
       end
 
@@ -242,8 +244,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 50 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 50 miles")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 50 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses within 50 miles")
         end
       end
     end
@@ -264,8 +266,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary within 50 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses across England")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses within 50 miles")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses across England")
         end
       end
 
@@ -281,8 +283,8 @@ describe "Suggested salary searches" do
 
           expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
           expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses with or without a salary across England")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses across England")
+          expect(results_page.suggested_search_links.first.text).to eq("4 non-salaried courses across England")
+          expect(results_page.suggested_search_links.last.text).to eq("10 salaried courses across England")
         end
       end
     end

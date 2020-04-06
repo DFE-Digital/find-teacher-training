@@ -225,6 +225,7 @@ class ResultsView
         radius: radius,
         count: course_counter(radius_to_check: radius),
         parameters: query_parameters_with_defaults,
+        explicit_salary_filter: with_salaries?,
       )
     end
 
