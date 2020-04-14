@@ -11,8 +11,9 @@ class SuggestedSearchLink
   end
 
   def text
-    count_prefix = "#{pluralize(count, text_course_text)} "
-    count_prefix + (all_england? ? "across England" : "within #{radius} miles")
+    count_prefix = "#{pluralize(count, 'course')} "
+    count_prefix << (all_england? ? "across England" : "within #{radius} miles")
+    count_prefix << (text_course_text.presence || "")
   end
 
   def url
@@ -20,6 +21,12 @@ class SuggestedSearchLink
       base_path: Rails.application.routes.url_helpers.results_path,
       parameters: suggested_search_link_parameters(radius: radius),
     )
+  end
+
+  def suffix
+    return " - including both salaried courses and ones without a salary" if including_non_salaried
+
+    ""
   end
 
 private
@@ -37,9 +44,8 @@ private
   end
 
   def text_course_text
-    return "non-salaried course" if including_non_salaried
-    return "salaried course" if explicit_salary_filter
+    return " with a salary" if explicit_salary_filter
 
-    "course"
+    ""
   end
 end
