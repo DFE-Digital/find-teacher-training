@@ -118,7 +118,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
 
-  gem "webdrivers", "~> 4.0"
+  gem "webdrivers", "~> 4.3"
 
   # Get us some fake!
   gem "faker"
