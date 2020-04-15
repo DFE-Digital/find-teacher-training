@@ -10,6 +10,11 @@ describe SuggestedSearchLink do
       it { is_expected.to eq("5 courses across England") }
     end
 
+    describe "#suffix" do
+      subject { super().suffix }
+      it { is_expected.to eq("") }
+    end
+
     describe "#url" do
       subject { super().url }
       it { is_expected.to eq("/results?l=2") }
@@ -25,6 +30,12 @@ describe SuggestedSearchLink do
       it { is_expected.to eq("5 courses within 10 miles") }
     end
 
+    describe "#suffix" do
+      subject { super().suffix }
+
+      it { is_expected.to eq("") }
+    end
+
     describe "#url" do
       it "produces the correct URL" do
         uri = URI(subject.url)
@@ -37,6 +48,37 @@ describe SuggestedSearchLink do
           "lq" => "2",
         })
       end
+    end
+  end
+
+  context "including_non_salaried is true" do
+    let(:parameters) { { "lat" => "5", "lng" => "-5", "rad" => "10", "loc" => "Shetlands", "lq" => "2" } }
+    subject { described_class.new(radius: nil, count: "5", parameters: parameters, including_non_salaried: true) }
+
+    describe "#text" do
+      subject { super().text }
+
+      it { is_expected.to eq("5 courses across England") }
+    end
+
+    describe "#suffix" do
+      subject { super().suffix }
+
+      it { is_expected.to eq(" - including both salaried courses and ones without a salary") }
+    end
+  end
+
+  context "explicit_salary_filter is true" do
+    let(:parameters) { { "lat" => "5", "lng" => "-5", "rad" => "10", "loc" => "Shetlands", "lq" => "2" } }
+
+    describe "#text" do
+      subject { described_class.new(radius: nil, count: "5", parameters: parameters, explicit_salary_filter: true).text }
+      it { is_expected.to eq("5 courses across England with a salary") }
+    end
+
+    describe "#text" do
+      subject { described_class.new(radius: nil, count: "5", parameters: parameters, explicit_salary_filter: true).suffix }
+      it { is_expected.to eq("") }
     end
   end
 end
