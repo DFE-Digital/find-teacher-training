@@ -124,7 +124,7 @@ class ResultsView
   end
 
   def vacancy_filter?
-    query_parameters["hasvacancies"] == "False"
+    query_parameters["hasvacancies"] == "false"
   end
 
   def sort_by_distance?
