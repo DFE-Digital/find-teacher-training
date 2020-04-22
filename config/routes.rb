@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     get "subject", to: "subject#start", as: "start_subject"
   end
 
+  # There is no need for a seperate path for start#location but this was the
+  # root path in the legacy c# app so we're redirecting to root
+  get "/start/location", to: redirect("/", status: "301")
+
   get "/terms-conditions", to: "pages#terms", as: "terms"
   get "/accessibility", to: "pages#accessibility", as: "accessibility"
   get "/privacy-policy", to: "pages#privacy", as: "privacy"
