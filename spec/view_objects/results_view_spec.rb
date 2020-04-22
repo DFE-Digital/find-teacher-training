@@ -388,14 +388,14 @@ describe ResultsView do
   describe "#vacancy_filter?" do
     subject { described_class.new(query_parameters: parameter_hash).vacancy_filter? }
 
-    context "when hasvacancies param is set to True" do
-      let(:parameter_hash) { { "hasvacancies" => "True" } }
+    context "when hasvacancies param is set to true" do
+      let(:parameter_hash) { { "hasvacancies" => "true" } }
 
       it { is_expected.to be(false) }
     end
 
-    context "when hasvacancies param is set to False" do
-      let(:parameter_hash) { { "hasvacancies" => "False" } }
+    context "when hasvacancies param is set to false" do
+      let(:parameter_hash) { { "hasvacancies" => "false" } }
 
       it { is_expected.to be(true) }
     end
