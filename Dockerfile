@@ -20,7 +20,7 @@ RUN apk add --update --no-cache --virtual build-dependances \
 
 ADD package.json $APP_HOME/package.json
 ADD yarn.lock $APP_HOME/yarn.lock
-RUN yarn
+RUN yarn install --frozen-lockfile
 
 ADD . $APP_HOME/
 
