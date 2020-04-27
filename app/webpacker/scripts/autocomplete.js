@@ -1,5 +1,9 @@
 import accessibleAutocomplete from "accessible-autocomplete";
 
+export const getPath = (endpoint,query) => {
+  return `${endpoint}?query=${query}`;
+}
+
 export const request = endpoint => {
   let xhr = null; // Hoist this call so that we can abort previous requests.
 
@@ -7,9 +11,7 @@ export const request = endpoint => {
     if (xhr && xhr.readyState !== XMLHttpRequest.DONE) {
       xhr.abort();
     }
-
-    let encodedQuery = encodeURIComponent(query);
-    const path = `${endpoint}?query=${encodedQuery}`;
+    const path = getPath(endpoint, query);
 
     xhr = new XMLHttpRequest();
     xhr.addEventListener("load", evt => {

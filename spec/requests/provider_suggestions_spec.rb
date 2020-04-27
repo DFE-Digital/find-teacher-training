@@ -19,9 +19,9 @@ describe "/provider-suggestions", type: :request do
   end
   context "when provider suggestion query is valid" do
     query = "Str"
-    query_with_encoded_characters = "Str%E2%80%99"
+    query_with_unicode_character = "Str%E2%80%99"
 
-    [query, query_with_encoded_characters].each do |provider_query|
+    [query, query_with_unicode_character].each do |provider_query|
       it "returns success (200) for query: '#{provider_query}'" do
         provider_suggestions = stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/provider-suggestions?query=#{provider_query}")
                                  .to_return(
