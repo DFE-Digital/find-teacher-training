@@ -104,7 +104,6 @@ feature "Subject filter", type: :feature do
 
         filter_page.continue.click
 
-
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
