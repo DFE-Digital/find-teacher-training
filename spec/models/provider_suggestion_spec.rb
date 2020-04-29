@@ -27,7 +27,6 @@ describe ProviderSuggestion do
       expect(query_stub).to have_been_requested
     end
 
-
     it "returns the result" do
       expect(provider_suggestions.length).to eq(2)
 
