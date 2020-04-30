@@ -1,5 +1,5 @@
 if Settings.logstash.host && Settings.logstash.port
-  logstash_formatter = Proc.new do |event|
+  logstash_formatter = proc do |event|
     # The value here appears to break logging to logstash / elasticsearch
     event["duration"] = event["duration_ms"]
     event["duration_ms"] = nil

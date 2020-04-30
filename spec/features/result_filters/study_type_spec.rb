@@ -48,7 +48,7 @@ feature "Study type filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "navigates back to the results page" do
@@ -102,7 +102,7 @@ feature "Study type filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists only courses with both study types" do
@@ -122,7 +122,7 @@ feature "Study type filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     context "deselecting full time" do
@@ -132,7 +132,7 @@ feature "Study type filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -157,7 +157,7 @@ feature "Study type filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -196,7 +196,7 @@ feature "Study type filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do

@@ -17,7 +17,7 @@ feature "results", type: :feature do
         .to_return(
           body: courses,
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      ),
+        ),
     }
   end
 
@@ -88,7 +88,7 @@ feature "results", type: :feature do
             "Business studies",
             "Chemistry",
           ],
-      )
+        )
       expect(results_page.subjects_filter.extra_subjects.text).to eq("and 37 more...")
     end
   end

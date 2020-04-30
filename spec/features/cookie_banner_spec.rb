@@ -28,7 +28,7 @@ feature "cookie banner", type: :feature do
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   before do

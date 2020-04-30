@@ -55,7 +55,7 @@ feature "Provider filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/providers.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
 
         provider_filter_page.load(query: query_params)
       end
@@ -80,7 +80,7 @@ feature "Provider filter", type: :feature do
 
         it "preserves previous parameters" do
           provider_filter_page.provider_suggestions.first.hyperlink.click
-          #We must do this because site_prism's URL system is broken
+          # We must do this because site_prism's URL system is broken
           expect(results_page.url).to eq(current_path)
           expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
             "other_param" => "my other param",
@@ -96,7 +96,7 @@ feature "Provider filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/one_provider.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
 
         provider_filter_page.load(query: query_params)
       end
@@ -115,7 +115,7 @@ feature "Provider filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/empty_providers.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
 
         provider_filter_page.load(query: query_params)
       end
@@ -136,7 +136,7 @@ feature "Provider filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/providers.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
 
       provider_filter_page.load(query: query_params)
     end

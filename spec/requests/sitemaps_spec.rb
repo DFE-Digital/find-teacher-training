@@ -58,6 +58,6 @@ describe "/sitemap.xml", type: :request do
           </url>
         </urlset>
       XML
-     )
+    )
   end
 end

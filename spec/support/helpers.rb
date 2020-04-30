@@ -6,14 +6,14 @@ module Helpers
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:dfe] = {
       "provider" => "dfe",
-      "uid"      => SecureRandom.uuid,
-      "info"     => {
+      "uid" => SecureRandom.uuid,
+      "info" => {
         "first_name" => user.first_name,
-        "last_name"  => user.last_name,
-        "email"      => user.email,
-        "id"         => user.id,
-        "state"      => user.state,
-        "admin"      => user.admin,
+        "last_name" => user.last_name,
+        "email" => user.email,
+        "id" => user.id,
+        "state" => user.state,
+        "admin" => user.admin,
       },
       "credentials" => {
         "token_id" => "123",

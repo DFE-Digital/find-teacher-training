@@ -44,7 +44,7 @@ describe "/provider-suggestions", type: :request do
               "name" => "Acme SCITT",
             },
           ],
-         )
+        )
       end
     end
   end

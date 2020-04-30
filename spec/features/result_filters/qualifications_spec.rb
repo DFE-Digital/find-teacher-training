@@ -28,7 +28,7 @@ feature "Qualifications filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "navigates back to the results page" do
@@ -70,7 +70,7 @@ feature "Qualifications filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists only courses with all qualifications" do
@@ -88,7 +88,7 @@ feature "Qualifications filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     context "deselecting courses with 'qts only' qualification" do
@@ -98,7 +98,7 @@ feature "Qualifications filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -125,7 +125,7 @@ feature "Qualifications filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -152,7 +152,7 @@ feature "Qualifications filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -196,14 +196,14 @@ feature "Qualifications filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
 
       stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "list the courses" do

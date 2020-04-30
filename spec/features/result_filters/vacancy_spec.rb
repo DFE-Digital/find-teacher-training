@@ -28,7 +28,7 @@ feature "Vacancy filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "navigates back to the results page" do
@@ -69,7 +69,7 @@ feature "Vacancy filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists only courses with vacancies" do
@@ -87,7 +87,7 @@ feature "Vacancy filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     context "selecting courses with or without vacancies" do
@@ -97,7 +97,7 @@ feature "Vacancy filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -122,7 +122,7 @@ feature "Vacancy filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "lists the courses" do

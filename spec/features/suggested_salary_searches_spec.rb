@@ -48,7 +48,7 @@ describe "Suggested salary searches" do
       .to_return(
         body: course_fixture_for(results: number_of_results),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def stub_suggested_across_england_with_salary_filter(number_of_results:)

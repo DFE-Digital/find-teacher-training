@@ -4,8 +4,8 @@ RSpec.describe ResultFilters::SubjectController do
   describe "#new" do
     context "when subjects is a comma delimited string" do
       it "returns a 200" do
-        stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects").
-           with(
+        stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects")
+           .with(
              headers: {
               "Accept" => "application/vnd.api+json",
               "Accept-Encoding" => "gzip,deflate",
