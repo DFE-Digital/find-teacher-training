@@ -26,7 +26,7 @@ feature "Subject filter", type: :feature do
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
 
     stub_subject_areas_request
 
@@ -40,7 +40,7 @@ feature "Subject filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     context "with less than 4 subjects selected" do
@@ -48,11 +48,11 @@ feature "Subject filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge(
             "filter[subjects]" => "00,F1",
-        ))
+          ))
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "lists the results" do
@@ -68,11 +68,11 @@ feature "Subject filter", type: :feature do
         expect(results_page.heading.text).to eq("Teacher training courses")
         expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
-            %w(
+            %w[
               Chemistry
               Primary
-            ),
-        )
+            ],
+          )
         expect(results_page.subjects_filter).not_to have_extra_subjects
 
         expect(results_page.courses.count).to eq(10)
@@ -84,11 +84,11 @@ feature "Subject filter", type: :feature do
         stub_request(:get, courses_url)
           .with(query: base_parameters.merge(
             "filter[subjects]" => "00,01,F1,Q8,P3",
-        ))
+          ))
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "lists the results" do
@@ -113,7 +113,7 @@ feature "Subject filter", type: :feature do
               "Communication and media studies",
               "Primary",
             ],
-        )
+          )
         expect(results_page.subjects_filter.extra_subjects.text).to eq("and 1 more...")
 
         expect(results_page.courses.count).to eq(10)
@@ -127,11 +127,11 @@ feature "Subject filter", type: :feature do
         .with(query: base_parameters.merge(
           "filter[subjects]" => "00,01,F1",
           "filter[send_courses]" => "true",
-      ))
+        ))
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists the results" do
@@ -154,7 +154,7 @@ feature "Subject filter", type: :feature do
             "Primary",
             "Primary with English",
           ],
-      )
+        )
       expect(results_page.subjects_filter).not_to have_extra_subjects
 
       expect(results_page.courses.count).to eq(10)
@@ -207,7 +207,7 @@ feature "Subject filter", type: :feature do
 
       expect_page_to_be_displayed_with_query(
         page: results_page,
-        expected_query_params:  {
+        expected_query_params: {
           "fulltime" => "false",
           "hasvacancies" => "true",
           "parttime" => "false",
@@ -322,11 +322,11 @@ feature "Subject filter", type: :feature do
       stub_request(:get, courses_url)
           .with(query: base_parameters.merge(
             "filter[subjects]" => "01",
-              ))
+          ))
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-              )
+          )
 
       visit subject_path(subjects: %w[31], senCourses: "true")
       filter_page.subject_areas.first.subjects[0].checkbox.click # unselect
@@ -341,7 +341,7 @@ feature "Subject filter", type: :feature do
             [
                 "Primary with English",
             ],
-                  )
+          )
       expect(results_page.subjects_filter).not_to have_extra_subjects
     end
   end
@@ -351,11 +351,11 @@ feature "Subject filter", type: :feature do
       stub_request(:get, courses_url)
         .with(query: base_parameters.merge(
           "filter[subjects]" => "00,01",
-      ))
+        ))
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "only changes the subjects params" do

@@ -8,7 +8,7 @@ class Base < JsonApiClient::Resource
       params: params,
       headers: headers.update(
         "X-Request-Id" => RequestStore.store[:request_id],
-        ),
+      ),
       body: body
     )
   end

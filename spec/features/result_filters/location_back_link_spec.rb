@@ -121,10 +121,10 @@ feature "Location filter back link", type: :feature do
         "fields[providers]" => "provider_code,provider_name",
         "search" => "ACME",
       },
-      ).to_return(
-        body: File.new("spec/fixtures/api_responses/providers.json"),
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+    ).to_return(
+      body: File.new("spec/fixtures/api_responses/providers.json"),
+      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+    )
   end
 
   def stub_results_page_request
@@ -133,18 +133,18 @@ feature "Location filter back link", type: :feature do
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def stub_courses_request_with_acme
     stub_request(:get, courses_url)
       .with(
         query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
-    )
+      )
       .to_return(
         body: File.new("spec/fixtures/api_responses/four_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def stub_courses_request_with_location
@@ -154,11 +154,11 @@ feature "Location filter back link", type: :feature do
                                      "filter[latitude]" => "51.4980188",
                                      "filter[radius]" => "20",
                                      "sort" => "distance"),
-    )
+      )
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def any_parameters

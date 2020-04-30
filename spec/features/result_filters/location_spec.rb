@@ -26,7 +26,7 @@ feature "Location filter", type: :feature do
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   describe "filtering by provider" do
@@ -51,7 +51,7 @@ feature "Location filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/four_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "displays the courses" do
@@ -83,11 +83,11 @@ feature "Location filter", type: :feature do
                                        "filter[latitude]" => "51.4980188",
                                        "filter[radius]" => "20",
                                        "sort" => "distance"),
-          )
+        )
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-          )
+        )
 
       results_page.load
       results_page.location_filter.link.click
@@ -281,11 +281,11 @@ feature "Location filter", type: :feature do
                                        "filter[latitude]" => "51.4980188",
                                        "filter[radius]" => "20",
                                        "sort" => "distance"),
-          )
+        )
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-          )
+        )
     end
 
     before do
@@ -379,7 +379,7 @@ feature "Location filter", type: :feature do
     end
 
     it "passes arrays correctly" do
-      #Site prism does not correctly handle array arguments
+      # Site prism does not correctly handle array arguments
       visit location_path(test: [1, 2])
       filter_page.across_england.click
       filter_page.find_courses.click

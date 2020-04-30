@@ -31,7 +31,7 @@ feature "Funding filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "navigates back to the results page" do
@@ -87,7 +87,7 @@ feature "Funding filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists course with or without salary" do
@@ -105,7 +105,7 @@ feature "Funding filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     context "selecting all courses" do
@@ -115,7 +115,7 @@ feature "Funding filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "list the courses" do
@@ -141,7 +141,7 @@ feature "Funding filter", type: :feature do
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
             headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+          )
       end
 
       it "lists the courses" do
@@ -168,14 +168,14 @@ feature "Funding filter", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
 
       stub_request(:get, courses_url)
         .with(query: base_parameters.merge("filter[qualifications]" => "QtsOnly,PgdePgceWithQts,Other"))
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "lists only courses with and without salary" do

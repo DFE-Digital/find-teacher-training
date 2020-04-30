@@ -263,13 +263,13 @@ private
   end
 
   def new_or_running_sites_for(course)
-    sites = course.
-      site_statuses.
-      select(&:new_or_running?).
-      map(&:site).
-      reject do |site|
-      # Sites that have no address details whatsoever are not to be considered
-      # when calculating '#nearest_address' or '#site_distance'
+    sites = course
+      .site_statuses
+      .select(&:new_or_running?)
+      .map(&:site)
+      .reject do |site|
+        # Sites that have no address details whatsoever are not to be considered
+        # when calculating '#nearest_address' or '#site_distance'
         [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
       end
 
@@ -375,11 +375,11 @@ private
   end
 
   def course_query(include_location:, radius_to_query: radius, include_salary: true)
-    base_query = Course.
-      includes(site_statuses: [:site]).
-      includes(:provider).
-      includes(:subjects).
-      where(recruitment_cycle_year: Settings.current_cycle)
+    base_query = Course
+      .includes(site_statuses: [:site])
+      .includes(:provider)
+      .includes(:subjects)
+      .where(recruitment_cycle_year: Settings.current_cycle)
 
     base_query = base_query.where(funding: "salary") if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: hasvacancies?)

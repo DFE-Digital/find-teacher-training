@@ -28,7 +28,7 @@ feature "suggested searches", type: :feature do
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def suggested_search_count_request(radius:, results_to_return:)
@@ -37,7 +37,7 @@ feature "suggested searches", type: :feature do
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def suggested_search_count_across_england(results_to_return:)
@@ -46,7 +46,7 @@ feature "suggested searches", type: :feature do
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-    )
+      )
   end
 
   def course_fixture_for(results:)
@@ -217,7 +217,7 @@ feature "suggested searches", type: :feature do
         .to_return(
           body: File.new("spec/fixtures/api_responses/two_courses.json"),
           headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-      )
+        )
     end
 
     it "doesn't show suggested searches" do

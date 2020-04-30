@@ -39,7 +39,7 @@ private
     return parameters.merge("rad" => radius) if radius.present?
 
     parameters
-      .reject { |k, _v| %w(lat lng rad loc lq).include?(k) }
+      .reject { |k, _v| %w[lat lng rad loc lq].include?(k) }
       .merge("l" => 2)
   end
 

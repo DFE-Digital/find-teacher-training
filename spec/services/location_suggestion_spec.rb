@@ -36,7 +36,7 @@ describe LocationSuggestion do
           status: status,
           body: { predictions: stub }.to_json,
           headers: { 'Content-Type': "application/json" },
-      )
+        )
     end
 
     context "successful requests" do
