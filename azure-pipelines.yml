@@ -108,6 +108,7 @@ steps:
   inputs:
     Contents: |
      azure/**
+     terraform/**
     TargetFolder: '$(build.artifactstagingdirectory)'
     OverWrite: true
 
