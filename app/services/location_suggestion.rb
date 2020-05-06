@@ -18,11 +18,11 @@ class LocationSuggestion
 
     def build_query(input)
       {
-          key: Settings.google.gcp_api_key,
-          language: "en",
-          input: input,
-          components: "country:uk",
-          types: "geocode",
+        key: Settings.google.gcp_api_key,
+        language: "en",
+        input: input,
+        components: "country:uk",
+        types: "geocode",
       }
     end
   end

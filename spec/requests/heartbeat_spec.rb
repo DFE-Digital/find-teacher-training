@@ -29,7 +29,7 @@ describe "heartbeat requests" do
 
       it "returns the expected response report" do
         expect(response.body).to eq({ checks: {
-            teacher_training_api: true,
+          teacher_training_api: true,
         } }.to_json)
       end
     end
