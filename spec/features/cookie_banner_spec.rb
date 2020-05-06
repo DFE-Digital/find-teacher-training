@@ -5,14 +5,14 @@ feature "cookie banner", type: :feature do
   let(:params) {}
   let(:subject_areas) do
     [
-        build(:subject_area, subjects: [
-            build(:subject, :primary, id: 1),
-            build(:subject, :biology, id: 10),
-            build(:subject, :english, id: 21),
-            build(:subject, :mathematics, id: 25),
-            build(:subject, :french, id: 34),
-        ]),
-        build(:subject_area, :secondary),
+      build(:subject_area, subjects: [
+        build(:subject, :primary, id: 1),
+        build(:subject, :biology, id: 10),
+        build(:subject, :english, id: 21),
+        build(:subject, :mathematics, id: 25),
+        build(:subject, :french, id: 34),
+      ]),
+      build(:subject_area, :secondary),
     ]
   end
 

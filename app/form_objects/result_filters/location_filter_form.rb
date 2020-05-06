@@ -44,10 +44,10 @@ module ResultFilters
       results = Geocoder.search(query, components: "country:UK").first
       if results
         {
-            lat: results.latitude,
-            lng: results.longitude,
-            loc: results.address,
-            lq: location_query,
+          lat: results.latitude,
+          lng: results.longitude,
+          loc: results.address,
+          lq: location_query,
         }
       end
     end

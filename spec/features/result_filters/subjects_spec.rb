@@ -339,7 +339,7 @@ feature "Subject filter", type: :feature do
       expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
             [
-                "Primary with English",
+              "Primary with English",
             ],
           )
       expect(results_page.subjects_filter).not_to have_extra_subjects

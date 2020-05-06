@@ -5,7 +5,7 @@ class HeartbeatController < ActionController::API
 
   def healthcheck
     checks = {
-        teacher_training_api: api_alive?,
+      teacher_training_api: api_alive?,
     }
 
     render status: (checks.values.all? ? :ok : :bad_gateway), json: {
