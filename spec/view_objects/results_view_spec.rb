@@ -263,6 +263,17 @@ describe ResultsView do
 
       it { is_expected.to eq("10") }
     end
+
+    context "when an unapproved rad is passed" do
+      let(:parameter_hash) { { "rad" => "11" } }
+
+      it { is_expected.to eq("20") }
+    end
+
+    context "when rad is not passed" do
+      let(:parameter_hash) { {} }
+      it { is_expected.to eq("20") }
+    end
   end
 
   describe "#show_map?" do
