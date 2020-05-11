@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resource :sitemap, only: :show
 
+  get "/course/:provider_code/:course_code/apply", to: "courses#apply", as: :apply
   get "/course/:provider_code/:course_code", to: "courses#show", as: "course"
   get "/results", to: "results#index", as: "results"
 

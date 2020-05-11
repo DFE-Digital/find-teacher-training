@@ -14,4 +14,17 @@ class CoursesController < ApplicationController
   rescue JsonApiClient::Errors::NotFound
     render file: "errors/not_found", status: :not_found
   end
+
+  def apply
+    course = Course
+      .includes(:provider)
+      .where(recruitment_cycle_year: Settings.current_cycle)
+      .where(provider_code: params[:provider_code])
+      .find(params[:course_code])
+      .first
+
+    Rails.logger.info("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
+
+    redirect_to "https://www.apply-for-teacher-training.education.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
+  end
 end
