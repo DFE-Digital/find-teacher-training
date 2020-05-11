@@ -7,8 +7,7 @@
 
   <% if @course.has_vacancies? %>
     <p class="govuk-body">
-      <%= link_to "Apply for this course",
-                  "https://www.apply-for-teacher-training.education.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}",
+      <%= link_to "Apply for this course", apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
                   class: "govuk-button govuk-button--start",
                   data: { qa: 'course__apply_link' } %>
     </p>
