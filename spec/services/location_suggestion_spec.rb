@@ -5,13 +5,13 @@ describe LocationSuggestion do
     let(:location1) { "123 Seseme Street" }
     let(:location2) { "New York, NY" }
     let(:query) { "New York" }
-    let(:predictions) {
+    let(:predictions) do
       [
         { description: location1 },
         { description: location2 },
       ]
-    }
-    let(:params) {
+    end
+    let(:params) do
       {
         key: Settings.google.gcp_api_key,
         language: "en",
@@ -19,16 +19,16 @@ describe LocationSuggestion do
         components: "country:uk",
         types: "geocode",
       }.to_query
-    }
+    end
     let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
 
     let(:location_suggestions) do
       LocationSuggestion.suggest(query)
     end
 
-    let(:query_stub) {
+    let(:query_stub) do
       stub_suggestions(200, predictions)
-    }
+    end
 
     def stub_suggestions(status, stub = {})
       stub_request(:get, url)

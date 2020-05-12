@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require "rails_helper"
 
 feature "Course show", type: :feature do
@@ -143,7 +141,7 @@ feature "Course show", type: :feature do
       )
 
       # expect(course_page).to have_content(
-      #   "The course fees for #{Settings.current_cycle} – #{Settings.current_cycle + 1} are as follows",
+      #   "The course fees for #{Settings.current_cycle} - #{Settings.current_cycle + 1} are as follows",
       # )
 
       expect(course_page.uk_fees).to have_content(
