@@ -1,5 +1,3 @@
-# rubocop:disable Metrics/BlockLength
-
 Rails.application.routes.draw do
   constraints(host: /^www2\.|\.education\./) do
     match "/(*path)" => redirect { |_, req| "#{Settings.base_url}#{req.fullpath}" },
@@ -66,4 +64,3 @@ Rails.application.routes.draw do
     get "provider", to: "provider#new"
   end
 end
-# rubocop:enable Metrics/BlockLength
