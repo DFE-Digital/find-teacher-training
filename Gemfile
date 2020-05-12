@@ -22,7 +22,7 @@ gem "logstash-logger"
 gem "rails_semantic_logger"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.0.2"
+gem "rails", "~> 6.0.3"
 
 # Thread-safe global state
 gem "request_store"
