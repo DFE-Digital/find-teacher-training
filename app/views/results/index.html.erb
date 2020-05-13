@@ -2,14 +2,17 @@
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-column-two-thirds">
       <% if @results_view.provider_filter? %>
         <h1 class="govuk-heading-xl" data-qa="heading">
           <span class="govuk-caption-l">Teacher training courses</span>
           <%= @results_view.provider %>
         </h1>
       <% else %>
-        <h1 class="govuk-heading-xl" data-qa="heading">Teacher training courses</h1>
+        <h1 class="govuk-heading-xl" data-qa="heading">
+          <span class="govuk-caption-xl">Teacher training courses near to</span>
+          <span><%= @results_view.location %></span>
+        </h1>
       <% end %>
     </div>
   </div>
@@ -45,7 +48,7 @@
       <% else %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-one-half">
-            <p class="govuk-body search-results__count" data-qa="course-count"><%= @results_view.number_of_courses_string %> found</p>
+            <p class="govuk-body search-results__count" data-qa="course-count"><%= @results_view.number_of_courses_string %> within 50 miles</p>
           </div>
           <div class="govuk-grid-column-one-half">
             <p class="govuk-body search-results__new-search">
