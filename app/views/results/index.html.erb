@@ -119,7 +119,7 @@
                   <dt class="govuk-list--description__label">Distance</dt>
                   <dd data-qa="course__site_distance">
                     <ul class="govuk-list govuk-!-margin-top-0 govuk-!-margin-bottom-0">
-                      <% if @results_view.site_distance(course) < 5 %>
+                      <% if @results_view.site_distance(course) < 6 %>
                         <li>Placement schools are in this area</li>
                       <% else %>
                         <li>Placement schools are within <%= @results_view.site_distance(course) - 5 %> mile<%= 's' if @results_view.site_distance(course) - 5 != 1 %></li>
