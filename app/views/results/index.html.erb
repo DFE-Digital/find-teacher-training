@@ -10,7 +10,7 @@
         </h1>
       <% else %>
         <h1 class="govuk-heading-xl" data-qa="heading">
-          <span class="govuk-caption-xl">Teacher training courses near to</span>
+          <span class="govuk-caption-xl">Teacher training courses</span>
           <span><%= @results_view.location %></span>
         </h1>
       <% end %>
@@ -57,7 +57,7 @@
           </div>
         </div>
         <% unless @results_view.provider_filter? %>
-          <div class="search-results-header">
+          <!-- <div class="search-results-header">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-full">
                     <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
@@ -84,7 +84,7 @@
                     <% end %>
                 </div>
               </div>
-            </div>
+            </div> -->
         <% end %>
       <% end %>
 
