@@ -44,8 +44,8 @@ FactoryBot.define do
     has_scholarship_and_bursary? { nil }
     has_bursary? { nil }
     has_early_career_payments? { nil }
-    scholarship_amount { 20000 }
-    bursary_amount { 22000 }
+    scholarship_amount { 20_000 }
+    bursary_amount { 22_000 }
     about_accrediting_body { nil }
     maths { "expect_to_achieve_before_training_begins" }
     english { "must_have_qualification_at_application_time" }
@@ -113,7 +113,7 @@ FactoryBot.define do
     trait :with_fees do
       course_length { "TwoYears" }
       fee_uk_eu { 7000 }
-      fee_international { 14000 }
+      fee_international { 14_000 }
       fee_details { Faker::Lorem.sentence(word_count: 100) }
       financial_support { Faker::Lorem.sentence(word_count: 100) }
     end

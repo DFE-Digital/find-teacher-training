@@ -6,11 +6,13 @@ feature "Search results", type: :feature do
   let(:base_parameters) { results_page_parameters }
 
   let(:subject) do
-    build(:subject,
-          :english,
-          scholarship: "2000",
-          bursary_amount: "4000",
-          early_career_payments: "1000")
+    build(
+      :subject,
+      :english,
+      scholarship: "2000",
+      bursary_amount: "4000",
+      early_career_payments: "1000",
+    )
   end
 
   let(:accrediting_provider) { build(:provider) }

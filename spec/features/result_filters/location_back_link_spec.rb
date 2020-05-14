@@ -150,10 +150,12 @@ feature "Location filter back link", type: :feature do
   def stub_courses_request_with_location
     stub_request(:get, courses_url)
       .with(
-        query: base_parameters.merge("filter[longitude]" => "-0.1300436",
-                                     "filter[latitude]" => "51.4980188",
-                                     "filter[radius]" => "20",
-                                     "sort" => "distance"),
+        query: base_parameters.merge(
+          "filter[longitude]" => "-0.1300436",
+          "filter[latitude]" => "51.4980188",
+          "filter[radius]" => "20",
+          "sort" => "distance",
+        ),
       )
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),

@@ -2,48 +2,52 @@ require "rails_helper"
 
 feature "Course show", type: :feature do
   let(:provider) do
-    build(:provider,
-          provider_name: "ACME SCITT A0",
-          provider_code: "T92",
-          website: "https://scitt.org",
-          address1: "1 Long Rd",
-          postcode: "E1 ABC")
+    build(
+      :provider,
+      provider_name: "ACME SCITT A0",
+      provider_code: "T92",
+      website: "https://scitt.org",
+      address1: "1 Long Rd",
+      postcode: "E1 ABC",
+    )
   end
 
   let(:course) do
-    build(:course,
-          name: "Primary",
-          course_code: "X130",
-          provider: provider,
-          provider_code: provider.provider_code,
-          recruitment_cycle: current_recruitment_cycle,
-          accrediting_provider: accrediting_provider,
-          course_length: "OneYear",
-          applications_open_from: "2019-01-01T00:00:00Z",
-          start_date: "2019-09-01T00:00:00Z",
-          fee_uk_eu: "9250.0",
-          fee_international: "9250.0",
-          fee_details: "Optional fee details",
-          has_scholarship_and_bursary?: true,
-          financial_support: "Some info about financial support",
-          scholarship_amount: "20000",
-          bursary_amount: "22000",
-          personal_qualities: "We are looking for ambitious trainee teachers who are passionate and enthusiastic about their subject and have a desire to share that with young people of all abilities in this particular age range.",
-          other_requirements: "You will need three years of prior work experience, but not necessarily in an educational context.",
-          about_accrediting_body: "Something great about the accredited body",
-          interview_process: "Some helpful guidance about the interview process",
-          how_school_placements_work: "Some info about how school placements work",
-          about_course: "This is a course",
-          required_qualifications: "You need some qualifications for this course",
-          has_vacancies?: true,
-          site_statuses: [
-            jsonapi_site_status("Running site with vacancies", :full_time, "running"),
-            jsonapi_site_status("Suspended site with vacancies", :full_time, "suspended"),
-            jsonapi_site_status("New site with vacancies", :full_time, "new_status"),
-            jsonapi_site_status("New site with no vacancies", :no_vacancies, "new_status"),
-            jsonapi_site_status("Running site with no vacancies", :no_vacancies, "running"),
-          ],
-          subjects: [subject])
+    build(
+      :course,
+      name: "Primary",
+      course_code: "X130",
+      provider: provider,
+      provider_code: provider.provider_code,
+      recruitment_cycle: current_recruitment_cycle,
+      accrediting_provider: accrediting_provider,
+      course_length: "OneYear",
+      applications_open_from: "2019-01-01T00:00:00Z",
+      start_date: "2019-09-01T00:00:00Z",
+      fee_uk_eu: "9250.0",
+      fee_international: "9250.0",
+      fee_details: "Optional fee details",
+      has_scholarship_and_bursary?: true,
+      financial_support: "Some info about financial support",
+      scholarship_amount: "20000",
+      bursary_amount: "22000",
+      personal_qualities: "We are looking for ambitious trainee teachers who are passionate and enthusiastic about their subject and have a desire to share that with young people of all abilities in this particular age range.",
+      other_requirements: "You will need three years of prior work experience, but not necessarily in an educational context.",
+      about_accrediting_body: "Something great about the accredited body",
+      interview_process: "Some helpful guidance about the interview process",
+      how_school_placements_work: "Some info about how school placements work",
+      about_course: "This is a course",
+      required_qualifications: "You need some qualifications for this course",
+      has_vacancies?: true,
+      site_statuses: [
+        jsonapi_site_status("Running site with vacancies", :full_time, "running"),
+        jsonapi_site_status("Suspended site with vacancies", :full_time, "suspended"),
+        jsonapi_site_status("New site with vacancies", :full_time, "new_status"),
+        jsonapi_site_status("New site with no vacancies", :no_vacancies, "new_status"),
+        jsonapi_site_status("Running site with no vacancies", :no_vacancies, "running"),
+      ],
+      subjects: [subject],
+    )
   end
 
   let(:current_recruitment_cycle) { build :recruitment_cycle }
@@ -51,11 +55,13 @@ feature "Course show", type: :feature do
   let(:course_page) { PageObjects::Page::Course.new }
 
   let(:subject) do
-    build(:subject,
-          :english,
-          scholarship: "2000",
-          bursary_amount: "4000",
-          early_career_payments: "1000")
+    build(
+      :subject,
+      :english,
+      scholarship: "2000",
+      bursary_amount: "4000",
+      early_career_payments: "1000",
+    )
   end
 
   let(:accrediting_provider) { build(:provider) }

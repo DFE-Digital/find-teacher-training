@@ -2,11 +2,13 @@ require "rails_helper"
 
 describe ProviderDecorator do
   let(:provider) do
-    build(:provider,
-          accredited_body?: false,
-          website: "www.acmescitt.com",
-          address1: "1 Sample Road",
-          postcode: "W1 ABC")
+    build(
+      :provider,
+      accredited_body?: false,
+      website: "www.acmescitt.com",
+      address1: "1 Sample Road",
+      postcode: "W1 ABC",
+    )
   end
 
   let(:decorated_provider) { provider.decorate }
@@ -32,14 +34,16 @@ describe ProviderDecorator do
   describe "#short_address" do
     context "with a full address" do
       let(:provider) do
-        build(:provider,
-              accredited_body?: false,
-              website: "www.acmescitt.com",
-              address1: "Building 64",
-              address2: "32 Copton Lane",
-              address3: "Bracknel",
-              address4: "Berkshire",
-              postcode: "NXT STP")
+        build(
+          :provider,
+          accredited_body?: false,
+          website: "www.acmescitt.com",
+          address1: "Building 64",
+          address2: "32 Copton Lane",
+          address3: "Bracknel",
+          address4: "Berkshire",
+          postcode: "NXT STP",
+        )
       end
 
       it "returns a complete address" do
@@ -49,12 +53,14 @@ describe ProviderDecorator do
 
     context "with a partial address" do
       let(:provider) do
-        build(:provider,
-              accredited_body?: false,
-              website: "www.acmescitt.com",
-              address1: "Building 64",
-              address2: "32 Copton Lane",
-              postcode: "NXT STP")
+        build(
+          :provider,
+          accredited_body?: false,
+          website: "www.acmescitt.com",
+          address1: "Building 64",
+          address2: "32 Copton Lane",
+          postcode: "NXT STP",
+        )
       end
 
       it "returns a partial address" do

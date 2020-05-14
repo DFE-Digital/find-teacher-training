@@ -37,29 +37,30 @@ class JSONAPIMockSerializable
   def to_jsonapi_data
     relationships_jsonapi = relationships.map do |name, data|
       [
-        name, if name.in?(include_nulls)
-                {
-                  data: nil,
-                }
-              elsif data.nil?
-                {
-                  meta: { included: false },
-                }
-              elsif name.in?(include_counts)
-                {
-                  meta: {
-                    count: data.size,
-                  },
-                }
-              elsif data.is_a? Array
-                {
-                  data: data.map(&:to_jsonapi_relationship),
-                }
-              else
-                {
-                  data: data.to_jsonapi_relationship,
-                }
-              end
+        name,
+        if name.in?(include_nulls)
+          {
+            data: nil,
+          }
+        elsif data.nil?
+          {
+            meta: { included: false },
+          }
+        elsif name.in?(include_counts)
+          {
+            meta: {
+              count: data.size,
+            },
+          }
+        elsif data.is_a? Array
+          {
+            data: data.map(&:to_jsonapi_relationship),
+          }
+        else
+          {
+            data: data.to_jsonapi_relationship,
+          }
+        end,
       ]
     end
     relationships_jsonapi = relationships_jsonapi.to_h
