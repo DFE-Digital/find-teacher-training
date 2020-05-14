@@ -57,7 +57,7 @@ steps:
   inputs:
     command: Run an image
     imageName: $(IMAGE_NAME)
-    containerCommand: rubocop app config db lib spec --format clang
+    containerCommand: rubocop app config lib spec --format clang
     runInBackground: false
 
 - task: Docker@1

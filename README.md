@@ -29,7 +29,7 @@ bundle exec rspec
 It's best to lint just your app directories and not those belonging to the framework, e.g.
 
 ```bash
-bundle exec rubocop app config db lib spec Gemfile --format clang -a
+bundle exec rubocop app config lib spec Gemfile --format clang -a
 
 or
 
