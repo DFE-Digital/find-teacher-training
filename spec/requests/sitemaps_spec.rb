@@ -5,12 +5,14 @@ describe "/sitemap.xml", type: :request do
   let(:current_recruitment_cycle) { build :recruitment_cycle }
   let(:changed_at) { Time.zone.now }
   let(:course) do
-    build(:course,
-          course_code: "X102",
-          provider: provider,
-          provider_code: provider.provider_code,
-          recruitment_cycle: current_recruitment_cycle,
-          changed_at: changed_at)
+    build(
+      :course,
+      course_code: "X102",
+      provider: provider,
+      provider_code: provider.provider_code,
+      recruitment_cycle: current_recruitment_cycle,
+      changed_at: changed_at,
+    )
   end
 
   before do

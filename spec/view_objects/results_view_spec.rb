@@ -587,10 +587,13 @@ describe ResultsView do
         site1 = build(:site, latitude: 51.5079, longitude: 0.0877, address1: "1 Foo Street", postcode: "BAA0NE")
         site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: "2 Foo Street", postcode: "BAA0NE")
 
-        course = build(:course, site_statuses: [
-          build(:site_status, :full_time_and_part_time, site: site1),
-          build(:site_status, :full_time_and_part_time, site: site2),
-        ])
+        course = build(
+          :course,
+          site_statuses: [
+            build(:site_status, :full_time_and_part_time, site: site1),
+            build(:site_status, :full_time_and_part_time, site: site2),
+          ],
+        )
 
         expect(results_view.site_distance(course)).to eq(2)
       end
@@ -603,10 +606,13 @@ describe ResultsView do
         site1 = build(:site, latitude: 51.4985, longitude: 0.1367, address1: "1 Foo Street", postcode: "BAA0NE")
         site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: "2 Foo Street", postcode: "BAA0NE")
 
-        course = build(:course, site_statuses: [
-          build(:site_status, :full_time_and_part_time, site: site1),
-          build(:site_status, :full_time_and_part_time, site: site2),
-        ])
+        course = build(
+          :course,
+          site_statuses: [
+            build(:site_status, :full_time_and_part_time, site: site1),
+            build(:site_status, :full_time_and_part_time, site: site2),
+          ],
+        )
 
         expect(results_view.site_distance(course)).to eq(0.1)
       end
@@ -619,29 +625,36 @@ describe ResultsView do
     let(:geocoder) { double("geocoder") }
 
     it "returns the address to the nearest site" do
-      site1 = build(:site,
-                    latitude: 51.4985,
-                    longitude: 0.1367,
-                    address1: "10 Windy Way",
-                    address2: "Witham",
-                    address3: "Essex",
-                    address4: "UK",
-                    postcode: "CM8 2SD")
+      site1 = build(
+        :site,
+        latitude: 51.4985,
+        longitude: 0.1367,
+        address1: "10 Windy Way",
+        address2: "Witham",
+        address3: "Essex",
+        address4: "UK",
+        postcode: "CM8 2SD",
+      )
       site2 = build(:site, latitude: 54.9783, longitude: 1.6178)
-      site3 = build(:site,
-                    latitude: nil,
-                    longitude: nil,
-                    address1: "10 Windy Way",
-                    address2: "Witham",
-                    address3: "Essex",
-                    address4: "UK",
-                    postcode: "CM8 2SD")
+      site3 = build(
+        :site,
+        latitude: nil,
+        longitude: nil,
+        address1: "10 Windy Way",
+        address2: "Witham",
+        address3: "Essex",
+        address4: "UK",
+        postcode: "CM8 2SD",
+      )
 
-      course = build(:course, site_statuses: [
-        build(:site_status, :full_time_and_part_time, site: site1),
-        build(:site_status, :full_time_and_part_time, site: site2),
-        build(:site_status, :full_time_and_part_time, site: site3),
-      ])
+      course = build(
+        :course,
+        site_statuses: [
+          build(:site_status, :full_time_and_part_time, site: site1),
+          build(:site_status, :full_time_and_part_time, site: site2),
+          build(:site_status, :full_time_and_part_time, site: site3),
+        ],
+      )
 
       allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
       allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")

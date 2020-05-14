@@ -79,10 +79,12 @@ feature "Location filter", type: :feature do
     before do
       stub_request(:get, courses_url)
         .with(
-          query: base_parameters.merge("filter[longitude]" => "-0.1300436",
-                                       "filter[latitude]" => "51.4980188",
-                                       "filter[radius]" => "20",
-                                       "sort" => "distance"),
+          query: base_parameters.merge(
+            "filter[longitude]" => "-0.1300436",
+            "filter[latitude]" => "51.4980188",
+            "filter[radius]" => "20",
+            "sort" => "distance",
+          ),
         )
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -277,10 +279,12 @@ feature "Location filter", type: :feature do
     let(:distance_stub) do
       stub_request(:get, courses_url)
         .with(
-          query: base_parameters.merge("filter[longitude]" => "-0.1300436",
-                                       "filter[latitude]" => "51.4980188",
-                                       "filter[radius]" => "20",
-                                       "sort" => "distance"),
+          query: base_parameters.merge(
+            "filter[longitude]" => "-0.1300436",
+            "filter[latitude]" => "51.4980188",
+            "filter[radius]" => "20",
+            "sort" => "distance",
+          ),
         )
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),

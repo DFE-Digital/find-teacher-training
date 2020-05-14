@@ -4,7 +4,7 @@ class SitemapsController < ApplicationController
       .where(recruitment_cycle_year: Settings.current_cycle)
       .select("course_code", "provider_code", "changed_at")
       .page(1)
-      .per(20000)
+      .per(20_000)
       .all
   end
 end

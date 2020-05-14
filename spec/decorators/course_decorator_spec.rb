@@ -4,9 +4,11 @@ describe CourseDecorator do
   let(:current_recruitment_cycle) { build :recruitment_cycle }
   let(:next_recruitment_cycle) { build :recruitment_cycle, :next_cycle }
   let(:provider) do
-    build(:provider,
-          accredited_body?: false,
-          website: "www.acmescitt.com")
+    build(
+      :provider,
+      accredited_body?: false,
+      website: "www.acmescitt.com",
+    )
   end
   let(:english) { build(:subject, :english) }
   let(:biology) { build(:subject, :biology) }
@@ -37,8 +39,10 @@ describe CourseDecorator do
   end
 
   let(:course_response) do
-    resource_to_jsonapi(course,
-                        include: %i[sites provider accrediting_provider recruitment_cycle subjects])
+    resource_to_jsonapi(
+      course,
+      include: %i[sites provider accrediting_provider recruitment_cycle subjects],
+    )
   end
 
   let(:decorated_course) { course.decorate }

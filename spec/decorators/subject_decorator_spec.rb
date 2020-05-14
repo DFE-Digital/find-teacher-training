@@ -5,11 +5,13 @@ describe SubjectDecorator do
   let(:subject_with_bursary) { build(:subject, :biology, bursary_amount: "26000") }
   let(:subject_with_scholarship_and_bursary) { build(:subject, :biology, scholarship: "10000", bursary_amount: "5000") }
   let(:subject_with_early_career_payments) do
-    build(:subject,
-          :french,
-          scholarship: "10000",
-          bursary_amount: "5000",
-          early_career_payments: "1000")
+    build(
+      :subject,
+      :french,
+      scholarship: "10000",
+      bursary_amount: "5000",
+      early_career_payments: "1000",
+    )
   end
 
   context "financial information" do
