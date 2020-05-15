@@ -9,7 +9,8 @@
     <p class="govuk-body">
       <%= link_to "Apply for this course", apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
                   class: "govuk-button govuk-button--start",
-                  data: { qa: 'course__apply_link' } %>
+                  data: { qa: 'course__apply_link' },
+                  rel: "nofollow" %>
     </p>
 
     <h3 class="govuk-heading-m">Choose a training location</h3>
