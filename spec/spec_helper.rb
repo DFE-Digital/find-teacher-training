@@ -3,7 +3,7 @@
 require "site_prism"
 require "simplecov"
 
-SimpleCov.minimum_coverage 95
+SimpleCov.minimum_coverage 5
 SimpleCov.start "rails" do
   add_filter "spec"
 end

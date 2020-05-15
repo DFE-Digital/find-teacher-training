@@ -83,7 +83,7 @@ class ResultsView
   end
 
   def location
-    (query_parameters["loc"] || "Across England").gsub(/, UK$/, '')
+    (query_parameters["loc"] || "Across England").gsub(/, UK$/, "")
   end
 
   def radius
