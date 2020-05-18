@@ -1,6 +1,4 @@
 teacher_training_api:
   base_url: http://localhost:3001
-search_and_compare_ui:
-  base_url: http://localhost:5000
 valid_referers:
   - http://localhost:9000
