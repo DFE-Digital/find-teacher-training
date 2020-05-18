@@ -8,7 +8,7 @@ class HeartbeatController < ActionController::API
       teacher_training_api: api_alive?,
     }
 
-    render status: (checks.values.all? ? :ok : :bad_gateway),
+    render status: (checks.values.all? ? :ok : :service_unavailable),
            json: {
              checks: checks,
            }
