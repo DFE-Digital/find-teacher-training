@@ -28,14 +28,6 @@ feature "View helpers", type: :helper do
       end
     end
 
-    context "With a referrer from search and compare ui" do
-      it "returns true" do
-        headers = { "HTTP_REFERER": Settings.search_and_compare_ui.base_url }
-        helper.request.headers.merge!(headers)
-        expect(helper.permitted_referrer?).to eq(true)
-      end
-    end
-
     context "With a referrer from the current application" do
       it "returns true" do
         headers = { "HTTP_REFERER": helper.request.host_with_port }

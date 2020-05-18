@@ -14,8 +14,7 @@ module ViewHelper
   def permitted_referrer?
     return false if request.referer.blank?
 
-    request.referer.start_with?(Settings.search_and_compare_ui.base_url) ||
-      request.referer.include?(request.host_with_port) ||
+    request.referer.include?(request.host_with_port) ||
       Settings.valid_referers.any? { |url| request.referer.start_with?(url) }
   end
 
