@@ -34,15 +34,15 @@ describe "heartbeat requests" do
       end
     end
 
-    context "when the api returns 502" do
+    context "when the api returns 503" do
       before do
         stub_request(:get, healthcheck_endpoint)
-            .to_return(status: 502)
+            .to_return(status: 503)
         get "/healthcheck"
       end
 
-      it "returns status bad gateway" do
-        expect(response.status).to eq(502)
+      it "returns status service_unavailable" do
+        expect(response.status).to eq(503)
       end
 
       it "returns the expected response report" do
@@ -59,8 +59,8 @@ describe "heartbeat requests" do
         get "/healthcheck"
       end
 
-      it "returns status bad gateway" do
-        expect(response.status).to eq(502)
+      it "returns status service_unavailable" do
+        expect(response.status).to eq(503)
       end
 
       it "returns the expected response report" do
@@ -77,8 +77,8 @@ describe "heartbeat requests" do
         get "/healthcheck"
       end
 
-      it "returns status bad gateway" do
-        expect(response.status).to eq(502)
+      it "returns status service_unavailable" do
+        expect(response.status).to eq(503)
       end
 
       it "returns the expected response report" do
