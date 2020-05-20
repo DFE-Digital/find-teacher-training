@@ -422,14 +422,14 @@ private
 
       count = course_counter(radius_to_check: radius, include_salary: false)
 
-      if count > course_count
-        suggested_search_link = SuggestedSearchLink.new(
-          radius: radius,
-          count: count,
-          parameters: query_parameters_with_defaults.except("funding"),
-          including_non_salaried: true,
-        )
-      end
+      next unless count > course_count
+
+      suggested_search_link = SuggestedSearchLink.new(
+        radius: radius,
+        count: count,
+        parameters: query_parameters_with_defaults.except("funding"),
+        including_non_salaried: true,
+      )
     end
 
     suggested_search_link
