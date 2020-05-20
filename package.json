@@ -12,6 +12,9 @@
     "jest": "^26.0.1",
     "webpack-dev-server": "^3.11.0"
   },
+  "engines": {
+    "node": "12.16.x"
+  },
   "scripts": {
     "test": "jest"
   },
