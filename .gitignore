@@ -32,3 +32,14 @@ config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 coverage
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/environment
+terraform.tfplan
+terraform.tfstate
+terraform.tfstate.d/
+./*.tfstate
+lock.json
+
