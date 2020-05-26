@@ -199,8 +199,20 @@ class ResultsView
     ].select(&:present?).join(", ").html_safe
   end
 
+  def nearest_location_name(course)
+    nearest_address = new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    nearest_address.location_name
+  end
+
   def has_sites?(course)
     !new_or_running_sites_for(course).empty?
+  end
+
+  def sites_count(course)
+    new_or_running_sites_for(course).count
   end
 
   def subjects
