@@ -122,7 +122,7 @@
                   <span class="govuk-hint">Enter the name or provider code</span>
                   <% if provider_error? %>
                     <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
-                    <span class="govuk-visually-hidden">Error: </span><%= I18n.t("location_filter.errors.missing_provider") %>
+                    <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
                   </span>
                   <% end %>
                 <% end %>

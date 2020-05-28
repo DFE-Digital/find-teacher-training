@@ -4,7 +4,12 @@ module ResultFilters
 
     def new
       if params[:query].blank?
-        flash[:error] = [I18n.t("location_filter.fields.provider")]
+        flash[:error] = [t("location_filter.fields.provider"), t("location_filter.errors.blank_provider")]
+        return redirect_back
+      end
+
+      if params[:query].length == 1
+        flash[:error] = [t("location_filter.fields.provider"), t("location_filter.errors.invalid_provider")]
         return redirect_back
       end
 
@@ -15,7 +20,7 @@ module ResultFilters
         .all
 
       if @provider_suggestions.count.zero?
-        flash[:error] = [I18n.t("location_filter.fields.provider")]
+        flash[:error] = [I18n.t("location_filter.fields.provider"), I18n.t("location_filter.errors.missing_provider")]
         redirect_back
       elsif @provider_suggestions.count == 1
         redirect_to results_path(
