@@ -1,3 +1,5 @@
+require.context("govuk-frontend/govuk/assets");
+
 import "../styles/application.scss";
 import "../images/option-select-toggle-sprite.png";
 import "accessible-autocomplete/dist/accessible-autocomplete.min.css";
@@ -19,20 +21,16 @@ new backLink($backLink).init();
 const $toggle = document.querySelector('[data-module="toggle"]');
 new toggle($toggle).init();
 
-initAutocomplete(
-  {
-    element: "location-autocomplete",
-    input: "location",
-    path: "/location-suggestions"
-  }
-);
-initAutocomplete(
-  {
-    element: "provider-autocomplete",
-    input: "provider",
-    path: "/provider-suggestions"
-  }
-);
+initAutocomplete({
+  element: "location-autocomplete",
+  input: "location",
+  path: "/location-suggestions",
+});
+initAutocomplete({
+  element: "provider-autocomplete",
+  input: "provider",
+  path: "/provider-suggestions",
+});
 
-loadAnalytics()
+loadAnalytics();
 new initCookieBanner();

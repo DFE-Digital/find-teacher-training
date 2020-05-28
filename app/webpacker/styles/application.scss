@@ -1,4 +1,15 @@
-@import "../../../node_modules/govuk-frontend/govuk/all";
+@function frontend-font-url($filename) {
+  @return url("~assets/fonts/" + $filename);
+}
+
+@function frontend-image-url($filename) {
+  @return url("~assets/images/" + $filename);
+}
+
+$govuk-font-url-function: frontend-font-url;
+$govuk-image-url-function: frontend-image-url;
+
+@import "~govuk-frontend/govuk/all";
 
 @import "components/cookie-banner";
 @import "components/preview-banner";
@@ -80,7 +91,7 @@
 
   @include govuk-media-query($from: desktop) {
     padding-top: govuk-spacing(2);
-  };
+  }
 
   &__cta {
     margin: govuk-spacing(1) 0;
