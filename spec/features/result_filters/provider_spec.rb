@@ -124,7 +124,7 @@ feature "Provider filter", type: :feature do
         expect(current_path).to eq(location_filter_page.url)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq("query" => "ACME")
         expect(location_filter_page.error_text.text).to eq("Training provider")
-        expect(location_filter_page.provider_error.text).to eq("Error: We couldn't find this provider, please check your input and try again")
+        expect(location_filter_page.provider_error.text).to eq("Error: We couldn't find this provider, please check your information and try again")
       end
     end
   end

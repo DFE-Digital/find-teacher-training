@@ -54,24 +54,51 @@ feature "Location filter", type: :feature do
         )
     end
 
-    it "displays the courses" do
-      results_page.load
-      results_page.location_filter.link.click
-      filter_page.by_provider.click
-      filter_page.provider_search.fill_in(with: "ACME")
-      filter_page.find_courses.click
+    context "valid provider search" do
+      it "displays the courses" do
+        results_page.load
+        results_page.location_filter.link.click
+        filter_page.by_provider.click
+        filter_page.provider_search.fill_in(with: "ACME")
+        filter_page.find_courses.click
 
-      expect(provider_page.heading.text).to eq("Pick a provider")
-      provider_page.provider_suggestions[0].hyperlink.click
+        expect(provider_page.heading.text).to eq("Pick a provider")
+        provider_page.provider_suggestions[0].hyperlink.click
 
-      expect(results_page.courses.first).to have_main_address
-      expect(results_page.courses.first).not_to have_site_distance_to_location_query
-      expect(results_page.courses.first).not_to have_nearest_address
+        expect(results_page.courses.first).to have_main_address
+        expect(results_page.courses.first).not_to have_site_distance_to_location_query
+        expect(results_page.courses.first).not_to have_nearest_address
 
-      expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
-      expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
-      expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
-      expect(results_page.courses.count).to eq(4)
+        expect(results_page.heading.text).to eq("Teacher training courses ACME SCITT 0")
+        expect(results_page.provider_filter.name.text).to eq("ACME SCITT 0")
+        expect(results_page.provider_filter.link.text).to eq("Change provider or choose a location")
+        expect(results_page.courses.count).to eq(4)
+      end
+    end
+
+    context "invalid provider search" do
+      context "blank search" do
+        it "displays an error" do
+          results_page.load
+          results_page.location_filter.link.click
+          filter_page.by_provider.click
+          filter_page.find_courses.click
+
+          expect(filter_page).to have_content("You need to add some information")
+        end
+      end
+
+      context "invalid one character provider search" do
+        it "displays an error" do
+          results_page.load
+          results_page.location_filter.link.click
+          filter_page.by_provider.click
+          filter_page.provider_search.fill_in(with: "A")
+          filter_page.find_courses.click
+
+          expect(filter_page).to have_content("Please enter a minimum of two characters")
+        end
+      end
     end
   end
 
