@@ -98,7 +98,7 @@ class CourseDecorator < Draper::Decorator
   end
 
   def funding_option
-    if object.funding_type == "salary"
+    if salaried?
       "Salary"
     elsif excluded_from_bursary?
       "Student finance if you’re eligible"
