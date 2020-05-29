@@ -23,5 +23,8 @@ module FindTeacherTraining
     # the framework and any gems in your application.
 
     config.exceptions_app = routes
+
+    # https://thoughtbot.com/blog/content-compression-with-rack-deflater
+    config.middleware.use Rack::Deflater
   end
 end
