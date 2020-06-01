@@ -1,4 +1,12 @@
 <%= content_for :page_title, "#{@results_view.number_of_courses_string}" %>
+<%= content_for :body_end do %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= Settings.google.maps_api_key %>&callback=initLocationsResults" async defer></script>
+<% end %>
+
+<script>
+  window.userLat = <%= @results_view.latitude %>;
+  window.userLng = <%= @results_view.longitude %>;
+</script>
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
@@ -75,7 +83,7 @@
         </div>
       <% end %>
       <ul class="govuk-list search-results">
-        <% @results_view.courses.each do |course| %>
+        <% @results_view.courses.each_with_index do |course, index| %>
           <li data-qa="course">
             <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
               <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
@@ -84,10 +92,32 @@
                 <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
               <% end %>
             </h3>
+
+            <% sites = @results_view.sites_for_results_map(course) %>
+            <script>
+              window.useCircles<%= index %> = <% if course.provider_type == "university" %>true<% else %>false<% end %>;
+              window.trainingLocations<%= index %> = [
+                <% sites.each do |site_status| %>
+                  {
+                    "code": "<%= site_status.code %>",
+                    "name": "<%= course.provider_type == "university" && sites.count == 1 ? 'University' : site_status.location_name %>",
+                    "lat": "<%= site_status.latitude %>",
+                    "lng": "<%= site_status.longitude %>",
+                    "address": "",
+                    "vacancies": ""
+                  },
+                <% end %>
+              ]
+            </script>
+
             <dl class="govuk-list--description">
               <dt class="govuk-list--description__label">Course</dt>
               <dd data-qa="course__description"><%= course.description%></dd>
               <% if @results_view.location_filter? && @results_view.has_sites?(course)  %>
+                <!-- <img src="<%= @results_view.course_map_url(course) %>"
+                   alt="Map showing <%= @results_view.radius %> miles
+                   of <%= @results_view.location %>" class="filter-form__map govuk-!-margin-top-1"
+                   data-qa="map" /> -->
                 <% if course.provider_type == "university" %>
                   <dt class="govuk-list--description__label">Location</dt>
                   <dd data-qa="course__site_distance">
@@ -117,9 +147,6 @@
                             <% end %>
                           </div>
                         </details>
-
-
-
                         <span class="govuk-list--description__hint">University</span>
                         <%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> from you
                         <br /> You’ll be at university only some of the time
@@ -128,6 +155,8 @@
                           <!-- <span class="govuk-list--description__hint">University address</span>
                           <%= @results_view.nearest_address(course) %> -->
                         <% end %>
+
+                        <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
                       </li>
                     </ul>
                   </dd>
@@ -153,6 +182,8 @@
                       <% end %>
                       <%= @results_view.nearest_address(course) %>
                     <% end %>
+
+                    <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
                   </dd>
                 <% end %>
               <% end %>

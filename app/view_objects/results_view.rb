@@ -171,6 +171,20 @@ class ResultsView
     (course_count.to_f / results_per_page).ceil
   end
 
+  def course_map_url(course)
+    nearest_address = new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    "#{Settings.google.maps_api_url}\
+?key=#{Settings.google.maps_api_key}\
+&center=#{latitude},#{longitude}\
+&size=500x300\
+&scale=2\
+&markers=color:blue|#{nearest_address[:latitude]},#{nearest_address[:longitude]}
+&markers=size:small|#{latitude},#{longitude}"
+  end
+
   def site_distance(course)
     distances = new_or_running_sites_for(course).map do |site|
       lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
@@ -260,6 +274,38 @@ class ResultsView
     end
   end
 
+  def new_or_running_sites_for(course)
+    sites = course
+      .site_statuses
+      .select(&:new_or_running?)
+      .map(&:site)
+      .reject do |site|
+        # Sites that have no address details whatsoever are not to be considered
+        # when calculating '#nearest_address' or '#site_distance'
+        [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
+      end
+
+    # binding.pry
+
+    sites.reject do |site|
+      site.latitude.blank? || site.longitude.blank?
+    end
+  end
+
+  def sites_for_results_map(course)
+    new_or_running_sites_for(course).select do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}") < 50
+    end
+  end
+
+  def latitude
+    query_parameters["lat"]
+  end
+
+  def longitude
+    query_parameters["lng"]
+  end
+
 private
 
   def results_per_page
@@ -273,22 +319,6 @@ private
     qualification |= %w[pgce pgde] if other_qualifications?
 
     qualification
-  end
-
-  def new_or_running_sites_for(course)
-    sites = course
-      .site_statuses
-      .select(&:new_or_running?)
-      .map(&:site)
-      .reject do |site|
-        # Sites that have no address details whatsoever are not to be considered
-        # when calculating '#nearest_address' or '#site_distance'
-        [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
-      end
-
-    sites.reject do |site|
-      site.latitude.blank? || site.longitude.blank?
-    end
   end
 
   def lat_long
@@ -333,14 +363,6 @@ private
 
   def subject_codes
     csharp_array_to_subject_codes(subject_parameters_array)
-  end
-
-  def latitude
-    query_parameters["lat"]
-  end
-
-  def longitude
-    query_parameters["lng"]
   end
 
   def google_map_zoom

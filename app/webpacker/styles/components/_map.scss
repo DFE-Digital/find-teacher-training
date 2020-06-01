@@ -105,3 +105,40 @@
     margin-bottom: -10px;
   }
 }
+
+.map-marker.radius-marker {
+  .map-marker__content {
+    border: none;
+    background-color: govuk-colour("dark-grey");
+    box-shadow: none;
+    color: govuk-colour("white");
+    max-width: none;
+    top: 16px;
+  }
+
+  &:after {
+    display: none;
+  }
+
+  &__title {
+    @include govuk-font($size: 14, $line-height: 1.2, $weight: normal);
+    pointer-events: none;
+  }
+}
+
+.map-marker.you-marker {
+  .map-marker__content {
+    border: none;
+    background-color: govuk-colour("red");
+    color: govuk-colour("white");
+  }
+
+  &:after {
+    border-top: 8px solid govuk-colour("red");
+  }
+
+  &__title {
+    @include govuk-font($size: 16, $line-height: 1.2, $weight: bold);
+    pointer-events: none;
+  }
+}

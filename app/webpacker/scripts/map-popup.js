@@ -14,7 +14,7 @@ const createPopupClass = () => {
     ov.setMap(map);
   };
 
-  const Popup = function(position, closedContent, openContent) {
+  const Popup = function(position, closedContent, openContent, containerClass) {
     this.position = position;
     const content = document.createElement("div");
     content.classList.add("map-marker__content");
@@ -29,6 +29,9 @@ const createPopupClass = () => {
 
     this.anchor = document.createElement("div");
     this.anchor.classList.add("map-marker");
+    if (containerClass) {
+      this.anchor.classList.add(containerClass);
+    }
     this.anchor.appendChild(content);
 
     this.stopEventPropagation();

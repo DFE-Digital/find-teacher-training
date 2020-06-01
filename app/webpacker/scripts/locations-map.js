@@ -88,6 +88,28 @@ const initLocationsMap = () => {
     bounds.extend(latLng);
   }
 
+  var circle = new google.maps.Circle({
+    strokeColor: '#000000',
+    strokeOpacity: 0.5,
+    strokeWeight: 3,
+    fillColor: '#000000',
+    fillOpacity: 0.1,
+    map: map,
+    center: { lat: trainingLocations[0].lat, lng: trainingLocations[0].lng },
+    radius: 1609.34 * 10
+  });
+
+  var circle = new google.maps.Circle({
+    strokeColor: '#000000',
+    strokeOpacity: 0.25,
+    strokeWeight: 1,
+    fillColor: '#000000',
+    fillOpacity: 0.05,
+    map: map,
+    center: { lat: trainingLocations[0].lat, lng: trainingLocations[0].lng },
+    radius: 1609.34 * 15
+  });
+
   // Use provider address to center and zoom when only one location
   if (locations.length > 1) {
     map.fitBounds(bounds);
