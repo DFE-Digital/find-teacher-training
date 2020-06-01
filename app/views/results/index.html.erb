@@ -48,11 +48,14 @@
       <% else %>
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-one-half">
-            <p class="govuk-body search-results__count" data-qa="course-count"><%= @results_view.number_of_courses_string %> within 50 miles</p>
+            <p class="govuk-body search-results__count" data-qa="course-count">
+              <%= @results_view.number_of_courses_string %> found within 50 miles
+              <br />Sorted by distance from you
+            </p>
           </div>
           <div class="govuk-grid-column-one-half">
             <p class="govuk-body search-results__new-search">
-              <%= link_to "New search", root_path, class: "govuk-link" %>
+              <%= link_to "Start a new search", root_path, class: "govuk-link" %>
             </p>
           </div>
         </div>
@@ -90,22 +93,40 @@
                   <dd data-qa="course__site_distance">
                     <ul class="govuk-list govuk-!-margin-top-0 govuk-!-margin-bottom-0">
                       <li>
-                        <span class="govuk-list--description__hint govuk-!-margin-top-0">Placement school</span>
-                        <% if @results_view.site_distance(course) < 11 %>
-                          Placement schools are near you
-                        <% else %>
-                          Placement schools are within <%= @results_view.site_distance(course) - 10 %> mile<%= 's' if @results_view.site_distance(course) - 10 != 1 %> of you
-                        <% end %>
+                        <span class="govuk-list--description__hint govuk-!-margin-top-0">Placement schools</span>
+                        You’ll be placed in schools for most of your course
 
-                        <br /> You’ll be placed in schools for most of your course
+                        <details class="govuk-details" data-module="govuk-details">
+                          <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                              <% if @results_view.site_distance(course) < 11 %>
+                                Placement schools are near you
+                              <% elsif @results_view.site_distance(course) < 21 %>
+                                Placement schools might be near you
+                              <% else %>
+                                Placement schools might be in commuting distance
+                              <% end %>
+                            </span>
+                          </summary>
+                          <div class="govuk-details__text">
+                            <p>You can’t pick which schools you want to be in, but your university will try to place you in schools you can commute to.</p>
+                            <p>Universities usually work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
+
+                            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), class: "govuk-link" do %>
+                              More about placements on this course
+                            <% end %>
+                          </div>
+                        </details>
+
+
 
                         <span class="govuk-list--description__hint">University</span>
-                        <%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> away from you
+                        <%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> from you
                         <br /> You’ll be at university only some of the time
 
                         <% if @results_view.nearest_address(course).present? %>
-                          <span class="govuk-list--description__hint">University address</span>
-                          <%= @results_view.nearest_address(course) %>
+                          <!-- <span class="govuk-list--description__hint">University address</span>
+                          <%= @results_view.nearest_address(course) %> -->
                         <% end %>
                       </li>
                     </ul>
@@ -119,18 +140,17 @@
                     <% end %>
                   </dt>
                   <dd data-qa="course__site_distance">
-                    <%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> away from you
+                    <%= @results_view.site_distance(course) %> mile<%= 's' if @results_view.site_distance(course) != 1 %> from you
+                    <% if @results_view.sites_count(course) > 1 %>
+                      <div class="govuk-!-margin-top-0">
+                        (Nearest of <%= @results_view.sites_count(course) %> locations to choose from)
+                      </div>
+                    <% end %>
                     <% if @results_view.nearest_address(course).present? %>
+                      <span class="govuk-list--description__hint">Location</span>
                       <% if @results_view.nearest_location_name(course) != "Main Site" %>
-                        <span class="govuk-list--description__hint">Location name</span>
-                        <%= @results_view.nearest_location_name(course) %>
+                        <%= @results_view.nearest_location_name(course) %><br />
                       <% end %>
-                      <% if @results_view.sites_count(course) > 1 %>
-                        <div class="govuk-!-margin-top-0">
-                          (Nearest of <%= @results_view.sites_count(course) %> locations to choose from)
-                        </div>
-                      <% end %>
-                      <span class="govuk-list--description__hint">Address</span>
                       <%= @results_view.nearest_address(course) %>
                     <% end %>
                   </dd>
