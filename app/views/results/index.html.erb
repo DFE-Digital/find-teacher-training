@@ -1,12 +1,16 @@
 <%= content_for :page_title, "#{@results_view.number_of_courses_string}" %>
 <%= content_for :body_end do %>
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= Settings.google.maps_api_key %>&callback=initLocationsResults" async defer></script>
+  <% if @results_view.show_results_map? %>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= Settings.google.maps_api_key %>&callback=initLocationsResults" async defer></script>
+  <% end %>
 <% end %>
 
+<% if @results_view.show_results_map? %>
 <script>
   window.userLat = <%= @results_view.latitude %>;
   window.userLng = <%= @results_view.longitude %>;
 </script>
+<% end %>
 
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
@@ -93,22 +97,24 @@
               <% end %>
             </h3>
 
-            <% sites = @results_view.sites_for_results_map(course) %>
-            <script>
-              window.useCircles<%= index %> = <% if course.provider_type == "university" %>true<% else %>false<% end %>;
-              window.trainingLocations<%= index %> = [
-                <% sites.each do |site_status| %>
-                  {
-                    "code": "<%= site_status.code %>",
-                    "name": "<%= course.provider_type == "university" && sites.count == 1 ? 'University' : site_status.location_name %>",
-                    "lat": "<%= site_status.latitude %>",
-                    "lng": "<%= site_status.longitude %>",
-                    "address": "",
-                    "vacancies": ""
-                  },
-                <% end %>
-              ]
-            </script>
+            <% if @results_view.show_results_map? %>
+              <% sites = @results_view.sites_for_results_map(course) %>
+              <script>
+                window.useCircles<%= index %> = <% if course.provider_type == "university" %>true<% else %>false<% end %>;
+                window.trainingLocations<%= index %> = [
+                  <% sites.each do |site_status| %>
+                    {
+                      "code": "<%= site_status.code %>",
+                      "name": "<%= course.provider_type == "university" && sites.count == 1 ? 'University' : site_status.location_name %>",
+                      "lat": "<%= site_status.latitude %>",
+                      "lng": "<%= site_status.longitude %>",
+                      "address": "",
+                      "vacancies": ""
+                    },
+                  <% end %>
+                ]
+              </script>
+            <% end %>
 
             <dl class="govuk-list--description">
               <dt class="govuk-list--description__label">Course</dt>
@@ -156,7 +162,9 @@
                           <%= @results_view.nearest_address(course) %> -->
                         <% end %>
 
-                        <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
+                        <% if @results_view.show_results_map? %>
+                          <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
+                        <% end %>
                       </li>
                     </ul>
                   </dd>
@@ -183,7 +191,9 @@
                       <%= @results_view.nearest_address(course) %>
                     <% end %>
 
-                    <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
+                    <% if @results_view.show_results_map? %>
+                      <div id="locations-map-<%= index %>" class="app-google-map govuk-!-margin-bottom-2 govuk-!-margin-top-2" data-qa="course__locations_map"></div>
+                    <% end %>
                   </dd>
                 <% end %>
               <% end %>
@@ -210,6 +220,12 @@
         <% end %>
       </ul>
       <%= paginate(@results_view.courses, total_pages: @results_view.total_pages) %>
+
+      <% unless @results_view.show_results_map? %>
+        <p class="govuk-body">
+          <%= link_to "Show map", params.to_enum.to_h.merge(map: 1), class: 'govuk-link' %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

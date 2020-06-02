@@ -306,6 +306,10 @@ class ResultsView
     query_parameters["lng"]
   end
 
+  def show_results_map?
+    query_parameters["map"].present?
+  end
+
 private
 
   def results_per_page
