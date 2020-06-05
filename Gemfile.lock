@@ -434,7 +434,6 @@ DEPENDENCIES
   site_prism
   spring
   spring-watcher-listen (~> 2.0.0)
-  sprockets (= 3.7.2)
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers (~> 4.4)
