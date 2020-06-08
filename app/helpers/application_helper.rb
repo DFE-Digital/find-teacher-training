@@ -8,6 +8,13 @@ module ApplicationHelper
     # autolink: parse links even when they are not enclosed in <> characters
     options = { autolink: true, lax_spacing: true }
     markdown = Redcarpet::Markdown.new(render, options)
+
+    # Fix common markdown errors:
+    # - using bullets rather than *
+    # - not putting a space between * and word
+    source = source.gsub(/•\s?/, "* ").gsub(/^\*(?!\s)/, "* ")
+
+    # Convert quotes to smart quotes
     source_with_smart_quotes = smart_quotes(source)
     markdown.render(source_with_smart_quotes).html_safe
   end
