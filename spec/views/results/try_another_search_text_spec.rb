@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "results/try_another_search_text.html.erb", type: :view do
   let(:html) { render partial: "results/try_another_search_text.html.erb" }
-  let(:salary_suffix) { "or searching for courses that don't offer a salary" }
+  let(:salary_suffix) { "or searching for courses that do not offer a salary" }
 
   before do
     assign(:results_view, double(with_salaries?: with_salaries))

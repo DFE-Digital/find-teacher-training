@@ -388,7 +388,7 @@ feature "Location filter", type: :feature do
       filter_page.find_courses.click
 
       expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
-      expect(filter_page.location_error.text).to eq("Error: We couldn't find this location, please check your input and try again")
+      expect(filter_page.location_error.text).to eq("Error: We couldn’t find this location, please check your input and try again")
       expect(filter_page).to have_location_query
       expect(filter_page).to have_unknown_location
     end
