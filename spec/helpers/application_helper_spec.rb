@@ -30,6 +30,12 @@ feature "Application helpers", type: :helper do
       output = helper.markdown("\"Wow -- what's this...\", O'connor asked.")
       expect(output).to eq("<p class=\"govuk-body\">“Wow – what’s this…”, O’connor asked.</p>")
     end
+
+    # Redcarpet fixes out of the box
+    it "fixes incorrect markdown links" do
+      output = helper.markdown("[Google] (https://www.google.com)")
+      expect(output).to include("<a href=\"https://www.google.com\" class=\"govuk-link\">Google</a>")
+    end
   end
 
   describe "#smart_quotes" do
