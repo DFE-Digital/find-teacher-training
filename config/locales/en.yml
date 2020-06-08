@@ -50,9 +50,9 @@ en:
   location_filter:
     errors:
       no_option: "Please choose an option"
-      unknown_location: "We couldn't find this location, please check your input and try again"
+      unknown_location: "We couldn’t find this location, please check your input and try again"
       missing_location: "Please enter a postcode, city or town in England"
-      missing_provider: "We couldn't find this provider, please check your information and try again"
+      missing_provider: "We couldn’t find this provider, please check your information and try again"
       blank_provider: "You need to add some information"
       invalid_provider: "Please enter a minimum of two characters"
     fields:

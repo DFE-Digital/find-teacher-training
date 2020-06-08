@@ -31,9 +31,9 @@
         <% course.preview_site_statuses.each do |site_status| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <strong><%= site_status.site.location_name %></strong>
+              <strong><%= smart_quotes(site_status.site.location_name) %></strong>
               <br>
-              <%= site_status.site.decorate.full_address %>
+              <%= smart_quotes(site_status.site.decorate.full_address) %>
             </td>
             <td class="govuk-table__cell">
               <%= site_status.has_vacancies? ? 'Yes' : 'No' %>
@@ -48,7 +48,7 @@
       <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
       <strong class="govuk-warning-text__text">
         <span class="govuk-warning-text__assistive">Warning</span>
-        You can't apply for this course because it currently has no vacancies. To find courses with vacancies, change your search settings to 'Only courses with vacancies'.
+        You cannot apply for this course because it currently has no vacancies. To find courses with vacancies, change your search settings to ‘Only courses with vacancies’.
       </strong>
     </div>
   <% end %>
@@ -59,10 +59,10 @@
     <% course.preview_site_statuses.each do |site_status| %>
       {
         "code": "<%= site_status.site.code %>",
-        "name": "<%= site_status.site.location_name %>",
+        "name": "<%= smart_quotes(site_status.site.location_name) %>",
         "lat": "<%= site_status.site.latitude.present? ? site_status.site.latitude : course.provider.latitude %>",
         "lng": "<%= site_status.site.longitude.present? ? site_status.site.longitude : course.provider.longitude %>",
-        "address": "<%= site_status.site.decorate.full_address %>",
+        "address": "<%= smart_quotes(site_status.site.decorate.full_address) %>",
         "vacancies": "<%= site_status.has_vacancies? ? "" : "No vacancies" %>"
       },
     <% end %>

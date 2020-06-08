@@ -321,6 +321,7 @@ GEM
     rubocop-rspec (1.39.0)
       rubocop (>= 0.68.1)
     ruby-progressbar (1.10.1)
+    rubypants (0.7.1)
     rubyzip (2.3.0)
     safe_yaml (1.0.5)
     sass (3.7.4)
@@ -428,6 +429,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.1)
   rspec_junit_formatter
   rubocop-govuk
+  rubypants
   scss_lint-govuk
   sentry-raven
   simplecov
