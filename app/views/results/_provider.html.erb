@@ -4,7 +4,7 @@
   </h2>
   <ul class="filter-form__value--list">
     <li data-qa="provider_name">
-      <%= @results_view.provider %>
+      <%= smart_quotes(@results_view.provider) %>
     </li>
   </ul>
   <%= link_to "Change provider or choose a location",

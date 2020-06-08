@@ -8,6 +8,11 @@ module ApplicationHelper
     # autolink: parse links even when they are not enclosed in <> characters
     options = { autolink: true, lax_spacing: true }
     markdown = Redcarpet::Markdown.new(render, options)
-    markdown.render(source).html_safe
+    source_with_smart_quotes = RubyPants.new(source).to_html
+    markdown.render(source_with_smart_quotes).html_safe
+  end
+
+  def smart_quotes(string)
+    RubyPants.new(string).to_html.html_safe
   end
 end
