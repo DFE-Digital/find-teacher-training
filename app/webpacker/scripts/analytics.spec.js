@@ -15,6 +15,11 @@ const setupPage = (HTMLContent, callback) => {
   callback()
 }
 
+const userClicksNavLinkTest = () => {
+  Array.from(document.querySelectorAll("a")).forEach($el => $el.click())
+  expect(ga.mock.calls).toMatchSnapshot()
+}
+
 describe("Analytics", () => {
   afterEach(() => {
     global.ga.mockClear()
@@ -149,8 +154,7 @@ describe("Analytics", () => {
     })
 
     it("triggers correct GA events when users click on external links", () => {
-      Array.from(document.querySelectorAll("a")).forEach($el => $el.click())
-      expect(ga.mock.calls).toMatchSnapshot()
+      userClicksNavLinkTest()
     })
   })
 
@@ -166,8 +170,7 @@ describe("Analytics", () => {
     })
 
     it("triggers correct GA events when users click on navigation links", () => {
-      Array.from(document.querySelectorAll("a")).forEach($el => $el.click())
-      expect(ga.mock.calls).toMatchSnapshot()
+      userClicksNavLinkTest()
     })
   })
 })
