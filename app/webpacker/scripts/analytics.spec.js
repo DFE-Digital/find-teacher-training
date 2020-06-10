@@ -20,6 +20,13 @@ const userClicksNavLinkTest = () => {
   expect(ga.mock.calls).toMatchSnapshot()
 }
 
+const injectScriptTag = (constestGiven) => {
+  fetchConsentedToCookieValue.mockImplementationOnce(() => constestGiven);
+  // GTM needs a script tag on the page so we create an emptry script
+  // tag. It doesn't have an attributes so we can ignore it in the tests
+  document.head.appendChild(document.createElement('script'));
+}
+
 describe("Analytics", () => {
   afterEach(() => {
     global.ga.mockClear()
@@ -28,10 +35,7 @@ describe("Analytics", () => {
   describe("loadAnalytics", () => {
     describe("when a user consents to cookies", () => {
       beforeEach(() => {
-        fetchConsentedToCookieValue.mockImplementationOnce(() => true);
-        // GTM needs a script tag on the page so we create an emptry script
-        // tag. It doesn't have an attributes so we can ignore it in the tests
-        document.head.appendChild(document.createElement('script'));
+        injectScriptTag(true)
       })
 
       afterEach(() => {
@@ -72,11 +76,7 @@ describe("Analytics", () => {
 
     describe("when a user rejects cookies", () => {
       beforeEach(() => {
-        fetchConsentedToCookieValue.mockImplementation(() => false);
-
-        // GTM needs a script tag on the page so we create an emptry script
-        // tag. It doesn't have an attributes so we can ignore it in the tests
-        document.head.appendChild(document.createElement('script'));
+        injectScriptTag(false)
       })
 
       afterEach(()=>{
