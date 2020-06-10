@@ -162,7 +162,7 @@ describe Govuk::MarkdownRenderer do
     end
   end
 
-  context "h6" do
+  describe "h6" do
     let(:markdown) do
       <<~MD
         ###### heading level 6
@@ -172,6 +172,54 @@ describe Govuk::MarkdownRenderer do
     it "renders correct HTML" do
       expected_html = <<~HTML
         <h3 class="govuk-heading-m">heading level 6</h3>
+      HTML
+
+      expect_equal_ignoring_ws(html, expected_html)
+    end
+  end
+
+  describe "em" do
+    let(:markdown) do
+      <<~MD
+        *emphasis*
+      MD
+    end
+
+    it "does not render emphasis tags" do
+      expected_html = <<~HTML
+        <p class="govuk-body">*emphasis*</p>
+      HTML
+
+      expect_equal_ignoring_ws(html, expected_html)
+    end
+  end
+
+  describe "strong" do
+    let(:markdown) do
+      <<~MD
+        **strong**
+      MD
+    end
+
+    it "does not render strong tags" do
+      expected_html = <<~HTML
+        <p class="govuk-body">**strong**</p>
+      HTML
+
+      expect_equal_ignoring_ws(html, expected_html)
+    end
+  end
+
+  describe "strong emphasis" do
+    let(:markdown) do
+      <<~MD
+        ***strong emphasis***
+      MD
+    end
+
+    it "does not render strong or emphasis tags" do
+      expected_html = <<~HTML
+        <p class="govuk-body">***strong emphasis***</p>
       HTML
 
       expect_equal_ignoring_ws(html, expected_html)

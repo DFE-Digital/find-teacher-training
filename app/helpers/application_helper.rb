@@ -12,7 +12,7 @@ module ApplicationHelper
     # Fix common markdown errors:
     # - using bullets rather than *
     # - not putting a space between * and word
-    source = source.gsub(/•\s?/, "* ").gsub(/^\*(?!\s)/, "* ")
+    source = source.gsub(/•\s?/, "* ").gsub(/^\*(?![\s\*])/, "* ")
 
     # Convert quotes to smart quotes
     source_with_smart_quotes = smart_quotes(source)

@@ -23,7 +23,14 @@ feature "Application helpers", type: :helper do
 
       expect(output).to include("<li>test</li>")
       expect(output).to include("<li>no space here</li>")
-      expect(output).to include("<li>also <em>here</em></li>")
+      expect(output).to include("<li>also *here*</li>")
+    end
+
+    it "ignores emphasis markdown" do
+      output = helper.markdown("This does not have *emphasis*\n**something important**\n***super***")
+      expect(output).to include("This does not have *emphasis*")
+      expect(output).to include("**something important**")
+      expect(output).to include("***super***")
     end
 
     it "converts quotes to smart quotes" do

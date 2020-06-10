@@ -8,6 +8,18 @@ module Govuk
       # No user input HTML please
     end
 
+    def emphasis(text)
+      # Disable feature
+    end
+
+    def double_emphasis(text)
+      # Disable feature
+    end
+
+    def triple_emphasis(text)
+      # Disable feature
+    end
+
     def list(content, list_type)
       case list_type
       when :ordered
