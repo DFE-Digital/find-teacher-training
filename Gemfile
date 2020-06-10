@@ -122,7 +122,7 @@ group :test do
   gem "faker"
 
   # Show test coverage %
-  gem "simplecov", require: false
+  gem "simplecov", "< 0.18", require: false
 
   # Page object for Capybara
   gem "site_prism"
