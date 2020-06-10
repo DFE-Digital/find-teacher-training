@@ -1,13 +1,19 @@
 jest.mock('./cookie-helper')
 
-import { initFormAnalytics, 
-  initExternalLinkAnalytics, 
-  initNavigationAnalytics, 
+import { initFormAnalytics,
+  initExternalLinkAnalytics,
+  initNavigationAnalytics,
   loadAnalytics } from "./analytics"
 
 import { fetchConsentedToCookieValue } from './cookie-helper'
 
 global.ga = jest.fn()
+
+const setupPage = (HTMLContent, callback) => {
+  fetchConsentedToCookieValue.mockImplementation(() => true);
+  document.body.innerHTML = HTMLContent
+  callback()
+}
 
 describe("Analytics", () => {
   afterEach(() => {
@@ -22,8 +28,8 @@ describe("Analytics", () => {
         // tag. It doesn't have an attributes so we can ignore it in the tests
         document.head.appendChild(document.createElement('script'));
       })
-      
-      afterEach(() => { 
+
+      afterEach(() => {
         jest.clearAllMocks();
       })
 
@@ -62,15 +68,15 @@ describe("Analytics", () => {
     describe("when a user rejects cookies", () => {
       beforeEach(() => {
         fetchConsentedToCookieValue.mockImplementation(() => false);
-        
+
         // GTM needs a script tag on the page so we create an emptry script
         // tag. It doesn't have an attributes so we can ignore it in the tests
         document.head.appendChild(document.createElement('script'));
       })
-      
-      afterEach(()=>{ 
+
+      afterEach(()=>{
         jest.clearAllMocks()
-        document.head.innerHTML = '' 
+        document.head.innerHTML = ''
       })
 
       // Jest doesn't seem to be clearing down the script tage
@@ -108,10 +114,9 @@ describe("Analytics", () => {
 
   describe("initFormAnalytics", () => {
     beforeEach(() => {
-      fetchConsentedToCookieValue.mockImplementationOnce(() => true);
-        
+
       // Note: not a <form> because JSDOM throws a fit https://github.com/jsdom/jsdom/issues/1937
-      document.body.innerHTML = `
+      const testContent = `
         <div data-ga-event-form="Some form">
           <input type="checkbox" data-ga-event-form-input="A ticked item" checked>
           <input type="checkbox" data-ga-event-form-input="An unticked item">
@@ -119,7 +124,7 @@ describe("Analytics", () => {
           <input type="submit">
         </div>
         `
-      initFormAnalytics()
+      setupPage(testContent,initFormAnalytics)
     })
 
     it("triggers correct GA event when users submit with checked checkboxes", () => {
@@ -130,8 +135,7 @@ describe("Analytics", () => {
 
   describe("initExternalLinkAnalytics", () => {
     beforeEach(() => {
-      fetchConsentedToCookieValue.mockImplementation(() => true);
-      document.body.innerHTML = `
+      const testContent = `
         <div>
           <a href="http://example.com"></a>
           <a href="https://google.com"></a>
@@ -141,7 +145,7 @@ describe("Analytics", () => {
           <a href="#foo"></a>
         </div>
         `
-      initExternalLinkAnalytics()
+      setupPage(testContent,initExternalLinkAnalytics)
     })
 
     it("triggers correct GA events when users click on external links", () => {
@@ -152,15 +156,13 @@ describe("Analytics", () => {
 
   describe("initNavigationAnalytics", () => {
     beforeEach(() => {
-      fetchConsentedToCookieValue.mockImplementationOnce(() => true);
-        
-      document.body.innerHTML = `
+      const testContent = `
         <div data-ga-event-navigation="Some navigation">
           <a href="#about"></a>
           <a href="http://example.com"></a>
         </div>
         `
-      initNavigationAnalytics()
+      setupPage(testContent,initNavigationAnalytics)
     })
 
     it("triggers correct GA events when users click on navigation links", () => {
