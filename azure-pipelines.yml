@@ -43,15 +43,6 @@ steps:
     containerCommand: rails webpacker:compile
     runInBackground: false
 
-- bash: |
-    set -x
-    docker run --rm $(IMAGE_NAME) rails spec SPEC_OPTS='--format RspecJunitFormatter' >rspec-results.xml
-    test_result=$?
-    cat  --number rspec-results.xml
-    sed -i '1,2d' rspec-results.xml
-    if [ "$test_result" == "0" ] ; then true ; else false ; fi
-  displayName: 'Run tests'
-
 - task: Docker@1
   displayName: Run ruby linter
   inputs:
@@ -75,6 +66,16 @@ steps:
     imageName: $(IMAGE_NAME)
     containerCommand: brakeman
     runInBackground: false
+
+- bash: |
+    set -x
+    docker run --rm $(IMAGE_NAME) rails spec SPEC_OPTS='--format RspecJunitFormatter' >rspec-results.xml
+    test_result=$?
+    cat  --number rspec-results.xml
+    sed -i '1,2d' rspec-results.xml
+    if [ "$test_result" == "0" ] ; then true ; else false ; fi
+  displayName: 'Run tests'
+
 
 - task: Docker@1
   displayName: Tag image with current build number $(Build.BuildNumber)
