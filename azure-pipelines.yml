@@ -70,17 +70,15 @@ steps:
 - bash: |
     set -x
     docker run --name test-run-image -d $(IMAGE_NAME)
-    docker exec test-run-image rails spec SPEC_OPTS='--format RspecJunitFormatter'
+    docker exec test-run-image rails spec SPEC_OPTS='--format RspecJunitFormatter --out rspec-results.xml'
     test_result=$?
-      if [ "$test_result" != "0" ]
-      then
-          echo "##vso[task.logissue type=error] Test task failed."
-          exit 1
-      fi
 
+    docker cp test-run-image:/app/rspec-results.xml .
     docker cp test-run-image:/app/coverage .
     docker stop test-run-image
     docker rm test-run-image
+
+    if [ "$test_result" == "0" ]; then true; else false; fi
   displayName: 'Run Ruby tests'
 
 - task: Docker@1
@@ -104,7 +102,6 @@ steps:
   displayName: 'Publish Code Climate Test Coverage'
   env:
     CC_TEST_REPORTER_ID: $(ccReporterID)
-    AGENT_JOBSTATUS: $(Agent.JobStatus)
     GIT_BRANCH: $(Build.SourceBranchName)
 
 - task: Docker@1
