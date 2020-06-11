@@ -1,14 +1,36 @@
 import createPopupClass from "./map-popup";
 
+const getTrainingLocations = () => window.trainingLocations
+      .filter(({lat, lng}) => lat !== "" && lng !== "")
+      .map(location => {
+        location.lat = parseFloat(location.lat);
+        location.lng = parseFloat(location.lng);
+        return location;
+      })
+
+const trainingLocationMapStyleOptions = [
+  {
+    featureType: "poi.business",
+    stylers: [
+      {
+        visibility: "off"
+      }
+    ]
+  },
+  {
+    featureType: "poi.park",
+    elementType: "labels.text",
+    stylers: [
+      {
+        visibility: "off"
+      }
+    ]
+  }
+]
+
 const initLocationsMap = () => {
   const $map = document.getElementById("locations-map");
-  const trainingLocations = window.trainingLocations
-    .filter(({lat, lng}) => lat !== "" && lng !== "")
-    .map(location => {
-      location.lat = parseFloat(location.lat);
-      location.lng = parseFloat(location.lng);
-      return location;
-    })
+  const trainingLocations = getTrainingLocations()
 
   if (trainingLocations.length === 0) {
     console.error("Failed to initialise map: center is impossible to display, because none of the locations have a lat/lng.");
@@ -19,8 +41,10 @@ const initLocationsMap = () => {
   const Popup = createPopupClass();
   const bounds = new google.maps.LatLngBounds();
 
-  const centerLat = trainingLocations[0].lat;
-  const centerLng = trainingLocations[0].lng;
+  const centerCoOrdinates = {
+    lat: trainingLocations[0].lat,
+    lng: trainingLocations[0].lng
+  }
 
   const map = new google.maps.Map($map, {
     mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -33,29 +57,8 @@ const initLocationsMap = () => {
       position: google.maps.ControlPosition.RIGHT_BOTTOM
     },
     zoom: 11,
-    center: {
-      lat: centerLat,
-      lng: centerLng
-    },
-    styles: [
-      {
-        featureType: "poi.business",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      },
-      {
-        featureType: "poi.park",
-        elementType: "labels.text",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      }
-    ]
+    center: centerCoOrdinates,
+    styles: trainingLocationMapStyleOptions
   });
 
   const locations = window.trainingLocations;
