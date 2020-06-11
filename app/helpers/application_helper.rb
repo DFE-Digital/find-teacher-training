@@ -20,6 +20,8 @@ module ApplicationHelper
   end
 
   def smart_quotes(string)
+    return "" if string.blank?
+
     RubyPants.new(string, 2, ruby_pants_options).to_html
   end
 
