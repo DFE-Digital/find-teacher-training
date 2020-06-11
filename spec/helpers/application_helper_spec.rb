@@ -50,5 +50,11 @@ feature "Application helpers", type: :helper do
       output = helper.smart_quotes("\"Wow -- what's this...\", O'connor asked.")
       expect(output).to include("“Wow – what’s this…”, O’connor asked.")
     end
+
+    context "when nil" do
+      it "returns empty string" do
+        expect(helper.smart_quotes(nil)).to be_blank
+      end
+    end
   end
 end
