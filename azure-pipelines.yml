@@ -69,16 +69,19 @@ steps:
 
 - bash: |
     set -x
+    # Start up container and run the ruby test suite
     docker run --name test-run-image -d $(IMAGE_NAME)
     docker exec test-run-image rails spec SPEC_OPTS='--format RspecJunitFormatter --out rspec-results.xml'
     test_result=$?
 
+    # Copy test results and coverage to docker host (used by another script)
     docker cp test-run-image:/app/rspec-results.xml .
     docker cp test-run-image:/app/coverage .
-    docker stop test-run-image
-    docker rm test-run-image
 
-    if [ "$test_result" == "0" ]; then true; else false; fi
+    # Remove container
+    docker rm -f test-run-image
+
+    exit $test_result
   displayName: 'Run Ruby tests'
 
 - task: Docker@1
