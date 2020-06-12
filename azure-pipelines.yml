@@ -43,15 +43,6 @@ steps:
     containerCommand: rails webpacker:compile
     runInBackground: false
 
-- bash: |
-    set -x
-    docker run --rm $(IMAGE_NAME) rails spec SPEC_OPTS='--format RspecJunitFormatter' >rspec-results.xml
-    test_result=$?
-    cat  --number rspec-results.xml
-    sed -i '1,2d' rspec-results.xml
-    if [ "$test_result" == "0" ] ; then true ; else false ; fi
-  displayName: 'Run tests'
-
 - task: Docker@1
   displayName: Run ruby linter
   inputs:
@@ -75,6 +66,46 @@ steps:
     imageName: $(IMAGE_NAME)
     containerCommand: brakeman
     runInBackground: false
+
+- bash: |
+    set -x
+    # Start up container and run the ruby test suite
+    docker run --name test-run-image -d $(IMAGE_NAME)
+    docker exec test-run-image rails spec SPEC_OPTS='--format RspecJunitFormatter --out rspec-results.xml'
+    test_result=$?
+
+    # Copy test results and coverage to docker host (used by another script)
+    docker cp test-run-image:/app/rspec-results.xml .
+    docker cp test-run-image:/app/coverage .
+
+    # Remove container
+    docker rm -f test-run-image
+
+    exit $test_result
+  displayName: 'Run Ruby tests'
+
+- task: Docker@1
+  displayName: Run JavaScript tests
+  inputs:
+    command: Run an image
+    imageName: $(IMAGE_NAME)
+    containerCommand: yarn test
+    runInBackground: false
+
+- script: |
+    set -x
+    curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    chmod +x ./cc-test-reporter
+
+    ./cc-test-reporter before-build
+    # As the tests were run in the docker container the paths to the coverage are prefixed with "/app/"
+    # So we need to replace it with the docker hosts current directory
+    sed "s|\"/app/|\"`pwd`/|g" coverage/.resultset.json -i
+    ./cc-test-reporter after-build
+  displayName: 'Publish Code Climate Test Coverage'
+  env:
+    CC_TEST_REPORTER_ID: $(ccReporterID)
+    GIT_BRANCH: $(Build.SourceBranchName)
 
 - task: Docker@1
   displayName: Tag image with current build number $(Build.BuildNumber)
