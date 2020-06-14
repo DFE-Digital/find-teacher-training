@@ -84,13 +84,21 @@ steps:
     exit $test_result
   displayName: 'Run Ruby tests'
 
-- task: Docker@1
-  displayName: Run JavaScript tests
-  inputs:
-    command: Run an image
-    imageName: $(IMAGE_NAME)
-    containerCommand: yarn test
-    runInBackground: false
+- bash: |
+    set -x
+    # Start up container and run the ruby test suite
+    docker run --name test-run-image -d $(IMAGE_NAME)
+    docker exec test-run-image yarn test --coverage
+    test_result=$?
+
+    # Copy test results and coverage to docker host (used by another script)
+    docker cp test-run-image:/app/coverage .
+
+    # Remove container
+    docker rm -f test-run-image
+
+    exit $test_result
+  displayName: 'Run JavaScript tests'
 
 - script: |
     set -x
@@ -101,7 +109,16 @@ steps:
     # As the tests were run in the docker container the paths to the coverage are prefixed with "/app/"
     # So we need to replace it with the docker hosts current directory
     sed "s|\"/app/|\"`pwd`/|g" coverage/.resultset.json -i
-    ./cc-test-reporter after-build
+
+    # Format the two different test coverage formats (SimpleCov anf lcov) to code climates json format
+    ./cc-test-reporter format-coverage --input-type simplecov --output coverage/rspec.json
+    ./cc-test-reporter format-coverage --input-type lcov --output coverage/javascript.json
+
+    # Aggregate the two results to form a single result for our code base
+    ./cc-test-reporter sum-coverage --output 'coverage/total.json' coverage/javascript.json coverage/rspec.json
+
+    # Upload the our test coverage to code climat
+    ./cc-test-reporter upload-coverage --input coverage/total.json
   displayName: 'Publish Code Climate Test Coverage'
   env:
     CC_TEST_REPORTER_ID: $(ccReporterID)
