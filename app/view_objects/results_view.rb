@@ -203,6 +203,10 @@ class ResultsView
     !new_or_running_sites_for(course).empty?
   end
 
+  def sites_count(course)
+    new_or_running_sites_for(course).count
+  end
+
   def subjects
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
