@@ -30,6 +30,10 @@ class Course < Base
     applications_open_from.split("-").third if applications_open_from.present?
   end
 
+  def university_based?
+    provider_type == "university"
+  end
+
   def further_education?
     level == "further_education" && subjects.any? { |s| s.subject_name == "Further education" || s.subject_code = "41" }
   end
