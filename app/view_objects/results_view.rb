@@ -207,6 +207,14 @@ class ResultsView
     new_or_running_sites_for(course).count
   end
 
+  def nearest_location_name(course)
+    nearest_address = new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+
+    nearest_address.location_name
+  end
+
   def subjects
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
