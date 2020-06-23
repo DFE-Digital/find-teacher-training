@@ -119,6 +119,10 @@ class CourseDecorator < Draper::Decorator
     object.has_vacancies? ? "Yes" : "No"
   end
 
+  def year_range
+    "#{object.recruitment_cycle_year} – #{object.recruitment_cycle_year.to_i + 1}"
+  end
+
 private
 
   def find_max(attribute)
