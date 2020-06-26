@@ -10,11 +10,20 @@ class LocationSuggestion
       response = get("#{Settings.google.places_api_path}?#{query.to_query}")
 
       if response.success?
-        JSON.parse(response.body)["predictions"].map { |p| p["description"] }.take(5)
+        JSON.parse(response.body)["predictions"]
+          .map(&format_prediction)
+          .take(5)
       end
     end
 
   private
+
+    def format_prediction
+      lambda do |prediction|
+        prediction_split = prediction["description"].split(",")
+        prediction_split.first(prediction_split.size - 1).join(",")
+      end
+    end
 
     def build_query(input)
       {
