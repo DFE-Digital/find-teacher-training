@@ -2,13 +2,15 @@ require "rails_helper"
 
 describe LocationSuggestion do
   describe "#suggest" do
-    let(:location1) { "123 Seseme Street" }
-    let(:location2) { "New York, NY" }
-    let(:query) { "New York" }
+    let(:location1) { "Cardiff, UK" }
+    let(:location2) { "Cardiff Road, Newport, UK" }
+    let(:location3) { "Cardiff House, Peckham Park Road, London, UK" }
+    let(:query) { "Cardiff" }
     let(:predictions) do
       [
         { description: location1 },
         { description: location2 },
+        { description: location3 },
       ]
     end
     let(:params) do
@@ -50,10 +52,11 @@ describe LocationSuggestion do
       end
 
       context "successful request" do
-        it "returns the result" do
-          expect(location_suggestions.count).to eq(2)
-          expect(location_suggestions.first).to eq(location1)
-          expect(location_suggestions.last).to eq(location2)
+        it "returns the formatted result" do
+          expect(location_suggestions.count).to eq(3)
+          expect(location_suggestions.first).to eq("Cardiff")
+          expect(location_suggestions.second).to eq("Cardiff Road, Newport")
+          expect(location_suggestions.last).to eq("Cardiff House, Peckham Park Road, London")
         end
       end
     end
