@@ -5,6 +5,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "385N",
@@ -128,6 +129,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "38KK",
@@ -267,6 +269,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "3855",
@@ -402,6 +405,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "385J",
@@ -513,6 +517,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "3DTC",
@@ -620,6 +625,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "Z923",
@@ -731,6 +737,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "3FL7",
@@ -839,6 +846,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "3854",
@@ -950,6 +958,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "384R",
@@ -1097,6 +1106,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "385V",
