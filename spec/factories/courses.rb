@@ -76,6 +76,7 @@ FactoryBot.define do
 
       course.recruitment_cycle = evaluator.recruitment_cycle
       course.provider_code = evaluator.provider&.provider_code
+      course.provider_type = evaluator.provider&.provider_type
       course.recruitment_cycle_year = evaluator&.recruitment_cycle&.year
     end
 
