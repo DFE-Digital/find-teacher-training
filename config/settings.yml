@@ -18,3 +18,4 @@ logstash:
   port: # Our port here
   ssl_enable: true
 log_level: info
+commit_sha_file: COMMIT_SHA
