@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get :ping, controller: :heartbeat
   get :healthcheck, controller: :heartbeat
+  get :sha, controller: :heartbeat
 
   scope module: "result_filters" do
     root to: "location#start"
