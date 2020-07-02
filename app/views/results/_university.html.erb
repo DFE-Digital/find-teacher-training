@@ -2,7 +2,7 @@
 
 <dt class="govuk-list--description__label">Location</dt>
 
-<dd data-qa="course__site_distance">
+<dd>
   <ul class="govuk-list govuk-!-margin-top-0 govuk-!-margin-bottom-0">
     <li>
       <% if course.further_education? %>
@@ -24,9 +24,7 @@
           <div class="govuk-details__text">
             <p>You can’t pick which schools you want to be in, but your university will try to place you in schools you can commute to.</p>
             <p>Universities usually work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
-            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), class: "govuk-link" do %>
-              More about placements on this course
-            <% end %>
+            <%= link_to "More about placements on this course", course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), class: "govuk-link" %>
           </div>
         </details>
         You’ll be placed in schools for most of your course

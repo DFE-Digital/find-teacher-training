@@ -5,7 +5,7 @@
 <dt class="govuk-list--description__label">
   <%= (number_of_sites > 1) ? "Nearest location" :  "Location"%>
 </dt>
-<dd data-qa="course__site_distance">
+<dd>
   <%= "#{pluralize(@results_view.site_distance(course), 'mile')} from you" %> 
   <% if number_of_sites > 1 %>
     <div class="govuk-!-margin-top-0">
@@ -13,11 +13,9 @@
     </div>
   <% end %>
 
-  <% if nearest_address.present? %>
-    <span class="govuk-list--description__hint govuk-!-padding-top-2">Location</span>
-    <% if nearest_location_name != "Main Site" %>
-      <%= nearest_location_name %><br />
-    <% end %>
-    <%= nearest_address %>
+  <span class="govuk-list--description__hint govuk-!-padding-top-2">Location</span>
+  <% if nearest_location_name != "Main Site" %>
+    <%= nearest_location_name %><br />
   <% end %>
+  <%= nearest_address %>
 </dd>

@@ -707,6 +707,12 @@ describe ResultsView do
         expect(results_view.sites_count(course)).to eq(1)
       end
     end
+
+    describe "#site_distance" do
+      it "returns the running or new sites count" do
+        expect(results_view.site_distance(course)).to eq(0.1)
+      end
+    end
   end
 
   describe "#sort_options" do
