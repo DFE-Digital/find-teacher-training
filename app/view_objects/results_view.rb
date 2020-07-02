@@ -186,9 +186,7 @@ class ResultsView
   end
 
   def nearest_address(course)
-    nearest_address = new_or_running_sites_for(course).min_by do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
-    end
+    nearest_address = nearest_location(course)
 
     [
       nearest_address.address1,
@@ -208,11 +206,7 @@ class ResultsView
   end
 
   def nearest_location_name(course)
-    nearest_address = new_or_running_sites_for(course).min_by do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
-    end
-
-    nearest_address.location_name
+    nearest_location(course).location_name
   end
 
   def subjects
@@ -261,6 +255,12 @@ class ResultsView
   end
 
 private
+
+  def nearest_location(course)
+    new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+  end
 
   def results_per_page
     RESULTS_PER_PAGE

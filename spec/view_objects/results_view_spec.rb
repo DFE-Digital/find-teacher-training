@@ -619,13 +619,13 @@ describe ResultsView do
     end
   end
 
-  describe "#nearest_address" do
+  context "locations" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
     let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
     let(:geocoder) { double("geocoder") }
 
-    it "returns the address to the nearest site" do
-      site1 = build(
+    let(:site1) do
+      build(
         :site,
         latitude: 51.4985,
         longitude: 0.1367,
@@ -635,8 +635,12 @@ describe ResultsView do
         address4: "UK",
         postcode: "CM8 2SD",
       )
-      site2 = build(:site, latitude: 54.9783, longitude: 1.6178)
-      site3 = build(
+    end
+    let(:site2) do
+      build(:site, latitude: 54.9783, longitude: 1.6178, location_name: "no address")
+    end
+    let(:site3) do
+      build(
         :site,
         latitude: nil,
         longitude: nil,
@@ -645,22 +649,63 @@ describe ResultsView do
         address3: "Essex",
         address4: "UK",
         postcode: "CM8 2SD",
+        location_name: "no lat long",
       )
+    end
+    let(:site4) do
+      build(
+        :site,
+        latitude: 51.4985,
+        longitude: 0.1367,
+        address1: "10 Windy Way",
+        address2: "Witham",
+        address3: "Essex",
+        address4: "UK",
+        postcode: "CM8 2SD",
+        location_name: "suspended",
+      )
+    end
 
-      course = build(
+    let(:course) do
+      build(
         :course,
         site_statuses: [
           build(:site_status, :full_time_and_part_time, site: site1),
           build(:site_status, :full_time_and_part_time, site: site2),
           build(:site_status, :full_time_and_part_time, site: site3),
+          build(:site_status, :full_time_and_part_time, site: site4, status: "suspended"),
         ],
       )
+    end
 
-      allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
-      allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
-      allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+    before do
+      course
+    end
 
-      expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+    describe "#nearest_address" do
+      it "returns the address to the nearest site" do
+        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
+        allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
+        allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+
+        expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+      end
+    end
+
+    describe "#nearest_location_name" do
+      it "returns the location name to the nearest site" do
+        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
+        allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
+        allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+
+        expect(results_view.nearest_location_name(course)).to eq("Main Site")
+      end
+    end
+
+    describe "#sites_count" do
+      it "returns the running or new sites count" do
+        expect(results_view.sites_count(course)).to eq(1)
+      end
     end
   end
 
