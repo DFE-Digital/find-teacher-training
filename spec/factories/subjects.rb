@@ -54,6 +54,11 @@ FactoryBot.define do
       subject_code { "00" }
     end
 
+    trait :further_education do
+      subject_name { "Further education" }
+      subject_code { "41" }
+    end
+
     trait :design_and_technology do
       subject_name { "Design and technology" }
       subject_code { "DT" }
