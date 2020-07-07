@@ -44,7 +44,7 @@
     <% else %>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__count" data-qa="course-count"><%= @results_view.number_of_courses_string %> found</p>
+          <p class="govuk-body search-results__count" data-qa="course-count"><%= "#{@results_view.number_of_courses_string} found#{' within 50 miles' if @results_view.location_filter?} " %></p>
         </div>
         <div class="govuk-grid-column-one-half">
           <p class="govuk-body search-results__new-search">
