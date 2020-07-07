@@ -64,24 +64,8 @@
                 %>
                 <div id="location-autocomplete" class="govuk-body"></div>
               </div>
-              <div class="govuk-form-group">
-                <%= form.label :rad, "Within", class: "govuk-label" %>
-                <%= form.select :rad,
-                                options_for_select(
-                                  [
-                                    ["5 miles", "5"],
-                                    ["10 miles", "10"],
-                                    ["20 miles", "20"],
-                                    ["50 miles", "50"],
-                                    ["100 miles", "100"],
-                                  ],
-                                  [request.params[:rad] || "20"]
-                                ),
-                                {include_blank: false},
-                                data: {qa: 'search-radius'},
-                                class: 'govuk-select govuk-!-width-one-half'
-                %>
-              </div>
+          <%= form.hidden_field(:rad, value: 50) %>
+
             </div>
             <div class="govuk-radios__item">
               <%= form.radio_button(
