@@ -107,7 +107,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge(
             "filter[longitude]" => "-0.1300436",
             "filter[latitude]" => "51.4980188",
-            "filter[radius]" => "20",
+            "filter[radius]" => "50",
             "sort" => "distance",
             "filter[expand_university]" => true,
           ),
@@ -130,7 +130,7 @@ feature "Location filter", type: :feature do
 
         expect(results_page.courses.first).not_to have_main_address
 
-        expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 20 miles of the pin")
+        expect(results_page.location_filter.name.text).to eq("Westminster, London SW1P 3BT, UK Within 50 miles of the pin")
         expect(results_page.location_filter.map).to be_present
         expect(results_page.courses.count).to eq(10)
       end
@@ -154,7 +154,7 @@ feature "Location filter", type: :feature do
         URI(current_url).then do |uri|
           expect(uri.path).to eq("/start/subject")
           expect(uri.query)
-            .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=20&sortby=2")
+            .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2")
         end
       end
     end
@@ -304,7 +304,7 @@ feature "Location filter", type: :feature do
           query: base_parameters.merge(
             "filter[longitude]" => "-0.1300436",
             "filter[latitude]" => "51.4980188",
-            "filter[radius]" => "20",
+            "filter[radius]" => "50",
             "sort" => "distance",
             "filter[expand_university]" => true,
           ),
@@ -366,14 +366,12 @@ feature "Location filter", type: :feature do
     it "Displays an error if location is selected but none is entered" do
       filter_page.load
       filter_page.by_postcode_town_or_city.click
-      filter_page.search_radius.select "5 miles"
 
       filter_page.find_courses.click
 
       expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
       expect(filter_page.location_error.text).to eq("Error: Please enter a postcode, city or town in England")
       expect(filter_page).to have_location_query
-      expect(filter_page).to have_select("rad", selected: "5 miles")
     end
 
     it "Displays an error if the the location is unknown" do
