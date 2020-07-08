@@ -96,46 +96,6 @@ feature "suggested searches", type: :feature do
 
         expect(results_page.courses.count).to eq(10)
       end
-
-      # The specs below can go?
-
-      # context "where more than 2 expanded radius searches return more results than the original search" do
-      #   before do
-      #     # suggested_search_count_request(radius: 20, results_to_return: 4)
-      #     suggested_search_count_request(radius: 50, results_to_return: 10)
-      #   end
-      #
-      #   it "only shows the first 2 suggested search links" do
-      #     filter_page.load
-      #     filter_page.by_postcode_town_or_city.click
-      #     filter_page.location_query.set "SW1P 3BT"
-      #
-      #     filter_page.find_courses.click
-      #     expect(results_page.suggested_search_links.first.text).to eq("10 courses across England")
-      #     # expect(results_page.suggested_search_links.second.text).to eq("4 courses within 20 miles")
-      #     expect(results_page.suggested_search_links.count).to eq(1)
-      #   end
-      # end
-
-      # context "when the search was filtered to a 20 mile radius" do
-      #   before do
-      #     results_page_request(radius: 20, results_to_return: 0)
-      #     suggested_search_count_request(radius: 50, results_to_return: 2)
-      #     suggested_search_count_across_england(results_to_return: 4)
-      #   end
-      #
-      #   it "shows results from across England" do
-      #     filter_page.load
-      #     filter_page.by_postcode_town_or_city.click
-      #     filter_page.location_query.set "SW1P 3BT"
-      #     filter_page.search_radius.select "20 miles"
-      #
-      #     filter_page.find_courses.click
-      #
-      #     expect(results_page.suggested_search_links.first.text).to eq("2 courses within 50 miles")
-      #     expect(results_page.suggested_search_links.second.text).to eq("4 courses across England")
-      #   end
-      # end
     end
 
     context "no courses are found in the suggested searches" do
