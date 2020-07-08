@@ -217,16 +217,14 @@ class ResultsView
       all_links << first_link if first_link.present?
     end
 
-    radii_for_suggestions.each do |radius|
-      break if filter_links(all_links).count == 2
+    radius = nil
 
-      all_links << SuggestedSearchLink.new(
-        radius: radius,
-        count: course_counter(radius_to_check: radius),
-        parameters: query_parameters_with_defaults,
-        explicit_salary_filter: with_salaries?,
-      )
-    end
+    all_links << SuggestedSearchLink.new(
+      radius: radius,
+      count: course_counter(radius_to_check: radius),
+      parameters: query_parameters_with_defaults,
+      explicit_salary_filter: with_salaries?,
+    )
 
     @suggested_search_links ||= filter_links(all_links)
   end
@@ -424,15 +422,14 @@ private
       .take(MAXIMUM_NUMBER_OF_SUGGESTED_LINKS)
   end
 
-  def radii_for_suggestions
-    radius_for_all_england = nil
-    [10, 20, 50].reject { |rad| rad <= radius.to_i } << radius_for_all_england
+  def radius_for_all_england
+    [nil]
   end
 
   def suggested_search_link_including_unsalaried(current_radius:)
     suggested_search_link = nil
 
-    radii_including_current = [current_radius] + radii_for_suggestions
+    radii_including_current = [current_radius] + radius_for_all_england
 
     radii_including_current.each do |radius|
       break if suggested_search_link.present?
