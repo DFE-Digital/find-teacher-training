@@ -329,8 +329,12 @@ feature "Location filter", type: :feature do
       expect(distance_stub).to have_been_requested
     end
 
-    it "is automatically selected" do
-      expect(results_page.sort_form.options.distance).to be_selected
+    it "does not have the sort form" do
+      expect(results_page).to_not have_sort_form
+    end
+
+    it "has sorted by distance" do
+      expect(results_page).to have_sorted_by_distance
     end
   end
 

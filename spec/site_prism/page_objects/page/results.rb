@@ -104,6 +104,8 @@ module PageObjects
       sections :suggested_search_links, SuggestedSearchLinkSection, '[data-qa="suggested_search_link"]'
 
       section :sort_form, SortFormSection, '[data-qa="sort-form"]'
+
+      element :sorted_by_distance, 'div.govuk-grid-column-full>p.govuk-body.govuk-\\!-margin-bottom-0', text: "Sorted by distance"
     end
   end
 end
