@@ -37,7 +37,7 @@ feature "suggested searches", type: :feature do
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-        )
+      )
   end
 
   def suggested_search_count_request(radius:, results_to_return:)
