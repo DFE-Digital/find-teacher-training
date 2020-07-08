@@ -133,16 +133,8 @@ class ResultsView
   end
 
   def sort_options
-    if location_filter?
-      [
-        ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-        ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
-        ["Distance", 2, { "data-qa": "sort-form__options__distance" }],
-      ]
-    else
-      [["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-       ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }]]
-    end
+    [["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+     ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }]]
   end
 
   def courses
