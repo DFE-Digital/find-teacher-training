@@ -10,7 +10,7 @@ class ResultsView
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
   RESULTS_PER_PAGE = 10
-  ALL_RADII = %w[5 10 20 50 100].freeze
+  MILES = "50".freeze
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -87,7 +87,7 @@ class ResultsView
   end
 
   def radius
-    ALL_RADII.include?(query_parameters["rad"]) ? query_parameters["rad"] : "20"
+    MILES
   end
 
   def sort_by
