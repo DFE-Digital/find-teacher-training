@@ -489,7 +489,7 @@ describe ResultsView do
       end
 
       describe "#suggested_search_visible?" do
-        subject { described_class.new(query_parameters: { "lat" => "0.1", "lng" => "2.4", "rad" => "5" }).suggested_search_visible? }
+        subject { described_class.new(query_parameters: { "lat" => "0.1", "lng" => "2.4", "rad" => "50" }).suggested_search_visible? }
 
         def suggested_search_count_parameters
           results_page_parameters.reject do |k, _v|
@@ -519,14 +519,9 @@ describe ResultsView do
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
+
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/four_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
+                .with(query: suggested_search_count_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/ten_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -542,24 +537,6 @@ describe ResultsView do
                 .with(query: results_page_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 50, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
@@ -592,7 +569,7 @@ describe ResultsView do
       build(
         :course,
         site_statuses: site_statuses,
-      )
+      )\
     end
 
     subject do
