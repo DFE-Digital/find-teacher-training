@@ -1,4 +1,3 @@
-
 class DeprecatedParametersService
   def initialize(parameters:)
     @parameters = parameters
@@ -18,17 +17,16 @@ class DeprecatedParametersService
   private_class_method :new
 
 private
-  
 
   def have_legacy_params_values
-    @have_legacy_params_values ||= parameters.has_key?("rad") && parameters["rad"] != ResultsView::MILES
+    @have_legacy_params_values ||= parameters.key?("rad") && parameters["rad"] != ResultsView::MILES
   end
 
   def params_hash
     if have_legacy_params_values
       parameters["rad"] = ResultsView::MILES
 
-      if parameters.has_key? "page"
+      if parameters.key? "page"
         parameters["page"] = 1
       end
     end
@@ -37,4 +35,3 @@ private
 
   attr_reader :base_path, :parameters
 end
-

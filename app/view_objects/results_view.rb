@@ -348,20 +348,7 @@ private
   end
 
   def google_map_zoom
-    case radius
-    when "5"
-      "12"
-    when "10"
-      "11"
-    when "20"
-      "10"
-    when "50"
-      "9"
-    when "100"
-      "8"
-    else
-      "14"
-    end
+    "9"
   end
 
   def study_type

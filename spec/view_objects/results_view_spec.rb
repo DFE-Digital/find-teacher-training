@@ -258,22 +258,8 @@ describe ResultsView do
   describe "#radius" do
     subject { described_class.new(query_parameters: parameter_hash).radius }
 
-    context "when rad is passed" do
-      let(:parameter_hash) { { "rad" => "10" } }
-
-      it { is_expected.to eq("10") }
-    end
-
-    context "when an unapproved rad is passed" do
-      let(:parameter_hash) { { "rad" => "11" } }
-
-      it { is_expected.to eq("20") }
-    end
-
-    context "when rad is not passed" do
-      let(:parameter_hash) { {} }
-      it { is_expected.to eq("20") }
-    end
+    let(:parameter_hash) { {} }
+    it { is_expected.to eq("50") }
   end
 
   describe "#show_map?" do
@@ -335,7 +321,7 @@ describe ResultsView do
       allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return("https://maps.googleapis.com/maps/api/staticmap")
     end
 
-    it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
+    it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=9&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
   end
 
   describe "#provider" do
