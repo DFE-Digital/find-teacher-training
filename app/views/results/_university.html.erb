@@ -1,5 +1,3 @@
-<% site_distance = @results_view.site_distance(course)%>
-
 <dt class="govuk-list--description__label">Location</dt>
 
 <dd>
@@ -12,13 +10,7 @@
         <details class="govuk-details" data-module="govuk-details">
           <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
-              <% if site_distance < 11 %>
-                Placement schools are near you
-              <% elsif site_distance < 21 %>
-                Placement schools might be near you
-              <% else %>
-                Placement schools might be in commuting distance
-              <% end %>
+              <%= @results_view.placement_schools_summary(course) %>
             </span>
           </summary>
           <div class="govuk-details__text">
@@ -31,7 +23,7 @@
         <span class="govuk-list--description__hint govuk-!-padding-top-2">University</span>
       <% end %>
 
-      <%= "#{pluralize(site_distance, 'mile')} from you" %> 
+      <%= "#{pluralize(@results_view.site_distance(course), 'mile')} from you" %> 
       <br />
       You’ll be at university only some of the time
     </li>

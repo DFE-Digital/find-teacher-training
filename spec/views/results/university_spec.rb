@@ -72,7 +72,7 @@ describe "results/university.html.erb", type: :view do
       expect(html).to have_no_css("dt.govuk-list--description__label", text: "Nearest location")
     end
 
-    context "site_distance < 11" do
+    context "site_distance less than 11 miles" do
       it "renders '0.1 miles from you'" do
         expect(html).to match("0.1 miles from you")
       end
@@ -82,7 +82,7 @@ describe "results/university.html.erb", type: :view do
       end
     end
 
-    context "site_distance < 21" do
+    context "site_distance less than 21 miles" do
       let(:lat_lon) do
         { latitude: 51.6985,
           longitude: 0.1367 }
@@ -97,7 +97,7 @@ describe "results/university.html.erb", type: :view do
       end
     end
 
-    context "site_distance < 21" do
+    context "site_distance more than 21 miles" do
       let(:lat_lon) do
         { latitude: 52,
           longitude: 0.1367 }

@@ -254,6 +254,18 @@ class ResultsView
     end
   end
 
+  def placement_schools_summary(course)
+    site_distance = site_distance(course)
+
+    if site_distance < 11
+      "Placement schools are near you"
+    elsif site_distance < 21
+      "Placement schools might be near you"
+    else
+      "Placement schools might be in commuting distance"
+    end
+  end
+
 private
 
   def nearest_location(course)

@@ -577,6 +577,59 @@ describe ResultsView do
     end
   end
 
+  describe "#placement_schools_summary" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    let(:site1) do
+      build(:site, latitude: 51.5079, longitude: 0.0877, address1: "1 Foo Street", postcode: "BAA0NE")
+    end
+
+    let(:site_statuses) do
+      [build(:site_status, :full_time_and_part_time, site: site1)]
+    end
+
+    let(:course) do
+      build(
+        :course,
+        site_statuses: site_statuses,
+      )
+    end
+
+    subject do
+      results_view.placement_schools_summary(course)
+    end
+
+    context "site_distance less than 11 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "51.5079",
+          "lng" => "0.0877",
+        }
+      end
+      it { expect(subject).to eq("Placement schools are near you") }
+    end
+
+    context "site_distance less than 21 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "51.6985",
+          "lng" => "0.1367",
+        }
+      end
+      it { expect(subject).to eq("Placement schools might be near you") }
+    end
+
+    context "site_distance more than 21 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "52",
+          "lng" => "0.1367",
+        }
+      end
+      it { expect(subject).to eq("Placement schools might be in commuting distance") }
+    end
+  end
+
   describe "#site_distance" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
