@@ -186,9 +186,7 @@ class ResultsView
   end
 
   def nearest_address(course)
-    nearest_address = new_or_running_sites_for(course).min_by do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
-    end
+    nearest_address = nearest_location(course)
 
     [
       nearest_address.address1,
@@ -201,6 +199,14 @@ class ResultsView
 
   def has_sites?(course)
     !new_or_running_sites_for(course).empty?
+  end
+
+  def sites_count(course)
+    new_or_running_sites_for(course).count
+  end
+
+  def nearest_location_name(course)
+    nearest_location(course).location_name
   end
 
   def subjects
@@ -248,7 +254,25 @@ class ResultsView
     end
   end
 
+  def placement_schools_summary(course)
+    site_distance = site_distance(course)
+
+    if site_distance < 11
+      "Placement schools are near you"
+    elsif site_distance < 21
+      "Placement schools might be near you"
+    else
+      "Placement schools might be in commuting distance"
+    end
+  end
+
 private
+
+  def nearest_location(course)
+    new_or_running_sites_for(course).min_by do |site|
+      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    end
+  end
 
   def results_per_page
     RESULTS_PER_PAGE
@@ -394,6 +418,7 @@ private
       base_query = base_query.where("latitude" => latitude)
       base_query = base_query.where("longitude" => longitude)
       base_query = base_query.where("radius" => radius_to_query)
+      base_query = base_query.where(expand_university: true)
     end
 
     base_query = base_query.where("provider.provider_name" => provider) if provider.present?

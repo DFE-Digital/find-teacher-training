@@ -24,7 +24,7 @@ feature "suggested searches", type: :feature do
 
   def results_page_request(radius:, results_to_return:)
     stub_request(:get, courses_url)
-      .with(query: base_parameters.merge("filter[latitude]" => 51.4980188, "filter[longitude]" => -0.1300436, "filter[radius]" => radius))
+      .with(query: base_parameters.merge("filter[latitude]" => 51.4980188, "filter[longitude]" => -0.1300436, "filter[radius]" => radius, "filter[expand_university]" => true))
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -33,7 +33,7 @@ feature "suggested searches", type: :feature do
 
   def suggested_search_count_request(radius:, results_to_return:)
     stub_request(:get, courses_url)
-      .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 51.4980188, "filter[longitude]" => -0.1300436, "filter[radius]" => radius))
+      .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 51.4980188, "filter[longitude]" => -0.1300436, "filter[radius]" => radius, "filter[expand_university]" => true))
       .to_return(
         body: course_fixture_for(results: results_to_return),
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },

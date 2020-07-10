@@ -520,13 +520,13 @@ describe ResultsView do
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/four_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20))
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/ten_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -545,19 +545,19 @@ describe ResultsView do
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10))
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/empty_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20))
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/empty_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 50))
+                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 50, "filter[expand_university]" => true))
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/empty_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -574,6 +574,59 @@ describe ResultsView do
           end
         end
       end
+    end
+  end
+
+  describe "#placement_schools_summary" do
+    let(:results_view) { described_class.new(query_parameters: parameter_hash) }
+
+    let(:site1) do
+      build(:site, latitude: 51.5079, longitude: 0.0877, address1: "1 Foo Street", postcode: "BAA0NE")
+    end
+
+    let(:site_statuses) do
+      [build(:site_status, :full_time_and_part_time, site: site1)]
+    end
+
+    let(:course) do
+      build(
+        :course,
+        site_statuses: site_statuses,
+      )
+    end
+
+    subject do
+      results_view.placement_schools_summary(course)
+    end
+
+    context "site_distance less than 11 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "51.5079",
+          "lng" => "0.0877",
+        }
+      end
+      it { expect(subject).to eq("Placement schools are near you") }
+    end
+
+    context "site_distance less than 21 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "51.6985",
+          "lng" => "0.1367",
+        }
+      end
+      it { expect(subject).to eq("Placement schools might be near you") }
+    end
+
+    context "site_distance more than 21 miles" do
+      let(:parameter_hash) do
+        {
+          "lat" => "52",
+          "lng" => "0.1367",
+        }
+      end
+      it { expect(subject).to eq("Placement schools might be in commuting distance") }
     end
   end
 
@@ -619,13 +672,13 @@ describe ResultsView do
     end
   end
 
-  describe "#nearest_address" do
+  context "locations" do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
     let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
     let(:geocoder) { double("geocoder") }
 
-    it "returns the address to the nearest site" do
-      site1 = build(
+    let(:site1) do
+      build(
         :site,
         latitude: 51.4985,
         longitude: 0.1367,
@@ -635,8 +688,12 @@ describe ResultsView do
         address4: "UK",
         postcode: "CM8 2SD",
       )
-      site2 = build(:site, latitude: 54.9783, longitude: 1.6178)
-      site3 = build(
+    end
+    let(:site2) do
+      build(:site, latitude: 54.9783, longitude: 1.6178, location_name: "no address")
+    end
+    let(:site3) do
+      build(
         :site,
         latitude: nil,
         longitude: nil,
@@ -645,22 +702,69 @@ describe ResultsView do
         address3: "Essex",
         address4: "UK",
         postcode: "CM8 2SD",
+        location_name: "no lat long",
       )
+    end
+    let(:site4) do
+      build(
+        :site,
+        latitude: 51.4985,
+        longitude: 0.1367,
+        address1: "10 Windy Way",
+        address2: "Witham",
+        address3: "Essex",
+        address4: "UK",
+        postcode: "CM8 2SD",
+        location_name: "suspended",
+      )
+    end
 
-      course = build(
+    let(:course) do
+      build(
         :course,
         site_statuses: [
           build(:site_status, :full_time_and_part_time, site: site1),
           build(:site_status, :full_time_and_part_time, site: site2),
           build(:site_status, :full_time_and_part_time, site: site3),
+          build(:site_status, :full_time_and_part_time, site: site4, status: "suspended"),
         ],
       )
+    end
 
-      allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
-      allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
-      allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+    before do
+      course
+    end
 
-      expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+    describe "#nearest_address" do
+      it "returns the address to the nearest site" do
+        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
+        allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
+        allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+
+        expect(results_view.nearest_address(course)).to eq("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+      end
+    end
+
+    describe "#nearest_location_name" do
+      it "returns the location name to the nearest site" do
+        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
+        allow(geocoder).to receive(:distance_to).with("51.4985,0.1367")
+        allow(geocoder).to receive(:distance_to).with(",").and_raise(Geokit::Geocoders::GeocodeError)
+
+        expect(results_view.nearest_location_name(course)).to eq("Main Site")
+      end
+    end
+
+    describe "#sites_count" do
+      it "returns the running or new sites count" do
+        expect(results_view.sites_count(course)).to eq(1)
+      end
+    end
+
+    describe "#site_distance" do
+      it "returns the running or new sites count" do
+        expect(results_view.site_distance(course)).to eq(0.1)
+      end
     end
   end
 

@@ -5,6 +5,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "X130",
@@ -88,6 +89,7 @@
       "type": "courses",
       "attributes": {
         "findable?": true,
+        "provider_type": "university",
         "open_for_applications?": true,
         "has_vacancies?": true,
         "course_code": "2XNM",

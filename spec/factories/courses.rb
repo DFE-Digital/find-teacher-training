@@ -76,7 +76,13 @@ FactoryBot.define do
 
       course.recruitment_cycle = evaluator.recruitment_cycle
       course.provider_code = evaluator.provider&.provider_code
+      course.provider_type = evaluator.provider&.provider_type
       course.recruitment_cycle_year = evaluator&.recruitment_cycle&.year
+    end
+
+    trait :further_education do
+      level { "further_education" }
+      subjects { [build(:subject, :further_education)] }
     end
 
     trait :with_vacancy do

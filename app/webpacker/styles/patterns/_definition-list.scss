@@ -4,7 +4,7 @@
 }
 
 %govuk-list--description > dt {
-  @include govuk-font($size: 19, $weight: normal);
+  @include govuk-font($size: 19, $weight: bold);
   vertical-align: top;
 
   @include mq ($from: desktop) {
@@ -40,7 +40,6 @@
   @extend %govuk-list--description;
 
   &__label:after {
-    content: ":";
     display: inline-block;
   }
 

@@ -73,6 +73,7 @@ describe "Suggested salary searches" do
         "filter[latitude]" => 51.4980188,
         "filter[longitude]" => -0.1300436,
         "filter[radius]" => radius,
+        "filter[expand_university]" => true,
       ),
     )
   end
@@ -85,6 +86,7 @@ describe "Suggested salary searches" do
         "filter[latitude]" => 51.4980188,
         "filter[longitude]" => -0.1300436,
         "filter[radius]" => radius,
+        "filter[expand_university]" => true,
       ),
     )
   end
@@ -96,6 +98,7 @@ describe "Suggested salary searches" do
         "filter[latitude]" => 51.4980188,
         "filter[longitude]" => -0.1300436,
         "filter[radius]" => radius,
+        "filter[expand_university]" => true,
       ),
     )
   end

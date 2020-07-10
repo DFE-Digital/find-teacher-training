@@ -9,7 +9,9 @@ FactoryBot.define do
     sequence(:id)
     sequence(:provider_code) { |n| "A#{n}" }
     provider_name { "ACME SCITT #{provider_code}" }
-    accredited_body? { false }
+
+    lead_school
+
     can_add_more_sites? { true }
     courses { [] }
     train_with_us { Faker::Lorem.sentence(word_count: 100) }
@@ -81,6 +83,27 @@ FactoryBot.define do
 
       provider.recruitment_cycle = evaluator.recruitment_cycle
       provider.recruitment_cycle_year = evaluator.recruitment_cycle.year
+
+      provider.provider_type = if provider.accredited_body?
+                                 %w[scitt university].sample
+                               else
+                                 "lead_school"
+                               end
+    end
+
+    trait :lead_school do
+      accredited_body? { false }
+      provider_type { "lead_school" }
+    end
+
+    trait :scitt do
+      accredited_body? { true }
+      provider_type { "scitt" }
+    end
+
+    trait :university do
+      accredited_body? { true }
+      provider_type { "university" }
     end
   end
 end

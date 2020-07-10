@@ -64,6 +64,7 @@ $govuk-image-url-function: frontend-image-url;
 
   > li {
     @include govuk-responsive-padding(4, "top");
+    @include govuk-responsive-padding(4, "bottom");
     border-bottom: 1px solid $govuk-border-colour;
     margin: 0;
   }
