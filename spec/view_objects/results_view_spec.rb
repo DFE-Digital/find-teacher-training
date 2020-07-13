@@ -555,7 +555,7 @@ describe ResultsView do
       build(
         :course,
         site_statuses: site_statuses,
-      )\
+      )
     end
 
     subject do
