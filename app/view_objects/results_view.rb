@@ -95,7 +95,7 @@ class ResultsView
   end
 
   def show_map?
-    latitude.present? && longitude.present? && radius.present?
+    latitude.present? && longitude.present?
   end
 
   def map_image_url
