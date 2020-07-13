@@ -11,19 +11,22 @@ class DeprecatedParametersService
 
   def call
     csharp_parameter_converter = ConvertDeprecatedCsharpParametersService.new.call(parameters: params_hash)
-    { deprecated: csharp_parameter_converter[:deprecated] || have_legacy_params_values, parameters: csharp_parameter_converter[:parameters] }
+    {
+      deprecated: (csharp_parameter_converter[:deprecated] || legacy_params_values?),
+      parameters: csharp_parameter_converter[:parameters],
+    }
   end
 
   private_class_method :new
 
 private
 
-  def have_legacy_params_values
+  def legacy_params_values?
     @have_legacy_params_values ||= parameters.key?("rad") && parameters["rad"] != ResultsView::MILES
   end
 
   def params_hash
-    if have_legacy_params_values
+    if legacy_params_values?
       parameters["rad"] = ResultsView::MILES
 
       if parameters.key? "page"
