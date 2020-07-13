@@ -19,7 +19,7 @@ class DeprecatedParametersService
 private
 
   def legacy_params_values?
-    @have_legacy_params_values ||= original_parameters.key?("rad") && original_parameters["rad"] != ResultsView::MILES
+    @legacy_params_values ||= original_parameters.key?("rad") && original_parameters["rad"] != ResultsView::MILES
   end
 
   def params_hash
