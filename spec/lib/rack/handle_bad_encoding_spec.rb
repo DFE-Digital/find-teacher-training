@@ -4,7 +4,7 @@ describe Rack::HandleBadEncoding do
   let(:app) { double }
   let(:middleware) { described_class.new(app) }
 
-  %w[/location-suggestions /provider-suggestions].each do |path|
+  %w[/location-suggestions /provider-suggestions /results].each do |path|
     context "request path is #{path}" do
       context "query does not contain invalid encodings" do
         it "does not modify the query" do
