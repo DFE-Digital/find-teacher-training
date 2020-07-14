@@ -412,4 +412,22 @@ describe CourseDecorator do
       expect(decorated_course.year_range).to eq("2020 – 2021")
     end
   end
+
+  describe "#placements_heading" do
+    context "when subject is primary" do
+      let(:course) { build(:course) }
+
+      it "returns school placement" do
+        expect(decorated_course.placements_heading).to eq("How school placements work")
+      end
+    end
+
+    context "when further education" do
+      let(:course) { build(:course, :further_education) }
+
+      it "returns teaching placement" do
+        expect(decorated_course.placements_heading).to eq("How teaching placements work")
+      end
+    end
+  end
 end
