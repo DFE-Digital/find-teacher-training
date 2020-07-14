@@ -51,7 +51,7 @@ module ResultFilters
 
     def get_params_for_selected_option(all_params)
       if location_option_selected?
-        all_params.except(:query)
+        all_params.except(:query).merge(rad: ResultsView::MILES)
       elsif across_england_option_selected?
         all_params.except(:lat, :lng, :rad, :loc, :lq, :query, :sortby)
       elsif provider_option_selected?
