@@ -3,14 +3,28 @@ require "rails_helper"
 describe Rack::HandleBadEncoding do
   let(:app) { double }
   let(:middleware) { described_class.new(app) }
+  requests = [
+    {
+      path: "/location-suggestions",
+      malformed_query: "query=%2Flondon%2bot%F",
+    },
+    {
+      path: "/provider-suggestions",
+      malformed_query: "query=%2FOxford%2bot%F",
+    },
+    {
+      path: "/results",
+      malformed_query: "?fulltime=false'&funding=8'&hasvacancies=true'&l=2'&page=10'&parttime=false'&qualifications%5B%5D=QtsOnly'&qualifications%5B%5D=PgdePgceWithQts'&qualifications%5B%5D=Other'&senCourses=false'&subjects%5B%5'%22'",
+    },
+  ]
 
-  %w[/location-suggestions /provider-suggestions /results].each do |path|
-    context "request path is #{path}" do
+  requests.each do |request|
+    context "request path is #{request[:path]}" do
       context "query does not contain invalid encodings" do
         it "does not modify the query" do
-          expect(app).to receive(:call).with("REQUEST_PATH" => path, "QUERY_STRING" => "query=london")
+          expect(app).to receive(:call).with("REQUEST_PATH" => request[:path], "QUERY_STRING" => "query=london")
           middleware.call(
-            "REQUEST_PATH" => path,
+            "REQUEST_PATH" => request[:path],
             "QUERY_STRING" => "query=london",
           )
         end
@@ -18,8 +32,8 @@ describe Rack::HandleBadEncoding do
 
       context "query is absent" do
         it "does not modify the query" do
-          expect(app).to receive(:call).with("REQUEST_PATH" => path)
-          middleware.call("REQUEST_PATH" => path)
+          expect(app).to receive(:call).with("REQUEST_PATH" => request[:path])
+          middleware.call("REQUEST_PATH" => request[:path])
         end
       end
 
@@ -27,27 +41,27 @@ describe Rack::HandleBadEncoding do
         it "modifies the query" do
           expect(app).to receive(:call).with(
             "QUERY_STRING" => "",
-            "REQUEST_PATH" => path,
+            "REQUEST_PATH" => request[:path],
           )
           middleware.call(
-            "QUERY_STRING" => "query=%2Flondon%2bot%Forder%3Ddescending%26page%3D5%26sort%3Dcreated_at",
-            "REQUEST_PATH" => path,
+            "QUERY_STRING" => request[:malformed_query],
+            "REQUEST_PATH" => request[:path],
           )
         end
       end
     end
-  end
 
-  context "request path is not 'location-suggestions' or '/provider-suggestions'" do
-    it "does not modify the query" do
-      expect(app).to receive(:call).with(
-        "QUERY_STRING" => "query=%2Flondon%2bot%Forder%3Ddescending%26page%3D5%26sort%3Dcreated_at",
-        "REQUEST_PATH" => "/foo/bar",
-      )
-      middleware.call(
-        "QUERY_STRING" => "query=%2Flondon%2bot%Forder%3Ddescending%26page%3D5%26sort%3Dcreated_at",
-        "REQUEST_PATH" => "/foo/bar",
-      )
+    context "request path is not #{request[:path]}" do
+      it "does not modify the query" do
+        expect(app).to receive(:call).with(
+          "QUERY_STRING" => request[:malformed_query],
+          "REQUEST_PATH" => "/foo/bar",
+        )
+        middleware.call(
+          "QUERY_STRING" => request[:malformed_query],
+          "REQUEST_PATH" => "/foo/bar",
+        )
+      end
     end
   end
 end
