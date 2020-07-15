@@ -123,6 +123,14 @@ class CourseDecorator < Draper::Decorator
     "#{object.recruitment_cycle_year} – #{object.recruitment_cycle_year.to_i + 1}"
   end
 
+  def placements_heading
+    if further_education?
+      "How teaching placements work"
+    else
+      "How school placements work"
+    end
+  end
+
 private
 
   def find_max(attribute)

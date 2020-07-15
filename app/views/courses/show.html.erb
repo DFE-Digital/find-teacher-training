@@ -58,7 +58,7 @@
           <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
         <% end %>
         <% if course.how_school_placements_work.present? %>
-          <li><%= link_to 'How school placements work', '#section-schools', class: 'govuk-link' %></li>
+          <li><%= link_to course.placements_heading, '#section-schools', class: 'govuk-link' %></li>
         <% end %>
         <% if course.has_fees? %>
           <li><%= link_to 'Fees', '#section-fees', class: 'govuk-link' %></li>
