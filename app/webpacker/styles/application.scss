@@ -21,6 +21,7 @@ $govuk-image-url-function: frontend-image-url;
 @import "patterns/definition-list";
 @import "patterns/filters";
 @import "patterns/pagination";
+@import "patterns/text-ellipsis";
 
 .govuk-list--dash {
   margin-bottom: govuk-spacing(8);

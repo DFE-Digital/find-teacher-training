@@ -6,7 +6,7 @@
   <%= (number_of_sites > 1) ? "Nearest location" :  "Location"%>
 </dt>
 <dd>
-  <%= "#{pluralize(@results_view.site_distance(course), 'mile')} from you" %> 
+  <%= "#{pluralize(@results_view.site_distance(course), 'mile')} from you" %>
   <% if number_of_sites > 1 %>
     <div class="govuk-!-margin-top-0">
       (Nearest of <%= number_of_sites %> locations to choose from)
@@ -17,5 +17,7 @@
   <% if nearest_location_name != "Main Site" %>
     <%= nearest_location_name %><br />
   <% end %>
-  <%= nearest_address %>
+  <div class="app-text-ellipsis">
+    <%= nearest_address %>
+  </div>
 </dd>
