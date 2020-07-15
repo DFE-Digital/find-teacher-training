@@ -10,7 +10,7 @@ class ResultsView
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
   RESULTS_PER_PAGE = 10
-  ALL_RADII = %w[5 10 20 50 100].freeze
+  MILES = "50".freeze
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
@@ -87,7 +87,7 @@ class ResultsView
   end
 
   def radius
-    ALL_RADII.include?(query_parameters["rad"]) ? query_parameters["rad"] : "20"
+    MILES
   end
 
   def sort_by
@@ -95,7 +95,7 @@ class ResultsView
   end
 
   def show_map?
-    latitude.present? && longitude.present? && radius.present?
+    latitude.present? && longitude.present?
   end
 
   def map_image_url
@@ -133,16 +133,10 @@ class ResultsView
   end
 
   def sort_options
-    if location_filter?
-      [
-        ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-        ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
-        ["Distance", 2, { "data-qa": "sort-form__options__distance" }],
-      ]
-    else
-      [["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-       ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }]]
-    end
+    [
+      ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
+      ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
+    ]
   end
 
   def courses
@@ -356,20 +350,7 @@ private
   end
 
   def google_map_zoom
-    case radius
-    when "5"
-      "12"
-    when "10"
-      "11"
-    when "20"
-      "10"
-    when "50"
-      "9"
-    when "100"
-      "8"
-    else
-      "14"
-    end
+    "9"
   end
 
   def study_type
@@ -434,7 +415,7 @@ private
 
   def radii_for_suggestions
     radius_for_all_england = nil
-    [10, 20, 50].reject { |rad| rad <= radius.to_i } << radius_for_all_england
+    [50].reject { |rad| rad <= radius.to_i } << radius_for_all_england
   end
 
   def suggested_search_link_including_unsalaried(current_radius:)

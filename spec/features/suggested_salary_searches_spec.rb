@@ -114,151 +114,6 @@ describe "Suggested salary searches" do
   end
 
   context "with 0 results" do
-    context "and the initial search was filtered to a 5 mile radius" do
-      before do
-        stub_results_with_salary_filter(radius: 5, number_of_results: 0)
-      end
-
-      context "with courses available that are non-salaried with the same radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 5, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 10, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the same radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 5))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 5 miles")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 5 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 10 miles with a salary")
-        end
-      end
-
-      context "with courses available that are non-salaried with a larger radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 5, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 10, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 10, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the larger radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 5))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 10 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 10 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 10 miles with a salary")
-        end
-      end
-
-      context "no courses are found in the suggested searches" do
-        before do
-          stub_suggested_without_salary_filter(radius: 5, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 10, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 20, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 50, number_of_results: 0)
-          stub_suggested_across_england_without_salary_filter(number_of_results: 0)
-
-          stub_suggested_with_salary_filter(radius: 5, number_of_results: 0)
-          stub_suggested_with_salary_filter(radius: 10, number_of_results: 0)
-          stub_suggested_with_salary_filter(radius: 20, number_of_results: 0)
-          stub_suggested_with_salary_filter(radius: 50, number_of_results: 0)
-          stub_suggested_across_england_with_salary_filter(number_of_results: 0)
-        end
-
-        it "doesn't show the link if" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 5))
-
-          expect(results_page).not_to have_suggested_search_links
-        end
-      end
-    end
-
-    context "and the initial search was filtered to a 10 mile radius" do
-      before do
-        stub_results_with_salary_filter(radius: 10, number_of_results: 0)
-      end
-
-      context "with courses available that are non-salaried with the same radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 10, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 20, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the same radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 10))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 10 miles")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 10 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 20 miles with a salary")
-        end
-      end
-
-      context "with courses available that are non-salaried with a larger radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 10, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 20, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 20, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the larger radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 10))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 20 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 20 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 20 miles with a salary")
-        end
-      end
-    end
-
-    context "and the initial search was filtered to a 20 mile radius" do
-      before do
-        stub_results_with_salary_filter(radius: 20, number_of_results: 0)
-      end
-
-      context "with courses available that are non-salaried with the same radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 20, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 50, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the same radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 20))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 20 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 20 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 50 miles with a salary")
-        end
-      end
-
-      context "with courses available that are non-salaried with a larger radius and salaried in a larger radius" do
-        before do
-          stub_suggested_without_salary_filter(radius: 20, number_of_results: 0)
-          stub_suggested_without_salary_filter(radius: 50, number_of_results: 4)
-          stub_suggested_with_salary_filter(radius: 50, number_of_results: 10)
-        end
-
-        it "displays a suggested search for the non-salaried courses with the larger radius first followed with salaried in a larger radius" do
-          search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 20))
-
-          expect(results_page.suggested_search_heading.text).to eq("Suggested searches")
-          expect(results_page.suggested_search_description.text).to eq("You can find:")
-          expect(results_page.suggested_search_links.first.text).to eq("4 courses within 50 miles - including both salaried courses and ones without a salary")
-          expect(results_page.suggested_search_links.first.link.text).to eq("4 courses within 50 miles")
-          expect(results_page.suggested_search_links.last.text).to eq("10 courses within 50 miles with a salary")
-        end
-      end
-    end
-
     context "and the initial search was filtered to a 50 mile radius" do
       before do
         stub_results_with_salary_filter(radius: 50, number_of_results: 0)
@@ -303,11 +158,11 @@ describe "Suggested salary searches" do
 
   context "with more than 2 results" do
     before do
-      stub_results_with_salary_filter(radius: 5, number_of_results: 10)
+      stub_results_with_salary_filter(radius: 50, number_of_results: 10)
     end
 
     it "does not show the suggested searches" do
-      search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 5))
+      search_for_salaried_courses_with_query_params(default_query_for_location_search(radius: 50))
       expect(results_page).not_to have_suggested_search_links
     end
   end

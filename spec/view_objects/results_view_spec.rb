@@ -258,22 +258,8 @@ describe ResultsView do
   describe "#radius" do
     subject { described_class.new(query_parameters: parameter_hash).radius }
 
-    context "when rad is passed" do
-      let(:parameter_hash) { { "rad" => "10" } }
-
-      it { is_expected.to eq("10") }
-    end
-
-    context "when an unapproved rad is passed" do
-      let(:parameter_hash) { { "rad" => "11" } }
-
-      it { is_expected.to eq("20") }
-    end
-
-    context "when rad is not passed" do
-      let(:parameter_hash) { {} }
-      it { is_expected.to eq("20") }
-    end
+    let(:parameter_hash) { {} }
+    it { is_expected.to eq("50") }
   end
 
   describe "#show_map?" do
@@ -335,7 +321,7 @@ describe ResultsView do
       allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return("https://maps.googleapis.com/maps/api/staticmap")
     end
 
-    it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=11&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
+    it { is_expected.to eq("https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=9&size=300x200&scale=2&markers=-109.3042697,-27.1504002") }
   end
 
   describe "#provider" do
@@ -489,7 +475,7 @@ describe ResultsView do
       end
 
       describe "#suggested_search_visible?" do
-        subject { described_class.new(query_parameters: { "lat" => "0.1", "lng" => "2.4", "rad" => "5" }).suggested_search_visible? }
+        subject { described_class.new(query_parameters: { "lat" => "0.1", "lng" => "2.4", "rad" => "50" }).suggested_search_visible? }
 
         def suggested_search_count_parameters
           results_page_parameters.reject do |k, _v|
@@ -519,14 +505,9 @@ describe ResultsView do
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
+
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/four_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
+                .with(query: suggested_search_count_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/ten_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
@@ -542,24 +523,6 @@ describe ResultsView do
                 .with(query: results_page_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 10, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 20, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
-                  headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
-                )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
-                .with(query: suggested_search_count_parameters.merge("filter[latitude]" => 0.1, "filter[longitude]" => 2.4, "filter[radius]" => 50, "filter[expand_university]" => true))
-                .to_return(
-                  body: File.new("spec/fixtures/api_responses/empty_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
               stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
@@ -769,19 +732,6 @@ describe ResultsView do
   end
 
   describe "#sort_options" do
-    context "location query" do
-      subject { described_class.new(query_parameters: { "l" => "1" }).sort_options }
-      it {
-        is_expected.to eq(
-          [
-            ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-            ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
-            ["Distance", 2, { "data-qa": "sort-form__options__distance" }],
-          ],
-        )
-      }
-    end
-
     context "all other queries" do
       subject { described_class.new(query_parameters: {}).sort_options }
       it {

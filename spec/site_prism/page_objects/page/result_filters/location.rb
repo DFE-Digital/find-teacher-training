@@ -19,7 +19,6 @@ module PageObjects
         element :by_postcode_town_or_city, '[data-qa="by_postcode_town_or_city"]'
         element :location_query, '[data-qa="location-query"]'
         element :unknown_location, 'input[value="Unknown location"]'
-        element :search_radius, '[data-qa="search-radius"]'
       end
     end
   end
