@@ -43,3 +43,5 @@ terraform.tfstate.d/
 ./*.tfstate
 lock.json
 
+## sanatised production data
+*.sql.gz
