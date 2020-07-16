@@ -633,6 +633,23 @@ describe ResultsView do
         expect(results_view.site_distance(course)).to eq(0.1)
       end
     end
+
+    context "closest site distance is less than 0.05 miles" do
+      let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+
+      it "calculates the distance to the closest site, rounding up to prevent 0.0 miles displaying" do
+        site1 = build(:site, latitude: 51.4970, longitude: 0.1358, address1: "1 Foo Street", postcode: "BAA0NE")
+
+        course = build(
+          :course,
+          site_statuses: [
+            build(:site_status, :full_time_and_part_time, site: site1),
+          ],
+        )
+
+        expect(results_view.site_distance(course)).to eq(0.1)
+      end
+    end
   end
 
   context "locations" do

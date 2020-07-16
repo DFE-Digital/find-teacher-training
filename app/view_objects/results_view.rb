@@ -172,7 +172,9 @@ class ResultsView
 
     min_distance = distances.min
 
-    if min_distance && min_distance < 1
+    if min_distance && min_distance < 0.05
+      min_distance.ceil(1)
+    elsif min_distance && min_distance < 1
       min_distance.round(1)
     else
       min_distance.round(0)
