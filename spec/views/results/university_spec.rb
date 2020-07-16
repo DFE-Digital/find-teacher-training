@@ -111,5 +111,30 @@ describe "results/university.html.erb", type: :view do
         expect(html).to have_css("span.govuk-details__summary-text", text: "Placement schools might be in commuting distance")
       end
     end
+
+    context "course has two locations" do
+      let(:site2) do
+        build(
+          :site,
+          **lat_lon,
+          address1: "3 Beech Rd",
+          address2: "Billericay",
+          address3: "Essex",
+          address4: "UK",
+          postcode: "CM12 5YF",
+        )
+      end
+
+      let(:site_statuses) do
+        [
+          build(:site_status, :full_time_and_part_time, site: site1),
+          build(:site_status, :full_time_and_part_time, site: site2),
+        ]
+      end
+
+      it "renders '(Nearest of 2 locations to choose from)'" do
+        expect(html).to match("(Nearest of 2 locations to choose from)")
+      end
+    end
   end
 end
