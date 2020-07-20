@@ -22,7 +22,7 @@ RSpec.describe CoursesController do
 
     it "redirects to correct apply destination" do
       get :apply, params: { provider_code: course.provider_code, course_code: course.course_code }
-      expect(response).to redirect_to("https://www.apply-for-teacher-training.education.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}")
+      expect(response).to redirect_to("https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}")
     end
 
     context "a course from University of Bolton" do
