@@ -28,7 +28,7 @@ FactoryBot.define do
     latitude { nil }
     longitude { nil }
     recruitment_cycle_year { "2019" }
-    last_published_at { DateTime.new(2019).utc.iso8601 }
+    last_published_at { Time.zone.local(2019).utc.iso8601 }
     content_status { "Published" }
     utt_contact do
       {
