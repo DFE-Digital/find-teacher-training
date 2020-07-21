@@ -25,7 +25,7 @@ FactoryBot.define do
     qualification { "pgce_with_qts" }
     start_date     { Time.zone.local(2019) }
     funding_type { "fee" }
-    applications_open_from { DateTime.new(2019).utc.iso8601 }
+    applications_open_from { Time.zone.local(2019).utc.iso8601 }
     is_send? { false }
     level { :secondary }
     about_course { nil }
@@ -40,7 +40,7 @@ FactoryBot.define do
     required_qualifications { nil }
     personal_qualities { nil }
     other_requirements { nil }
-    last_published_at { DateTime.new(2019).utc.iso8601 }
+    last_published_at { Time.zone.local(2019).utc.iso8601 }
     has_scholarship_and_bursary? { nil }
     has_bursary? { nil }
     has_early_career_payments? { nil }
