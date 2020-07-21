@@ -26,3 +26,9 @@ Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
   Enabled: true
+
+
+# rubocop-govuk 3.17.0 started to enforce this but no active record is actually in use
+# https://github.com/alphagov/rubocop-govuk/commit/c4a4329d5e44dc98b24f1d344a3532054b1539e0
+Rails/SaveBang:
+  Enabled: false
