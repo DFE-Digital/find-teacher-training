@@ -1,4 +1,6 @@
-describe ConvertDeprecatedCsharpParametersService do
+require "rails_helper"
+
+RSpec.describe ConvertDeprecatedCsharpParametersService do
   let(:service) { described_class.new }
   let(:service_call) { service.call(parameters: input_parameters) }
 
@@ -26,6 +28,34 @@ describe ConvertDeprecatedCsharpParametersService do
         "senCourses" => true,
         "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
         "subjects" => %w[1 2 3],
+      })
+    end
+  end
+
+  context "given deprecated parameters" do
+    let(:input_parameters) do
+      {
+        "fulltime" => "True",
+        "hasvacancies" => "True",
+        "parttime" => "True",
+        "senCourses" => "True",
+        "qualifications" => "QtsOnly,PgdePgceWithQts,Other",
+        "subjects" => { "0" => "27" }.with_indifferent_access,
+      }
+    end
+
+    it "flags that the parameters are deprecated" do
+      expect(service_call[:deprecated]).to eq(true)
+    end
+
+    it "returns the correct parameters" do
+      expect(service_call[:parameters]).to eq({
+        "fulltime" => true,
+        "hasvacancies" => true,
+        "parttime" => true,
+        "senCourses" => true,
+        "qualifications" => %w[QtsOnly PgdePgceWithQts Other],
+        "subjects" => %w[27],
       })
     end
   end

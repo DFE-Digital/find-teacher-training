@@ -39,7 +39,11 @@ private
   end
 
   def legacy_to_rails_array(array)
-    array.split(",")
+    if array.instance_of?(String)
+      array.split(",")
+    elsif array.is_a?(Hash)
+      array.values
+    end
   end
 
   def legacy_to_rails_boolean(boolean)
