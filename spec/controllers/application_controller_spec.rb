@@ -17,6 +17,15 @@ describe ApplicationController, type: :controller do
     end
   end
 
+  describe "#assign_sentry_contexts" do
+    it "assigns a request id to Sentry tags" do
+      allow(Raven).to receive(:tags_context).and_return({})
+      controller.__send__(:store_request_id)
+      controller.__send__(:assign_sentry_contexts)
+      expect(Raven).to have_received(:tags_context).with(request_id: request_uuid)
+    end
+  end
+
   describe "#append_info_to_payload" do
     it "sets the request_id in the payload to the request uuid" do
       payload = {}
