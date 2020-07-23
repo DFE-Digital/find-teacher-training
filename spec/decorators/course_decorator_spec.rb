@@ -409,7 +409,7 @@ describe CourseDecorator do
 
   describe "#year_range" do
     it "returns correct year range" do
-      expect(decorated_course.year_range).to eq("2020 – 2021")
+      expect(decorated_course.year_range).to eq("2020 to 2021")
     end
   end
 
