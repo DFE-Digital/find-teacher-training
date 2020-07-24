@@ -120,7 +120,7 @@ class CourseDecorator < Draper::Decorator
   end
 
   def year_range
-    "#{object.recruitment_cycle_year} – #{object.recruitment_cycle_year.to_i + 1}"
+    "#{object.recruitment_cycle_year} to #{object.recruitment_cycle_year.to_i + 1}"
   end
 
   def placements_heading
