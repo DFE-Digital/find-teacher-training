@@ -39,13 +39,10 @@
               <%= form.label :qualifications, value: "QtsOnly", class: "govuk-label govuk-checkboxes__label" do %>
                 <span class="govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-display-block">QTS only</span>
                 <p class="govuk-body">
-                  QTS (qualified teacher status) allows you to teach in state schools in England.
+                  QTS (qualified teacher status) allows you to teach in state schools in England and may allow you to teach in other parts of the UK.
                 </p>
                 <p class="govuk-body">
-                  It may also allow you to teach in <%= link_to "the EU, the EEA and Switzerland", "https://www.gov.uk/eu-eea", class: "govuk-link" %>. You should check with the institution you’d like to teach in for confirmation. The status of QTS in these countries may change after the UK leaves the EU. Please check <%= link_to "GOV.UK", "https://www.gov.uk", class: "govuk-link" %> for updates.
-                </p>
-                <p class="govuk-body">
-                  To teach in the rest of the UK or internationally, you may wish to consider a ‘PGCE (or PGDE) with QTS’ qualification instead.
+                  It may also allow you to teach in <%= link_to "the EEA and EEA", "https://www.gov.uk/eu-eea", class: "govuk-link" %>, though this could change after 2020. If you&rsquo;re planning to teach overseas, you should always check what’s needed in the country you&rsquo;d like to teach in.
                 </p>
               <% end %>
             </div>
@@ -67,10 +64,13 @@
               <%= form.label :qualifications, value: "PgdePgceWithQts", class: "govuk-label govuk-checkboxes__label" do %>
                 <span class="govuk-!-font-weight-bold govuk-!-margin-bottom-2 govuk-!-display-block">PGCE (or PGDE) with QTS</span>
                 <p class="govuk-body">
-                  A PGCE (postgraduate certificate in education) with QTS allows you to teach in England, Scotland, Wales and Northern Ireland. It’s also recognised internationally. Many PGCE courses include credits that count towards a Master’s degree.
+                  A PGCE (postgraduate certificate in education) is an academic qualification in education. PGCE with QTS allows you to teach in state schools in England and may allow you to teach in other parts of the UK.
                 </p>
                 <p class="govuk-body">
-                  Some providers offer a PGDE (postgraduate diploma in education) with QTS, which is equivalent to a PGCE. In some cases these courses offer more credits towards a Master’s degree than PGCE courses.
+                  It may also allow you to teach in <%= link_to "the EEA and EEA", "https://www.gov.uk/eu-eea", class: "govuk-link" %>, though this could change after 2020. If you&rsquo;re planning to teach overseas, you should always check what&rsquo;s needed in the country you&rsquo;d like to teach in.
+                </p>
+                <p class="govuk-body">
+                  Many PGCE courses include credits towards a Master&rsquo;s degree. Some providers offer a PGDE (postgraduate diploma in education) with QTS, which is equivalent to a PGCE. In some cases these offer more Master&rsquo;s credits than PGCE courses.
                 </p>
               <% end %>
             </div>
