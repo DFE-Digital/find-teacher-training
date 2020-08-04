@@ -8,7 +8,7 @@
     "yarn": "^1.22.4"
   },
   "devDependencies": {
-    "jest": "^26.2.1",
+    "jest": "^26.2.2",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
