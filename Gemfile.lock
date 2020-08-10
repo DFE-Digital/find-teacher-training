@@ -156,7 +156,7 @@ GEM
     faraday_middleware (0.13.1)
       faraday (>= 0.7.4, < 1.0)
     ffi (1.12.2)
-    foreman (0.87.1)
+    foreman (0.87.2)
     geocoder (1.6.3)
     geokit (1.13.1)
     globalid (0.4.2)
