@@ -1,5 +1,7 @@
 # https://docs.sentry.io/clients/ruby/config
 Raven.configure do |config|
+  config.silence_ready = true
+
   # > Inspect an incoming exception's causes when determining whether or not that
   # exception should be excluded
   #
