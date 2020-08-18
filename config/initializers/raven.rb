@@ -12,5 +12,6 @@ Raven.configure do |config|
 
   config.excluded_exceptions += [
     "JsonApiClient::Errors::ConnectionError",
+    "Mime::Type::InvalidMimeType",
   ]
 end
