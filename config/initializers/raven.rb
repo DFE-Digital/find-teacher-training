@@ -11,6 +11,7 @@ Raven.configure do |config|
   config.inspect_exception_causes_for_exclusion = true
 
   config.excluded_exceptions += [
+    "ActionController::BadRequest",
     "JsonApiClient::Errors::ConnectionError",
     "Mime::Type::InvalidMimeType",
   ]
