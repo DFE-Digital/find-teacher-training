@@ -10,7 +10,7 @@ RSpec.describe ResultFilters::SubjectController do
                "Accept" => "application/vnd.api+json",
                "Accept-Encoding" => "gzip,deflate",
                "Content-Type" => "application/vnd.api+json",
-               "User-Agent" => "Faraday v0.17.3",
+               "User-Agent" => /^Faraday/,
              },
            ).to_return(status: 200, body: "", headers: {})
 
