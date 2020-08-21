@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
       .find(params[:course_code])
       .first
   rescue JsonApiClient::Errors::NotFound
-    render file: "errors/not_found", status: :not_found
+    render file: "errors/not_found", status: :not_found, formats: [:html]
   end
 
   def apply
