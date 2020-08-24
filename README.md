@@ -30,7 +30,7 @@ bundle exec rspec
 
 ## Deploying
 
-- Go to [Find Postgraduate Teacher Training release pipeline](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_release?_a=releases&view=mine&definitionId=36) in Azure DevOps
+- Go to [Find Postgraduate Teacher Training release pipeline](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_release?_a=releases&view=mine&definitionId=30) in Azure DevOps
 - Find the release you want to deploy and note the commit SHA:
   - It’s the first one where first 2 squares in Stages column are green (QA succeeded)
   - Branch has to be master
