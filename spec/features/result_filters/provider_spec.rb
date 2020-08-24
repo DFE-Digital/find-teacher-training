@@ -141,9 +141,9 @@ feature "Provider filter", type: :feature do
       provider_filter_page.load(query: query_params)
     end
     it "has a form with which to search again" do
-      provider_filter_page.search.expand.click
-      provider_filter_page.search.input.fill_in(with: "ACME SCITT")
-      provider_filter_page.search.submit.click
+      provider_filter_page.search_expand.click
+      provider_filter_page.search_input.fill_in(with: "ACME SCITT")
+      provider_filter_page.search_submit.click
 
       expect(current_path).to eq(provider_filter_page.url)
       expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
