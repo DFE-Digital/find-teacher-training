@@ -1,9 +1,9 @@
 alerts =  {
 ftt = {
     website_name = "qa-find-postgraduate-teacher-training"
-    website_url   = "https://www.qa.find-postgraduate-teacher-training.service.gov.uk/healthcheck"
+    website_url   = "https://www.qa.find-postgraduate-teacher-training.service.gov.uk/ping"
     test_type     = "HTTP"
-    check_rate    = 300
+    check_rate    = 60
     contact_group = [151103]
     trigger_rate  = 0
     custom_header = "{\"Content-Type\": \"application/x-www-form-urlencoded\"}"
