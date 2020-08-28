@@ -1,4 +1,4 @@
-<%= content_for :page_title, "#{@results_view.number_of_courses_string}" %>
+<%= content_for :page_title, "#{@number_of_courses_string}" %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
@@ -103,7 +103,7 @@
       </div>
     <% end %>
     <ul class="govuk-list search-results">
-      <% @results_view.courses.each do |course| %>
+      <% @courses.each do |course| %>
         <li data-qa="course">
           <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
             <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
@@ -145,6 +145,6 @@
         </li>
       <% end %>
     </ul>
-    <%= paginate(@results_view.courses, total_pages: @results_view.total_pages) %>
+    <%= paginate(@courses, total_pages: @results_view.total_pages) %>
   </div>
 </div>
