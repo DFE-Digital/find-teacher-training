@@ -6,4 +6,6 @@ class PagesController < ApplicationController
   def privacy; end
 
   def accessibilty; end
+
+  def cycle_has_ended; end
 end
