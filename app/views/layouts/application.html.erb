@@ -72,23 +72,32 @@
       </main>
     </div>
 
-    <footer class="govuk-footer " role="contentinfo">
+    <footer class="govuk-footer govuk-!-display-none-print" role="contentinfo">
       <div class="govuk-width-container">
-
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-two-thirds govuk-footer__content-container">
-            <p class="govuk-footer__content">
-              For personalised support and advice about teacher training, register with <%= link_to "Get Into Teaching", "https://getintoteaching.education.gov.uk/", class: "govuk-footer__link" %>. You can also call them free of charge on 0800 389 2500, or speak to an adviser using their <%= link_to "online chat service", "https://getintoteaching.education.gov.uk/lp/live-chat", class: "govuk-footer__link" %>, from 8am to 8pm, Monday to Friday.
-            </p>
-          </div>
-        </div>
-
         <div class="govuk-footer__meta">
           <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+            <h2 class="govuk-heading-m">Get support</h2>
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-one-half">
+                <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Telephone</h2>
+                <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16">
+                  <li>0800 389 2500</li>
+                  <li>Monday to Friday, 8.30am to 5pm (except public&nbsp;holidays)</li>
+                  <li>Free of charge</li>
+                </ul>
+              </div>
+              <div class="govuk-grid-column-one-half">
+                <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Online chat</h2>
+                <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-8">
+                  <li><%= link_to "Talk to an adviser online", "https://getintoteaching.education.gov.uk/lp/live-chat", class: "govuk-footer__link" %></li>
+                  <li>Monday to Friday, 8.30am to 5pm (except public&nbsp;holidays)</li>
+                </ul>
+              </div>
+            </div>
             <h2 class="govuk-visually-hidden">Support links</h2>
-            <ul class="govuk-footer__inline-list">
+            <ul class="govuk-footer__inline-list govuk-!-margin-bottom-0">
               <li class="govuk-footer__inline-list-item">
-                <%= mail_to "becomingateacher@digital.education.gov.uk", "Give feedback or report a problem", class: "govuk-footer__link" %>
+                <%= link_to "Accessibility", accessibility_path, class: "govuk-footer__link" %>
               </li>
               <li class="govuk-footer__inline-list-item">
                 <%= link_to "Cookies", cookie_preferences_path, class: "govuk-footer__link" %>
@@ -97,15 +106,12 @@
                 <%= link_to "Privacy policy", privacy_path, class: "govuk-footer__link" %>
               </li>
               <li class="govuk-footer__inline-list-item">
-                <%= link_to "Accessibility", accessibility_path, class: "govuk-footer__link" %>
-              </li>
-              <li class="govuk-footer__inline-list-item">
                 <%= link_to "Terms and conditions", terms_path, class: "govuk-footer__link" %>
               </li>
             </ul>
           </div>
           <div class="govuk-footer__meta-item">
-            <a class="govuk-footer__link govuk-footer__copyright-logo" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
+            <a class="govuk-footer__link govuk-footer__copyright-logo govuk-!-margin-bottom-1" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
           </div>
         </div>
       </div>
