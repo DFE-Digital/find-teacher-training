@@ -315,11 +315,11 @@
               },
               {
                 "name": "SETTINGS__CYCLE_HAS_ENDED",
-                "value": "[parameters('settingsCycleHasEnded']"
+                "value": "[parameters('settingsCycleHasEnded')]"
               },
               {
                 "name": "SETTINGS__DISABLE_APPLY_BUTTON",
-                "value":  "[parameters('settingsDisableApplyButton)]",
+                "value":  "[parameters('settingsDisableApplyButton')]"
               }
             ]
           },
