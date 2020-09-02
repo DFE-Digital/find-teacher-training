@@ -19,4 +19,6 @@ logstash:
   ssl_enable: true
 log_level: info
 commit_sha_file: COMMIT_SHA
-cycle_has_ended: false
+cycle_has_ended:
+cycle_ending_soon:
+disable_apply_button:

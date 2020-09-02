@@ -144,6 +144,28 @@
       "metadata": {
         "description": "API Key for Google Geocode"
       }
+    },
+    "settingsCycleEndingSoon": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When true, requests to '/' will be redirected to '/cycle-ending-soon"
+      }
+    },
+    "settingsCycleHasEnded": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "When true, requests to root, search, results and course pages will be redirected to '/cycle-has-ended"
+      }
+
+    },
+    "settingsDisableApplyButton": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Disables the 'apply' button on course pages"
+      }
     }
   },
   "variables": {
@@ -286,6 +308,18 @@
               {
                 "name": "SETTINGS__GOOGLE__GCP_API_KEY",
                 "value": "[parameters('settingsGoogleGeocodeAPIKey')]"
+              },
+              {
+                "name": "SETTTINGS__CYCLE_ENDING_SOON",
+                "value": "[parameters('settingsCycleEndingSoon')]"
+              },
+              {
+                "name": "SETTINGS__CYCLE_HAS_ENDED",
+                "value": "[parameters('settingsCycleHasEnded']"
+              },
+              {
+                "name": "SETTINGS__DISABLE_APPLY_BUTTON",
+                "value":  "[parameters('settingsDisableApplyButton)]",
               }
             ]
           },
