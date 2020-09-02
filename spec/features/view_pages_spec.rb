@@ -18,6 +18,6 @@ RSpec.feature "View pages", type: :feature do
   scenario "Navigate to terms" do
     visit terms_path
 
-    expect(page).to have_text("Terms and Conditions")
+    expect(page).to have_text("Terms and conditions")
   end
 end
