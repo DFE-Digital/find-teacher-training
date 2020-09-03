@@ -160,11 +160,11 @@
       }
 
     },
-    "settingsDisableApplyButton": {
+    "settingsDisplayApplyButton": {
       "type": "bool",
-      "defaultValue": false,
+      "defaultValue": true,
       "metadata": {
-        "description": "Disables the 'apply' button on course pages"
+        "description": "Displays the 'apply for this course' button on course pages"
       }
     }
   },
@@ -319,7 +319,7 @@
               },
               {
                 "name": "SETTINGS__DISABLE_APPLY_BUTTON",
-                "value":  "[parameters('settingsDisableApplyButton')]"
+                "value":  "[parameters('settingsDisplayApplyButton')]"
               }
             ]
           },
