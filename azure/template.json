@@ -318,7 +318,7 @@
                 "value": "[parameters('settingsCycleHasEnded')]"
               },
               {
-                "name": "SETTINGS__DISABLE_APPLY_BUTTON",
+                "name": "SETTINGS__DISPLAY_APPLY_BUTTON",
                 "value":  "[parameters('settingsDisplayApplyButton')]"
               }
             ]
