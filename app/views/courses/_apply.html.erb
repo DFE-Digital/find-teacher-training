@@ -6,12 +6,14 @@
   <h2 class="govuk-heading-l" id="section-apply">Apply</h2>
 
   <% if @course.has_vacancies? %>
-    <p class="govuk-body">
-      <%= link_to "Apply for this course", apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
-                  class: "govuk-button govuk-button--start",
-                  data: { qa: 'course__apply_link' },
-                  rel: "nofollow" %>
-    </p>
+    <% if Settings.display_apply_button %>
+      <p class="govuk-body">
+        <%= link_to "Apply for this course", apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
+                    class: "govuk-button govuk-button--start",
+                    data: { qa: 'course__apply_link' },
+                    rel: "nofollow" %>
+      </p>
+    <% end %>
 
     <h3 class="govuk-heading-m">Choose a training location</h3>
     <p class="govuk-body">You’ll also need to choose a training location – select the relevant location name on the application form.</p>

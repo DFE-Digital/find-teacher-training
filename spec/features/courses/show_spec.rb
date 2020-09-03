@@ -242,6 +242,17 @@ feature "Course show", type: :feature do
 
       expect(course_page).not_to have_content("When you apply you’ll need these codes for the Choices section of your application form")
     end
+
+    context "End of cycle" do
+      before do
+        allow(Settings).to receive(:display_apply_button).and_return(false)
+        visit course_path(course.provider_code, course.course_code)
+      end
+
+      it "does not display the 'apply for this course' button" do
+        expect(course_page).not_to have_apply_link
+      end
+    end
   end
 
   describe "Showing the back button" do
