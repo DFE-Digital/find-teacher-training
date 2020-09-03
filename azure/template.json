@@ -158,7 +158,6 @@
       "metadata": {
         "description": "When true, requests to root, search, results and course pages will be redirected to '/cycle-has-ended"
       }
-
     },
     "settingsDisplayApplyButton": {
       "type": "bool",
@@ -310,7 +309,7 @@
                 "value": "[parameters('settingsGoogleGeocodeAPIKey')]"
               },
               {
-                "name": "SETTTINGS__CYCLE_ENDING_SOON",
+                "name": "SETTINGS__CYCLE_ENDING_SOON",
                 "value": "[parameters('settingsCycleEndingSoon')]"
               },
               {
