@@ -13,10 +13,23 @@
                     data: { qa: 'course__apply_link' },
                     rel: "nofollow" %>
       </p>
+    <% else %>
+      <div data-qa="course__end_of_cycle_notice">
+        <p class="govuk-body">
+          Applications for this academic year (2020 to 2021) are now closed.
+        </p>
+        <p class="govuk-body">
+          Come back from 6 October 2020 to find out if this course is available for the next academic year.
+        </p>
+      </div>
     <% end %>
 
-    <h3 class="govuk-heading-m">Choose a training location</h3>
-    <p class="govuk-body">You’ll also need to choose a training location – select the relevant location name on the application form.</p>
+    <% if Settings.display_apply_button %>
+      <h3 class="govuk-heading-m">Choose a training location</h3>
+      <p class="govuk-body" data-qa="course__training_location_guidance">You’ll also need to choose a training location – select the relevant location name on the application form.</p>
+    <% else %>
+      <h3 class="govuk-heading-m">Training locations</h3>
+    <% end %>
 
     <div id="locations-map" class="app-google-map" data-qa="course__locations_map"></div>
 

@@ -241,6 +241,10 @@ feature "Course show", type: :feature do
       expect(course_page.apply_link[:href]).to eq("/course/T92/X130/apply")
 
       expect(course_page).not_to have_content("When you apply you’ll need these codes for the Choices section of your application form")
+
+      expect(course_page).not_to have_end_of_cycle_notice
+
+      expect(course_page).to have_training_location_guidance
     end
 
     context "End of cycle" do
@@ -251,6 +255,8 @@ feature "Course show", type: :feature do
 
       it "does not display the 'apply for this course' button" do
         expect(course_page).not_to have_apply_link
+        expect(course_page).to have_end_of_cycle_notice
+        expect(course_page).not_to have_training_location_guidance
       end
     end
   end
