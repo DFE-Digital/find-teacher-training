@@ -44,6 +44,8 @@ module PageObjects
       element :locations_map, "[data-qa=course__locations_map]"
       element :apply_link, "a[data-qa=course__apply_link]"
       element :back_link, "[data-qa=page-back]"
+      element :end_of_cycle_notice, "[data-qa=course__end_of_cycle_notice]"
+      element :training_location_guidance, "[data-qa=course__training_location_guidance]"
     end
   end
 end
