@@ -145,16 +145,42 @@ feature "Location filter", type: :feature do
     end
 
     describe "when using the wizard" do
-      it "progresses to next step instead of going straight to results" do
-        start_page.load
-        start_page.by_postcode_town_or_city.click
-        start_page.location_query.fill_in(with: "SW1P 3BT")
-        start_page.find_courses.click
+      context "within cycle" do
+        context "valid search" do
+          it "progresses to next step instead of going straight to results" do
+            start_page.load
+            start_page.by_postcode_town_or_city.click
+            start_page.location_query.fill_in(with: "SW1P 3BT")
+            start_page.find_courses.click
 
-        URI(current_url).then do |uri|
-          expect(uri.path).to eq("/start/subject")
-          expect(uri.query)
-            .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2")
+            URI(current_url).then do |uri|
+              expect(uri.path).to eq("/start/subject")
+              expect(uri.query)
+                .to eq("l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2")
+            end
+          end
+        end
+
+        context "no option selected" do
+          it "displays an error" do
+            start_page.load
+            start_page.find_courses.click
+
+            expect(start_page).to have_content(/Please choose an option/)
+          end
+        end
+      end
+
+      context "nearing end of cycle" do
+        context "no options selected" do
+          it "displays an error" do
+            allow(Settings).to receive(:cycle_ending_soon).and_return(true)
+
+            start_page.load
+            start_page.find_courses.click
+
+            expect(start_page).to have_content(/Please choose an option/)
+          end
         end
       end
     end
