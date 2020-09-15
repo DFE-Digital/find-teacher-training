@@ -223,7 +223,7 @@ GEM
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
-    pkg-config (1.4.2)
+    pkg-config (1.4.3)
     pry (0.13.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -421,7 +421,7 @@ DEPENDENCIES
   launchy
   listen (>= 3.0.5, < 3.3)
   logstash-logger
-  pkg-config (~> 1.4.2)
+  pkg-config (~> 1.4.3)
   pry-byebug
   puma (~> 4.3)
   rails (~> 6.0.3)
