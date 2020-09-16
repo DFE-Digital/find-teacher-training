@@ -7,7 +7,7 @@ ruby "2.6.5"
 
 # App Insights for Azure
 gem "application_insights"
-gem "pkg-config", "~> 1.4.2"
+gem "pkg-config", "~> 1.4.3"
 
 # Decorate logic to keep it of the views and helper methods
 gem "draper"
