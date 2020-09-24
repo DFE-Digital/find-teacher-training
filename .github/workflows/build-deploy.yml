@@ -1,0 +1,24 @@
+name: Build & Deploy to PaaS
+
+on:
+  push:
+    branches:
+      - master
+env:
+  DOCKERHUB_REPOSITORY: dfedigital/find-teacher-training
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1.1.1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: ${{ env.DOCKERHUB_REPOSITORY }}
+          tags: ${{ format('paas-{0}', github.sha) }}
