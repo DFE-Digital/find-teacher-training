@@ -1,12 +1,12 @@
-data cloudfoundry_domain local {
-  name = "london.cloudapps.digital"
-}
-
 data cloudfoundry_org org {
   name = "dfe-teacher-services"
 }
 
 data cloudfoundry_space space {
-  name = var.app.space
+  name = "bat-${var.app_environment}"
   org  = data.cloudfoundry_org.org.id
+}
+
+data cloudfoundry_domain cloudapps_digital {
+  name = "london.cloudapps.digital"
 }
