@@ -22,3 +22,32 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: ${{ env.DOCKERHUB_REPOSITORY }}
           tags: ${{ format('paas-{0}', github.sha) }}
+
+      - name: Use Terraform v 0.13.3
+        uses: hashicorp/setup-terraform@v1.2.0
+        with:
+          terraform_version: 0.13.3
+
+      - name: terraform init
+        run: |
+          terraform init -backend-config=workspace_variables/qa_backend.tfvars
+        working-directory: terraform
+        env:
+          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
+      
+      - name: terraform plan & apply
+        run: |
+          terraform plan -var-file workspace_variables/qa.tfvars -out tfplan
+          terraform apply -auto-approve -input=false "tfplan"
+        working-directory: terraform
+        env:
+          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
+          TF_VAR_paas_user: ${{ secrets.CF_USER }}
+          TF_VAR_paas_password: ${{ secrets.CF_PASSWORD }}
+          TF_VAR_paas_secret_key_base: ${{ secrets.SECRET_KEY_BASE }}
+          TF_VAR_paas_sentry_dsn: ${{ secrets.SENTRY_DSN }}
+          TF_VAR_paas_settings_google_gcp_api_key: ${{ secrets.GOOGLE_GCP_API_KEY }}
+          TF_VAR_paas_settings_google_maps_api_key: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          TF_VAR_paas_settings_logstash_host: ${{ secrets.LOGSTASH_HOST }}
+          TF_VAR_paas_settings_logstash_port: ${{ secrets.LOGSTASH_PORT }}
+          TF_VAR_paas_app_docker_image: ${{ format('{0}:paas-{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}
