@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 env:
   DOCKERHUB_REPOSITORY: dfedigital/find-teacher-training
 
@@ -23,19 +24,47 @@ jobs:
           repository: ${{ env.DOCKERHUB_REPOSITORY }}
           tags: ${{ format('paas-{0}', github.sha) }}
 
-      - name: Use Terraform v 0.13.3
+      - name: Set Environment variable
+        run: |
+          echo ::set-env name=DOCKER_IMAGE::$DOCKER_IMAGE
+        env:
+          DOCKER_IMAGE: ${{ format('{0}:paas-{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}
+
+      - name: Run ruby linter
+        run: make rubocop
+      
+      - name: Run sass linter
+        run: make lint-sass
+      
+      - name: Run brakeman static analysis
+        run: make brakeman
+      
+      - name: Run ruby tests
+        run: make rspec
+      
+      - name: Run javascript tests
+        run: make js.test
+
+      - name: Publish Test Coverage to Code Climate
+        run: |
+          make publish.codeclimate
+        env:
+          GIT_BRANCH: ${{ github.ref }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
+
+      - name: Use Terraform v0.13.3
         uses: hashicorp/setup-terraform@v1.2.0
         with:
           terraform_version: 0.13.3
 
-      - name: terraform init
+      - name: Terraform init
         run: |
           terraform init -backend-config=workspace_variables/qa_backend.tfvars
         working-directory: terraform
         env:
           ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
       
-      - name: terraform plan & apply
+      - name: Terraform plan & apply
         run: |
           terraform plan -var-file workspace_variables/qa.tfvars -out tfplan
           terraform apply -auto-approve -input=false "tfplan"
