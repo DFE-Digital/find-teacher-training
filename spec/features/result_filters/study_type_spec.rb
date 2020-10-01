@@ -3,10 +3,6 @@ require "rails_helper"
 feature "Study type filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:courses_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
-
   let(:base_parameters) { results_page_parameters }
 
   before do

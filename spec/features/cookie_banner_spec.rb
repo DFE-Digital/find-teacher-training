@@ -19,14 +19,10 @@ feature "cookie banner", type: :feature do
     ]
   end
 
-  let(:default_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
-
   let(:base_parameters) { results_page_parameters }
 
   def stub_results_request
-    stub_request(:get, default_url)
+    stub_request(:get, courses_url)
       .with(query: base_parameters)
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),

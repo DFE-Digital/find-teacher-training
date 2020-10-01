@@ -23,8 +23,6 @@ describe ResultsView do
     }
   end
 
-  let(:courses_url) { "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses" }
-
   before do
     stub_request(
       :get,
@@ -843,7 +841,7 @@ describe ResultsView do
     subject { described_class.new(query_parameters: query_parameters) }
 
     def stub_request_with_meta_count(count)
-      stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/2020/courses")
+      stub_request(:get, courses_url)
         .with(query: results_page_parameters)
         .to_return(
           body: { meta: { count: count } }.to_json,

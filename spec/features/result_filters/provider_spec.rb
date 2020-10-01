@@ -4,11 +4,6 @@ feature "Provider filter", type: :feature do
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
-
-  let(:courses_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
-
   let(:providers_url) do
     "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
   end

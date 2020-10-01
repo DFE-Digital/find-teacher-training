@@ -5,9 +5,6 @@ feature "Location filter back link", type: :feature do
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
-  let(:courses_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
 
   before do
     stub_results_page_request

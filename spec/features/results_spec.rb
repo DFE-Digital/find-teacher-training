@@ -4,15 +4,11 @@ feature "results", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { "provider.provider_name,name" }
   let(:params) {}
-  let(:default_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
-
   let(:base_parameters) { results_page_parameters("sort" => sort) }
 
   let(:results_page_request) do
     {
-      course_stub: stub_request(:get, default_url)
+      course_stub: stub_request(:get, courses_url)
         .with(query: base_parameters)
         .to_return(
           body: courses,
@@ -117,7 +113,7 @@ feature "results", type: :feature do
 
   context "provider sorting" do
     let(:ascending_stub) do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: results_page_parameters("sort" => "provider.provider_name,name"))
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -126,7 +122,7 @@ feature "results", type: :feature do
     end
 
     let(:descending_stub) do
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: results_page_parameters("sort" => "-provider.provider_name,-name"))
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),

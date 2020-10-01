@@ -1,8 +1,6 @@
 require "rails_helper"
 
 describe "/results", type: :request do
-  let(:courses_url) { "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses" }
-
   context "a valid request" do
     before do
       stub_request(

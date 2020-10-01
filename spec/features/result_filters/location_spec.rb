@@ -6,12 +6,7 @@ feature "Location filter", type: :feature do
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
-  let(:courses_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
-  end
-
   let(:base_parameters) { results_page_parameters }
-
   let(:stub_subject_area_request) do
     stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects")
   end
