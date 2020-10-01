@@ -4,7 +4,7 @@ feature "Qualifications filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Qualification.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }

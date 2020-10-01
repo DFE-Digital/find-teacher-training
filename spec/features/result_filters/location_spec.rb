@@ -7,7 +7,7 @@ feature "Location filter", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }
@@ -33,7 +33,7 @@ feature "Location filter", type: :feature do
     before do
       stub_request(
         :get,
-        "http://localhost:3001/api/v3/recruitment_cycles/2020/providers",
+        "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
       ).with(
         query: {
           "fields[providers]" => "provider_code,provider_name",
@@ -282,7 +282,7 @@ feature "Location filter", type: :feature do
         type: Provider,
         resources: providers,
         fields: { providers: %i[provider_code provider_name] },
-        params: { recruitment_cycle_year: 2020 },
+        params: { recruitment_cycle_year: Settings.current_cycle },
         search: "ACME",
       )
 
@@ -305,7 +305,7 @@ feature "Location filter", type: :feature do
           type: Provider,
           resources: providers,
           fields: { providers: %i[provider_code provider_name] },
-          params: { recruitment_cycle_year: 2020 },
+          params: { recruitment_cycle_year: Settings.current_cycle },
           search: "ACME",
         )
 

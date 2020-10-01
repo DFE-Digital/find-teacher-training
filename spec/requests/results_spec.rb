@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe "/results", type: :request do
+  let(:courses_url) { "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses" }
+
   context "a valid request" do
     before do
-      default_url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-
       stub_request(
         :get,
         "http://localhost:3001/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
@@ -13,7 +13,7 @@ describe "/results", type: :request do
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: results_page_parameters)
         .to_return(
           body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -29,8 +29,6 @@ describe "/results", type: :request do
 
   context "API returns client error (400)" do
     before do
-      default_url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-
       stub_request(
         :get,
         "http://localhost:3001/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
@@ -39,7 +37,7 @@ describe "/results", type: :request do
         headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
       )
 
-      stub_request(:get, default_url)
+      stub_request(:get, courses_url)
         .with(query: results_page_parameters)
         .to_return(status: 400)
     end

@@ -23,6 +23,8 @@ describe ResultsView do
     }
   end
 
+  let(:courses_url) { "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses" }
+
   before do
     stub_request(
       :get,
@@ -403,7 +405,7 @@ describe ResultsView do
 
     context "there are more than three results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -416,7 +418,7 @@ describe ResultsView do
 
     context "there are no results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -485,7 +487,7 @@ describe ResultsView do
 
         context "there are more than three results" do
           before do
-            stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+            stub_request(:get, courses_url)
               .with(query: results_page_parameters)
               .to_return(
                 body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -499,14 +501,14 @@ describe ResultsView do
         context "there are less than three results" do
           context "there are suggested courses found" do
             before do
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+              stub_request(:get, courses_url)
                 .with(query: results_page_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
 
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+              stub_request(:get, courses_url)
                 .with(query: suggested_search_count_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -519,13 +521,13 @@ describe ResultsView do
 
           context "there are no suggested courses found" do
             before do
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+              stub_request(:get, courses_url)
                 .with(query: results_page_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/two_courses.json"),
                   headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
                 )
-              stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+              stub_request(:get, courses_url)
                 .with(query: suggested_search_count_parameters)
                 .to_return(
                   body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -767,7 +769,7 @@ describe ResultsView do
 
     context "there are more than three results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/ten_courses.json"),
@@ -780,7 +782,7 @@ describe ResultsView do
 
     context "there are no results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/empty_courses.json"),
@@ -797,7 +799,7 @@ describe ResultsView do
 
     context "there are two results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/two_courses.json"),
@@ -810,7 +812,7 @@ describe ResultsView do
 
     context "there is one result" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/one_course.json"),
@@ -823,7 +825,7 @@ describe ResultsView do
 
     context "there are no results" do
       before do
-        stub_request(:get, "http://localhost:3001/api/v3/recruitment_cycles/2020/courses")
+        stub_request(:get, courses_url)
           .with(query: results_page_parameters)
           .to_return(
             body: File.new("spec/fixtures/api_responses/empty_courses.json"),

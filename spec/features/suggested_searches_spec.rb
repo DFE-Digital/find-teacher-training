@@ -5,7 +5,7 @@ feature "suggested searches", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { "distance" }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters("sort" => sort) }
@@ -150,7 +150,7 @@ feature "suggested searches", type: :feature do
     before do
       stub_request(
         :get,
-        "http://localhost:3001/api/v3/recruitment_cycles/2020/providers",
+        "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
       ).with(
         query: {
           "fields[providers]" => "provider_code,provider_name",

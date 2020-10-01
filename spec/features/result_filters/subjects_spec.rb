@@ -5,7 +5,7 @@ feature "Subject filter", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }

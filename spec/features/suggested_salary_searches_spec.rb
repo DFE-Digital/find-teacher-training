@@ -4,7 +4,7 @@ describe "Suggested salary searches" do
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   def default_query_for_location_search(radius:)

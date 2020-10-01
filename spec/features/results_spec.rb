@@ -5,7 +5,7 @@ feature "results", type: :feature do
   let(:sort) { "provider.provider_name,name" }
   let(:params) {}
   let(:default_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
+    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters("sort" => sort) }
