@@ -6,11 +6,11 @@ feature "Provider filter", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:providers_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
   end
 
   let(:base_parameters) { results_page_parameters }

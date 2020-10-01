@@ -150,7 +150,7 @@ feature "suggested searches", type: :feature do
     before do
       stub_request(
         :get,
-        "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
+        "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
       ).with(
         query: {
           "fields[providers]" => "provider_code,provider_name",

@@ -22,7 +22,7 @@ feature "Search results", type: :feature do
   let(:page_index) { nil }
 
   let(:stub_courses_request) do
-    url = "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+    url = "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
     stub_request(:get, url)
       .with(query: base_parameters)
       .to_return(

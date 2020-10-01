@@ -26,7 +26,7 @@ describe "heartbeat requests" do
   end
 
   describe "GET /healthcheck" do
-    let(:healthcheck_endpoint) { "http://localhost:3001/healthcheck" }
+    let(:healthcheck_endpoint) { "#{Settings.teacher_training_api.base_url}/healthcheck" }
 
     context "when everything is ok" do
       before do

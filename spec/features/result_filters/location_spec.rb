@@ -7,13 +7,13 @@ feature "Location filter", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }
 
   let(:stub_subject_area_request) do
-    stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects")
+    stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects")
   end
 
   before do
@@ -33,7 +33,7 @@ feature "Location filter", type: :feature do
     before do
       stub_request(
         :get,
-        "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
+        "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
       ).with(
         query: {
           "fields[providers]" => "provider_code,provider_name",

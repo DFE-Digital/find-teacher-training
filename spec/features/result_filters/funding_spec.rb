@@ -7,7 +7,7 @@ feature "Funding filter", type: :feature do
   let(:salary_course_param_value_from_c_sharp) { "8" }
   let(:all_course_param_value_from_c_sharp) { "15" }
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }

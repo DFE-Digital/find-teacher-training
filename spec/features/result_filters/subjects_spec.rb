@@ -5,7 +5,7 @@ feature "Subject filter", type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
   end
 
   let(:base_parameters) { results_page_parameters }
@@ -13,7 +13,7 @@ feature "Subject filter", type: :feature do
   let(:stub_subject_areas_request) do
     stub_request(
       :get,
-      "http://localhost:3001/api/v3/subject_areas?include=subjects",
+      "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects",
     ).to_return(
       body: File.new("spec/fixtures/api_responses/subject_areas.json"),
       headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
