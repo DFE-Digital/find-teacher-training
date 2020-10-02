@@ -3,10 +3,6 @@ require "rails_helper"
 feature "Vacancy filter", type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Vacancy.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-  end
-
   let(:base_parameters) { results_page_parameters }
 
   before do

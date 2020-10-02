@@ -22,8 +22,7 @@ feature "Search results", type: :feature do
   let(:page_index) { nil }
 
   let(:stub_courses_request) do
-    url = "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-    stub_request(:get, url)
+    stub_request(:get, courses_url)
       .with(query: base_parameters)
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),

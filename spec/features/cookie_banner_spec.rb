@@ -19,14 +19,10 @@ feature "cookie banner", type: :feature do
     ]
   end
 
-  let(:default_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-  end
-
   let(:base_parameters) { results_page_parameters }
 
   def stub_results_request
-    stub_request(:get, default_url)
+    stub_request(:get, courses_url)
       .with(query: base_parameters)
       .to_return(
         body: File.new("spec/fixtures/api_responses/ten_courses.json"),

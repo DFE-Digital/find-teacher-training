@@ -4,7 +4,7 @@ RSpec.describe ResultFilters::SubjectController do
   describe "#new" do
     context "when subjects is a comma delimited string" do
       it "returns a 200" do
-        stub_request(:get, "http://localhost:3001/api/v3/subject_areas?include=subjects")
+        stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects")
            .with(
              headers: {
                "Accept" => "application/vnd.api+json",

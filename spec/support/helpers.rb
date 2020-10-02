@@ -67,6 +67,10 @@ module Helpers
     expect(page).to be_displayed
     expect(Rack::Utils.parse_nested_query(current_query_string)).to eq(expected_query_params)
   end
+
+  def courses_url
+    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/courses"
+  end
 end
 
 RSpec.configure do |config|

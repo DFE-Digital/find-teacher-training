@@ -3,9 +3,6 @@ require "rails_helper"
 describe "Suggested salary searches" do
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:courses_url) do
-    "http://localhost:3001/api/v3/recruitment_cycles/2020/courses"
-  end
 
   def default_query_for_location_search(radius:)
     { l: 1, loc: "Cat Town", lq: "Cat Town", lat: 51.4980188, lng: -0.1300436, rad: radius }
@@ -14,7 +11,7 @@ describe "Suggested salary searches" do
   def stub_subjects
     stub_request(
       :get,
-      "http://localhost:3001/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
+      "#{Settings.teacher_training_api.base_url}/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
     ).to_return(
       body: File.new("spec/fixtures/api_responses/subjects_sorted_name_code.json"),
       headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
