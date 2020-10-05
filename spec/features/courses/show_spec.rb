@@ -146,15 +146,7 @@ feature "Course show", type: :feature do
         course.how_school_placements_work,
       )
 
-      # expect(course_page).to have_content(
-      #   "The course fees for #{Settings.current_cycle} - #{Settings.current_cycle + 1} are as follows",
-      # )
-
       expect(course_page.uk_fees).to have_content(
-        "£9,250",
-      )
-
-      expect(course_page.eu_fees).to have_content(
         "£9,250",
       )
 
@@ -258,6 +250,27 @@ feature "Course show", type: :feature do
         expect(course_page).to have_end_of_cycle_notice
         expect(course_page).not_to have_training_location_guidance
       end
+    end
+  end
+
+  describe "A course without international fees" do
+    let(:course) do
+      build(:course,
+            course_code: "X130",
+            fee_uk_eu: "9250.0",
+            fee_international: nil,
+            provider: provider,
+            provider_code: provider.provider_code,
+            recruitment_cycle: current_recruitment_cycle,
+            accrediting_provider: accrediting_provider)
+    end
+
+    it "only displays uk fees" do
+      expect(course_page).to have_content(
+        "The course fees for UK students in #{Settings.current_cycle} to #{Settings.current_cycle + 1} are £9,250",
+      )
+
+      expect(course_page).to_not have_international_fees
     end
   end
 
