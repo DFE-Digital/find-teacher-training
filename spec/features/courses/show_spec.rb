@@ -160,11 +160,14 @@ feature "Course show", type: :feature do
 
       expect(course_page).to_not have_salary_details
 
-      expect(course_page.scholarship_amount).to have_content("a scholarship of £2,000")
+      # TODO: Reinstate once financial incentives are confirmed for 2021-22
+      # Current holding copy is displayed in Financial Incentives section
 
-      expect(course_page.bursary_amount).to have_content("a bursary of £4,000")
+      # expect(course_page.scholarship_amount).to have_content("a scholarship of £2,000")
 
-      expect(course_page.financial_support_details).to have_content("Financial support from the training provider")
+      # expect(course_page.bursary_amount).to have_content("a bursary of £4,000")
+
+      # expect(course_page.financial_support_details).to have_content("Financial support from the training provider")
 
       expect(course_page.required_qualifications).to have_content(
         course.required_qualifications,
