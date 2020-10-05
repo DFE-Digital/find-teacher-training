@@ -3,7 +3,7 @@ base_url: http://localhost:3002
 teacher_training_api:
   # URL of the API app (teacher-training-api)
   base_url: http://localhost:3001
-current_cycle: 2020
+current_cycle: 2021
 google:
   maps_api_key: replace_me
   maps_api_url: https://maps.googleapis.com/maps/api/staticmap
