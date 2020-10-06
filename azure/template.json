@@ -301,11 +301,11 @@
                 "value": "0"
               },
               {
-                "name": "SKYLIGHT_AUTH_TOKEN",
+                "name": "SETTINGS__SKYLIGHT_AUTH_TOKEN",
                 "value": "[parameters('skylightAuthToken')]"
               },
               {
-                "name": "SKYLIGHT_ENABLE",
+                "name": "SETTINGS__SKYLIGHT_ENABLE",
                 "value": "[parameters('skylightEnable')]"
               },
               {
