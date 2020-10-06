@@ -352,6 +352,10 @@ GEM
       capybara (~> 3.3)
       site_prism-all_there (>= 0.3.1, < 1.0)
     site_prism-all_there (0.3.2)
+    skylight (4.3.1)
+      skylight-core (= 4.3.1)
+    skylight-core (4.3.1)
+      activesupport (>= 4.2.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -436,6 +440,7 @@ DEPENDENCIES
   sentry-raven
   simplecov (< 0.18)
   site_prism
+  skylight
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

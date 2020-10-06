@@ -22,3 +22,5 @@ commit_sha_file: COMMIT_SHA
 cycle_has_ended:
 cycle_ending_soon:
 display_apply_button: true
+skylight_auth_token: replace_me
+skylight_enable: true

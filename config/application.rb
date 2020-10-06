@@ -26,5 +26,7 @@ module FindTeacherTraining
 
     # https://thoughtbot.com/blog/content-compression-with-rack-deflater
     config.middleware.use Rack::Deflater
+
+    config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
   end
 end

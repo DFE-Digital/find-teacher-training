@@ -1,0 +1,9 @@
+---
+#The authentication token for the application
+authentication: <%= Settings.skylight_auth_token %>
+ignored_endpoints:
+  - HeartbeatController#ping
+  - HeartbeatController#healthcheck
+  - HeartbeatController#sha
+agent:
+  sockfile_path: /tmp/find-postgraduate-teacher-training
