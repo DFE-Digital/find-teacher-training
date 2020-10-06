@@ -124,7 +124,8 @@
                 <% end %>
             <% end %>
             <dt class="govuk-list--description__label">Financial support</dt>
-            <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+<!--            <dd data-qa="course__funding_options"><%#= course.decorate.funding_option %></dd>-->
+            <dd data-qa="course__funding_options">Financial support for 2021 to 2022 will be announced soon</dd>
             <% if course['accrediting_provider'].present? %>
               <dt class="govuk-list--description__label">Accredited body</dt>
               <dd data-qa="course__accrediting_provider"><%= smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
