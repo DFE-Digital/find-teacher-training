@@ -77,6 +77,5 @@ jobs:
           TF_VAR_paas_sentry_dsn: ${{ secrets.SENTRY_DSN }}
           TF_VAR_paas_settings_google_gcp_api_key: ${{ secrets.GOOGLE_GCP_API_KEY }}
           TF_VAR_paas_settings_google_maps_api_key: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-          TF_VAR_paas_settings_logstash_host: ${{ secrets.LOGSTASH_HOST }}
-          TF_VAR_paas_settings_logstash_port: ${{ secrets.LOGSTASH_PORT }}
+          TF_VAR_paas_logstash_url: ${{ secrets.LOGSTASH_URL }}
           TF_VAR_paas_app_docker_image: ${{ format('{0}:paas-{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}

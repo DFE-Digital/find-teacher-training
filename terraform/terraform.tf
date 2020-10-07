@@ -37,6 +37,5 @@ module paas {
   settings_display_apply_button = var.paas_settings_display_apply_button
   settings_google_gcp_api_key   = var.paas_settings_google_gcp_api_key
   settings_google_maps_api_key  = var.paas_settings_google_maps_api_key
-  settings_logstash_host        = var.paas_settings_logstash_host
-  settings_logstash_port        = var.paas_settings_logstash_port
+  logstash_url                  = var.paas_logstash_url
 }
