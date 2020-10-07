@@ -26,7 +26,7 @@ jobs:
 
       - name: Set Environment variable
         run: |
-          echo ::set-env name=DOCKER_IMAGE::$DOCKER_IMAGE
+          echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
         env:
           DOCKER_IMAGE: ${{ format('{0}:paas-{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}
 
