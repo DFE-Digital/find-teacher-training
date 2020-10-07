@@ -1,4 +1,5 @@
 import accessibleAutocomplete from "accessible-autocomplete";
+import throttle from 'lodash.throttle'
 
 export const getPath = (endpoint,query) => {
   return `${endpoint}?query=${query}`;
@@ -47,7 +48,7 @@ const initAutocomplete = ({element, input, path}) => {
         name: $input.name,
         defaultValue: $input.value,
         minLength: 3,
-        source: request(path),
+        source: throttle(request(path), 500),
         templates: {
           inputValue: inputValueTemplate,
           suggestion: suggestionTemplate
