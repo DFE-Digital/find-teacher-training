@@ -30,9 +30,7 @@ variable settings_google_gcp_api_key {}
 
 variable settings_google_maps_api_key {}
 
-variable settings_logstash_host {}
-
-variable settings_logstash_port {}
+variable logstash_url {}
 
 
 locals {
@@ -53,7 +51,5 @@ locals {
     SETTINGS__DISPLAY_APPLY_BUTTON = var.settings_display_apply_button
     SETTINGS__GOOGLE__GCP_API_KEY  = var.settings_google_gcp_api_key
     SETTINGS__GOOGLE__MAPS_API_KEY = var.settings_google_maps_api_key
-    SETTINGS__LOGSTASH__HOST       = var.settings_logstash_host
-    SETTINGS__LOGSTASH__PORT       = var.settings_logstash_port
   }
 }

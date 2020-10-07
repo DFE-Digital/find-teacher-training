@@ -28,9 +28,7 @@ variable paas_settings_google_gcp_api_key {}
 
 variable paas_settings_google_maps_api_key {}
 
-variable paas_settings_logstash_host {}
-
-variable paas_settings_logstash_port {}
+variable paas_logstash_url {}
 
 locals {
   cf_api_url = "https://api.london.cloud.service.gov.uk"
