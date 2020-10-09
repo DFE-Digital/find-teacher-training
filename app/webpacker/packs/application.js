@@ -21,16 +21,16 @@ new backLink($backLink).init();
 const $toggle = document.querySelector('[data-module="toggle"]');
 new toggle($toggle).init();
 
-// initAutocomplete({
-//   element: "location-autocomplete",
-//   input: "location",
-//   path: "/location-suggestions",
-// });
-// initAutocomplete({
-//   element: "provider-autocomplete",
-//   input: "provider",
-//   path: "/provider-suggestions",
-// });
+initAutocomplete({
+  element: "location-autocomplete",
+  input: "location",
+  path: "/location-suggestions",
+});
+initAutocomplete({
+  element: "provider-autocomplete",
+  input: "provider",
+  path: "/provider-suggestions",
+});
 
 loadAnalytics();
 new initCookieBanner();
