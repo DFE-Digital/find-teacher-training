@@ -7,16 +7,11 @@
     <%= form_with(url: subject_path, method: :post, data: { "ga-event-form" => "Subject" }) do |f| %>
       <%= render "shared/hidden_fields", exclude_keys: %w(subjects senCourses), form: f %>
       <h1 class="govuk-heading-xl" data-qa="heading">Find courses by subject</h1>
-      <p class="govuk-body">Select the subjects you want to teach.</p>
 
+      <p class="govuk-body">Select the subjects you want to teach.</p>
       <h2 class="govuk-heading-m">Get financial support</h2>
-      <p class="govuk-body">
-        The bursaries and scholarships available for teacher training courses starting in the academic year 2021/22 will be announced soon.
-      </p>
-      <p class="govuk-body">
-        You’ll have to pay a fee for most courses. You can get financial support to cover this, and to help with your living costs while you study.
-        Further information is available on <%= govuk_link_to 'Get Into Teaching','https://getintoteaching.education.gov.uk/funding-my-teacher-training/bursaries-and-scholarships-for-teacher-training' %>.
-      </p>
+      <p class="govuk-body">You’ll have to pay a fee for most courses. You can get financial support to cover this, and to help with your living costs while you study. The amount of financial support available to you will depend on the subject you choose.</p>
+      <p class="govuk-body">Visit Get Into Teaching to find out more about <%= govuk_link_to "postgraduate loans", "https://getintoteaching.education.gov.uk/funding-and-salary/overview/postgraduate-loans" %>, <%= govuk_link_to "bursaries and scholarships", "https://getintoteaching.education.gov.uk/funding-and-salary/overview" %>, and <%= govuk_link_to "funding by subject", "https://getintoteaching.education.gov.uk/funding-and-salary/overview/funding-by-subject" %>.</p>
 
       <h2 class="govuk-heading-m">Find out about Subject knowledge enhancement courses</h2>
       <p class="govuk-body">
