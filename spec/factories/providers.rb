@@ -30,41 +30,6 @@ FactoryBot.define do
     recruitment_cycle_year { "2019" }
     last_published_at { Time.zone.local(2019).utc.iso8601 }
     content_status { "Published" }
-    utt_contact do
-      {
-        name: "utt_contact@acme-scitt.org",
-        email: "utt_contact@acme-scitt.org",
-        telephone: "utt_contact@acme-scitt.org",
-      }
-    end
-    web_link_contact do
-      {
-        name: "web_link_contact@acme-scitt.org",
-        email: "web_link_contact@acme-scitt.org",
-        telephone: "web_link_contact@acme-scitt.org",
-      }
-    end
-    finance_contact do
-      {
-        name: "finance_contact@acme-scitt.org",
-        email: "finance_contact@acme-scitt.org",
-        telephone: "finance_contact@acme-scitt.org",
-      }
-    end
-    fraud_contact do
-      {
-        name: "fraud_contact@acme-scitt.org",
-        email: "fraud_contact@acme-scitt.org",
-        telephone: "fraud_contact@acme-scitt.org",
-      }
-    end
-    admin_contact do
-      {
-        name: "admin_contact@acme-scitt.org",
-        email: "admin_contact@acme-scitt.org",
-        telephone: "admin_contact@acme-scitt.org",
-      }
-    end
     gt12_contact { "gt12_contact@acme-scitt.org" }
     application_alert_contact { "application_alert_contact@acme-scitt.org" }
     send_application_alerts { "all" }
