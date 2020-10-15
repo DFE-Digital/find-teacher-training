@@ -7,6 +7,10 @@ data cloudfoundry_space space {
   org  = data.cloudfoundry_org.org.id
 }
 
-data cloudfoundry_domain cloudapps_digital {
+data cloudfoundry_domain london_cloudapps_digital {
   name = "london.cloudapps.digital"
+}
+
+data cloudfoundry_domain find_service_gov_uk {
+  name = "find-postgraduate-teacher-training.service.gov.uk"
 }

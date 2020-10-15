@@ -26,18 +26,27 @@ resource cloudfoundry_app web_app {
   strategy                   = "blue-green-v2"
   timeout                    = 180
   environment                = local.app_environment_variables
-  routes {
-    route = cloudfoundry_route.web_app_route.id
+  dynamic "routes" {
+    for_each = local.web_app_routes
+    content {
+      route = web_app_routes.value
+    }
   }
   service_binding {
     service_instance = cloudfoundry_user_provided_service.logging.id
   }
 }
 
-resource cloudfoundry_route web_app_route {
-  domain   = data.cloudfoundry_domain.cloudapps_digital.id
+resource cloudfoundry_route web_app_cloudapps_digital_route {
+  domain   = data.cloudfoundry_domain.london_cloudapps_digital.id
   space    = data.cloudfoundry_space.space.id
   hostname = local.web_app_name
+}
+
+resource cloudfoundry_route web_app_service_gov_uk_route {
+  domain   = data.cloudfoundry_domain.find_service_gov_uk.id
+  space    = data.cloudfoundry_space.space.id
+  hostname = local.service_gov_uk_host_names["${var.app_environment}"]
 }
 
 resource cloudfoundry_user_provided_service logging {
