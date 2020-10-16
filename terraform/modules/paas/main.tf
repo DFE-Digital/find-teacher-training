@@ -29,7 +29,7 @@ resource cloudfoundry_app web_app {
   dynamic "routes" {
     for_each = local.web_app_routes
     content {
-      route = web_app_routes.value
+      route = routes.value
     }
   }
   service_binding {
