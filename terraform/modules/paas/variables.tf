@@ -32,7 +32,6 @@ variable settings_google_maps_api_key {}
 
 variable logstash_url {}
 
-
 locals {
   web_app_name          = "find-${var.app_environment}"
   web_app_start_command = "bundle exec rails server -b 0.0.0.0"
@@ -52,4 +51,11 @@ locals {
     SETTINGS__GOOGLE__GCP_API_KEY  = var.settings_google_gcp_api_key
     SETTINGS__GOOGLE__MAPS_API_KEY = var.settings_google_maps_api_key
   }
+  service_gov_uk_host_names = {
+    qa      = "qa"
+    staging = "staging"
+    prod    = "www2"
+  }
+  web_app_routes = [cloudfoundry_route.web_app_service_gov_uk_route.id,
+  cloudfoundry_route.web_app_cloudapps_digital_route.id]
 }
