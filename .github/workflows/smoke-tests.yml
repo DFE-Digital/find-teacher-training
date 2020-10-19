@@ -21,7 +21,7 @@ jobs:
         env:
           RAILS_ENV: ${{ github.event.inputs.environment }}
 
-      - name: Cypress Run
+      - name: Cypress Run against ${{ github.event.inputs.environment }}
         run: | 
           npm install
-          npx cypress run --reporter junit --reporter-options mochaFile=result-[hash].xml,toConsole=true
+          npx cypress run
