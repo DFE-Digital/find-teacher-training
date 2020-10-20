@@ -1,0 +1,22 @@
+default: &default
+  ASSETS_PRECOMPILE: true
+  RAILS_SERVE_STATIC_FILES: true
+  WEBPACKER_DEV_SERVER_HOST: "webpacker"
+  SETTINGS__CYCLE_ENDING_SOON: false
+  SETTINGS__CYCLE_HAS_ENDED: false
+  SETTINGS__DISPLAY_APPLY_BUTTON: true
+
+qa:
+  <<: *default
+  RAILS_ENV: qa
+  RACK_ENV: qa
+
+staging:
+  <<: *default
+  RAILS_ENV: staging
+  RACK_ENV: staging
+
+prod:
+  <<: *default
+  RAILS_ENV: production
+  RACK_ENV: production
