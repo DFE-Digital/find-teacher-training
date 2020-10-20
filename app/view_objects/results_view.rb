@@ -401,7 +401,7 @@ private
       base_query = base_query.where("latitude" => latitude)
       base_query = base_query.where("longitude" => longitude)
       base_query = base_query.where("radius" => radius_to_query)
-      base_query = base_query.where(expand_university: true)
+      base_query = base_query.where(expand_university: Settings.expand_university)
     end
 
     base_query = base_query.where("provider.provider_name" => provider) if provider.present?

@@ -4,6 +4,7 @@ teacher_training_api:
   # URL of the API app (teacher-training-api)
   base_url: http://localhost:3001
 current_cycle: 2021
+expand_university: false # When true HEI institutions have search radii increased. See https://bat-design-history.netlify.app/find-teacher-training/search-results-locations/
 google:
   maps_api_key: replace_me
   maps_api_url: https://maps.googleapis.com/maps/api/staticmap
