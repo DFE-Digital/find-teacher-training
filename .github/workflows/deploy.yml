@@ -6,6 +6,7 @@ on:
 jobs:
   deploy:
     name: deploy ${{ github.event.deployment.environment }}
+    if: ${{ !startsWith(github.event.deployment.environment, 'bat-find-pr') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -64,3 +65,12 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}" \
             https://api.github.com/repos/DFE-Digital/find-teacher-training/deployments/$deployment_id/statuses \
             -d '{"state": "'$deployment_status'"}'
+
+      - name: Trigger Smoke Tests
+        if: ${{ success() }}
+        run: |
+          curl -X POST \
+            https://api.github.com/repos/DFE-Digital/find-teacher-training-tests/actions/workflows/smoke-tests.yml/dispatches \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}" \
+            -d '{"ref": "refs/heads/master", "inputs": {"environment": "${{ env.DEPLOY_ENV }}"} }'
