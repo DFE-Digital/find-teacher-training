@@ -1,0 +1,76 @@
+name: Deploy to PaaS
+
+on:
+  deployment
+
+jobs:
+  deploy:
+    name: deploy ${{ github.event.deployment.environment }}
+    if: ${{ !startsWith(github.event.deployment.environment, 'bat-find-pr') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set Environment variable
+        run: |
+          echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
+          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
+        env:
+          DOCKER_IMAGE: ${{ format('dfedigital/find-teacher-training:paas-{0}', github.event.deployment.ref) }}
+          DEPLOY_ENV: ${{ github.event.deployment.environment }}
+
+      - name: Use Terraform v0.13.3
+        uses: hashicorp/setup-terraform@v1.2.0
+        with:
+          terraform_version: 0.13.3
+
+      - name: Terraform init
+        run: |
+          terraform init -backend-config=workspace_variables/${{ env.DEPLOY_ENV }}_backend.tfvars
+        working-directory: terraform
+        env:
+          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
+      
+      - name: Terraform plan & apply
+        id: terraform_deploy
+        run: |
+          terraform plan -var-file workspace_variables/${{ env.DEPLOY_ENV }}.tfvars -out tfplan
+          terraform apply -auto-approve -input=false "tfplan"
+        working-directory: terraform
+        env:
+          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
+          TF_VAR_paas_user: ${{ secrets.CF_USER }}
+          TF_VAR_paas_password: ${{ secrets.CF_PASSWORD }}
+          TF_VAR_paas_secret_key_base: ${{ secrets.SECRET_KEY_BASE }}
+          TF_VAR_paas_sentry_dsn: ${{ secrets.SENTRY_DSN }}
+          TF_VAR_paas_settings_google_gcp_api_key: ${{ secrets.GOOGLE_GCP_API_KEY }}
+          TF_VAR_paas_settings_google_maps_api_key: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          TF_VAR_paas_logstash_url: ${{ secrets.LOGSTASH_URL }}
+          TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}
+
+      - name: Post Deployment Status
+        run: |
+          current_deployment=$(curl -s -X GET -H "Authorization: Bearer ${{ github.token }}" 'https://api.github.com/repos/DFE-Digital/find-teacher-training/deployments?ref=${{ github.event.deployment.ref }}&environment=${{ github.event.deployment.environment }}')
+          deployment_id=$(echo $current_deployment | jq '.[0].id')
+
+          deployment_status="failure"
+          if [ "${{ steps.terraform_deploy.outcome }}" == "success" ];
+          then
+            deployment_status="success"
+          fi
+ 
+          curl -s -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}" \
+            https://api.github.com/repos/DFE-Digital/find-teacher-training/deployments/$deployment_id/statuses \
+            -d '{"state": "'$deployment_status'"}'
+
+      - name: Trigger Smoke Tests
+        if: ${{ success() }}
+        run: |
+          curl -X POST \
+            https://api.github.com/repos/DFE-Digital/find-teacher-training-tests/actions/workflows/smoke-tests.yml/dispatches \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: Bearer ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}" \
+            -d '{"ref": "refs/heads/master", "inputs": {"environment": "${{ env.DEPLOY_ENV }}"} }'
