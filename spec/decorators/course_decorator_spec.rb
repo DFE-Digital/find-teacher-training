@@ -101,14 +101,14 @@ describe CourseDecorator do
         let(:mathematics) { build(:subject, :mathematics, scholarship: "2000", bursary_amount: "3000") }
         let(:course) { build :course, subjects: [mathematics] }
 
-        it { is_expected.to eq("Scholarship, bursary or student finance if you’re eligible") }
+        it { is_expected.to eq("Scholarships or bursaries, as well as student finance, are available if you’re eligible") }
       end
 
       context "Bursary" do
         let(:mathematics) { build(:subject, :mathematics, bursary_amount: "3000") }
         let(:course) { build :course, subjects: [mathematics] }
 
-        it { is_expected.to eq("Bursary or student finance if you’re eligible") }
+        it { is_expected.to eq("Bursaries and student finance are available if you’re eligible") }
       end
 
       context "Student finance" do
