@@ -104,7 +104,7 @@ feature "Location filter", type: :feature do
             "filter[latitude]" => "51.4980188",
             "filter[radius]" => "50",
             "sort" => "distance",
-            "filter[expand_university]" => true,
+            "filter[expand_university]" => false,
           ),
         )
         .to_return(
@@ -327,7 +327,7 @@ feature "Location filter", type: :feature do
             "filter[latitude]" => "51.4980188",
             "filter[radius]" => "50",
             "sort" => "distance",
-            "filter[expand_university]" => true,
+            "filter[expand_university]" => false,
           ),
         )
         .to_return(
