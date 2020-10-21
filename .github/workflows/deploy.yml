@@ -25,27 +25,24 @@ jobs:
         with:
           terraform_version: 0.13.3
 
-      - name: Terraform init
-        run: |
-          terraform init -backend-config=workspace_variables/${{ env.DEPLOY_ENV }}_backend.tfvars
+      - name: Download app configuration file
         working-directory: terraform
+        run: |
+          echo $APP_SECRETS | base64 -d >> app_secrets.yml
         env:
-          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
-      
-      - name: Terraform plan & apply
+          APP_SECRETS: ${{ secrets[format('APP_SECRETS_{0}', env.DEPLOY_ENV)] }}
+
+      - name: Terraform init, plan & apply
         id: terraform_deploy
         run: |
+          terraform init -backend-config=workspace_variables/${{ env.DEPLOY_ENV }}_backend.tfvars
           terraform plan -var-file workspace_variables/${{ env.DEPLOY_ENV }}.tfvars -out tfplan
           terraform apply -auto-approve -input=false "tfplan"
         working-directory: terraform
         env:
-          ARM_ACCESS_KEY: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY }}
-          TF_VAR_paas_user: ${{ secrets.CF_USER }}
-          TF_VAR_paas_password: ${{ secrets.CF_PASSWORD }}
-          TF_VAR_paas_secret_key_base: ${{ secrets.SECRET_KEY_BASE }}
-          TF_VAR_paas_sentry_dsn: ${{ secrets.SENTRY_DSN }}
-          TF_VAR_paas_settings_google_gcp_api_key: ${{ secrets.GOOGLE_GCP_API_KEY }}
-          TF_VAR_paas_settings_google_maps_api_key: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          ARM_ACCESS_KEY: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', env.DEPLOY_ENV)] }}
+          TF_VAR_paas_user: ${{ secrets[format('CF_USER_{0}', env.DEPLOY_ENV)] }}
+          TF_VAR_paas_password: ${{ secrets[format('CF_PASSWORD_{0}', env.DEPLOY_ENV)] }}
           TF_VAR_paas_logstash_url: ${{ secrets.LOGSTASH_URL }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}
 

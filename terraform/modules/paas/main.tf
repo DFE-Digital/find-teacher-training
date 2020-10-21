@@ -25,7 +25,7 @@ resource cloudfoundry_app web_app {
   space                      = data.cloudfoundry_space.space.id
   strategy                   = "blue-green-v2"
   timeout                    = 180
-  environment                = local.app_environment_variables
+  environment                = var.app_environment_variables
   dynamic "routes" {
     for_each = local.web_app_routes
     content {
