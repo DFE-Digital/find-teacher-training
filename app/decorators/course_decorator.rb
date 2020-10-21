@@ -103,9 +103,9 @@ class CourseDecorator < Draper::Decorator
     elsif excluded_from_bursary?
       "Student finance if you’re eligible"
     elsif has_scholarship_and_bursary?
-      "Scholarship, bursary or student finance if you’re eligible"
+      "Scholarships or bursaries, as well as student finance, are available if you’re eligible"
     elsif has_bursary?
-      "Bursary or student finance if you’re eligible"
+      "Bursaries and student finance are available if you’re eligible"
     else
       "Student finance if you’re eligible"
     end
