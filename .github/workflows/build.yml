@@ -54,9 +54,8 @@ jobs:
       
       - name: Trigger QA Deployment
         if: ${{ success() }}
-        run: |
-          curl -X POST \
-               -H "Accept: application/vnd.github.v3+json" \
-               -H "Authorization: Bearer ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}" \
-               https://api.github.com/repos/DFE-Digital/find-teacher-training/deployments \
-               -d '{"ref":"${{ github.sha }}", "environment": "qa", "required_contexts": []}'
+        uses: benc-uk/workflow-dispatch@v1.1
+        with:
+          workflow: Deploy to PaaS
+          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          inputs: '{"environment": "qa", "sha": "${{ github.sha }}"}'
