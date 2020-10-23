@@ -1,5 +1,5 @@
 name: Smoke Tests Manual
-on: 
+on:
   workflow_dispatch:
     inputs:
       environment:
