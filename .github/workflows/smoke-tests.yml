@@ -1,0 +1,32 @@
+name: Smoke Tests Manual
+on: 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The environment to run tests against (qa, staging or production)'
+        required: true
+
+jobs:
+  smoke_tests:
+    name: smoke-tests-${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+        with:
+          repository: DFE-Digital/find-teacher-training-tests
+          ref: refs/heads/master
+          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+
+      - name: Set Environment variable
+        run: |
+          echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
+          echo "CYPRESS_ENVIRONMENT=$RAILS_ENV" >> $GITHUB_ENV
+        env:
+          RAILS_ENV: ${{ github.event.inputs.environment }}
+
+      - name: Cypress Run against ${{ github.event.inputs.environment }}
+        id: cypress_run
+        run: |
+          npm install
+          npx cypress run
