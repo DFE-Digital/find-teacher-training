@@ -5,6 +5,7 @@ default: &default
   SETTINGS__CYCLE_ENDING_SOON: false
   SETTINGS__CYCLE_HAS_ENDED: false
   SETTINGS__DISPLAY_APPLY_BUTTON: true
+  SETTINGS__SKYLIGHT_ENABLE: true
 
 qa:
   <<: *default
