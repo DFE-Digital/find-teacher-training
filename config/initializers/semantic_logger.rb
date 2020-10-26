@@ -1,9 +1,5 @@
 if Settings.logstash.host && Settings.logstash.port
   logstash_formatter = proc do |event|
-    # The value here appears to break logging to logstash / elasticsearch
-    event["duration"] = event["duration_ms"]
-    event["duration_ms"] = nil
-
     # For some reason logstash / elasticsearch drops events where the payload
     # is a hash. These are more conveniently accessed at the top level of the
     # event, anyway, so we move it there.
