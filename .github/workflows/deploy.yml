@@ -28,6 +28,7 @@ jobs:
           step: start
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           env: ${{ github.event.inputs.environment }}
+          ref: ${{ github.event.inputs.sha }}
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -90,7 +91,7 @@ jobs:
           intervalSeconds: 15
 
       - name: Trigger ${{ env.NEXT_ENV }} Deployment
-        if: ${{ steps.wait_for_smoke_tests.outputs.conclusion == 'success' && env.NEXT_ENV != '' }}
+        if: ${{ steps.wait_for_smoke_tests.outputs.conclusion == 'success' && env.NEXT_ENV != '' && github.ref == 'refs/heads/master' }}
         uses: benc-uk/workflow-dispatch@v1.1
         with:
           workflow: Deploy to PaaS
@@ -106,3 +107,4 @@ jobs:
           env: ${{ github.event.inputs.environment }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          ref: ${{ github.event.inputs.sha }}
