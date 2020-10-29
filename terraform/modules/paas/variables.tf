@@ -18,6 +18,8 @@ variable logstash_url {}
 
 variable app_environment_variables { type = map }
 
+variable docker_credentials { type = map }
+
 locals {
   web_app_name          = "find-${var.app_environment}"
   web_app_start_command = "bundle exec rails server -b 0.0.0.0"

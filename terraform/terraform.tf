@@ -31,4 +31,5 @@ module paas {
   web_app_memory            = var.paas_web_app_memory
   logstash_url              = var.paas_logstash_url
   app_environment_variables = local.paas_app_environment_variables
+  docker_credentials        = local.docker_credentials
 }

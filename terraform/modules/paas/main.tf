@@ -35,6 +35,7 @@ resource cloudfoundry_app web_app {
   service_binding {
     service_instance = cloudfoundry_user_provided_service.logging.id
   }
+  docker_credentials = var.docker_credentials
 }
 
 resource cloudfoundry_route web_app_cloudapps_digital_route {
