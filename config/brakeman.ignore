@@ -7,7 +7,7 @@
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/courses_controller.rb",
-      "line": 37,
+      "line": 32,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
       "code": "redirect_to(\"https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
       "render_path": null,
@@ -19,8 +19,28 @@
       "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code",
       "confidence": "High",
       "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "c073e6f06f02705207d657718febbff481aa5b0ac08648aa35fecabc47f8b2b5",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/courses_controller.rb",
+      "line": 30,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(\"https://www.apply-for-teacher-training.service.gov.uk/candidate/account?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "CoursesController",
+        "method": "apply"
+      },
+      "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code",
+      "confidence": "High",
+      "note": ""
     }
   ],
-  "updated": "2020-07-20 13:45:35 +0100",
-  "brakeman_version": "4.8.2"
+  "updated": "2020-10-29 14:51:03 +0000",
+  "brakeman_version": "4.10.0"
 }
