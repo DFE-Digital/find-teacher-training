@@ -72,6 +72,8 @@ jobs:
           TF_VAR_paas_password: ${{ secrets[format('CF_PASSWORD_{0}', env.DEPLOY_ENV)] }}
           TF_VAR_paas_logstash_url: ${{ secrets.LOGSTASH_URL }}
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}
+          TF_VAR_dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          TF_VAR_dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
         uses: benc-uk/workflow-dispatch@v1.1
