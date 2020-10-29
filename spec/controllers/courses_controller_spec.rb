@@ -29,9 +29,9 @@ RSpec.describe CoursesController do
       let(:provider) { build(:provider, provider_code: "8N5") }
       let(:course) { build(:course, course_code: "V595", provider: provider) }
 
-      it "redirects to University of Bolton's applications service" do
+      it "redirects to the apply create account page" do
         get :apply, params: { provider_code: course.provider_code, course_code: course.course_code }
-        expect(response).to redirect_to("https://evision.bolton.ac.uk/urd/sits.urd/run/siw_ipp_lgn.login?process=siw_ipp_app&code1=1101-D&code2=0001")
+        expect(response).to redirect_to("https://www.apply-for-teacher-training.service.gov.uk/candidate/account?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}")
       end
     end
 
