@@ -25,11 +25,6 @@ class CoursesController < ApplicationController
 
     Rails.logger.info("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
 
-    # If course provider is University of Bolton
-    if course.provider.provider_code == "8N5"
-      redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/account?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
-    else
-      redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
-    end
+    redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
   end
 end
