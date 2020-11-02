@@ -21,7 +21,6 @@ steps:
     echo "##vso[build.updatebuildnumber]$GIT_SHORT_SHA"
     echo "##vso[task.setvariable variable=IMAGE_NAME_WITH_TAG;]$IMAGE_NAME_WITH_TAG"
     echo '$(System.PullRequest.SourceBranch)'> $(build.artifactstagingdirectory)/prbranch.info
-    echo $(Build.SourceVersion) > COMMIT_SHA
   displayName: 'Set version number'
 
 - script: docker pull $(IMAGE_NAME):latest || true
@@ -33,7 +32,7 @@ steps:
     command: Build an image
     imageName: $(IMAGE_NAME)
     dockerFile: Dockerfile
-    arguments: '--cache-from $(IMAGE_NAME):latest'
+    arguments: '--cache-from $(IMAGE_NAME):latest --build-arg COMMIT_SHA=$(Build.SourceVersion)'
     addDefaultLabels: false
 
 - task: Docker@1

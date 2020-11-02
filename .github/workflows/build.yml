@@ -28,6 +28,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: ${{ env.DOCKERHUB_REPOSITORY }}
           tags: ${{ format('paas-{0}', github.sha) }}
+          build_args: COMMIT_SHA=${{ github.sha }}
 
       - name: Set Environment variable
         run: |
