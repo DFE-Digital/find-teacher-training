@@ -11,11 +11,9 @@ describe "heartbeat requests" do
 
   describe "GET /sha" do
     around :each do |example|
-      File.open("COMMIT_SHA", "w") { |f| f.write "some-sha" }
+      ENV["SHA"] = "some-sha"
 
       example.run
-
-      File.delete("COMMIT_SHA")
     end
 
     it "returns sha" do
