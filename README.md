@@ -30,18 +30,9 @@ bundle exec rspec
 
 ## Deploying
 
-- Go to [Find Postgraduate Teacher Training release pipeline](https://dfe-ssp.visualstudio.com/Become-A-Teacher/_release?_a=releases&view=mine&definitionId=30) in Azure DevOps
-- Find the release you want to deploy and note the commit SHA:
-  - It’s the first one where first 2 squares in Stages column are green (QA succeeded)
-  - Branch has to be master
-- Find the release that’s currently deployed and note the commit SHA:
-  - It’s the top one where Prod Stages column is green (Prod succeeded)
-  - Branch has to be master
-- Check what you are about to deploy: `https://github.com/DFE-Digital/find-teacher-training/compare/CURRENT-COMMIT-SHA…TO-DEPLOY-COMMIT-SHA`
-- Click on the release you want to deploy
-- Click “Deploy” below the box that says ‘staging’
-- When the release to staging succeeds, test staging, check if there are any Sentry errors
-- Then announce that you are deploying to production in the #twd_apply_candidate slack channel using shortcuts `:ship_it_parrot:` and deploy to production in the same way as staging (you also need to click 'Approve'). Test production
+Application is hosted on [GOV.UK PaaS](https://www.cloud.service.gov.uk) and every merged PR is continuously deployed to Production.
+- [Deployment Workflow](/docs/deployment.md)
+- [Getting started with PaaS](/docs/paas.md)
 
 ## Linting
 
@@ -57,6 +48,9 @@ bundle exec scss-lint app/webpacker/styles
 
 ## End of cycle feature flags
 
+We use terraform to deploy and configure the application.
+Application configuration variables and feature flags are configured for each environment in the [app_config.yml](/terraform/workspace_variables/app_config.yml) file.
+
 ### Enable ‘Nearing end of cycle’ interim page
 Turning this flag on redirects requests from `/` to `/cycle-ending-soon`.
 
@@ -66,7 +60,7 @@ To enable this feature locally, add the following to `config/settings/developmen
 cycle_ending_soon: true
 ```
 
-To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in Azure.
+To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in [app_config.yml](/terraform/workspace_variables/app_config.yml)
 
 ```
 SETTINGS__CYCLE_ENDING_SOON
@@ -81,7 +75,7 @@ To disable this feature locally, add the following to `config/settings/developme
 display_apply_button: false
 ```
 
-To disable this feature on a deployed environment, the following environment variable needs to be updated to `false` in Azure.
+To disable this feature on a deployed environment, the following environment variable needs to be updated to `false` in [app_config.yml](/terraform/workspace_variables/app_config.yml)
 
 ```
 SETTINGS__DISPLAY_APPLY_BUTTON
@@ -97,8 +91,23 @@ To enable this feature locally, add the following to `config/settings/developmen
 cycle_has_ended: true
 ```
 
-To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in Azure.
+To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in the [app_config.yml](/terraform/workspace_variables/app_config.yml)
 
 ```
 SETTINGS__CYCLE_HAS_ENDED
 ```
+
+## Application Secrets
+
+Secrets like API keys and tokens are configured in a YAML file and stored as `base64` encoded string in GitHub secrets.
+```yaml
+SENTRY_DSN: xxx
+SETTINGS__GOOGLE__GCP_API_KEY : xxx
+SETTINGS__GOOGLE__MAPS_API_KEY : xxx
+SETTINGS__SKYLIGHT_AUTH_TOKEN: xxx
+```
+The above yaml file is populated with values for each environment and the output of the below command is stored in GitHub secrets as `APP_SECRETS_QA`, or `APP_SECRETS_STAGING` or `APP_SECRETS_PRODUCTION` respectively.
+```shell
+base64 -w0 app_secrets.yml
+```
+Note: This process will soon be moved to Azure keyVault for easier management of secrets.
