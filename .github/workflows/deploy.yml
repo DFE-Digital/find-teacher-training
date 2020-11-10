@@ -78,7 +78,7 @@ jobs:
       - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
         uses: benc-uk/workflow-dispatch@v1.1
         with:
-          workflow: Smoke Tests Manual
+          workflow: Smoke Tests
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           inputs: '{"environment": "${{ env.DEPLOY_ENV }}"}'
 
