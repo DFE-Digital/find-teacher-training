@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 env:
   DOCKERHUB_REPOSITORY: dfedigital/find-teacher-training
@@ -27,14 +30,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: ${{ env.DOCKERHUB_REPOSITORY }}
-          tags: ${{ format('paas-{0}', github.sha) }}
+          tags: ${{ github.sha }}
           build_args: COMMIT_SHA=${{ github.sha }}
 
       - name: Set Environment variable
         run: |
           echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
         env:
-          DOCKER_IMAGE: ${{ format('{0}:paas-{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}
+          DOCKER_IMAGE: ${{ format('{0}:{1}', env.DOCKERHUB_REPOSITORY, github.sha) }}
 
       - name: Run ruby linter
         run: make rubocop
@@ -59,9 +62,9 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
       
       - name: Trigger QA Deployment
-        if: ${{ success() }}
+        if: ${{ success() && github.ref == 'refs/heads/master' }}
         uses: benc-uk/workflow-dispatch@v1.1
         with:
-          workflow: Deploy to PaaS
+          workflow: Deploy
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           inputs: '{"environment": "qa", "sha": "${{ github.sha }}"}'
