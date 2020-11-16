@@ -10,11 +10,44 @@
 - NodeJS 12.16.x
 - Yarn 1.12.x
 
+
 ## Setting up the app in development
 
 1. Run `bundle install` to install the gem dependencies
 2. Run `yarn` to install node dependencies
+3. Run `rake assets:precompile` to precompile the assets
 3. Run `bundle exec rails server` to launch the app on http://localhost:3002
+
+## Setting up the Teacher Training API in development
+
+Find pulls data from the Teacher Training API. In order for the search functionality on Find to work you need to setup
+and run the Teacher Training API app locally.
+
+1. Go to the the Teacher Training API on GitHub and clone the repo https://github.com/DFE-Digital/teacher-training-api
+2. Run `bundle exec rails db:setup` to create a development and testing database.
+3. Run  `bundle exec rails server` to launch the Teacher training API app on http://localhost:3001
+
+## Populate the Teacher Training API development database
+
+1. Open the Teacher Training API app and navigate to `config/azure_environments.yml`. Add the following:
+  `qa:
+    webapp: s121d01-ttapi-as
+    rgroup: s121d01-ttapi-rg
+    subscription: s121-findpostgraduateteachertraining-development
+  staging:
+    webapp: s121t01-ttapi-as
+    rgroup: s121t01-ttapi-rg
+    subscription: s121-findpostgraduateteachertraining-test
+  production:
+    webapp: s121p01-ttapi-as
+    rgroup: s121p01-ttapi-rg
+    subscription: s121-findpostgraduateteachertraining-production
+`
+2. Visit your Azure roles https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/azurerbac and activate yourself as a contributor on `s121-findpostgraduateteachertraining-test`
+3. Visit the Staging database connection security permissions https://preview.portal.azure.com/#@platform.education.gov.uk/resource/subscriptions/64d0000b-ff5d-4d6e-9a98-41f0d8d17da7/resourceGroups/s121t01-ttapi-rg/providers/Microsoft.DBForPostgreSQL/servers/s121t01-teacher-training-psql/connectionSecurity and click `Add current client IP address`. Set your firewall name to something sensible like `david_home` then click the Save icon
+5. Run `az logout` then `az login` to refresh your credentials
+4. Run `bin/mcb az apps pg_dump -E staging` to get a database dump from staging. This data is sanitised production data
+5. Run `psql manage_courses_backend_development < staging_teacher_training_yyyymmdd_hhmmss.sql` (yours will a different filename) to import the data into your database
 
 ## Running specs, linter(without auto correct) and annotate models and serializers
 
@@ -81,7 +114,7 @@ To disable this feature on a deployed environment, the following environment var
 SETTINGS__DISPLAY_APPLY_BUTTON
 ```
 
-### Enable ‘Cycle has ended’ interim page 
+### Enable ‘Cycle has ended’ interim page
 
 Turning this flag on redirects all home, search, results and course page requests to `/cycle-has-ended`.
 
