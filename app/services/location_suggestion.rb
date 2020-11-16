@@ -9,10 +9,12 @@ class LocationSuggestion
 
       response = get("#{Settings.google.places_api_path}?#{query.to_query}")
 
-      if response.success?
+      if response["predictions"].present?
         JSON.parse(response.body)["predictions"]
           .map(&format_prediction)
           .take(5)
+      elsif response["error_message"].present?
+        Raven.send_event(error_message: response["error_message"])
       end
     end
 

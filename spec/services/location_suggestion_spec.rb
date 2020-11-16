@@ -29,14 +29,14 @@ describe LocationSuggestion do
     end
 
     let(:query_stub) do
-      stub_suggestions(200, predictions)
+      stub_query(predictions: predictions)
     end
 
-    def stub_suggestions(status, stub = {})
+    def stub_query(status: 200, predictions: {}, error_message: nil)
       stub_request(:get, url)
         .to_return(
           status: status,
-          body: { predictions: stub }.to_json,
+          body: { error_message: error_message, predictions: predictions }.to_json,
           headers: { 'Content-Type': "application/json" },
         )
     end
@@ -61,6 +61,20 @@ describe LocationSuggestion do
       end
     end
 
+    context "with an error message in the body" do
+      let(:error_message) { "The provided API key is invalid." }
+
+      before do
+        allow(Raven).to receive(:send_event)
+      end
+      it "sends a sentry error with the received error_message" do
+        stub_query(error_message: error_message)
+        location_suggestions
+
+        expect(Raven).to have_received(:send_event).with(error_message: error_message)
+      end
+    end
+
     context "suggestion limits" do
       before do
         predictions = []
@@ -69,7 +83,7 @@ describe LocationSuggestion do
           predictions.push(description: "Foo")
         end
 
-        stub_suggestions(200, predictions)
+        stub_query(predictions: predictions)
 
         location_suggestions
       end
@@ -81,7 +95,7 @@ describe LocationSuggestion do
 
     context "unsuccessful request" do
       before do
-        stub_suggestions(500)
+        stub_query(status: 500)
       end
 
       it "returns nothing" do
