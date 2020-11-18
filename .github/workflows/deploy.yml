@@ -47,10 +47,10 @@ jobs:
           DOCKER_IMAGE: ${{ format('dfedigital/find-teacher-training:{0}', github.event.inputs.sha) }}
           DEPLOY_ENV: ${{ github.event.inputs.environment }}
 
-      - name: Use Terraform v0.13.3
+      - name: Use Terraform v0.13.5
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 0.13.3
+          terraform_version: 0.13.5
 
       - name: Download app configuration file
         working-directory: terraform
