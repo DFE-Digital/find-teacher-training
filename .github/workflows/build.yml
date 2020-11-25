@@ -67,4 +67,4 @@ jobs:
         with:
           workflow: Deploy
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"environment": "qa", "sha": "${{ github.sha }}"}'
+          inputs: '{"qa": "true", "staging": "true", "production": "true", "sha": "${{ github.sha }}"}'

@@ -3,31 +3,57 @@ name: Deploy
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'The environment to deploy to eg: qa, staging, production etc'
+      qa:
+        description: Deploy to qa?
+        default: 'true'
+        required: true
+      staging:
+        description: Deploy to staging?
+        default: 'false'
+        required: true
+      production:
+        description: Deploy to production?
+        default: 'false'
         required: true
       sha:
         description: Commit sha to be deployed
         required: true
 
 jobs:
-  deploy:
-    name: deploy ${{ github.event.inputs.environment }}
-    if: ${{ !startsWith(github.event.inputs.environment, 'bat-find-pr') }}
+  prepare-matrix:
+    name: Prepare Environment Matrix
     runs-on: ubuntu-latest
+    outputs:
+      environments: ${{ steps.select-environments.outputs.environments }}
+    steps:
+      - name:  Prepare Environment Matrix
+        shell: pwsh
+        id:    select-environments
+        run: |
+          $inputs = '${{ toJson(github.event.inputs) }}' | ConvertFrom-Json -AsHashtable
+          $environments = @('qa', 'staging', 'production') | where { $inputs[$_] -eq 'true' }
+          echo "::set-output name=environments::$(@{ environment = $environments } | ConvertTo-Json -Compress)"
+
+  deploy:
+    name: ${{ matrix.environment }} Deployment
+    runs-on: ubuntu-latest
+    needs: [prepare-matrix]
+    strategy:
+      matrix: ${{ fromJson(needs.prepare-matrix.outputs.environments) }}
+      max-parallel: 1
     steps:
       - uses: softprops/turnstyle@v1
         name: Wait for other inprogress deployment runs
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
 
-      - name: Start ${{ github.event.inputs.environment }} Deployment
+      - name: Start ${{ matrix.environment }} Deployment
         uses: bobheadxi/deployments@v0.4.2
         id: deployment
         with:
           step: start
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          env: ${{ github.event.inputs.environment }}
+          env: ${{ matrix.environment }}
           ref: ${{ github.event.inputs.sha }}
 
       - name: Checkout
@@ -35,17 +61,12 @@ jobs:
 
       - name: Set Environment variable
         run: |
-          case $DEPLOY_ENV in
-            qa) next_env=staging ;;
-            staging) next_env=production ;;
-          esac
-
           echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
           echo "NEXT_ENV=$next_env" >> $GITHUB_ENV
         env:
           DOCKER_IMAGE: ${{ format('dfedigital/find-teacher-training:{0}', github.event.inputs.sha) }}
-          DEPLOY_ENV: ${{ github.event.inputs.environment }}
+          DEPLOY_ENV: ${{ matrix.environment }}
 
       - name: Use Terraform v0.13.5
         uses: hashicorp/setup-terraform@v1
@@ -92,21 +113,13 @@ jobs:
           timeoutSeconds: 300
           intervalSeconds: 15
 
-      - name: Trigger ${{ env.NEXT_ENV }} Deployment
-        if: ${{ steps.wait_for_smoke_tests.outputs.conclusion == 'success' && env.NEXT_ENV != '' && github.ref == 'refs/heads/master' }}
-        uses: benc-uk/workflow-dispatch@v1.1
-        with:
-          workflow: Deploy
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"environment": "${{ env.NEXT_ENV }}", "sha": "${{ github.event.inputs.sha }}"}'
-
-      - name: Update ${{ github.event.inputs.environment }} status
+      - name: Update ${{ matrix.environment }} status
         if: ${{ always() }}
         uses: bobheadxi/deployments@v0.4.2
         with:
           step: finish
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          env: ${{ github.event.inputs.environment }}
+          env: ${{ matrix.environment }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           ref: ${{ github.event.inputs.sha }}
