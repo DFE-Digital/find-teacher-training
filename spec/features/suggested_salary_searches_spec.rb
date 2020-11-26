@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Suggested salary searches' do
+describe 'Suggested salary searches', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
 

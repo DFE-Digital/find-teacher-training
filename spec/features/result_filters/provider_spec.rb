@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Provider filter', type: :feature do
+describe 'Provider filter', type: :feature do
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -116,7 +116,7 @@ feature 'Provider filter', type: :feature do
       end
 
       it 'redirects to location page with an error' do
-        expect(current_path).to eq(location_filter_page.url)
+        expect(page).to have_current_path(location_filter_page.url, ignore_query: true)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq('query' => 'ACME')
         expect(location_filter_page.error_text.text).to eq('Training provider')
         expect(location_filter_page.provider_error.text).to eq('Error: We couldn’t find this provider, please check your information and try again')
@@ -126,6 +126,7 @@ feature 'Provider filter', type: :feature do
 
   context 'Searching' do
     let(:search_term) { 'ACME SCITT' }
+
     before do
       stub_request(:get, providers_url)
         .to_return(
@@ -135,12 +136,13 @@ feature 'Provider filter', type: :feature do
 
       provider_filter_page.load(query: query_params)
     end
+
     it 'has a form with which to search again' do
       provider_filter_page.search_expand.click
       provider_filter_page.search_input.fill_in(with: 'ACME SCITT')
       provider_filter_page.search_submit.click
 
-      expect(current_path).to eq(provider_filter_page.url)
+      expect(page).to have_current_path(provider_filter_page.url, ignore_query: true)
       expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
         'query' => 'ACME SCITT',
         'utf8' => '✓',

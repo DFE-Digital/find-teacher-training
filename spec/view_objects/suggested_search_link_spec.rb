@@ -2,31 +2,37 @@ require 'rails_helper'
 
 describe SuggestedSearchLink do
   context 'radius is nil' do
-    let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
     subject { described_class.new(radius: nil, count: '5', parameters: parameters) }
+
+    let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
 
     describe '#text' do
       subject { super().text }
+
       it { is_expected.to eq('5 courses across England') }
     end
 
     describe '#suffix' do
       subject { super().suffix }
+
       it { is_expected.to eq('') }
     end
 
     describe '#url' do
       subject { super().url }
+
       it { is_expected.to eq('/results?l=2') }
     end
   end
 
   context 'radius is 10' do
+    subject(:suggested_search_link) { described_class.new(radius: '10', count: '5', parameters: parameters) }
+
     let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '5', 'loc' => 'Shetlands', 'lq' => '2' } }
-    subject { described_class.new(radius: '10', count: '5', parameters: parameters) }
 
     describe '#text' do
       subject { super().text }
+
       it { is_expected.to eq('5 courses within 10 miles') }
     end
 
@@ -38,7 +44,7 @@ describe SuggestedSearchLink do
 
     describe '#url' do
       it 'produces the correct URL' do
-        uri = URI(subject.url)
+        uri = URI(suggested_search_link.url)
         expect(uri.path).to eq('/results')
         expect(Rack::Utils.parse_nested_query(uri.query)).to eq({
           'lat' => '5',
@@ -52,8 +58,9 @@ describe SuggestedSearchLink do
   end
 
   context 'including_non_salaried is true' do
-    let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
     subject { described_class.new(radius: nil, count: '5', parameters: parameters, including_non_salaried: true) }
+
+    let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
 
     describe '#text' do
       subject { super().text }
@@ -73,11 +80,13 @@ describe SuggestedSearchLink do
 
     describe '#text' do
       subject { described_class.new(radius: nil, count: '5', parameters: parameters, explicit_salary_filter: true).text }
+
       it { is_expected.to eq('5 courses across England with a salary') }
     end
 
-    describe '#text' do
+    describe '#suffix' do
       subject { described_class.new(radius: nil, count: '5', parameters: parameters, explicit_salary_filter: true).suffix }
+
       it { is_expected.to eq('') }
     end
   end

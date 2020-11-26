@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Study type filter', type: :feature do
+describe 'Study type filter', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
@@ -62,18 +62,6 @@ feature 'Study type filter', type: :feature do
             'test' => 'params',
           },
         )
-      end
-    end
-
-    describe 'Navigating to the page with currently selected filters' do
-      it 'Allows the full time param to be pre-selected' do
-        filter_page.load(query: { fulltime: 'true' })
-        expect(filter_page.full_time.checked?).to eq(true)
-      end
-
-      it 'Allows the part time param to be pre-selected' do
-        filter_page.load(query: { parttime: 'true' })
-        expect(filter_page.part_time.checked?).to eq(true)
       end
     end
 

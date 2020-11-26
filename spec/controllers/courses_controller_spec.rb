@@ -6,7 +6,7 @@ RSpec.describe CoursesController do
 
   describe '#apply' do
     context 'when course is found' do
-      let(:logger) { double(:logger) }
+      let(:logger) { instance_double(Logger) }
 
       before do
         stub_api_v3_resource(
@@ -27,10 +27,12 @@ RSpec.describe CoursesController do
       end
 
       it 'writes to log' do
+        allow(logger).to receive(:info)
         allow(Rails).to receive(:logger).and_return(logger)
-        expect(logger).to receive(:info).with("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
 
         get :apply, params: { provider_code: course.provider_code, course_code: course.course_code }
+
+        expect(logger).to have_received(:info).with("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
       end
     end
 

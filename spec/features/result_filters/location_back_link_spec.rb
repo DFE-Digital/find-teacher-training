@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Location filter back link', type: :feature do
+describe 'Location filter back link', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }

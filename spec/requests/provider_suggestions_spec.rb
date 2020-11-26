@@ -9,6 +9,7 @@ describe '/provider-suggestions', type: :request do
       expect(JSON.parse(response.body)).to eq('error' => 'Bad request')
     end
   end
+
   context 'when provider suggestion is less than three characters' do
     it 'returns bad request (400)' do
       get '/provider-suggestions?query=St'
@@ -17,6 +18,7 @@ describe '/provider-suggestions', type: :request do
       expect(JSON.parse(response.body)).to eq('error' => 'Bad request')
     end
   end
+
   context 'when provider suggestion query is valid' do
     query = 'Str'
     query_with_unicode_character = 'Str%E2%80%99'

@@ -7,21 +7,25 @@ module ResultFilters
 
       context 'when QtsOnly param not present' do
         let(:params) { { qualifications: %w[Other PgdePgceWithQts] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when QtsOnly param is present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
+
         it { is_expected.to eq(true) }
       end
 
       context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when parameters are empty' do
         let(:params) { {} }
+
         it { is_expected.to eq(false) }
       end
     end
@@ -31,26 +35,25 @@ module ResultFilters
 
       context 'when PgdePgceWithQts param not present' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when PgdePgceWithQts param is present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
+
         it { is_expected.to eq(true) }
       end
 
       context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when parameters are empty' do
         let(:params) { {} }
-        it { is_expected.to eq(false) }
-      end
 
-      context 'when qualifications is nil' do
-        let(:params) { {} }
         it { is_expected.to eq(false) }
       end
     end
@@ -60,44 +63,47 @@ module ResultFilters
 
       context 'when Other param not present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when Other param is present' do
         let(:params) { { qualifications: %w[QtsOnly Other] } }
+
         it { is_expected.to eq(true) }
       end
 
       context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
+
         it { is_expected.to eq(false) }
       end
 
       context 'when parameters are empty' do
         let(:params) { {} }
+
         it { is_expected.to eq(false) }
       end
     end
 
     describe 'qualification_selected?' do
       subject { described_class.new(params: params).qualification_selected? }
+
       context 'when a parameter is selected' do
         let(:params) { { qualifications: %w[Other] } }
+
         it { is_expected.to eq(true) }
       end
 
       context 'when multiple parameters are selected' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
+
         it { is_expected.to eq(true) }
       end
 
       context 'when no parameter is selected' do
         let(:params) { {} }
-        it { is_expected.to eq(false) }
-      end
 
-      context 'when qualifications is nil' do
-        let(:params) { {} }
         it { is_expected.to eq(false) }
       end
     end

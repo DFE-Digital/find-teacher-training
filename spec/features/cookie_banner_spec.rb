@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'cookie banner', type: :feature do
+describe 'cookie banner', type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:params) {}
   let(:subject_areas) do

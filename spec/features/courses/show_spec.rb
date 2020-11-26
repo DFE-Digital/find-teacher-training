@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Course show', type: :feature do
+describe 'Course show', type: :feature do
   let(:provider) do
     build(
       :provider,
@@ -91,7 +91,7 @@ feature 'Course show', type: :feature do
   end
 
   describe 'Any course' do
-    scenario 'it shows the course show page' do
+    it 'shows the course show page' do
       expect(course_page.title).to have_content(
         "#{course.name} (#{course.course_code})",
       )
@@ -132,7 +132,7 @@ feature 'Course show', type: :feature do
         provider.website,
       )
 
-      expect(course_page).to_not have_vacancies
+      expect(course_page).not_to have_vacancies
 
       expect(course_page.about_course).to have_content(
         course.about_course,
@@ -158,7 +158,7 @@ feature 'Course show', type: :feature do
         decorated_course.fee_details,
       )
 
-      expect(course_page).to_not have_salary_details
+      expect(course_page).not_to have_salary_details
 
       expect(course_page.scholarship_amount).to have_content('a scholarship of £2,000')
 
@@ -270,7 +270,7 @@ feature 'Course show', type: :feature do
         "The course fees for UK students in #{Settings.current_cycle} to #{Settings.current_cycle + 1} are £9,250",
       )
 
-      expect(course_page).to_not have_international_fees
+      expect(course_page).not_to have_international_fees
     end
   end
 

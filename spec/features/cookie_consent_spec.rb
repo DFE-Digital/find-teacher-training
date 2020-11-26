@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.feature 'Cookie consent', type: :feature do
+RSpec.describe 'Cookie consent', type: :feature do
   let(:cookie_preferences_page) { PageObjects::Page::CookiePreferences.new }
 
-  scenario 'Navigate to cookies' do
+  it 'Navigate to cookies' do
     visit cookie_preferences_path
 
     expect(page).to have_text('Cookies')
@@ -13,7 +13,7 @@ RSpec.feature 'Cookie consent', type: :feature do
     expect(cookie_preferences_page.cookie_consent_deny).not_to be_checked
   end
 
-  scenario 'Consent to cookies' do
+  it 'Consent to cookies' do
     visit cookie_preferences_path
     page.choose('Yes, opt-in to Google Analytics cookies')
     click_button 'Save changes'
@@ -23,7 +23,7 @@ RSpec.feature 'Cookie consent', type: :feature do
     expect(cookie_preferences_page.cookie_consent_deny).not_to be_checked
   end
 
-  scenario 'Does not consent to cookies' do
+  it 'Does not consent to cookies' do
     visit cookie_preferences_path
     page.choose('No, do not track my website usage')
     click_button 'Save changes'
@@ -33,7 +33,7 @@ RSpec.feature 'Cookie consent', type: :feature do
     expect(cookie_preferences_page.cookie_consent_accept).not_to be_checked
   end
 
-  scenario 'No cookie preference selected' do
+  it 'No cookie preference selected' do
     visit cookie_preferences_path
     click_button 'Save changes'
 

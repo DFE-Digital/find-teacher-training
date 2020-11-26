@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Application helpers', type: :helper do
+describe 'Application helpers', type: :helper do
   describe '#markdown' do
     it 'converts markdown to HTML' do
       expect(helper.markdown('test')).to eq('<p class="govuk-body">test</p>')

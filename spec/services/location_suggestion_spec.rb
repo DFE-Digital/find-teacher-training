@@ -67,6 +67,7 @@ describe LocationSuggestion do
       before do
         allow(Raven).to receive(:send_event)
       end
+
       it 'sends a sentry error with the received error_message' do
         stub_query(error_message: error_message)
         location_suggestions
@@ -88,7 +89,7 @@ describe LocationSuggestion do
         location_suggestions
       end
 
-      it 'it returns a maximum of 5 suggestions' do
+      it 'returns a maximum of 5 suggestions' do
         expect(location_suggestions.count).to eq(5)
       end
     end

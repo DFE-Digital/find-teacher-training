@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'heartbeat requests' do
+describe 'heartbeat requests', type: :request do
   describe 'GET /ping' do
     it 'returns PONG' do
       get '/ping'
@@ -10,7 +10,7 @@ describe 'heartbeat requests' do
   end
 
   describe 'GET /sha' do
-    around :each do |example|
+    around do |example|
       ENV['SHA'] = 'some-sha'
 
       example.run

@@ -34,7 +34,7 @@ describe ResultsView do
   end
 
   describe '#query_parameters_with_defaults' do
-    subject { described_class.new(query_parameters: query_parameters).query_parameters_with_defaults }
+    subject(:results_view) { described_class.new(query_parameters: query_parameters).query_parameters_with_defaults }
 
     context 'params are empty' do
       let(:parameter_hash) { {} }
@@ -88,7 +88,7 @@ describe ResultsView do
       let(:parameter_hash) { { 'utf8' => 'true', 'authenticity_token' => 'booyah' } }
 
       it 'filters them out' do
-        expect(subject).to eq(default_output_parameters.merge({}))
+        expect(results_view).to eq(default_output_parameters.merge({}))
       end
     end
 
@@ -98,17 +98,18 @@ describe ResultsView do
       # This will change when we fully switch to Rails
 
       let(:parameter_hash) { { 'subjects' => '14,41,20' } }
+
       it { is_expected.to eq(default_output_parameters.merge(parameter_hash)) }
     end
   end
 
   describe 'filter_path_with_unescaped_commas' do
-    subject { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas('/test') }
+    subject(:results_view) { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas('/test') }
 
     it 'appends an unescaped querystring to the passed path' do
-      expect(UnescapedQueryStringService).to receive(:call).with(base_path: '/test', parameters: default_output_parameters)
+      allow(UnescapedQueryStringService).to receive(:call).with(base_path: '/test', parameters: default_output_parameters)
         .and_return('test_result')
-      expect(subject).to eq('test_result')
+      expect(results_view).to eq('test_result')
     end
   end
 
@@ -251,6 +252,7 @@ describe ResultsView do
 
     context 'when loc is not passed' do
       let(:parameter_hash) { {} }
+
       it { is_expected.to eq('Across England') }
     end
   end
@@ -259,6 +261,7 @@ describe ResultsView do
     subject { described_class.new(query_parameters: parameter_hash).radius }
 
     let(:parameter_hash) { {} }
+
     it { is_expected.to eq('50') }
   end
 
@@ -317,8 +320,8 @@ describe ResultsView do
     end
 
     before do
-      allow(Settings).to receive_message_chain(:google, :maps_api_key).and_return('yellowskullkey')
-      allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return('https://maps.googleapis.com/maps/api/staticmap')
+      allow(Settings.google).to receive(:maps_api_key).and_return('yellowskullkey')
+      allow(Settings.google).to receive(:maps_api_url).and_return('https://maps.googleapis.com/maps/api/staticmap')
     end
 
     it { is_expected.to eq('https://maps.googleapis.com/maps/api/staticmap?key=yellowskullkey&center=-109.3042697,-27.1504002&zoom=9&size=300x200&scale=2&markers=-109.3042697,-27.1504002') }
@@ -473,74 +476,74 @@ describe ResultsView do
           )
         end
       end
+    end
+  end
 
-      describe '#suggested_search_visible?' do
-        subject { described_class.new(query_parameters: { 'lat' => '0.1', 'lng' => '2.4', 'rad' => '50' }).suggested_search_visible? }
+  describe '#suggested_search_visible?' do
+    subject { described_class.new(query_parameters: { 'lat' => '0.1', 'lng' => '2.4', 'rad' => '50' }).suggested_search_visible? }
 
-        def suggested_search_count_parameters
-          results_page_parameters.reject do |k, _v|
-            ['page[page]', 'page[per_page]', 'sort'].include?(k)
-          end
-        end
-
-        context 'there are more than three results' do
-          before do
-            stub_request(:get, courses_url)
-              .with(query: results_page_parameters)
-              .to_return(
-                body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-                headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-              )
-          end
-
-          it { is_expected.to be(false) }
-        end
-
-        context 'there are less than three results' do
-          context 'there are suggested courses found' do
-            before do
-              stub_request(:get, courses_url)
-                .with(query: results_page_parameters)
-                .to_return(
-                  body: File.new('spec/fixtures/api_responses/two_courses.json'),
-                  headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-                )
-
-              stub_request(:get, courses_url)
-                .with(query: suggested_search_count_parameters)
-                .to_return(
-                  body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-                  headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-                )
-            end
-
-            it { is_expected.to be(true) }
-          end
-
-          context 'there are no suggested courses found' do
-            before do
-              stub_request(:get, courses_url)
-                .with(query: results_page_parameters)
-                .to_return(
-                  body: File.new('spec/fixtures/api_responses/two_courses.json'),
-                  headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-                )
-              stub_request(:get, courses_url)
-                .with(query: suggested_search_count_parameters)
-                .to_return(
-                  body: File.new('spec/fixtures/api_responses/empty_courses.json'),
-                  headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-                )
-            end
-
-            it { is_expected.to be(false) }
-          end
-        end
+    def suggested_search_count_parameters
+      results_page_parameters.reject do |k, _v|
+        ['page[page]', 'page[per_page]', 'sort'].include?(k)
       end
+    end
+
+    context 'there are more than three results' do
+      before do
+        stub_request(:get, courses_url)
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
+            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          )
+      end
+
+      it { is_expected.to be(false) }
+    end
+
+    context 'there are less than three results and there are suggested courses found' do
+      before do
+        stub_request(:get, courses_url)
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new('spec/fixtures/api_responses/two_courses.json'),
+            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          )
+
+        stub_request(:get, courses_url)
+          .with(query: suggested_search_count_parameters)
+          .to_return(
+            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
+            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          )
+      end
+
+      it { is_expected.to be(true) }
+    end
+
+    context 'there are less than three results and there are no suggested courses found' do
+      before do
+        stub_request(:get, courses_url)
+          .with(query: results_page_parameters)
+          .to_return(
+            body: File.new('spec/fixtures/api_responses/two_courses.json'),
+            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          )
+        stub_request(:get, courses_url)
+          .with(query: suggested_search_count_parameters)
+          .to_return(
+            body: File.new('spec/fixtures/api_responses/empty_courses.json'),
+            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          )
+      end
+
+      it { is_expected.to be(false) }
     end
   end
 
   describe '#placement_schools_summary' do
+    subject(:placement_schools_summary) { results_view.placement_schools_summary(course) }
+
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
     let(:site1) do
@@ -558,10 +561,6 @@ describe ResultsView do
       )
     end
 
-    subject do
-      results_view.placement_schools_summary(course)
-    end
-
     context 'site_distance less than 11 miles' do
       let(:parameter_hash) do
         {
@@ -569,7 +568,8 @@ describe ResultsView do
           'lng' => '0.0877',
         }
       end
-      it { expect(subject).to eq('Placement schools are near you') }
+
+      it { expect(placement_schools_summary).to eq('Placement schools are near you') }
     end
 
     context 'site_distance less than 21 miles' do
@@ -579,7 +579,8 @@ describe ResultsView do
           'lng' => '0.1367',
         }
       end
-      it { expect(subject).to eq('Placement schools might be near you') }
+
+      it { expect(placement_schools_summary).to eq('Placement schools might be near you') }
     end
 
     context 'site_distance more than 21 miles' do
@@ -589,7 +590,8 @@ describe ResultsView do
           'lng' => '0.1367',
         }
       end
-      it { expect(subject).to eq('Placement schools might be in commuting distance') }
+
+      it { expect(placement_schools_summary).to eq('Placement schools might be in commuting distance') }
     end
   end
 
@@ -655,7 +657,7 @@ describe ResultsView do
   context 'locations' do
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
     let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
-    let(:geocoder) { double('geocoder') }
+    let(:geocoder) { instance_double(Geokit::LatLng) }
 
     let(:site1) do
       build(
@@ -750,9 +752,10 @@ describe ResultsView do
 
   describe '#sort_options' do
     context 'all other queries' do
-      subject { described_class.new(query_parameters: {}).sort_options }
+      subject(:results_view) { described_class.new(query_parameters: {}).sort_options }
+
       it {
-        is_expected.to eq(
+        expect(results_view).to eq(
           [
             ['Training provider (A-Z)', 0, { "data-qa": 'sort-form__options__ascending' }],
             ['Training provider (Z-A)', 1, { "data-qa": 'sort-form__options__descending' }],
@@ -836,9 +839,9 @@ describe ResultsView do
   end
 
   describe '#total_pages' do
-    let(:parameter_hash) { {} }
+    subject(:results_view) { described_class.new(query_parameters: query_parameters) }
 
-    subject { described_class.new(query_parameters: query_parameters) }
+    let(:parameter_hash) { {} }
 
     def stub_request_with_meta_count(count)
       stub_request(:get, courses_url)
@@ -854,8 +857,8 @@ describe ResultsView do
         stub_request_with_meta_count(0)
       end
 
-      it 'should return 0 pages' do
-        expect(subject.total_pages).to eql(0)
+      it 'returns 0 pages' do
+        expect(results_view.total_pages).to be(0)
       end
     end
 
@@ -864,8 +867,8 @@ describe ResultsView do
         stub_request_with_meta_count(10)
       end
 
-      it 'should return 1 page' do
-        expect(subject.total_pages).to eql(1)
+      it 'returns 1 page' do
+        expect(results_view.total_pages).to be(1)
       end
     end
 
@@ -874,8 +877,8 @@ describe ResultsView do
         stub_request_with_meta_count(20)
       end
 
-      it 'should return 2 pages' do
-        expect(subject.total_pages).to eql(2)
+      it 'returns 2 pages' do
+        expect(results_view.total_pages).to be(2)
       end
     end
   end

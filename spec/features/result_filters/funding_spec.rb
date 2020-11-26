@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Funding filter', type: :feature do
+describe 'Funding filter', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
 

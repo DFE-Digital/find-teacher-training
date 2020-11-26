@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Subject filter', type: :feature do
+describe 'Subject filter', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
@@ -159,9 +159,11 @@ feature 'Subject filter', type: :feature do
     before do
       filter_page.load
     end
+
     it "displays 'Back to search results' for the back link" do
       expect(filter_page.back_link.text).to eq('Back to search results')
     end
+
     it "displays 'Find courses' for the continue" do
       expect(filter_page.continue.value).to eq('Find courses')
     end
@@ -272,12 +274,12 @@ feature 'Subject filter', type: :feature do
       ]
     end
 
-    it 'should set assistive technology attributes appropriately' do
+    it 'sets assistive technology attributes appropriately' do
       expect(filter_page.subject_areas.first.accordion_button).to match_selector('[aria-expanded="false"]')
       expect(filter_page.send_area.accordion_button).to match_selector('[aria-expanded="false"]')
     end
 
-    it 'should not expand any accordion sections' do
+    it 'does not expand any accordion sections' do
       expect(filter_page.subject_areas.first.root_element).to have_no_css('.govuk-accordion__section--expanded')
       expect(filter_page.send_area.root_element).to have_no_css('.govuk-accordion__section--expanded')
     end

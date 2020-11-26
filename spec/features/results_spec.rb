@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'results', type: :feature do
+describe 'results', type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'provider.provider_name,name' }
   let(:params) {}
@@ -32,8 +32,8 @@ feature 'results', type: :feature do
 
     results_page_request
 
-    allow(Settings).to receive_message_chain(:google, :maps_api_key).and_return('alohomora')
-    allow(Settings).to receive_message_chain(:google, :maps_api_url).and_return('https://maps.googleapis.com/maps/api/staticmap')
+    allow(Settings).to receive(:google).and_return(maps_api_key: 'alohomora')
+    allow(Settings).to receive(:google).and_return(maps_api_url: 'https://maps.googleapis.com/maps/api/staticmap')
     visit results_path(params)
   end
 

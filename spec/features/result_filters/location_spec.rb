@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Location filter', type: :feature do
+describe 'Location filter', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
@@ -140,42 +140,38 @@ feature 'Location filter', type: :feature do
     end
 
     describe 'when using the wizard' do
-      context 'within cycle' do
-        context 'valid search' do
-          it 'progresses to next step instead of going straight to results' do
-            start_page.load
-            start_page.by_postcode_town_or_city.click
-            start_page.location_query.fill_in(with: 'SW1P 3BT')
-            start_page.find_courses.click
+      context 'within cycle and a valid search' do
+        it 'progresses to next step instead of going straight to results' do
+          start_page.load
+          start_page.by_postcode_town_or_city.click
+          start_page.location_query.fill_in(with: 'SW1P 3BT')
+          start_page.find_courses.click
 
-            URI(current_url).then do |uri|
-              expect(uri.path).to eq('/start/subject')
-              expect(uri.query)
-                .to eq('l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2')
-            end
-          end
-        end
-
-        context 'no option selected' do
-          it 'displays an error' do
-            start_page.load
-            start_page.find_courses.click
-
-            expect(start_page).to have_content(/Please choose an option/)
+          URI(current_url).then do |uri|
+            expect(uri.path).to eq('/start/subject')
+            expect(uri.query)
+            .to eq('l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2')
           end
         end
       end
 
-      context 'nearing end of cycle' do
-        context 'no options selected' do
-          it 'displays an error' do
-            allow(Settings).to receive(:cycle_ending_soon).and_return(true)
+      context 'within cycle and no option selected' do
+        it 'displays an error' do
+          start_page.load
+          start_page.find_courses.click
 
-            start_page.load
-            start_page.find_courses.click
+          expect(start_page).to have_content(/Please choose an option/)
+        end
+      end
 
-            expect(start_page).to have_content(/Please choose an option/)
-          end
+      context 'nearing end of cycle and no options selected' do
+        it 'displays an error' do
+          allow(Settings).to receive(:cycle_ending_soon).and_return(true)
+
+          start_page.load
+          start_page.find_courses.click
+
+          expect(start_page).to have_content(/Please choose an option/)
         end
       end
     end
@@ -267,7 +263,7 @@ feature 'Location filter', type: :feature do
     end
   end
 
-  context 'filtering by provider' do
+  describe 'searching by provider' do
     before { filter_page.load(query: query_params) }
 
     let(:providers) { [build(:provider), build(:provider)] }
@@ -285,7 +281,7 @@ feature 'Location filter', type: :feature do
       filter_page.provider_search.fill_in(with: 'ACME')
       filter_page.find_courses.click
 
-      expect(current_path).to eq(provider_page.url)
+      expect(page).to have_current_path(provider_page.url, ignore_query: true)
       expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
         'l' => '3',
         'query' => 'ACME',
@@ -308,7 +304,7 @@ feature 'Location filter', type: :feature do
         filter_page.provider_search.fill_in(with: 'ACME')
         filter_page.find_courses.click
 
-        expect(current_path).to eq(provider_page.url)
+        expect(page).to have_current_path(provider_page.url, ignore_query: true)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
           'l' => '3',
           'query' => 'ACME',
@@ -351,7 +347,7 @@ feature 'Location filter', type: :feature do
     end
 
     it 'does not have the sort form' do
-      expect(results_page).to_not have_sort_form
+      expect(results_page).not_to have_sort_form
     end
 
     it 'has sorted by distance' do

@@ -46,11 +46,11 @@ describe 'results/non_university.html.erb', type: :view do
 
     it "does not renders 'locations to choose from'" do
       expect(html).to have_no_css('div.govuk-\\!-margin-top-0')
-      expect(html).to_not match('locations to choose from')
+      expect(html).not_to match('locations to choose from')
     end
 
     it 'does not renders `Main Site` as nearest_location_name' do
-      expect(html).to_not match('Main Site')
+      expect(html).not_to match('Main Site')
     end
 
     it "renders nearest address'" do

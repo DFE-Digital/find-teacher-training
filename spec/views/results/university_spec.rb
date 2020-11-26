@@ -60,7 +60,7 @@ describe 'results/university.html.erb', type: :view do
     end
 
     it 'renders link' do
-      expect(html).to have_link('More about placements on this course', href: course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), visible: false)
+      expect(html).to have_link('More about placements on this course', href: course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), visible: :hidden)
     end
 
     it 'renders University' do

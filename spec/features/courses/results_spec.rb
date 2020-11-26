@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Search results', type: :feature do
+describe 'Search results', type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:base_parameters) { results_page_parameters }

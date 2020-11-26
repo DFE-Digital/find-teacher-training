@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'suggested searches', type: :feature do
+describe 'suggested searches', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'distance' }
