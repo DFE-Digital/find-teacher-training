@@ -1,102 +1,102 @@
-require_relative "../../../app/view_objects/result_filters/qualification_view"
+require_relative '../../../app/view_objects/result_filters/qualification_view'
 
 module ResultFilters
   describe QualificationView do
-    describe "qts_only_checked?" do
+    describe 'qts_only_checked?' do
       subject { described_class.new(params: params).qts_only_checked? }
 
-      context "when QtsOnly param not present" do
+      context 'when QtsOnly param not present' do
         let(:params) { { qualifications: %w[Other PgdePgceWithQts] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when QtsOnly param is present" do
+      context 'when QtsOnly param is present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
         it { is_expected.to eq(true) }
       end
 
-      context "when qualifications is empty" do
+      context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when parameters are empty" do
+      context 'when parameters are empty' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end
     end
 
-    describe "pgde_pgce_with_qts_checked" do
+    describe 'pgde_pgce_with_qts_checked' do
       subject { described_class.new(params: params).pgde_pgce_with_qts_checked? }
 
-      context "when PgdePgceWithQts param not present" do
+      context 'when PgdePgceWithQts param not present' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when PgdePgceWithQts param is present" do
+      context 'when PgdePgceWithQts param is present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
         it { is_expected.to eq(true) }
       end
 
-      context "when qualifications is empty" do
+      context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when parameters are empty" do
+      context 'when parameters are empty' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end
 
-      context "when qualifications is nil" do
+      context 'when qualifications is nil' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end
     end
 
-    describe "#other_checked?" do
+    describe '#other_checked?' do
       subject { described_class.new(params: params).other_checked? }
 
-      context "when Other param not present" do
+      context 'when Other param not present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when Other param is present" do
+      context 'when Other param is present' do
         let(:params) { { qualifications: %w[QtsOnly Other] } }
         it { is_expected.to eq(true) }
       end
 
-      context "when qualifications is empty" do
+      context 'when qualifications is empty' do
         let(:params) { { qualifications: [] } }
         it { is_expected.to eq(false) }
       end
 
-      context "when parameters are empty" do
+      context 'when parameters are empty' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end
     end
 
-    describe "qualification_selected?" do
+    describe 'qualification_selected?' do
       subject { described_class.new(params: params).qualification_selected? }
-      context "when a parameter is selected" do
+      context 'when a parameter is selected' do
         let(:params) { { qualifications: %w[Other] } }
         it { is_expected.to eq(true) }
       end
 
-      context "when multiple parameters are selected" do
+      context 'when multiple parameters are selected' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
         it { is_expected.to eq(true) }
       end
 
-      context "when no parameter is selected" do
+      context 'when no parameter is selected' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end
 
-      context "when qualifications is nil" do
+      context 'when qualifications is nil' do
         let(:params) { {} }
         it { is_expected.to eq(false) }
       end

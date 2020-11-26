@@ -3,9 +3,9 @@ if Settings.logstash.host && Settings.logstash.port
     # For some reason logstash / elasticsearch drops events where the payload
     # is a hash. These are more conveniently accessed at the top level of the
     # event, anyway, so we move it there.
-    if event["payload"].present?
-      event.append(event["payload"])
-      event["payload"] = nil
+    if event['payload'].present?
+      event.append(event['payload'])
+      event['payload'] = nil
     end
   end
 

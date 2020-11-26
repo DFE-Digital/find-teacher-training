@@ -5,18 +5,18 @@ module Helpers
 
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:dfe] = {
-      "provider" => "dfe",
-      "uid" => SecureRandom.uuid,
-      "info" => {
-        "first_name" => user.first_name,
-        "last_name" => user.last_name,
-        "email" => user.email,
-        "id" => user.id,
-        "state" => user.state,
-        "admin" => user.admin,
+      'provider' => 'dfe',
+      'uid' => SecureRandom.uuid,
+      'info' => {
+        'first_name' => user.first_name,
+        'last_name' => user.last_name,
+        'email' => user.email,
+        'id' => user.id,
+        'state' => user.state,
+        'admin' => user.admin,
       },
-      "credentials" => {
-        "token_id" => "123",
+      'credentials' => {
+        'token_id' => '123',
       },
     }
 
@@ -26,8 +26,8 @@ module Helpers
       "/recruitment_cycles/#{Settings.current_cycle}/providers",
       resource_to_jsonapi(provider),
     )
-    Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:dfe]
-    stub_api_v2_request("/sessions", resource_to_jsonapi(user), :post)
+    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:dfe]
+    stub_api_v2_request('/sessions', resource_to_jsonapi(user), :post)
 
     disable_authorised_development_user
   end
@@ -48,7 +48,7 @@ module Helpers
       last_name: user.last_name,
     )
 
-    stub_api_v2_request("/sessions", resource_to_jsonapi(user), :post)
+    stub_api_v2_request('/sessions', resource_to_jsonapi(user), :post)
 
     begin
       Settings[:authorised_user] = authorised_user

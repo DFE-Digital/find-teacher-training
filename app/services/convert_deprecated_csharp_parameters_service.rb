@@ -21,7 +21,7 @@ class ConvertDeprecatedCsharpParametersService
     end
 
     if have_legacy_params
-      warn "The user navigated to the results page using the deprecated C# parameterisation scheme" if Rails.env.production?
+      warn 'The user navigated to the results page using the deprecated C# parameterisation scheme' if Rails.env.production?
       return { deprecated: true, parameters: params_hash }
     end
 
@@ -40,13 +40,13 @@ private
 
   def legacy_to_rails_array(array)
     if array.instance_of?(String)
-      array.split(",")
+      array.split(',')
     elsif array.is_a?(Hash)
       array.values
     end
   end
 
   def legacy_to_rails_boolean(boolean)
-    boolean == "True"
+    boolean == 'True'
   end
 end

@@ -38,15 +38,15 @@ module ResultFilters
     end
 
     def location_option_selected?
-      filter_params[:l] == "1"
+      filter_params[:l] == '1'
     end
 
     def across_england_option_selected?
-      filter_params[:l] == "2"
+      filter_params[:l] == '2'
     end
 
     def provider_option_selected?
-      filter_params[:l] == "3"
+      filter_params[:l] == '3'
     end
 
     def get_params_for_selected_option(all_params)
@@ -60,7 +60,7 @@ module ResultFilters
     end
 
     def strip(params)
-      params.reject { |_, v| v == "" }
+      params.reject { |_, v| v == '' }
     end
 
     def next_step(all_params)

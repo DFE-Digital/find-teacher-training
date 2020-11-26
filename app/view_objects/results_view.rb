@@ -1,4 +1,4 @@
-require "geokit"
+require 'geokit'
 
 class ResultsView
   include CsharpRailsSubjectConversionHelper
@@ -6,18 +6,18 @@ class ResultsView
 
   MAXIMUM_NUMBER_OF_SUBJECTS = 43
   NUMBER_OF_SUBJECTS_DISPLAYED = 4
-  DISTANCE = "2".freeze
+  DISTANCE = '2'.freeze
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
   RESULTS_PER_PAGE = 10
-  MILES = "50".freeze
+  MILES = '50'.freeze
 
   def initialize(query_parameters:)
     @query_parameters = query_parameters
   end
 
   def query_parameters_with_defaults
-    query_parameters.except("utf8", "authenticity_token")
+    query_parameters.except('utf8', 'authenticity_token')
       .merge(qualifications_parameters)
       .merge(fulltime_parameters)
       .merge(parttime_parameters)
@@ -31,37 +31,37 @@ class ResultsView
   end
 
   def fulltime?
-    return false if query_parameters["fulltime"].nil?
+    return false if query_parameters['fulltime'].nil?
 
-    query_parameters["fulltime"] == "true"
+    query_parameters['fulltime'] == 'true'
   end
 
   def parttime?
-    return false if query_parameters["parttime"].nil?
+    return false if query_parameters['parttime'].nil?
 
-    query_parameters["parttime"] == "true"
+    query_parameters['parttime'] == 'true'
   end
 
   def hasvacancies?
-    return true if query_parameters["hasvacancies"].nil?
+    return true if query_parameters['hasvacancies'].nil?
 
-    query_parameters["hasvacancies"] == "true"
+    query_parameters['hasvacancies'] == 'true'
   end
 
   def sen_courses?
-    query_parameters["senCourses"] == "true"
+    query_parameters['senCourses'] == 'true'
   end
 
   def qts_only?
-    qualifications.include?("QtsOnly")
+    qualifications.include?('QtsOnly')
   end
 
   def pgce_or_pgde_with_qts?
-    qualifications.include?("PgdePgceWithQts")
+    qualifications.include?('PgdePgceWithQts')
   end
 
   def other_qualifications?
-    qualifications.include?("Other")
+    qualifications.include?('Other')
   end
 
   def all_qualifications?
@@ -69,11 +69,11 @@ class ResultsView
   end
 
   def with_salaries?
-    query_parameters["funding"] == "8"
+    query_parameters['funding'] == '8'
   end
 
   def send_courses?
-    query_parameters["senCourses"].present? && query_parameters["senCourses"].downcase == "true"
+    query_parameters['senCourses'].present? && query_parameters['senCourses'].downcase == 'true'
   end
 
   def number_of_extra_subjects
@@ -83,7 +83,7 @@ class ResultsView
   end
 
   def location
-    query_parameters["loc"] || "Across England"
+    query_parameters['loc'] || 'Across England'
   end
 
   def radius
@@ -91,7 +91,7 @@ class ResultsView
   end
 
   def sort_by
-    query_parameters["sortby"]
+    query_parameters['sortby']
   end
 
   def show_map?
@@ -109,23 +109,23 @@ class ResultsView
   end
 
   def provider
-    query_parameters["query"]
+    query_parameters['query']
   end
 
   def location_filter?
-    query_parameters["l"] == "1"
+    query_parameters['l'] == '1'
   end
 
   def england_filter?
-    query_parameters["l"] == "2"
+    query_parameters['l'] == '2'
   end
 
   def provider_filter?
-    query_parameters["l"] == "3"
+    query_parameters['l'] == '3'
   end
 
   def vacancy_filter?
-    query_parameters["hasvacancies"] == "false"
+    query_parameters['hasvacancies'] == 'false'
   end
 
   def sort_by_distance?
@@ -134,8 +134,8 @@ class ResultsView
 
   def sort_options
     [
-      ["Training provider (A-Z)", 0, { "data-qa": "sort-form__options__ascending" }],
-      ["Training provider (Z-A)", 1, { "data-qa": "sort-form__options__descending" }],
+      ['Training provider (A-Z)', 0, { "data-qa": 'sort-form__options__ascending' }],
+      ['Training provider (Z-A)', 1, { "data-qa": 'sort-form__options__descending' }],
     ]
   end
 
@@ -158,7 +158,7 @@ class ResultsView
   end
 
   def course_count
-    courses.meta["count"]
+    courses.meta['count']
   end
 
   def total_pages
@@ -190,7 +190,7 @@ class ResultsView
       nearest_address.address3,
       nearest_address.address4,
       nearest_address.postcode,
-    ].select(&:present?).join(", ").html_safe
+    ].select(&:present?).join(', ').html_safe
   end
 
   def has_sites?(course)
@@ -242,9 +242,9 @@ class ResultsView
   def number_of_courses_string
     case course_count
     when 0
-      "No courses"
+      'No courses'
     when 1
-      "1 course"
+      '1 course'
     else
       "#{number_with_delimiter(course_count)} courses"
     end
@@ -254,11 +254,11 @@ class ResultsView
     site_distance = site_distance(course)
 
     if site_distance < 11
-      "Placement schools are near you"
+      'Placement schools are near you'
     elsif site_distance < 21
-      "Placement schools might be near you"
+      'Placement schools might be near you'
     else
-      "Placement schools might be in commuting distance"
+      'Placement schools might be in commuting distance'
     end
   end
 
@@ -306,37 +306,37 @@ private
   attr_reader :query_parameters
 
   def results_order
-    return :desc if query_parameters[:sortby] == "1"
+    return :desc if query_parameters[:sortby] == '1'
 
     :asc
   end
 
   def qualifications_parameters
-    { "qualifications" => query_parameters["qualifications"].presence || %w[QtsOnly PgdePgceWithQts Other] }
+    { 'qualifications' => query_parameters['qualifications'].presence || %w[QtsOnly PgdePgceWithQts Other] }
   end
 
   def fulltime_parameters
-    { "fulltime" => fulltime? }
+    { 'fulltime' => fulltime? }
   end
 
   def parttime_parameters
-    { "parttime" => parttime? }
+    { 'parttime' => parttime? }
   end
 
   def hasvacancies_parameters
-    { "hasvacancies" => hasvacancies? }
+    { 'hasvacancies' => hasvacancies? }
   end
 
   def sen_courses_parameters
-    { "senCourses" => sen_courses? }
+    { 'senCourses' => sen_courses? }
   end
 
   def subject_parameters
-    query_parameters["subjects"].present? ? { "subjects" => query_parameters["subjects"].presence } : {}
+    query_parameters['subjects'].present? ? { 'subjects' => query_parameters['subjects'].presence } : {}
   end
 
   def subject_parameters_array
-    query_parameters["subjects"] || []
+    query_parameters['subjects'] || []
   end
 
   def subject_codes
@@ -344,25 +344,25 @@ private
   end
 
   def latitude
-    query_parameters["lat"]
+    query_parameters['lat']
   end
 
   def longitude
-    query_parameters["lng"]
+    query_parameters['lng']
   end
 
   def google_map_zoom
-    "9"
+    '9'
   end
 
   def study_type
-    return "full_time,part_time" if fulltime? && parttime?
-    return "full_time" if fulltime?
-    return "part_time" if parttime?
+    return 'full_time,part_time' if fulltime? && parttime?
+    return 'full_time' if fulltime?
+    return 'part_time' if parttime?
   end
 
   def qualifications
-    query_parameters["qualifications"] || %w[QtsOnly PgdePgceWithQts Other]
+    query_parameters['qualifications'] || %w[QtsOnly PgdePgceWithQts Other]
   end
 
   def filtered_subjects
@@ -379,7 +379,7 @@ private
   end
 
   def course_counter(radius_to_check: nil, include_salary: true)
-    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary).all.meta["count"]
+    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary).all.meta['count']
   end
 
   def course_query(include_location:, radius_to_query: radius, include_salary: true)
@@ -389,22 +389,22 @@ private
       .includes(:subjects)
       .where(recruitment_cycle_year: Settings.current_cycle)
 
-    base_query = base_query.where(funding: "salary") if include_salary && with_salaries?
+    base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: hasvacancies?)
     base_query = base_query.where(study_type: study_type) if study_type.present?
 
-    base_query = base_query.where(qualification: qualification.join(",")) unless all_qualifications?
-    base_query = base_query.where(subjects: subject_codes.join(",")) if subject_codes.any?
+    base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
+    base_query = base_query.where(subjects: subject_codes.join(',')) if subject_codes.any?
     base_query = base_query.where(send_courses: true) if send_courses?
 
     if include_location
-      base_query = base_query.where("latitude" => latitude)
-      base_query = base_query.where("longitude" => longitude)
-      base_query = base_query.where("radius" => radius_to_query)
+      base_query = base_query.where('latitude' => latitude)
+      base_query = base_query.where('longitude' => longitude)
+      base_query = base_query.where('radius' => radius_to_query)
       base_query = base_query.where(expand_university: Settings.expand_university)
     end
 
-    base_query = base_query.where("provider.provider_name" => provider) if provider.present?
+    base_query = base_query.where('provider.provider_name' => provider) if provider.present?
     base_query
   end
 
@@ -435,7 +435,7 @@ private
       suggested_search_link = SuggestedSearchLink.new(
         radius: radius,
         count: count,
-        parameters: query_parameters_with_defaults.except("funding"),
+        parameters: query_parameters_with_defaults.except('funding'),
         including_non_salaried: true,
       )
     end

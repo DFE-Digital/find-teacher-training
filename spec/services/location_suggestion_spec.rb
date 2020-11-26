@@ -1,11 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe LocationSuggestion do
-  describe "#suggest" do
-    let(:location1) { "Cardiff, UK" }
-    let(:location2) { "Cardiff Road, Newport, UK" }
-    let(:location3) { "Cardiff House, Peckham Park Road, London, UK" }
-    let(:query) { "Cardiff" }
+  describe '#suggest' do
+    let(:location1) { 'Cardiff, UK' }
+    let(:location2) { 'Cardiff Road, Newport, UK' }
+    let(:location3) { 'Cardiff House, Peckham Park Road, London, UK' }
+    let(:query) { 'Cardiff' }
     let(:predictions) do
       [
         { description: location1 },
@@ -16,10 +16,10 @@ describe LocationSuggestion do
     let(:params) do
       {
         key: Settings.google.gcp_api_key,
-        language: "en",
+        language: 'en',
         input: query,
-        components: "country:uk",
-        types: "geocode",
+        components: 'country:uk',
+        types: 'geocode',
       }.to_query
     end
     let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
@@ -37,37 +37,37 @@ describe LocationSuggestion do
         .to_return(
           status: status,
           body: { error_message: error_message, predictions: predictions }.to_json,
-          headers: { 'Content-Type': "application/json" },
+          headers: { 'Content-Type': 'application/json' },
         )
     end
 
-    context "successful requests" do
+    context 'successful requests' do
       before do
         query_stub
         location_suggestions
       end
 
-      it "requests suggestions" do
+      it 'requests suggestions' do
         expect(query_stub).to have_been_requested
       end
 
-      context "successful request" do
-        it "returns the formatted result" do
+      context 'successful request' do
+        it 'returns the formatted result' do
           expect(location_suggestions.count).to eq(3)
-          expect(location_suggestions.first).to eq("Cardiff")
-          expect(location_suggestions.second).to eq("Cardiff Road, Newport")
-          expect(location_suggestions.last).to eq("Cardiff House, Peckham Park Road, London")
+          expect(location_suggestions.first).to eq('Cardiff')
+          expect(location_suggestions.second).to eq('Cardiff Road, Newport')
+          expect(location_suggestions.last).to eq('Cardiff House, Peckham Park Road, London')
         end
       end
     end
 
-    context "with an error message in the body" do
-      let(:error_message) { "The provided API key is invalid." }
+    context 'with an error message in the body' do
+      let(:error_message) { 'The provided API key is invalid.' }
 
       before do
         allow(Raven).to receive(:send_event)
       end
-      it "sends a sentry error with the received error_message" do
+      it 'sends a sentry error with the received error_message' do
         stub_query(error_message: error_message)
         location_suggestions
 
@@ -75,12 +75,12 @@ describe LocationSuggestion do
       end
     end
 
-    context "suggestion limits" do
+    context 'suggestion limits' do
       before do
         predictions = []
 
         7.times do
-          predictions.push(description: "Foo")
+          predictions.push(description: 'Foo')
         end
 
         stub_query(predictions: predictions)
@@ -88,17 +88,17 @@ describe LocationSuggestion do
         location_suggestions
       end
 
-      it "it returns a maximum of 5 suggestions" do
+      it 'it returns a maximum of 5 suggestions' do
         expect(location_suggestions.count).to eq(5)
       end
     end
 
-    context "unsuccessful request" do
+    context 'unsuccessful request' do
       before do
         stub_query(status: 500)
       end
 
-      it "returns nothing" do
+      it 'returns nothing' do
         expect(location_suggestions).to be_nil
       end
     end

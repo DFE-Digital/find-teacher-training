@@ -1,19 +1,19 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "results/university.html.erb", type: :view do
+describe 'results/university.html.erb', type: :view do
   let(:html) do
-    render partial: "results/university.html.erb", locals: { course: course }
+    render partial: 'results/university.html.erb', locals: { course: course }
   end
 
   let(:site1) do
     build(
       :site,
       **lat_lon,
-      address1: "10 Windy Way",
-      address2: "Witham",
-      address3: "Essex",
-      address4: "UK",
-      postcode: "CM8 2SD",
+      address1: '10 Windy Way',
+      address2: 'Witham',
+      address3: 'Essex',
+      address4: 'UK',
+      postcode: 'CM8 2SD',
     )
   end
 
@@ -24,7 +24,7 @@ describe "results/university.html.erb", type: :view do
     }
   end
 
-  let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+  let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
 
   let(:site_statuses) do
     [
@@ -36,92 +36,92 @@ describe "results/university.html.erb", type: :view do
     assign(:results_view, ResultsView.new(query_parameters: parameter_hash))
   end
 
-  context "further education course" do
+  context 'further education course' do
     let(:course) do
       build(:course, :further_education, provider: build(:provider), site_statuses: site_statuses)
     end
 
-    it "renders University" do
-      expect(html).to have_css("span.govuk-list--description__hint.govuk-\\!-margin-top-0", text: "University")
+    it 'renders University' do
+      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-margin-top-0', text: 'University')
     end
 
     it "renders '0.1 miles from you'" do
-      expect(html).to match("0.1 miles from you")
+      expect(html).to match('0.1 miles from you')
     end
   end
 
-  context "non further education course" do
+  context 'non further education course' do
     let(:course) do
       build(:course, provider: build(:provider), site_statuses: site_statuses)
     end
 
-    it "renders Placement schools" do
-      expect(html).to have_css("span.govuk-list--description__hint.govuk-\\!-margin-top-0", text: "Placement schools")
+    it 'renders Placement schools' do
+      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-margin-top-0', text: 'Placement schools')
     end
 
-    it "renders link" do
-      expect(html).to have_link("More about placements on this course", href: course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: "section-schools"), visible: false)
+    it 'renders link' do
+      expect(html).to have_link('More about placements on this course', href: course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), visible: false)
     end
 
-    it "renders University" do
-      expect(html).to have_css("span.govuk-list--description__hint.govuk-\\!-padding-top-2", text: "University")
+    it 'renders University' do
+      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-padding-top-2', text: 'University')
     end
 
-    it "renders dt with Location" do
-      expect(html).to have_css("dt.govuk-list--description__label", text: "Location")
-      expect(html).to have_no_css("dt.govuk-list--description__label", text: "Nearest location")
+    it 'renders dt with Location' do
+      expect(html).to have_css('dt.govuk-list--description__label', text: 'Location')
+      expect(html).to have_no_css('dt.govuk-list--description__label', text: 'Nearest location')
     end
 
-    context "site_distance less than 11 miles" do
+    context 'site_distance less than 11 miles' do
       it "renders '0.1 miles from you'" do
-        expect(html).to match("0.1 miles from you")
+        expect(html).to match('0.1 miles from you')
       end
 
-      it "renders Placement schools distance summary" do
-        expect(html).to have_css("span.govuk-details__summary-text", text: "Placement schools are near you")
+      it 'renders Placement schools distance summary' do
+        expect(html).to have_css('span.govuk-details__summary-text', text: 'Placement schools are near you')
       end
     end
 
-    context "site_distance less than 21 miles" do
+    context 'site_distance less than 21 miles' do
       let(:lat_lon) do
         { latitude: 51.6985,
           longitude: 0.1367 }
       end
 
       it "renders '14 miles from you'" do
-        expect(html).to match("14 miles from you")
+        expect(html).to match('14 miles from you')
       end
 
-      it "renders Placement schools distance summary" do
-        expect(html).to have_css("span.govuk-details__summary-text", text: "Placement schools might be near you")
+      it 'renders Placement schools distance summary' do
+        expect(html).to have_css('span.govuk-details__summary-text', text: 'Placement schools might be near you')
       end
     end
 
-    context "site_distance more than 21 miles" do
+    context 'site_distance more than 21 miles' do
       let(:lat_lon) do
         { latitude: 52,
           longitude: 0.1367 }
       end
 
       it "renders '35 miles from you'" do
-        expect(html).to match("35 miles from you")
+        expect(html).to match('35 miles from you')
       end
 
-      it "renders Placement schools distance summary" do
-        expect(html).to have_css("span.govuk-details__summary-text", text: "Placement schools might be in commuting distance")
+      it 'renders Placement schools distance summary' do
+        expect(html).to have_css('span.govuk-details__summary-text', text: 'Placement schools might be in commuting distance')
       end
     end
 
-    context "course has two locations" do
+    context 'course has two locations' do
       let(:site2) do
         build(
           :site,
           **lat_lon,
-          address1: "3 Beech Rd",
-          address2: "Billericay",
-          address3: "Essex",
-          address4: "UK",
-          postcode: "CM12 5YF",
+          address1: '3 Beech Rd',
+          address2: 'Billericay',
+          address3: 'Essex',
+          address4: 'UK',
+          postcode: 'CM12 5YF',
         )
       end
 
@@ -133,7 +133,7 @@ describe "results/university.html.erb", type: :view do
       end
 
       it "renders '(Nearest of 2 locations to choose from)'" do
-        expect(html).to match("(Nearest of 2 locations to choose from)")
+        expect(html).to match('(Nearest of 2 locations to choose from)')
       end
     end
   end

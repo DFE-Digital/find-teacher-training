@@ -1,5 +1,5 @@
 class CourseSerializer < JSONAPI::Serializable::Resource
-  type "courses"
+  type 'courses'
 
   belongs_to :provider
   belongs_to :accrediting_provider
@@ -9,7 +9,7 @@ class CourseSerializer < JSONAPI::Serializable::Resource
   has_many :sites
   has_many :subjects
 
-  attributes(*FactoryBot.attributes_for("course").keys)
+  attributes(*FactoryBot.attributes_for('course').keys)
 
   # belongs_to need to have their attributes declared or they don't serialise
   # correctly

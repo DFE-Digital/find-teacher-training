@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
       .find(params[:course_code])
       .first
   rescue JsonApiClient::Errors::NotFound
-    render template: "errors/not_found", status: :not_found, formats: [:html]
+    render template: 'errors/not_found', status: :not_found, formats: [:html]
   end
 
   def apply
@@ -27,6 +27,6 @@ class CoursesController < ApplicationController
 
     redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
   rescue JsonApiClient::Errors::NotFound
-    render template: "errors/not_found", status: :not_found, formats: [:html]
+    render template: 'errors/not_found', status: :not_found, formats: [:html]
   end
 end

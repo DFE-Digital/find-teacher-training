@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require "site_prism"
-require "simplecov"
+require 'site_prism'
+require 'simplecov'
 
 SimpleCov.minimum_coverage 95
-SimpleCov.start "rails" do
-  add_filter "spec"
+SimpleCov.start 'rails' do
+  add_filter 'spec'
 end
 
 RSpec.configure do |config|
@@ -86,8 +86,8 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
-  require "webmock/rspec"
-  require "factory_bot"
+  require 'webmock/rspec'
+  require 'factory_bot'
   config.include FactoryBot::Syntax::Methods
 
   RSpec::Matchers.define :appear_before do |later_content|

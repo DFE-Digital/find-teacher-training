@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-require "spec_helper"
-ENV["RAILS_ENV"] ||= "test"
-require File.expand_path("../config/environment", __dir__)
+require 'spec_helper'
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
 
-require "rspec/rails"
+require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -21,14 +21,14 @@ require "rspec/rails"
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 # Add the site_prism dir to autoloads so that they get loaded up automatically.
 # This may be frowned-upon in Rails, but doing it this way can help
 # dependencies get sorted out better than if they're all required in at once by
 # walking the directory structure, so should be ok in the contexts of tests.
 ActiveSupport::Dependencies.autoload_paths +=
-  [Rails.root.join("spec/site_prism")]
+  [Rails.root.join('spec/site_prism')]
 
 RSpec.configure do |config|
   # RSpec Rails can automatically mix in different behaviours to your tests

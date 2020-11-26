@@ -6,7 +6,7 @@ FactoryBot.define do
 
     sequence(:id, &:to_s)
     sequence(:code, &:to_s)
-    location_name { "Main Site" }
+    location_name { 'Main Site' }
     address1 { nil }
     address2 { nil }
     address3 { nil }

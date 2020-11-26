@@ -1,13 +1,13 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "/sitemap.xml", type: :request do
-  let(:provider) { build(:provider, provider_code: "T92") }
+describe '/sitemap.xml', type: :request do
+  let(:provider) { build(:provider, provider_code: 'T92') }
   let(:current_recruitment_cycle) { build :recruitment_cycle }
   let(:changed_at) { Time.zone.now }
   let(:course) do
     build(
       :course,
-      course_code: "X102",
+      course_code: 'X102',
       provider: provider,
       provider_code: provider.provider_code,
       recruitment_cycle: current_recruitment_cycle,
@@ -39,10 +39,10 @@ describe "/sitemap.xml", type: :request do
       },
     )
 
-    get "/sitemap.xml"
+    get '/sitemap.xml'
   end
 
-  it "renders sitemap" do
+  it 'renders sitemap' do
     expect(response).to have_http_status(200)
     expect(response.body).to eq(
       <<~XML,

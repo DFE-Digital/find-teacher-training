@@ -2,7 +2,7 @@ module PageObjects
   module Page
     module ResultFilters
       class Funding < SitePrism::Page
-        set_url "/results/filter/funding{?query*}"
+        set_url '/results/filter/funding{?query*}'
 
         element :heading, '[data-qa="heading"]'
         element :back_link, '[data-qa="page-back"]'

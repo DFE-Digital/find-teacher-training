@@ -11,20 +11,20 @@ FactoryBot.define do
     sequence(:course_code) { |n| "X10#{n}" }
     # This hardcodes the provider code to A0. This should probably be fixed at
     # some point. Right now it doesn't break anything.
-    sequence(:provider_code) { "A0" }
-    name { "English" }
-    description { "PGCE with QTS full time" }
+    sequence(:provider_code) { 'A0' }
+    name { 'English' }
+    description { 'PGCE with QTS full time' }
     findable? { true }
     open_for_applications? { false }
     has_vacancies? { false }
     provider      { nil }
-    study_mode    { "full_time" }
-    content_status { "published" }
-    ucas_status { "running" }
+    study_mode    { 'full_time' }
+    content_status { 'published' }
+    ucas_status { 'running' }
     accrediting_provider { nil }
-    qualification { "pgce_with_qts" }
+    qualification { 'pgce_with_qts' }
     start_date     { Time.zone.local(2019) }
-    funding_type { "fee" }
+    funding_type { 'fee' }
     applications_open_from { Time.zone.local(2019).utc.iso8601 }
     is_send? { false }
     level { :secondary }
@@ -47,13 +47,13 @@ FactoryBot.define do
     scholarship_amount { 20_000 }
     bursary_amount { 22_000 }
     about_accrediting_body { nil }
-    maths { "expect_to_achieve_before_training_begins" }
-    english { "must_have_qualification_at_application_time" }
-    science { "not_required" }
+    maths { 'expect_to_achieve_before_training_begins' }
+    english { 'must_have_qualification_at_application_time' }
+    science { 'not_required' }
     gcse_subjects_required { %w[maths english] }
     meta { nil }
-    age_range_in_years { "11_to_16" }
-    program_type { "pg_teaching_apprenticeship" }
+    age_range_in_years { '11_to_16' }
+    program_type { 'pg_teaching_apprenticeship' }
     changed_at { Time.zone.now }
 
     after :build do |course, evaluator|
@@ -81,7 +81,7 @@ FactoryBot.define do
     end
 
     trait :further_education do
-      level { "further_education" }
+      level { 'further_education' }
       subjects { [build(:subject, :further_education)] }
     end
 
@@ -105,19 +105,19 @@ FactoryBot.define do
     end
 
     trait :full_time_or_part_time do
-      study_mode { "full_time_or_part_time" }
+      study_mode { 'full_time_or_part_time' }
     end
 
     trait :full_time do
-      study_mode { "full_time" }
+      study_mode { 'full_time' }
     end
 
     trait :part_time do
-      study_mode { "part_time" }
+      study_mode { 'part_time' }
     end
 
     trait :with_fees do
-      course_length { "TwoYears" }
+      course_length { 'TwoYears' }
       fee_uk_eu { 7000 }
       fee_international { 14_000 }
       fee_details { Faker::Lorem.sentence(word_count: 100) }

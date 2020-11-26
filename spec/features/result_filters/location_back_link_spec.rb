@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-feature "Location filter back link", type: :feature do
+feature 'Location filter back link', type: :feature do
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -11,8 +11,8 @@ feature "Location filter back link", type: :feature do
     stub_subjects_request
   end
 
-  context "before the location filter form has been submitted" do
-    it "returns the user to their previous filtered results" do
+  context 'before the location filter form has been submitted' do
+    it 'returns the user to their previous filtered results' do
       load_results_page
       open_the_location_filter
       click_the_back_link
@@ -20,13 +20,13 @@ feature "Location filter back link", type: :feature do
     end
   end
 
-  context "after an invalid postcode search has been submitted" do
+  context 'after an invalid postcode search has been submitted' do
     before do
       stub_provider_request
       stub_courses_request_with_acme
     end
 
-    it "returns the user to their previous filtered results" do
+    it 'returns the user to their previous filtered results' do
       load_results_page
       open_the_location_filter
       select_a_provider
@@ -39,13 +39,13 @@ feature "Location filter back link", type: :feature do
     end
   end
 
-  context "after an invalid provider search has been submitted" do
+  context 'after an invalid provider search has been submitted' do
     before do
       stub_geocoder
       stub_courses_request_with_location
     end
 
-    it "returns the user to their previous filtered results" do
+    it 'returns the user to their previous filtered results' do
       load_results_page
       open_the_location_filter
       select_a_location
@@ -72,7 +72,7 @@ feature "Location filter back link", type: :feature do
 
   def select_a_provider
     filter_page.by_provider.click
-    filter_page.provider_search.fill_in(with: "ACME")
+    filter_page.provider_search.fill_in(with: 'ACME')
     filter_page.find_courses.click
     provider_page.provider_suggestions[0].hyperlink.click
   end
@@ -87,12 +87,12 @@ feature "Location filter back link", type: :feature do
   end
 
   def the_results_page_still_has_the_original_provider_filter_applied
-    expect(results_page.provider_filter.name).to have_text("ACME SCITT 0")
+    expect(results_page.provider_filter.name).to have_text('ACME SCITT 0')
   end
 
   def select_a_location
     filter_page.by_postcode_town_or_city.click
-    filter_page.location_query.fill_in(with: "SW1P 3BT")
+    filter_page.location_query.fill_in(with: 'SW1P 3BT')
     filter_page.find_courses.click
   end
 
@@ -102,11 +102,11 @@ feature "Location filter back link", type: :feature do
   end
 
   def the_results_page_still_has_the_original_location_filter_applied
-    expect(results_page.location_filter.name).to have_text("SW1P 3BT")
+    expect(results_page.location_filter.name).to have_text('SW1P 3BT')
   end
 
   def the_results_page_has_the_default_location_filter
-    expect(results_page.location_filter.name).to have_text("Across England")
+    expect(results_page.location_filter.name).to have_text('Across England')
   end
 
   def stub_provider_request
@@ -115,12 +115,12 @@ feature "Location filter back link", type: :feature do
       "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
     ).with(
       query: {
-        "fields[providers]" => "provider_code,provider_name",
-        "search" => "ACME",
+        'fields[providers]' => 'provider_code,provider_name',
+        'search' => 'ACME',
       },
     ).to_return(
-      body: File.new("spec/fixtures/api_responses/providers.json"),
-      headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+      body: File.new('spec/fixtures/api_responses/providers.json'),
+      headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
     )
   end
 
@@ -128,19 +128,19 @@ feature "Location filter back link", type: :feature do
     stub_request(:get, courses_url)
       .with(any_parameters)
       .to_return(
-        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
+        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
   end
 
   def stub_courses_request_with_acme
     stub_request(:get, courses_url)
       .with(
-        query: base_parameters.merge("filter[provider.provider_name]" => "ACME SCITT 0"),
+        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
       )
       .to_return(
-        body: File.new("spec/fixtures/api_responses/four_courses.json"),
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        body: File.new('spec/fixtures/api_responses/four_courses.json'),
+        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
   end
 
@@ -148,15 +148,15 @@ feature "Location filter back link", type: :feature do
     stub_request(:get, courses_url)
       .with(
         query: base_parameters.merge(
-          "filter[longitude]" => "-0.1300436",
-          "filter[latitude]" => "51.4980188",
-          "filter[radius]" => "20",
-          "sort" => "distance",
+          'filter[longitude]' => '-0.1300436',
+          'filter[latitude]' => '51.4980188',
+          'filter[radius]' => '20',
+          'sort' => 'distance',
         ),
       )
       .to_return(
-        body: File.new("spec/fixtures/api_responses/ten_courses.json"),
-        headers: { "Content-Type": "application/vnd.api+json; charset=utf-8" },
+        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
+        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
   end
 
