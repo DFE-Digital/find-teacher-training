@@ -26,13 +26,8 @@ jobs:
     outputs:
       environments: ${{ steps.select-environments.outputs.environments }}
     steps:
-      - name:  Prepare Environment Matrix
-        shell: pwsh
-        id:    select-environments
-        run: |
-          $inputs = '${{ toJson(github.event.inputs) }}' | ConvertFrom-Json -AsHashtable
-          $environments = @('qa', 'staging', 'production') | where { $inputs[$_] -eq 'true' }
-          echo "::set-output name=environments::$(@{ environment = $environments } | ConvertTo-Json -Compress)"
+      - id:   select-environments
+        uses: DFE-Digital/bat-infrastructure/actions/prepare-environment-matrix@main
 
   deploy:
     name: ${{ matrix.environment }} Deployment
