@@ -66,12 +66,11 @@ Capybara/FeatureMethods:
     - feature
     - scenario
 
+Naming/MethodParameterName:
+  AllowedNames:
+    - e
+    - to
 
-#Naming/MethodParameterName:
-#  AllowedNames:
-#    - e
-#    - to
-#
 
 
 ## Rails does not actually allow "dynamic find_by", so this cop yields false positives

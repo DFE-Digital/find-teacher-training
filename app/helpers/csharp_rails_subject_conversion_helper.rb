@@ -8,23 +8,23 @@ module CsharpRailsSubjectConversionHelper
                end
 
     subjects&.map do |subject|
-      csharp_to_subject_code(id: subject)
+      csharp_to_subject_code(csharp_id: subject)
     end
   end
 
   def convert_subject_code_params_to_csharp
     params['subjects']&.map do |subject|
-      subject_code_to_csharp_subject_id(id: subject)
+      subject_code_to_csharp_subject_id(subject_id: subject)
     end
   end
 
   def csharp_array_to_subject_codes(csharp_id_array)
-    csharp_id_array&.map { |csharp_id| csharp_to_subject_code(id: csharp_id) }
+    csharp_id_array&.map { |csharp_id| csharp_to_subject_code(csharp_id: csharp_id) }
   end
 
-  def csharp_to_subject_code(id:)
+  def csharp_to_subject_code(csharp_id:)
     rails_data = csharp_subject_code_conversion_table.find do |entry|
-      entry[:csharp_id] == id
+      entry[:csharp_id] == csharp_id
     end
 
     # A user may somehow end up with a subject that doesn't exist.
@@ -38,9 +38,9 @@ module CsharpRailsSubjectConversionHelper
     rails_data[:subject_code]
   end
 
-  def subject_code_to_csharp_subject_id(id:)
+  def subject_code_to_csharp_subject_id(subject_id:)
     csharp_data = csharp_subject_code_conversion_table.find do |entry|
-      entry[:subject_code] == id
+      entry[:subject_code] == subject_id
     end
 
     return '[non-existent subject id]' if csharp_data.nil?

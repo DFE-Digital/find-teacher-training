@@ -2,9 +2,9 @@ module ResultFilters
   module SubjectHelper
     include FilterParameters
 
-    def subject_is_selected?(id:)
+    def subject_is_selected?(subject_code:)
       if params['subjects'] && params['subjects'].length
-        id.in?(params['subjects'])
+        subject_code.in?(params['subjects'])
       else
         false
       end
