@@ -71,93 +71,73 @@ Naming/MethodParameterName:
     - e
     - to
 
+# Rails does not actually allow "dynamic find_by", so this cop yields false positives
+# like `VendorApiToken.find_by_unhashed_token` (which we implement ourselves)
+Rails/DynamicFindBy:
+  Enabled: false
 
+# Not all rake tasks need :environment
+Rails/RakeEnvironment:
+  Enabled: false
 
-## Rails does not actually allow "dynamic find_by", so this cop yields false positives
-## like `VendorApiToken.find_by_unhashed_token` (which we implement ourselves)
-#Rails/DynamicFindBy:
-#  Enabled: false
-#
-## Not all rake tasks need :environment
-#Rails/RakeEnvironment:
-#  Enabled: false
-#
-## This cop demands a default value for not-null columns, which is not possible
-## when dealing with references
-#Rails/NotNullColumn:
-#  Enabled: false
-#
-#Naming/MemoizedInstanceVariableName:
-#  Enabled: false
-#
-## sometimes reduce is fine
-#Style/EachWithObject:
-#  Enabled: false
-#
-## Pending cops
-## These will be enabled by default at Rubocop 1.0
-#Style/HashEachMethods:
-#  Enabled: true
-#
-#Style/HashTransformKeys:
-#  Enabled: true
-#
-#Style/HashTransformValues:
-#  Enabled: true
-#
-#Rake/Desc:
-#  Exclude:
-#    - 'lib/tasks/reset_qa.rake'
-#
-## This cop has too many false positives (it also requires underscores for things that are not numbers)
-#Style/NumericLiterals:
-#  Enabled: false
-#
-## Sometimes it's easier to think about a negated if, for example `render_error if !model.valid?` vs `render_error unless model.valid?`
-#Style/NegatedIf:
-#  Enabled: false
-#
-## Disable these cops because they do not allow reasonable code like splitting
-## `attr_reader :bla, :foo` over 2 lines.
-#Layout/MultilineArrayLineBreaks:
-#  Enabled: false
-#
-#Layout/MultilineHashKeyLineBreaks:
-#  Enabled: false
-#
-#Layout/MultilineMethodArgumentLineBreaks:
-#  Enabled: false
-#
-#Layout/FirstMethodArgumentLineBreak:
-#  Enabled: false
-#
-## 🤷‍♂️
-#Style/AsciiComments:
-#  Enabled: false
-#
-#Style/ConditionalAssignment:
-#  Enabled: false
-#
-#Rails/Output:
-#  Exclude:
-#    - config/initializers/console.rb
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
 
+# sometimes reduce is fine
+Style/EachWithObject:
+  Enabled: false
 
-##############################
+# This cop has too many false positives (it also requires underscores for things that are not numbers)
+Style/NumericLiterals:
+  Enabled: false
 
+# Sometimes it's easier to think about a negated if, for example `render_error if !model.valid?` vs `render_error unless model.valid?`
+Style/NegatedIf:
+  Enabled: false
+
+# Disable these cops because they do not allow reasonable code like splitting
+# `attr_reader :bla, :foo` over 2 lines.
+Layout/MultilineArrayLineBreaks:
+  Enabled: false
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: false
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: false
+
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: false
+
+# 🤷‍♂️
+Style/AsciiComments:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Rails/Output:
+  Exclude:
+    - config/initializers/console.rb
+
+# The following cops were present before adding Apply cops above
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
 Rails/OutputSafety:
   Enabled: false
+
 Rails/HelperInstanceVariable:
   Enabled: false
+
 Style/HashEachMethods:
   Enabled: true
+
 Style/HashTransformKeys:
   Enabled: true
+
 Style/HashTransformValues:
   Enabled: true
-
 
 # rubocop-govuk 3.17.0 started to enforce this but no active record is actually in use
 # https://github.com/alphagov/rubocop-govuk/commit/c4a4329d5e44dc98b24f1d344a3532054b1539e0
