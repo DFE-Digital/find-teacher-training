@@ -58,30 +58,16 @@ jobs:
         run: |
           echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
-          echo "NEXT_ENV=$next_env" >> $GITHUB_ENV
         env:
           DOCKER_IMAGE: ${{ format('dfedigital/find-teacher-training:{0}', github.event.inputs.sha) }}
           DEPLOY_ENV: ${{ matrix.environment }}
 
-      - name: Use Terraform v0.13.5
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 0.13.5
-
-      - name: Download app configuration file
-        working-directory: terraform
-        run: |
-          echo $APP_SECRETS | base64 -d >> app_secrets.yml
-        env:
-          APP_SECRETS: ${{ secrets[format('APP_SECRETS_{0}', env.DEPLOY_ENV)] }}
-
       - name: Terraform init, plan & apply
         id: terraform_deploy
-        run: |
-          terraform init -backend-config=workspace_variables/${{ env.DEPLOY_ENV }}_backend.tfvars
-          terraform plan -var-file workspace_variables/${{ env.DEPLOY_ENV }}.tfvars -out tfplan
-          terraform apply -auto-approve -input=false "tfplan"
-        working-directory: terraform
+        uses: DFE-Digital/bat-infrastructure/actions/terraform@main
+        with:
+          DEPLOY_ENV:  ${{ env.DEPLOY_ENV }}
+          APP_SECRETS: ${{ secrets[format('APP_SECRETS_{0}', env.DEPLOY_ENV)] }}
         env:
           ARM_ACCESS_KEY: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', env.DEPLOY_ENV)] }}
           TF_VAR_paas_user: ${{ secrets[format('CF_USER_{0}', env.DEPLOY_ENV)] }}
