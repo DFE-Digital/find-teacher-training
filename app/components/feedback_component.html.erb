@@ -1,0 +1,15 @@
+<div class="govuk-width-container">
+  <div class="app-feedback__container">
+    <p class="govuk-body govuk-!-margin-bottom-0 govuk-!-margin-top-4">
+
+      <%= link_to(
+        'How can we improve this section? (Opens in a new tab)',
+          "https://www.apply-for-teacher-training.service.gov.uk/find-feedback?path=#{@path}&original_controller=#{@original_controller}",
+        class: 'govuk-!-margin-top-4 govuk-link',
+        data: { qa:'feedback-link' },
+        target: '_blank',
+        rel: 'noopener'
+      ) %>
+    </p>
+  </div>
+</div>
