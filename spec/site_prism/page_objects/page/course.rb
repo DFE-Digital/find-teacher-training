@@ -46,6 +46,7 @@ module PageObjects
       element :back_link, '[data-qa=page-back]'
       element :end_of_cycle_notice, '[data-qa=course__end_of_cycle_notice]'
       element :training_location_guidance, '[data-qa=course__training_location_guidance]'
+      element :feedback_link, "[data-qa=feedback-link]"
     end
   end
 end

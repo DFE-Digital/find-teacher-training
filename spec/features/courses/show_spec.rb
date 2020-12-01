@@ -237,6 +237,8 @@ describe 'Course show', type: :feature do
       expect(course_page).not_to have_end_of_cycle_notice
 
       expect(course_page).to have_training_location_guidance
+
+      expect(course_page.feedback_link[:href]).to eq("https://www.apply-for-teacher-training.service.gov.uk/find-feedback?path=/course/T92/X130&original_controller=courses")
     end
 
     context 'End of cycle' do
