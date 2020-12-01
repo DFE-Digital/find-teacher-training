@@ -17,4 +17,8 @@ class ApplicationController < ActionController::Base
 
     payload[:request_id] = RequestStore.store[:request_id]
   end
+
+  def render_feedback_component
+    @render_feedback_component = true
+  end
 end

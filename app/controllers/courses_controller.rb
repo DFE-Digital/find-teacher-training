@@ -1,6 +1,8 @@
 class CoursesController < ApplicationController
   decorates_assigned :course
 
+  before_action :render_feedback_component, only: :show
+
   def show
     @course = Course
       .includes(:subjects)

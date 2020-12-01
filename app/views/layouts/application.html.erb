@@ -72,6 +72,15 @@
       </main>
     </div>
 
+    <% if @render_feedback_component %>
+      <%= render(
+        FeedbackComponent.new(
+          path: request.env['PATH_INFO'],
+          original_controller: params[:controller],
+        )
+      ) %>
+    <% end %>
+
     <footer class="govuk-footer govuk-!-display-none-print" role="contentinfo">
       <div class="govuk-width-container">
         <div class="govuk-footer__meta">
