@@ -1,8 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "results/non_university.html.erb", type: :view do
+describe 'results/non_university.html.erb', type: :view do
   let(:html) do
-    render partial: "results/non_university.html.erb", locals: { course: course }
+    render partial: 'results/non_university.html.erb', locals: { course: course }
   end
 
   let(:site1) do
@@ -10,15 +10,15 @@ describe "results/non_university.html.erb", type: :view do
       :site,
       latitude: 51.4985,
       longitude: 0.1367,
-      address1: "10 Windy Way",
-      address2: "Witham",
-      address3: "Essex",
-      address4: "UK",
-      postcode: "CM8 2SD",
+      address1: '10 Windy Way',
+      address2: 'Witham',
+      address3: 'Essex',
+      address4: 'UK',
+      postcode: 'CM8 2SD',
     )
   end
 
-  let(:parameter_hash) { { "lat" => "51.4975", "lng" => "0.1357" } }
+  let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
 
   let(:course) do
     build(:course, site_statuses: site_statuses)
@@ -28,52 +28,52 @@ describe "results/non_university.html.erb", type: :view do
     assign(:results_view, ResultsView.new(query_parameters: parameter_hash))
   end
 
-  context "single site" do
+  context 'single site' do
     let(:site_statuses) do
       [
         build(:site_status, :full_time_and_part_time, site: site1),
       ]
     end
 
-    it "renders dt with Location" do
-      expect(html).to have_css("dt.govuk-list--description__label", text: "Location")
-      expect(html).to have_no_css("dt.govuk-list--description__label", text: "Nearest location")
+    it 'renders dt with Location' do
+      expect(html).to have_css('dt.govuk-list--description__label', text: 'Location')
+      expect(html).to have_no_css('dt.govuk-list--description__label', text: 'Nearest location')
     end
 
     it "renders '0.1 miles from you'" do
-      expect(html).to match("0.1 miles from you")
+      expect(html).to match('0.1 miles from you')
     end
 
     it "does not renders 'locations to choose from'" do
-      expect(html).to have_no_css("div.govuk-\\!-margin-top-0")
-      expect(html).to_not match("locations to choose from")
+      expect(html).to have_no_css('div.govuk-\\!-margin-top-0')
+      expect(html).not_to match('locations to choose from')
     end
 
-    it "does not renders `Main Site` as nearest_location_name" do
-      expect(html).to_not match("Main Site")
+    it 'does not renders `Main Site` as nearest_location_name' do
+      expect(html).not_to match('Main Site')
     end
 
     it "renders nearest address'" do
-      expect(html).to match("10 Windy Way, Witham, Essex, UK, CM8 2SD")
+      expect(html).to match('10 Windy Way, Witham, Essex, UK, CM8 2SD')
     end
 
-    it "renders location" do
-      expect(html).to have_css("span.govuk-list--description__hint.govuk-\\!-padding-top-2", text: "Location")
+    it 'renders location' do
+      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-padding-top-2', text: 'Location')
     end
   end
 
-  context "multi sites" do
+  context 'multi sites' do
     let(:site2) do
       build(
         :site,
         latitude: 51.4980,
         longitude: 0.1367,
-        address1: "101 Windy Way",
-        address2: "Witham",
-        address3: "Essex",
-        address4: "UK",
-        postcode: "CM8 2SD",
-        location_name: "campus main site",
+        address1: '101 Windy Way',
+        address2: 'Witham',
+        address3: 'Essex',
+        address4: 'UK',
+        postcode: 'CM8 2SD',
+        location_name: 'campus main site',
       )
     end
     let(:site_statuses) do
@@ -83,25 +83,25 @@ describe "results/non_university.html.erb", type: :view do
       ]
     end
 
-    it "renders dt with Nearest location" do
-      expect(html).to have_no_css("dt.govuk-list--description__label", text: "Location")
-      expect(html).to have_css("dt.govuk-list--description__label", text: "Nearest location")
+    it 'renders dt with Nearest location' do
+      expect(html).to have_no_css('dt.govuk-list--description__label', text: 'Location')
+      expect(html).to have_css('dt.govuk-list--description__label', text: 'Nearest location')
     end
 
-    it "renders choose from" do
-      expect(html).to have_css("div.govuk-\\!-margin-top-0", text: "(Nearest of 2 locations to choose from)")
+    it 'renders choose from' do
+      expect(html).to have_css('div.govuk-\\!-margin-top-0', text: '(Nearest of 2 locations to choose from)')
     end
 
-    it "renders nearest location name" do
-      expect(html).to match("campus main site")
+    it 'renders nearest location name' do
+      expect(html).to match('campus main site')
     end
 
     it "renders nearest address'" do
-      expect(html).to match("101 Windy Way, Witham, Essex, UK, CM8 2SD")
+      expect(html).to match('101 Windy Way, Witham, Essex, UK, CM8 2SD')
     end
 
-    it "renders location" do
-      expect(html).to have_css("span.govuk-list--description__hint.govuk-\\!-padding-top-2", text: "Location")
+    it 'renders location' do
+      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-padding-top-2', text: 'Location')
     end
   end
 end

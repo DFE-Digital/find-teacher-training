@@ -43,7 +43,7 @@
                     <%# C# doesn't have a distinct modern languages subject %>
                     <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
-                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(id: subject.subject_code), data: {qa: "subject__checkbox"}, id: "subject#{subject.subject_code}", class: "govuk-checkboxes__input" }, subject.subject_code, nil) %>
+                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: {qa: "subject__checkbox"}, id: "subject#{subject.subject_code}", class: "govuk-checkboxes__input" }, subject.subject_code, nil) %>
                         <%= f.label(:subjects, {for: "subject#{subject.subject_code}"}, class: "govuk-label govuk-checkboxes__label") do %>
                           <span class="govuk-checkboxes__label-text" data-qa="subject__name">
                             <%= subject.subject_name %>

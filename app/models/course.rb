@@ -15,26 +15,26 @@ class Course < Base
   self.primary_key = :course_code
 
   def has_fees?
-    funding_type == "fee"
+    funding_type == 'fee'
   end
 
   def year
-    applications_open_from.split("-").first if applications_open_from.present?
+    applications_open_from.split('-').first if applications_open_from.present?
   end
 
   def month
-    applications_open_from.split("-").second if applications_open_from.present?
+    applications_open_from.split('-').second if applications_open_from.present?
   end
 
   def day
-    applications_open_from.split("-").third if applications_open_from.present?
+    applications_open_from.split('-').third if applications_open_from.present?
   end
 
   def university_based?
-    provider_type == "university"
+    provider_type == 'university'
   end
 
   def further_education?
-    level == "further_education" && subjects.any? { |s| s.subject_name == "Further education" || s.subject_code = "41" }
+    level == 'further_education' && subjects.any? { |s| s.subject_name == 'Further education' || s.subject_code = '41' }
   end
 end

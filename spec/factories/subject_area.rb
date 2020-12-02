@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :subject_area do
-    type { "subject_areas" }
-    id { "PrimarySubject" }
-    typename { "PrimarySubject" }
-    name { "Primary" }
+    type { 'subject_areas' }
+    id { 'PrimarySubject' }
+    typename { 'PrimarySubject' }
+    name { 'Primary' }
 
     trait :secondary do
-      id { "SecondarySubject" }
-      typename { "SecondarySubject" }
-      name { "Secondary" }
+      id { 'SecondarySubject' }
+      typename { 'SecondarySubject' }
+      name { 'Secondary' }
     end
 
     after(:build) do |subject_area, evaluator|

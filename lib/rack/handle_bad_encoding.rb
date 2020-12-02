@@ -5,11 +5,11 @@ module Rack
     end
 
     def call(env)
-      if %w[/location-suggestions /provider-suggestions /results].include?(env["REQUEST_PATH"])
+      if %w[/location-suggestions /provider-suggestions /results].include?(env['REQUEST_PATH'])
         begin
-          Rack::Utils.parse_nested_query(env["QUERY_STRING"].to_s)
+          Rack::Utils.parse_nested_query(env['QUERY_STRING'].to_s)
         rescue Rack::Utils::InvalidParameterError
-          return [301, { "Location" => "/422", "Content-Type" => "text/html" }, []]
+          return [301, { 'Location' => '/422', 'Content-Type' => 'text/html' }, []]
         end
       end
 

@@ -1,6 +1,6 @@
 class HeartbeatController < ActionController::API
   def ping
-    render body: "PONG"
+    render body: 'PONG'
   end
 
   def healthcheck
@@ -15,7 +15,7 @@ class HeartbeatController < ActionController::API
   end
 
   def sha
-    render json: { sha: ENV["SHA"] }
+    render json: { sha: ENV['SHA'] }
   end
 
 private

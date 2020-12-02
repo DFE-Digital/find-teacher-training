@@ -1,15 +1,15 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "/start", type: :request do
-  context "within cycle" do
+describe '/start', type: :request do
+  context 'within cycle' do
     it "redirects from '/start/location' to '/'" do
-      get "/start/location"
+      get '/start/location'
 
-      expect(response).to redirect_to("/")
+      expect(response).to redirect_to('/')
     end
   end
 
-  context "nearing end of cycle" do
+  context 'nearing end of cycle' do
     before do
       allow(Settings).to receive(:cycle_ending_soon).and_return(true)
       Rails.application.reload_routes!
@@ -21,7 +21,7 @@ describe "/start", type: :request do
     end
 
     it "navigates to '/start/location'" do
-      get "/start/location"
+      get '/start/location'
 
       expect(response.status).to eq(200)
     end

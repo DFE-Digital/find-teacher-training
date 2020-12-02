@@ -6,7 +6,7 @@ module StubV3Helper
                         .to_return(
                           status: status,
                           body: stub.to_json,
-                          headers: { 'Content-Type': "application/vnd.api+json" },
+                          headers: { 'Content-Type': 'application/vnd.api+json' },
                         )
 
     stubbed_request
@@ -19,9 +19,9 @@ private
     course.errors.messages.each do |error_key, _|
       course.errors.full_messages_for(error_key).each do |error_message|
         errors << {
-          "title" => "Invalid #{error_key}",
-          "detail" => error_message,
-          "source" => { "pointer" => "/data/attributes/#{error_key}" },
+          'title' => "Invalid #{error_key}",
+          'detail' => error_message,
+          'source' => { 'pointer' => "/data/attributes/#{error_key}" },
         }
       end
     end

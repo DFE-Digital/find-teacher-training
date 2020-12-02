@@ -2,7 +2,7 @@ module PageObjects
   module Page
     module ResultFilters
       class Vacancy < SitePrism::Page
-        set_url "/results/filter/vacancy{?query*}"
+        set_url '/results/filter/vacancy{?query*}'
 
         element :heading, '[data-qa="heading"]'
         element :back_link, '[data-qa="page-back"]'

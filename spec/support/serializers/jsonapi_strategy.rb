@@ -1,4 +1,4 @@
-require "factory_bot"
+require 'factory_bot'
 
 class JSONAPIStrategy
   def association(runner)

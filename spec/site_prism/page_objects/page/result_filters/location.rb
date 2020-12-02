@@ -2,7 +2,7 @@ module PageObjects
   module Page
     module ResultFilters
       class Location < SitePrism::Page
-        set_url "/results/filter/location{?query*}"
+        set_url '/results/filter/location{?query*}'
 
         element :back_link, '[data-qa="page-back"]'
         element :error, '[data-qa="error"]'

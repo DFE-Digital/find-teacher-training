@@ -7,7 +7,7 @@ module ResultFilters
     before_action :convert_csharp_params_to_rails, except: [:create]
     before_action :build_subject_areas, except: [:create]
 
-    before_action { params["senCourses"].downcase! if params["senCourses"].present? }
+    before_action { params['senCourses'].downcase! if params['senCourses'].present? }
 
     def new; end
 
@@ -16,8 +16,8 @@ module ResultFilters
     end
 
     def create
-      if params[:subjects].blank? && (params[:senCourses].blank? || params[:senCourses] == "false")
-        flash[:error] = [I18n.t("subject_filter.errors.no_option")]
+      if params[:subjects].blank? && (params[:senCourses].blank? || params[:senCourses] == 'false')
+        flash[:error] = [I18n.t('subject_filter.errors.no_option')]
 
         if flash[:start_wizard]
           redirect_to(start_subject_path(filter_params))
@@ -32,7 +32,7 @@ module ResultFilters
   private
 
     def convert_csharp_params_to_rails
-      params["subjects"] = convert_csharp_subject_id_params_to_subject_code if convert_csharp_subject_id_params_to_subject_code.present?
+      params['subjects'] = convert_csharp_subject_id_params_to_subject_code if convert_csharp_subject_id_params_to_subject_code.present?
     end
 
     def build_subject_areas

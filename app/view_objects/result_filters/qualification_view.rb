@@ -5,15 +5,15 @@ module ResultFilters
     end
 
     def qts_only_checked?
-      checked?("QtsOnly")
+      checked?('QtsOnly')
     end
 
     def pgde_pgce_with_qts_checked?
-      checked?("PgdePgceWithQts")
+      checked?('PgdePgceWithQts')
     end
 
     def other_checked?
-      checked?("Other")
+      checked?('Other')
     end
 
     def qualification_selected?

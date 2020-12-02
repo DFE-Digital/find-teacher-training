@@ -12,7 +12,7 @@ module ApplicationHelper
     # Fix common markdown errors:
     # - using bullets rather than *
     # - not putting a space between * and word
-    source = source.gsub(/•\s?/, "* ").gsub(/^\*(?![\s\*])/, "* ")
+    source = source.gsub(/•\s?/, '* ').gsub(/^\*(?![\s\*])/, '* ')
 
     # Convert quotes to smart quotes
     source_with_smart_quotes = smart_quotes(source)
@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def smart_quotes(string)
-    return "" if string.blank?
+    return '' if string.blank?
 
     RubyPants.new(string, 2, ruby_pants_options).to_html
   end
@@ -33,13 +33,13 @@ private
   # https://github.com/jmcnevin/rubypants/blob/master/lib/rubypants.rb
   def ruby_pants_options
     {
-      double_left_quote: "“",
-      double_right_quote: "”",
-      single_left_quote: "‘",
-      single_right_quote: "’",
-      ellipsis: "…",
-      em_dash: "—",
-      en_dash: "–",
+      double_left_quote: '“',
+      double_right_quote: '”',
+      single_left_quote: '‘',
+      single_right_quote: '’',
+      ellipsis: '…',
+      em_dash: '—',
+      en_dash: '–',
     }
   end
 end

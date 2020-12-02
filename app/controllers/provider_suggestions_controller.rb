@@ -1,6 +1,6 @@
 class ProviderSuggestionsController < ApplicationController
   def index
-    return render(json: { error: "Bad request" }, status: :bad_request) if params_invalid?
+    return render(json: { error: 'Bad request' }, status: :bad_request) if params_invalid?
 
     sanitised_query = CGI.escape(params[:query])
     suggestions = ProviderSuggestion.suggest(sanitised_query)

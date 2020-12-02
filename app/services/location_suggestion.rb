@@ -9,12 +9,12 @@ class LocationSuggestion
 
       response = get("#{Settings.google.places_api_path}?#{query.to_query}")
 
-      if response["predictions"].present?
-        JSON.parse(response.body)["predictions"]
+      if response['predictions'].present?
+        JSON.parse(response.body)['predictions']
           .map(&format_prediction)
           .take(5)
-      elsif response["error_message"].present?
-        Raven.send_event(error_message: response["error_message"])
+      elsif response['error_message'].present?
+        Raven.send_event(error_message: response['error_message'])
       end
     end
 
@@ -22,18 +22,18 @@ class LocationSuggestion
 
     def format_prediction
       lambda do |prediction|
-        prediction_split = prediction["description"].split(",")
-        prediction_split.first(prediction_split.size - 1).join(",")
+        prediction_split = prediction['description'].split(',')
+        prediction_split.first(prediction_split.size - 1).join(',')
       end
     end
 
     def build_query(input)
       {
         key: Settings.google.gcp_api_key,
-        language: "en",
+        language: 'en',
         input: input,
-        components: "country:uk",
-        types: "geocode",
+        components: 'country:uk',
+        types: 'geocode',
       }
     end
   end

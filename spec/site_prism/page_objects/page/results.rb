@@ -1,7 +1,7 @@
 module PageObjects
   module Page
     class Results < SitePrism::Page
-      set_url "/results"
+      set_url '/results'
       class CookieBannerSection < SitePrism::Section
         element :cookies_info_link, '[data-qa="cookie-banner__info-link"]'
         element :accept_all_cookies, '[data-qa="cookie-banner__accept"]'
@@ -26,14 +26,14 @@ module PageObjects
       end
 
       class StudyTypeSection < SitePrism::Section
-        element :subheading, "h2"
+        element :subheading, 'h2'
         element :fulltime, '[data-qa="fulltime"]'
         element :parttime, '[data-qa="parttime"]'
         element :link, '[data-qa="link"]'
       end
 
       class VacanciesSection < SitePrism::Section
-        element :subheading, "h2"
+        element :subheading, 'h2'
         element :vacancies, '[data-qa="vacancies"]'
         element :link, '[data-qa="link"]'
       end
@@ -105,7 +105,7 @@ module PageObjects
 
       section :sort_form, SortFormSection, '[data-qa="sort-form"]'
 
-      element :sorted_by_distance, ".search-results-header", text: "Sorted by distance"
+      element :sorted_by_distance, '.search-results-header', text: 'Sorted by distance'
     end
   end
 end

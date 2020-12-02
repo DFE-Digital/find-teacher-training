@@ -23,17 +23,17 @@ class CourseDecorator < Draper::Decorator
 
   def bursary_first_line_ending
     if bursary_requirements.count > 1
-      ":"
+      ':'
     else
       "#{bursary_requirements.first}."
     end
   end
 
   def bursary_requirements
-    requirements = ["a degree of 2:2 or above in any subject"]
+    requirements = ['a degree of 2:2 or above in any subject']
 
-    if object.subjects.any? { |subject| subject.subject_name.downcase == "primary with mathematics" }
-      mathematics_requirement = "at least grade B in maths A-level (or an equivalent)"
+    if object.subjects.any? { |subject| subject.subject_name.downcase == 'primary with mathematics' }
+      mathematics_requirement = 'at least grade B in maths A-level (or an equivalent)'
       requirements.push(mathematics_requirement)
     end
 
@@ -46,7 +46,7 @@ class CourseDecorator < Draper::Decorator
 
   def has_bursary?
     object.subjects.present? &&
-      object.subjects.any? { |subject| subject.attributes["bursary_amount"].present? }
+      object.subjects.any? { |subject| subject.attributes['bursary_amount'].present? }
   end
 
   def excluded_from_bursary?
@@ -58,36 +58,36 @@ class CourseDecorator < Draper::Decorator
 
   def has_scholarship?
     object.subjects.present? &&
-      object.subjects.any? { |subject| subject.attributes["scholarship"].present? }
+      object.subjects.any? { |subject| subject.attributes['scholarship'].present? }
   end
 
   def has_early_career_payments?
     object.subjects.present? &&
-      object.subjects.any? { |subject| subject.attributes["early_career_payments"].present? }
+      object.subjects.any? { |subject| subject.attributes['early_career_payments'].present? }
   end
 
   def bursary_amount
-    find_max("bursary_amount")
+    find_max('bursary_amount')
   end
 
   def scholarship_amount
-    find_max("scholarship")
+    find_max('scholarship')
   end
 
   def salaried?
-    object.funding_type == "salary" || object.funding_type == "apprenticeship"
+    object.funding_type == 'salary' || object.funding_type == 'apprenticeship'
   end
 
   def apprenticeship?
-    object.funding_type == "apprenticeship" ? "Yes" : "No"
+    object.funding_type == 'apprenticeship' ? 'Yes' : 'No'
   end
 
   def length
     case object.course_length
-    when "OneYear"
-      "1 year"
-    when "TwoYears"
-      "Up to 2 years"
+    when 'OneYear'
+      '1 year'
+    when 'TwoYears'
+      'Up to 2 years'
     else
       object.course_length
     end
@@ -99,15 +99,15 @@ class CourseDecorator < Draper::Decorator
 
   def funding_option
     if salaried?
-      "Salary"
+      'Salary'
     elsif excluded_from_bursary?
-      "Student finance if you’re eligible"
+      'Student finance if you’re eligible'
     elsif has_scholarship_and_bursary?
-      "Scholarships or bursaries, as well as student finance, are available if you’re eligible"
+      'Scholarships or bursaries, as well as student finance, are available if you’re eligible'
     elsif has_bursary?
-      "Bursaries and student finance are available if you’re eligible"
+      'Bursaries and student finance are available if you’re eligible'
     else
-      "Student finance if you’re eligible"
+      'Student finance if you’re eligible'
     end
   end
 
@@ -116,7 +116,7 @@ class CourseDecorator < Draper::Decorator
   end
 
   def has_vacancies?
-    object.has_vacancies? ? "Yes" : "No"
+    object.has_vacancies? ? 'Yes' : 'No'
   end
 
   def year_range
@@ -125,9 +125,9 @@ class CourseDecorator < Draper::Decorator
 
   def placements_heading
     if further_education?
-      "How teaching placements work"
+      'How teaching placements work'
     else
-      "How school placements work"
+      'How school placements work'
     end
   end
 

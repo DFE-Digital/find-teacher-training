@@ -2,7 +2,7 @@ module PageObjects
   module Page
     module ResultFilters
       class SubjectPage < SitePrism::Page
-        set_url "/results/filter/subject{?query*}"
+        set_url '/results/filter/subject{?query*}'
 
         class SubjectAreaSection < SitePrism::Section
           class Subject < SitePrism::Section
