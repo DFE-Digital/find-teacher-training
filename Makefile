@@ -51,3 +51,33 @@ publish.codeclimate: ## Publish coverage to Code Climate
 		./cc-test-reporter sum-coverage --output 'coverage/total.json' coverage/javascript.json coverage/rspec.json
 		# Upload the our test coverage to code climate
 		./cc-test-reporter upload-coverage --input coverage/total.json
+
+.PHONY: qa
+qa: ## Set DEPLOY_ENV to qa
+	$(eval DEPLOY_ENV=qa)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
+
+.PHONY: staging
+staging: ## Set DEPLOY_ENV to staging
+	$(eval DEPLOY_ENV=staging)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
+
+.PHONY: production
+production: ## Set DEPLOY_ENV to production
+	$(eval DEPLOY_ENV=production)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
+
+.PHONY: plan
+plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
+	$(eval export TF_VAR_paas_app_secrets_file=terraform/workspace_variables/app_secrets.yml)
+	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
+	az account set -s ${AZ_SUBSCRIPTION} && az account show
+	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
+
+.PHONY: deploy
+deploy: ## Run terraform apply for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
+	$(eval export TF_VAR_paas_app_secrets_file=terraform/workspace_variables/app_secrets.yml)
+	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
+	az account set -s ${AZ_SUBSCRIPTION} && az account show
+	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
+	terraform apply -var-file terraform/workspace_variables/${DEPLOY_ENV}.tfvars terraform
