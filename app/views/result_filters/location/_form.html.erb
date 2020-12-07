@@ -17,7 +17,7 @@
       <%= render "shared/hidden_previous_fields", form: form %>
       <fieldset class="govuk-fieldset" role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-          <h1 class="govuk-heading-xl">Find courses by location or by training provider</h1>
+          <h1 class="govuk-fieldset__heading">Find courses by location or by training provider</h1>
         </legend>
         <div class="govuk-form-group<%= " govuk-form-group--error" if flash[:error] %>" id="search-options">
           <% if flash[:error] and location_error? === false and provider_error? === false%>
