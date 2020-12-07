@@ -25,15 +25,6 @@ $govuk-image-url-function: frontend-image-url;
 @import "patterns/pagination";
 @import "patterns/text-ellipsis";
 
-
-.override-button-default {
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .govuk-checkboxes__label-text {
   display: block;
   font-weight: bold;
