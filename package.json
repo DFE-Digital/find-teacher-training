@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "^12.16.1"
+  },
   "dependencies": {
     "@rails/webpacker": "^5.2.1",
     "accessible-autocomplete": "^2.0.3",
