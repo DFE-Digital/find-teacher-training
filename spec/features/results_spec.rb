@@ -89,7 +89,7 @@ describe 'results', type: :feature do
     end
 
     it "renders the feedback component" do
-      expect(results_page.feedback_link[:href]).to eq("https://www.apply-for-teacher-training.service.gov.uk/find-feedback?path=/results&find_controller=results")
+      expect(results_page.feedback_link[:href]).to eq("https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/results&find_controller=results")
     end
   end
 
