@@ -6,9 +6,22 @@
 
 ## Prerequisites
 
-- Ruby 2.6.5
-- NodeJS 12.16.x
-- Yarn 1.12.x
+- Ruby 2.7.2
+- NodeJS 12.18.x
+- Yarn 1.22.x
+
+## Using asdf-vm to manage tool versions
+
+The `.tool-version` file in the root of the repository is used to specify the runtime versions of ruby and node.
+1. Download and install asdf-vm [🔗](https://asdf-vm.com/#/core-manage-asdf)
+2. Install ruby and node plugins
+
+    >```
+    > asdf plugin add ruby
+    > asdf plugin add nodejs
+    >```
+
+3. Then run `asdf install` to install the ruby and node versions specified in the `.tool-versions` file.
 
 ## Setting up the app in development
 
