@@ -1,10 +1,10 @@
 class FeedbackComponent < ViewComponent::Base
   include ViewHelper
 
-  attr_reader :path, :original_controller
+  attr_reader :path, :controller
 
-  def initialize(path:, original_controller:)
+  def initialize(path:, controller:)
     @path = path
-    @original_controller = original_controller
+    @controller = controller
   end
 end

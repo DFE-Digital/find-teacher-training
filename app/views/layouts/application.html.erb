@@ -76,7 +76,7 @@
       <%= render(
         FeedbackComponent.new(
           path: request.env['PATH_INFO'],
-          original_controller: params[:controller],
+          controller: params[:controller],
         )
       ) %>
     <% end %>
