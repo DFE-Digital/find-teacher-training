@@ -1,4 +1,4 @@
-ARG BASE_RUBY_IMAGE=ruby:2.6.5-alpine
+ARG BASE_RUBY_IMAGE=ruby:2.7.2-alpine
 
 FROM ${BASE_RUBY_IMAGE} AS base-image
 
@@ -11,7 +11,7 @@ RUN apk add --update --no-cache --virtual runtime-dependances \
 
 WORKDIR /app
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock .tool-versions ./
 
 RUN apk add --update --no-cache --virtual build-dependances \
     build-base  && \
