@@ -3,12 +3,16 @@ module ViewHelper
     mail_to(email, name, html_options.merge(class: 'govuk-link'), &block)
   end
 
-  def govuk_link_to(body, url = body, html_options = { class: 'govuk-link' })
-    link_to body, url, html_options
+  def govuk_link_to(body, url, html_options = {}, &_block)
+    html_options[:class] = prepend_css_class('govuk-link', html_options[:class])
+
+    return link_to(url, html_options) { yield } if block_given?
+
+    link_to(body, url, html_options)
   end
 
   def govuk_back_link_to(url, link_text = 'Back')
-    govuk_link_to(link_text, url, class: 'govuk-back-link', data: { qa: 'page-back' })
+    link_to link_text, url, class: 'govuk-back-link', data: { qa: 'page-back' }
   end
 
   def permitted_referrer?
@@ -24,5 +28,15 @@ module ViewHelper
 
   def bat_contact_mail_to(name = nil, subject: nil, link_class: 'govuk-link')
     mail_to bat_contact_email_address, name || bat_contact_email_address, subject: subject, class: link_class
+  end
+
+private
+
+  def prepend_css_class(css_class, current_class)
+    if current_class
+      current_class.prepend("#{css_class} ")
+    else
+      css_class
+    end
   end
 end

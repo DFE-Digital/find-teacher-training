@@ -106,6 +106,7 @@ module PageObjects
       section :sort_form, SortFormSection, '[data-qa="sort-form"]'
 
       element :sorted_by_distance, '.search-results-header', text: 'Sorted by distance'
+      element :feedback_link, '[data-qa=feedback-link]'
     end
   end
 end
