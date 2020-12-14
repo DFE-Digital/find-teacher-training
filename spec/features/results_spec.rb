@@ -88,8 +88,8 @@ describe 'results', type: :feature do
       expect(results_page.subjects_filter.extra_subjects.text).to eq('and 37 more...')
     end
 
-    it "renders the feedback component" do
-      expect(results_page.feedback_link[:href]).to eq("https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/results&find_controller=results")
+    it 'renders the feedback component' do
+      expect(results_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/results&find_controller=results')
     end
   end
 
