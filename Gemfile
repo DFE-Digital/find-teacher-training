@@ -3,14 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-def ruby_version
-  ruby_version = IO.foreach('.tool-versions', "\n") do |tool_version|
-    tool = Hash[*tool_version.split(' ')]
-    break tool['ruby'] if tool['ruby']
-  end
-end
-
-ruby ruby_version.to_s
+ruby '2.7.2'
 
 gem 'pkg-config', '~> 1.4.4'
 
