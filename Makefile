@@ -31,10 +31,14 @@ rspec: ## Run Ruby tests
 
 .PHONY: js.test
 js.test: ## Run Javascript tests
-		docker run --name find-yarn-test-runner ${IMAGE} yarn test --coverage
+		docker run --name find-yarn-test-runner ${IMAGE} /bin/sh -c 'apk add yarn && yarn install --frozen-lockfile && yarn test --coverage'
 		test_result=$$?
 		docker cp find-yarn-test-runner:/app/coverage .
 		exit ${test_result}
+
+.PHONY: shell
+shell: ## Shell into the container
+		docker run -it --rm ${IMAGE} sh
 
 .PHONY: publish.codeclimate
 publish.codeclimate: ## Publish coverage to Code Climate
