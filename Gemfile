@@ -4,8 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 def ruby_version
-  tool_versions_file = File.join(__dir__, '.tool-versions')
-  ruby_version = IO.foreach(tool_versions_file, "\n") do |tool_version|
+  ruby_version = IO.foreach('.tool-versions', "\n") do |tool_version|
     tool = Hash[*tool_version.split(' ')]
     break tool['ruby'] if tool['ruby']
   end
