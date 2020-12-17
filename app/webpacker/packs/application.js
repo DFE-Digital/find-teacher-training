@@ -10,9 +10,11 @@ import initAutocomplete from "scripts/autocomplete";
 import toggle from "scripts/toggle";
 import { loadAnalytics } from "scripts/analytics.js";
 import initCookieBanner from "scripts/cookie-banner";
+import refreshStartPage from "scripts/refresh-start-page";
 
 initAll();
 
+refreshStartPage();
 window.initLocationsMap = initLocationsMap;
 
 const $backLink = document.querySelector('[data-module="back-link"]');
