@@ -52,7 +52,7 @@ describe 'Search results', type: :feature do
         expect(first_course.accrediting_provider.text).to eq('University of Brighton')
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
         expect(first_course.main_address.text).to eq('Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA')
-        expect(first_course).not_to have_show_vacanices
+        expect(first_course).to have_show_vacancies
       end
     end
   end
