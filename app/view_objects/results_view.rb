@@ -43,7 +43,7 @@ class ResultsView
   end
 
   def hasvacancies?
-    return true if query_parameters['hasvacancies'].nil?
+    return false if query_parameters['hasvacancies'].nil?
 
     query_parameters['hasvacancies'] == 'true'
   end
@@ -122,10 +122,6 @@ class ResultsView
 
   def provider_filter?
     query_parameters['l'] == '3'
-  end
-
-  def vacancy_filter?
-    query_parameters['hasvacancies'] == 'false'
   end
 
   def sort_by_distance?

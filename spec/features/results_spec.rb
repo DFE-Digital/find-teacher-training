@@ -55,7 +55,7 @@ describe 'results', type: :feature do
 
     it 'has vacancies filter' do
       expect(results_page.vacancies_filter.subheading).to have_content('Vacancies:')
-      expect(results_page.vacancies_filter.vacancies).to have_content('Only courses with vacancies')
+      expect(results_page.vacancies_filter.vacancies).to have_content('Courses with and without vacancies')
       expect(results_page.vacancies_filter.link).to have_content('Change vacancies')
     end
 
@@ -68,7 +68,7 @@ describe 'results', type: :feature do
       expect(location_filter_uri.path).to eq('/results/filter/location')
       expect(Rack::Utils.parse_nested_query(location_filter_uri.query)).to eq({
         'fulltime' => 'false',
-        'hasvacancies' => 'true',
+        'hasvacancies' => 'false',
         'parttime' => 'false',
         'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
         'senCourses' => 'false',
@@ -94,7 +94,7 @@ describe 'results', type: :feature do
   end
 
   describe 'filters defaults with query string' do
-    let(:params) { { fulltime: 'false', parttime: 'false', hasvacancies: 'true' } }
+    let(:params) { { fulltime: 'false', parttime: 'false', hasvacancies: 'false' } }
 
     it 'has study type filter' do
       expect(results_page.study_type_filter.subheading).to have_content('Study type:')
@@ -105,7 +105,7 @@ describe 'results', type: :feature do
 
     it 'has vacancies filter' do
       expect(results_page.vacancies_filter.subheading).to have_content('Vacancies:')
-      expect(results_page.vacancies_filter.vacancies).to have_content('Only courses with vacancies')
+      expect(results_page.vacancies_filter.vacancies).to have_content('Courses with and without vacancies')
       expect(results_page.vacancies_filter.link).to have_content('Change vacancies')
     end
 
@@ -234,7 +234,7 @@ describe 'results', type: :feature do
           qualifications: %w[QtsOnly PgdePgceWithQts Other],
           fulltime: 'false',
           parttime: 'false',
-          hasvacancies: 'true',
+          hasvacancies: 'false',
           senCourses: 'false',
         }
       end
@@ -244,7 +244,7 @@ describe 'results', type: :feature do
         expect(location_filter_uri.path).to eq('/results')
         expect(Rack::Utils.parse_nested_query(location_filter_uri.query)).to eq({
           'fulltime' => 'false',
-          'hasvacancies' => 'true',
+          'hasvacancies' => 'false',
           'l' => '2',
           'parttime' => 'false',
           'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
@@ -266,7 +266,7 @@ describe 'results', type: :feature do
         subjects: '1,2,3',
         fulltime: 'False',
         parttime: 'False',
-        hasvacancies: 'True',
+        hasvacancies: 'False',
         senCourses: 'False',
         funding: '15',
       }
@@ -280,7 +280,7 @@ describe 'results', type: :feature do
       expect(results_page.study_type_filter.parttime).to have_content('Part time (18 - 24 months)')
       expect(results_page.qualifications_filter).to have_content('All qualifications')
       expect(results_page.funding_filter).to have_with_or_without_salary
-      expect(results_page.vacancies_filter).to have_content('Only courses with vacancies')
+      expect(results_page.vacancies_filter).to have_content('Courses with and without vacancies')
     end
   end
 end

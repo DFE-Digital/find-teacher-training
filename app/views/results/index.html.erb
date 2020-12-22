@@ -135,12 +135,10 @@
                 <%= smart_quotes(course.provider.decorate.short_address) %>
               </dd>
             <% end %>
-            <% if @results_view.vacancy_filter?  %>
-              <dt class="govuk-list--description__label">Vacancies</dt>
-              <dd data-qa="course__has_vacancies">
-                <%= course.decorate.has_vacancies? %>
-              </dd>
-            <% end %>
+            <dt class="govuk-list--description__label">Vacancies</dt>
+            <dd data-qa="course__has_vacancies">
+              <%= course.decorate.has_vacancies? %>
+            </dd>
           </dl>
         </li>
       <% end %>

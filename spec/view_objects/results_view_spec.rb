@@ -8,18 +8,8 @@ describe ResultsView do
       'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
       'fulltime' => false,
       'parttime' => false,
-      'hasvacancies' => true,
+      'hasvacancies' => false,
       'senCourses' => false,
-    }
-  end
-
-  let(:default_query_parameters) do
-    {
-      'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-      'fulltime' => 'false',
-      'parttime' => 'false',
-      'hasvacancies' => 'true',
-      'senCourses' => 'false',
     }
   end
 
@@ -104,10 +94,13 @@ describe ResultsView do
   end
 
   describe 'filter_path_with_unescaped_commas' do
-    subject(:results_view) { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas('/test') }
+    subject(:results_view) { described_class.new(query_parameters: default_output_parameters).filter_path_with_unescaped_commas('/test') }
 
     it 'appends an unescaped querystring to the passed path' do
-      allow(UnescapedQueryStringService).to receive(:call).with(base_path: '/test', parameters: default_output_parameters)
+      allow(UnescapedQueryStringService).to receive(:call).with(
+        base_path: '/test',
+        parameters: default_output_parameters,
+      )
         .and_return('test_result')
       expect(results_view).to eq('test_result')
     end
@@ -382,22 +375,6 @@ describe ResultsView do
       let(:parameter_hash) { { 'l' => '2' } }
 
       it { is_expected.to be(false) }
-    end
-  end
-
-  describe '#vacancy_filter?' do
-    subject { described_class.new(query_parameters: parameter_hash).vacancy_filter? }
-
-    context 'when hasvacancies param is set to true' do
-      let(:parameter_hash) { { 'hasvacancies' => 'true' } }
-
-      it { is_expected.to be(false) }
-    end
-
-    context 'when hasvacancies param is set to false' do
-      let(:parameter_hash) { { 'hasvacancies' => 'false' } }
-
-      it { is_expected.to be(true) }
     end
   end
 
