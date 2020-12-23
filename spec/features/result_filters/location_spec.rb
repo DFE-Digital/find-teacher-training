@@ -379,7 +379,7 @@ describe 'Location filter', type: :feature do
       filter_page.load
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPlease choose an option")
+      expect(filter_page.error.text).to eq("There is a problem\nPlease choose an option")
 
       expect(page).to have_current_path(location_path, ignore_query: true)
     end
@@ -390,7 +390,7 @@ describe 'Location filter', type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
+      expect(filter_page.error.text).to eq("There is a problem\nPostcode, town or city")
       expect(filter_page.location_error.text).to eq('Error: Please enter a postcode, city or town in England')
       expect(filter_page).to have_location_query
     end
@@ -402,7 +402,7 @@ describe 'Location filter', type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("You’ll need to correct some information.\nPostcode, town or city")
+      expect(filter_page.error.text).to eq("There is a problem\nPostcode, town or city")
       expect(filter_page.location_error.text).to eq('Error: We couldn’t find this location, please check your input and try again')
       expect(filter_page).to have_location_query
       expect(filter_page).to have_unknown_location
