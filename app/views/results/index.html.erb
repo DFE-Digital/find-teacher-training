@@ -1,17 +1,14 @@
 <%= content_for :page_title, "#{@number_of_courses_string}" %>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-full">
-    <% if @results_view.provider_filter? %>
-      <h1 class="govuk-heading-xl" data-qa="heading">
-        <span class="govuk-caption-l">Teacher training courses</span>
-        <%= smart_quotes(@results_view.provider) %>
-      </h1>
-    <% else %>
-      <h1 class="govuk-heading-xl" data-qa="heading">Teacher training courses</h1>
-    <% end %>
-  </div>
-</div>
+<% if @results_view.provider_filter? %>
+  <h1 class="govuk-heading-xl" data-qa="heading">
+    <span class="govuk-caption-l">Teacher training courses</span>
+    <%= smart_quotes(@results_view.provider) %>
+  </h1>
+<% else %>
+  <h1 class="govuk-heading-xl" data-qa="heading">Teacher training courses</h1>
+<% end %>
+
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-third">
     <div class="govuk-toggle" data-module="toggle">
@@ -34,17 +31,15 @@
   </div>
 
   <div class="govuk-grid-column-two-thirds">
-    <% if @results_view.no_results_found?%>
-      <div class="govuk-grid-row">
-        <h2 class="govuk-heading-l">
-          There are no courses matching your&nbsp;search
-        </h2>
-        <%= render partial: "try_another_search_text" %>
-      </div>
+    <% if @results_view.no_results_found? %>
+      <h2 class="govuk-heading-l">There are no courses matching your&nbsp;search</h2>
+      <%= render partial: "try_another_search_text" %>
     <% else %>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
-          <p class="govuk-body search-results__count" data-qa="course-count"><%= "#{@results_view.number_of_courses_string} found#{' within 50 miles' if @results_view.location_filter?} " %></p>
+          <p class="govuk-body search-results__count" data-qa="course-count">
+            <%= "#{@results_view.number_of_courses_string} found#{' within 50 miles' if @results_view.location_filter?}" %>
+          </p>
         </div>
         <div class="govuk-grid-column-one-half">
           <p class="govuk-body search-results__new-search">
@@ -54,43 +49,37 @@
       </div>
       <% unless @results_view.provider_filter? %>
         <div class="search-results-header">
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <% if @results_view.location_filter? %>
-                <p class="govuk-body govuk-!-margin-bottom-0">
-                  Sorted by distance
-                </p>
-              <% else %>
-                <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
-                  <%= render 'shared/hidden_fields',
-                    form: form,
-                    exclude_keys: ["sortby"]
-                  %>
-                  <div class="govuk-form-group">
-                    <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
-                    <%= form.select(
-                      :sortby,
-                      options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
-                      {},
-                      {
-                        class: "govuk-select trigger-result-update sortby-selector",
-                        onchange: "this.form.submit()",
-                        role: "listbox",
-                        "data-qa": "sort-form__options"
-                      }
-                    ) %>
-                  </div>
-                  <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
-                <% end %>
-              <% end %>
+          <% if @results_view.location_filter? %>
+            <p class="govuk-body govuk-!-margin-bottom-0">Sorted by distance</p>
+          <% else %>
+            <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
+              <%= render 'shared/hidden_fields',
+                form: form,
+                exclude_keys: ["sortby"]
+              %>
+              <div class="govuk-form-group">
+                <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
+                <%= form.select(
+                  :sortby,
+                  options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
+                  {},
+                  {
+                    class: "govuk-select trigger-result-update sortby-selector",
+                    onchange: "this.form.submit()",
+                    role: "listbox",
+                    "data-qa": "sort-form__options"
+                  }
+                ) %>
               </div>
-            </div>
-          </div>
+              <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
 
     <% if @results_view.suggested_search_visible? %>
-      <div class="govuk-grid-row" data-qa="suggested_searches">
+      <div data-qa="suggested_searches">
         <h3 class="govuk-heading-m" data-qa="suggested_search_heading">Suggested searches</h3>
         <p class="govuk-body" data-qa="suggested_search_description">You can find:</p>
         <ul class="govuk-list govuk-list--bullet">
@@ -102,11 +91,12 @@
         </ul>
       </div>
     <% end %>
+
     <ul class="govuk-list search-results">
       <% @courses.each do |course| %>
         <li data-qa="course">
           <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
-            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link  search-result-link", rel: "prev", data: { qa: "course__link" } do %>
+            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link search-result-link", rel: "prev", data: { qa: "course__link" } do %>
               <span data-qa="course__provider_name" class="govuk-!-font-size-19">
                 <%= smart_quotes(course.provider.provider_name) %>
               </span><br>
@@ -116,11 +106,11 @@
           <dl class="govuk-list--description">
             <dt class="govuk-list--description__label">Course</dt>
             <dd data-qa="course__description"><%= course.description%></dd>
-            <% if @results_view.location_filter? && @results_view.has_sites?(course)  %>
+            <% if @results_view.location_filter? && @results_view.has_sites?(course) %>
               <% if course.university_based? %>
-                <%= render partial: 'results/university', locals: {course: course} %>
+                <%= render partial: 'results/university', locals: { course: course } %>
               <% else %>
-                <%= render partial: 'results/non_university', locals: {course: course} %>
+                <%= render partial: 'results/non_university', locals: { course: course } %>
                 <% end %>
             <% end %>
             <dt class="govuk-list--description__label">Financial support</dt>
