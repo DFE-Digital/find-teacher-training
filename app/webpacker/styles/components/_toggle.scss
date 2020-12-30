@@ -1,7 +1,7 @@
 .govuk-toggle__link {
   @include govuk-font($size: 19, $weight: 'bold');
   @include govuk-responsive-margin(6, "bottom");
-  background-color: darken(govuk-colour("light-grey"), 5%);
+  background-color: govuk-colour("light-grey");
   background-image: url('../images/option-select-toggle-sprite.png');
   background-position: right -75px;
   background-repeat: no-repeat;
