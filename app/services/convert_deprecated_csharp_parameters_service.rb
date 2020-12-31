@@ -21,7 +21,7 @@ class ConvertDeprecatedCsharpParametersService
     end
 
     if have_legacy_params
-      warn 'The user navigated to the results page using the deprecated C# parameterisation scheme' if Rails.env.production?
+      Rails.logger.warn('The user navigated to the results page using the deprecated C# parameterisation scheme') if Rails.env.production?
       return { deprecated: true, parameters: params_hash }
     end
 
