@@ -19,7 +19,7 @@
               <%=
                 form.radio_button(
                   :hasvacancies,
-                  "True",
+                  true,
                   class: "govuk-radios__input",
                   data: { qa: "with_vacancies" },
                   checked: params[:hasvacancies] == "true" || params[:hasvacancies].blank?
@@ -32,7 +32,7 @@
               <%=
                 form.radio_button(
                   :hasvacancies,
-                  "False",
+                  false,
                   class: "govuk-radios__input",
                   data: { qa: "with_and_without_vacancies" },
                   checked: params[:hasvacancies] == "false"
