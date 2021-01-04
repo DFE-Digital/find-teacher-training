@@ -18,7 +18,7 @@
         <div class="govuk-form-group <%= flash[:error] ? "govuk-form-group--error" : "" %>">
           <% if flash[:error] %>
             <span id="qualification-error" class="govuk-error-message">
-              <span class="govuk-visually-hidden">Error:</span> You must make at least one selection
+              <span class="govuk-visually-hidden">Error:</span> <%= flash[:error] %>
             </span>
           <% end %>
           <div class="govuk-checkboxes">

@@ -8,7 +8,7 @@
         <li>
           <a href="#<%= error_anchor_id %>" data-qa="error__text">
             <% if flash[:error].kind_of?(Array) %>
-              <%= flash[:error].first %>
+              <%= flash[:error].last %>
             <% else %>
               <%= flash[:error] %>
             <% end %>

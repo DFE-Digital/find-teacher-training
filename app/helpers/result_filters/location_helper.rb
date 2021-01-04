@@ -5,8 +5,7 @@ module ResultFilters
 
       flash[:error].include?(t('location_filter.fields.provider')) ||
         flash[:error].include?(t('location_filter.errors.blank_provider')) ||
-        flash[:error].include?(t('location_filter.errors.missing_provider')) ||
-        flash[:error].include?(t('location_filter.errors.invalid_provider'))
+        flash[:error].include?(t('location_filter.errors.missing_provider'))
     end
 
     def location_error?
