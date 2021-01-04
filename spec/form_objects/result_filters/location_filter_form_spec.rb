@@ -18,7 +18,7 @@ module ResultFilters
 
         it 'has error' do
           results_filters.valid?
-          expect(results_filters.errors).to eq(['Please choose an option'])
+          expect(results_filters.errors).to eq(['Select an option to find courses'])
         end
 
         it 'has empty params' do
@@ -36,7 +36,7 @@ module ResultFilters
 
         it 'has error' do
           results_filters.valid?
-          expect(results_filters.errors).to eq(['Postcode, town or city', 'We couldn’t find this location, please check your input and try again'])
+          expect(results_filters.errors).to eq(['Postcode, town or city', 'Enter a real city, town or postcode'])
         end
 
         it 'has params' do

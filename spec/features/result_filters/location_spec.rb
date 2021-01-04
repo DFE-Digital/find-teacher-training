@@ -77,7 +77,7 @@ describe 'Location filter', type: :feature do
           filter_page.by_provider.click
           filter_page.find_courses.click
 
-          expect(filter_page).to have_content('You need to add some information')
+          expect(filter_page).to have_content('Enter a school, university or other training provider')
         end
       end
 
@@ -89,7 +89,7 @@ describe 'Location filter', type: :feature do
           filter_page.provider_search.fill_in(with: 'A')
           filter_page.find_courses.click
 
-          expect(filter_page).to have_content('Please enter a minimum of two characters')
+          expect(filter_page).to have_content('Enter a real school, university or training provider')
         end
       end
     end
@@ -160,7 +160,7 @@ describe 'Location filter', type: :feature do
           start_page.load
           start_page.find_courses.click
 
-          expect(start_page).to have_content(/Please choose an option/)
+          expect(start_page).to have_content(/Select an option to find courses/)
         end
       end
 
@@ -171,7 +171,7 @@ describe 'Location filter', type: :feature do
           start_page.load
           start_page.find_courses.click
 
-          expect(start_page).to have_content(/Please choose an option/)
+          expect(start_page).to have_content(/Select an option to find courses/)
         end
       end
     end
@@ -379,7 +379,7 @@ describe 'Location filter', type: :feature do
       filter_page.load
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("There is a problem\nPlease choose an option")
+      expect(filter_page.error.text).to eq("There is a problem\nSelect an option to find courses")
 
       expect(page).to have_current_path(location_path, ignore_query: true)
     end
@@ -390,8 +390,8 @@ describe 'Location filter', type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("There is a problem\nPostcode, town or city")
-      expect(filter_page.location_error.text).to eq('Error: Please enter a postcode, city or town in England')
+      expect(filter_page.error.text).to eq("There is a problem\nEnter a city, town or postcode")
+      expect(filter_page.location_error.text).to eq('Error: Enter a city, town or postcode')
       expect(filter_page).to have_location_query
     end
 
@@ -402,8 +402,8 @@ describe 'Location filter', type: :feature do
 
       filter_page.find_courses.click
 
-      expect(filter_page.error.text).to eq("There is a problem\nPostcode, town or city")
-      expect(filter_page.location_error.text).to eq('Error: We couldn’t find this location, please check your input and try again')
+      expect(filter_page.error.text).to eq("There is a problem\nEnter a real city, town or postcode")
+      expect(filter_page.location_error.text).to eq('Error: Enter a real city, town or postcode')
       expect(filter_page).to have_location_query
       expect(filter_page).to have_unknown_location
     end

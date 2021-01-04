@@ -9,7 +9,7 @@ module ResultFilters
       end
 
       if params[:query].length == 1
-        flash[:error] = [t('location_filter.fields.provider'), t('location_filter.errors.invalid_provider')]
+        flash[:error] = [t('location_filter.fields.provider'), t('location_filter.errors.missing_provider')]
         return redirect_back
       end
 

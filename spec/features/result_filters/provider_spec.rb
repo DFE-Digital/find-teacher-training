@@ -118,8 +118,8 @@ describe 'Provider filter', type: :feature do
       it 'redirects to location page with an error' do
         expect(page).to have_current_path(location_filter_page.url, ignore_query: true)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq('query' => 'ACME')
-        expect(location_filter_page.error_text.text).to eq('Training provider')
-        expect(location_filter_page.provider_error.text).to eq('Error: We couldn’t find this provider, please check your information and try again')
+        expect(location_filter_page.error_text.text).to eq('Enter a real school, university or training provider')
+        expect(location_filter_page.provider_error.text).to eq('Error: Enter a real school, university or training provider')
       end
     end
   end
