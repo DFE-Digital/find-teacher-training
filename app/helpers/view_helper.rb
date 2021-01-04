@@ -30,6 +30,10 @@ module ViewHelper
     mail_to bat_contact_email_address, name || bat_contact_email_address, subject: subject, class: link_class
   end
 
+  def title_with_error_prefix(title, error)
+    "#{t('page_titles.error_prefix') if error}#{title}"
+  end
+
 private
 
   def prepend_css_class(css_class, current_class)

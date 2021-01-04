@@ -1,4 +1,4 @@
-<%= content_for :page_title, "Find courses by location or by training provider" %>
+<%= content_for :page_title, title_with_error_prefix("Find courses by location or by training provider", flash[:error].present?) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">

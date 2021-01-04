@@ -64,3 +64,5 @@ en:
   cookie_preferences:
     no_option_error: "Please choose an option"
     success: "Your cookie preferences have been saved"
+  page_titles:
+    error_prefix: "Error: "
