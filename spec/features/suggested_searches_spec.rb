@@ -8,7 +8,7 @@ describe 'suggested searches', type: :feature do
 
   def suggested_search_count_parameters
     base_parameters.reject do |k, _v|
-      ['page[page]', 'page[per_page]', 'sort'].include?(k)
+      ['page[page]', 'page[per_page]'].include?(k)
     end
   end
 

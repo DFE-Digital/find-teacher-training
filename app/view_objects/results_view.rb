@@ -375,7 +375,10 @@ private
   end
 
   def course_counter(radius_to_check: nil, include_salary: true)
-    course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary).all.meta['count']
+    course_query = course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary)
+    course_query = course_query.order(:distance) if sort_by_distance?
+
+    course_query.all.meta['count']
   end
 
   def course_query(include_location:, radius_to_query: radius, include_salary: true)
