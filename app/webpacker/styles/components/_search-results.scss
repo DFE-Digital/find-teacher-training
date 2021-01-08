@@ -25,6 +25,10 @@
 .search-result-link {
   text-decoration: none;
 
+  * {
+    color: inherit;
+  }
+
   .search-result-link-name {
     text-decoration: underline;
   }

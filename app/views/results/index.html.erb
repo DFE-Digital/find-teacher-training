@@ -97,9 +97,9 @@
         <li data-qa="course">
           <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
             <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link search-result-link", rel: "prev", data: { qa: "course__link" } do %>
-              <span data-qa="course__provider_name" class="govuk-!-font-size-19">
+              <span data-qa="course__provider_name" class="govuk-heading-s govuk-!-margin-bottom-0">
                 <%= smart_quotes(course.provider.provider_name) %>
-              </span><br>
+              </span>
               <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
             <% end %>
           </h3>
