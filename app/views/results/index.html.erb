@@ -120,7 +120,7 @@
               <dd data-qa="course__accrediting_provider"><%= smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
             <% end %>
             <% unless @results_view.location_filter?  %>
-              <dt class="govuk-list--description__label">Main address</dt>
+              <dt class="govuk-list--description__label">Locations</dt>
               <dd data-qa="course__main_address">
                 <%= smart_quotes(course.provider.decorate.short_address) %>
               </dd>
