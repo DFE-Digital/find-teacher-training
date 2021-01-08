@@ -109,7 +109,7 @@ jobs:
           intervalSeconds: 15
 
       - name: Stop when smoke tests fail
-        if:  steps.wait-for-wait_for_smoke_tests.outputs.conclusion == 'failure'
+        if:  steps.wait_for_smoke_tests.outputs.conclusion == 'failure'
         run: exit 1
 
       - name: Update ${{ matrix.environment }} status
