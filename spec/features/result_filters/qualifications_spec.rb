@@ -14,7 +14,7 @@ describe 'Qualifications filter', type: :feature do
 
     it 'has the correct title and heading' do
       expect(page.title).to have_content('Filter by qualification')
-      expect(page).to have_content('What you will get')
+      expect(page).to have_content('Choose the qualifications to search for')
     end
 
     describe 'back link' do
@@ -101,7 +101,7 @@ describe 'Qualifications filter', type: :feature do
         results_page.load
         results_page.qualifications_filter.link.click
 
-        expect(filter_page.heading.text).to eq('What you will get')
+        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
 
         filter_page.qts_only.click
         filter_page.find_courses.click
@@ -128,7 +128,7 @@ describe 'Qualifications filter', type: :feature do
         results_page.load
         results_page.qualifications_filter.link.click
 
-        expect(filter_page.heading.text).to eq('What you will get')
+        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
 
         filter_page.pgde_pgce_with_qts.click
         filter_page.find_courses.click
@@ -155,7 +155,7 @@ describe 'Qualifications filter', type: :feature do
         results_page.load
         results_page.qualifications_filter.link.click
 
-        expect(filter_page.heading.text).to eq('What you will get')
+        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
 
         filter_page.other.click
         filter_page.find_courses.click
@@ -173,7 +173,7 @@ describe 'Qualifications filter', type: :feature do
         results_page.load
         results_page.qualifications_filter.link.click
 
-        expect(filter_page.heading.text).to eq('What you will get')
+        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
 
         filter_page.qts_only.click
         filter_page.pgde_pgce_with_qts.click
@@ -206,7 +206,7 @@ describe 'Qualifications filter', type: :feature do
       results_page.load
       results_page.qualifications_filter.link.click
 
-      expect(filter_page.heading.text).to eq('What you will get')
+      expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
       filter_page.find_courses.click
 
       expect(results_page.heading.text).to eq('Teacher training courses')
