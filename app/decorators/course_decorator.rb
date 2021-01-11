@@ -125,9 +125,9 @@ class CourseDecorator < Draper::Decorator
 
   def placements_heading
     if further_education?
-      'How teaching placements work'
+      'Teaching placements'
     else
-      'How school placements work'
+      'School placements'
     end
   end
 

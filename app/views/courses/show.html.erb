@@ -54,11 +54,11 @@
         <% if course.about_course.present? %>
           <li><%= link_to 'About the course', '#section-about', class: 'govuk-link' %></li>
         <% end %>
-        <% if course.interview_process.present? %>
-          <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
-        <% end %>
         <% if course.how_school_placements_work.present? %>
           <li><%= link_to course.placements_heading, '#section-schools', class: 'govuk-link' %></li>
+        <% end %>
+        <% if course.interview_process.present? %>
+          <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
         <% end %>
         <% if course.has_fees? %>
           <li><%= link_to 'Fees', '#section-fees', class: 'govuk-link' %></li>
@@ -82,12 +82,12 @@
         <%= render partial: 'courses/about_course' %>
       <% end %>
 
-      <% if course.interview_process.present? %>
-        <%= render partial: 'courses/interview_process' %>
-      <% end %>
-
       <% if course.how_school_placements_work.present? %>
         <%= render partial: 'courses/about_schools' %>
+      <% end %>
+
+      <% if course.interview_process.present? %>
+        <%= render partial: 'courses/interview_process' %>
       <% end %>
 
       <% if course.has_fees? %>

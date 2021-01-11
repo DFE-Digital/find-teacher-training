@@ -401,7 +401,7 @@ describe CourseDecorator do
       let(:course) { build(:course) }
 
       it 'returns school placement' do
-        expect(decorated_course.placements_heading).to eq('How school placements work')
+        expect(decorated_course.placements_heading).to eq('School placements')
       end
     end
 
@@ -409,7 +409,7 @@ describe CourseDecorator do
       let(:course) { build(:course, :further_education) }
 
       it 'returns teaching placement' do
-        expect(decorated_course.placements_heading).to eq('How teaching placements work')
+        expect(decorated_course.placements_heading).to eq('Teaching placements')
       end
     end
   end
