@@ -49,3 +49,6 @@ terraform/**/*.base64
 
 ## sanitised production data
 *.sql.gz
+
+# Cached Rubocop files
+.rubocop-https*
