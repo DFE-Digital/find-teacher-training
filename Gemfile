@@ -73,6 +73,7 @@ gem 'skylight'
 
 # Allows the creation of components which encapsulate and test logic in views
 gem 'view_component'
+gem 'govuk-components'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
