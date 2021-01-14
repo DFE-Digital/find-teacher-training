@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'Suggested salary searches', type: :feature do
+  include StubbedRequests::Courses
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
@@ -18,53 +20,29 @@ describe 'Suggested salary searches', type: :feature do
     )
   end
 
-  def course_fixture_for(results:)
-    file_name = case results
-                when 0
-                  'empty_courses.json'
-                when 2
-                  'two_courses.json'
-                when 4
-                  'four_courses.json'
-                when 10
-                  'ten_courses.json'
-                end
-
-    File.new("spec/fixtures/api_responses/#{file_name}")
-  end
-
   def suggested_search_count_parameters
     results_page_parameters.reject do |k, _v|
       ['page[page]', 'page[per_page]', 'sort'].include?(k)
     end
   end
 
-  def stub_courses(number_of_results:, query:)
-    stub_request(:get, courses_url)
-      .with(query: query)
-      .to_return(
-        body: course_fixture_for(results: number_of_results),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
-  end
-
   def stub_suggested_across_england_with_salary_filter(number_of_results:)
     stub_courses(
-      number_of_results: number_of_results,
+      course_count: number_of_results,
       query: suggested_search_count_parameters.merge('filter[funding]' => 'salary'),
     )
   end
 
   def stub_suggested_across_england_without_salary_filter(number_of_results:)
     stub_courses(
-      number_of_results: number_of_results,
+      course_count: number_of_results,
       query: suggested_search_count_parameters,
     )
   end
 
   def stub_results_with_salary_filter(radius:, number_of_results:)
     stub_courses(
-      number_of_results: number_of_results,
+      course_count: number_of_results,
       query: results_page_parameters.merge(
         'filter[funding]' => 'salary',
         'filter[latitude]' => 51.4980188,
@@ -77,7 +55,7 @@ describe 'Suggested salary searches', type: :feature do
 
   def stub_suggested_with_salary_filter(radius:, number_of_results:)
     stub_courses(
-      number_of_results: number_of_results,
+      course_count: number_of_results,
       query: suggested_search_count_parameters.merge(
         'filter[funding]' => 'salary',
         'filter[latitude]' => 51.4980188,
@@ -90,7 +68,7 @@ describe 'Suggested salary searches', type: :feature do
 
   def stub_suggested_without_salary_filter(radius:, number_of_results:)
     stub_courses(
-      number_of_results: number_of_results,
+      course_count: number_of_results,
       query: suggested_search_count_parameters.merge(
         'filter[latitude]' => 51.4980188,
         'filter[longitude]' => -0.1300436,

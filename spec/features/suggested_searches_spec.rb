@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'suggested searches', type: :feature do
+  include StubbedRequests::Courses
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'distance' }
@@ -19,64 +21,31 @@ describe 'suggested searches', type: :feature do
   end
 
   def results_page_request(radius:, results_to_return:)
-    stub_request(:get, courses_url)
-      .with(query: base_parameters.merge(
-        'filter[latitude]' => 51.4980188,
-        'filter[longitude]' => -0.1300436,
-        'filter[radius]' => radius,
-        'filter[expand_university]' => false,
-      ))
-      .to_return(
-        body: course_fixture_for(results: results_to_return),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    query = base_parameters.merge(
+      'filter[latitude]' => 51.4980188,
+      'filter[longitude]' => -0.1300436,
+      'filter[radius]' => radius,
+      'filter[expand_university]' => false,
+    )
+    stub_courses(query: query, course_count: results_to_return)
   end
 
   def across_england_results_page_request(results_to_return:)
-    stub_request(:get, courses_url)
-      .with(query: base_parameters)
-      .to_return(
-        body: course_fixture_for(results: results_to_return),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    stub_courses(query: base_parameters, course_count: results_to_return)
   end
 
   def suggested_search_count_request(radius:, results_to_return:)
-    stub_request(:get, courses_url)
-      .with(query: suggested_search_count_parameters.merge(
-        'filter[latitude]' => 51.4980188,
-        'filter[longitude]' => -0.1300436,
-        'filter[radius]' => radius,
-        'filter[expand_university]' => false,
-      ))
-      .to_return(
-        body: course_fixture_for(results: results_to_return),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    query = suggested_search_count_parameters.merge(
+      'filter[latitude]' => 51.4980188,
+      'filter[longitude]' => -0.1300436,
+      'filter[radius]' => radius,
+      'filter[expand_university]' => false,
+    )
+    stub_courses(query: query, course_count: results_to_return)
   end
 
   def suggested_search_count_across_england(results_to_return:)
-    stub_request(:get, courses_url)
-      .with(query: suggested_search_count_parameters)
-      .to_return(
-        body: course_fixture_for(results: results_to_return),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
-  end
-
-  def course_fixture_for(results:)
-    file_name = case results
-                when 0
-                  'empty_courses.json'
-                when 2
-                  'two_courses.json'
-                when 4
-                  'four_courses.json'
-                when 10
-                  'ten_courses.json'
-                end
-
-    File.new("spec/fixtures/api_responses/#{file_name}")
+    stub_courses(query: suggested_search_count_parameters, course_count: results_to_return)
   end
 
   context 'when an initial search returns no results' do
@@ -167,14 +136,10 @@ describe 'suggested searches', type: :feature do
         headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
 
-      stub_request(:get, courses_url)
-        .with(
-          query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
-        )
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/two_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(
+        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        course_count: 2,
+      )
     end
 
     it "doesn't show suggested searches" do

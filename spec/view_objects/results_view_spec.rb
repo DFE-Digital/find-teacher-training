@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe ResultsView do
+  include StubbedRequests::Courses
+
   let(:query_parameters) { ActionController::Parameters.new(parameter_hash) }
 
   let(:default_output_parameters) do
@@ -383,12 +385,7 @@ describe ResultsView do
 
     context 'there are more than three results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 10)
       end
 
       it { is_expected.to be(10) }
@@ -396,12 +393,7 @@ describe ResultsView do
 
     context 'there are no results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/empty_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 0)
       end
 
       it { is_expected.to be(0) }
@@ -467,12 +459,7 @@ describe ResultsView do
 
     context 'there are more than three results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 10)
       end
 
       it { is_expected.to be(false) }
@@ -480,19 +467,8 @@ describe ResultsView do
 
     context 'there are less than three results and there are suggested courses found' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/two_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
-
-        stub_request(:get, courses_url)
-          .with(query: suggested_search_count_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 2)
+        stub_courses(query: suggested_search_count_parameters, course_count: 10)
       end
 
       it { is_expected.to be(true) }
@@ -500,18 +476,8 @@ describe ResultsView do
 
     context 'there are less than three results and there are no suggested courses found' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/two_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
-        stub_request(:get, courses_url)
-          .with(query: suggested_search_count_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/empty_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 2)
+        stub_courses(query: suggested_search_count_parameters, course_count: 0)
       end
 
       it { is_expected.to be(false) }
@@ -747,12 +713,7 @@ describe ResultsView do
 
     context 'there are more than three results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 10)
       end
 
       it { is_expected.to eq(false) }
@@ -760,12 +721,7 @@ describe ResultsView do
 
     context 'there are no results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/empty_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 0)
       end
 
       it { is_expected.to eq(true) }
@@ -777,12 +733,7 @@ describe ResultsView do
 
     context 'there are two results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/two_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 2)
       end
 
       it { is_expected.to eq('2 courses') }
@@ -790,12 +741,7 @@ describe ResultsView do
 
     context 'there is one result' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/one_course.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 1)
       end
 
       it { is_expected.to eq('1 course') }
@@ -803,12 +749,7 @@ describe ResultsView do
 
     context 'there are no results' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: results_page_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/empty_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: results_page_parameters, course_count: 0)
       end
 
       it { is_expected.to eq('No courses') }

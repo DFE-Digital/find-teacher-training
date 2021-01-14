@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'Subject filter', type: :feature do
+  include StubbedRequests::Courses
+
   let(:filter_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
@@ -15,38 +17,22 @@ describe 'Subject filter', type: :feature do
   end
 
   before do
-    stub_request(:get, courses_url)
-      .with(query: base_parameters)
-      .to_return(
-        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
-
+    stub_courses(query: base_parameters, course_count: 10)
     stub_subject_areas_request
-
     stub_subjects_request
   end
 
   describe 'applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     context 'with less than 4 subjects selected' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge(
-            'filter[subjects]' => '00,F1',
-          ))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[subjects]' => '00,F1'),
+          course_count: 10,
+        )
       end
 
       it 'lists the results' do
@@ -75,14 +61,10 @@ describe 'Subject filter', type: :feature do
 
     context 'with subjects selected' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge(
-            'filter[subjects]' => '00,01,F1,Q8,P3',
-          ))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[subjects]' => '00,01,F1,Q8,P3'),
+          course_count: 10,
+        )
       end
 
       it 'lists the results' do
@@ -117,15 +99,11 @@ describe 'Subject filter', type: :feature do
 
   context 'with only SEND courses selected' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters.merge(
-          'filter[subjects]' => '00,01,F1',
-          'filter[send_courses]' => 'true',
-        ))
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      query = base_parameters.merge(
+        'filter[subjects]' => '00,01,F1',
+        'filter[send_courses]' => 'true',
+      )
+      stub_courses(query: query, course_count: 10)
     end
 
     it 'lists the results' do
@@ -315,14 +293,10 @@ describe 'Subject filter', type: :feature do
     end
 
     it 'lets you unselect SEND and other subjects' do
-      stub_request(:get, courses_url)
-          .with(query: base_parameters.merge(
-            'filter[subjects]' => '01',
-          ))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+      stub_courses(
+        query: base_parameters.merge('filter[subjects]' => '01'),
+        course_count: 10,
+      )
 
       visit subject_path(subjects: %w[31], senCourses: 'true')
       filter_page.subject_areas.first.subjects[0].checkbox.click # unselect
@@ -344,14 +318,10 @@ describe 'Subject filter', type: :feature do
 
   context 'with existing parameters' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters.merge(
-          'filter[subjects]' => '00,01',
-        ))
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(
+        query: base_parameters.merge('filter[subjects]' => '00,01'),
+        course_count: 10,
+      )
     end
 
     it 'only changes the subjects params' do

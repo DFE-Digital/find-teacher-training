@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe 'Provider filter', type: :feature do
+  include StubbedRequests::Courses
+
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -16,15 +18,10 @@ describe 'Provider filter', type: :feature do
   before do
     stub_subjects_request
 
-    stub_request(:get, courses_url)
-      .with(
-        query: base_parameters.merge(
-          'filter[provider.provider_name]' => 'ACME SCITT 0',
-        ),
-      ).to_return(
-        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    stub_courses(
+      query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+      course_count: 10,
+    )
   end
 
   context 'with an empty search' do

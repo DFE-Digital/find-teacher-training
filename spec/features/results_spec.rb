@@ -1,25 +1,12 @@
 require 'rails_helper'
 
 describe 'results', type: :feature do
+  include StubbedRequests::Courses
+
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'provider.provider_name,name' }
   let(:params) {}
   let(:base_parameters) { results_page_parameters('sort' => sort) }
-
-  let(:results_page_request) do
-    {
-      course_stub: stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: courses,
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        ),
-    }
-  end
-
-  let(:courses) do
-    File.new('spec/fixtures/api_responses/ten_courses.json')
-  end
 
   before do
     stub_request(
@@ -30,7 +17,7 @@ describe 'results', type: :feature do
       headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
     )
 
-    results_page_request
+    stub_courses(query: base_parameters, course_count: 10)
 
     allow(Settings).to receive(:google).and_return(maps_api_key: 'alohomora')
     allow(Settings).to receive(:google).and_return(maps_api_url: 'https://maps.googleapis.com/maps/api/staticmap')
@@ -117,21 +104,17 @@ describe 'results', type: :feature do
 
   context 'provider sorting' do
     let(:ascending_stub) do
-      stub_request(:get, courses_url)
-        .with(query: results_page_parameters('sort' => 'provider.provider_name,name'))
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(
+        query: results_page_parameters('sort' => 'provider.provider_name,name'),
+        course_count: 10,
+      )
     end
 
     let(:descending_stub) do
-      stub_request(:get, courses_url)
-        .with(query: results_page_parameters('sort' => '-provider.provider_name,-name'))
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(
+        query: results_page_parameters('sort' => '-provider.provider_name,-name'),
+        course_count: 10,
+      )
     end
 
     before do
