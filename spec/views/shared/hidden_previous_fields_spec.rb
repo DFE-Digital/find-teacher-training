@@ -5,7 +5,7 @@ RSpec.describe 'shared/hidden_previous_fields.html.erb', type: :view do
 
   before do
     allow(form_builder).to receive(:hidden_field)
-    render partial: 'shared/hidden_previous_fields.html.erb', locals: { form: form_builder, params: params }
+    render partial: 'shared/hidden_previous_fields', locals: { form: form_builder, params: params }
   end
 
   context 'prev_ parameters are present in the params' do
