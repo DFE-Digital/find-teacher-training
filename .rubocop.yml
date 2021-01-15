@@ -1,2 +1,26 @@
 inherit_from:
   - https://raw.githubusercontent.com/DFE-Digital/apply-for-teacher-training/master/.rubocop.yml
+
+# The following cops were present before adding Apply cops above
+Rails/HasManyOrHasOneDependent:
+ Enabled: false
+
+Rails/OutputSafety:
+ Enabled: false
+
+Rails/HelperInstanceVariable:
+ Enabled: false
+
+Style/HashEachMethods:
+ Enabled: true
+
+Style/HashTransformKeys:
+ Enabled: true
+
+Style/HashTransformValues:
+ Enabled: true
+
+# rubocop-govuk 3.17.0 started to enforce this but no active record is actually in use
+# https://github.com/alphagov/rubocop-govuk/commit/c4a4329d5e44dc98b24f1d344a3532054b1539e0
+Rails/SaveBang:
+ Enabled: false
