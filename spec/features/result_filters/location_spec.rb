@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Location filter', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Providers
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
@@ -23,17 +24,11 @@ describe 'Location filter', type: :feature do
 
   describe 'filtering by provider' do
     before do
-      stub_request(
-        :get,
-        "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
-      ).with(
+      stub_providers(
         query: {
           'fields[providers]' => 'provider_code,provider_name',
           'search' => 'ACME',
         },
-      ).to_return(
-        body: File.new('spec/fixtures/api_responses/providers.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
 
       stub_courses(
