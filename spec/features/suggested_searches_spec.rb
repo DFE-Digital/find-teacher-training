@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'suggested searches', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -17,8 +18,7 @@ describe 'suggested searches', type: :feature do
 
   before do
     stub_geocoder
-
-    stub_subjects_request
+    stub_subjects
   end
 
   def results_page_request(radius:, results_to_return:)

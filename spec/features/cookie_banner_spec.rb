@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'cookie banner', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
   let(:params) {}
@@ -29,8 +30,7 @@ describe 'cookie banner', type: :feature do
 
   before do
     stub_results_request
-    stub_subjects_request
-
+    stub_subjects
     visit results_path(params)
   end
 

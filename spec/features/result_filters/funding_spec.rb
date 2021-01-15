@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Funding filter', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -11,7 +12,7 @@ describe 'Funding filter', type: :feature do
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Funding filter page' do

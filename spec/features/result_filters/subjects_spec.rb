@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Subject filter', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::SubjectAreas
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -11,7 +12,7 @@ describe 'Subject filter', type: :feature do
   before do
     stub_courses(query: base_parameters, course_count: 10)
     stub_subject_areas
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'applying a filter' do

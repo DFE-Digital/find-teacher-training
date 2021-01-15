@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Location filter back link', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
@@ -11,7 +12,7 @@ describe 'Location filter back link', type: :feature do
 
   before do
     stub_results_page_request
-    stub_subjects_request
+    stub_subjects
   end
 
   context 'before the location filter form has been submitted' do

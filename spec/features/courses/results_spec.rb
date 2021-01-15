@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Search results', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
 
@@ -28,7 +29,7 @@ describe 'Search results', type: :feature do
   end
 
   before do
-    stub_subjects_request
+    stub_subjects
     stub_courses_request
 
     visit results_path(page: page_index)

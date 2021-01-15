@@ -4,6 +4,7 @@ describe 'Location filter', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
   include StubbedRequests::SubjectAreas
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
@@ -14,8 +15,8 @@ describe 'Location filter', type: :feature do
 
   before do
     stub_geocoder
-    stub_subjects_request
     stub_subject_areas
+    stub_subjects
 
     stub_courses(query: base_parameters, course_count: 10)
   end

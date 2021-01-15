@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Provider filter', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
+  include StubbedRequests::Subjects
 
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
@@ -12,7 +13,7 @@ describe 'Provider filter', type: :feature do
   let(:query_params) { { query: search_term } }
 
   before do
-    stub_subjects_request
+    stub_subjects
 
     stub_courses(
       query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),

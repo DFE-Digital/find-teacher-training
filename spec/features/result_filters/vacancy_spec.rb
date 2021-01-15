@@ -2,13 +2,14 @@ require 'rails_helper'
 
 describe 'Vacancy filter', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Subjects
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Vacancy.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Vacancy filter page' do

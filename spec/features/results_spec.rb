@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'results', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'provider.provider_name,name' }
@@ -9,14 +10,7 @@ describe 'results', type: :feature do
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
   before do
-    stub_request(
-      :get,
-      "#{Settings.teacher_training_api.base_url}/api/v3/subjects?fields%5Bsubjects%5D=subject_name,subject_code&sort=subject_name",
-    ).to_return(
-      body: File.new('spec/fixtures/api_responses/subjects_sorted_name_code.json'),
-      headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-    )
-
+    stub_subjects
     stub_courses(query: base_parameters, course_count: 10)
 
     allow(Settings).to receive(:google).and_return(maps_api_key: 'alohomora')
