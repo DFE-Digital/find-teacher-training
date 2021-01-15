@@ -8,10 +8,10 @@
   <% if @course.has_vacancies? %>
     <% if Settings.display_apply_button %>
       <p class="govuk-body">
-        <%= link_to "Apply for this course", apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
-                    class: "govuk-button govuk-button--start",
-                    data: { qa: 'course__apply_link' },
-                    rel: "nofollow" %>
+        <%= render GovukComponent::StartNowButton.new(
+          text: 'Apply for this course',
+          href: apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
+        ) %>
       </p>
     <% else %>
       <div data-qa="course__end_of_cycle_notice">
