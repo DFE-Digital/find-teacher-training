@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Location filter', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
+  include StubbedRequests::SubjectAreas
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
@@ -10,14 +11,11 @@ describe 'Location filter', type: :feature do
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
   let(:base_parameters) { results_page_parameters }
-  let(:stub_subject_area_request) do
-    stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects")
-  end
 
   before do
     stub_geocoder
-    stub_subject_area_request
     stub_subjects_request
+    stub_subject_areas
 
     stub_courses(query: base_parameters, course_count: 10)
   end

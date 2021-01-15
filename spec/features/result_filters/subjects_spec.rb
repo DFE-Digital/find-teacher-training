@@ -2,23 +2,15 @@ require 'rails_helper'
 
 describe 'Subject filter', type: :feature do
   include StubbedRequests::Courses
+  include StubbedRequests::SubjectAreas
 
   let(:filter_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
-  let(:stub_subject_areas_request) do
-    stub_request(
-      :get,
-      "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects",
-    ).to_return(
-      body: File.new('spec/fixtures/api_responses/subject_areas.json'),
-      headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-    )
-  end
 
   before do
     stub_courses(query: base_parameters, course_count: 10)
-    stub_subject_areas_request
+    stub_subject_areas
     stub_subjects_request
   end
 
