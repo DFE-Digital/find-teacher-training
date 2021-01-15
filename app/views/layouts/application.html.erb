@@ -33,14 +33,9 @@
     ) %>
 
     <div class="govuk-width-container">
-      <div class="govuk-phase-banner">
-        <p class="govuk-phase-banner__content">
-          <strong class="govuk-tag govuk-phase-banner__content__tag">Beta</strong>
-          <span class="govuk-phase-banner__text">
-            This is a new service – <%= link_to "give feedback or report a problem", "mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training", class: 'govuk-link govuk-link--no-visited-state' %>
-          </span>
-        </p>
-      </div>
+      <%= render GovukComponent::PhaseBanner.new(phase: 'Beta') do %>
+        This is a new service – <%= govuk_link_to "give feedback or report a problem", "mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training", class: 'govuk-link govuk-link--no-visited-state' %>
+      <% end %>
       <%= yield(:before_content) %>
       <main class="govuk-main-wrapper " id="main-content" role="main">
         <% if flash[:success] %>
