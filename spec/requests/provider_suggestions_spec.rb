@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe '/provider-suggestions', type: :request do
+  include StubbedRequests::ProviderSuggestions
+
   context 'when provider suggestion is blank' do
     it 'returns bad request (400)' do
       get '/provider-suggestions'
@@ -25,11 +27,7 @@ describe '/provider-suggestions', type: :request do
 
     [query, query_with_unicode_character].each do |provider_query|
       it "returns success (200) for query: '#{provider_query}'" do
-        provider_suggestions = stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/provider-suggestions?query=#{provider_query}")
-                                 .to_return(
-                                   headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-                                   body: File.new('spec/fixtures/api_responses/provider-suggestions.json'),
-                                 )
+        provider_suggestions = stub_provider_suggestions(query: provider_query)
 
         get "/provider-suggestions?query=#{provider_query}"
 

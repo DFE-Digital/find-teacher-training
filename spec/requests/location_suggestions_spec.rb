@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe '/location-suggestions', type: :request do
+  include StubbedRequests::LocationSuggestions
+
   context 'when provider suggestion is blank' do
     it 'returns bad request (400)' do
       get '/location-suggestions'
@@ -13,11 +15,7 @@ describe '/location-suggestions', type: :request do
   context 'when location suggestion query is valid' do
     it 'returns success (200)' do
       query = 'london'
-      location_suggestions = stub_request(
-        :get,
-        "#{Settings.google.places_api_host}/maps/api/place/autocomplete/json?components=country:uk&input=#{query}&key=replace_me&language=en&types=geocode",
-      ).to_return(body: File.new('spec/fixtures/api_responses/location-suggestions.json'))
-
+      location_suggestions = stub_location_suggestions(query: query)
       get "/location-suggestions?query=#{query}"
 
       expect(location_suggestions).to have_been_requested
