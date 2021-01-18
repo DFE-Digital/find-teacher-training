@@ -4,13 +4,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">Find postgraduate teacher training</h1>
-      <div class="govuk-warning-text">
-        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-        <strong class="govuk-warning-text__text">
-          <span class="govuk-warning-text__assistive">Warning</span>
-          It’s no longer possible to apply for courses for the 2020 to 2021 academic year
-        </strong>
-      </div>
+      <%= render GovukComponent::Warning.new(
+        text: 'It’s no longer possible to apply for courses for the 2020 to 2021 academic year',
+      ) %>
       <h2 class="govuk-heading-m">Find courses starting in the 2021 to 2022 academic year</h2>
       <p class="govuk-body">
         Come back from 6 October 2020 to find courses.
