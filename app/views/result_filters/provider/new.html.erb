@@ -19,26 +19,21 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
     <div>
-      <details class="govuk-details" role="group">
-        <summary class="govuk-details__summary" role="button">
-          <span class="govuk-details__summary-text">Try another provider</span>
-        </summary>
-        <div class="govuk-details__text">
-          <%= form_with url: provider_path, method: :get, data: { "ga-event-form" => "Provider" } do |form| %>
-            <fieldset class="govuk-fieldset">
-              <div class="govuk-form-group">
-                <%= form.label :query, class: "govuk-label" do %>
-                  <strong>School, university or other training provider</strong>
-                  <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
-                <% end %>
-                <%= form.text_field :query, class: "govuk-input" %>
-              </div>
+      <%= render GovukComponent::Details.new(summary: 'Try another provider') do %>
+        <%= form_with url: provider_path, method: :get, data: { "ga-event-form" => "Provider" } do |form| %>
+          <fieldset class="govuk-fieldset">
+            <div class="govuk-form-group">
+              <%= form.label :query, class: "govuk-label" do %>
+                <strong>School, university or other training provider</strong>
+                <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
+              <% end %>
+              <%= form.text_field :query, class: "govuk-input" %>
+            </div>
 
-              <%= form.submit "Search again", name: nil, class: "govuk-button" %>
-            </fieldset>
-          <% end %>
-        </div>
-      </details>
+            <%= form.submit "Search again", name: nil, class: "govuk-button" %>
+          </fieldset>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
