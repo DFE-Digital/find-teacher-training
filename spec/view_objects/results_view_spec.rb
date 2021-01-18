@@ -51,9 +51,9 @@ describe ResultsView do
     end
 
     context 'query_parameters have hasvacancies set' do
-      let(:parameter_hash) { { 'hasvacancies' => 'false' } }
+      let(:parameter_hash) { { 'hasvacancies' => 'true' } }
 
-      it { is_expected.to eq(default_output_parameters.merge('hasvacancies' => false)) }
+      it { is_expected.to eq(default_output_parameters.merge('hasvacancies' => true)) }
     end
 
     context 'query_parameters have senCourses set' do
