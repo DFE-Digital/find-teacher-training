@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe 'Search results', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Subjects
+
   let(:results_page) { PageObjects::Page::Results.new }
 
   let(:base_parameters) { results_page_parameters }
@@ -22,16 +25,11 @@ describe 'Search results', type: :feature do
   let(:page_index) { nil }
 
   let(:stub_courses_request) do
-    stub_request(:get, courses_url)
-      .with(query: base_parameters)
-      .to_return(
-        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    stub_courses(query: base_parameters, course_count: 10)
   end
 
   before do
-    stub_subjects_request
+    stub_subjects
     stub_courses_request
 
     visit results_path(page: page_index)

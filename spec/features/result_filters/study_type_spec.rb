@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe 'Study type filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Subjects
+
   let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Study type filter page' do
@@ -39,12 +42,7 @@ describe 'Study type filter', type: :feature do
 
     describe 'back link' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters, course_count: 10)
       end
 
       it 'navigates back to the results page' do
@@ -81,12 +79,7 @@ describe 'Study type filter', type: :feature do
 
   describe 'viewing results without explicitly selecting a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     it 'lists only courses with both study types' do
@@ -101,22 +94,12 @@ describe 'Study type filter', type: :feature do
 
   describe 'applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     context 'deselecting full time' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[study_type]' => 'part_time'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters.merge('filter[study_type]' => 'part_time'), course_count: 10)
       end
 
       it 'list the courses' do
@@ -136,12 +119,7 @@ describe 'Study type filter', type: :feature do
 
     context 'deselecting part time' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[study_type]' => 'full_time'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters.merge('filter[study_type]' => 'full_time'), course_count: 10)
       end
 
       it 'list the courses' do
@@ -175,12 +153,7 @@ describe 'Study type filter', type: :feature do
 
     context 'submitting without deselection' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[study_type]' => 'full_time,part_time'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters.merge('filter[study_type]' => 'full_time,part_time'), course_count: 10)
       end
 
       it 'list the courses' do

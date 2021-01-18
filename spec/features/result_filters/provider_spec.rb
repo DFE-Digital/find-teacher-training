@@ -1,30 +1,24 @@
 require 'rails_helper'
 
 describe 'Provider filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Providers
+  include StubbedRequests::Subjects
+
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:providers_url) do
-    "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers?fields%5Bproviders%5D=provider_code,provider_name&search=#{search_term}"
-  end
-
   let(:base_parameters) { results_page_parameters }
-
   let(:search_term) { 'ACME' }
   let(:query_params) { { query: search_term } }
 
   before do
-    stub_subjects_request
+    stub_subjects
 
-    stub_request(:get, courses_url)
-      .with(
-        query: base_parameters.merge(
-          'filter[provider.provider_name]' => 'ACME SCITT 0',
-        ),
-      ).to_return(
-        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    stub_courses(
+      query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+      course_count: 10,
+    )
   end
 
   context 'with an empty search' do
@@ -46,11 +40,12 @@ describe 'Provider filter', type: :feature do
   context 'with a query' do
     context 'with many providers' do
       before do
-        stub_request(:get, providers_url)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/providers.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_providers(
+          query: {
+            'fields[providers]' => 'provider_code,provider_name',
+            'search' => search_term,
+          },
+        )
 
         provider_filter_page.load(query: query_params)
       end
@@ -87,12 +82,12 @@ describe 'Provider filter', type: :feature do
 
     context 'with only one provider' do
       before do
-        stub_request(:get, providers_url)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/one_provider.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
-
+        stub_one_provider(
+          query: {
+            'fields[providers]' => 'provider_code,provider_name',
+            'search' => search_term,
+          },
+        )
         provider_filter_page.load(query: query_params)
       end
 
@@ -106,11 +101,12 @@ describe 'Provider filter', type: :feature do
 
     context 'with no providers' do
       before do
-        stub_request(:get, providers_url)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/empty_providers.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_empty_providers(
+          query: {
+            'fields[providers]' => 'provider_code,provider_name',
+            'search' => search_term,
+          },
+        )
 
         provider_filter_page.load(query: query_params)
       end
@@ -128,11 +124,12 @@ describe 'Provider filter', type: :feature do
     let(:search_term) { 'ACME SCITT' }
 
     before do
-      stub_request(:get, providers_url)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/providers.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_providers(
+        query: {
+          'fields[providers]' => 'provider_code,provider_name',
+          'search' => search_term,
+        },
+      )
 
       provider_filter_page.load(query: query_params)
     end

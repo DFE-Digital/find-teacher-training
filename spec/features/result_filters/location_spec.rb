@@ -1,52 +1,39 @@
 require 'rails_helper'
 
 describe 'Location filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Providers
+  include StubbedRequests::SubjectAreas
+  include StubbedRequests::Subjects
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:query_params) { {} }
   let(:base_parameters) { results_page_parameters }
-  let(:stub_subject_area_request) do
-    stub_request(:get, "#{Settings.teacher_training_api.base_url}/api/v3/subject_areas?include=subjects")
-  end
 
   before do
     stub_geocoder
-    stub_subject_area_request
-    stub_subjects_request
+    stub_subject_areas
+    stub_subjects
 
-    stub_request(:get, courses_url)
-      .with(query: base_parameters)
-      .to_return(
-        body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-      )
+    stub_courses(query: base_parameters, course_count: 10)
   end
 
   describe 'filtering by provider' do
     before do
-      stub_request(
-        :get,
-        "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers",
-      ).with(
+      stub_providers(
         query: {
           'fields[providers]' => 'provider_code,provider_name',
           'search' => 'ACME',
         },
-      ).to_return(
-        body: File.new('spec/fixtures/api_responses/providers.json'),
-        headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
       )
 
-      stub_request(:get, courses_url)
-        .with(
-          query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
-        )
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/four_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(
+        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        course_count: 4,
+      )
     end
 
     context 'valid provider search' do
@@ -97,20 +84,14 @@ describe 'Location filter', type: :feature do
 
   describe 'filtering by location' do
     before do
-      stub_request(:get, courses_url)
-        .with(
-          query: base_parameters.merge(
-            'filter[longitude]' => '-0.1300436',
-            'filter[latitude]' => '51.4980188',
-            'filter[radius]' => '50',
-            'sort' => 'distance',
-            'filter[expand_university]' => false,
-          ),
-        )
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      query = base_parameters.merge(
+        'filter[longitude]' => '-0.1300436',
+        'filter[latitude]' => '51.4980188',
+        'filter[radius]' => '50',
+        'sort' => 'distance',
+        'filter[expand_university]' => false,
+      )
+      stub_courses(query: query, course_count: 10)
 
       results_page.load
       results_page.location_filter.link.click
@@ -316,20 +297,14 @@ describe 'Location filter', type: :feature do
 
   describe 'distance sorting' do
     let(:distance_stub) do
-      stub_request(:get, courses_url)
-        .with(
-          query: base_parameters.merge(
-            'filter[longitude]' => '-0.1300436',
-            'filter[latitude]' => '51.4980188',
-            'filter[radius]' => '50',
-            'sort' => 'distance',
-            'filter[expand_university]' => false,
-          ),
-        )
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      query = base_parameters.merge(
+        'filter[longitude]' => '-0.1300436',
+        'filter[latitude]' => '51.4980188',
+        'filter[radius]' => '50',
+        'sort' => 'distance',
+        'filter[expand_university]' => false,
+      )
+      stub_courses(query: query, course_count: 10)
     end
 
     before do

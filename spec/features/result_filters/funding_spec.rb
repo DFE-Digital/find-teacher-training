@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe 'Funding filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Subjects
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
 
@@ -9,7 +12,7 @@ describe 'Funding filter', type: :feature do
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Funding filter page' do
@@ -22,12 +25,7 @@ describe 'Funding filter', type: :feature do
 
     describe 'back link' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters, course_count: 10)
       end
 
       it 'navigates back to the results page' do
@@ -78,12 +76,7 @@ describe 'Funding filter', type: :feature do
 
   describe 'viewing results without explicitly selecting a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     it 'lists course with or without salary' do
@@ -96,22 +89,12 @@ describe 'Funding filter', type: :feature do
 
   describe 'applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     context 'selecting all courses' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters, course_count: 10)
       end
 
       it 'list the courses' do
@@ -132,12 +115,7 @@ describe 'Funding filter', type: :feature do
 
     context 'selecting salary only courses' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[funding]' => 'salary'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters.merge('filter[funding]' => 'salary'), course_count: 10)
       end
 
       it 'lists the courses' do
@@ -159,19 +137,8 @@ describe 'Funding filter', type: :feature do
 
   describe 'submitting without applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
-
-      stub_request(:get, courses_url)
-        .with(query: base_parameters.merge('filter[qualifications]' => 'QtsOnly,PgdePgceWithQts,Other'))
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
+      stub_courses(query: base_parameters.merge('filter[qualifications]' => 'QtsOnly,PgdePgceWithQts,Other'), course_count: 10)
     end
 
     it 'lists only courses with and without salary' do

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'results/university.html.erb', type: :view do
   let(:html) do
-    render partial: 'results/university.html.erb', locals: { course: course }
+    render partial: 'results/university', locals: { course: course }
   end
 
   let(:site1) do

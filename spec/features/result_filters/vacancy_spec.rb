@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe 'Vacancy filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Subjects
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Vacancy.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Vacancy filter page' do
@@ -19,12 +22,7 @@ describe 'Vacancy filter', type: :feature do
 
     describe 'back link' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters, course_count: 10)
       end
 
       it 'navigates back to the results page' do
@@ -60,12 +58,7 @@ describe 'Vacancy filter', type: :feature do
 
   describe 'viewing results without explicitly selecting a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     it 'lists only courses with vacancies' do
@@ -78,22 +71,15 @@ describe 'Vacancy filter', type: :feature do
 
   describe 'applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     context 'selecting courses with or without vacancies' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[has_vacancies]' => 'false'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[has_vacancies]' => 'false'),
+          course_count: 10,
+        )
       end
 
       it 'list the courses' do
@@ -113,12 +99,10 @@ describe 'Vacancy filter', type: :feature do
 
     context 'selecting courses with vacancies' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[has_vacancies]' => 'true'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[has_vacancies]' => 'true'),
+          course_count: 10,
+        )
       end
 
       it 'lists the courses' do

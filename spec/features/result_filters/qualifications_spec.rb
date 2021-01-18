@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 describe 'Qualifications filter', type: :feature do
+  include StubbedRequests::Courses
+  include StubbedRequests::Subjects
+
   let(:filter_page) { PageObjects::Page::ResultFilters::Qualification.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    stub_subjects_request
+    stub_subjects
   end
 
   describe 'Qualification filter page' do
@@ -19,12 +22,7 @@ describe 'Qualifications filter', type: :feature do
 
     describe 'back link' do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters)
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(query: base_parameters, course_count: 10)
       end
 
       it 'navigates back to the results page' do
@@ -61,12 +59,7 @@ describe 'Qualifications filter', type: :feature do
 
   describe 'viewing results without explicitly selecting a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     it 'lists only courses with all qualifications' do
@@ -79,22 +72,15 @@ describe 'Qualifications filter', type: :feature do
 
   describe 'applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     context "deselecting courses with 'qts only' qualification" do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[qualification]' => 'pgce_with_qts,pgde_with_qts,pgce,pgde'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[qualification]' => 'pgce_with_qts,pgde_with_qts,pgce,pgde'),
+          course_count: 10,
+        )
       end
 
       it 'list the courses' do
@@ -116,12 +102,10 @@ describe 'Qualifications filter', type: :feature do
 
     context "deselecting courses that with 'pgde with qts' qualification" do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[qualification]' => 'qts,pgce,pgde'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[qualification]' => 'qts,pgce,pgde'),
+          course_count: 10,
+        )
       end
 
       it 'list the courses' do
@@ -143,12 +127,10 @@ describe 'Qualifications filter', type: :feature do
 
     context "deselecting courses with 'further education' qualification" do
       before do
-        stub_request(:get, courses_url)
-          .with(query: base_parameters.merge('filter[qualification]' => 'qts,pgce_with_qts,pgde_with_qts'))
-          .to_return(
-            body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-            headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-          )
+        stub_courses(
+          query: base_parameters.merge('filter[qualification]' => 'qts,pgce_with_qts,pgde_with_qts'),
+          course_count: 10,
+        )
       end
 
       it 'list the courses' do
@@ -187,19 +169,7 @@ describe 'Qualifications filter', type: :feature do
 
   describe 'submitting without applying a filter' do
     before do
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
-
-      stub_request(:get, courses_url)
-        .with(query: base_parameters)
-        .to_return(
-          body: File.new('spec/fixtures/api_responses/ten_courses.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
-        )
+      stub_courses(query: base_parameters, course_count: 10)
     end
 
     it 'list the courses' do
