@@ -13,9 +13,6 @@ gem 'draper'
 # http client
 gem 'httparty'
 
-# Offshore logging
-gem 'logstash-logger'
-
 # Semantic Logger makes logs pretty
 gem 'rails_semantic_logger'
 

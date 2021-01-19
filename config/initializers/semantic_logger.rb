@@ -1,14 +1,4 @@
-if Settings.logstash.host && Settings.logstash.port
-  logstash_formatter = proc do |event|
-    # For some reason logstash / elasticsearch drops events where the payload
-    # is a hash. These are more conveniently accessed at the top level of the
-    # event, anyway, so we move it there.
-    if event['payload'].present?
-      event.append(event['payload'])
-      event['payload'] = nil
-    end
-  end
-
-  log_stash = LogStashLogger.new(Settings.logstash.to_h.merge(customize_event: logstash_formatter))
-  SemanticLogger.add_appender(logger: log_stash, level: :info, formatter: :json)
-end
+Rails.application.config.semantic_logger.application = Settings.application_name
+Rails.application.config.rails_semantic_logger.format = :json
+SemanticLogger.add_appender(io: STDOUT, level: Rails.application.config.log_level, formatter: Rails.application.config.rails_semantic_logger.format)
+Rails.application.config.logger.info('Application logging to STDOUT')
