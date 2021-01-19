@@ -34,7 +34,7 @@ describe 'Application helpers', type: :helper do
     end
 
     it 'converts quotes to smart quotes' do
-      output = helper.markdown("\"Wow -- what's this...\", O'connor asked.")
+      output = helper.markdown("\"Wow – what's this...\", O'connor asked.")
       expect(output).to eq('<p class="govuk-body">“Wow – what’s this…”, O’connor asked.</p>')
     end
 
@@ -47,8 +47,13 @@ describe 'Application helpers', type: :helper do
 
   describe '#smart_quotes' do
     it 'converts quotes to smart quotes' do
-      output = helper.smart_quotes("\"Wow -- what's this...\", O'connor asked.")
+      output = helper.smart_quotes("\"Wow – what's this...\", O'connor asked.")
       expect(output).to include('“Wow – what’s this…”, O’connor asked.')
+    end
+
+    it 'does not convert three consecutive dashes to an em dash' do
+      output = helper.smart_quotes('https://www.londonmet.ac.uk/courses/postgraduate/pgce-secondary-science-with-biology---pgce')
+      expect(output).to include('https://www.londonmet.ac.uk/courses/postgraduate/pgce-secondary-science-with-biology---pgce')
     end
 
     context 'when nil' do

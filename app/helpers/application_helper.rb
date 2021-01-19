@@ -22,7 +22,7 @@ module ApplicationHelper
   def smart_quotes(string)
     return '' if string.blank?
 
-    RubyPants.new(string, 2, ruby_pants_options).to_html
+    RubyPants.new(string, [2, :dashes], ruby_pants_options).to_html
   end
 
 private
