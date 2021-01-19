@@ -22,8 +22,8 @@ brakeman: ## Run Brakeman static analysis
 
 .PHONY: rspec
 rspec: ## Run Ruby tests
-		docker run --name find-rspec-runner ${IMAGE} \
-		                  rails spec SPEC_OPTS='--format RspecJunitFormatter --out rspec-results.xml'
+		docker run -t -e RAILS_ENV=test --name find-rspec-runner ${IMAGE} \
+		                  rspec --format RspecJunitFormatter --out rspec-results.xml --format documentation
 		test_result=$$?
 		docker cp find-rspec-runner:/app/coverage .
 		docker cp find-rspec-runner:/app/rspec-results.xml .
