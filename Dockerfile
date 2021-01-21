@@ -1,4 +1,4 @@
-ARG BASE_RUBY_IMAGE=ruby:2.7.2-alpine
+ARG BASE_RUBY_IMAGE=ruby:2.7.2-alpine3.12
 
 FROM ${BASE_RUBY_IMAGE} AS base-image
 
