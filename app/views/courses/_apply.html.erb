@@ -5,12 +5,12 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-apply">Apply</h2>
 
-  <% if @course.has_vacancies? %>
+  <% if @course.has_vacancies %>
     <% if Settings.display_apply_button %>
       <p class="govuk-body">
         <%= render GovukComponent::StartNowButton.new(
           text: 'Apply for this course',
-          href: apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
+          href: apply_path(provider_code: course.provider.code, course_code: course.code),
           html_attributes: { 'data-qa': 'course__apply_link' },
         ) %>
       </p>
@@ -41,17 +41,17 @@
         </tr>
       </thead>
       <tbody class="govuk-table__body">
-        <% course.preview_site_statuses.each do |site_status| %>
+        <% @locations.each do |location| %>
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
-              <strong><%= smart_quotes(site_status.site.location_name) %></strong>
+              <strong><%= smart_quotes(location.name) %></strong>
               <br>
-              <%= smart_quotes(site_status.site.decorate.full_address) %>
+              <%= smart_quotes(location.decorate.full_address) %>
             </td>
             <td class="govuk-table__cell">
-              <%= site_status.has_vacancies? ? 'Yes' : 'No' %>
+              <%= location.location_status.has_vacancies ? 'Yes' : 'No' %>
             </td>
-            <td class="govuk-table__cell"><%= site_status.site.code %></td>
+            <td class="govuk-table__cell"><%= location.code %></td>
           </tr>
         <% end %>
       </tbody>
@@ -65,14 +65,14 @@
 
 <script>
   window.trainingLocations = [
-    <% course.preview_site_statuses.each do |site_status| %>
+    <% @locations.each do |location| %>
       {
-        "code": "<%= site_status.site.code %>",
-        "name": "<%= smart_quotes(site_status.site.location_name) %>",
-        "lat": "<%= site_status.site.latitude.present? ? site_status.site.latitude : course.provider.latitude %>",
-        "lng": "<%= site_status.site.longitude.present? ? site_status.site.longitude : course.provider.longitude %>",
-        "address": "<%= smart_quotes(site_status.site.decorate.full_address) %>",
-        "vacancies": "<%= site_status.has_vacancies? ? "" : "No vacancies" %>"
+        "code": "<%= location.code %>",
+        "name": "<%= smart_quotes(location.name) %>",
+        "lat": "<%= location.latitude.present? ? location.latitude : course.provider.latitude %>",
+        "lng": "<%= location.longitude.present? ? location.longitude : course.provider.longitude %>",
+        "address": "<%= smart_quotes(location.decorate.full_address) %>",
+        "vacancies": "<%= location.location_status.has_vacancies ? "" : "No vacancies" %>"
       },
     <% end %>
   ]

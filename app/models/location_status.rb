@@ -1,4 +1,4 @@
-class SiteStatus < Base
+class LocationStatus < Base
   def new_or_running?
     status.in?(%w[running new_status])
   end

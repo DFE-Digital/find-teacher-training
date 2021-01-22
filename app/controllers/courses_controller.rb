@@ -6,13 +6,19 @@ class CoursesController < ApplicationController
   def show
     @course = Course
       .includes(:subjects)
-      .includes(site_statuses: [:site])
-      .includes(provider: [:sites])
-      .includes(:accrediting_provider)
+      .includes(:provider)
+      .includes(:accredited_body)
       .where(recruitment_cycle_year: Settings.current_cycle)
       .where(provider_code: params[:provider_code])
       .find(params[:course_code])
       .first
+
+    @locations = Location
+      .includes(:location_status)
+      .where(recruitment_cycle_year: Settings.current_cycle, course_code: @course.code, provider_code: @course.provider.code)
+      .all
+      .select { |location| location.location_status.new_or_running? }
+      .sort_by(&:name)
   rescue JsonApiClient::Errors::NotFound
     render template: 'errors/not_found', status: :not_found, formats: [:html]
   end
@@ -25,9 +31,9 @@ class CoursesController < ApplicationController
       .find(params[:course_code])
       .first
 
-    Rails.logger.info("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
+    Rails.logger.info("Course apply conversion. Provider: #{course.provider.code}. Course: #{course.code}")
 
-    redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
+    redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.code}&courseCode=#{course.code}"
   rescue JsonApiClient::Errors::NotFound
     render template: 'errors/not_found', status: :not_found, formats: [:html]
   end

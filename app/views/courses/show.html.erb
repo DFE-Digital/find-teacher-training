@@ -1,4 +1,4 @@
-<%= content_for :page_title, "#{course.name_and_code} with #{smart_quotes(course.provider.provider_name)}" %>
+<%= content_for :page_title, "#{course.name_and_code} with #{smart_quotes(course.provider.name)}" %>
 
 <% if permitted_referrer? %>
   <%= content_for(:before_content) do %>
@@ -9,17 +9,17 @@
 <div data-module="ga-track-scrolling ga-track-copying">
   <h1 class="govuk-heading-xl">
     <span class="govuk-heading-l govuk-!-margin-bottom-0" data-qa="course__provider_name">
-      <%= smart_quotes(course.provider.provider_name) %>
+      <%= smart_quotes(course.provider.name) %>
     </span>
     <%= course.name_and_code %>
   </h1>
 
-  <p class="govuk-body-l" data-qa='course__description'><%= course.description %></p>
+  <p class="govuk-body-l" data-qa='course__description'><%= course.summary %></p>
 
   <dl class="govuk-list--description govuk-!-margin-bottom-8">
-    <% if (course.accrediting_provider.present? && course.accrediting_provider.provider_code != course.provider.provider_code) %>
+    <% if course.accredited_body.present? && course.accredited_body.code != course.provider.code %>
       <dt class="govuk-list--description__label">Accredited body</dt>
-      <dd data-qa="course__accredited_body"><%= smart_quotes(course.accrediting_provider.provider_name) %></dd>
+      <dd data-qa="course__accredited_body"><%= smart_quotes(course.accredited_body.name) %></dd>
     <% end %>
     <dt class="govuk-list--description__label">Financial support</dt>
     <dd data-qa="course__funding_option"><%= course.funding_option %></dd>
@@ -67,7 +67,7 @@
         <% end %>
         <li><%= link_to 'Financial support', '#section-financial-support', class: 'govuk-link' %></li>
         <li><%= link_to 'Requirements', '#section-entry', class: 'govuk-link' %></li>
-        <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
+        <% if course.provider.train_with_us.present? ||  course.about_accredited_body.present? %>
           <li><%= link_to 'About the training provider', '#section-about-provider', class: 'govuk-link' %></li>
         <% end %>
         <% if course.provider.train_with_disability.present? %>

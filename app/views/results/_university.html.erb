@@ -18,10 +18,10 @@
         <span class="govuk-list--description__hint govuk-!-padding-top-2">University</span>
       <% end %>
 
-      <%= "#{pluralize(@results_view.site_distance(course), 'mile')} from you" %>
+      <%= "#{pluralize(location_distance, 'mile')} from you" %>
       <br />
-      <% if @results_view.sites_count(course) > 1 %>
-        (Nearest of <%= @results_view.sites_count(course) %> locations to choose from)
+      <% if locations_count > 1 %>
+        (Nearest of <%= locations_count %> locations to choose from)
         <br />
       <% end  %>
       You’ll be at university only some of the time

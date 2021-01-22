@@ -13,10 +13,10 @@ module ResultFilters
         return redirect_back
       end
 
-      @provider_suggestions = Provider
-        .select(:provider_code, :provider_name)
+      @provider_suggestions = ProviderSuggestion
+        .select(:code, :name)
         .where(recruitment_cycle_year: Settings.current_cycle)
-        .with_params(search: params[:query])
+        .with_params(query: params[:query])
         .all
 
       if @provider_suggestions.count.zero?
@@ -24,7 +24,7 @@ module ResultFilters
         redirect_back
       elsif @provider_suggestions.count == 1
         redirect_to results_path(
-          filter_params_without_previous_parameters.merge(query: @provider_suggestions.first.provider_name),
+          filter_params_without_previous_parameters.merge(query: @provider_suggestions.first.name),
         )
       end
     end

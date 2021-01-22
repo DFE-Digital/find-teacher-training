@@ -1,8 +1,6 @@
 class Course < Base
   belongs_to :recruitment_cycle, through: :provider, param: :recruitment_cycle_year
   belongs_to :provider, param: :provider_code, shallow_path: true
-  has_many :site_statuses
-  has_many :sites, through: :site_statuses, source: :site
   has_many :subjects
 
   property :fee_international, type: :string
@@ -31,7 +29,7 @@ class Course < Base
   end
 
   def university_based?
-    provider_type == 'university'
+    provider.provider_type == 'university'
   end
 
   def further_education?

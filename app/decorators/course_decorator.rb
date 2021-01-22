@@ -2,11 +2,11 @@ class CourseDecorator < Draper::Decorator
   delegate_all
 
   def name_and_code
-    "#{object.name} (#{object.course_code})"
+    "#{object.name} (#{object.code})"
   end
 
   def outcome
-    I18n.t("qualifications.#{object.qualification}")
+    I18n.t("qualifications.#{object.qualifications}")
   end
 
   def subject_name
@@ -93,10 +93,6 @@ class CourseDecorator < Draper::Decorator
     end
   end
 
-  def preview_site_statuses
-    site_statuses.select(&:new_or_running?).sort_by { |status| status.site.location_name }
-  end
-
   def funding_option
     if salaried?
       'Salary'
@@ -112,11 +108,11 @@ class CourseDecorator < Draper::Decorator
   end
 
   def display_title
-    "#{name} (#{course_code})"
+    "#{name} (#{code})"
   end
 
   def has_vacancies?
-    object.has_vacancies? ? 'Yes' : 'No'
+    object.has_vacancies ? 'Yes' : 'No'
   end
 
   def year_range

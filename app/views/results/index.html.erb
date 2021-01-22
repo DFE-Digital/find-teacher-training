@@ -96,28 +96,39 @@
       <% @courses.each do |course| %>
         <li data-qa="course">
           <h3 class="govuk-heading-m govuk-!-margin-bottom-6">
-            <%= link_to course_path(provider_code: course.provider_code, course_code: course.course_code), class: "govuk-link search-result-link", rel: "prev", data: { qa: "course__link" } do %>
+            <%= link_to course_path(provider_code: course.provider.code, course_code: course.code), class: "govuk-link search-result-link", rel: "prev", data: { qa: "course__link" } do %>
               <span data-qa="course__provider_name" class="govuk-heading-s govuk-!-margin-bottom-0">
-                <%= smart_quotes(course.provider.provider_name) %>
+                <%= smart_quotes(course.provider.name) %>
               </span>
               <span data-qa="course__name" class="search-result-link-name govuk-!-font-size-24"><%= course.decorate.display_title %></span>
             <% end %>
           </h3>
           <dl class="govuk-list--description">
             <dt class="govuk-list--description__label">Course</dt>
-            <dd data-qa="course__description"><%= course.description%></dd>
-            <% if @results_view.location_filter? && @results_view.has_sites?(course) %>
+            <dd data-qa="course__summary"><%= course.summary %></dd>
+            <% if @results_view.location_filter? && @results_view.has_locations?(course) %>
               <% if course.university_based? %>
-                <%= render partial: 'results/university', locals: { course: course } %>
+                <%= render partial: 'results/university', locals: {
+                  course: course,
+                  location_distance: @results_view.location_distance(course),
+                  placement_schools_summary: @results_view.placement_schools_summary(course),
+                  locations_count: @results_view.locations_count(course),
+                } %>
               <% else %>
-                <%= render partial: 'results/non_university', locals: { course: course } %>
+                <%= render partial: 'results/non_university', locals: {
+                  course: course,
+                  number_of_locations: @results_view.locations_count(course),
+                  nearest_address:  @results_view.nearest_address(course),
+                  nearest_location_name: @results_view.nearest_location_name(course),
+                  location_distance: @results_view.location_distance(course),
+                } %>
                 <% end %>
             <% end %>
             <dt class="govuk-list--description__label">Financial support</dt>
             <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-            <% if course['accrediting_provider'].present? %>
+            <% if course.accredited_body %>
               <dt class="govuk-list--description__label">Accredited body</dt>
-              <dd data-qa="course__accrediting_provider"><%= smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
+              <dd data-qa="course__accredited_body"><%= smart_quotes(course.accredited_body.name) %></dd>
             <% end %>
             <% unless @results_view.location_filter?  %>
               <dt class="govuk-list--description__label">Locations</dt>

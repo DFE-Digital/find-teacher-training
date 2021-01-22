@@ -19,10 +19,10 @@ private
 
   def address_lines
     [
-      object.address1,
-      object.address2,
-      object.address3,
-      object.address4,
+      object.street_address_1,
+      object.street_address_2,
+      object.city,
+      object.county,
       object.postcode,
     ].reject(&:blank?)
   end

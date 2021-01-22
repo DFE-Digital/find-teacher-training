@@ -3,8 +3,12 @@ class ProviderSuggestionsController < ApplicationController
     return render(json: { error: 'Bad request' }, status: :bad_request) if params_invalid?
 
     sanitised_query = CGI.escape(params[:query])
-    suggestions = ProviderSuggestion.suggest(sanitised_query)
-      .map { |provider| { code: provider.provider_code, name: provider.provider_name } }
+    suggestions = ProviderSuggestion
+      .select(:code, :name)
+      .where(recruitment_cycle_year: Settings.current_cycle)
+      .with_params(query: sanitised_query)
+      .all
+      .map { |provider| { code: provider.code, name: provider.name } }
     render json: suggestions
   end
 

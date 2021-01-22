@@ -42,15 +42,15 @@
                   Choose from the following <%= subject_area.name %> subjects
                 </legend>
                 <div class="govuk-checkboxes">
-                  <% subject_area.subjects.sort_by{ |subject| subject.subject_name }.each do |subject| %>
+                  <% subject_area.subjects.sort_by{ |subject| subject.name }.each do |subject| %>
                     <%# C# doesn't have a distinct modern languages subject %>
-                    <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
+                    <% unless subject.name == "Modern Languages" || subject.name == "Philosophy" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
-                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: {qa: "subject__checkbox"}, id: "subject#{subject.subject_code}", class: "govuk-checkboxes__input" }, subject.subject_code, nil) %>
-                        <%= f.label(:subjects, {for: "subject#{subject.subject_code}"}, class: "govuk-label govuk-checkboxes__label") do %>
+                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.code), data: {qa: "subject__checkbox"}, id: "subject#{subject.code}", class: "govuk-checkboxes__input" }, subject.code, nil) %>
+                        <%= f.label(:subjects, {for: "subject#{subject.code}"}, class: "govuk-label govuk-checkboxes__label") do %>
                           <span class="govuk-checkboxes__label-text" data-qa="subject__name">
-                            <%= subject.subject_name %>
-                            <% if subject.subject_name == "Design and technology" %>
+                            <%= subject.name %>
+                            <% if subject.name == "Design and technology" %>
                               – also includes food, product design, textiles, and systems and control
                             <% end %>
                           </span>

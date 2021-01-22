@@ -143,7 +143,7 @@ class ResultsView
                                   base_query.order(:distance)
                                 else
                                   base_query
-                                    .order("provider.provider_name": results_order)
+                                    .order("provider.name": results_order)
                                     .order("name": results_order)
                                 end
 
@@ -161,9 +161,9 @@ class ResultsView
     (course_count.to_f / results_per_page).ceil
   end
 
-  def site_distance(course)
-    distances = new_or_running_sites_for(course).map do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+  def location_distance(course)
+    distances = new_or_running_locations_for(course).map do |location|
+      lat_long.distance_to("#{location[:latitude]},#{location[:longitude]}")
     end
 
     min_distance = distances.min
@@ -181,24 +181,24 @@ class ResultsView
     nearest_address = nearest_location(course)
 
     [
-      nearest_address.address1,
-      nearest_address.address2,
-      nearest_address.address3,
-      nearest_address.address4,
+      nearest_address.street_address_1,
+      nearest_address.street_address_2,
+      nearest_address.county,
+      nearest_address.city,
       nearest_address.postcode,
     ].select(&:present?).join(', ').html_safe
   end
 
-  def has_sites?(course)
-    !new_or_running_sites_for(course).empty?
+  def has_locations?(course)
+    !new_or_running_locations_for(course).empty?
   end
 
-  def sites_count(course)
-    new_or_running_sites_for(course).count
+  def locations_count(course)
+    new_or_running_locations_for(course).count
   end
 
   def nearest_location_name(course)
-    nearest_location(course).location_name
+    nearest_location(course).name
   end
 
   def subjects
@@ -247,11 +247,11 @@ class ResultsView
   end
 
   def placement_schools_summary(course)
-    site_distance = site_distance(course)
+    location_distance = location_distance(course)
 
-    if site_distance < 11
+    if location_distance < 11
       'Placement schools are near you'
-    elsif site_distance < 21
+    elsif location_distance < 21
       'Placement schools might be near you'
     else
       'Placement schools might be in commuting distance'
@@ -261,8 +261,8 @@ class ResultsView
 private
 
   def nearest_location(course)
-    new_or_running_sites_for(course).min_by do |site|
-      lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
+    new_or_running_locations_for(course).min_by do |location|
+      lat_long.distance_to("#{location[:latitude]},#{location[:longitude]}")
     end
   end
 
@@ -279,20 +279,16 @@ private
     qualification
   end
 
-  def new_or_running_sites_for(course)
-    sites = course
-      .site_statuses
-      .select(&:new_or_running?)
-      .map(&:site)
-      .reject do |site|
-        # Sites that have no address details whatsoever are not to be considered
-        # when calculating '#nearest_address' or '#site_distance'
-        [site.address1, site.address2, site.address3, site.address4, site.postcode].all?(&:blank?)
-      end
+  def new_or_running_locations_for(course)
+    locations = Location
+      .includes(:location_status)
+      .where(recruitment_cycle_year: Settings.current_cycle, course_code: course.code, provider_code: course.provider.code)
+      .all
 
-    sites.reject do |site|
-      site.latitude.blank? || site.longitude.blank?
-    end
+    locations
+      .select { |location| location.location_status.new_or_running? }
+      .reject(&:address_blank?)
+      .reject(&:coordinates_blank?)
   end
 
   def lat_long
@@ -362,12 +358,12 @@ private
   end
 
   def filtered_subjects
-    all_matching = all_subjects.select { |subject| subject_codes.include?(subject.subject_code) }
+    all_matching = all_subjects.select { |subject| subject_codes.include?(subject.code) }
     all_matching[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
 
   def all_subjects
-    @all_subjects ||= Subject.select(:subject_name, :subject_code).order(:subject_name).all
+    @all_subjects ||= Subject.select(:name, :code).order(:name).all
   end
 
   def number_of_subjects_selected
@@ -383,10 +379,11 @@ private
 
   def course_query(include_location:, radius_to_query: radius, include_salary: true)
     base_query = Course
-      .includes(site_statuses: [:site])
       .includes(:provider)
       .includes(:subjects)
+      .includes(:accredited_body)
       .where(recruitment_cycle_year: Settings.current_cycle)
+      .where(findable: true)
 
     base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: true) if hasvacancies?
