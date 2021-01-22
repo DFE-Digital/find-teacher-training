@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :provider do
     transient do
-      sites { [] }
+      locations { [] }
       recruitment_cycle { build :recruitment_cycle }
       include_counts { [] }
     end
 
     sequence(:id)
-    sequence(:provider_code) { |n| "A#{n}" }
-    provider_name { "ACME SCITT #{provider_code}" }
+    sequence(:code) { |n| "A#{n}" }
+    name { "ACME SCITT #{code}" }
 
     lead_school
 
@@ -20,10 +20,10 @@ FactoryBot.define do
     website { 'https://cat.me' }
     email { 'info@acme-scitt.org' }
     telephone { '020 8123 4567' }
-    address1 { nil }
-    address2 { nil }
-    address3 { nil }
-    address4 { nil }
+    street_address_1 { nil }
+    street_address_2 { nil }
+    city { nil }
+    county { nil }
     postcode { nil }
     latitude { nil }
     longitude { nil }
@@ -36,9 +36,9 @@ FactoryBot.define do
 
     after :build do |provider, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.
-      provider.sites = []
-      evaluator.sites.each do |site|
-        provider.sites << site
+      provider.locations = []
+      evaluator.locations.each do |location|
+        provider.locations << location
       end
 
       provider.courses = []

@@ -1,28 +1,23 @@
 FactoryBot.define do
   factory :course do
     transient do
-      sites { [] }
-      site_statuses { [] }
       subjects { [] }
       recruitment_cycle { build :recruitment_cycle }
     end
 
     sequence(:id)
-    sequence(:course_code) { |n| "X10#{n}" }
-    # This hardcodes the provider code to A0. This should probably be fixed at
-    # some point. Right now it doesn't break anything.
-    sequence(:provider_code) { 'A0' }
+    sequence(:code) { |n| "X10#{n}" }
     name { 'English' }
-    description { 'PGCE with QTS full time' }
+    summary { 'PGCE with QTS full time' }
     findable? { true }
     open_for_applications? { false }
-    has_vacancies? { false }
+    has_vacancies { false }
     provider      { nil }
     study_mode    { 'full_time' }
     content_status { 'published' }
     ucas_status { 'running' }
-    accrediting_provider { nil }
-    qualification { 'pgce_with_qts' }
+    accredited_body { nil }
+    qualifications { 'pgce_with_qts' }
     start_date     { Time.zone.local(2019) }
     funding_type { 'fee' }
     applications_open_from { Time.zone.local(2019).utc.iso8601 }
@@ -46,7 +41,7 @@ FactoryBot.define do
     has_early_career_payments? { nil }
     scholarship_amount { 20_000 }
     bursary_amount { 22_000 }
-    about_accrediting_body { nil }
+    about_accredited_body { nil }
     maths { 'expect_to_achieve_before_training_begins' }
     english { 'must_have_qualification_at_application_time' }
     science { 'not_required' }
@@ -59,23 +54,12 @@ FactoryBot.define do
     after :build do |course, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.
       # https://github.com/JsonApiClient/json_api_client/issues/342
-      course.sites = []
-      evaluator.sites.each do |site|
-        course.sites << site
-      end
-
-      course.site_statuses = []
-      evaluator.site_statuses.each do |site_status|
-        course.site_statuses << site_status
-      end
-
       course.subjects = []
       evaluator.subjects&.each do |subject|
         course.subjects << subject
       end
 
       course.recruitment_cycle = evaluator.recruitment_cycle
-      course.provider_code = evaluator.provider&.provider_code
       course.provider_type = evaluator.provider&.provider_type
       course.recruitment_cycle_year = evaluator&.recruitment_cycle&.year
     end
@@ -86,7 +70,7 @@ FactoryBot.define do
     end
 
     trait :with_vacancy do
-      has_vacancies? { true }
+      has_vacancies { true }
     end
 
     trait :with_full_time_or_part_time_vacancy do
@@ -127,9 +111,9 @@ FactoryBot.define do
     trait :new do
       id                     { nil }
       qualification          { nil }
-      course_code            { nil }
+      code                   { nil }
       name                   { nil }
-      description            { nil }
+      summary                { nil }
       study_mode             { nil }
       content_status         { nil }
       ucas_status            { nil }
