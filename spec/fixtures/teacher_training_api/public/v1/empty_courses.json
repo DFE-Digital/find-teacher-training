@@ -1,0 +1,15 @@
+{
+  "data": [],
+  "links": {
+    "first": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/courses?filter[subjects]=00%2C01&include=site_statuses.site%2Cprovider%2Csubjects&page=1&sort=provider.provider_name%2Cname",
+    "last": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/courses?filter[subjects]=00%2C01&include=site_statuses.site%2Cprovider%2Csubjects&page=2522&sort=provider.provider_name%2Cname",
+    "prev": null,
+    "next": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/courses?filter[subjects]=00%2C01&include=site_statuses.site%2Cprovider%2Csubjects&page=2&sort=provider.provider_name%2Cname"
+  },
+  "meta": {
+    "count": 0
+  },
+  "jsonapi": {
+    "version": "1.0"
+  }
+}

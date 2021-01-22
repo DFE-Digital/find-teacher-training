@@ -4,344 +4,344 @@
       "id": "8",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Art and design",
-        "subject_code": "W1"
+        "name": "Art and design",
+        "code": "W1"
       }
     },
     {
       "id": "10",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Biology",
-        "subject_code": "C1"
+        "name": "Biology",
+        "code": "C1"
       }
     },
     {
       "id": "11",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Business studies",
-        "subject_code": "08"
+        "name": "Business studies",
+        "code": "08"
       }
     },
     {
       "id": "12",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Chemistry",
-        "subject_code": "F1"
+        "name": "Chemistry",
+        "code": "F1"
       }
     },
     {
       "id": "13",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Citizenship",
-        "subject_code": "09"
+        "name": "Citizenship",
+        "code": "09"
       }
     },
     {
       "id": "14",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Classics",
-        "subject_code": "Q8"
+        "name": "Classics",
+        "code": "Q8"
       }
     },
     {
       "id": "15",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Communication and media studies",
-        "subject_code": "P3"
+        "name": "Communication and media studies",
+        "code": "P3"
       }
     },
     {
       "id": "16",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Computing",
-        "subject_code": "11"
+        "name": "Computing",
+        "code": "11"
       }
     },
     {
       "id": "17",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Dance",
-        "subject_code": "12"
+        "name": "Dance",
+        "code": "12"
       }
     },
     {
       "id": "18",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Design and technology",
-        "subject_code": "DT"
+        "name": "Design and technology",
+        "code": "DT"
       }
     },
     {
       "id": "19",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Drama",
-        "subject_code": "13"
+        "name": "Drama",
+        "code": "13"
       }
     },
     {
       "id": "20",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Economics",
-        "subject_code": "L1"
+        "name": "Economics",
+        "code": "L1"
       }
     },
     {
       "id": "21",
       "type": "subjects",
       "attributes": {
-        "subject_name": "English",
-        "subject_code": "Q3"
+        "name": "English",
+        "code": "Q3"
       }
     },
     {
       "id": "35",
       "type": "subjects",
       "attributes": {
-        "subject_name": "English as a second or other language",
-        "subject_code": "16"
+        "name": "English as a second or other language",
+        "code": "16"
       }
     },
     {
       "id": "34",
       "type": "subjects",
       "attributes": {
-        "subject_name": "French",
-        "subject_code": "15"
+        "name": "French",
+        "code": "15"
       }
     },
     {
       "id": "43",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Further education",
-        "subject_code": "41"
+        "name": "Further education",
+        "code": "41"
       }
     },
     {
       "id": "22",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Geography",
-        "subject_code": "F8"
+        "name": "Geography",
+        "code": "F8"
       }
     },
     {
       "id": "36",
       "type": "subjects",
       "attributes": {
-        "subject_name": "German",
-        "subject_code": "17"
+        "name": "German",
+        "code": "17"
       }
     },
     {
       "id": "23",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Health and social care",
-        "subject_code": "L5"
+        "name": "Health and social care",
+        "code": "L5"
       }
     },
     {
       "id": "24",
       "type": "subjects",
       "attributes": {
-        "subject_name": "History",
-        "subject_code": "V1"
+        "name": "History",
+        "code": "V1"
       }
     },
     {
       "id": "37",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Italian",
-        "subject_code": "18"
+        "name": "Italian",
+        "code": "18"
       }
     },
     {
       "id": "38",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Japanese",
-        "subject_code": "19"
+        "name": "Japanese",
+        "code": "19"
       }
     },
     {
       "id": "39",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Mandarin",
-        "subject_code": "20"
+        "name": "Mandarin",
+        "code": "20"
       }
     },
     {
       "id": "25",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Mathematics",
-        "subject_code": "G1"
+        "name": "Mathematics",
+        "code": "G1"
       }
     },
     {
       "id": "33",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Modern Languages",
-        "subject_code": null
+        "name": "Modern Languages",
+        "code": null
       }
     },
     {
       "id": "42",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Modern languages (other)",
-        "subject_code": "24"
+        "name": "Modern languages (other)",
+        "code": "24"
       }
     },
     {
       "id": "26",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Music",
-        "subject_code": "W3"
+        "name": "Music",
+        "code": "W3"
       }
     },
     {
       "id": "27",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Philosophy",
-        "subject_code": "P1"
+        "name": "Philosophy",
+        "code": "P1"
       }
     },
     {
       "id": "28",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Physical education",
-        "subject_code": "C6"
+        "name": "Physical education",
+        "code": "C6"
       }
     },
     {
       "id": "29",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Physics",
-        "subject_code": "F3"
+        "name": "Physics",
+        "code": "F3"
       }
     },
     {
       "id": "1",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary",
-        "subject_code": "00"
+        "name": "Primary",
+        "code": "00"
       }
     },
     {
       "id": "2",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with English",
-        "subject_code": "01"
+        "name": "Primary with English",
+        "code": "01"
       }
     },
     {
       "id": "3",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with geography and history",
-        "subject_code": "02"
+        "name": "Primary with geography and history",
+        "code": "02"
       }
     },
     {
       "id": "4",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with mathematics",
-        "subject_code": "03"
+        "name": "Primary with mathematics",
+        "code": "03"
       }
     },
     {
       "id": "5",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with modern languages",
-        "subject_code": "04"
+        "name": "Primary with modern languages",
+        "code": "04"
       }
     },
     {
       "id": "6",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with physical education",
-        "subject_code": "06"
+        "name": "Primary with physical education",
+        "code": "06"
       }
     },
     {
       "id": "7",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Primary with science",
-        "subject_code": "07"
+        "name": "Primary with science",
+        "code": "07"
       }
     },
     {
       "id": "30",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Psychology",
-        "subject_code": "C8"
+        "name": "Psychology",
+        "code": "C8"
       }
     },
     {
       "id": "31",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Religious education",
-        "subject_code": "V6"
+        "name": "Religious education",
+        "code": "V6"
       }
     },
     {
       "id": "40",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Russian",
-        "subject_code": "21"
+        "name": "Russian",
+        "code": "21"
       }
     },
     {
       "id": "9",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Science",
-        "subject_code": "F0"
+        "name": "Science",
+        "code": "F0"
       }
     },
     {
       "id": "32",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Social sciences",
-        "subject_code": "14"
+        "name": "Social sciences",
+        "code": "14"
       }
     },
     {
       "id": "41",
       "type": "subjects",
       "attributes": {
-        "subject_name": "Spanish",
-        "subject_code": "22"
+        "name": "Spanish",
+        "code": "22"
       }
     }
   ],

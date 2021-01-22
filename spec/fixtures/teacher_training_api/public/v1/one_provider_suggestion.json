@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "15947",
+      "type": "provider_suggestions",
+      "attributes": {
+        "code": "O66",
+        "name": "Oxford Brookes University"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}

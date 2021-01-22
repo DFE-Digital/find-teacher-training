@@ -1,0 +1,45 @@
+{
+  "data": [
+    {
+      "id": "16216",
+      "type": "providers",
+      "attributes": {
+        "postcode": "N13 6BY",
+        "provider_type": "scitt",
+        "region_code": "london",
+        "train_with_disability": "At 2Schools we want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children.  If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.\r\n\r\nWe are committed to provide equality and fairness for all in our recruitment and employment practices and not to discriminate on grounds of age, disability, gender reassignment, marriage/civil partnership status, pregnancy and maternity, race, religion or belief, sex, or sexual orientation. We oppose all forms of unlawful and unfair discrimination.\r\n\r\nWe have regularly successfully supported a number of trainees with dyslexia, mental health conditions and learning difficulties and will continue to provide high level of support for any disability.",
+        "train_with_us": "2Schools Consortium has been an accredited provider since 2002 and has a wealth of experience in mentoring trainees and in delivering training.\r\n\r\nThe 2Schools Consortium (Ofsted Outstanding, May 2014) consists of a lead school, Oakthorpe Primary School, in Enfield, and approximately 30 partnership schools where trainees are placed.\r\n\r\nAll trainees on the 2Schools Consortium School Direct Salaried and SCITT Programmes have the opportunity to work towards a PGCE award which will be validated by the University of Brighton.\r\n\r\nQuotes:\r\n\"This course has provided me with so much knowledge to prepare me for working in the field. The training team have all been fantastic mentors and encouraged me throughout my years training, keeping me on track and providing me with endless support. The training team continuously look for ways to improve the course and listen to the suggestions we make, leading to us having training sessions that were both relevant and engaging from trainers we enjoyed. Overall I have really enjoyed my training year and feel well prepared to undertake my new adventure in September! Thank you :)\" NQT July 2020\r\n\r\n\"I don't think I could have found a more positive, supportive provider for my training. The training team themselves have gone out of their way to support us this year. The teaching staff have been wonderful mentors and I have learnt so much from them. I wish I could do it all over again.\" NQT July 2020 \r\n",
+        "website": "http://www.2schools.org/",
+        "latitude": 51.6139314,
+        "longitude": -0.0935379,
+        "telephone": "02088076906",
+        "email": "training@oakthorpe.enfield.sch.uk",
+        "accredited_body": true,
+        "changed_at": "2020-07-13T11:21:55Z",
+        "city": "Palmers Green",
+        "code": "T92",
+        "county": "London",
+        "created_at": "2020-07-05T13:47:29Z",
+        "name": "2Schools Consortium",
+        "street_address_1": "Oakthorpe Primary School",
+        "street_address_2": "c/o Tile Kiln Lane"
+      },
+      "relationships": {
+        "recruitment_cycle": {
+          "meta": {
+            "included": false
+          }
+        }
+      }
+    }
+  ],
+  "links": {
+    "first": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/providers?page=1",
+    "last": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/providers?page=1951",
+    "prev": null,
+    "next": "https://api.staging.publish-teacher-training-courses.service.gov.uk/api/public/v1/recruitment_cycles/2021/providers?page=2"
+  },
+  "jsonapi": {
+    "version": "1.0"
+  }
+}

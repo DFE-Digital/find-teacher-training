@@ -1,0 +1,31 @@
+{
+  "data": [
+    {
+      "id": "15947",
+      "type": "provider_suggestions",
+      "attributes": {
+        "code": "O66",
+        "name": "Oxford Brookes University"
+      }
+    },
+    {
+      "id": "16623",
+      "type": "provider_suggestions",
+      "attributes": {
+        "code": "O33",
+        "name": "Oxford University"
+      }
+    },
+    {
+      "id": "16819",
+      "type": "provider_suggestions",
+      "attributes": {
+        "code": "1DE",
+        "name": "Oxfordshire Teacher Training"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}

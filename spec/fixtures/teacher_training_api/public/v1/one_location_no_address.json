@@ -1,0 +1,134 @@
+{
+  "data": [
+    {
+      "id": "11221763",
+      "type": "locations",
+      "attributes": {
+        "code": "O",
+        "latitude": 51.6139314,
+        "longitude": -0.0935379,
+        "postcode": "",
+        "region_code": "",
+        "name": "Oakthorpe Primary School",
+        "city": "",
+        "county": "",
+        "street_address_1": "",
+        "street_address_2": ""
+      },
+      "relationships": {
+        "course": {
+          "data": {
+            "type": "courses",
+            "id": "12943730"
+          }
+        },
+        "location_status": {
+          "data": {
+            "type": "location_statuses",
+            "id": "22358605"
+          }
+        },
+        "provider": {
+          "meta": {
+            "included": false
+          }
+        },
+        "recruitment_cycle": {
+          "meta": {
+            "included": false
+          }
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "12943730",
+      "type": "courses",
+      "attributes": {
+        "accredited_body_code": null,
+        "age_maximum": 11,
+        "age_minimum": 3,
+        "bursary_amount": null,
+        "bursary_requirements": [],
+        "created_at": "2020-07-05T13:47:30Z",
+        "funding_type": "fee",
+        "gcse_subjects_required": [
+          "maths",
+          "english",
+          "science"
+        ],
+        "level": "primary",
+        "name": "Primary",
+        "program_type": "scitt_programme",
+        "qualifications": [
+          "qts",
+          "pgce"
+        ],
+        "scholarship_amount": null,
+        "study_mode": "full_time",
+        "uuid": "a0ad17e4-3fbc-4e77-9618-6aec769dce0a",
+        "about_accredited_body": null,
+        "applications_open_from": "2020-10-13",
+        "changed_at": "2020-09-08T08:39:23Z",
+        "code": "X130",
+        "findable": true,
+        "has_early_career_payments": false,
+        "has_scholarship": false,
+        "has_vacancies": true,
+        "is_send": false,
+        "last_published_at": "2020-09-08T08:39:23Z",
+        "open_for_applications": true,
+        "required_qualifications_english": "equivalence_test",
+        "required_qualifications_maths": "equivalence_test",
+        "required_qualifications_science": "equivalence_test",
+        "running": true,
+        "start_date": "September 2021",
+        "state": "published",
+        "summary": "PGCE with QTS full time",
+        "about_course": "SCITT (School Centred Initial Teacher Training) is a school-based route to becoming a qualified teacher and achieving QTS. The course lasts for one year full-time, from September to July. Most of the course is spent in school, where successful applicants are placed in a class under the supervision and guidance of a mentor.\r\n\r\nTrainees will complete their year’s training at [Oakthorpe Primary School](https://www.oakthorpe.enfield.sch.uk/), a school situated in the London Borough of Enfield. \r\n\r\nAll trainees on the 2Schools Consortium SCITT Programme have the opportunity to work towards a PGCE (Primary Education) award which will be validated by the University of Brighton as well as Qualified Teacher Status (QTS awarded by 2Schools Consortium, the Teacher Training provider). \r\n\r\nTRAINING SESSIONS\r\nTrainees will be required to attend a weekly training session ( at Hazelwood Sports Centre) delivered  by a range of experienced teachers and experts.\r\n\r\nASSESSMENT\r\nAssessment of the teaching is carried out regularly through observations of lessons, discussion and feedback on academic tasks and assignments.\r\n\r\nTeaching is assessed against Qualified Teacher Status (QTS) Standards, on three teaching practices across two school placements. \r\n\r\nA personalised training plan guides the trainee through weekly expectations in and out of class.\r\n\r\nCOURSE TIMETABLE\r\n\r\nTerm 1:        \r\n\r\n* 4 days per week in school, observing and increasing to teaching a minimum of 4 sessions per week\r\n\r\n* Every Thursday- training all day\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence \r\n\r\nTerm 2:        \r\n\r\n* 4 days per week in school in a different KS, then in a different school observing and increasing to 3-4 days teaching\r\n\r\n* Most Thursdays- training all day\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence \r\n\r\nTerm 3: \r\n\r\n* 5 days teaching up to 85% of the week in main placement school\r\nTraining will take place up to 3 times over the course of the term\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence\r\n\r\n* Final moderation: one lesson observation, discussion and scrutiny of evidence\r\n\r\nIf you would like to find out more or have questions please contact us by [post, phone, fax or email](http://www.2schools.org/contact/).\r\n\r\n\"I really looked forward to every Thursday training session and believe they were all developed so well. The training team have been an amazing support system this year!\" NQT July 2020\r\n\r\n",
+        "course_length": "OneYear",
+        "fee_details": "",
+        "fee_international": null,
+        "fee_domestic": 9000,
+        "financial_support": "",
+        "how_school_placements_work": "Most of the course is spent at the main placement school, Oakthorpe Primary School (children age 3-11) in a class under the supervision and guidance of an experienced and supportive mentor (often the class teacher or a senior member of the school’s staff).\r\nTrainees on the course can choose to focus on EYFS and KS1 (3-7) or KS1 and 2 (5-11) but all trainees will be exposed to the primary curriculum and the focai are flexible.\r\n\r\nThe course will include a minimum of three placements/practices. One of these practices will take place in a partnership school and in a different Key Stage. Our partnership includes around 40 schools across North London and regularly expands. \r\n\r\nExperience in school progresses from observing and working alongside the class teacher, to taking full responsibility, initially for individuals and groups, and later, for a whole class.\r\n\r\nThroughout this experience trainees acquire the skills, knowledge and understanding of the range of elements which make an outstanding teacher, as specified in the Teachers’ Standards; from developing good relationships with children that promote learning, with other colleagues to working within a framework and national and school policies to deliver the Curriculum.",
+        "interview_process": "Applicants are shortlisted by the training team according to a scoring system against our (person specification)[http://www.2schools.org/scitt/what-are-we-looking-for/].\r\n\r\nINTERVIEW DAY\r\n\r\nShortlisted candidates are invited to spend the day at Oakthorpe Primary School.\r\n\r\nThe day consists of:\r\n\r\n* Group introduction\r\n\r\n* Tour of the school\r\n\r\n* Half a day in class\r\n\r\n* Reading a story to a class (observed by class teacher/ member of school’s SLT/ Programme Leaders)\r\n\r\n* Interview with up to three members of the management board\r\n\r\n* Internally set maths and literacy tasks\r\n\r\n* Summative assessment by class teacher\r\n\r\nSuccessful applicants are then offered a place subject to:\r\n\r\n\r\n* Satisfactory completion of up to 5 days of school experience\r\n\r\n* Satisfactory criminal record (DBS) and health checks\r\n\r\n* Satisfactory references\r\n\r\nDuring the 3-5  day school experience, candidates are observed in a variety of situations and by a range of staff.  We look at their approach to teamwork, relationships with staff and children, professionalism, flexibility and initiative during this period.\r\n\r\nObservations made by class teachers and the training managers, applications, interviews, subject audits, and trainees self-audit of prior experience, all inform the needs analysis and development of a training plan once the candidate is registered on the course.",
+        "other_requirements": "With the removal of the skills tests, we will be seeking evidence of a candidate' proficiency in maths and English  \r\n\r\nAll offers of appointment are conditional upon a satisfactory criminal record (DBS) check, satisfactory outcome of a health questionnaire and two references that meet safer recruitment requirements.",
+        "personal_qualities": "* Ability to work on own initiative and manage own work load \r\n\r\n* Ability to combine work and study\r\n\r\n* Ability to work co-operatively and effectively with colleagues\r\n\r\n* Ability to build relationships with children that promote learning\r\n\r\n* Clear and accurate verbal and written communication skills\r\n\r\n* An interest in and enjoyment of working with children \r\n\r\n* Ability to reflect on own practice and learning and listen to advice \r\n\r\n* An understanding of children’s needs\r\n\r\n* An understanding of the professional boundaries related to child protection procedures\r\n\r\n* Willingness to implement and promote equal opportunities policies\r\n",
+        "required_qualifications": "\r\n* Degree from a United Kingdom Higher education institution or equivalent\r\n\r\n* English, Maths and Science GCSE grade C/4 or above or the equivalent \r\n\r\nIf your qualifications were awarded abroad, you must submit proof of equivalency from NARIC with your application. ",
+        "salary_details": null
+      },
+      "relationships": {
+        "accredited_body": {
+          "meta": {
+            "included": false
+          }
+        },
+        "provider": {
+          "meta": {
+            "included": false
+          }
+        },
+        "recruitment_cycle": {
+          "meta": {
+            "included": false
+          }
+        }
+      }
+    },
+    {
+      "id": "22358605",
+      "type": "location_statuses",
+      "attributes": {
+        "publish": "published",
+        "status": "running",
+        "vacancy_status": "full_time_vacancies",
+        "has_vacancies": true
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}
