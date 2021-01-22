@@ -1,6 +1,6 @@
-module StubV3Helper
-  def stub_api_v3_request(url_path, stub, method = :get, status = 200)
-    url = "#{Settings.teacher_training_api.base_url}/api/v3#{url_path}"
+module StubTeacherTrainingAPIHelper
+  def stub_teacher_training_api_request(url_path, stub, method = :get, status = 200)
+    url = "#{Settings.teacher_training_api.base_url}/api#{Settings.teacher_training_api.version}#{url_path}"
 
     stubbed_request = stub_request(method, url)
                         .to_return(
@@ -30,5 +30,5 @@ private
 end
 
 RSpec.configure do |config|
-  config.include StubV3Helper
+  config.include StubTeacherTrainingAPIHelper
 end

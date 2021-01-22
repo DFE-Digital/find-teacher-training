@@ -1,4 +1,4 @@
-def api_v3_url(type:, params:, fields: nil, include: nil, pagination: nil, search: nil, sort: nil)
+def api_url(type:, params:, fields: nil, include: nil, pagination: nil, search: nil, sort: nil)
   query_params = {}
   unless fields.nil?
     query_params[:fields] = fields.to_h do |model_name, model_fields|
