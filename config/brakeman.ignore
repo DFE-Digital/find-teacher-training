@@ -3,24 +3,24 @@
     {
       "warning_type": "Redirect",
       "warning_code": 18,
-      "fingerprint": "3c8bd00799ef0afccbfc300699e62a19252d288493bbfeecf0f843b3ebf97cd7",
+      "fingerprint": "4f2011e7a9aa1e3af82f9ed6ee4465af2e8ef756a20b378d106dbc7819d9d8bd",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/courses_controller.rb",
-      "line": 28,
+      "line": 36,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(\"https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
+      "code": "redirect_to(\"https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.code}\")",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "CoursesController",
         "method": "apply"
       },
-      "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code",
+      "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.code",
       "confidence": "High",
       "note": ""
     }
   ],
-  "updated": "2020-11-02 17:50:25 +0000",
-  "brakeman_version": "4.10.0"
+  "updated": "2021-01-22 15:35:04 +0000",
+  "brakeman_version": "4.10.1"
 }
