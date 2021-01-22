@@ -15,7 +15,7 @@ class Base < JsonApiClient::Resource
     end
   end
 
-  self.site = "#{Settings.teacher_training_api.base_url}/api/v3/"
+  self.site = "#{Settings.teacher_training_api.base_url}/api#{Settings.teacher_training_api.version}"
   self.paginator = JsonApiClient::Paginating::NestedParamPaginator
   self.connection_class = ConnectionWithRequestId
 end
