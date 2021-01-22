@@ -90,6 +90,8 @@ jobs:
           TF_VAR_paas_app_docker_image: ${{ env.DOCKER_IMAGE }}
           TF_VAR_dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           TF_VAR_dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          TF_VAR_statuscake_username: ${{ secrets.STATUSCAKE_USERNAME }}
+          TF_VAR_statuscake_password: ${{ secrets.STATUSCAKE_PASSWORD }}
 
       - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
         uses: benc-uk/workflow-dispatch@v1.1

@@ -22,6 +22,16 @@ variable dockerhub_username {}
 
 variable dockerhub_password {}
 
+#StatusCake
+variable statuscake_alerts {
+  type    = map
+  default = {}
+}
+
+variable statuscake_username { default = "not-empty" }
+
+variable statuscake_password { default = "not-empty" }
+
 locals {
   cf_api_url                     = "https://api.london.cloud.service.gov.uk"
   app_config                     = yamldecode(file(var.paas_app_config_file))[var.paas_app_environment]

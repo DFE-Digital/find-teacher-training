@@ -10,8 +10,8 @@ terraform {
       version = "0.12.6"
     }
     statuscake = {
-      source  = "thde/statuscake"
-      version = "1.1.2"
+      source  = "terraform-providers/statuscake"
+      version = "1.0.0"
     }
   }
   backend "azurerm" {
@@ -32,4 +32,15 @@ module paas {
   logstash_url              = var.paas_logstash_url
   app_environment_variables = local.paas_app_environment_variables
   docker_credentials        = local.docker_credentials
+}
+
+provider statuscake {
+  username = var.statuscake_username
+  apikey   = var.statuscake_password
+}
+
+module statuscake {
+  source = "./modules/statuscake"
+
+  alerts = var.statuscake_alerts
 }
