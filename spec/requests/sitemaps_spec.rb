@@ -1,22 +1,21 @@
 require 'rails_helper'
 
 describe '/sitemap.xml', type: :request do
-  let(:provider) { build(:provider, provider_code: 'T92') }
+  let(:provider) { build(:provider, code: 'T92') }
   let(:current_recruitment_cycle) { build :recruitment_cycle }
   let(:changed_at) { Time.zone.now }
   let(:course) do
     build(
       :course,
-      course_code: 'X102',
+      code: 'X102',
       provider: provider,
-      provider_code: provider.provider_code,
       recruitment_cycle: current_recruitment_cycle,
       changed_at: changed_at,
     )
   end
 
   before do
-    stub_api_v3_resource(
+    stub_teacher_training_api_resource(
       type: RecruitmentCycle,
       params: {
         recruitment_cycle_year: Settings.current_cycle,
@@ -24,7 +23,7 @@ describe '/sitemap.xml', type: :request do
       resources: current_recruitment_cycle,
     )
 
-    stub_api_v3_resource(
+    stub_teacher_training_api_resource(
       type: Course,
       params: {
         recruitment_cycle_year: Settings.current_cycle,
@@ -35,8 +34,9 @@ describe '/sitemap.xml', type: :request do
       },
       resources: course,
       fields: {
-        courses: %w[course_code provider_code changed_at],
+        courses: %w[code changed_at],
       },
+      include: %w[provider],
     )
 
     get '/sitemap.xml'

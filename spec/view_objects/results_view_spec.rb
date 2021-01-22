@@ -3,6 +3,7 @@ require 'rails_helper'
 describe ResultsView do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
+  include StubbedRequests::Locations
 
   let(:query_parameters) { ActionController::Parameters.new(parameter_hash) }
 
@@ -400,7 +401,7 @@ describe ResultsView do
       let(:results_view) { described_class.new(query_parameters: {}) }
 
       it 'returns the first four subjects in alphabetical order' do
-        expect(results_view.subjects.map(&:subject_name)).to eq(
+        expect(results_view.subjects.map(&:name)).to eq(
           [
             'Art and design',
             'Biology',
@@ -430,7 +431,7 @@ describe ResultsView do
         let(:russian_csharp_id) { '41' }
 
         it 'returns the first four matching subjects in alphabetical order' do
-          expect(results_view.subjects.map(&:subject_name)).to eq(
+          expect(results_view.subjects.map(&:name)).to eq(
             %w[
               French
               Mathematics
@@ -484,22 +485,36 @@ describe ResultsView do
 
     let(:results_view) { described_class.new(query_parameters: parameter_hash) }
 
-    let(:site1) do
-      build(:site, latitude: 51.5079, longitude: 0.0877, address1: '1 Foo Street', postcode: 'BAA0NE')
-    end
-
-    let(:site_statuses) do
-      [build(:site_status, :full_time_and_part_time, site: site1)]
+    let(:location1) do
+      build(:location,
+            latitude: 51.5079,
+            longitude: 0.0877,
+            street_address_1: '1 Foo Street',
+            postcode: 'BAA0NE',
+            location_status: build(:location_status, :full_time))
     end
 
     let(:course) do
       build(
         :course,
-        site_statuses: site_statuses,
+        provider: build(:provider),
       )
     end
 
-    context 'site_distance less than 11 miles' do
+    before do
+      stub_teacher_training_api_resource(
+        type: Location,
+        params: {
+          recruitment_cycle_year: Settings.current_cycle,
+          provider_code: course.provider.code,
+          course_code: course.code,
+        },
+        resources: location1,
+        include: %w[location_status],
+      )
+    end
+
+    context 'location_distance less than 11 miles' do
       let(:parameter_hash) do
         {
           'lat' => '51.5079',
@@ -539,55 +554,110 @@ describe ResultsView do
     context 'closest site distance is greater than 1 mile' do
       let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
 
-      it 'calculates the distance to the closest site, rounding to one decimal place' do
-        site1 = build(:site, latitude: 51.5079, longitude: 0.0877, address1: '1 Foo Street', postcode: 'BAA0NE')
-        site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: '2 Foo Street', postcode: 'BAA0NE')
+      let(:location1) do
+        build(:location,
+              latitude: 51.5079,
+              longitude: 0.0877,
+              street_address_1: '1 Foo Street',
+              postcode: 'BAA0NE',
+              location_status: build(:location_status, :full_time))
+      end
+      let(:location2) do
+        build(:location,
+              latitude: 54.9783,
+              longitude: 1.6178,
+              street_address_1: '2 Foo Street',
+              postcode: 'BAA0NE',
+              location_status: build(:location_status, :full_time))
+      end
+      let(:locations) { [location1, location2] }
 
-        course = build(
-          :course,
-          site_statuses: [
-            build(:site_status, :full_time_and_part_time, site: site1),
-            build(:site_status, :full_time_and_part_time, site: site2),
-          ],
+      let(:course) { build(:course, provider: build(:provider)) }
+
+      before do
+        stub_teacher_training_api_resource(
+          type: Location,
+          params: {
+            recruitment_cycle_year: Settings.current_cycle,
+            provider_code: course.provider.code,
+            course_code: course.code,
+          },
+          resources: locations,
+          include: %w[location_status],
         )
+      end
 
-        expect(results_view.site_distance(course)).to eq(2)
+      it 'calculates the distance to the closest site, rounding to one decimal place' do
+        expect(results_view.location_distance(course)).to eq(2)
       end
     end
 
     context 'closest site distance is less than 1 mile' do
       let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
+      let(:location1) do
+        build(:location,
+              latitude: 51.4985,
+              longitude: 0.1367,
+              street_address_1: '1 Foo Street',
+              postcode: 'BAA0NE',
+              location_status: build(:location_status, :full_time))
+      end
+      let(:location2) do
+        build(:location,
+              latitude: 54.9783,
+              longitude: 1.6178,
+              street_address_1: '2 Foo Street',
+              postcode: 'BAA0NE',
+              location_status: build(:location_status, :full_time))
+      end
+      let(:locations) { [location1, location2] }
+      let(:course) { build(:course, provider: build(:provider)) }
+
+      before do
+        stub_teacher_training_api_resource(
+          type: Location,
+          params: {
+            recruitment_cycle_year: Settings.current_cycle,
+            provider_code: course.provider.code,
+            course_code: course.code,
+          },
+          resources: locations,
+          include: %w[location_status],
+        )
+      end
 
       it 'calculates the distance to the closest site, rounding to one decimal place' do
-        site1 = build(:site, latitude: 51.4985, longitude: 0.1367, address1: '1 Foo Street', postcode: 'BAA0NE')
-        site2 = build(:site, latitude: 54.9783, longitude: 1.6178, address1: '2 Foo Street', postcode: 'BAA0NE')
-
-        course = build(
-          :course,
-          site_statuses: [
-            build(:site_status, :full_time_and_part_time, site: site1),
-            build(:site_status, :full_time_and_part_time, site: site2),
-          ],
-        )
-
-        expect(results_view.site_distance(course)).to eq(0.1)
+        expect(results_view.location_distance(course)).to eq(0.1)
       end
     end
 
     context 'closest site distance is less than 0.05 miles' do
       let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
+      let(:course) { build(:course, provider: build(:provider)) }
+      let(:location) do
+        build(:location,
+              latitude: 51.4970,
+              longitude: 0.1358,
+              street_address_1: '1 Foo Street',
+              postcode: 'BAA0NE',
+              location_status: build(:location_status, :full_time))
+      end
+
+      before do
+        stub_teacher_training_api_resource(
+          type: Location,
+          params: {
+            recruitment_cycle_year: Settings.current_cycle,
+            provider_code: course.provider.code,
+            course_code: course.code,
+          },
+          resources: location,
+          include: %w[location_status],
+        )
+      end
 
       it 'calculates the distance to the closest site, rounding up to prevent 0.0 miles displaying' do
-        site1 = build(:site, latitude: 51.4970, longitude: 0.1358, address1: '1 Foo Street', postcode: 'BAA0NE')
-
-        course = build(
-          :course,
-          site_statuses: [
-            build(:site_status, :full_time_and_part_time, site: site1),
-          ],
-        )
-
-        expect(results_view.site_distance(course)).to eq(0.1)
+        expect(results_view.location_distance(course)).to eq(0.1)
       end
     end
   end
@@ -597,93 +667,42 @@ describe ResultsView do
     let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
     let(:geocoder) { instance_double(Geokit::LatLng) }
 
-    let(:site1) do
-      build(
-        :site,
-        latitude: 51.4985,
-        longitude: 0.1367,
-        address1: '10 Windy Way',
-        address2: 'Witham',
-        address3: 'Essex',
-        address4: 'UK',
-        postcode: 'CM8 2SD',
-      )
-    end
-    let(:site2) do
-      build(:site, latitude: 54.9783, longitude: 1.6178, location_name: 'no address')
-    end
-    let(:site3) do
-      build(
-        :site,
-        latitude: nil,
-        longitude: nil,
-        address1: '10 Windy Way',
-        address2: 'Witham',
-        address3: 'Essex',
-        address4: 'UK',
-        postcode: 'CM8 2SD',
-        location_name: 'no lat long',
-      )
-    end
-    let(:site4) do
-      build(
-        :site,
-        latitude: 51.4985,
-        longitude: 0.1367,
-        address1: '10 Windy Way',
-        address2: 'Witham',
-        address3: 'Essex',
-        address4: 'UK',
-        postcode: 'CM8 2SD',
-        location_name: 'suspended',
-      )
-    end
-
     let(:course) do
       build(
         :course,
-        site_statuses: [
-          build(:site_status, :full_time_and_part_time, site: site1),
-          build(:site_status, :full_time_and_part_time, site: site2),
-          build(:site_status, :full_time_and_part_time, site: site3),
-          build(:site_status, :full_time_and_part_time, site: site4, status: 'suspended'),
-        ],
+        provider: build(:provider),
       )
     end
 
     before do
       course
+      stub_locations(query: { 'include' => 'location_status' })
+
+      allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
+      allow(geocoder).to receive(:distance_to).and_return(0.12)
     end
 
     describe '#nearest_address' do
       it 'returns the address to the nearest site' do
-        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
-        allow(geocoder).to receive(:distance_to).with('51.4985,0.1367')
-        allow(geocoder).to receive(:distance_to).with(',').and_raise(Geokit::Geocoders::GeocodeError)
-
-        expect(results_view.nearest_address(course)).to eq('10 Windy Way, Witham, Essex, UK, CM8 2SD')
+        expect(results_view.nearest_address(course)).to eq('Tile Kiln Lane, N13 6BY')
       end
     end
 
     describe '#nearest_location_name' do
       it 'returns the location name to the nearest site' do
-        allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
-        allow(geocoder).to receive(:distance_to).with('51.4985,0.1367')
-        allow(geocoder).to receive(:distance_to).with(',').and_raise(Geokit::Geocoders::GeocodeError)
-
-        expect(results_view.nearest_location_name(course)).to eq('Main Site')
+        expect(results_view.nearest_location_name(course)).to eq('Oakthorpe Primary School')
       end
     end
 
     describe '#sites_count' do
       it 'returns the running or new sites count' do
-        expect(results_view.sites_count(course)).to eq(1)
+        expect(results_view.locations_count(course)).to eq(1)
       end
     end
 
     describe '#site_distance' do
       it 'returns the running or new sites count' do
-        expect(results_view.site_distance(course)).to eq(0.1)
+        expect(results_view.location_distance(course)).to eq(0.1)
       end
     end
   end

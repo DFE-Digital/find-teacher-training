@@ -7,7 +7,7 @@ RSpec.describe Base do
     end
 
     it 'connection sends X-Request-Id header' do
-      stub = stub_request(:post, "#{Settings.teacher_training_api.base_url}/api/v3/bases")
+      stub = stub_request(:post, "#{Settings.teacher_training_api.base_url}/api#{Settings.teacher_training_api.version}/bases")
         .with(
           body: '{"data":{"type":"bases","attributes":{}}}',
           headers: {

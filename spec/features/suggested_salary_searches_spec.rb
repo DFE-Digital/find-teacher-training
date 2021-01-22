@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'Suggested salary searches', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
+  include StubbedRequests::Locations
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Funding.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -125,6 +126,7 @@ describe 'Suggested salary searches', type: :feature do
   context 'with more than 2 results' do
     before do
       stub_results_with_salary_filter(radius: 50, number_of_results: 10)
+      stub_locations(query: { 'include' => 'location_status' })
     end
 
     it 'does not show the suggested searches' do

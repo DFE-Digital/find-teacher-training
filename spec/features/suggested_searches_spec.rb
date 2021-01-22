@@ -4,6 +4,8 @@ describe 'suggested searches', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
   include StubbedRequests::Subjects
+  include StubbedRequests::Locations
+  include StubbedRequests::ProviderSuggestions
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -19,6 +21,7 @@ describe 'suggested searches', type: :feature do
   before do
     stub_geocoder
     stub_subjects
+    stub_locations(query: { 'include' => 'location_status' })
   end
 
   def results_page_request(radius:, results_to_return:)
@@ -124,15 +127,16 @@ describe 'suggested searches', type: :feature do
 
   context 'a search filtered by provider with 2 results' do
     before do
-      stub_providers(
+      stub_provider_suggestions(
         query: {
-          'fields[providers]' => 'provider_code,provider_name',
-          'search' => 'ACME',
+          'fields[provider_suggestions]' => 'code,name',
+          'filter[recruitment_cycle_year]' => Settings.current_cycle,
+          'query' => 'Oxford',
         },
       )
 
       stub_courses(
-        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        query: base_parameters.merge('filter[provider.provider_name]' => 'Oxford Brookes University'),
         course_count: 2,
       )
     end
@@ -140,7 +144,7 @@ describe 'suggested searches', type: :feature do
     it "doesn't show suggested searches" do
       filter_page.load
       filter_page.by_provider.click
-      filter_page.provider_search.fill_in(with: 'ACME')
+      filter_page.provider_search.fill_in(with: 'Oxford')
       filter_page.find_courses.click
 
       expect(results_page).not_to have_suggested_search_links

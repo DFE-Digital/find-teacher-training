@@ -2,9 +2,10 @@ require 'rails_helper'
 
 describe 'Location filter', type: :feature do
   include StubbedRequests::Courses
-  include StubbedRequests::Providers
+  include StubbedRequests::ProviderSuggestions
   include StubbedRequests::SubjectAreas
   include StubbedRequests::Subjects
+  include StubbedRequests::Locations
 
   let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
@@ -23,15 +24,16 @@ describe 'Location filter', type: :feature do
 
   describe 'filtering by provider' do
     before do
-      stub_providers(
+      stub_provider_suggestions(
         query: {
-          'fields[providers]' => 'provider_code,provider_name',
-          'search' => 'ACME',
+          'fields[provider_suggestions]' => 'code,name',
+          'filter[recruitment_cycle_year]' => Settings.current_cycle,
+          'query' => 'Oxford',
         },
       )
 
       stub_courses(
-        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        query: base_parameters.merge('filter[provider.provider_name]' => 'Oxford Brookes University'),
         course_count: 4,
       )
     end
@@ -41,7 +43,7 @@ describe 'Location filter', type: :feature do
         results_page.load
         results_page.location_filter.link.click
         filter_page.by_provider.click
-        filter_page.provider_search.fill_in(with: 'ACME')
+        filter_page.provider_search.fill_in(with: 'Oxford')
         filter_page.find_courses.click
 
         expect(provider_page.heading.text).to eq('Pick a provider')
@@ -49,8 +51,8 @@ describe 'Location filter', type: :feature do
 
         expect(results_page.courses.first).to have_main_address
 
-        expect(results_page.heading.text).to eq('Teacher training courses ACME SCITT 0')
-        expect(results_page.provider_filter.name.text).to eq('ACME SCITT 0')
+        expect(results_page.heading.text).to eq('Teacher training courses Oxford Brookes University')
+        expect(results_page.provider_filter.name.text).to eq('Oxford Brookes University')
         expect(results_page.provider_filter.link.text).to eq('Change provider or choose a location')
         expect(results_page.courses.count).to eq(4)
       end
@@ -92,30 +94,33 @@ describe 'Location filter', type: :feature do
         'filter[expand_university]' => false,
       )
       stub_courses(query: query, course_count: 10)
-
-      results_page.load
-      results_page.location_filter.link.click
-      filter_page.by_postcode_town_or_city.click
-      filter_page.location_query.fill_in(with: 'SW1P 3BT')
-      filter_page.find_courses.click
     end
 
-    context 'course has sites' do
+    context 'course has location' do
+      before do
+        stub_locations(query: { 'include' => 'location_status' })
+        filter_courses_by_location
+      end
+
       it 'displays the courses' do
         expect(results_page.heading.text).to eq('Teacher training courses')
-
         expect(results_page.courses.first).not_to have_main_address
-
         expect(results_page.location_filter.name.text).to eq('Westminster, London SW1P 3BT, UK Within 50 miles of the pin')
         expect(results_page.location_filter.map).to be_present
         expect(results_page.courses.count).to eq(10)
       end
     end
 
-    context 'course with one site that has no address' do
-      # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
-      # 'nearest site' or 'distance to site' info
-      it 'does not display nearest site information' do
+    context 'course with one location that has no address' do
+      # When a course has no sites with addresses we cannot show
+      # 'nearest location' or 'distance to location' info
+      before do
+        stub_location_with_no_address(query: { 'include' => 'location_status' })
+        filter_courses_by_location
+      end
+
+      it 'does not display nearest location information' do
+        # TODO: seems to be an assertion missing?
         expect(results_page.heading.text).to eq('Teacher training courses')
       end
     end
@@ -250,22 +255,30 @@ describe 'Location filter', type: :feature do
     let(:providers) { [build(:provider), build(:provider)] }
 
     it 'can search by provider' do
-      stub_api_v3_resource(
+      stub_teacher_training_api_resource(
         type: Provider,
         resources: providers,
         fields: { providers: %i[provider_code provider_name] },
         params: { recruitment_cycle_year: Settings.current_cycle },
-        search: 'ACME',
+        search: 'Oxford',
+      )
+
+      stub_provider_suggestions(
+        query: {
+          'fields[provider_suggestions]' => 'code,name',
+          'filter[recruitment_cycle_year]' => Settings.current_cycle,
+          'query' => 'Oxford',
+        },
       )
 
       filter_page.by_provider.click
-      filter_page.provider_search.fill_in(with: 'ACME')
+      filter_page.provider_search.fill_in(with: 'Oxford')
       filter_page.find_courses.click
 
       expect(page).to have_current_path(provider_page.url, ignore_query: true)
       expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
         'l' => '3',
-        'query' => 'ACME',
+        'query' => 'Oxford',
       )
     end
 
@@ -273,22 +286,30 @@ describe 'Location filter', type: :feature do
       let(:query_params) { { another_option: 'option' } }
 
       it 'preserves other selected options' do
-        stub_api_v3_resource(
+        stub_teacher_training_api_resource(
           type: Provider,
           resources: providers,
           fields: { providers: %i[provider_code provider_name] },
           params: { recruitment_cycle_year: Settings.current_cycle },
-          search: 'ACME',
+          search: 'Oxford',
+        )
+
+        stub_provider_suggestions(
+          query: {
+            'fields[provider_suggestions]' => 'code,name',
+            'filter[recruitment_cycle_year]' => Settings.current_cycle,
+            'query' => 'Oxford',
+          },
         )
 
         filter_page.by_provider.click
-        filter_page.provider_search.fill_in(with: 'ACME')
+        filter_page.provider_search.fill_in(with: 'Oxford')
         filter_page.find_courses.click
 
         expect(page).to have_current_path(provider_page.url, ignore_query: true)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to include(
           'l' => '3',
-          'query' => 'ACME',
+          'query' => 'Oxford',
           'another_option' => 'option',
         )
       end
@@ -309,6 +330,7 @@ describe 'Location filter', type: :feature do
 
     before do
       distance_stub
+      stub_locations(query: { 'include' => 'location_status' })
 
       filter_page.load
 
@@ -415,5 +437,13 @@ describe 'Location filter', type: :feature do
         },
       )
     end
+  end
+
+  def filter_courses_by_location
+    results_page.load
+    results_page.location_filter.link.click
+    filter_page.by_postcode_town_or_city.click
+    filter_page.location_query.fill_in(with: 'SW1P 3BT')
+    filter_page.find_courses.click
   end
 end

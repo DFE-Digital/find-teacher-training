@@ -6,7 +6,7 @@ describe ProviderDecorator do
       :provider,
       accredited_body?: false,
       website: 'www.acmescitt.com',
-      address1: '1 Sample Road',
+      street_address_1: '1 Sample Road',
       postcode: 'W1 ABC',
     )
   end
@@ -38,10 +38,10 @@ describe ProviderDecorator do
           :provider,
           accredited_body?: false,
           website: 'www.acmescitt.com',
-          address1: 'Building 64',
-          address2: '32 Copton Lane',
-          address3: 'Bracknel',
-          address4: 'Berkshire',
+          street_address_1: 'Building 64',
+          street_address_2: '32 Copton Lane',
+          city: 'Bracknel',
+          county: 'Berkshire',
           postcode: 'NXT STP',
         )
       end
@@ -57,8 +57,8 @@ describe ProviderDecorator do
           :provider,
           accredited_body?: false,
           website: 'www.acmescitt.com',
-          address1: 'Building 64',
-          address2: '32 Copton Lane',
+          street_address_1: 'Building 64',
+          street_address_2: '32 Copton Lane',
           postcode: 'NXT STP',
         )
       end

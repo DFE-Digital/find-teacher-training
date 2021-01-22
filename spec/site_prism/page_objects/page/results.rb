@@ -10,9 +10,9 @@ module PageObjects
 
       class CourseSection < SitePrism::Section
         element :provider_name, '[data-qa="course__provider_name"]'
-        element :description, '[data-qa="course__description"]'
+        element :summary, '[data-qa="course__summary"]'
         element :name, '[data-qa="course__name"]'
-        element :accrediting_provider, '[data-qa="course__accrediting_provider"]'
+        element :accredited_body, '[data-qa="course__accredited_body"]'
         element :funding_options, '[data-qa="course__funding_options"]'
         element :main_address, '[data-qa="course__main_address"]'
         elements :show_vacancies, '[data-qa="course__has_vacancies"]'

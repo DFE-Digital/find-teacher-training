@@ -5,7 +5,7 @@ describe 'results', type: :feature do
   include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:sort) { 'provider.provider_name,name' }
+  let(:sort) { 'provider.name,name' }
   let(:params) {}
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
@@ -99,14 +99,14 @@ describe 'results', type: :feature do
   context 'provider sorting' do
     let(:ascending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => 'provider.provider_name,name'),
+        query: results_page_parameters('sort' => 'provider.name,name'),
         course_count: 10,
       )
     end
 
     let(:descending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => '-provider.provider_name,-name'),
+        query: results_page_parameters('sort' => '-provider.name,-name'),
         course_count: 10,
       )
     end
@@ -118,7 +118,7 @@ describe 'results', type: :feature do
 
     describe 'hides ordering' do
       let(:base_parameters) { results_page_parameters('sort' => sort, 'filter[provider.provider_name]' => '2AT') }
-      let(:sort) { 'provider.provider_name,name' }
+      let(:sort) { 'provider.name,name' }
       let(:params) { { l: '3', query: '2AT' } }
 
       it 'does not display the sort form' do
@@ -127,7 +127,7 @@ describe 'results', type: :feature do
     end
 
     context 'descending' do
-      let(:sort) { '-provider.provider_name,-name' }
+      let(:sort) { '-provider.name,-name' }
       let(:params) { { sortby: '1', l: '2' } }
 
       it 'requests that the backend sorts the data' do
@@ -150,7 +150,7 @@ describe 'results', type: :feature do
     end
 
     context 'ascending' do
-      let(:sort) { 'provider.provider_name,name' }
+      let(:sort) { 'provider.name,name' }
       let(:params) { { sortby: '0', l: '2' } }
 
       it 'requests that the backend sorts the data' do

@@ -27,7 +27,13 @@ describe '/provider-suggestions', type: :request do
 
     [query, query_with_unicode_character].each do |provider_query|
       it "returns success (200) for query: '#{provider_query}'" do
-        provider_suggestions = stub_provider_suggestions(query: provider_query)
+        provider_suggestions = stub_provider_suggestions(
+          query: {
+            'fields[provider_suggestions]' => 'code,name',
+            'filter[recruitment_cycle_year]' => Settings.current_cycle,
+            'query' => provider_query,
+          },
+        )
 
         get "/provider-suggestions?query=#{provider_query}"
 
@@ -36,12 +42,16 @@ describe '/provider-suggestions', type: :request do
         expect(JSON.parse(response.body)).to eq(
           [
             {
-              'code' => 'A0',
-              'name' => 'ACME SCITT 0',
+              'code' => 'O66',
+              'name' => 'Oxford Brookes University',
             },
             {
-              'code' => 'A01',
-              'name' => 'Acme SCITT',
+              'code' => 'O33',
+              'name' => 'Oxford University',
+            },
+            {
+              'code' => '1DE',
+              'name' => 'Oxfordshire Teacher Training',
             },
           ],
         )

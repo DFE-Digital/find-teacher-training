@@ -2,38 +2,25 @@ require 'rails_helper'
 
 describe 'results/non_university.html.erb', type: :view do
   let(:html) do
-    render partial: 'results/non_university', locals: { course: course }
-  end
-
-  let(:site1) do
-    build(
-      :site,
-      latitude: 51.4985,
-      longitude: 0.1367,
-      address1: '10 Windy Way',
-      address2: 'Witham',
-      address3: 'Essex',
-      address4: 'UK',
-      postcode: 'CM8 2SD',
-    )
+    render partial: 'results/non_university', locals: {
+      course: course,
+      number_of_locations: number_of_locations,
+      nearest_address: '10 Windy Way, Witham, Essex, UK, CM8 2SD',
+      nearest_location_name: 'campus main site',
+      location_distance: 0.1,
+    }
   end
 
   let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
 
-  let(:course) do
-    build(:course, site_statuses: site_statuses)
-  end
+  let(:course) { build(:course) }
 
   before do
     assign(:results_view, ResultsView.new(query_parameters: parameter_hash))
   end
 
-  context 'single site' do
-    let(:site_statuses) do
-      [
-        build(:site_status, :full_time_and_part_time, site: site1),
-      ]
-    end
+  context 'single location' do
+    let(:number_of_locations) { 1 }
 
     it 'renders dt with Location' do
       expect(html).to have_css('dt.govuk-list--description__label', text: 'Location')
@@ -62,26 +49,8 @@ describe 'results/non_university.html.erb', type: :view do
     end
   end
 
-  context 'multi sites' do
-    let(:site2) do
-      build(
-        :site,
-        latitude: 51.4980,
-        longitude: 0.1367,
-        address1: '101 Windy Way',
-        address2: 'Witham',
-        address3: 'Essex',
-        address4: 'UK',
-        postcode: 'CM8 2SD',
-        location_name: 'campus main site',
-      )
-    end
-    let(:site_statuses) do
-      [
-        build(:site_status, :full_time_and_part_time, site: site1),
-        build(:site_status, :full_time_and_part_time, site: site2),
-      ]
-    end
+  context 'multiple locations' do
+    let(:number_of_locations) { 2 }
 
     it 'renders dt with Nearest location' do
       expect(html).to have_no_css('dt.govuk-list--description__label', text: 'Location')
@@ -97,7 +66,7 @@ describe 'results/non_university.html.erb', type: :view do
     end
 
     it "renders nearest address'" do
-      expect(html).to match('101 Windy Way, Witham, Essex, UK, CM8 2SD')
+      expect(html).to match('10 Windy Way, Witham, Essex, UK, CM8 2SD')
     end
 
     it 'renders location' do

@@ -267,9 +267,14 @@ describe 'Subject filter', type: :feature do
     end
 
     it 'displays financial information' do
-      subjects = filter_page.subject_areas.first.subjects
-      expect(subjects.fourth.info.text).to eq('Bursaries of £6,000 available.')
-      expect(subjects.fourth.ske_course.text).to eq('You can also take a subject knowledge enhancement (SKE) course.')
+      subjects = filter_page.subject_areas.second.subjects
+
+      # The bursary information has since changed (none for primary mathematics)  - so now asserting against a different subject
+      # There no longer any SKE information
+
+      expect(subjects.second.info.text).to eq('Bursaries of £7,000 available.')
+
+      # expect(subjects.fourth.ske_course.text).to eq('You can also take a subject knowledge enhancement (SKE) course.')
     end
   end
 

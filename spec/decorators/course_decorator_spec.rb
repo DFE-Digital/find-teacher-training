@@ -17,12 +17,12 @@ describe CourseDecorator do
 
   let(:course) do
     build :course,
-          course_code: 'A1',
+          code: 'A1',
           name: 'Mathematics',
           qualification: 'pgce_with_qts',
           study_mode: 'full_time',
           start_date: start_date,
-          site_statuses: [site_status],
+          location_statuses: [location_status],
           provider: provider,
           accrediting_provider: provider,
           course_length: 'OneYear',
@@ -30,19 +30,12 @@ describe CourseDecorator do
           open_for_applications?: true,
           last_published_at: '2019-03-05T14:42:34Z',
           recruitment_cycle: current_recruitment_cycle,
-          has_vacancies?: true
+          has_vacancies: true
   end
   let(:start_date) { Time.zone.local(2019) }
-  let(:site) { build(:site) }
-  let(:site_status) do
-    build(:site_status, :full_time_and_part_time, site: site)
-  end
-
-  let(:course_response) do
-    resource_to_jsonapi(
-      course,
-      include: %i[sites provider accrediting_provider recruitment_cycle subjects],
-    )
+  let(:location) { build(:location) }
+  let(:location_status) do
+    build(:location_status, :full_time_and_part_time, location: location)
   end
 
   let(:decorated_course) { course.decorate }

@@ -18,7 +18,7 @@ describe 'Search results', type: :feature do
     )
   end
 
-  let(:accrediting_provider) { build(:provider) }
+  let(:accredited_body) { build(:provider) }
   let(:decorated_course) { course.decorate }
   let(:courses) { [course] }
 
@@ -44,12 +44,12 @@ describe 'Search results', type: :feature do
       expect(results_page.courses.count).to eq(10)
 
       results_page.courses.first.then do |first_course|
-        expect(first_course.name.text).to eq('Geography (385N)')
-        expect(first_course.provider_name.text).to eq('BHSSA')
-        expect(first_course.description.text).to eq('PGCE with QTS full time')
-        expect(first_course.accrediting_provider.text).to eq('University of Brighton')
+        expect(first_course.name.text).to eq('Primary (N276)')
+        expect(first_course.provider_name.text).to eq('Celtic Cross Education')
+        expect(first_course.summary.text).to eq('PGCE with QTS full time')
+        expect(first_course.accredited_body.text).to eq('Plymouth Marjon University')
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
-        expect(first_course.main_address.text).to eq('Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA')
+        expect(first_course.main_address.text).to eq('Unit 15, Victoria Trading Estate, Roche, Cornwall, PL26 8LX')
         expect(first_course).to have_show_vacancies
       end
     end

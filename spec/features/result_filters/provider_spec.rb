@@ -2,21 +2,21 @@ require 'rails_helper'
 
 describe 'Provider filter', type: :feature do
   include StubbedRequests::Courses
-  include StubbedRequests::Providers
+  include StubbedRequests::ProviderSuggestions
   include StubbedRequests::Subjects
 
   let(:provider_filter_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:location_filter_page) { PageObjects::Page::ResultFilters::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
-  let(:search_term) { 'ACME' }
+  let(:search_term) { 'Oxford' }
   let(:query_params) { { query: search_term } }
 
   before do
     stub_subjects
 
     stub_courses(
-      query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+      query: base_parameters.merge('filter[provider.provider_name]' => 'Oxford Brookes University'),
       course_count: 10,
     )
   end
@@ -40,10 +40,11 @@ describe 'Provider filter', type: :feature do
   context 'with a query' do
     context 'with many providers' do
       before do
-        stub_providers(
+        stub_provider_suggestions(
           query: {
-            'fields[providers]' => 'provider_code,provider_name',
-            'search' => search_term,
+            'fields[provider_suggestions]' => 'code,name',
+            'filter[recruitment_cycle_year]' => Settings.current_cycle,
+            'query' => search_term,
           },
         )
 
@@ -51,8 +52,8 @@ describe 'Provider filter', type: :feature do
       end
 
       it 'queries the API' do
-        expect(provider_filter_page.provider_suggestions.first.hyperlink.text).to eq('ACME SCITT 0 (A0)')
-        expect(provider_filter_page.provider_suggestions.second.hyperlink.text).to eq('ACME SCITT 1 (A1)')
+        expect(provider_filter_page.provider_suggestions.first.hyperlink.text).to eq('Oxford Brookes University (O66)')
+        expect(provider_filter_page.provider_suggestions.second.hyperlink.text).to eq('Oxford University (O33)')
       end
 
       it 'links to the results page' do
@@ -60,13 +61,13 @@ describe 'Provider filter', type: :feature do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'query' => 'ACME SCITT 0',
+            'query' => 'Oxford Brookes University',
           },
         )
       end
 
       context 'with existing params' do
-        let(:query_params) { { other_param: 'my other param', query: 'ACME' } }
+        let(:query_params) { { other_param: 'my other param', query: 'Oxford' } }
 
         it 'preserves previous parameters' do
           provider_filter_page.provider_suggestions.first.hyperlink.click
@@ -74,7 +75,7 @@ describe 'Provider filter', type: :feature do
           expect(results_page.url).to eq(current_path)
           expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
             'other_param' => 'my other param',
-            'query' => 'ACME SCITT 0',
+            'query' => 'Oxford Brookes University',
           )
         end
       end
@@ -82,10 +83,11 @@ describe 'Provider filter', type: :feature do
 
     context 'with only one provider' do
       before do
-        stub_one_provider(
+        stub_one_provider_suggestion(
           query: {
-            'fields[providers]' => 'provider_code,provider_name',
-            'search' => search_term,
+            'fields[provider_suggestions]' => 'code,name',
+            'filter[recruitment_cycle_year]' => Settings.current_cycle,
+            'query' => search_term,
           },
         )
         provider_filter_page.load(query: query_params)
@@ -94,17 +96,18 @@ describe 'Provider filter', type: :feature do
       it 'is automatically selected' do
         expect(results_page.url).to eq(current_path)
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'query' => 'ACME SCITT 0',
+          'query' => 'Oxford Brookes University',
         )
       end
     end
 
     context 'with no providers' do
       before do
-        stub_empty_providers(
+        stub_empty_provider_suggestions(
           query: {
-            'fields[providers]' => 'provider_code,provider_name',
-            'search' => search_term,
+            'fields[provider_suggestions]' => 'code,name',
+            'filter[recruitment_cycle_year]' => Settings.current_cycle,
+            'query' => search_term,
           },
         )
 
@@ -113,7 +116,7 @@ describe 'Provider filter', type: :feature do
 
       it 'redirects to location page with an error' do
         expect(page).to have_current_path(location_filter_page.url, ignore_query: true)
-        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq('query' => 'ACME')
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq('query' => 'Oxford')
         expect(location_filter_page.error_text.text).to eq('Enter a real school, university or training provider')
         expect(location_filter_page.provider_error.text).to eq('Error: Enter a real school, university or training provider')
       end
@@ -124,10 +127,11 @@ describe 'Provider filter', type: :feature do
     let(:search_term) { 'ACME SCITT' }
 
     before do
-      stub_providers(
+      stub_provider_suggestions(
         query: {
-          'fields[providers]' => 'provider_code,provider_name',
-          'search' => search_term,
+          'fields[provider_suggestions]' => 'code,name',
+          'filter[recruitment_cycle_year]' => Settings.current_cycle,
+          'query' => search_term,
         },
       )
 

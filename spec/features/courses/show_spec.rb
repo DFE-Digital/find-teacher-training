@@ -4,10 +4,10 @@ describe 'Course show', type: :feature do
   let(:provider) do
     build(
       :provider,
-      provider_name: 'ACME SCITT A0',
-      provider_code: 'T92',
+      name: 'ACME SCITT A0',
+      code: 'T92',
       website: 'https://scitt.org',
-      address1: '1 Long Rd',
+      street_address_1: '1 Long Rd',
       postcode: 'E1 ABC',
     )
   end
@@ -16,11 +16,10 @@ describe 'Course show', type: :feature do
     build(
       :course,
       name: 'Primary',
-      course_code: 'X130',
+      code: 'X130',
       provider: provider,
-      provider_code: provider.provider_code,
       recruitment_cycle: current_recruitment_cycle,
-      accrediting_provider: accrediting_provider,
+      accredited_body: accredited_body,
       course_length: 'OneYear',
       applications_open_from: '2019-01-01T00:00:00Z',
       start_date: '2019-09-01T00:00:00Z',
@@ -33,21 +32,54 @@ describe 'Course show', type: :feature do
       bursary_amount: '22000',
       personal_qualities: 'We are looking for ambitious trainee teachers who are passionate and enthusiastic about their subject and have a desire to share that with young people of all abilities in this particular age range.',
       other_requirements: 'You will need three years of prior work experience, but not necessarily in an educational context.',
-      about_accrediting_body: 'Something great about the accredited body',
+      about_accredited_body: 'Something great about the accredited body',
       interview_process: 'Some helpful guidance about the interview process',
       how_school_placements_work: 'Some info about how school placements work',
       about_course: 'This is a course',
       required_qualifications: 'You need some qualifications for this course',
-      has_vacancies?: true,
-      site_statuses: [
-        jsonapi_site_status('Running site with vacancies', :full_time, 'running'),
-        jsonapi_site_status('Suspended site with vacancies', :full_time, 'suspended'),
-        jsonapi_site_status('New site with vacancies', :full_time, 'new_status'),
-        jsonapi_site_status('New site with no vacancies', :no_vacancies, 'new_status'),
-        jsonapi_site_status('Running site with no vacancies', :no_vacancies, 'running'),
-      ],
+      has_vacancies: true,
       subjects: [subject],
     )
+  end
+
+  let(:location1) do
+    build(:location,
+          name: 'Running location with vacancies',
+          location_status: build(:location_status, :full_time))
+  end
+
+  let(:location2) do
+    build(:location,
+          name: 'Suspended location with vacancies',
+          location_status: build(:location_status, :full_time, status: 'suspended'))
+  end
+
+  let(:location3) do
+    build(:location,
+          name: 'New location with vacancies',
+          location_status: build(:location_status, :full_time, status: 'new_status'))
+  end
+
+  let(:location4) do
+    build(:location,
+          name: 'New location with no vacancies',
+          location_status: build(:location_status, :no_vacancies, status: 'new_status'))
+  end
+
+  let(:location5) do
+    build(:location,
+          name: 'Running location with no vacancies',
+          location_status: build(:location_status, :no_vacancies, status: 'running'))
+  end
+
+  let(:locations) do
+    [
+      location1,
+      location2,
+      location3,
+      location4,
+      location5,
+    ]
   end
 
   let(:current_recruitment_cycle) { build :recruitment_cycle }
@@ -64,11 +96,11 @@ describe 'Course show', type: :feature do
     )
   end
 
-  let(:accrediting_provider) { build(:provider) }
+  let(:accredited_body) { build(:provider) }
   let(:decorated_course) { course.decorate }
 
   before do
-    stub_api_v3_resource(
+    stub_teacher_training_api_resource(
       type: RecruitmentCycle,
       params: {
         recruitment_cycle_year: Settings.current_cycle,
@@ -76,36 +108,47 @@ describe 'Course show', type: :feature do
       resources: current_recruitment_cycle,
     )
 
-    stub_api_v3_resource(
+    stub_teacher_training_api_resource(
       type: Course,
       params: {
         recruitment_cycle_year: Settings.current_cycle,
-        provider_code: course.provider_code,
-        course_code: course.course_code,
+        provider_code: course.provider.code,
+        course_code: course.code,
       },
       resources: course,
-      include: ['subjects', 'site_statuses.site', 'provider.sites', 'accrediting_provider'],
+      include: %w[subjects provider accredited_body],
     )
 
-    visit course_path(course.provider_code, course.course_code)
+    stub_teacher_training_api_resource(
+      type: Location,
+      params: {
+        recruitment_cycle_year: Settings.current_cycle,
+        provider_code: course.provider.code,
+        course_code: course.code,
+      },
+      resources: locations,
+      include: %w[location_status],
+    )
+
+    visit course_path(course.provider.code, course.code)
   end
 
   describe 'Any course' do
     it 'shows the course show page' do
       expect(course_page.title).to have_content(
-        "#{course.name} (#{course.course_code})",
+        "#{course.name} (#{course.code})",
       )
 
       expect(course_page.sub_title).to have_content(
-        provider.provider_name,
+        provider.name,
       )
 
       expect(course_page.accredited_body).to have_content(
-        accrediting_provider.provider_name,
+        accredited_body.name,
       )
 
-      expect(course_page.description).to have_content(
-        course.description,
+      expect(course_page.summary).to have_content(
+        course.summary,
       )
 
       expect(course_page.qualifications).to have_content(
@@ -183,7 +226,7 @@ describe 'Course show', type: :feature do
       )
 
       expect(course_page.about_accrediting_body).to have_content(
-        course.about_accrediting_body,
+        course.about_accredited_body,
       )
 
       expect(course_page.train_with_disability).to have_content(
@@ -210,12 +253,12 @@ describe 'Course show', type: :feature do
       expect(course_page.choose_a_training_location_table).not_to have_content('Suspended site with vacancies')
 
       [
-        ['New site with no vacancies', 'No'],
-        ['New site with vacancies', 'Yes'],
-        ['Running site with no vacancies', 'No'],
-        ['Running site with vacancies', 'Yes'],
-      ].each_with_index do |site, index|
-        name, has_vacancies_string = site
+        ['New location with no vacancies', 'No'],
+        ['New location with vacancies', 'Yes'],
+        ['Running location with no vacancies', 'No'],
+        ['Running location with vacancies', 'Yes'],
+      ].each_with_index do |location, index|
+        name, has_vacancies_string = location
 
         expect(course_page.choose_a_training_location_table)
           .to have_selector("tbody tr:nth-child(#{index + 1}) strong", text: name)
@@ -244,7 +287,7 @@ describe 'Course show', type: :feature do
     context 'End of cycle' do
       before do
         allow(Settings).to receive(:display_apply_button).and_return(false)
-        visit course_path(course.provider_code, course.course_code)
+        visit course_path(course.provider.code, course.code)
       end
 
       it "does not display the 'apply for this course' button" do
@@ -262,9 +305,9 @@ describe 'Course show', type: :feature do
             fee_uk_eu: '9250.0',
             fee_international: nil,
             provider: provider,
-            provider_code: provider.provider_code,
+            provider_code: provider.code,
             recruitment_cycle: current_recruitment_cycle,
-            accrediting_provider: accrediting_provider)
+            accredited_body: accredited_body)
     end
 
     it 'only displays uk fees' do
@@ -288,14 +331,10 @@ describe 'Course show', type: :feature do
 
       it 'Does displays the back link' do
         page.driver.header('Referer', referer)
-        visit course_path(course.provider_code, course.course_code)
+        visit course_path(course.provider.code, course.code)
         expect(course_page).to have_back_link
         expect(course_page.back_link[:href]).to eq referer
       end
     end
-  end
-
-  def jsonapi_site_status(name, study_mode, status)
-    build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
   end
 end
