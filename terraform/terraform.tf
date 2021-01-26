@@ -25,6 +25,7 @@ module paas {
   cf_user                   = var.paas_user
   cf_user_password          = var.paas_password
   cf_sso_passcode           = var.paas_sso_code
+  cf_space                  = var.paas_cf_space
   app_environment           = var.paas_app_environment
   app_docker_image          = var.paas_app_docker_image
   web_app_instances         = var.paas_web_app_instances
