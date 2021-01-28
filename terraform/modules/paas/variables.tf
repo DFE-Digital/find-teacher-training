@@ -6,6 +6,8 @@ variable cf_user_password {}
 
 variable cf_sso_passcode {}
 
+variable cf_space {}
+
 variable app_environment {}
 
 variable app_docker_image {}
@@ -27,6 +29,7 @@ locals {
   service_gov_uk_host_names = {
     qa      = ["qa"]
     staging = ["staging"]
+    sandbox = ["sandbox"]
     prod    = ["www", "www2"]
   }
   web_app_service_gov_uk_route_ids = [for r in cloudfoundry_route.web_app_service_gov_uk_route : r.id]

@@ -71,6 +71,11 @@ production: ## Set DEPLOY_ENV to production
 	$(eval DEPLOY_ENV=production)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 
+.PHONY: sandbox
+production: ## Set DEPLOY_ENV to production
+	$(eval DEPLOY_ENV=sandbox)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
+
 .PHONY: plan
 plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
 	$(eval export TF_VAR_paas_app_secrets_file=terraform/workspace_variables/app_secrets.yml)

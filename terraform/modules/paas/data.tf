@@ -3,7 +3,7 @@ data cloudfoundry_org org {
 }
 
 data cloudfoundry_space space {
-  name = "bat-${var.app_environment}"
+  name = var.cf_space
   org  = data.cloudfoundry_org.org.id
 }
 

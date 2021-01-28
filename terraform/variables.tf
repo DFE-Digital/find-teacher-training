@@ -4,6 +4,8 @@ variable paas_password {}
 
 variable paas_sso_code {}
 
+variable paas_cf_space {}
+
 variable paas_app_environment {}
 
 variable paas_app_docker_image {}
