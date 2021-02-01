@@ -16,6 +16,10 @@ service_support:
 log_level: info
 cycle_has_ended:
 cycle_ending_soon:
-display_apply_button: true
 skylight_auth_token: replace_me
 skylight_enable: true
+
+feature_flags:
+  cycle_ending_soon: false
+  cycle_has_ended: false
+  display_apply_button: true
