@@ -25,9 +25,3 @@ $govuk-image-url-function: frontend-image-url;
 @import "patterns/filters";
 @import "patterns/pagination";
 @import "patterns/text-ellipsis";
-
-.govuk-checkboxes__label-text {
-  display: block;
-  font-weight: bold;
-  margin-bottom: govuk-spacing(1);
-}

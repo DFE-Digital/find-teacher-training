@@ -68,3 +68,4 @@ en:
     success: "Your cookie preferences have been saved"
   page_titles:
     error_prefix: "Error: "
+    subjects_filter: "Select the subjects you want to teach"
