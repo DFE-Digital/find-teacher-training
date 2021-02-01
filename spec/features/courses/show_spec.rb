@@ -243,7 +243,7 @@ describe 'Course show', type: :feature do
 
     context 'End of cycle' do
       before do
-        allow(Settings).to receive(:display_apply_button).and_return(false)
+        deactivate_feature(:display_apply_button)
         visit course_path(course.provider_code, course.course_code)
       end
 

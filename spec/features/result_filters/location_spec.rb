@@ -147,7 +147,7 @@ describe 'Location filter', type: :feature do
 
       context 'nearing end of cycle and no options selected' do
         it 'displays an error' do
-          allow(Settings).to receive(:cycle_ending_soon).and_return(true)
+          activate_feature(:cycle_ending_soon)
 
           start_page.load
           start_page.find_courses.click

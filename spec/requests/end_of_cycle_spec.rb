@@ -11,12 +11,13 @@ describe '/cycle-has-ended', type: :request do
 
   context 'end of cycle' do
     before do
-      allow(Settings).to receive(:cycle_has_ended).and_return(true)
+      activate_feature(:cycle_has_ended)
+      deactivate_feature(:cycle_ending_soon)
       Rails.application.reload_routes!
     end
 
     after do
-      allow(Settings).to receive(:cycle_has_ended).and_return(false)
+      deactivate_feature(:cycle_has_ended)
       Rails.application.reload_routes!
     end
 

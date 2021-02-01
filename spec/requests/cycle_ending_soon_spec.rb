@@ -11,12 +11,13 @@ RSpec.describe '/cycle-ending-soon', type: :request do
 
   context 'cycle ending soon' do
     before do
-      allow(Settings).to receive(:cycle_ending_soon).and_return(true)
+      activate_feature(:cycle_ending_soon)
+      deactivate_feature(:cycle_has_ended)
       Rails.application.reload_routes!
     end
 
     after do
-      allow(Settings).to receive(:cycle_ending_soon).and_return(false)
+      deactivate_feature(:cycle_ending_soon)
       Rails.application.reload_routes!
     end
 
