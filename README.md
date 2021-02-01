@@ -59,57 +59,6 @@ or
 bundle exec scss-lint app/webpacker/styles
 ```
 
-## End of cycle feature flags
-
-We use terraform to deploy and configure the application.
-Application configuration variables and feature flags are configured for each environment in the [app_config.yml](/terraform/workspace_variables/app_config.yml) file.
-
-### Enable ‘Nearing end of cycle’ interim page
-Turning this flag on redirects requests from `/` to `/cycle-ending-soon`.
-
-To enable this feature locally, add the following to `config/settings/development.local.yml`
-
-```yaml
-cycle_ending_soon: true
-```
-
-To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in [app_config.yml](/terraform/workspace_variables/app_config.yml)
-
-```
-SETTINGS__CYCLE_ENDING_SOON
-```
-
-### Disable ‘Apply for this course’ button
-Turning this flag off removes the ‘Apply for this course button’ on each course listing.
-
-To disable this feature locally, add the following to `config/settings/development.local.yml`
-
-```yaml
-display_apply_button: false
-```
-
-To disable this feature on a deployed environment, the following environment variable needs to be updated to `false` in [app_config.yml](/terraform/workspace_variables/app_config.yml)
-
-```
-SETTINGS__DISPLAY_APPLY_BUTTON
-```
-
-### Enable ‘Cycle has ended’ interim page 
-
-Turning this flag on redirects all home, search, results and course page requests to `/cycle-has-ended`.
-
-To enable this feature locally, add the following to `config/settings/development.local.yml`
-
-```yaml
-cycle_has_ended: true
-```
-
-To enable this feature on a deployed environment, the following environment variable needs to be updated to `true` in the [app_config.yml](/terraform/workspace_variables/app_config.yml)
-
-```
-SETTINGS__CYCLE_HAS_ENDED
-```
-
 ## Application Secrets
 
 Secrets like API keys and tokens are configured in a YAML file and stored as `base64` encoded string in GitHub secrets.
