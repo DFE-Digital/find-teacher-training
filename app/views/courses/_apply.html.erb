@@ -6,7 +6,7 @@
   <h2 class="govuk-heading-l" id="section-apply">Apply</h2>
 
   <% if @course.has_vacancies? %>
-    <% if Settings.display_apply_button %>
+    <% if FeatureFlag.active?(:display_apply_button) %>
       <p class="govuk-body">
         <%= render GovukComponent::StartNowButton.new(
           text: 'Apply for this course',
@@ -22,7 +22,7 @@
       </div>
     <% end %>
 
-    <% if Settings.display_apply_button %>
+    <% if FeatureFlag.active?(:display_apply_button) %>
       <h3 class="govuk-heading-m">Choose a training location</h3>
       <p class="govuk-body" data-qa="course__training_location_guidance">You’ll also need to choose a training location – select the relevant location name on the application form.</p>
     <% else %>
