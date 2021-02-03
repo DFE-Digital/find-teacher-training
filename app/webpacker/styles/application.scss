@@ -11,6 +11,7 @@ $govuk-image-url-function: frontend-image-url;
 
 @import "~govuk-frontend/govuk/all";
 
+@import "components/advice";
 @import "components/cookie-banner";
 @import "components/preview-banner";
 @import "components/map";
