@@ -32,7 +32,7 @@ describe 'Subject filter', type: :feature do
         results_page.load
         results_page.subjects_filter.link.click
 
-        expect(filter_page.heading.text).to eq('Find courses by subject')
+        expect(filter_page.heading.text).to eq(I18n.t('page_titles.subjects_filter'))
         filter_page.subject_areas.first.subjects[0].checkbox.click
         filter_page.subject_areas.second.subjects[3].checkbox.click
 
@@ -64,7 +64,7 @@ describe 'Subject filter', type: :feature do
         results_page.load
         results_page.subjects_filter.link.click
 
-        expect(filter_page.heading.text).to eq('Find courses by subject')
+        expect(filter_page.heading.text).to eq(I18n.t('page_titles.subjects_filter'))
         filter_page.subject_areas.first.subjects[0].checkbox.click
         filter_page.subject_areas.first.subjects[1].checkbox.click
         filter_page.subject_areas.second.subjects[3].checkbox.click
@@ -103,7 +103,7 @@ describe 'Subject filter', type: :feature do
       results_page.load
       results_page.subjects_filter.link.click
 
-      expect(filter_page.heading.text).to eq('Find courses by subject')
+      expect(filter_page.heading.text).to eq(I18n.t('page_titles.subjects_filter'))
       filter_page.subject_areas.first.subjects[0].checkbox.click
       filter_page.subject_areas.first.subjects[1].checkbox.click
       filter_page.subject_areas.second.subjects[3].checkbox.click

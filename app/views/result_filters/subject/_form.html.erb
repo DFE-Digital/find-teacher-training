@@ -1,4 +1,4 @@
-<%= content_for :page_title, title_with_error_prefix("Find course by subject", flash[:error].present?) %>
+<%= content_for :page_title, title_with_error_prefix(I18n.t('page_titles.subjects_filter'), flash[:error].present?) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
@@ -6,25 +6,7 @@
 
     <%= form_with(url: subject_path, method: :post, data: { "ga-event-form" => "Subject" }) do |f| %>
       <%= render "shared/hidden_fields", exclude_keys: %w(subjects senCourses), form: f %>
-      <h1 class="govuk-heading-xl" data-qa="heading">Find courses by subject</h1>
-
-      <p class="govuk-body">Select the subjects you want to teach.</p>
-      <h2 class="govuk-heading-m">Get financial support</h2>
-      <p class="govuk-body">
-        You’ll have to pay a fee for most courses. You can get financial support to cover this, and to help with your living costs while you study. The amount of financial support available to you will depend on the subject you choose.
-      </p>
-      <p class="govuk-body">
-        Visit Get Into Teaching to find out more about <%= govuk_link_to "loans", "https://beta-getintoteaching.education.gov.uk/funding-your-training#tuition-fee-and-maintenance-loans" %>, <%= govuk_link_to "bursaries and scholarships", "https://beta-getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships" %>, and <%= govuk_link_to "funding by subject", "https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#financial-support-for-teacher-training" %>.
-      </p>
-
-      <h2 class="govuk-heading-m">Find out about Subject knowledge enhancement courses</h2>
-      <p class="govuk-body">
-        For some subjects you can take a Subject knowledge enhancement (SKE) course.
-      </p>
-      <p class="govuk-body">
-        Visit Get Into Teaching to find out more about <%= govuk_link_to 'Subject knowledge enhancement', 'https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %> courses.
-      </p>
-
+      <h1 class="govuk-heading-l" data-qa="heading"><%= I18n.t('page_titles.subjects_filter') %></h1>
       <div class="accordion govuk-form-group" data-module="govuk-accordion">
         <% @subject_areas.each_with_index do |subject_area, counter| %>
           <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) || (counter == 0 && no_subject_selected_error?) then " govuk-accordion__section--expanded" end %>" data-qa="subject_area">
@@ -41,6 +23,12 @@
                 <legend class="govuk-fieldset__legend govuk-visually-hidden" data-qa="subject_area__legend">
                   Choose from the following <%= subject_area.name %> subjects
                 </legend>
+                <%if subject_area.name == 'Primary' %>
+                  <p class="govuk-body">Trainee primary school teachers learn to teach all subjects across the national curriculum.</p>
+                  <p class="govuk-body">You can choose to add a specialist subject to your training. This could be a subject you have qualifications or experience in.</p>
+                  <p class="govuk-body">Your training will develop your knowledge of your specialist subject. This is so you can support other teachers to teach that subject.</p>
+                <% end %>
+
                 <div class="govuk-checkboxes">
                   <% subject_area.subjects.sort_by{ |subject| subject.subject_name }.each do |subject| %>
                     <%# C# doesn't have a distinct modern languages subject %>
