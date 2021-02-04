@@ -1,20 +1,22 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-financial-support">Fees and financial support</h2>
 
-  <% if course.has_fees? %>
-    <%= render partial: 'courses/fees' %>
+  <%= render AdviceComponent.new(title: "Financial support") do %>
+      <% if course.salaried? %>
+      <%= render partial: 'courses/financial_support/salaried' %>
+    <% elsif course.excluded_from_bursary? %>
+      <%= render partial: 'courses/financial_support/loan', locals: { course: course } %>
+    <% elsif course.bursary_only? %>
+      <%= render partial: 'courses/financial_support/bursary', locals: { course: course } %>
+    <% elsif course.has_scholarship_and_bursary? %>
+      <%= render partial: 'courses/financial_support/scholarship_and_bursary', locals: { course: course } %>
+    <% else %>
+      <%= render partial: 'courses/financial_support/loan', locals: { course: course } %>
+    <% end %>
   <% end %>
 
-  <% if course.salaried? %>
-    <%= render partial: 'courses/financial_support/salaried' %>
-  <% elsif course.excluded_from_bursary? %>
-    <%= render partial: 'courses/financial_support/loan', locals: { course: course } %>
-  <% elsif course.bursary_only? %>
-    <%= render partial: 'courses/financial_support/bursary', locals: { course: course } %>
-  <% elsif course.has_scholarship_and_bursary? %>
-    <%= render partial: 'courses/financial_support/scholarship_and_bursary', locals: { course: course } %>
-  <% else %>
-    <%= render partial: 'courses/financial_support/loan', locals: { course: course } %>
+  <% if course.has_fees? %>
+    <%= render partial: 'courses/fees' %>
   <% end %>
 
   <% if course.financial_support.present? %>
