@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
 
-gem 'pkg-config', '~> 1.4.4'
+gem 'pkg-config', '~> 1.4.5'
 
 # Decorate logic to keep it of the views and helper methods
 gem 'draper'
