@@ -244,6 +244,7 @@ describe 'Course show', type: :feature do
     context 'End of cycle' do
       before do
         deactivate_feature(:display_apply_button)
+        deactivate_feature(:ucas_only_locations)
         visit course_path(course.provider_code, course.course_code)
       end
 

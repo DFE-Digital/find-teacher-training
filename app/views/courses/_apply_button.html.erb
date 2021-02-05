@@ -1,0 +1,15 @@
+<% if FeatureFlag.active?(:display_apply_button) %>
+  <p class="govuk-body">
+  <%= render GovukComponent::StartNowButton.new(
+    text: 'Apply for this course',
+    href: apply_path(provider_code: course.provider.provider_code, course_code: course.course_code),
+    html_attributes: { 'data-qa': 'course__apply_link' },
+  ) %>
+  </p>
+<% else %>
+  <div data-qa="course__end_of_cycle_notice">
+    <p class="govuk-body">
+    You can apply to this course from 13 October.
+    </p>
+  </div>
+<% end %>
