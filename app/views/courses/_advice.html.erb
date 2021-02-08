@@ -2,7 +2,8 @@
 <p class="govuk-body">For questions about this course you should contact the training provider using <%= link_to "the contact details above", "#contact_section", class: "govuk-link" %>.</p>
 
 <h4 class="govuk-heading-m">Get support and advice about teaching</h4>
-<p class="govuk-body">Register with <%= link_to 'Get Into Teaching', 'https://beta-getintoteaching.education.gov.uk/helping-you-become-a-teacher', class: "govuk-link" %>, the Department for Education’s free support and advice service, for personalised guidance from teaching experts. They can help you to prepare your application, book school experience, and access exclusive teaching events. You can also call them free of charge on 0800 389 2500, or speak to an adviser using their <%= link_to "online chat service", "https://beta-getintoteaching.education.gov.uk/#talk-to-us", class: 'govuk-link' %>, from 8am to 8pm, Monday to Friday.</p>
+<p class="govuk-body"><%= link_to "Register with #{t('service_name.get_into_teaching')}", t('get_into_teaching.url_get_an_advisor'), class: "govuk-link" %>, the Department for Education’s free support and advice service, for personalised guidance from teaching experts. They can help you to prepare your application, book school experience, and access exclusive teaching events.</p>
+<p class="govuk-body">You can also call them free of charge on <%= t('get_into_teaching.tel') %>, or speak to an adviser using their <%= link_to "online chat service", t('get_into_teaching.url_online_chat'), class: 'govuk-link' %> <%= t('get_into_teaching.opening_times') %>.</p>
 
 <h4 class="govuk-heading-m">Is there something wrong with this page?</h4>
 <p class="govuk-body">If there is something wrong with this course listing, <%= bat_contact_mail_to "contact us by email", subject: "Edit #{course.name} (#{course.provider_code}/#{course.course_code})" %>.</p>
