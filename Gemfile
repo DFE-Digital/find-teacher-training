@@ -17,7 +17,7 @@ gem 'httparty'
 gem 'rails_semantic_logger'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.1'
+gem 'rails', '~> 6.1.2'
 
 # Thread-safe global state
 gem 'request_store'
