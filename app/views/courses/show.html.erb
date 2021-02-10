@@ -57,25 +57,23 @@
         <% if course.how_school_placements_work.present? %>
           <li><%= link_to course.placements_heading, '#section-schools', class: 'govuk-link' %></li>
         <% end %>
-        <% if course.interview_process.present? %>
-          <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
-        <% end %>
-        <% if course.has_fees? %>
-          <li><%= link_to 'Fees', '#section-fees', class: 'govuk-link' %></li>
-        <% else %>
-          <li><%= link_to 'Salary', '#section-salary', class: 'govuk-link' %></li>
-        <% end %>
-        <li><%= link_to 'Financial support', '#section-financial-support', class: 'govuk-link' %></li>
-        <li><%= link_to 'Requirements', '#section-entry', class: 'govuk-link' %></li>
+        <li><%= link_to 'Entry requirements', '#section-entry', class: 'govuk-link' %></li>
         <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
           <li><%= link_to 'About the training provider', '#section-about-provider', class: 'govuk-link' %></li>
+        <% end %>
+        <% if course.salaried? %>
+          <li><%= link_to 'Salary', '#section-salary', class: 'govuk-link' %></li>
+        <% end %>
+        <li><%= link_to 'Fees and financial support', '#section-financial-support', class: 'govuk-link' %></li>
+        <% if course.interview_process.present? %>
+          <li><%= link_to 'Interview process', '#section-interviews', class: 'govuk-link' %></li>
         <% end %>
         <% if course.provider.train_with_disability.present? %>
           <li><%= link_to 'Training with disabilities and other needs', '#section-train-with-disabilities', class: 'govuk-link' %></li>
         <% end %>
         <li><%= link_to 'Contact details', '#section-contact', class: 'govuk-link' %></li>
-        <li><%= link_to 'Apply', '#section-apply', class: 'govuk-link' %></li>
         <li><%= link_to 'Support and advice', '#section-advice', class: 'govuk-link' %></li>
+        <li><%= link_to 'Apply', '#section-apply', class: 'govuk-link' %></li>
       </ul>
 
       <% if course.about_course.present? %>
@@ -86,22 +84,20 @@
         <%= render partial: 'courses/about_schools' %>
       <% end %>
 
-      <% if course.interview_process.present? %>
-        <%= render partial: 'courses/interview_process' %>
-      <% end %>
-
-      <% if course.has_fees? %>
-        <%= render partial: 'courses/fees' %>
-      <% else %>
-        <%= render partial: 'courses/salary' %>
-      <% end %>
-
-      <%= render partial: 'courses/financial_support' %>
-
       <%= render partial: 'courses/entry_requirements_qualifications' %>
+
+      <% if course.salaried? %>
+        <%= render partial: 'courses/salary' %>
+      <% end  %>
+
+      <%= render partial: 'courses/fees_and_financial_support' %>
 
       <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
         <%= render partial: 'courses/about_the_provider' %>
+      <% end %>
+
+      <% if course.interview_process.present? %>
+        <%= render partial: 'courses/interview_process' %>
       <% end %>
 
       <% if course.provider.train_with_disability.present? %>
@@ -110,11 +106,11 @@
 
       <%= render partial: 'courses/contact_details' %>
 
+      <%= render partial: 'courses/advice' %>
+
       <% if !FeatureFlag.active?(:ucas_only_locations) %>
         <%= render partial: 'courses/apply' %>
       <% end %>
-
-      <%= render partial: 'courses/advice' %>
 
       <% if FeatureFlag.active?(:ucas_only_locations) %>
         <%= render partial: 'courses/apply_button' %>
