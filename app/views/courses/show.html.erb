@@ -110,9 +110,15 @@
 
       <%= render partial: 'courses/contact_details' %>
 
-      <%= render partial: 'courses/apply' %>
+      <% if !FeatureFlag.active?(:ucas_only_locations) %>
+        <%= render partial: 'courses/apply' %>
+      <% end %>
 
       <%= render partial: 'courses/advice' %>
+
+      <% if FeatureFlag.active?(:ucas_only_locations) %>
+        <%= render partial: 'courses/apply_button' %>
+      <% end %>
     </div>
   </div>
 </div>
