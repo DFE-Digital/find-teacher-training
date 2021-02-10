@@ -7,6 +7,7 @@ qa:
   <<: *default
   RAILS_ENV: qa
   RACK_ENV: qa
+  SETTINGS__UCAS_ONLY_LOCATIONS: true
 
 staging:
   <<: *default
