@@ -1,0 +1,30 @@
+<div class="app-filter__group" data-qa="filters__area_and_provider">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    <h3 class="govuk-fieldset__heading">
+      <% if @filters_view.provider_query? %>
+        Provider
+      <% else %>
+        Location
+      <% end %>
+    </h3>
+  </legend>
+  <p class="govuk-body-s govuk-!-margin-bottom-2" data-qa="area_or_provider_name">
+    <% if @filters_view.across_england_query? %>
+      Across England
+    <% elsif @filters_view.location_query? %>
+      <%= request.parameters['lq'] %>
+    <% elsif @filters_view.provider_query? %>
+      <%= request.parameters['query'] %>
+    <% end %>
+  </p>
+
+  <% if @filters_view.provider_query? %>
+    <%= govuk_link_to "Change provider or choose a location",
+      @results_view.filter_path_with_unescaped_commas(location_path),
+      data:  { qa: "filters__area_and_provider_link" } %>
+  <% else %>
+    <%= govuk_link_to "Change location or choose a provider",
+      @results_view.filter_path_with_unescaped_commas(location_path),
+      data:  { qa: "filters__area_and_provider_link" } %>
+  <% end %>
+</div>
