@@ -205,6 +205,14 @@ class ResultsView
     subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
   end
 
+  def all_subjects
+    @all_subjects ||= Subject.select(:subject_name, :subject_code).order(:subject_name).all
+  end
+
+  def all_subjects_no_ordered
+    @all_subjects_not_ordered ||= Subject.select(:subject_name, :subject_code).all
+  end
+
   def suggested_search_visible?
     course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any?
   end
@@ -364,10 +372,6 @@ private
   def filtered_subjects
     all_matching = all_subjects.select { |subject| subject_codes.include?(subject.subject_code) }
     all_matching[0...NUMBER_OF_SUBJECTS_DISPLAYED]
-  end
-
-  def all_subjects
-    @all_subjects ||= Subject.select(:subject_name, :subject_code).order(:subject_name).all
   end
 
   def number_of_subjects_selected
