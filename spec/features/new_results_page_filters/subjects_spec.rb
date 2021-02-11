@@ -246,7 +246,6 @@ RSpec.feature 'Results page new subject filter' do
       filter_page.subject_areas.first.subjects[0].checkbox.click
       filter_page.subject_areas.first.subjects[1].checkbox.click
       filter_page.send_area.subjects.first.checkbox.click
-
       filter_page.continue.click
 
       expect(results_page.subjects_filter.subjects.map(&:text))
