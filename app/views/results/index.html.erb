@@ -1,11 +1,6 @@
 <%= content_for :page_title, "#{@number_of_courses_string}" %>
 
-<% if FeatureFlag.active?(:new_filters) %>
-  <h1 class="govuk-heading-l" data-qa="heading">
-    <span class="govuk-caption-l">Teacher training courses</span>
-    <%= "#{@results_view.number_of_courses_string} found" %>
-  </h1>
-<% elsif @results_view.provider_filter? %>
+<% if @results_view.provider_filter? %>
   <h1 class="govuk-heading-xl" data-qa="heading">
     <span class="govuk-caption-l">Teacher training courses</span>
     <%= smart_quotes(@results_view.provider) %>
@@ -16,23 +11,27 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-third">
-    <div class="govuk-toggle" data-module="toggle">
-      <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
-        Filter the results
-      </button>
-      <div class="govuk-toggle__target" id="searchFilters" data-qa="filters">
-        <% if @results_view.provider_filter? %>
-          <%= render partial: 'results/provider' %>
-        <% else %>
-          <%= render partial: 'results/location' %>
-        <% end %>
-        <%= render partial: 'results/subjects' %>
-        <%= render partial: 'results/study_type' %>
-        <%= render partial: 'results/qualifications' %>
-        <%= render partial: 'results/funding' %>
-        <%= render partial: 'results/vacancy' %>
+    <% if FeatureFlag.active?(:new_filters) %>
+      <%= render partial: 'new_filters/all' %>
+    <% else %>
+      <div class="govuk-toggle" data-module="toggle">
+        <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
+          Filter the results
+        </button>
+        <div class="govuk-toggle__target" id="searchFilters" data-qa="filters">
+          <% if @results_view.provider_filter? %>
+            <%= render partial: 'results/provider' %>
+          <% else %>
+            <%= render partial: 'results/location' %>
+          <% end %>
+          <%= render partial: 'results/subjects' %>
+          <%= render partial: 'results/study_type' %>
+          <%= render partial: 'results/qualifications' %>
+          <%= render partial: 'results/funding' %>
+          <%= render partial: 'results/vacancy' %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <div class="govuk-grid-column-two-thirds">
@@ -40,28 +39,18 @@
       <h2 class="govuk-heading-l">There are no courses matching your&nbsp;search</h2>
       <%= render partial: "try_another_search_text" %>
     <% else %>
-      <% if FeatureFlag.active?(:new_filters) %>
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-one-half">
-            <p class="govuk-body search-results__new-search">
-              <%= link_to "New search", root_path, class: "govuk-link" %>
-            </p>
-          </div>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half">
+          <p class="govuk-body search-results__count" data-qa="course-count">
+            <%= "#{@results_view.number_of_courses_string} found#{' within 50 miles' if @results_view.location_filter?}" %>
+          </p>
         </div>
-      <% else %>
-        <div class="govuk-grid-row">
-          <div class="govuk-grid-column-one-half">
-            <p class="govuk-body search-results__count" data-qa="course-count">
-              <%= "#{@results_view.number_of_courses_string} found#{' within 50 miles' if @results_view.location_filter?}" %>
-            </p>
-          </div>
-          <div class="govuk-grid-column-one-half">
-            <p class="govuk-body search-results__new-search">
-              <%= link_to "New search", root_path, class: "govuk-link" %>
-            </p>
-          </div>
+        <div class="govuk-grid-column-one-half">
+          <p class="govuk-body search-results__new-search">
+            <%= link_to "New search", root_path, class: "govuk-link" %>
+          </p>
         </div>
-      <% end %>
+      </div>
       <% unless @results_view.provider_filter? %>
         <div class="search-results-header">
           <% if @results_view.location_filter? %>

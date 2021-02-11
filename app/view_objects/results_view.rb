@@ -209,10 +209,6 @@ class ResultsView
     @all_subjects ||= Subject.select(:subject_name, :subject_code).order(:subject_name).all
   end
 
-  def all_subjects_no_ordered
-    @all_subjects_not_ordered ||= Subject.select(:subject_name, :subject_code).all
-  end
-
   def suggested_search_visible?
     course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any?
   end
