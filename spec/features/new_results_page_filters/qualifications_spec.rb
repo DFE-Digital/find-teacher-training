@@ -22,7 +22,6 @@ RSpec.feature 'Results page new qualifications filter' do
       expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
       expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
       expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
-      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -49,7 +48,6 @@ RSpec.feature 'Results page new qualifications filter' do
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
-        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -75,7 +73,6 @@ RSpec.feature 'Results page new qualifications filter' do
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
-        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -101,7 +98,6 @@ RSpec.feature 'Results page new qualifications filter' do
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
-        expect(results_page.courses.count).to eq(10)
       end
     end
   end

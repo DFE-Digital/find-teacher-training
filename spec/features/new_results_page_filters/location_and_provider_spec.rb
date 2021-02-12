@@ -109,7 +109,6 @@ RSpec.feature 'Results page new area and provider filter' do
         expect(results_page.courses.first).not_to have_main_address
 
         expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
-        expect(results_page.courses.count).to eq(10)
       end
     end
 

@@ -20,7 +20,6 @@ RSpec.feature 'Results page new funding filter' do
 
       expect(results_page.funding_filter.subheading.text).to eq('Salary')
       expect(results_page.funding_filter.checkbox.checked?).to be(false)
-      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -44,7 +43,6 @@ RSpec.feature 'Results page new funding filter' do
 
         expect(results_page.funding_filter.subheading.text).to eq('Salary')
         expect(results_page.funding_filter.checkbox.checked?).to be(true)
-        expect(results_page.courses.count).to eq(10)
       end
     end
   end

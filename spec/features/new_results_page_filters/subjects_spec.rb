@@ -47,8 +47,6 @@ RSpec.feature 'Results page new subject filter' do
         expect(results_page.subjects_filter.subjects.first.text).to eq(
           'Chemistry, Classics, Communication and media studies, Primary, Primary with English',
         )
-
-        expect(results_page.courses.count).to eq(10)
       end
     end
   end
@@ -76,8 +74,6 @@ RSpec.feature 'Results page new subject filter' do
       expect(results_page.heading.text).to eq('Teacher training courses')
       expect(results_page.subjects_filter.subjects.map.first.text).to eq('Chemistry, Primary, Primary with English')
       expect(results_page.send_filter.checkbox.checked?).to be(true)
-
-      expect(results_page.courses.count).to eq(10)
     end
   end
 

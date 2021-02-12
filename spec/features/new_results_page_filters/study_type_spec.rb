@@ -21,7 +21,6 @@ RSpec.feature 'Results page new study type filter' do
       expect(results_page.study_type_filter.subheading.text).to eq('Study type')
       expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
       expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
-      expect(results_page.courses.count).to eq(10)
     end
   end
 
@@ -45,7 +44,6 @@ RSpec.feature 'Results page new study type filter' do
         expect(results_page.study_type_filter.subheading.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(false)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
-        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -68,7 +66,6 @@ RSpec.feature 'Results page new study type filter' do
         expect(results_page.study_type_filter.subheading.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(false)
-        expect(results_page.courses.count).to eq(10)
       end
     end
 
@@ -92,7 +89,6 @@ RSpec.feature 'Results page new study type filter' do
         expect(results_page.study_type_filter.subheading.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
-        expect(results_page.courses.count).to eq(10)
       end
     end
   end
