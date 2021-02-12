@@ -108,12 +108,12 @@
 
       <%= render partial: 'courses/advice' %>
 
-      <% if !FeatureFlag.active?(:ucas_only_locations) %>
-        <%= render partial: 'courses/apply' %>
-      <% end %>
-
       <% if FeatureFlag.active?(:ucas_only_locations) %>
-        <%= render partial: 'courses/apply_button' %>
+        <div class="govuk-!-margin-bottom-8" id="section-apply">
+          <%= @course.has_vacancies? ? render('apply_button') : render('no_vacancies_warning') %>
+        </div>
+      <% else %>
+          <%= render 'apply' %>
       <% end %>
     </div>
   </div>
