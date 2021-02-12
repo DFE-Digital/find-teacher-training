@@ -12,6 +12,7 @@ FactoryBot.define do
     # This hardcodes the provider code to A0. This should probably be fixed at
     # some point. Right now it doesn't break anything.
     sequence(:provider_code) { 'A0' }
+    provider_type { nil }
     name { 'English' }
     description { 'PGCE with QTS full time' }
     findable? { true }

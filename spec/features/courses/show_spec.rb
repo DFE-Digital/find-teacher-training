@@ -6,6 +6,7 @@ describe 'Course show', type: :feature do
       :provider,
       provider_name: 'ACME SCITT A0',
       provider_code: 'T92',
+      provider_type: 'scitt',
       website: 'https://scitt.org',
       address1: '1 Long Rd',
       postcode: 'E1 ABC',
@@ -19,6 +20,7 @@ describe 'Course show', type: :feature do
       course_code: 'X130',
       provider: provider,
       provider_code: provider.provider_code,
+      provider_type: provider.provider_type,
       recruitment_cycle: current_recruitment_cycle,
       accrediting_provider: accrediting_provider,
       course_length: 'OneYear',
@@ -81,6 +83,7 @@ describe 'Course show', type: :feature do
       params: {
         recruitment_cycle_year: Settings.current_cycle,
         provider_code: course.provider_code,
+        provider_type: course.provider_type,
         course_code: course.course_code,
       },
       resources: course,
@@ -144,6 +147,10 @@ describe 'Course show', type: :feature do
 
       expect(course_page.school_placements).to have_content(
         course.how_school_placements_work,
+      )
+
+      expect(course_page.school_placements).to have_content(
+        'This course has placement schools in Leeds',
       )
 
       expect(course_page.uk_fees).to have_content(
@@ -264,6 +271,7 @@ describe 'Course show', type: :feature do
             fee_international: nil,
             provider: provider,
             provider_code: provider.provider_code,
+            provider_type: provider.provider_type,
             recruitment_cycle: current_recruitment_cycle,
             accrediting_provider: accrediting_provider)
     end
@@ -297,6 +305,6 @@ describe 'Course show', type: :feature do
   end
 
   def jsonapi_site_status(name, study_mode, status)
-    build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
+    build(:site_status, study_mode, site: build(:site, location_name: name, travel_to_work_area: 'Leeds'), status: status)
   end
 end

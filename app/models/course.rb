@@ -37,4 +37,10 @@ class Course < Base
   def further_education?
     level == 'further_education' && subjects.any? { |s| s.subject_name == 'Further education' || s.subject_code = '41' }
   end
+
+  def travel_to_work_areas
+    travel_to_work_areas = site_statuses.map(&:site).map { |site| site.london_borough || site.travel_to_work_area }.uniq
+
+    travel_to_work_areas.to_sentence(last_word_connector: ' and ')
+  end
 end
