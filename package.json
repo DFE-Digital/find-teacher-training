@@ -8,7 +8,8 @@
     "govuk-frontend": "^3.11.0",
     "lodash.throttle": "^4.1.1",
     "set-value": "^3.0.2",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "jquery": "^3.5.1"
   },
   "devDependencies": {
     "jest": "^26.6.3",
