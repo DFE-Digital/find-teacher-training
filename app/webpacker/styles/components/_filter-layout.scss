@@ -1,0 +1,27 @@
+.app-filter-layout {
+  @include govuk-clearfix;
+}
+
+.app-filter-layout__filter {
+  @include govuk-media-query(desktop) {
+    float: left;
+    margin-right: govuk-spacing(6);
+    max-width: govuk-grid-width("one-third");
+  }
+}
+
+@include govuk-media-query($until: desktop) {
+  .js-enabled .app-filter-layout__filter {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    z-index: 100;
+  }
+}
+
+.app-filter-layout__content {
+  overflow: hidden;
+  overflow-x: auto;
+}
