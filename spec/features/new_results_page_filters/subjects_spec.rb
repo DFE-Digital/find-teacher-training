@@ -247,9 +247,9 @@ RSpec.feature 'Results page new subject filter' do
       )
 
       visit subject_path(subjects: %w[31], senCourses: 'true')
-      filter_page.subject_areas.first.subjects[0].checkbox.click # unselect
-      filter_page.subject_areas.first.subjects[1].checkbox.click # select a different one
-      filter_page.send_area.subjects.first.checkbox.click # unselect
+      filter_page.subject_areas.first.subjects[0].checkbox.click
+      filter_page.subject_areas.first.subjects[1].checkbox.click
+      filter_page.send_area.subjects.first.checkbox.click
 
       filter_page.continue.click
 
