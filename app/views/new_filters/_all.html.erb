@@ -9,10 +9,11 @@
       <%= render 'new_filters/location_provider_filter', form: form %>
       <%= render 'new_filters/subjects_filter', form: form  %>
       <%= render 'new_filters/send_filter', form: form %>
-      <%= render 'new_filters/vacancy_filter',  form: form %>
+      <%= render 'new_filters/vacancy_filter', form: form %>
       <%= render 'new_filters/study_type_filter', form: form %>
       <%= render 'new_filters/qualifications_filter', form: form %>
       <%= render 'new_filters/salary_filter', form: form %>
+      <%= render 'new_filters/hidden_fields', form: form %>
       <div class="govuk-form-group app-filter__group">
         <%= form.submit "Apply filters", name: nil, class: "govuk-button govuk-!-margin-bottom-1", data: { qa: "apply-filters" } %>
       </div>
