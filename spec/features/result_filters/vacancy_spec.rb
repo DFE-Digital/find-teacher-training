@@ -91,7 +91,7 @@ describe 'Vacancy filter', type: :feature do
         filter_page.with_and_without_vacancies.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.vacancies_filter.vacancies.text).to eq('Courses with and without vacancies')
         expect(results_page.courses.count).to eq(10)
       end
@@ -114,7 +114,7 @@ describe 'Vacancy filter', type: :feature do
         filter_page.with_vacancies.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.vacancies_filter.vacancies.text).to eq('Only courses with vacancies')
 
         expect(results_page.courses.count).to eq(10)

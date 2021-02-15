@@ -49,7 +49,7 @@ describe 'Location filter', type: :feature do
 
         expect(results_page.courses.first).to have_main_address
 
-        expect(results_page.heading.text).to eq('Teacher training courses ACME SCITT 0')
+        expect(results_page.heading.text).to eq('Teacher training courses 4 courses found')
         expect(results_page.provider_filter.name.text).to eq('ACME SCITT 0')
         expect(results_page.provider_filter.link.text).to eq('Change provider or choose a location')
         expect(results_page.courses.count).to eq(4)
@@ -102,7 +102,7 @@ describe 'Location filter', type: :feature do
 
     context 'course has sites' do
       it 'displays the courses' do
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
 
         expect(results_page.courses.first).not_to have_main_address
 
@@ -116,7 +116,7 @@ describe 'Location filter', type: :feature do
       # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
       # 'nearest site' or 'distance to site' info
       it 'does not display nearest site information' do
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
       end
     end
 

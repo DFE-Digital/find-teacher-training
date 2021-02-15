@@ -92,7 +92,7 @@ describe 'Qualifications filter', type: :feature do
         filter_page.qts_only.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
         expect(results_page.qualifications_filter).to have_other_qualifications
 
@@ -117,7 +117,7 @@ describe 'Qualifications filter', type: :feature do
         filter_page.pgde_pgce_with_qts.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.qualifications_filter).to have_qts_only
         expect(results_page.qualifications_filter).to have_other_qualifications
 
@@ -142,7 +142,7 @@ describe 'Qualifications filter', type: :feature do
         filter_page.other.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
         expect(results_page.qualifications_filter).to have_qts_only
 
@@ -179,7 +179,7 @@ describe 'Qualifications filter', type: :feature do
       expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
       filter_page.find_courses.click
 
-      expect(results_page.heading.text).to eq('Teacher training courses')
+      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
       expect(results_page.qualifications_filter).to have_qualifications
 
       expect(results_page.courses.count).to eq(10)
