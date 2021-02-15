@@ -55,7 +55,7 @@
                           <% elsif subject.decorate.has_scholarship? || subject.decorate.has_bursary? %>
                             <% financial_info.concat(".") %>
                           <% end %>
-                          <span class="govuk-body" data-qa="subject__info"><%= financial_info %></span>
+                          <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
 
                           <% if subject.subject_knowledge_enhancement_course_available %>
                             <span class="govuk-!-display-block" data-qa="subject__ske_course">
