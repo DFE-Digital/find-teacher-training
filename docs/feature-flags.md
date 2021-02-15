@@ -31,7 +31,7 @@ qa:
   <<: *default
   RAILS_ENV: qa
   RACK_ENV: qa
-  SETTINGS__FEATURE_NAME: true
+  SETTINGS__FEATURE_FLAGS__<FEATURE_NAME>: true
 ```
 
 This should be removed as soon as the feature is ready to be switched on in production. Refrain from adding overrides to the staging and production blocks of this file so as to minimise the spread of feature flag config across two files.
