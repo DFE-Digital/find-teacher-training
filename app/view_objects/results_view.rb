@@ -266,6 +266,14 @@ class ResultsView
     end
   end
 
+  def country
+    query_parameters['c']
+  end
+
+  def devolved_nation?
+    DEVOLVED_NATIONS.include?(country)
+  end
+
 private
 
   def nearest_location(course)
