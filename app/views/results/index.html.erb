@@ -37,31 +37,43 @@
     <% else %>
       <% unless @results_view.provider_filter? %>
         <div class="search-results-header">
-          <% if @results_view.location_filter? %>
-            <p class="govuk-body govuk-!-margin-bottom-0">Sorted by distance</p>
-          <% else %>
-            <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
-              <%= render 'shared/hidden_fields',
-                form: form,
-                exclude_keys: ["sortby"]
-              %>
-              <div class="govuk-form-group">
-                <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
-                <%= form.select(
-                  :sortby,
-                  options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
-                  {},
-                  {
-                    class: "govuk-select trigger-result-update sortby-selector",
-                    onchange: "this.form.submit()",
-                    role: "listbox",
-                    "data-qa": "sort-form__options"
-                  }
-                ) %>
-              </div>
-              <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
+          <div class="govuk-grid-row">
+
+            <div class="govuk-grid-column-two-thirds">
+              <% if @results_view.location_filter? %>
+                <p class="govuk-body govuk-!-margin-bottom-0">Sorted by distance</p>
+              <% else %>
+                <%= form_with(url: results_path, method: "get", skip_enforcing_utf8: true, class: "govuk-form", data: {qa: "sort-form"}) do |form| %>
+                  <%= render 'shared/hidden_fields',
+                    form: form,
+                    exclude_keys: ["sortby"]
+                  %>
+                <div class="govuk-form-group">
+                  <%= form.label(:sortby, "Sorted by", class: "govuk-label govuk-label--inline sortedby-label") %>
+                  <%= form.select(
+                    :sortby,
+                    options_for_select(@results_view.sort_options, selected: params["sortby"].to_i || 0),
+                    {},
+                    {
+                      class: "govuk-select trigger-result-update sortby-selector",
+                      onchange: "this.form.submit()",
+                      role: "listbox",
+                      "data-qa": "sort-form__options"
+                    }
+                  ) %>
+                </div>
+                <%= form.submit("Update", name: nil, class: "govuk-button", data: { qa: "sort-form__submit" })%>
+              <% end %>
             <% end %>
-          <% end %>
+            </div>
+
+            <div class="govuk-grid-column-one-third">
+              <p class="govuk-body search-results__new-search">
+              <%= link_to "New search", root_path, class: "govuk-link" %>
+              </p>
+            </div>
+
+          </div>
         </div>
       <% end %>
     <% end %>
@@ -99,7 +111,7 @@
                 <%= render partial: 'results/university', locals: { course: course } %>
               <% else %>
                 <%= render partial: 'results/non_university', locals: { course: course } %>
-                <% end %>
+              <% end %>
             <% end %>
             <dt class="govuk-list--description__label">Financial support</dt>
             <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>

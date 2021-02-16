@@ -19,6 +19,7 @@
 
   &__new-search {
     float: right;
+    margin-bottom: 0;
   }
 }
 
@@ -48,12 +49,6 @@
 
     .js-enabled & {
       display: block;
-    }
-  }
-
-  .govuk-form {
-    @include mq($from: desktop) {
-      text-align: right;
     }
   }
 
