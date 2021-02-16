@@ -33,8 +33,7 @@
   <div class="govuk-grid-column-two-thirds">
     <% if @results_view.no_results_found? %>
       <div class="app-search-results">
-        <h2 class="govuk-heading-m">There are no courses matching your&nbsp;search</h2>
-        <%= render partial: 'try_another_search_text' %>
+        <%= render partial: 'no_results', locals: { country: @results_view.country, devolved_nation: @results_view.devolved_nation? } %>
       </div>
     <% else %>
       <% unless @results_view.provider_filter? %>
