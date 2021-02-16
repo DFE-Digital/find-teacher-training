@@ -210,7 +210,7 @@ class ResultsView
   end
 
   def suggested_search_visible?
-    course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any?
+    course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any? && !devolved_nation?
   end
 
   def suggested_search_links
