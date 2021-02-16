@@ -21,7 +21,7 @@
     display: block;
 
     // hide for desktop only
-    @include mq ($from: desktop) {
+    @include mq ($from: tablet) {
       display: none;
 
       &.map-results {
@@ -38,7 +38,7 @@
     display: none;
 
     // always show for desktop
-    @include mq ($from: desktop) {
+    @include mq ($from: tablet) {
       display: block;
     }
 

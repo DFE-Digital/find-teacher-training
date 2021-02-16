@@ -10,5 +10,6 @@
   <% end %>
   <%= govuk_link_to "Change",
     @results_view.filter_path_with_unescaped_commas(subject_path),
+    class: 'govuk-link--no-visited-state',
     data:  { qa: "link" } %>
 </div>
