@@ -97,7 +97,7 @@ describe 'Funding filter', type: :feature do
         stub_courses(query: base_parameters, course_count: 10)
       end
 
-      it 'list the courses' do
+      it 'lists the courses' do
         results_page.load
         results_page.funding_filter.link.click
 
@@ -106,7 +106,7 @@ describe 'Funding filter', type: :feature do
         filter_page.all_courses.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.funding_filter.with_or_without_salary.text).to eq('Courses with and without salary')
 
         expect(results_page.courses.count).to eq(10)
@@ -127,7 +127,7 @@ describe 'Funding filter', type: :feature do
         filter_page.salary_courses.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.funding_filter.with_salary.text).to eq('Only courses with a salary')
 
         expect(results_page.courses.count).to eq(10)

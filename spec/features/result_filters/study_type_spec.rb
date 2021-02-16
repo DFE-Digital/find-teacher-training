@@ -110,7 +110,7 @@ describe 'Study type filter', type: :feature do
         filter_page.full_time.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.study_type_filter).to have_parttime
 
         expect(results_page.courses.count).to eq(10)
@@ -130,7 +130,7 @@ describe 'Study type filter', type: :feature do
         filter_page.part_time.click
         filter_page.find_courses.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.study_type_filter).to have_fulltime
 
         expect(results_page.courses.count).to eq(10)
@@ -164,7 +164,7 @@ describe 'Study type filter', type: :feature do
 
         filter_page.find_courses.click
 
-        expect(filter_page.heading.text).to eq('Teacher training courses')
+        expect(filter_page.heading.text).to eq('Teacher training courses 10 courses found')
 
         expect(results_page.study_type_filter).to have_fulltime
 

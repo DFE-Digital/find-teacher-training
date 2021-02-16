@@ -38,7 +38,7 @@ describe 'Subject filter', type: :feature do
 
         filter_page.continue.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
             %w[
@@ -73,7 +73,7 @@ describe 'Subject filter', type: :feature do
 
         filter_page.continue.click
 
-        expect(results_page.heading.text).to eq('Teacher training courses')
+        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
         expect(results_page.subjects_filter.subjects.map(&:text))
           .to eq(
             [
@@ -110,7 +110,7 @@ describe 'Subject filter', type: :feature do
       filter_page.send_area.subjects.first.checkbox.click
       filter_page.continue.click
 
-      expect(results_page.heading.text).to eq('Teacher training courses')
+      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
       expect(results_page.subjects_filter).to have_send_courses
       expect(results_page.subjects_filter.subjects.map(&:text))
         .to eq(
