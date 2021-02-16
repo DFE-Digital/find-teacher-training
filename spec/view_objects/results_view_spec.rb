@@ -444,38 +444,53 @@ describe ResultsView do
   end
 
   describe '#suggested_search_visible?' do
-    subject { described_class.new(query_parameters: { 'lat' => '0.1', 'lng' => '2.4', 'rad' => '50' }).suggested_search_visible? }
-
     def suggested_search_count_parameters
       results_page_parameters.reject do |k, _v|
         ['page[page]', 'page[per_page]', 'sort'].include?(k)
       end
     end
 
-    context 'there are more than three results' do
-      before do
-        stub_courses(query: results_page_parameters, course_count: 10)
+    context 'searching for courses within England' do
+      subject { described_class.new(query_parameters: { 'c' => 'England', 'lat' => '0.1', 'lng' => '2.4', 'rad' => '50' }).suggested_search_visible? }
+
+      context 'there are more than three results' do
+        before do
+          stub_courses(query: results_page_parameters, course_count: 10)
+        end
+
+        it { is_expected.to be(false) }
       end
 
-      it { is_expected.to be(false) }
+      context 'there are less than three results and there are suggested courses found' do
+        before do
+          stub_courses(query: results_page_parameters, course_count: 2)
+          stub_courses(query: suggested_search_count_parameters, course_count: 10)
+        end
+
+        it { is_expected.to be(true) }
+      end
+
+      context 'there are less than three results and there are no suggested courses found' do
+        before do
+          stub_courses(query: results_page_parameters, course_count: 2)
+          stub_courses(query: suggested_search_count_parameters, course_count: 0)
+        end
+
+        it { is_expected.to be(false) }
+      end
     end
 
-    context 'there are less than three results and there are suggested courses found' do
-      before do
-        stub_courses(query: results_page_parameters, course_count: 2)
-        stub_courses(query: suggested_search_count_parameters, course_count: 10)
+    context 'searching for courses in a devolved nation' do
+      context 'there are less than three results and there are suggested courses found' do
+        subject { described_class.new(query_parameters: { 'c' => 'Scotland', 'lat' => '0.1', 'lng' => '2.4', 'rad' => '50' }).suggested_search_visible? }
+
+        before do
+          stub_courses(query: results_page_parameters, course_count: 2)
+          stub_courses(query: suggested_search_count_parameters, course_count: 10)
+        end
+
+        it { is_expected.to be(false) }
       end
-
-      it { is_expected.to be(true) }
-    end
-
-    context 'there are less than three results and there are no suggested courses found' do
-      before do
-        stub_courses(query: results_page_parameters, course_count: 2)
-        stub_courses(query: suggested_search_count_parameters, course_count: 0)
-      end
-
-      it { is_expected.to be(false) }
     end
   end
 
@@ -792,6 +807,40 @@ describe ResultsView do
 
       it 'returns 2 pages' do
         expect(results_view.total_pages).to be(2)
+      end
+    end
+  end
+
+  describe '#devolved_nation' do
+    context 'where country is devolved nation' do
+      let(:results_view) { described_class.new(query_parameters: { 'c' => 'Wales' }) }
+
+      it 'returns true' do
+        expect(results_view.devolved_nation?).to be true
+      end
+    end
+
+    context 'where country is not a devolved nation' do
+      let(:results_view) { described_class.new(query_parameters: { 'c' => 'Italy' }) }
+
+      it 'returns false' do
+        expect(results_view.devolved_nation?).to be false
+      end
+    end
+
+    context 'where country is England' do
+      let(:results_view) { described_class.new(query_parameters: { 'c' => 'England' }) }
+
+      it 'returns false' do
+        expect(results_view.devolved_nation?).to be false
+      end
+    end
+
+    context 'where country is nil' do
+      let(:results_view) { described_class.new(query_parameters: { 'c' => 'nil' }) }
+
+      it 'returns false' do
+        expect(results_view.devolved_nation?).to be false
       end
     end
   end

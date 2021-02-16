@@ -131,7 +131,7 @@ describe 'Location filter', type: :feature do
           URI(current_url).then do |uri|
             expect(uri.path).to eq('/start/subject')
             expect(uri.query)
-            .to eq('l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2')
+            .to eq('c=England&l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2')
           end
         end
       end

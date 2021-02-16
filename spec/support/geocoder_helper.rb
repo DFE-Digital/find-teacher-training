@@ -9,6 +9,7 @@ def stub_geocoder
         'state' => 'England',
         'country' => 'United Kingdom',
         'country_code' => 'UK',
+        'address_components' => [{ long_name: 'England' }],
       },
     ],
   )
@@ -23,6 +24,7 @@ def stub_geocoder
         'state_code' => 'England',
         'country' => 'United Kingdom',
         'country_code' => 'UK',
+        'address_components' => [{ long_name: 'England' }],
       },
     ],
   )
