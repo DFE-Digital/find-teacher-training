@@ -1,23 +1,27 @@
 .app-filter {
   background-color: govuk-colour("light-grey");
-  padding: govuk-spacing(3);
-
-  @include govuk-media-query($until: desktop) {
-    border-left: 1px solid $govuk-border-colour;
-  }
-
-  .govuk-checkboxes__label,
-  .govuk-radios__label {
-    @include govuk-font(16);
-
-    &::before {
-      background-color: govuk-colour("white");
-    }
-  }
 }
 
 .app-filter__header {
-  position: relative;
+  background-color: govuk-colour("light-grey");
+  display: flex;
+  justify-content: space-between;
+  padding: govuk-spacing(2) govuk-spacing(3);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  @include govuk-media-query($from: desktop) {
+    position: static;
+  }
+
+  [class^=govuk-heading-] {
+    margin-bottom: 0;
+  }
+}
+
+.app-filter__content {
+  padding: govuk-spacing(4) govuk-spacing(3);
 }
 
 .app-filter__close {
@@ -31,9 +35,6 @@
   cursor: pointer;
   margin: #{govuk-spacing(1) * -1};
   padding: govuk-spacing(1);
-  position: absolute;
-  top: 0;
-  right: 0;
 
   &:focus {
     background-color: $govuk-focus-colour;
@@ -49,7 +50,7 @@
   }
 
   &::before {
-    background-image: url('../images/icon-cross.svg');
+    background-image: url("../images/icon-cross.svg");
     content: "";
     display: inline-block;
     height: 14px;
@@ -83,19 +84,13 @@
       margin-bottom: 0;
     }
   }
-}
 
-.app-filter__scroll {
-  height: 300px;
-  overflow-y: scroll;
-  margin: 0 #{govuk-spacing(3) * -1} #{govuk-spacing(3) * -1} #{govuk-spacing(3) * -1};
-  padding: 0 govuk-spacing(3);
-}
+  .govuk-checkboxes__label,
+  .govuk-radios__label {
+    @include govuk-font(16);
 
-.app-filter__scroll::-webkit-scrollbar {
-  width: govuk-spacing(2);
-}
-
-.app-filter__scroll::-webkit-scrollbar-thumb {
-  background-color: govuk-colour("mid-grey");
+    &::before {
+      background-color: govuk-colour("white");
+    }
+  }
 }

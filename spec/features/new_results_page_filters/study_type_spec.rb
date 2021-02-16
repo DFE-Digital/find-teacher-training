@@ -18,7 +18,7 @@ RSpec.feature 'Results page new study type filter' do
     it 'show courses with all study types selected' do
       results_page.load
 
-      expect(results_page.study_type_filter.subheading.text).to eq('Study type')
+      expect(results_page.study_type_filter.legend.text).to eq('Study type')
       expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
       expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
     end
@@ -41,7 +41,7 @@ RSpec.feature 'Results page new study type filter' do
         results_page.study_type_filter.parttime_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.study_type_filter.subheading.text).to eq('Study type')
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(false)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
       end
@@ -63,7 +63,7 @@ RSpec.feature 'Results page new study type filter' do
         results_page.study_type_filter.fulltime_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.study_type_filter.subheading.text).to eq('Study type')
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(false)
       end
@@ -86,7 +86,7 @@ RSpec.feature 'Results page new study type filter' do
         results_page.study_type_filter.parttime_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.study_type_filter.subheading.text).to eq('Study type')
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
       end

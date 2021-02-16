@@ -10,18 +10,31 @@
   }
 }
 
-@include govuk-media-query($until: desktop) {
-  .js-enabled .app-filter-layout__filter {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
+.js-enabled .app-filter-layout__filter {
+  outline: 0 none;
+
+  @include govuk-media-query($until: desktop) {
+    background-color: govuk-colour("light-grey");
+    bottom: govuk-spacing(1);
+    border: 1px solid govuk-colour("mid-grey");
+    max-width: 310px;
+    min-width: 260px;
+    width: 100%;
     overflow-y: scroll;
+    position: fixed;
+    right: govuk-spacing(1);
+    top: govuk-spacing(1);
     z-index: 100;
+
+    &:focus {
+      outline: $govuk-focus-width solid $govuk-focus-colour;
+    }
   }
 }
 
 .app-filter-layout__content {
-  overflow: hidden;
-  overflow-x: auto;
+  @include govuk-media-query(desktop) {
+    float: right;
+    max-width: calc(#{govuk-grid-width("two-thirds")} - #{govuk-spacing(6)});
+  }
 }

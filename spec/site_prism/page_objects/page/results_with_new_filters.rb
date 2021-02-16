@@ -24,18 +24,18 @@ module PageObjects
       end
 
       class StudyTypeSection < SitePrism::Section
-        element :subheading, 'h3'
+        element :legend, 'legend'
         element :fulltime_checkbox, 'input[name="fulltime"]'
         element :parttime_checkbox, 'input[name="parttime"]'
       end
 
       class VacanciesSection < SitePrism::Section
-        element :subheading, 'h3'
+        element :legend, 'legend'
         element :checkbox, 'input[name="hasvacancies"]'
       end
 
       class QualificationsSection < SitePrism::Section
-        element :subheading, 'h3'
+        element :legend, 'legend'
         element :qts_checkbox, 'input[id="qualifications_qtsonly"]'
         element :pgce_checkbox, 'input[id="qualifications_pgdepgcewithqts"]'
         element :further_education_checkbox, 'input[id="qualifications_other"]'
@@ -47,7 +47,7 @@ module PageObjects
       end
 
       class SendSection < SitePrism::Section
-        element :subheading, 'h3'
+        element :legend, 'legend'
         element :checkbox, 'input[name="senCourses"]'
       end
 
@@ -57,7 +57,7 @@ module PageObjects
       end
 
       class FundingSection < SitePrism::Section
-        element :subheading, 'h3'
+        element :legend, 'legend'
         element :checkbox, 'input[name="funding"]'
       end
 

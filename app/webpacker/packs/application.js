@@ -37,7 +37,7 @@ const filterToggleButton = new FilterToggleButton({
     text: 'Close'
   },
   filter: {
-    container: $('.app-filter')
+    container: $('.app-filter-layout__filter')
   }
 })
 
