@@ -36,5 +36,6 @@
   @include govuk-media-query(desktop) {
     float: right;
     max-width: calc(#{govuk-grid-width("two-thirds")} - #{govuk-spacing(6)});
+    width: 100%;
   }
 }
