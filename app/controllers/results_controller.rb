@@ -8,6 +8,7 @@ class ResultsController < ApplicationController
     end
 
     @results_view = ResultsView.new(query_parameters: request.query_parameters)
+    @filters_view = ResultFilters::NewFiltersView.new(params: params)
 
     begin
       @courses = @results_view.courses.all

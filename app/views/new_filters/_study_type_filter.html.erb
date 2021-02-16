@@ -1,0 +1,34 @@
+<div class="govuk-form-group app-filter__group" data-qa="filters__study_type">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    <h3 class="govuk-fieldset__heading">Study type</h3>
+  </legend>
+  <div class="govuk-checkboxes govuk-checkboxes--small">
+    <div class="govuk-checkboxes__item">
+      <%=
+        form.check_box(
+          :fulltime,
+          { class: "govuk-checkboxes__input", checked: @filters_view.full_time_checked? || @filters_view.default_to_true },
+          "true",
+          nil
+        )
+      %>
+      <%= form.label :fulltime, class: "govuk-label govuk-checkboxes__label" do %>
+        Full time (12 months)
+      <% end %>
+    </div>
+
+    <div class="govuk-checkboxes__item">
+      <%=
+        form.check_box(
+          :parttime,
+          { class: "govuk-checkboxes__input", checked: @filters_view.part_time_checked? || @filters_view.default_to_true },
+          "true",
+          nil
+        )
+      %>
+      <%= form.label :parttime, class: "govuk-label govuk-checkboxes__label" do %>
+        Part time (18 – 24 months)
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="app-filter__group" data-qa="filters__subjects">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+    <h3 class="govuk-fieldset__heading">Subjects</h3>
+  </legend>
+  <% if request.params["subjects"] %>
+    <p class="govuk-body-s govuk-!-margin-bottom-2" data-qa="filters__subject_names"><%= filtered_subject_names %></p>
+    <% request.params["subjects"].each do |csharp_subject_id| %>
+      <%= form.hidden_field(:subjects, multiple: true, value: csharp_subject_id) %>
+    <% end %>
+  <% end %>
+  <%= govuk_link_to "Change",
+    @results_view.filter_path_with_unescaped_commas(subject_path),
+    data:  { qa: "link" } %>
+</div>
