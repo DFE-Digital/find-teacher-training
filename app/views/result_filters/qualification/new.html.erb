@@ -11,7 +11,7 @@
     <%= form_with url: qualification_path, method: :post, data: { "ga-event-form" => "Qualification" } do |form| %>
       <%= render "shared/hidden_fields", exclude_keys: ["qualifications"], form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
-        <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading" data-qa="heading">Choose the qualifications to search for</h1>
         </legend>
 
