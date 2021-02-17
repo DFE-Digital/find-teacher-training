@@ -2,7 +2,7 @@
 <% nearest_address = @results_view.nearest_address(course) %>
 <% nearest_location_name = @results_view.nearest_location_name(course) %>
 
-<dt class="govuk-list--description__label">
+<dt class="app-description-list__label">
   <%= (number_of_sites > 1) ? "Nearest location" :  "Location"%>
 </dt>
 <dd>
@@ -13,7 +13,7 @@
     </div>
   <% end %>
 
-  <span class="govuk-list--description__hint govuk-!-padding-top-2">Location</span>
+  <span class="app-description-list__hint govuk-!-padding-top-2">Location</span>
   <% if nearest_location_name != "Main Site" %>
     <%= nearest_location_name %><br />
   <% end %>

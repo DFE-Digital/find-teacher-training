@@ -42,7 +42,7 @@ describe 'results/university.html.erb', type: :view do
     end
 
     it 'renders University' do
-      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-margin-top-0', text: 'University')
+      expect(html).to have_css('span.app-description-list__hint.govuk-\\!-margin-top-0', text: 'University')
     end
 
     it "renders '0.1 miles from you'" do
@@ -56,7 +56,7 @@ describe 'results/university.html.erb', type: :view do
     end
 
     it 'renders Placement schools' do
-      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-margin-top-0', text: 'Placement schools')
+      expect(html).to have_css('span.app-description-list__hint.govuk-\\!-margin-top-0', text: 'Placement schools')
     end
 
     it 'renders link' do
@@ -64,12 +64,12 @@ describe 'results/university.html.erb', type: :view do
     end
 
     it 'renders University' do
-      expect(html).to have_css('span.govuk-list--description__hint.govuk-\\!-padding-top-2', text: 'University')
+      expect(html).to have_css('span.app-description-list__hint.govuk-\\!-padding-top-2', text: 'University')
     end
 
     it 'renders dt with Location' do
-      expect(html).to have_css('dt.govuk-list--description__label', text: 'Location')
-      expect(html).to have_no_css('dt.govuk-list--description__label', text: 'Nearest location')
+      expect(html).to have_css('dt.app-description-list__label', text: 'Location')
+      expect(html).to have_no_css('dt.app-description-list__label', text: 'Nearest location')
     end
 
     context 'site_distance less than 11 miles' do

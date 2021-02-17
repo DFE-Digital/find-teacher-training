@@ -1,13 +1,13 @@
-%govuk-list--description {
+%app-description-list {
   @include govuk-clearfix;
   margin-top: 0;
 }
 
-%govuk-list--description > dt {
+%app-description-list > dt {
   @include govuk-font($size: 19, $weight: bold);
   vertical-align: top;
 
-  @include mq ($from: desktop) {
+  @include govuk-media-query($from: desktop) {
     clear: left;
     float: left;
     margin-bottom: govuk-spacing(1);
@@ -15,12 +15,12 @@
   }
 }
 
-%govuk-list--description > dd {
+%app-description-list > dd {
   @include govuk-font($size: 19, $weight: normal);
   margin: 0 0 govuk-spacing(2) 0;
   vertical-align: top;
 
-  @include mq ($from: desktop) {
+  @include govuk-media-query($from: desktop) {
     float: left;
     margin-bottom: govuk-spacing(1);
     width: 70%;
@@ -36,8 +36,8 @@
   }
 }
 
-.govuk-list--description {
-  @extend %govuk-list--description;
+.app-description-list {
+  @extend %app-description-list;
 
   &__label:after {
     display: inline-block;
