@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="govuk-template ">
+<html lang="en" class="govuk-template">
   <head>
     <title><%= content_for(:page_title) %> - Find postgraduate teacher training - GOV.UK</title>
     <%= csrf_meta_tags %>
@@ -25,7 +25,9 @@
     </script>
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+
     <%= render partial: 'layouts/cookie-banner' unless current_page?(cookie_preferences_path)%>
+
     <%= render GovukComponent::Header.new(
       logo: 'GOV.UK',
       service_name: 'Find postgraduate teacher training',
@@ -34,18 +36,16 @@
 
     <div class="govuk-width-container">
       <%= render GovukComponent::PhaseBanner.new(phase: 'Beta') do %>
-        This is a new service – <%= govuk_link_to "give feedback or report a problem", "mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training", class: 'govuk-link govuk-link--no-visited-state' %>
+        This is a new service – <%= govuk_link_to "give feedback or report a problem", "mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training", class: 'govuk-link--no-visited-state' %>
       <% end %>
+
       <%= yield(:before_content) %>
-      <main class="govuk-main-wrapper " id="main-content" role="main">
+
+      <main class="govuk-main-wrapper" id="main-content" role="main">
         <% if flash[:success] %>
-          <div class="govuk-success-summary" aria-labelledby="success-message" tabindex="-1" role="alert">
-            <div class="govuk-success-summary__title">
-              <h2 class="govuk-heading-m" id="success-message">
-                <%= flash[:success] %>
-              </h2>
-            </div>
-          </div>
+          <%= render GovukComponent::NotificationBanner.new(title: 'Success', success: true, title_id: 'success-message', html_attributes: { role: 'alert' }) do |notification_banner| %>
+            <%= notification_banner.slot(:heading, text: flash[:success]) %>
+          <% end %>
         <% end %>
 
         <%= yield %>
