@@ -18,7 +18,7 @@ RSpec.feature 'Results page new qualifications filter' do
     it 'show courses with all qualification types selected' do
       results_page.load
 
-      expect(results_page.qualifications_filter.subheading.text).to eq('Qualifications')
+      expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
       expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
       expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
       expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
@@ -44,7 +44,7 @@ RSpec.feature 'Results page new qualifications filter' do
         results_page.qualifications_filter.further_education_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.qualifications_filter.subheading.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
@@ -69,7 +69,7 @@ RSpec.feature 'Results page new qualifications filter' do
         results_page.qualifications_filter.qts_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.qualifications_filter.subheading.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
@@ -94,7 +94,7 @@ RSpec.feature 'Results page new qualifications filter' do
         results_page.qualifications_filter.qts_checkbox.uncheck
         results_page.apply_filters_button.click
 
-        expect(results_page.qualifications_filter.subheading.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)

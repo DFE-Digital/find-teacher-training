@@ -1,22 +1,17 @@
-<div class="govuk-toggle" data-module="toggle">
-  <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="search-filters">
-    Filter the results
-  </button>
-
-  <div class="govuk-toggle__target" id="search-filters" data-qa="search-filters">
-    <%= form_with url: results_path, class: "app-filter", method: :get do |form| %>
-      <h2 class="govuk-heading-m">Filters</h2>
-      <%= render 'new_filters/location_provider_filter', form: form %>
-      <%= render 'new_filters/subjects_filter', form: form  %>
-      <%= render 'new_filters/send_filter', form: form %>
-      <%= render 'new_filters/vacancy_filter', form: form %>
-      <%= render 'new_filters/study_type_filter', form: form %>
-      <%= render 'new_filters/qualifications_filter', form: form %>
-      <%= render 'new_filters/salary_filter', form: form %>
-      <%= render 'new_filters/hidden_fields', form: form %>
-      <div class="govuk-form-group app-filter__group">
-        <%= form.submit "Apply filters", name: nil, class: "govuk-button govuk-!-margin-bottom-1", data: { qa: "apply-filters" } %>
-      </div>
-    <% end %>
+<%= form_with url: results_path, class: "app-filter", method: :get do |form| %>
+  <div class="app-filter__header">
+    <h2 class="govuk-heading-m">Filters</h2>
   </div>
-</div>
+
+  <div class="app-filter__content">
+    <%= render 'new_filters/location_provider_filter', form: form %>
+    <%= render 'new_filters/subjects_filter', form: form  %>
+    <%= render 'new_filters/send_filter', form: form %>
+    <%= render 'new_filters/vacancy_filter', form: form %>
+    <%= render 'new_filters/study_type_filter', form: form %>
+    <%= render 'new_filters/qualifications_filter', form: form %>
+    <%= render 'new_filters/salary_filter', form: form %>
+    <%= render 'new_filters/hidden_fields', form: form %>
+    <%= form.submit "Apply filters", name: nil, class: "govuk-button govuk-!-margin-bottom-1", data: { qa: "apply-filters" } %>
+  </div>
+<% end %>

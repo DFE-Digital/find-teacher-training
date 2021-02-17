@@ -18,7 +18,7 @@ RSpec.feature 'Results page new funding filter' do
     it 'shows courses with or without a salary' do
       results_page.load
 
-      expect(results_page.funding_filter.subheading.text).to eq('Salary')
+      expect(results_page.funding_filter.legend.text).to eq('Salary')
       expect(results_page.funding_filter.checkbox.checked?).to be(false)
     end
   end
@@ -41,7 +41,7 @@ RSpec.feature 'Results page new funding filter' do
         results_page.funding_filter.checkbox.check
         results_page.apply_filters_button.click
 
-        expect(results_page.funding_filter.subheading.text).to eq('Salary')
+        expect(results_page.funding_filter.legend.text).to eq('Salary')
         expect(results_page.funding_filter.checkbox.checked?).to be(true)
       end
     end

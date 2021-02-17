@@ -18,7 +18,7 @@ RSpec.feature 'Results page new SEND filter' do
     it 'show courses with or without a SEND specialism' do
       results_page.load
 
-      expect(results_page.send_filter.subheading.text).to eq('Special educational needs')
+      expect(results_page.send_filter.legend.text).to eq('Special educational needs')
       expect(results_page.send_filter.checkbox.checked?).to be(false)
     end
   end
@@ -41,7 +41,7 @@ RSpec.feature 'Results page new SEND filter' do
         results_page.send_filter.checkbox.check
         results_page.apply_filters_button.click
 
-        expect(results_page.send_filter.subheading.text).to eq('Special educational needs')
+        expect(results_page.send_filter.legend.text).to eq('Special educational needs')
         expect(results_page.send_filter.checkbox.checked?).to be(true)
       end
     end

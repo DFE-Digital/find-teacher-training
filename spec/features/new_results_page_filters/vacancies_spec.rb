@@ -18,7 +18,7 @@ RSpec.feature 'Results page new vacancies filter' do
     it 'show courses with or without vacancies' do
       results_page.load
 
-      expect(results_page.vacancies_filter.subheading.text).to eq('Vacancies')
+      expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
       expect(results_page.vacancies_filter.checkbox.checked?).to be(false)
     end
   end
@@ -41,7 +41,7 @@ RSpec.feature 'Results page new vacancies filter' do
         results_page.vacancies_filter.checkbox.check
         results_page.apply_filters_button.click
 
-        expect(results_page.vacancies_filter.subheading.text).to eq('Vacancies')
+        expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
         expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
       end
     end

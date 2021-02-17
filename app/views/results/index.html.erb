@@ -7,27 +7,23 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-one-third">
-    <% if FeatureFlag.active?(:new_filters) %>
-      <%= render partial: 'new_filters/all' %>
-    <% else %>
-      <div class="govuk-toggle" data-module="toggle">
-        <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
-          Filter the results
-        </button>
-        <div class="govuk-toggle__target" id="searchFilters" data-qa="filters">
-          <% if @results_view.provider_filter? %>
-            <%= render partial: 'results/provider' %>
-          <% else %>
-            <%= render partial: 'results/location' %>
-          <% end %>
-          <%= render partial: 'results/subjects' %>
-          <%= render partial: 'results/study_type' %>
-          <%= render partial: 'results/qualifications' %>
-          <%= render partial: 'results/funding' %>
-          <%= render partial: 'results/vacancy' %>
-        </div>
+    <div class="govuk-toggle" data-module="toggle">
+      <button class="govuk-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
+        Filter the results
+      </button>
+      <div class="govuk-toggle__target" id="searchFilters" data-qa="filters">
+        <% if @results_view.provider_filter? %>
+          <%= render partial: 'results/provider' %>
+        <% else %>
+          <%= render partial: 'results/location' %>
+        <% end %>
+        <%= render partial: 'results/subjects' %>
+        <%= render partial: 'results/study_type' %>
+        <%= render partial: 'results/qualifications' %>
+        <%= render partial: 'results/funding' %>
+        <%= render partial: 'results/vacancy' %>
       </div>
-    <% end %>
+    </div>
   </div>
 
   <div class="govuk-grid-column-two-thirds">
