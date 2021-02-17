@@ -23,10 +23,6 @@
     // hide for desktop only
     @include mq ($from: tablet) {
       display: none;
-
-      &.map-results {
-        display: block;
-      }
     }
   }
 }
@@ -41,20 +37,6 @@
     @include mq ($from: tablet) {
       display: block;
     }
-
-    &.govuk-toggle__target--open {
-      display: block;
-    }
-  }
-}
-
-.map-results.js-enabled {
-  .govuk-toggle__link {
-    display: block;
-  }
-
-  .govuk-toggle__target {
-    display: none;
 
     &.govuk-toggle__target--open {
       display: block;
