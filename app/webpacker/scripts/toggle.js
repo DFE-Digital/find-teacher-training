@@ -43,8 +43,8 @@ Toggle.prototype.handleClick = function (event) {
 
   // If a button with aria-controls, handle click
   if ($toggleButton && $target) {
-    this.toggleClass($target, 'govuk-toggle__target--open')
-    this.toggleClass($toggleButton, 'govuk-toggle__link--open')
+    this.toggleClass($target, 'app-toggle__target--open')
+    this.toggleClass($toggleButton, 'app-toggle__link--open')
 
     $toggleButton.setAttribute('aria-expanded', $toggleButton.getAttribute('aria-expanded') !== 'true')
     $target.setAttribute('aria-hidden', $target.getAttribute('aria-hidden') === 'false')

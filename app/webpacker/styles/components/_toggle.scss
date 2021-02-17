@@ -1,8 +1,8 @@
-.govuk-toggle__link {
-  @include govuk-font($size: 19, $weight: 'bold');
+.app-toggle__link {
+  @include govuk-font($size: 19, $weight: bold);
   @include govuk-responsive-margin(6, "bottom");
   background-color: govuk-colour("light-grey");
-  background-image: url('../images/option-select-toggle-sprite.png');
+  background-image: url("../images/option-select-toggle-sprite.png");
   background-position: right -75px;
   background-repeat: no-repeat;
   border: none;
@@ -13,7 +13,7 @@
   text-decoration: none;
   width: 100%;
 
-  &.govuk-toggle__link--open {
+  &.app-toggle__link--open {
     background-position: right 5px;
   }
 
@@ -21,42 +21,24 @@
     display: block;
 
     // hide for desktop only
-    @include mq ($from: tablet) {
+    @include govuk-media-query($from: tablet) {
       display: none;
-
-      &.map-results {
-        display: block;
-      }
     }
   }
 }
 
-.govuk-toggle__target {
+.app-toggle__target {
   display: block;
 
   .js-enabled & {
     display: none;
 
     // always show for desktop
-    @include mq ($from: tablet) {
+    @include govuk-media-query($from: tablet) {
       display: block;
     }
 
-    &.govuk-toggle__target--open {
-      display: block;
-    }
-  }
-}
-
-.map-results.js-enabled {
-  .govuk-toggle__link {
-    display: block;
-  }
-
-  .govuk-toggle__target {
-    display: none;
-
-    &.govuk-toggle__target--open {
+    &.app-toggle__target--open {
       display: block;
     }
   }

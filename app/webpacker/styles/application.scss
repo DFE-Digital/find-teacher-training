@@ -11,21 +11,19 @@ $govuk-image-url-function: frontend-image-url;
 
 @import "~govuk-frontend/govuk/all";
 
+@import "components/accordion";
 @import "components/advice";
 @import "components/cookie-banner";
-@import "components/preview-banner";
-@import "components/map";
-@import "components/accordion";
-@import "components/toggle";
+@import "components/description-list";
+@import "components/feedback";
 @import "components/filter";
 @import "components/filter-layout";
 @import "components/list";
+@import "components/map";
+@import "components/pagination";
 @import "components/search-results";
-@import "components/feedback";
-@import "components/advice";
-@import "patterns/course-parts";
-@import "patterns/success-summary";
-@import "patterns/definition-list";
+@import "components/text-ellipsis";
+@import "components/toggle";
+
 @import "patterns/filters";
-@import "patterns/pagination";
-@import "patterns/text-ellipsis";
+@import "patterns/success-summary";

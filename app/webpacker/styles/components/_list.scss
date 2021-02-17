@@ -1,6 +1,4 @@
-
 .app-list--dash {
-  margin-bottom: govuk-spacing(8);
   padding-left: govuk-spacing(3);
 
   li {
@@ -14,8 +12,4 @@
       top: 0;
     }
   }
-}
-
-.govuk-list li > .govuk-body:last-child {
-  margin-bottom: 0;
 }
