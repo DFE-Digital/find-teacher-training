@@ -1,7 +1,0 @@
-.preview-banner {
-  @include govuk-font($size: 19, $weight: normal);
-  background-color: govuk-colour("light-grey");
-  border-top: 5px solid $govuk-link-colour;
-  padding: govuk-spacing(4);
-  margin-top: govuk-spacing(3);
-}
