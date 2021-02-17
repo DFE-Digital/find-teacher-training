@@ -239,6 +239,10 @@ class ResultsView
     course_count.zero?
   end
 
+  def has_results?
+    course_count.positive?
+  end
+
   def number_of_courses_string
     case course_count
     when 0

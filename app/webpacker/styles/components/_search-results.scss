@@ -1,93 +1,86 @@
-// Search results view
-.search-results-filters {
+.app-search-results {
+  @include govuk-responsive-padding(4, "top");
+  margin: 0;
+  padding-left: 0;
+  border-top: 1px solid $govuk-border-colour;
+}
+
+.app-search-results__item {
+  @include govuk-responsive-margin(4, "bottom");
+  border-bottom: 1px solid $govuk-border-colour;
   display: block;
 }
 
-.search-results {
-  border-top: 1px solid $govuk-border-colour;
+.app-search-result__item-title {
+  @include govuk-font($size: 24, $weight: bold);
+  @include govuk-responsive-margin(4, "bottom");
+  margin-top: 0;
 
-  > li {
-    @include govuk-responsive-padding(4, "top");
-    @include govuk-responsive-padding(4, "bottom");
-    border-bottom: 1px solid $govuk-border-colour;
-    margin: 0;
-  }
-
-  &__count {
-    float: left;
-  }
-
-  &__new-search {
-    float: right;
-    margin-bottom: 0;
+  a {
+    text-decoration: none;
   }
 }
 
-.search-result-link {
-  text-decoration: none;
+.app-search-result__provider-name {
+  @include govuk-font($size: 19, $weight: "bold");
+}
 
-  * {
-    color: inherit;
+.app-search-result__course-name {
+  display: block;
+  text-decoration: underline;
+}
+
+.app-search-results-header {
+  border-top: 1px solid $govuk-border-colour;
+
+  @include govuk-media-query($from: "desktop") {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: govuk-spacing(2) 0;
   }
 
-  .search-result-link-name {
-    text-decoration: underline;
+  .govuk-body {
+    margin: govuk-spacing(2) 0;
   }
 }
 
-.search-results-header {
-  border-top: 1px solid $govuk-border-colour;
-  padding-bottom: govuk-spacing(2);
+.app-search-results-header__sort {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
 
-  @include govuk-media-query($from: desktop) {
-    padding-top: govuk-spacing(2);
+  .govuk-label {
+    padding: govuk-spacing(2) 0;
+    margin: 0 govuk-spacing(2) 0 0;
+    white-space: nowrap;
+    vertical-align: middle;
   }
 
-  &__cta {
-    margin: govuk-spacing(1) 0;
-    display: none;
+  .govuk-select {
+    flex: 1 1 auto;
+    margin: govuk-spacing(2);
+    margin-left: 0;
 
-    .js-enabled & {
-      display: block;
-    }
-  }
-
-  .govuk-form-group {
-    clear: both;
-    display: inline-block;
-    margin-bottom: 0;
-    margin-top: govuk-spacing(2);
-
-    @include mq($from: desktop) {
-      margin: 0;
+    @include govuk-media-query($from: "desktop") {
+      flex: 0;
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 
   .govuk-button {
-    float: right;
-    margin: govuk-spacing(2) 0 0 0;
+    flex: 1 0 0;
+    margin: 0 govuk-spacing(2) 0 0;
+    width: auto;
 
-    @include mq($from: desktop) {
-      margin: 0 0 0 govuk-spacing(2);
+    @include govuk-media-query($from: "desktop") {
+      flex: 0;
     }
 
     .js-enabled & {
       display: none;
-    }
-  }
-
-  select {
-    width: 100%;
-
-    @include mq($from: desktop) {
-      width: 220px;
-    }
-  }
-
-  .sortedby-label {
-    @include mq($from: desktop) {
-      display: inline;
-      margin-right: 0.5em;
     }
   }
 }
