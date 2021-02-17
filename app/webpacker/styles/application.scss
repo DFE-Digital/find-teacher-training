@@ -23,6 +23,6 @@ $govuk-image-url-function: frontend-image-url;
 @import "components/search-results";
 @import "components/feedback";
 @import "components/pagination";
+@import "components/text-ellipsis";
 @import "patterns/success-summary";
 @import "patterns/filters";
-@import "patterns/text-ellipsis";
