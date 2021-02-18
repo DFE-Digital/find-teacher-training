@@ -26,7 +26,7 @@
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
 
-    <%= render partial: 'layouts/cookie-banner' unless current_page?(cookie_preferences_path) %>
+    <%= render partial: 'layouts/cookie_banner' unless current_page?(cookie_preferences_path) %>
 
     <%= render GovukComponent::Header.new(
       logo: 'GOV.UK',
