@@ -44,11 +44,11 @@
                           </span>
 
                           <% if subject.decorate.has_scholarship_and_bursary? %>
-                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, :delimiter => ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, :delimiter => ',')} are available" %>
+                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
                           <% elsif subject.decorate.has_scholarship? %>
-                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, :delimiter => ',')} are available" %>
+                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} are available" %>
                           <% elsif subject.decorate.has_bursary? %>
-                            <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, :delimiter => ',')} available" %>
+                            <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} available" %>
                           <% end %>
                           <% if subject.decorate.early_career_payments? %>
                             <% financial_info.concat(', \n with early career payments of £2,000 each in your second, third and fourth year of teaching (£3,000 in some areas of England).') %>
