@@ -48,6 +48,7 @@ module ResultFilters
           lng: results.longitude,
           loc: results.address,
           lq: location_query,
+          c: country(results),
         }
       end
     end
@@ -62,6 +63,13 @@ module ResultFilters
 
     def search_radius
       @params[:rad]
+    end
+
+    def country(results)
+      flattened_results = results.address_components.map(&:values).flatten
+      countries = [DEVOLVED_NATIONS, 'England'].flatten
+
+      countries.each { |country| return country if flattened_results.include?(country) }
     end
   end
 end

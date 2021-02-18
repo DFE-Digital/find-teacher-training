@@ -210,7 +210,7 @@ class ResultsView
   end
 
   def suggested_search_visible?
-    course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any?
+    course_count < SUGGESTED_SEARCH_THRESHOLD && suggested_search_links.any? && !devolved_nation?
   end
 
   def suggested_search_links
@@ -264,6 +264,14 @@ class ResultsView
     else
       'Placement schools might be in commuting distance'
     end
+  end
+
+  def country
+    query_parameters['c']
+  end
+
+  def devolved_nation?
+    DEVOLVED_NATIONS.include?(country)
   end
 
 private
