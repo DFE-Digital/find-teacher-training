@@ -1,3 +1,7 @@
+ifndef VERBOSE
+.SILENT:
+endif
+
 IMAGE=${DOCKER_IMAGE}
 
 .PHONY: help
@@ -72,7 +76,7 @@ production: ## Set DEPLOY_ENV to production
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 
 .PHONY: sandbox
-production: ## Set DEPLOY_ENV to production
+sandbox: ## Set DEPLOY_ENV to production
 	$(eval DEPLOY_ENV=sandbox)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 
@@ -90,3 +94,20 @@ deploy: ## Run terraform apply for ${DEPLOY_ENV} eg: make qa plan, make staging 
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
 	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
 	terraform apply -var-file terraform/workspace_variables/${DEPLOY_ENV}.tfvars terraform
+
+.PHONY: install-fetch-config
+install-fetch-config: ## Install the fetch-config script
+	[ ! -f bin/fetch_config.rb ] \
+		&& curl -s https://raw.githubusercontent.com/DFE-Digital/bat-platform-building-blocks/master/scripts/fetch_config/fetch_config.rb -o bin/fetch_config.rb \
+		&& chmod +x bin/fetch_config.rb \
+		|| true
+
+.PHONY: edit-app-secrets
+edit-app-secrets: install-fetch-config ## Edit Find App Secrets
+	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
+		-e -d azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} -f yaml
+
+.PHONY: print-app-secrets
+print-app-secrets: install-fetch-config ## View Find App Secrets
+	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
+		-f yaml
