@@ -20,7 +20,7 @@
           <h1 class="govuk-fieldset__heading">Find courses by location or by training provider</h1>
         </legend>
         <div class="govuk-form-group" id="search-options">
-          <% if flash[:error] and location_error? === false and provider_error? === false%>
+          <% if flash[:error] and location_error? === false and provider_error? === false %>
             <p class="govuk-error-message">
               <% if flash[:error].kind_of?(Array) %>
                 <%= flash[:error].last %>
@@ -63,13 +63,12 @@
             </div>
             <div class="govuk-radios__item">
               <%= form.radio_button(
-                    :l,
-                    '2',
-                    class: 'govuk-radios__input',
-                    data: { qa: 'across-england' },
-                    checked: params[:l] == '2',
-                  )
-              %>
+                :l,
+                '2',
+                class: 'govuk-radios__input',
+                data: { qa: 'across-england' },
+                checked: params[:l] == '2',
+              ) %>
               <%= form.label :l_2, 'Across England', class: 'govuk-label govuk-radios__label' %>
             </div>
             <div class="govuk-radios__divider">or</div>

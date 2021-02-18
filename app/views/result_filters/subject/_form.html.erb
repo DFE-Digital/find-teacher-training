@@ -23,7 +23,7 @@
                 <legend class="govuk-fieldset__legend govuk-visually-hidden" data-qa="subject_area__legend">
                   Choose from the following <%= subject_area.name %> subjects
                 </legend>
-                <%if subject_area.name == 'Primary' %>
+                <% if subject_area.name == 'Primary' %>
                   <p class="govuk-body">Trainee primary school teachers learn to teach all subjects across the national curriculum.</p>
                   <p class="govuk-body">You can choose to add a specialist subject to your training. This could be a subject you have qualifications or experience in.</p>
                   <p class="govuk-body">Your training will develop your knowledge of your specialist subject. This is so you can support other teachers to teach that subject.</p>
@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <%= f.submit(local_assigns[:submit_button_text], name: nil, data: { qa: 'continue' }, class: 'govuk-button' )%>
+      <%= f.submit(local_assigns[:submit_button_text], name: nil, data: { qa: 'continue' }, class: 'govuk-button' ) %>
     <% end %>
   </div>
 </div>

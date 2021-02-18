@@ -16,15 +16,13 @@
         <div class="govuk-form-group">
           <div class="govuk-radios">
             <div class="govuk-radios__item">
-              <%=
-                form.radio_button(
-                  :hasvacancies,
-                  true,
-                  class: 'govuk-radios__input',
-                  data: { qa: 'with_vacancies' },
-                  checked: params[:hasvacancies] == 'true' || params[:hasvacancies].blank?
-                ),
-              %>
+              <%= form.radio_button(
+                :hasvacancies,
+                true,
+                class: 'govuk-radios__input',
+                data: { qa: 'with_vacancies' },
+                checked: params[:hasvacancies] == 'true' || params[:hasvacancies].blank?,
+              ) %>
               <%= form.label :hasvacancies_true, 'Only courses with vacancies', class: 'govuk-label govuk-radios__label' %>
             </div>
 

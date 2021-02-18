@@ -3,9 +3,9 @@
   <div data-qa="course__about_schools">
       <%= render AdviceComponent.new(title: 'Where you will train') do %>
         <% if course.provider_type == 'university' %>
-          <%= render partial: 'courses/placement/hei', locals: { course: course }  %>
+          <%= render partial: 'courses/placement/hei', locals: { course: course } %>
         <% else %>
-          <%= render partial: 'courses/placement/scitt', locals: { course: course }  %>
+          <%= render partial: 'courses/placement/scitt', locals: { course: course } %>
         <% end %>
       <% end %>
     <%= markdown(course.how_school_placements_work) %>

@@ -39,10 +39,7 @@
             <p class="govuk-body">Sorted by distance</p>
           <% else %>
             <%= form_with(url: results_path, method: 'get', skip_enforcing_utf8: true, class: 'app-search-results-header__sort', data: { qa: 'sort-form' }) do |form| %>
-              <%= render 'shared/hidden_fields',
-                form: form,
-                exclude_keys: ['sortby']
-              %>
+              <%= render 'shared/hidden_fields', form: form, exclude_keys: ['sortby'] %>
               <%= form.label(:sortby, 'Sorted by', class: 'govuk-label govuk-!-display-inline-block') %>
               <%= form.select(
                 :sortby,
@@ -92,7 +89,7 @@
             </h2>
             <dl class="app-description-list">
               <dt class="app-description-list__label">Course</dt>
-              <dd data-qa="course__description"><%= course.description%></dd>
+              <dd data-qa="course__description"><%= course.description %></dd>
               <% if @results_view.location_filter? && @results_view.has_sites?(course) %>
                 <% if course.university_based? %>
                   <%= render partial: 'results/university', locals: { course: course } %>
@@ -106,7 +103,7 @@
                 <dt class="app-description-list__label">Accredited body</dt>
                 <dd data-qa="course__accrediting_provider"><%= smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
               <% end %>
-              <% unless @results_view.location_filter?  %>
+              <% unless @results_view.location_filter? %>
                 <dt class="app-description-list__label">Locations</dt>
                 <dd data-qa="course__main_address">
                   <%= smart_quotes(course.provider.decorate.short_address) %>
