@@ -22,4 +22,4 @@ feature_flags:
   cycle_has_ended: false
   display_apply_button: true
   ucas_only_locations: false
-  new_filters: false
+  new_filters: true

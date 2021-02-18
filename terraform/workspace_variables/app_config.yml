@@ -8,7 +8,6 @@ qa:
   RAILS_ENV: qa
   RACK_ENV: qa
   SETTINGS__FEATURE_FLAGS__UCAS_ONLY_LOCATIONS: true
-  SETTINGS__FEATURE_FLAGS__NEW_FILTERS: true
 
 staging:
   <<: *default
