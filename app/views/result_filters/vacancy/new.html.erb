@@ -7,7 +7,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <%= form_with url: vacancy_path, method: :post, data: { 'ga-event-form' => 'Vacancy' } do |form| %>
-      <%= render 'shared/hidden_fields', exclude_keys: ['hasvacancies'], form: form %>
+      <%= render 'shared/hidden_fields', exclude_keys: %w[hasvacancies], form: form %>
       <fieldset class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading" data-qa="heading">Find courses by vacancies</h1>

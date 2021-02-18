@@ -8,7 +8,7 @@
   <div class="govuk-grid-column-two-thirds">
     <%= render partial: 'shared/error_message', locals: { error_anchor_id: 'fulltime' } %>
     <%= form_with url: studytype_path, method: :post do |form| %>
-      <%= render 'shared/hidden_fields', exclude_keys: ['fulltime', 'parttime'], form: form %>
+      <%= render 'shared/hidden_fields', exclude_keys: %w[fulltime parttime], form: form %>
       <fieldset role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading" data-qa="heading">Study type</h1>
