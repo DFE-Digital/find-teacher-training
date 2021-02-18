@@ -12,7 +12,7 @@
           <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?) then ' govuk-accordion__section--expanded' end %>" data-qa="subject_area">
             <div class="govuk-accordion__section-header">
               <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= if subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?) then 'true' else 'false' end %>">
+                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?) ? 'true' : 'false' %>">
                   <%= subject_area.name %>
                 </button>
               </h2>
@@ -75,7 +75,7 @@
         <div class="govuk-accordion__section<%= if params[:senCourses] == 'true' then ' govuk-accordion__section--expanded' end %>" data-qa="send_area">
           <div class="govuk-accordion__section-header">
             <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-              <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="send-content" class="govuk-accordion__section-button" aria-expanded="<%= if params[:senCourses] == 'true' then 'true' else 'false' end %>">
+              <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="send-content" class="govuk-accordion__section-button" aria-expanded="<%= params[:senCourses] == 'true' ? 'true' : 'false' %>">
                 Special educational needs and disability (SEND)
               </button>
             </h2>
