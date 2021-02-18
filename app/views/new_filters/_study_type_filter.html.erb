@@ -14,14 +14,12 @@
     </div>
 
     <div class="govuk-checkboxes__item">
-      <%=
-        form.check_box(
-          :parttime,
-          { checked: @filters_view.part_time_checked? || @filters_view.default_to_true, class: 'govuk-checkboxes__input' },
-          'true',
-          nil,
-        )
-      %>
+      <%= form.check_box(
+        :parttime,
+        { checked: @filters_view.part_time_checked? || @filters_view.default_to_true, class: 'govuk-checkboxes__input' },
+        'true',
+        nil,
+      ) %>
       <%= form.label :parttime, class: 'govuk-label govuk-checkboxes__label' do %>
         Part time (18 – 24 months)
       <% end %>

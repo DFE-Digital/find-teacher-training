@@ -23,32 +23,28 @@
         </legend>
         <div class="govuk-radios">
           <div class="govuk-radios__item">
-            <%=
-              form.radio_button(
-                :cookie_consent,
-                true,
-                id: 'cookie-consent-accept',
-                class: 'govuk-radios__input',
-                checked: cookies['consented-to-cookies'] == 'true',
-                data: { qa: 'cookie-consent-accept' },
-              )
-            %>
+            <%= form.radio_button(
+              :cookie_consent,
+              true,
+              id: 'cookie-consent-accept',
+              class: 'govuk-radios__input',
+              checked: cookies['consented-to-cookies'] == 'true',
+              data: { qa: 'cookie-consent-accept' },
+            ) %>
             <label class="govuk-label govuk-radios__label" for="cookie-consent-accept">
               Yes, opt-in to Google Analytics cookies
             </label>
 
           </div>
           <div class="govuk-radios__item">
-            <%=
-              form.radio_button(
-                :cookie_consent,
-                false,
-                id: 'cookie-consent-deny',
-                class: 'govuk-radios__input',
-                checked: cookies['consented-to-cookies'] == 'false',
-                data: { qa: 'cookie-consent-deny' },
-              )
-            %>
+            <%= form.radio_button(
+              :cookie_consent,
+              false,
+              id: 'cookie-consent-deny',
+              class: 'govuk-radios__input',
+              checked: cookies['consented-to-cookies'] == 'false',
+              data: { qa: 'cookie-consent-deny' },
+            ) %>
             <label class="govuk-label govuk-radios__label" for="cookie-consent-deny">
               No, do not track my website usage
             </label>
