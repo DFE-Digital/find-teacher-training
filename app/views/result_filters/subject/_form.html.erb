@@ -30,7 +30,7 @@
                 <% end %>
 
                 <div class="govuk-checkboxes">
-                  <% subject_area.subjects.sort_by { |subject| subject.subject_name }.each do |subject| %>
+                  <% subject_area.subjects.sort_by(&:subject_name).each do |subject| %>
                     <%# C# doesn't have a distinct modern languages subject %>
                     <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
