@@ -34,8 +34,8 @@
                     <%# C# doesn't have a distinct modern languages subject %>
                     <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
                       <div class="govuk-checkboxes__item" data-qa="subject">
-                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: {qa: 'subject__checkbox'}, id: "subject#{subject.subject_code}", class: 'govuk-checkboxes__input' }, subject.subject_code, nil) %>
-                        <%= f.label(:subjects, {for: "subject#{subject.subject_code}"}, class: 'govuk-label govuk-checkboxes__label') do %>
+                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: { qa: 'subject__checkbox' }, id: "subject#{subject.subject_code}", class: 'govuk-checkboxes__input' }, subject.subject_code, nil) %>
+                        <%= f.label(:subjects, { for: "subject#{subject.subject_code}" }, class: 'govuk-label govuk-checkboxes__label') do %>
                           <span class="govuk-checkboxes__label-text" data-qa="subject__name">
                             <%= subject.subject_name %>
                             <% if subject.subject_name == "Design and technology" %>
@@ -84,8 +84,8 @@
           <div id="send-content" class="govuk-accordion__section-content" aria-labelledby="accordion-heading-send">
             <div class="govuk-checkboxes">
               <div class="govuk-checkboxes__item" data-qa="subject">
-                <%= f.check_box(:senCourses, { checked: params[:senCourses] == 'true', data: {qa: 'subject__checkbox'}, id: 'subject_send', class: 'govuk-checkboxes__input' }, 'true', nil) %>
-                <%= f.label(:subjects, {for: 'subject_send', data: {qa: 'subject__name'}}, class: 'govuk-label govuk-checkboxes__label') do %>
+                <%= f.check_box(:senCourses, { checked: params[:senCourses] == 'true', data: { qa: 'subject__checkbox' }, id: 'subject_send', class: 'govuk-checkboxes__input' }, 'true', nil) %>
+                <%= f.label(:subjects, { for: 'subject_send', data: { qa: 'subject__name' } }, class: 'govuk-label govuk-checkboxes__label') do %>
                   <span class="govuk-checkboxes__label-text">
                     Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
                   </span>
@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <%= f.submit(local_assigns[:submit_button_text], name: nil, data: {qa: 'continue'}, class: 'govuk-button' )%>
+      <%= f.submit(local_assigns[:submit_button_text], name: nil, data: { qa: 'continue' }, class: 'govuk-button' )%>
     <% end %>
   </div>
 </div>

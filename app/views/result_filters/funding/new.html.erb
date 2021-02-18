@@ -22,7 +22,7 @@
                                   '15',
                                   class: 'govuk-radios__input',
                                   checked: params[:funding] == '15' || params[:funding].blank?,
-                                  data: { qa: 'all_courses'} %>
+                                  data: { qa: 'all_courses' } %>
 
             <%= form.label :funding_15, 'All courses (with or without a salary)', class: 'govuk-label govuk-radios__label' %>
           </div>
@@ -31,7 +31,7 @@
                                   '8',
                                   class: 'govuk-radios__input',
                                   checked: params[:funding] == '8',
-                                  data: { qa: 'salary_courses'} %>
+                                  data: { qa: 'salary_courses' } %>
 
             <%= form.label :funding_8, 'Only courses that come with a salary', class: 'govuk-label govuk-radios__label' %>
           </div>
