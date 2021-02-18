@@ -10,7 +10,7 @@
           'location'
         elsif provider_error?
           'provider'
-        end
+        end,
     } %>
     <%= form_with url: location_path, method: :post, data: { 'ga-event-form' => 'Location' } do |form| %>
       <%= render 'shared/hidden_fields', exclude_keys: %w(l query rad), form: form %>
@@ -71,7 +71,7 @@
                     '2',
                     class: 'govuk-radios__input',
                     data: { qa: 'across-england' },
-                    checked: params[:l] == '2'
+                    checked: params[:l] == '2',
                   )
               %>
               <%= form.label :l_2, 'Across England', class: 'govuk-label govuk-radios__label' %>
@@ -89,7 +89,7 @@
                   aria: {
                     controls: 'query-container',
                   },
-                  checked: params[:l] == '3'
+                  checked: params[:l] == '3',
                 )
               %>
               <%= form.label :l_3, class: 'govuk-label govuk-radios__label' do %>

@@ -22,14 +22,14 @@
       'Change provider or choose a location',
       @results_view.filter_path_with_unescaped_commas(location_path),
       class: 'govuk-link--no-visited-state',
-      data:  { qa: 'filters__area_and_provider_link' }
+      data:  { qa: 'filters__area_and_provider_link' },
     ) %>
   <% else %>
     <%= govuk_link_to(
       'Change location or choose a provider',
       @results_view.filter_path_with_unescaped_commas(location_path),
       class: 'govuk-link--no-visited-state',
-      data:  { qa: 'filters__area_and_provider_link' }
+      data:  { qa: 'filters__area_and_provider_link' },
     ) %>
   <% end %>
 </div>

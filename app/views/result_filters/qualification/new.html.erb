@@ -30,10 +30,10 @@
                     class: 'govuk-checkboxes__input',
                     multiple: true,
                     data: { qa: 'qts_only' },
-                    checked: @view.qts_only_checked?
+                    checked: @view.qts_only_checked?,
                   },
                   'QtsOnly',
-                  false
+                  false,
                 )
               %>
               <%= form.label :qualifications, value: 'QtsOnly', class: 'govuk-label govuk-checkboxes__label' do %>
@@ -58,7 +58,7 @@
                     checked: @view.pgde_pgce_with_qts_checked?,
                   },
                   'PgdePgceWithQts',
-                  false
+                  false,
                 )
               %>
               <%= form.label :qualifications, value: 'PgdePgceWithQts', class: 'govuk-label govuk-checkboxes__label' do %>
@@ -83,10 +83,10 @@
                     class: 'govuk-checkboxes__input',
                     multiple: true,
                     data: { qa: 'other' },
-                    checked: @view.other_checked?
+                    checked: @view.other_checked?,
                   },
                   'Other',
-                  false
+                  false,
                 )
               %>
               <%= form.label :qualifications, value: 'Other', class: 'govuk-label govuk-checkboxes__label' do %>

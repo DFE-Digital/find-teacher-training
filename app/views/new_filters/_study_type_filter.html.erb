@@ -6,7 +6,7 @@
         :fulltime,
         { checked: @filters_view.full_time_checked? || @filters_view.default_to_true, class: 'govuk-checkboxes__input' },
         'true',
-        nil
+        nil,
       ) %>
       <%= form.label :fulltime, class: 'govuk-label govuk-checkboxes__label' do %>
         Full time (12 months)
@@ -19,7 +19,7 @@
           :parttime,
           { checked: @filters_view.part_time_checked? || @filters_view.default_to_true, class: 'govuk-checkboxes__input' },
           'true',
-          nil
+          nil,
         )
       %>
       <%= form.label :parttime, class: 'govuk-label govuk-checkboxes__label' do %>
