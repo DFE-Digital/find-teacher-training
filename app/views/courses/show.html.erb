@@ -2,7 +2,7 @@
 
 <% if permitted_referrer? %>
   <%= content_for(:before_content) do %>
-    <%= govuk_back_link_to(request.referrer, "Back to search results") %>
+    <%= govuk_back_link_to(request.referrer, 'Back to search results') %>
   <% end %>
 <% end %>
 

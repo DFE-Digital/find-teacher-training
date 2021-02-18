@@ -1,8 +1,8 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-schools"><%= course.placements_heading %></h2>
   <div data-qa="course__about_schools">
-      <%= render AdviceComponent.new(title: "Where you will train") do %>
-        <% if course.provider_type == "university" %>
+      <%= render AdviceComponent.new(title: 'Where you will train') do %>
+        <% if course.provider_type == 'university' %>
           <%= render partial: 'courses/placement/hei', locals: { course: course }  %>
         <% else %>
           <%= render partial: 'courses/placement/scitt', locals: { course: course }  %>

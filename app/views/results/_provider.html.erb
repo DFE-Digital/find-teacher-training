@@ -7,8 +7,8 @@
       <%= smart_quotes(@results_view.provider) %>
     </li>
   </ul>
-  <%= link_to "Change provider or choose a location",
+  <%= link_to 'Change provider or choose a location',
              @results_view.filter_path_with_unescaped_commas(location_path),
-             class: "govuk-link",
-             data: { qa: "link" } %>
+             class: 'govuk-link',
+             data: { qa: 'link' } %>
 </div>

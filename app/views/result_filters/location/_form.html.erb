@@ -1,20 +1,20 @@
-<%= content_for :page_title, title_with_error_prefix("Find courses by location or by training provider", flash[:error].present?) %>
+<%= content_for :page_title, title_with_error_prefix('Find courses by location or by training provider', flash[:error].present?) %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
-    <%= render partial: "shared/error_message", locals: {
+    <%= render partial: 'shared/error_message', locals: {
       error_anchor_id:
         if no_option_selected?
-          "l_1"
+          'l_1'
         elsif location_error?
-          "location"
+          'location'
         elsif provider_error?
-          "provider"
+          'provider'
         end
     } %>
-    <%= form_with url: location_path, method: :post, data: { "ga-event-form" => "Location" } do |form| %>
-      <%= render "shared/hidden_fields", exclude_keys: %w(l query rad), form: form %>
-      <%= render "shared/hidden_previous_fields", form: form %>
+    <%= form_with url: location_path, method: :post, data: { 'ga-event-form' => 'Location' } do |form| %>
+      <%= render 'shared/hidden_fields', exclude_keys: %w(l query rad), form: form %>
+      <%= render 'shared/hidden_previous_fields', form: form %>
       <fieldset class="govuk-fieldset" role="radiogroup" aria-required="true" class="govuk-fieldset">
         <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
           <h1 class="govuk-fieldset__heading">Find courses by location or by training provider</h1>
@@ -34,20 +34,20 @@
               <%=
                 form.radio_button(
                   :l,
-                  "1",
-                  class: "govuk-radios__input",
-                  data: {qa: "by_postcode_town_or_city"},
-                  checked: params[:l] == "1",
-                  aria: {'controls': "location-conditional"}
+                  '1',
+                  class: 'govuk-radios__input',
+                  data: {qa: 'by_postcode_town_or_city'},
+                  checked: params[:l] == '1',
+                  aria: {'controls': 'location-conditional'}
                 )
               %>
-              <%= form.label :l_1, "By city, town or postcode", class: "govuk-label govuk-radios__label" %>
+              <%= form.label :l_1, 'By city, town or postcode', class: 'govuk-label govuk-radios__label' %>
             </div>
             <div
-              class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "1" %>"
+              class="govuk-radios__conditional <%= 'govuk-radios__conditional--hidden' unless params[:l] == '1' %>"
               id="location-conditional" data-qa="location-conditional">
-              <div class="govuk-form-group <%= "govuk-form-group--error" if location_error? %>">
-                <%= form.label :lq, "Postcode, town or city", { class: "govuk-label", for: "location"} %>
+              <div class="govuk-form-group <%= 'govuk-form-group--error' if location_error? %>">
+                <%= form.label :lq, 'Postcode, town or city', { class: 'govuk-label', for: 'location'} %>
                 <% if location_error? %>
                   <div class="govuk-error-message" id="location-error" data-qa="location-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
@@ -56,10 +56,10 @@
                 <%=
                   form.text_field(
                     :lq,
-                    id: "location",
-                    value: "#{request.params[:lq]}",
-                    class: "govuk-input",
-                    data: {qa: "location-query"},
+                    id: 'location',
+                    value: request.params[:lq],
+                    class: 'govuk-input',
+                    data: {qa: 'location-query'},
                   )
                 %>
                 <div id="location-autocomplete" class="govuk-body"></div>
@@ -68,38 +68,38 @@
             <div class="govuk-radios__item">
               <%= form.radio_button(
                     :l,
-                    "2",
-                    class: "govuk-radios__input",
-                    data: {qa: "across-england"},
-                    checked: params[:l] == "2"
+                    '2',
+                    class: 'govuk-radios__input',
+                    data: {qa: 'across-england'},
+                    checked: params[:l] == '2'
                   )
               %>
-              <%= form.label :l_2, "Across England", class: "govuk-label govuk-radios__label" %>
+              <%= form.label :l_2, 'Across England', class: 'govuk-label govuk-radios__label' %>
             </div>
             <div class="govuk-radios__divider">or</div>
             <div class="govuk-radios__item">
               <%=
                 form.radio_button(
                   :l,
-                  "3",
-                  class: "govuk-radios__input",
+                  '3',
+                  class: 'govuk-radios__input',
                   data: {
-                    qa: "by-provider",
+                    qa: 'by-provider',
                   },
                   aria: {
-                    controls: "query-container",
+                    controls: 'query-container',
                   },
-                  checked: params[:l] == "3"
+                  checked: params[:l] == '3'
                 )
               %>
-              <%= form.label :l_3, class: "govuk-label govuk-radios__label" do %>
+              <%= form.label :l_3, class: 'govuk-label govuk-radios__label' do %>
                 By school, university or other training provider
               <% end %>
             </div>
-            <div class="govuk-radios__conditional <%= "govuk-radios__conditional--hidden" unless params[:l] == "3" %>"
+            <div class="govuk-radios__conditional <%= 'govuk-radios__conditional--hidden' unless params[:l] == '3' %>"
               id="query-container" data-qa="by-provider-conditional">
-              <div class="govuk-form-group <%= "govuk-form-group--error" if provider_error? %>" data-module="track-no-provider-results">
-                <%= form.label :query, {class: "govuk-label", for: "provider" } do %>
+              <div class="govuk-form-group <%= 'govuk-form-group--error' if provider_error? %>" data-module="track-no-provider-results">
+                <%= form.label :query, {class: 'govuk-label', for: 'provider' } do %>
                   School, university or other training provider
                   <span class="govuk-hint">Enter the name or provider code</span>
                   <% if provider_error? %>
@@ -109,17 +109,17 @@
                   <% end %>
                 <% end %>
                 <%= form.text_field :query,
-                                    id: "provider",
+                                    id: 'provider',
                                     value: params[:query],
-                                    class: "govuk-input",
-                                    data: {qa: "provider-search"} %>
+                                    class: 'govuk-input',
+                                    data: {qa: 'provider-search'} %>
                 <div id="provider-autocomplete" class="govuk-body"></div>
               </div>
             </div>
           </div>
         </div>
       </fieldset>
-      <%= form.submit local_assigns[:submit_button_text], name: nil, class: "govuk-button", data: {qa: 'find-courses'} %>
+      <%= form.submit local_assigns[:submit_button_text], name: nil, class: 'govuk-button', data: {qa: 'find-courses'} %>
     <% end %>
   </div>
 </div>

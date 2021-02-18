@@ -1,7 +1,7 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-financial-support">Fees and financial support</h2>
 
-  <%= render AdviceComponent.new(title: "Financial support") do %>
+  <%= render AdviceComponent.new(title: 'Financial support') do %>
       <% if course.salaried? %>
       <%= render partial: 'courses/financial_support/salaried' %>
     <% elsif course.excluded_from_bursary? %>

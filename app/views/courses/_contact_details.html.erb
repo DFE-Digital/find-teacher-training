@@ -6,7 +6,7 @@
       <% if course.provider.email.present? %>
         <dt class="app-description-list__label">Email</dt>
         <dd data-qa="provider__email">
-          <%= mail_to course.provider.email, course.provider.email, title: "Send email to course contact", aria: { label: "Send email to course contact" }, class: "govuk-link" %>
+          <%= mail_to course.provider.email, course.provider.email, title: 'Send email to course contact', aria: { label: 'Send email to course contact' }, class: 'govuk-link' %>
         </dd>
       <% end %>
 
@@ -20,7 +20,7 @@
       <% if course.provider.decorate.website.present? %>
         <dt class="app-description-list__label">Website</dt>
         <dd data-qa="provider__website">
-          <%= link_to course.provider.decorate.website, course.provider.decorate.website, class: "govuk-link" %>
+          <%= link_to course.provider.decorate.website, course.provider.decorate.website, class: 'govuk-link' %>
         </dd>
       <% end %>
 

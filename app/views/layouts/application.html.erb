@@ -9,7 +9,7 @@
     <%= tag :meta, property: 'og:image', content: asset_pack_path('media/images/govuk-opengraph-image.png') %>
     <%= tag :meta, name: 'theme-color', content: '#0b0c0c' %>
     <%= favicon_link_tag asset_pack_path('media/images/favicon.ico') %>
-    <%= favicon_link_tag asset_pack_path('media/images/govuk-mask-icon.svg'), rel: 'mask-icon', type: 'image/svg', color: "#0b0c0c" %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-mask-icon.svg'), rel: 'mask-icon', type: 'image/svg', color: '#0b0c0c' %>
     <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png' %>
     <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon-152x152.png'), rel: 'apple-touch-icon', type: 'image/png', size: '152x152' %>
     <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon-167x167.png'), rel: 'apple-touch-icon', type: 'image/png', size: '167x167' %>
@@ -36,7 +36,7 @@
 
     <div class="govuk-width-container">
       <%= render GovukComponent::PhaseBanner.new(phase: 'Beta') do %>
-        This is a new service – <%= govuk_link_to "give feedback or report a problem", "mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training", class: 'govuk-link--no-visited-state' %>
+        This is a new service – <%= govuk_link_to 'give feedback or report a problem', 'mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training', class: 'govuk-link--no-visited-state' %>
       <% end %>
 
       <%= yield(:before_content) %>
@@ -77,7 +77,7 @@
             <div class="govuk-grid-column-one-half">
               <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Online chat</h2>
               <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-8">
-                <li><%= link_to "Talk to an adviser online", t('get_into_teaching.url_online_chat'), class: "govuk-footer__link" %></li>
+                <li><%= link_to 'Talk to an adviser online', t('get_into_teaching.url_online_chat'), class: 'govuk-footer__link' %></li>
                 <li><%= t('get_into_teaching.opening_times') %></li>
               </ul>
             </div>
@@ -85,16 +85,16 @@
           <h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list govuk-!-margin-bottom-0">
             <li class="govuk-footer__inline-list-item">
-              <%= link_to "Accessibility", accessibility_path, class: "govuk-footer__link" %>
+              <%= link_to 'Accessibility', accessibility_path, class: 'govuk-footer__link' %>
             </li>
             <li class="govuk-footer__inline-list-item">
-              <%= link_to "Cookies", cookie_preferences_path, class: "govuk-footer__link" %>
+              <%= link_to 'Cookies', cookie_preferences_path, class: 'govuk-footer__link' %>
             </li>
             <li class="govuk-footer__inline-list-item">
-              <%= link_to "Privacy policy", privacy_path, class: "govuk-footer__link" %>
+              <%= link_to 'Privacy policy', privacy_path, class: 'govuk-footer__link' %>
             </li>
             <li class="govuk-footer__inline-list-item">
-              <%= link_to "Terms and conditions", terms_path, class: "govuk-footer__link" %>
+              <%= link_to 'Terms and conditions', terms_path, class: 'govuk-footer__link' %>
             </li>
           </ul>
         </div>

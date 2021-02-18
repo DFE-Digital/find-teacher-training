@@ -49,12 +49,12 @@
   window.trainingLocations = [
     <% course.preview_site_statuses.each do |site_status| %>
       {
-        "code": "<%= site_status.site.code %>",
-        "name": "<%= smart_quotes(site_status.site.location_name) %>",
-        "lat": "<%= site_status.site.latitude.present? ? site_status.site.latitude : course.provider.latitude %>",
-        "lng": "<%= site_status.site.longitude.present? ? site_status.site.longitude : course.provider.longitude %>",
-        "address": "<%= smart_quotes(site_status.site.decorate.full_address) %>",
-        "vacancies": "<%= site_status.has_vacancies? ? "" : "No vacancies" %>"
+        code: '<%= site_status.site.code %>',
+        name: '<%= smart_quotes(site_status.site.location_name) %>',
+        lat: '<%= site_status.site.latitude.present? ? site_status.site.latitude : course.provider.latitude %>',
+        lng: '<%= site_status.site.longitude.present? ? site_status.site.longitude : course.provider.longitude %>',
+        address: '<%= smart_quotes(site_status.site.decorate.full_address) %>',
+        vacancies: '<%= site_status.has_vacancies? ? '' : 'No vacancies' %>'
       },
     <% end %>
   ]
