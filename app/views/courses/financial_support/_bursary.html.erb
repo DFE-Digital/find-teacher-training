@@ -4,7 +4,7 @@
   </p>
 
   <ul class="govuk-list govuk-list--bullet">
-    <%  if course.bursary_requirements.length > 1 %>
+    <% if course.bursary_requirements.length > 1 %>
       <% course.bursary_requirements.each do |requirement| %>
         <li><%= requirement %></li>
       <% end %>
@@ -13,15 +13,15 @@
 
   <p class="govuk-body">
   You don’t have to apply for a bursary - if you’re eligible, you’ll automatically start receiving it once you begin your course.
-  Find out about <%= link_to "eligibility", "https://beta-getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships", class: "govuk-link"%> and
-  <%= link_to "how you’ll be paid", "https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#how-to-get-a-bursary", class: "govuk-link"%>.
+  Find out about <%= link_to 'eligibility', 'https://beta-getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships', class: 'govuk-link' %> and
+  <%= link_to 'how you’ll be paid', 'https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#how-to-get-a-bursary', class: 'govuk-link' %>.
   </p>
 
   <p class="govuk-body">
-    You may be eligible for a <%= link_to "loan while you study", "https://beta-getintoteaching.education.gov.uk/funding-your-training#tuition-fee-and-maintenance-loans", class: "govuk-link" %> – note that you’ll have to apply for <%= link_to "undergraduate student finance" , "https://www.gov.uk/student-finance", class: "govuk-link" %>.
+    You may be eligible for a <%= link_to 'loan while you study', 'https://beta-getintoteaching.education.gov.uk/funding-your-training#tuition-fee-and-maintenance-loans', class: 'govuk-link' %> – note that you’ll have to apply for <%= link_to 'undergraduate student finance', 'https://www.gov.uk/student-finance', class: 'govuk-link' %>.
   </p>
 
   <p class="govuk-body">
-    Find out about financial support if you’re from <%= link_to "outside the UK", "https://beta-getintoteaching.education.gov.uk/international-candidates", class: "govuk-link" %>.
+    Find out about financial support if you’re from <%= link_to 'outside the UK', 'https://beta-getintoteaching.education.gov.uk/international-candidates', class: 'govuk-link' %>.
   </p>
 </div>

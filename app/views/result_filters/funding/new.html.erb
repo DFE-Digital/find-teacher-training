@@ -1,7 +1,7 @@
-<%= content_for :page_title, "Find courses that pay a salary" %>
+<%= content_for :page_title, 'Find courses that pay a salary' %>
 
 <% content_for :before_content do %>
-  <%= govuk_back_link_to(results_path(@results_filter_query_parameters), "Back to search results") %>
+  <%= govuk_back_link_to(results_path(@results_filter_query_parameters), 'Back to search results') %>
 <% end %>
 
 <div class="govuk-width-container">
@@ -14,30 +14,30 @@
       <p class="govuk-body">
         Salaried courses are not eligible for bursaries, scholarships or student finance. There are usually no course fees to pay.
       </p>
-      <%= form_with url: funding_path, data: { "ga-event-form" => "Salary" }  do |form| %>
-        <%= render "shared/hidden_fields", exclude_keys: ["funding"], form: form %>
+      <%= form_with url: funding_path, data: { 'ga-event-form' => 'Salary' }  do |form| %>
+        <%= render 'shared/hidden_fields', exclude_keys: %w[funding], form: form %>
         <div class="govuk-radios" data-module="govuk-radios">
           <div class="govuk-radios__item">
             <%= form.radio_button :funding,
                                   '15',
                                   class: 'govuk-radios__input',
                                   checked: params[:funding] == '15' || params[:funding].blank?,
-                                  data: { qa: 'all_courses'} %>
+                                  data: { qa: 'all_courses' } %>
 
-            <%= form.label :funding_15, "All courses (with or without a salary)", class: 'govuk-label govuk-radios__label' %>
+            <%= form.label :funding_15, 'All courses (with or without a salary)', class: 'govuk-label govuk-radios__label' %>
           </div>
           <div class="govuk-radios__item">
             <%= form.radio_button :funding,
                                   '8',
                                   class: 'govuk-radios__input',
                                   checked: params[:funding] == '8',
-                                  data: { qa: 'salary_courses'} %>
+                                  data: { qa: 'salary_courses' } %>
 
-            <%= form.label :funding_8, "Only courses that come with a salary", class: 'govuk-label govuk-radios__label' %>
+            <%= form.label :funding_8, 'Only courses that come with a salary', class: 'govuk-label govuk-radios__label' %>
           </div>
         </div>
         <br>
-        <%= form.submit "Find courses", name: nil, class: "govuk-button", data: { qa: "find-courses" } %>
+        <%= form.submit 'Find courses', name: nil, class: 'govuk-button', data: { qa: 'find-courses' } %>
       <% end %>
     </div>
   </div>

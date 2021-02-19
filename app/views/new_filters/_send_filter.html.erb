@@ -6,7 +6,7 @@
         :senCourses,
         { checked: @filters_view.send_checked?, data: { qa: 'send_filter__checkbox' }, class: 'govuk-checkboxes__input' },
         'true',
-        nil
+        nil,
       ) %>
       <%= form.label(:subjects, { for: 'senCourses', data: { qa: 'subject__name' } }, class: 'govuk-label govuk-checkboxes__label') do %>
         Show only courses with a SEND specialism

@@ -10,14 +10,14 @@
           <%= @results_view.radius %>
          miles of the pin</span>
         <img src="<%= @results_view.map_image_url %>"
-             alt="Map showing <%= @results_view.radius %> miles
-             of <%= @results_view.location %>"class="filter-form__map"
-             data-qa="map" />
+             alt="Map showing <%= @results_view.radius %> miles of <%= @results_view.location %>"
+             class="filter-form__map"
+             data-qa="map">
       <% end %>
     </li>
   </ul>
-  <%= link_to "Change location or choose a provider",
+  <%= link_to 'Change location or choose a provider',
              @results_view.filter_path_with_unescaped_commas(location_path),
-             class: "govuk-link",
-             data: { qa: "link" } %>
+             class: 'govuk-link',
+             data: { qa: 'link' } %>
 </div>

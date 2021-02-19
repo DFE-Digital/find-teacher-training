@@ -1,11 +1,11 @@
-<%= content_for :page_title, title_with_error_prefix("Cookies", flash[:error].present?) %>
+<%= content_for :page_title, title_with_error_prefix('Cookies', flash[:error].present?) %>
 
 <div class="govuk-width-container">
   <h1 class="govuk-heading-xl">Cookies</h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <%= render partial: 'cookie-preferences-form' %>
+      <%= render partial: 'cookie_preferences_form' %>
 
       <h2 class="govuk-heading-l">How we use cookies</h2>
 

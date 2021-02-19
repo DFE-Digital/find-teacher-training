@@ -82,6 +82,7 @@ group :development, :test do
   # GOV.UK interpretation of rubocop for linting Ruby
   gem 'rubocop-govuk'
   gem 'scss_lint-govuk'
+  gem 'erb_lint', require: false
 
   # Factories to build models
   gem 'factory_bot_rails'

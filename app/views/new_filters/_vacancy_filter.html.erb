@@ -6,7 +6,7 @@
         :hasvacancies,
         { checked: @filters_view.has_vacancies_checked?, data: { qa: 'with_vacancies' }, class: 'govuk-checkboxes__input' },
         'true',
-        nil
+        nil,
       ) %>
       <%= form.label(:hasvacancies_true, { for: 'hasvacancies' }, class: 'govuk-label govuk-checkboxes__label') do %>
         Only show courses with vacancies

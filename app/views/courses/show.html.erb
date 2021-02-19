@@ -2,7 +2,7 @@
 
 <% if permitted_referrer? %>
   <%= content_for(:before_content) do %>
-    <%= govuk_back_link_to(request.referrer, "Back to search results") %>
+    <%= govuk_back_link_to(request.referer, 'Back to search results') %>
   <% end %>
 <% end %>
 
@@ -88,7 +88,7 @@
 
       <% if course.salaried? %>
         <%= render partial: 'courses/salary' %>
-      <% end  %>
+      <% end %>
 
       <%= render partial: 'courses/fees_and_financial_support' %>
 
