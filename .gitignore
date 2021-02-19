@@ -25,6 +25,9 @@
 yarn-debug.log*
 .yarn-integrity
 
+#Ignore the fetch_config.rb script
+bin/fetch_config.rb
+
 .env
 *.log
 
