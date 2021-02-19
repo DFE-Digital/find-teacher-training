@@ -13,5 +13,5 @@
       </li>
     <% end %>
   </ul>
-  <%= link_to 'Change salary option', @results_view.filter_path_with_unescaped_commas(funding_path), class: 'govuk-link', data: { qa: 'link' } %>
+  <%= govuk_link_to 'Change salary option', @results_view.filter_path_with_unescaped_commas(funding_path), data: { qa: 'link' } %>
 </div>

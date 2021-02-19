@@ -16,8 +16,5 @@
       <% end %>
     </li>
   </ul>
-  <%= link_to 'Change location or choose a provider',
-             @results_view.filter_path_with_unescaped_commas(location_path),
-             class: 'govuk-link',
-             data: { qa: 'link' } %>
+  <%= govuk_link_to 'Change location or choose a provider', @results_view.filter_path_with_unescaped_commas(location_path), data: { qa: 'link' } %>
 </div>

@@ -20,7 +20,7 @@
       <% if course.provider.decorate.website.present? %>
         <dt class="app-description-list__label">Website</dt>
         <dd data-qa="provider__website">
-          <%= link_to course.provider.decorate.website, course.provider.decorate.website, class: 'govuk-link' %>
+          <%= govuk_link_to course.provider.decorate.website, course.provider.decorate.website %>
         </dd>
       <% end %>
 

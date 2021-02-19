@@ -12,7 +12,7 @@
         ) do %>
           <p>You can’t pick which schools you want to be in, but your university will try to place you in schools you can commute to.</p>
           <p>Universities usually work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
-          <%= link_to 'More about placements on this course', course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools'), class: 'govuk-link' %>
+          <%= govuk_link_to 'More about placements on this course', course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools') %>
         <% end %>
         You’ll be placed in schools for most of your course
         <span class="app-description-list__hint govuk-!-padding-top-2">University</span>
