@@ -5,6 +5,11 @@ inherit_from:
 Govuk/GovukSubmit:
   Enabled: false
 
+Govuk/GovukLinkTo:
+  Exclude:
+    # link_to in footer
+    - 'app/views/layouts/application.html.erb'
+
 # The following cops were present before adding Apply cops above
 Rails/HasManyOrHasOneDependent:
  Enabled: false

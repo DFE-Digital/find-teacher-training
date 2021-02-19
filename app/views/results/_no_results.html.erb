@@ -5,15 +5,15 @@
 <% case country
    when "Scotland" %>
   <p class="govuk-body">
-    <%= govuk_link_to "Learn more about teacher training in Scotland", "https://teachinscotland.scot/" %>
+    <%= govuk_link_to 'Learn more about teacher training in Scotland', 'https://teachinscotland.scot/' %>
   </p>
-<% when "Wales"%>
+<% when "Wales" %>
   <p class="govuk-body">
-    <%= govuk_link_to "Learn more about teacher training in Wales", "https://www.discoverteaching.wales/routes-into-teaching/" %>
+    <%= govuk_link_to 'Learn more about teacher training in Wales', 'https://www.discoverteaching.wales/routes-into-teaching/' %>
   </p>
-<% when "Northern Ireland"%>
+<% when "Northern Ireland" %>
   <p class="govuk-body">
-    <%= govuk_link_to "Learn more about teacher training in Northern Ireland", "https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland" %>
+    <%= govuk_link_to 'Learn more about teacher training in Northern Ireland', 'https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland' %>
   </p>
 <% else %>
   <h2 class="govuk-heading-l">There are no courses matching your&nbsp;search</h2>
