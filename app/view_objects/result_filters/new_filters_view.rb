@@ -58,8 +58,12 @@ module ResultFilters
       params[:parttime] == 'true'
     end
 
-    def default_to_true
+    def default_study_types_to_true
       params[:fulltime] != 'true' && params[:parttime] != 'true'
+    end
+
+    def default_with_vacancies_to_true
+      params[:hasvacancies].nil?
     end
 
   private

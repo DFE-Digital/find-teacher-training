@@ -43,7 +43,7 @@ class ResultsView
   end
 
   def hasvacancies?
-    return false if query_parameters['hasvacancies'].nil?
+    return true if query_parameters['hasvacancies'].nil?
 
     query_parameters['hasvacancies'] == 'true'
   end

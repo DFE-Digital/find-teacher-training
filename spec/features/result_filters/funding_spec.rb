@@ -36,7 +36,7 @@ describe 'Funding filter', type: :feature do
           page: results_page,
           expected_query_params: {
             'fulltime' => 'false',
-            'hasvacancies' => 'false',
+            'hasvacancies' => 'true',
             'parttime' => 'false',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'senCourses' => 'false',

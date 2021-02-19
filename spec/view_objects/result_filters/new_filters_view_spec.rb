@@ -237,7 +237,7 @@ module ResultFilters
     end
 
     describe '#default_to_true' do
-      subject { described_class.new(params: params).default_to_true }
+      subject { described_class.new(params: params).default_study_types_to_true }
 
       context 'when parameters are not present' do
         let(:params) { {} }

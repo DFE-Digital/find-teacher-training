@@ -33,7 +33,7 @@ describe 'Vacancy filter', type: :feature do
           page: results_page,
           expected_query_params: {
             'fulltime' => 'false',
-            'hasvacancies' => 'false',
+            'hasvacancies' => 'true',
             'parttime' => 'false',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'senCourses' => 'false',
@@ -64,7 +64,7 @@ describe 'Vacancy filter', type: :feature do
     it 'lists only courses with vacancies' do
       results_page.load
 
-      expect(results_page.vacancies_filter.vacancies.text).to eq('Courses with and without vacancies')
+      expect(results_page.vacancies_filter.vacancies.text).to eq('Only courses with vacancies')
       expect(results_page.courses.count).to eq(10)
     end
   end
@@ -75,9 +75,18 @@ describe 'Vacancy filter', type: :feature do
     end
 
     context 'selecting courses with or without vacancies' do
+      let(:filter_parameters) do
+        {
+          'include' => 'site_statuses.site,provider,subjects',
+          'page[page]' => 1,
+          'page[per_page]' => 10,
+          'sort' => 'provider.provider_name,name',
+        }
+      end
+
       before do
         stub_courses(
-          query: base_parameters.merge('filter[has_vacancies]' => 'false'),
+          query: filter_parameters,
           course_count: 10,
         )
       end

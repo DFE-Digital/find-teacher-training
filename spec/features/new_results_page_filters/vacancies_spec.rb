@@ -19,7 +19,7 @@ RSpec.feature 'Results page new vacancies filter' do
       results_page.load
 
       expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
-      expect(results_page.vacancies_filter.checkbox.checked?).to be(false)
+      expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
     end
   end
 
