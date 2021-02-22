@@ -41,7 +41,7 @@ describe 'results/no_results.html.erb', type: :view do
 
     it 'renders try another search text' do
       assign(:results_view, ResultsView.new(query_parameters: { 'c' => 'England', 'lat' => '51.4975', 'lng' => '0.1357' }))
-      expect(html).to match('There are no courses matching your&nbsp;search')
+      expect(html).to have_link('try another search', href: '/')
     end
   end
 end
