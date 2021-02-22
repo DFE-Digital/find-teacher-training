@@ -6,6 +6,7 @@ require 'simplecov'
 SimpleCov.minimum_coverage 95
 SimpleCov.start 'rails' do
   add_filter 'spec'
+  add_filter 'lib/rubocop'
 end
 
 RSpec.configure do |config|
