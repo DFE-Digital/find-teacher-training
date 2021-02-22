@@ -33,17 +33,27 @@ RSpec.feature 'Results page new study type filter' do
           ),
           course_count: 10,
         )
+
+        results_page.load
+        results_page.study_type_filter.parttime_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
       it 'list the filtered courses' do
-        results_page.load
-
-        results_page.study_type_filter.parttime_checkbox.uncheck
-        results_page.apply_filters_button.click
-
         expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(false)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          },
+        )
       end
     end
 
@@ -55,17 +65,27 @@ RSpec.feature 'Results page new study type filter' do
           ),
           course_count: 10,
         )
+
+        results_page.load
+        results_page.study_type_filter.fulltime_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
       it 'list the filtered courses' do
-        results_page.load
-
-        results_page.study_type_filter.fulltime_checkbox.uncheck
-        results_page.apply_filters_button.click
-
         expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(false)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          },
+        )
       end
     end
 
@@ -77,18 +97,27 @@ RSpec.feature 'Results page new study type filter' do
           ),
           course_count: 10,
         )
-      end
 
-      it 'still lists full time and part time courses when both are deselected' do
         results_page.load
-
         results_page.study_type_filter.fulltime_checkbox.uncheck
         results_page.study_type_filter.parttime_checkbox.uncheck
         results_page.apply_filters_button.click
+      end
 
+      it 'still lists full time and part time courses when both are deselected' do
         expect(results_page.study_type_filter.legend.text).to eq('Study type')
         expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
         expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          },
+        )
       end
     end
   end

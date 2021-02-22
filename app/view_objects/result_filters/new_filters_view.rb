@@ -66,6 +66,20 @@ module ResultFilters
       params[:hasvacancies].nil?
     end
 
+    def location_query_params
+      {
+        c: params[:c],
+        l: params[:l],
+        lq: params[:lq],
+        lat: params[:lat],
+        loc: params[:loc],
+        lng: params[:lng],
+        query: params[:query],
+        rad: params[:rad],
+        sortby: params[:sortby],
+      }
+    end
+
   private
 
     attr_reader :params

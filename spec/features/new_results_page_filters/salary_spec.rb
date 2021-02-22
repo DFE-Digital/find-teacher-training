@@ -33,16 +33,28 @@ RSpec.feature 'Results page new funding filter' do
           ),
           course_count: 10,
         )
+
+        results_page.load
+        results_page.funding_filter.checkbox.check
+        results_page.apply_filters_button.click
       end
 
       it 'list the filtered courses' do
-        results_page.load
-
-        results_page.funding_filter.checkbox.check
-        results_page.apply_filters_button.click
-
         expect(results_page.funding_filter.legend.text).to eq('Salary')
         expect(results_page.funding_filter.checkbox.checked?).to be(true)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'true',
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+            'funding' => '8',
+          },
+        )
       end
     end
   end
