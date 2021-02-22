@@ -15,5 +15,5 @@
       <li data-qa="extra_subjects">and <%= @results_view.number_of_extra_subjects %> more...</li>
     <% end %>
   </ul>
-  <%= link_to 'Change subjects', @results_view.filter_path_with_unescaped_commas(subject_path), class: 'govuk-link', data: { qa: 'link' } %>
+  <%= govuk_link_to 'Change subjects', @results_view.filter_path_with_unescaped_commas(subject_path), data: { qa: 'link' } %>
 </div>

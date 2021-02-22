@@ -1,6 +1,15 @@
 inherit_from:
   - https://raw.githubusercontent.com/DFE-Digital/apply-for-teacher-training/master/.rubocop.yml
 
+# Disabled because this project doesn’t use GOV.UK Design System Form Builder
+Govuk/GovukSubmit:
+  Enabled: false
+
+Govuk/GovukLinkTo:
+  Exclude:
+    # link_to in footer
+    - 'app/views/layouts/application.html.erb'
+
 # The following cops were present before adding Apply cops above
 Rails/HasManyOrHasOneDependent:
  Enabled: false
