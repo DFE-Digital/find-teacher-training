@@ -11,7 +11,7 @@ describe ResultsView do
       'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
       'fulltime' => false,
       'parttime' => false,
-      'hasvacancies' => false,
+      'hasvacancies' => true,
       'senCourses' => false,
     }
   end
@@ -91,7 +91,17 @@ describe ResultsView do
   end
 
   describe 'filter_path_with_unescaped_commas' do
-    subject(:results_view) { described_class.new(query_parameters: default_output_parameters).filter_path_with_unescaped_commas('/test') }
+    let(:default_query_parameters) do
+      {
+        'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+        'fulltime' => 'false',
+        'parttime' => 'false',
+        'hasvacancies' => 'true',
+        'senCourses' => 'false',
+      }
+    end
+
+    subject(:results_view) { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas('/test') }
 
     it 'appends an unescaped querystring to the passed path' do
       allow(UnescapedQueryStringService).to receive(:call).with(

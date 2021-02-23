@@ -30,6 +30,21 @@ def stub_geocoder
   )
 
   Geocoder::Lookup::Test.add_stub(
+    'Station Rise',
+    [
+      {
+        'coordinates' => [53.83365879999999, -1.0564076],
+        'address' => 'Station Rise, Ricall, York YO19 2C, UK',
+        'state' => 'England',
+        'state_code' => 'England',
+        'country' => 'United Kingdom',
+        'country_code' => 'UK',
+        'address_components' => [{ long_name: 'England' }],
+      },
+    ],
+  )
+
+  Geocoder::Lookup::Test.add_stub(
     'Unknown location',
     [],
   )

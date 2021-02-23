@@ -39,22 +39,35 @@ RSpec.feature 'Results page new area and provider filter' do
     end
 
     context 'valid provider search' do
-      it 'displays the courses' do
+      before do
         results_page.load
         results_page.area_and_provider_filter.link.click
         filter_page.by_provider.click
         filter_page.provider_search.fill_in(with: 'ACME')
         filter_page.find_courses.click
-
-        expect(provider_page.heading.text).to eq('Pick a provider')
         provider_page.provider_suggestions[0].hyperlink.click
+      end
 
+      it 'displays the courses' do
         expect(results_page.courses.first).to have_main_address
-
         expect(results_page.heading.text).to eq('Teacher training courses 4 courses found')
         expect(results_page.area_and_provider_filter.name.text).to eq('ACME SCITT 0')
         expect(results_page.area_and_provider_filter.link.text).to eq('Change provider or choose a location')
-        expect(results_page.courses.count).to eq(4)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'false',
+            'parttime' => 'false',
+            'hasvacancies' => 'true',
+            'l' => '3',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+            'senCourses' => 'false',
+            'query' => 'ACME SCITT 0',
+          },
+        )
       end
     end
 
@@ -100,6 +113,72 @@ RSpec.feature 'Results page new area and provider filter' do
       filter_page.by_postcode_town_or_city.click
       filter_page.location_query.fill_in(with: 'SW1P 3BT')
       filter_page.find_courses.click
+    end
+
+    it 'displays the courses' do
+      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
+      expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
+      expect(results_page.area_and_provider_filter.link.text).to eq('Change location or choose a provider')
+    end
+
+    it 'retains the query parameters' do
+      expect_page_to_be_displayed_with_query(
+        page: results_page,
+        expected_query_params: {
+          'c' => 'England',
+          'fulltime' => 'false',
+          'parttime' => 'false',
+          'hasvacancies' => 'true',
+          'l' => '1',
+          'lat' => '51.4980188',
+          'lng' => '-0.1300436',
+          'loc' => 'Westminster, London SW1P 3BT, UK',
+          'lq' => 'SW1P 3BT',
+          'rad' => '50',
+          'sortby' => '2',
+          'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          'senCourses' => 'false',
+        },
+      )
+    end
+
+    context 'filtering by location a second time' do
+      before do
+        query = base_parameters.merge(
+          'filter[longitude]' => '-1.0564076',
+          'filter[latitude]' => '53.83365879999999',
+          'filter[radius]' => '50',
+          'sort' => 'distance',
+          'filter[expand_university]' => false,
+        )
+        stub_courses(query: query, course_count: 10)
+      end
+
+      it 'updates and retains the query parameters' do
+        results_page.area_and_provider_filter.link.click
+        filter_page.by_postcode_town_or_city.click
+        filter_page.location_query.fill_in(with: 'Station Rise')
+        filter_page.find_courses.click
+
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'c' => 'England',
+            'fulltime' => 'false',
+            'parttime' => 'false',
+            'hasvacancies' => 'true',
+            'l' => '1',
+            'lat' => '53.83365879999999',
+            'lng' => '-1.0564076',
+            'loc' => 'Station Rise, Ricall, York YO19 2C, UK',
+            'lq' => 'Station Rise',
+            'rad' => '50',
+            'sortby' => '2',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+            'senCourses' => 'false',
+          },
+        )
+      end
     end
 
     context 'course has sites' do
@@ -176,7 +255,7 @@ RSpec.feature 'Results page new area and provider filter' do
         page: results_page,
         expected_query_params: {
           'fulltime' => 'false',
-          'hasvacancies' => 'false',
+          'hasvacancies' => 'true',
           'parttime' => 'false',
           'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           'senCourses' => 'false',

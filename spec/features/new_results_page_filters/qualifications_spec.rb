@@ -35,19 +35,30 @@ RSpec.feature 'Results page new qualifications filter' do
           ),
           course_count: 10,
         )
-      end
 
-      it 'list the filtered courses' do
         results_page.load
-
         results_page.qualifications_filter.pgce_checkbox.uncheck
         results_page.qualifications_filter.further_education_checkbox.uncheck
         results_page.apply_filters_button.click
+      end
 
+      it 'list the filtered courses' do
         expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'true',
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly],
+          },
+        )
       end
     end
 
@@ -60,19 +71,30 @@ RSpec.feature 'Results page new qualifications filter' do
           ),
           course_count: 10,
         )
-      end
 
-      it 'list the filtered courses' do
         results_page.load
-
         results_page.qualifications_filter.further_education_checkbox.uncheck
         results_page.qualifications_filter.qts_checkbox.uncheck
         results_page.apply_filters_button.click
+      end
 
+      it 'lists the filtered courses' do
         expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
         expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
         expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
         expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'true',
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[PgdePgceWithQts],
+          },
+        )
       end
     end
 

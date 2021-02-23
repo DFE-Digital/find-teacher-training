@@ -58,8 +58,26 @@ module ResultFilters
       params[:parttime] == 'true'
     end
 
-    def default_to_true
+    def default_study_types_to_true
       params[:fulltime] != 'true' && params[:parttime] != 'true'
+    end
+
+    def default_with_vacancies_to_true
+      params[:hasvacancies].nil?
+    end
+
+    def location_query_params
+      {
+        c: params[:c],
+        l: params[:l],
+        lq: params[:lq],
+        lat: params[:lat],
+        loc: params[:loc],
+        lng: params[:lng],
+        query: params[:query],
+        rad: params[:rad],
+        sortby: params[:sortby],
+      }
     end
 
   private
