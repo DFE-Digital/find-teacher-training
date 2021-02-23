@@ -1,5 +1,5 @@
 <% if devolved_nation %>
-  <h2 class="govuk-heading-l">This service is for courses in England</h2>
+  <h2 class="govuk-heading-m">This service is for courses in England</h2>
 <% end %>
 
 <% case country
@@ -16,6 +16,5 @@
     <%= govuk_link_to 'Learn more about teacher training in Northern Ireland', 'https://www.education-ni.gov.uk/articles/initial-teacher-education-courses-northern-ireland' %>
   </p>
 <% else %>
-  <h2 class="govuk-heading-l">There are no courses matching your&nbsp;search</h2>
   <%= render partial: 'try_another_search_text' %>
 <% end %>
