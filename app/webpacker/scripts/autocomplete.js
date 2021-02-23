@@ -32,7 +32,7 @@ export const request = endpoint => {
   };
 };
 
-const initAutocomplete = ({element, input, path}) => {
+const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
   const $input = document.getElementById(input);
   const $el = document.getElementById(element);
   const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
@@ -50,7 +50,7 @@ const initAutocomplete = ({element, input, path}) => {
         minLength: 3,
         source: throttle(request(path), 500),
         templates: {
-          inputValue: inputValueTemplate,
+          inputValue: selectNameAndCode ? suggestionTemplate : inputValueTemplate,
           suggestion: suggestionTemplate
         },
         onConfirm: option => ($input.value = option ? option.code : ""),
