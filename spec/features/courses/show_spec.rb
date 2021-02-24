@@ -149,10 +149,6 @@ describe 'Course show', type: :feature do
         course.how_school_placements_work,
       )
 
-      expect(course_page.school_placements).to have_content(
-        'This course has placement schools in Leeds',
-      )
-
       expect(course_page.uk_fees).to have_content(
         '£9,250',
       )
