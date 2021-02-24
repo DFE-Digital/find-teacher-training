@@ -4,3 +4,4 @@ valid_referers:
   - http://localhost:9000
 feature_flags:
   new_filters: false
+  ucas_only_locations: false
