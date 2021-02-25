@@ -13,12 +13,6 @@ class ResultsController < ApplicationController
     begin
       @courses = @results_view.courses.all
       @number_of_courses_string = @results_view.number_of_courses_string
-
-      if FeatureFlag.active?(:new_filters)
-        render 'results/index_new_filters'
-      else
-        render 'results/index'
-      end
     rescue JsonApiClient::Errors::ClientError
       render template: 'errors/unprocessable_entity', status: :unprocessable_entity
     end
