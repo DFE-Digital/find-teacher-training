@@ -17,7 +17,6 @@ prod:
   <<: *default
   RAILS_ENV: production
   RACK_ENV: production
-  SETTINGS__FEATURE_FLAGS__NEW_FILTERS: false
 
 sandbox:
   <<: *default
