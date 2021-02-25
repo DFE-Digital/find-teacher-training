@@ -51,7 +51,7 @@ publish.codeclimate: ## Publish coverage to Code Climate
 		./cc-test-reporter before-build
 		# As the tests were run in the docker container the paths to the coverage are prefixed with "/app/"
 		# So we need to replace it with the docker hosts current directory
-		sed "s|\"/app/|\"`pwd`/|g" coverage/.resultset.json -i		
+		sed "s|\"/app/|\"`pwd`/|g" coverage/.resultset.json -i
 		# Format the two different test coverage formats (SimpleCov anf lcov) to code climates json format
 		./cc-test-reporter format-coverage --input-type simplecov --output coverage/rspec.json
 		./cc-test-reporter format-coverage --input-type lcov --output coverage/javascript.json
@@ -63,22 +63,31 @@ publish.codeclimate: ## Publish coverage to Code Climate
 .PHONY: qa
 qa: ## Set DEPLOY_ENV to qa
 	$(eval DEPLOY_ENV=qa)
+	$(eval env=qa)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
+	$(eval space=bat-qa)
+
 
 .PHONY: staging
 staging: ## Set DEPLOY_ENV to staging
 	$(eval DEPLOY_ENV=staging)
+	$(eval env=staging)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
+	$(eval space=bat-staging)
 
 .PHONY: production
 production: ## Set DEPLOY_ENV to production
 	$(eval DEPLOY_ENV=production)
+	$(eval env=prod)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
+	$(eval space=bat-prod)
 
 .PHONY: sandbox
 sandbox: ## Set DEPLOY_ENV to production
 	$(eval DEPLOY_ENV=sandbox)
+	$(eval env=sandbox)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
+	$(eval space=bat-prod)
 
 .PHONY: plan
 plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
@@ -111,3 +120,7 @@ edit-app-secrets: install-fetch-config ## Edit Find App Secrets
 print-app-secrets: install-fetch-config ## View Find App Secrets
 	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
 		-f yaml
+.PHONY: console ## start a rails console, eg: make qa console
+console:
+	cf target -s ${space}
+	cf ssh find-${env} -t -c "cd /app && /usr/local/bin/bundle exec rails c"
