@@ -1,25 +1,23 @@
 require 'rails_helper'
 
-RSpec.feature 'Results page new SEND filter' do
+RSpec.feature 'Results page new vacancies filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 
-  let(:results_page) { PageObjects::Page::ResultsWithNewFilters.new }
+  let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    activate_feature(:new_filters)
-
     stub_subjects
     stub_courses(query: base_parameters, course_count: 10)
   end
 
   describe 'viewing results without explicitly selecting a filter' do
-    it 'show courses with or without a SEND specialism' do
+    it 'show courses with or without vacancies' do
       results_page.load
 
-      expect(results_page.send_filter.legend.text).to eq('Special educational needs')
-      expect(results_page.send_filter.checkbox.checked?).to be(false)
+      expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
+      expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
     end
   end
 
@@ -27,21 +25,22 @@ RSpec.feature 'Results page new SEND filter' do
     before do
       stub_courses(
         query: base_parameters.merge(
-          'filter[send_courses]' => 'true',
+          'filter[has_vacancies]' => 'true',
           'filter[study_type]' => 'full_time,part_time',
         ),
         course_count: 10,
       )
 
       results_page.load
-      results_page.send_filter.checkbox.check
+
+      results_page.vacancies_filter.checkbox.check
       results_page.apply_filters_button.click
     end
 
-    context 'selecting courses with a SEND specialism' do
+    context 'show courses with vacancies only' do
       it 'list the filtered courses' do
-        expect(results_page.send_filter.legend.text).to eq('Special educational needs')
-        expect(results_page.send_filter.checkbox.checked?).to be(true)
+        expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
+        expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
       end
 
       it 'retains the query parameters' do
@@ -52,7 +51,6 @@ RSpec.feature 'Results page new SEND filter' do
             'parttime' => 'true',
             'hasvacancies' => 'true',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'true',
           },
         )
       end

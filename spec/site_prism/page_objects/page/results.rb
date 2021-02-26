@@ -19,38 +19,36 @@ module PageObjects
       end
 
       class SubjectsSection < SitePrism::Section
-        element :send_courses, '[data-qa="send_courses"]'
-        elements :subjects, '[data-qa="subjects"]'
-        element :extra_subjects, '[data-qa="extra_subjects"]'
+        elements :subjects, '[data-qa="filters__subject_names"]'
         element :link, '[data-qa="link"]'
       end
 
       class StudyTypeSection < SitePrism::Section
-        element :subheading, 'h2'
-        element :fulltime, '[data-qa="fulltime"]'
-        element :parttime, '[data-qa="parttime"]'
-        element :link, '[data-qa="link"]'
+        element :legend, 'legend'
+        element :fulltime_checkbox, 'input[name="fulltime"]'
+        element :parttime_checkbox, 'input[name="parttime"]'
       end
 
       class VacanciesSection < SitePrism::Section
-        element :subheading, 'h2'
-        element :vacancies, '[data-qa="vacancies"]'
-        element :link, '[data-qa="link"]'
+        element :legend, 'legend'
+        element :checkbox, 'input[name="hasvacancies"]'
       end
 
       class QualificationsSection < SitePrism::Section
-        elements :qualifications, '[data-qa="qualifications"]'
-        element :link, '[data-qa="link"]'
-        element :qts_only, '[data-qa="qts_only"]'
-        element :pgde_pgce_with_qts, '[data-qa="pgde_pgce_with_qts"]'
-        element :other_qualifications, '[data-qa="other_qualifications"]'
+        element :legend, 'legend'
+        element :qts_checkbox, 'input[id="qualifications_qtsonly"]'
+        element :pgce_checkbox, 'input[id="qualifications_pgdepgcewithqts"]'
+        element :further_education_checkbox, 'input[id="qualifications_other"]'
       end
 
-      class LocationSection < SitePrism::Section
-        element :name, '[data-qa="location_name"]'
-        element :distance, '[data-qa="distance"]'
-        element :map, '[data-qa="map"]'
-        element :link, '[data-qa="link"]'
+      class LocationAndProviderSection < SitePrism::Section
+        element :name, '[data-qa="area_or_provider_name"]'
+        element :link, '[data-qa="filters__area_and_provider_link"]'
+      end
+
+      class SendSection < SitePrism::Section
+        element :legend, 'legend'
+        element :checkbox, 'input[name="senCourses"]'
       end
 
       class ProviderSection < SitePrism::Section
@@ -59,10 +57,8 @@ module PageObjects
       end
 
       class FundingSection < SitePrism::Section
-        element :funding, '[data-qa="funding"]'
-        element :with_or_without_salary, '[data-qa="with-or-without-salary"]'
-        element :with_salary, '[data-qa="with-salary"]'
-        element :link, '[data-qa="link"]'
+        element :legend, 'legend'
+        element :checkbox, 'input[name="funding"]'
       end
 
       class SortFormSection < SitePrism::Section
@@ -81,12 +77,14 @@ module PageObjects
       section :cookie_banner, CookieBannerSection, '[data-qa="cookie-banner"]'
       sections :courses, CourseSection, '[data-qa="course"]'
       section :subjects_filter, SubjectsSection, '[data-qa="filters__subjects"]'
-      section :study_type_filter, StudyTypeSection, '[data-qa="filters__studytype"]'
+      section :study_type_filter, StudyTypeSection, '[data-qa="filters__study_type"]'
       section :qualifications_filter, QualificationsSection, '[data-qa="filters__qualifications"]'
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
-      section :location_filter, LocationSection, '[data-qa="filters__location"]'
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
+
+      section :area_and_provider_filter, LocationAndProviderSection, '[data-qa="filters__area_and_provider"]'
+      section :send_filter, SendSection, '[data-qa="filters__send"]'
 
       element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'
@@ -107,6 +105,8 @@ module PageObjects
 
       element :sorted_by_distance, '.app-search-results-header', text: 'Sorted by distance'
       element :feedback_link, '[data-qa=feedback-link]'
+
+      element :apply_filters_button, '[data-qa=apply-filters]'
     end
   end
 end

@@ -1,188 +1,124 @@
 require 'rails_helper'
 
-describe 'Qualifications filter', type: :feature do
+RSpec.feature 'Results page new qualifications filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 
-  let(:filter_page) { PageObjects::Page::ResultFilters::Qualification.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
     stub_subjects
+    stub_courses(query: base_parameters, course_count: 10)
   end
 
-  describe 'Qualification filter page' do
-    before { filter_page.load }
+  describe 'viewing results without explicitly de-selecting a filter' do
+    it 'show courses with all qualification types selected' do
+      results_page.load
 
-    it 'has the correct title and heading' do
-      expect(page.title).to have_content('Filter by qualification')
-      expect(page).to have_content('Choose the qualifications to search for')
+      expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+      expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
+      expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
+      expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
     end
+  end
 
-    describe 'back link' do
+  describe 'applying the filters' do
+    context 'show QTS courses only' do
       before do
-        stub_courses(query: base_parameters, course_count: 10)
+        stub_courses(
+          query: base_parameters.merge(
+            'filter[qualification]' => 'qts',
+            'filter[study_type]' => 'full_time,part_time',
+          ),
+          course_count: 10,
+        )
+
+        results_page.load
+        results_page.qualifications_filter.pgce_checkbox.uncheck
+        results_page.qualifications_filter.further_education_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
-      it 'navigates back to the results page' do
-        filter_page.load(query: { test: 'params' })
-        filter_page.back_link.click
+      it 'list the filtered courses' do
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
+        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
+        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+      end
 
+      it 'retains the query parameters' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
+            'fulltime' => 'true',
+            'parttime' => 'true',
             'hasvacancies' => 'true',
-            'parttime' => 'false',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
-            'test' => 'params',
+            'qualifications' => %w[QtsOnly],
           },
         )
       end
     end
 
-    describe 'validation' do
-      context 'when no qualification is selected' do
-        it 'shows an error message' do
-          filter_page.find_courses.click
-
-          expect(filter_page).to have_error
-          expect(filter_page.qts_only).not_to be_checked
-          expect(filter_page.pgde_pgce_with_qts).not_to be_checked
-          expect(filter_page.other).not_to be_checked
-        end
-      end
-    end
-  end
-
-  describe 'viewing results without explicitly selecting a filter' do
-    before do
-      stub_courses(query: base_parameters, course_count: 10)
-    end
-
-    it 'lists only courses with all qualifications' do
-      results_page.load
-
-      expect(results_page.qualifications_filter).to have_qualifications
-      expect(results_page.courses.count).to eq(10)
-    end
-  end
-
-  describe 'applying a filter' do
-    before do
-      stub_courses(query: base_parameters, course_count: 10)
-    end
-
-    context "deselecting courses with 'qts only' qualification" do
+    context 'show PGCE (or PGDE) with QTS courses only' do
       before do
         stub_courses(
-          query: base_parameters.merge('filter[qualification]' => 'pgce_with_qts,pgde_with_qts,pgce,pgde'),
+          query: base_parameters.merge(
+            'filter[qualification]' => 'pgce_with_qts,pgde_with_qts',
+            'filter[study_type]' => 'full_time,part_time',
+          ),
+          course_count: 10,
+        )
+
+        results_page.load
+        results_page.qualifications_filter.further_education_checkbox.uncheck
+        results_page.qualifications_filter.qts_checkbox.uncheck
+        results_page.apply_filters_button.click
+      end
+
+      it 'lists the filtered courses' do
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
+        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
+        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+      end
+
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'fulltime' => 'true',
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[PgdePgceWithQts],
+          },
+        )
+      end
+    end
+
+    context 'show further education (PGCE or PGDE without QTS) courses only' do
+      before do
+        stub_courses(
+          query: base_parameters.merge(
+            'filter[qualification]' => 'pgce,pgde',
+            'filter[study_type]' => 'full_time,part_time',
+          ),
           course_count: 10,
         )
       end
 
-      it 'list the courses' do
+      it 'list the filtered courses' do
         results_page.load
-        results_page.qualifications_filter.link.click
 
-        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
+        results_page.qualifications_filter.pgce_checkbox.uncheck
+        results_page.qualifications_filter.qts_checkbox.uncheck
+        results_page.apply_filters_button.click
 
-        filter_page.qts_only.click
-        filter_page.find_courses.click
-
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
-        expect(results_page.qualifications_filter).to have_other_qualifications
-
-        expect(results_page.courses.count).to eq(10)
+        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
+        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
+        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
       end
-    end
-
-    context "deselecting courses that with 'pgde with qts' qualification" do
-      before do
-        stub_courses(
-          query: base_parameters.merge('filter[qualification]' => 'qts,pgce,pgde'),
-          course_count: 10,
-        )
-      end
-
-      it 'list the courses' do
-        results_page.load
-        results_page.qualifications_filter.link.click
-
-        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
-
-        filter_page.pgde_pgce_with_qts.click
-        filter_page.find_courses.click
-
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.qualifications_filter).to have_qts_only
-        expect(results_page.qualifications_filter).to have_other_qualifications
-
-        expect(results_page.courses.count).to eq(10)
-      end
-    end
-
-    context "deselecting courses with 'further education' qualification" do
-      before do
-        stub_courses(
-          query: base_parameters.merge('filter[qualification]' => 'qts,pgce_with_qts,pgde_with_qts'),
-          course_count: 10,
-        )
-      end
-
-      it 'list the courses' do
-        results_page.load
-        results_page.qualifications_filter.link.click
-
-        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
-
-        filter_page.other.click
-        filter_page.find_courses.click
-
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.qualifications_filter).to have_pgde_pgce_with_qts
-        expect(results_page.qualifications_filter).to have_qts_only
-
-        expect(results_page.courses.count).to eq(10)
-      end
-    end
-
-    context 'deselecting all options' do
-      it 'displays an error' do
-        results_page.load
-        results_page.qualifications_filter.link.click
-
-        expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
-
-        filter_page.qts_only.click
-        filter_page.pgde_pgce_with_qts.click
-        filter_page.other.click
-        filter_page.find_courses.click
-
-        expect(filter_page).to have_error
-      end
-    end
-  end
-
-  describe 'submitting without applying a filter' do
-    before do
-      stub_courses(query: base_parameters, course_count: 10)
-    end
-
-    it 'list the courses' do
-      results_page.load
-      results_page.qualifications_filter.link.click
-
-      expect(filter_page.heading.text).to eq('Choose the qualifications to search for')
-      filter_page.find_courses.click
-
-      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-      expect(results_page.qualifications_filter).to have_qualifications
-
-      expect(results_page.courses.count).to eq(10)
     end
   end
 end

@@ -26,76 +26,6 @@ describe 'results', type: :feature do
     end
   end
 
-  describe 'filters defaults without query string' do
-    it 'has study type filter' do
-      expect(results_page.study_type_filter.subheading).to have_content('Study type:')
-      expect(results_page.study_type_filter.fulltime).to have_content('Full time (12 months)')
-      expect(results_page.study_type_filter.parttime).to have_content('Part time (18 - 24 months)')
-      expect(results_page.study_type_filter.link).to have_content('Change study type')
-    end
-
-    it 'has vacancies filter' do
-      expect(results_page.vacancies_filter.subheading).to have_content('Vacancies:')
-      expect(results_page.vacancies_filter.vacancies).to have_content('Only courses with vacancies')
-      expect(results_page.vacancies_filter.link).to have_content('Change vacancies')
-    end
-
-    it 'has location filter' do
-      expect(results_page.location_filter.name).to have_content('Across England')
-      expect(results_page.location_filter).to have_no_distance
-      expect(results_page.location_filter.link).to have_content('Change location or choose a provider')
-      results_page.location_filter.link.click
-      location_filter_uri = URI(current_url)
-      expect(location_filter_uri.path).to eq('/results/filter/location')
-      expect(Rack::Utils.parse_nested_query(location_filter_uri.query)).to eq({
-        'fulltime' => 'false',
-        'hasvacancies' => 'true',
-        'parttime' => 'false',
-        'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-        'senCourses' => 'false',
-      })
-    end
-
-    it 'has subjects filter' do
-      expect(results_page.subjects_filter.subjects.map(&:text))
-        .to match_array(
-          [
-            'Art and design',
-            'Biology',
-            'Business studies',
-            'Chemistry',
-          ],
-        )
-      expect(results_page.subjects_filter.extra_subjects.text).to eq('and 37 more...')
-    end
-
-    it 'renders the feedback component' do
-      expect(results_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/results&find_controller=results')
-    end
-  end
-
-  describe 'filters defaults with query string' do
-    let(:params) { { fulltime: 'false', parttime: 'false' } }
-
-    it 'has study type filter' do
-      expect(results_page.study_type_filter.subheading).to have_content('Study type:')
-      expect(results_page.study_type_filter.fulltime).to have_content('Full time (12 months)')
-      expect(results_page.study_type_filter.parttime).to have_content('Part time (18 - 24 months)')
-      expect(results_page.study_type_filter.link).to have_content('Change study type')
-    end
-
-    it 'has vacancies filter' do
-      expect(results_page.vacancies_filter.subheading).to have_content('Vacancies:')
-      expect(results_page.vacancies_filter.vacancies).to have_content('Only courses with vacancies')
-      expect(results_page.vacancies_filter.link).to have_content('Change vacancies')
-    end
-
-    it 'has location filter' do
-      expect(results_page.location_filter.name).to have_content('Across England')
-      expect(results_page.location_filter).to have_no_distance
-    end
-  end
-
   context 'provider sorting' do
     let(:ascending_stub) do
       stub_courses(
@@ -173,35 +103,6 @@ describe 'results', type: :feature do
     end
   end
 
-  describe 'study type filter' do
-    let(:base_parameters) { results_page_parameters('filter[study_type]' => study_type, 'sort' => sort) }
-
-    context 'for full time only' do
-      let(:study_type) { 'full_time' }
-
-      let(:params) { { fulltime: 'true', parttime: 'false' } }
-
-      it 'has study type filter for full time only ' do
-        expect(results_page.study_type_filter.subheading).to have_content('Study type:')
-        expect(results_page.study_type_filter.fulltime).to have_content('Full time (12 months)')
-        expect(results_page.study_type_filter).not_to have_parttime
-        expect(results_page.study_type_filter.link).to have_content('Change study type')
-      end
-    end
-
-    context 'for part time only' do
-      let(:study_type) { 'part_time' }
-      let(:params) { { fulltime: 'false', parttime: 'true' } }
-
-      it 'has study type filter for part time only' do
-        expect(results_page.study_type_filter.subheading).to have_content('Study type:')
-        expect(results_page.study_type_filter).not_to have_fulltime
-        expect(results_page.study_type_filter.parttime).to have_content('Part time (18 - 24 months)')
-        expect(results_page.study_type_filter.link).to have_content('Change study type')
-      end
-    end
-  end
-
   describe 'location filter' do
     context 'location with blank provider name' do
       let(:params) do
@@ -250,14 +151,15 @@ describe 'results', type: :feature do
     end
 
     it 'sets all parameters correctly' do
-      expect(results_page.location_filter.name).to have_content('Across England')
-      expect(results_page.subjects_filter.subjects.map(&:text))
-        .to match_array(['Biology', 'Business studies', 'Chemistry'])
-      expect(results_page.study_type_filter.fulltime).to have_content('Full time (12 months)')
-      expect(results_page.study_type_filter.parttime).to have_content('Part time (18 - 24 months)')
-      expect(results_page.qualifications_filter).to have_content('All qualifications')
-      expect(results_page.funding_filter).to have_with_or_without_salary
-      expect(results_page.vacancies_filter).to have_content('Only courses with vacancies')
+      expect(results_page.area_and_provider_filter.name).to have_content('Across England')
+      expect(results_page.subjects_filter.subjects.first.text).to eq('Biology, Business studies, Chemistry')
+      expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
+      expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
+      expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
+      expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
+      expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
+      expect(results_page.funding_filter.checkbox.checked?).to be(false)
+      expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
     end
   end
 end

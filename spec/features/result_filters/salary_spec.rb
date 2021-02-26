@@ -4,12 +4,10 @@ RSpec.feature 'Results page new funding filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 
-  let(:results_page) { PageObjects::Page::ResultsWithNewFilters.new }
+  let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
-    activate_feature(:new_filters)
-
     stub_subjects
     stub_courses(query: base_parameters, course_count: 10)
   end
