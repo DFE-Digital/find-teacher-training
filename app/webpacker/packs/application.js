@@ -52,6 +52,7 @@ initAutocomplete({
   element: "provider-autocomplete",
   input: "provider",
   path: "/provider-suggestions",
+  selectNameAndCode: true,
 });
 
 loadAnalytics();
