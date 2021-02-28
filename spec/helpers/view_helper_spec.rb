@@ -21,6 +21,20 @@ describe 'View helpers', type: :helper do
     end
   end
 
+  describe '#govuk_button_link_to' do
+    it 'returns an anchor tag with the govuk-button class' do
+      expect(helper.govuk_button_link_to('ACME SCITT', 'https://localhost:3000/organisations/A0'))
+        .to eq('<a class="govuk-button" role="button" data-module="govuk-button" draggable="false" href="https://localhost:3000/organisations/A0">ACME SCITT</a>')
+    end
+  end
+
+  describe '#govuk_button_to' do
+    it 'returns a form containing a single button' do
+      expect(helper.govuk_button_to('ACME SCITT', 'https://localhost:3000/organisations/A0'))
+        .to eq('<form class="button_to" method="post" action="https://localhost:3000/organisations/A0"><input class="govuk-button" role="button" data-module="govuk-button" draggable="false" type="submit" value="ACME SCITT" /></form>')
+    end
+  end
+
   describe '#permitted_referrer?' do
     context 'With a blank referrer' do
       it 'Returns false' do
