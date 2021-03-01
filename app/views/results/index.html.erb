@@ -1,32 +1,17 @@
 <%= content_for :page_title, @number_of_courses_string %>
 
-<h1 class="govuk-heading-l" data-qa="heading">
+<h1 class="govuk-heading-xl" data-qa="heading">
   <span class="govuk-caption-l">Teacher training courses</span>
   <span data-qa="course-count"><%= "#{@results_view.number_of_courses_string} found" %></span>
 </h1>
 
-<div class="govuk-grid-row">
-  <div class="govuk-grid-column-one-third">
-    <div class="app-toggle" data-module="toggle">
-      <button class="app-toggle__link js-toggle" aria-expanded="false" aria-controls="searchFilters">
-        Filter the results
-      </button>
-      <div class="app-toggle__target" id="searchFilters" data-qa="filters">
-        <% if @results_view.provider_filter? %>
-          <%= render partial: 'results/provider' %>
-        <% else %>
-          <%= render partial: 'results/location' %>
-        <% end %>
-        <%= render partial: 'results/subjects' %>
-        <%= render partial: 'results/study_type' %>
-        <%= render partial: 'results/qualifications' %>
-        <%= render partial: 'results/funding' %>
-        <%= render partial: 'results/vacancy' %>
-      </div>
-    </div>
-  </div>
+<div class="app-filter-toggle"></div>
 
-  <div class="govuk-grid-column-two-thirds">
+<div class="app-filter-layout">
+  <div class="app-filter-layout__filter">
+    <%= render partial: 'result_filters/all' %>
+  </div>
+  <div class="app-filter-layout__content">
     <% if @results_view.no_results_found? %>
       <div class="app-search-results">
         <%= render partial: 'no_results', locals: { country: @results_view.country, devolved_nation: @results_view.devolved_nation? } %>
@@ -41,16 +26,16 @@
               <%= render 'shared/hidden_fields', form: form, exclude_keys: %w[sortby] %>
               <%= form.label(:sortby, 'Sorted by', class: 'govuk-label govuk-!-display-inline-block') %>
               <%= form.select(
-                :sortby,
-                options_for_select(@results_view.sort_options, selected: params['sortby'].to_i || 0),
-                {},
-                {
-                  class: 'govuk-select',
-                  onchange: 'this.form.submit()',
-                  role: 'listbox',
-                  'data-qa': 'sort-form__options',
-                },
-              ) %>
+                    :sortby,
+                    options_for_select(@results_view.sort_options, selected: params['sortby'].to_i || 0),
+                    {},
+                    {
+                      class: 'govuk-select',
+                      onchange: 'this.form.submit()',
+                      role: 'listbox',
+                      'data-qa': 'sort-form__options',
+                    },
+                  ) %>
               <%= form.submit('Update', name: nil, class: 'govuk-button', data: { qa: 'sort-form__submit' }) %>
             <% end %>
           <% end %>

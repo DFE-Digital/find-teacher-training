@@ -22,4 +22,3 @@ feature_flags:
   cycle_has_ended: false
   display_apply_button: true
   ucas_only_locations: true
-  new_filters: true

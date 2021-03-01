@@ -18,18 +18,6 @@ class Course < Base
     funding_type == 'fee'
   end
 
-  def year
-    applications_open_from.split('-').first if applications_open_from.present?
-  end
-
-  def month
-    applications_open_from.split('-').second if applications_open_from.present?
-  end
-
-  def day
-    applications_open_from.split('-').third if applications_open_from.present?
-  end
-
   def university_based?
     provider_type == 'university'
   end

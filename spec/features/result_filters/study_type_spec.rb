@@ -1,176 +1,121 @@
 require 'rails_helper'
 
-describe 'Study type filter', type: :feature do
+RSpec.feature 'Results page new study type filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 
-  let(:filter_page) { PageObjects::Page::ResultFilters::StudyType.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 
   before do
     stub_subjects
+    stub_courses(query: base_parameters, course_count: 10)
   end
 
-  describe 'Study type filter page' do
-    before { filter_page.load }
+  describe 'viewing results without explicitly de-selecting a filter' do
+    it 'show courses with all study types selected' do
+      results_page.load
 
-    it 'has the correct title and heading' do
-      expect(page.title).to have_content('Filter by study type')
-      expect(page).to have_content('Study type')
+      expect(results_page.study_type_filter.legend.text).to eq('Study type')
+      expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
+      expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
     end
+  end
 
-    describe 'Navigating to the page with currently selected filters' do
-      it 'Preselects with fulltime' do
-        filter_page.load(query: { fulltime: 'true' })
-        expect(filter_page.full_time.checked?).to eq(true)
-        expect(filter_page.part_time.checked?).to eq(false)
-      end
-
-      it 'Preselects with parttime' do
-        filter_page.load(query: { parttime: 'true' })
-        expect(filter_page.full_time.checked?).to eq(false)
-        expect(filter_page.part_time.checked?).to eq(true)
-      end
-
-      it 'Preselects all' do
-        filter_page.load
-        expect(filter_page.full_time.checked?).to eq(true)
-        expect(filter_page.part_time.checked?).to eq(true)
-      end
-    end
-
-    describe 'back link' do
+  describe 'applying the filters' do
+    context 'show full time courses only' do
       before do
-        stub_courses(query: base_parameters, course_count: 10)
+        stub_courses(
+          query: base_parameters.merge(
+            'filter[study_type]' => 'full_time',
+          ),
+          course_count: 10,
+        )
+
+        results_page.load
+        results_page.study_type_filter.parttime_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
-      it 'navigates back to the results page' do
-        filter_page.load(query: { test: 'params' })
-        filter_page.back_link.click
+      it 'list the filtered courses' do
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
+        expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(false)
+        expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
+      end
 
+      it 'retains the query parameters' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
+            'fulltime' => 'true',
             'hasvacancies' => 'true',
-            'parttime' => 'false',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
-            'test' => 'params',
           },
         )
       end
     end
 
-    describe 'Validation' do
-      it 'Displays an error if neither option is selected' do
-        filter_page.load
-
-        filter_page.part_time.click
-        filter_page.full_time.click
-
-        filter_page.find_courses.click
-
-        expect(filter_page).to have_error
-      end
-    end
-  end
-
-  describe 'viewing results without explicitly selecting a filter' do
-    before do
-      stub_courses(query: base_parameters, course_count: 10)
-    end
-
-    it 'lists only courses with both study types' do
-      results_page.load
-
-      expect(results_page.study_type_filter).to have_parttime
-      expect(results_page.study_type_filter).to have_fulltime
-
-      expect(results_page.courses.count).to eq(10)
-    end
-  end
-
-  describe 'applying a filter' do
-    before do
-      stub_courses(query: base_parameters, course_count: 10)
-    end
-
-    context 'deselecting full time' do
+    context 'show part time courses only' do
       before do
-        stub_courses(query: base_parameters.merge('filter[study_type]' => 'part_time'), course_count: 10)
+        stub_courses(
+          query: base_parameters.merge(
+            'filter[study_type]' => 'part_time',
+          ),
+          course_count: 10,
+        )
+
+        results_page.load
+        results_page.study_type_filter.fulltime_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
-      it 'list the courses' do
-        results_page.load
-        results_page.study_type_filter.link.click
+      it 'list the filtered courses' do
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
+        expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
+        expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(false)
+      end
 
-        expect(filter_page.heading.text).to eq('Study type')
-        filter_page.full_time.click
-        filter_page.find_courses.click
-
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.study_type_filter).to have_parttime
-
-        expect(results_page.courses.count).to eq(10)
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'parttime' => 'true',
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          },
+        )
       end
     end
 
-    context 'deselecting part time' do
+    context 'show full time and part time courses (default behaviour)' do
       before do
-        stub_courses(query: base_parameters.merge('filter[study_type]' => 'full_time'), course_count: 10)
-      end
+        stub_courses(
+          query: base_parameters.merge(
+            'filter[study_type]' => 'part_time,full_time',
+          ),
+          course_count: 10,
+        )
 
-      it 'list the courses' do
         results_page.load
-        results_page.study_type_filter.link.click
-
-        expect(filter_page.heading.text).to eq('Study type')
-        filter_page.part_time.click
-        filter_page.find_courses.click
-
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.study_type_filter).to have_fulltime
-
-        expect(results_page.courses.count).to eq(10)
-      end
-    end
-
-    context 'deselecting full time and part time' do
-      it 'displays an error' do
-        results_page.load
-        results_page.study_type_filter.link.click
-
-        expect(filter_page.heading.text).to eq('Study type')
-        filter_page.part_time.click
-        filter_page.full_time.click
-        filter_page.find_courses.click
-
-        expect(filter_page).to have_error
-      end
-    end
-
-    context 'submitting without deselection' do
-      before do
-        stub_courses(query: base_parameters.merge('filter[study_type]' => 'full_time,part_time'), course_count: 10)
+        results_page.study_type_filter.fulltime_checkbox.uncheck
+        results_page.study_type_filter.parttime_checkbox.uncheck
+        results_page.apply_filters_button.click
       end
 
-      it 'list the courses' do
-        results_page.load
-        results_page.study_type_filter.link.click
+      it 'still lists full time and part time courses when both are deselected' do
+        expect(results_page.study_type_filter.legend.text).to eq('Study type')
+        expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
+        expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
+      end
 
-        expect(filter_page.heading.text).to eq('Study type')
-
-        filter_page.find_courses.click
-
-        expect(filter_page.heading.text).to eq('Teacher training courses 10 courses found')
-
-        expect(results_page.study_type_filter).to have_fulltime
-
-        expect(results_page.study_type_filter).to have_parttime
-
-        expect(results_page.courses.count).to eq(10)
+      it 'retains the query parameters' do
+        expect_page_to_be_displayed_with_query(
+          page: results_page,
+          expected_query_params: {
+            'hasvacancies' => 'true',
+            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+          },
+        )
       end
     end
   end

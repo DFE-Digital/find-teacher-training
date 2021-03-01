@@ -28,12 +28,7 @@
                 <strong>School, university or other training provider</strong>
                 <span class="govuk-hint govuk-!-margin-bottom-0">Enter the name or provider code</span>
               <% end %>
-              <%= form.text_field(
-                :query,
-                id: 'provider',
-                class: 'govuk-input',
-              ) %>
-              <div id="provider-autocomplete" class="govuk-body"></div>
+              <%= form.text_field :query, class: 'govuk-input' %>
             </div>
 
             <%= form.submit 'Search again', name: nil, class: 'govuk-button' %>
