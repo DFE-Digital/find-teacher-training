@@ -169,13 +169,10 @@ RSpec.feature 'Results page new subject filter' do
       ]
 
       filter_page.subject_areas.each_with_index do |accordion_section, counter|
-        section_button = accordion_section.find('.govuk-accordion__section-button')
-        expect(section_button['aria-controls']).to eq(expected_control_ids[counter])
         expect(accordion_section.root_element).to have_selector("##{expected_control_ids[counter]}")
       end
 
       # Check SEND section
-      expect(filter_page.send_area.accordion_button['aria-controls']).to eq('send-content')
       expect(filter_page.send_area.root_element).to have_selector('div#send-content')
     end
 
