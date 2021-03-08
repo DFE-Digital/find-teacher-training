@@ -162,10 +162,10 @@ RSpec.feature 'Results page new subject filter' do
 
     it 'has aria-control set to the section-content id' do
       expected_control_ids = %w[
-        primarysubject-content-0
-        secondarysubject-content-1
-        modernlanguagessubject-content-2
-        furthereducationsubject-content-3
+        primary-content
+        secondary-content
+        secondary-modern-languages-content
+        further-education-content
       ]
 
       filter_page.subject_areas.each_with_index do |accordion_section, counter|
