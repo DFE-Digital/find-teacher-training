@@ -1,18 +1,12 @@
 class SitemapsController < ApplicationController
   def show
-    @courses = fetch_courses
-  end
+    @courses = Course
+      .where(recruitment_cycle_year: Settings.current_cycle)
+      .select('course_code', 'provider_code', 'changed_at')
+      .page(1)
+      .per(20_000)
+      .all
 
-private
-
-  def fetch_courses
-    Rails.cache.fetch ['sitemap-api-request'], expires_in: 1.day do
-      Course
-        .where(recruitment_cycle_year: Settings.current_cycle)
-        .select('course_code', 'provider_code', 'changed_at')
-        .page(1)
-        .per(20_000)
-        .all
-    end
+    expires_in(1.day, public: true)
   end
 end
