@@ -7,95 +7,84 @@
     <%= form_with(url: subject_path, method: :post, data: { 'ga-event-form' => 'Subject' }) do |f| %>
       <%= render 'shared/hidden_fields', exclude_keys: %w[subjects senCourses], form: f %>
       <h1 class="govuk-heading-l" data-qa="heading"><%= I18n.t('page_titles.subjects_filter') %></h1>
-      <div class="accordion govuk-form-group" data-module="govuk-accordion">
+
+      <%= govuk_accordion(id: 'subject-area-accordion') do |accordion| %>
         <% @subject_areas.each_with_index do |subject_area, counter| %>
-          <div class="govuk-accordion__section<%= if subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?) then ' govuk-accordion__section--expanded' end %>" data-qa="subject_area">
-            <div class="govuk-accordion__section-header">
-              <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-                <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-<%= subject_area.typename %>" aria-controls="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-button" aria-expanded="<%= subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?) ? 'true' : 'false' %>">
-                  <%= subject_area.name %>
-                </button>
-              </h2>
-              <span class="govuk-accordion__icon" aria-hidden="true"></span>
-            </div>
-            <div id="<%= subject_area.typename.downcase %>-content-<%= counter %>" class="govuk-accordion__section-content" aria-labelledby="accordion-heading-<%= subject_area.typename.downcase %>">
-              <fieldset class="govuk-fieldset">
-                <legend class="govuk-fieldset__legend govuk-visually-hidden" data-qa="subject_area__legend">
-                  Choose from the following <%= subject_area.name %> subjects
-                </legend>
-                <% if subject_area.name == 'Primary' %>
-                  <p class="govuk-body">Trainee primary school teachers learn to teach all subjects across the national curriculum.</p>
-                  <p class="govuk-body">You can choose to add a specialist subject to your training. This could be a subject you have qualifications or experience in.</p>
-                  <p class="govuk-body">Your training will develop your knowledge of your specialist subject. This is so you can support other teachers to teach that subject.</p>
-                <% end %>
+          <%= accordion.add_section(
+            title: subject_area.name,
+            expanded: subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?),
+            html_attributes: { 'data-qa': 'subject_area' },
+          ) do %>
+            <fieldset class="govuk-fieldset">
+              <legend class="govuk-fieldset__legend govuk-visually-hidden" data-qa="subject_area__legend">
+                Choose from the following <%= subject_area.name %> subjects
+              </legend>
+              <% if subject_area.name == 'Primary' %>
+                <p class="govuk-body">Trainee primary school teachers learn to teach all subjects across the national curriculum.</p>
+                <p class="govuk-body">You can choose to add a specialist subject to your training. This could be a subject you have qualifications or experience in.</p>
+                <p class="govuk-body">Your training will develop your knowledge of your specialist subject. This is so you can support other teachers to teach that subject.</p>
+              <% end %>
 
-                <div class="govuk-checkboxes">
-                  <% subject_area.subjects.sort_by(&:subject_name).each do |subject| %>
-                    <%# C# doesn't have a distinct modern languages subject %>
-                    <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
-                      <div class="govuk-checkboxes__item" data-qa="subject">
-                        <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: { qa: 'subject__checkbox' }, id: "subject#{subject.subject_code}", class: 'govuk-checkboxes__input' }, subject.subject_code, nil) %>
-                        <%= f.label(:subjects, { for: "subject#{subject.subject_code}" }, class: 'govuk-label govuk-checkboxes__label') do %>
-                          <span class="govuk-checkboxes__label-text" data-qa="subject__name">
-                            <%= subject.subject_name %>
-                            <% if subject.subject_name == "Design and technology" %>
-                              – also includes food, product design, textiles, and systems and control
-                            <% end %>
-                          </span>
+              <div class="govuk-checkboxes">
+                <% subject_area.subjects.sort_by(&:subject_name).each do |subject| %>
+                  <%# C# doesn't have a distinct modern languages subject %>
+                  <% unless subject.subject_name == "Modern Languages" || subject.subject_name == "Philosophy" %>
+                    <div class="govuk-checkboxes__item" data-qa="subject">
+                      <%= f.check_box(:subjects, { multiple: true, checked: subject_is_selected?(subject_code: subject.subject_code), data: { qa: 'subject__checkbox' }, id: "subject#{subject.subject_code}", class: 'govuk-checkboxes__input' }, subject.subject_code, nil) %>
+                      <%= f.label(:subjects, { for: "subject#{subject.subject_code}" }, class: 'govuk-label govuk-checkboxes__label') do %>
+                        <span class="govuk-checkboxes__label-text" data-qa="subject__name">
+                          <%= subject.subject_name %>
+                          <% if subject.subject_name == "Design and technology" %>
+                            – also includes food, product design, textiles, and systems and control
+                          <% end %>
+                        </span>
 
-                          <% if subject.decorate.has_scholarship_and_bursary? %>
-                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
-                          <% elsif subject.decorate.has_scholarship? %>
-                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} are available" %>
-                          <% elsif subject.decorate.has_bursary? %>
-                            <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} available" %>
-                          <% end %>
-                          <% if subject.decorate.early_career_payments? %>
-                            <% financial_info.concat(', \n with early career payments of £2,000 each in your second, third and fourth year of teaching (£3,000 in some areas of England).') %>
-                          <% elsif subject.decorate.has_scholarship? || subject.decorate.has_bursary? %>
-                            <% financial_info.concat('.') %>
-                          <% end %>
-                          <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
-
-                          <% if subject.subject_knowledge_enhancement_course_available %>
-                            <span class="govuk-!-display-block" data-qa="subject__ske_course">
-                              You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? 'also' : '' %> take a
-                              <%= govuk_link_to 'subject knowledge enhancement (SKE) course', 'https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %>.
-                            </span>
-                          <% end %>
+                        <% if subject.decorate.has_scholarship_and_bursary? %>
+                          <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
+                        <% elsif subject.decorate.has_scholarship? %>
+                          <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} are available" %>
+                        <% elsif subject.decorate.has_bursary? %>
+                          <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} available" %>
                         <% end %>
-                      </div>
-                    <% end %>
+                        <% if subject.decorate.early_career_payments? %>
+                          <% financial_info.concat(', \n with early career payments of £2,000 each in your second, third and fourth year of teaching (£3,000 in some areas of England).') %>
+                        <% elsif subject.decorate.has_scholarship? || subject.decorate.has_bursary? %>
+                          <% financial_info.concat('.') %>
+                        <% end %>
+                        <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
+
+                        <% if subject.subject_knowledge_enhancement_course_available %>
+                          <span class="govuk-!-display-block" data-qa="subject__ske_course">
+                            You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? 'also' : '' %> take a
+                            <%= govuk_link_to 'subject knowledge enhancement (SKE) course', 'https://beta-getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %>.
+                          </span>
+                        <% end %>
+                      <% end %>
+                    </div>
                   <% end %>
-                </div>
-              </fieldset>
+                <% end %>
+              </div>
+            </fieldset>
+          <% end %>
+        <% end %>
+        <%= accordion.add_section(
+          title: 'Special educational needs and disability (SEND)',
+          expanded: params[:senCourses] == 'true',
+          html_attributes: { 'data-qa': 'send_area' },
+        ) do %>
+          <div class="govuk-checkboxes" id="send-content">
+            <div class="govuk-checkboxes__item" data-qa="subject">
+              <%= f.check_box(:senCourses, { checked: params[:senCourses] == 'true', data: { qa: 'subject__checkbox' }, id: 'subject_send', class: 'govuk-checkboxes__input' }, 'true', nil) %>
+              <%= f.label(:subjects, { for: 'subject_send', data: { qa: 'subject__name' } }, class: 'govuk-label govuk-checkboxes__label') do %>
+                <span class="govuk-checkboxes__label-text">
+                  Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
+                </span>
+                <span class="govuk-!-display-block"></span>
+              <% end %>
             </div>
           </div>
         <% end %>
-        <div class="govuk-accordion__section<%= if params[:senCourses] == 'true' then ' govuk-accordion__section--expanded' end %>" data-qa="send_area">
-          <div class="govuk-accordion__section-header">
-            <h2 class="govuk-accordion__section-heading" data-qa="subject_area__name">
-              <button type="button" data-qa="subject_area__accordion_button" id="accordion-heading-send" aria-controls="send-content" class="govuk-accordion__section-button" aria-expanded="<%= params[:senCourses] == 'true' ? 'true' : 'false' %>">
-                Special educational needs and disability (SEND)
-              </button>
-            </h2>
-            <span class="govuk-accordion__icon" aria-hidden="true"></span>
-          </div>
-          <div id="send-content" class="govuk-accordion__section-content" aria-labelledby="accordion-heading-send">
-            <div class="govuk-checkboxes">
-              <div class="govuk-checkboxes__item" data-qa="subject">
-                <%= f.check_box(:senCourses, { checked: params[:senCourses] == 'true', data: { qa: 'subject__checkbox' }, id: 'subject_send', class: 'govuk-checkboxes__input' }, 'true', nil) %>
-                <%= f.label(:subjects, { for: 'subject_send', data: { qa: 'subject__name' } }, class: 'govuk-label govuk-checkboxes__label') do %>
-                  <span class="govuk-checkboxes__label-text">
-                    Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
-                  </span>
-                  <span class="govuk-!-display-block"></span>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <% end %>
 
       <%= f.submit(local_assigns[:submit_button_text], name: nil, data: { qa: 'continue' }, class: 'govuk-button') %>
     <% end %>

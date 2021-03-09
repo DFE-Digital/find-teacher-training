@@ -162,20 +162,17 @@ RSpec.feature 'Results page new subject filter' do
 
     it 'has aria-control set to the section-content id' do
       expected_control_ids = %w[
-        primarysubject-content-0
-        secondarysubject-content-1
-        modernlanguagessubject-content-2
-        furthereducationsubject-content-3
+        primary-content
+        secondary-content
+        secondary-modern-languages-content
+        further-education-content
       ]
 
       filter_page.subject_areas.each_with_index do |accordion_section, counter|
-        section_button = accordion_section.find('.govuk-accordion__section-button')
-        expect(section_button['aria-controls']).to eq(expected_control_ids[counter])
         expect(accordion_section.root_element).to have_selector("##{expected_control_ids[counter]}")
       end
 
       # Check SEND section
-      expect(filter_page.send_area.accordion_button['aria-controls']).to eq('send-content')
       expect(filter_page.send_area.root_element).to have_selector('div#send-content')
     end
 
