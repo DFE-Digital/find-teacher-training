@@ -34,10 +34,11 @@ describe 'cookie banner', type: :feature do
     visit results_path(params)
   end
 
-  it 'displays a cookie banner' do
-    expect(results_page).to have_cookie_banner
-    expect(results_page.cookie_banner).to have_accept_all_cookies
-    expect(results_page.cookie_banner).to have_set_preference_link
+  it 'renders a hidden cookie banner' do
+    expect(page).to have_selector('[data-qa="cookie-banner"]', visible: :hidden)
+    expect(page).to have_button('Accept analytics cookies', visible: :hidden)
+    expect(page).to have_button('Reject analytics cookies', visible: :hidden)
+    expect(page).to have_link('View cookies', visible: :hidden)
   end
 
   describe 'cookies preferences' do

@@ -5,7 +5,7 @@ import {setConsentedToCookie,
 
 export default class CookieBanner {
   constructor() {
-    this.$module = document.querySelector('[data-module="app-cookie-banner"]');
+    this.$module = document.querySelector('[data-module="govuk-cookie-banner"]');
 
     // If the page doesn't have the banner then stop
     if (!this.$module) {
@@ -13,7 +13,11 @@ export default class CookieBanner {
     }
 
     this.acceptButton = this.$module.querySelector(
-      '[data-qa="cookie-banner__accept"]'
+      '[data-accept-cookie="true"]'
+    );
+
+    this.rejectButton = this.$module.querySelector(
+      '[data-accept-cookie="false"]'
     );
 
     // consentCookie is false if user has not accept/rejected cookies
@@ -27,6 +31,7 @@ export default class CookieBanner {
 
   bindEvents() {
     this.acceptButton.addEventListener("click", () => this.acceptCookie());
+    this.rejectButton.addEventListener("click", () => this.rejectCookie());
   }
 
   acceptCookie() {
@@ -35,11 +40,16 @@ export default class CookieBanner {
     loadAnalytics();
   }
 
+  rejectCookie() {
+    this.hideCookieMessage();
+    setConsentedToCookie(false);
+  }
+
   showCookieMessage() {
-    this.$module.classList.remove("app-cookie-banner--hidden");
+    this.$module.hidden = false;
   }
 
   hideCookieMessage() {
-    this.$module.classList.add("app-cookie-banner--hidden");
+    this.$module.hidden = true;
   }
 }
