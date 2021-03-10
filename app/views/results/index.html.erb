@@ -71,7 +71,7 @@
                 <span class="app-search-result__course-name" data-qa="course__name"><%= course.decorate.display_title %></span>
               <% end %>
             </h2>
-            <dl class="app-description-list">
+            <dl class="app-description-list app-description-list--course-result">
               <dt class="app-description-list__label">Course</dt>
               <dd data-qa="course__description"><%= course.description %></dd>
               <% if @results_view.location_filter? && @results_view.has_sites?(course) %>

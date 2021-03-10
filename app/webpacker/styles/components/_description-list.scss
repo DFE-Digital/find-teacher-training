@@ -4,8 +4,7 @@
 }
 
 %app-description-list > dt {
-  @include govuk-font($size: 19, $weight: normal);
-  color: $govuk-secondary-text-colour;
+  @include govuk-font($size: 19, $weight: bold);
   vertical-align: top;
 
   @include govuk-media-query($from: desktop) {
@@ -14,6 +13,11 @@
     margin-bottom: govuk-spacing(1);
     width: 30%;
   }
+}
+
+.app-description-list--course-result > dt {
+  @include govuk-font($size: 19, $weight: regular);
+  color: $govuk-secondary-text-colour;
 }
 
 %app-description-list > dd {
