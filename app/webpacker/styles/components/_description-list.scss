@@ -4,7 +4,8 @@
 }
 
 %app-description-list > dt {
-  @include govuk-font($size: 19, $weight: bold);
+  @include govuk-font($size: 19, $weight: normal);
+  color: $govuk-secondary-text-colour;
   vertical-align: top;
 
   @include govuk-media-query($from: desktop) {
