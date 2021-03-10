@@ -1,14 +1,14 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-entry">Entry requirements</h2>
   <% if course.required_qualifications.present? %>
-    <%= render AdviceComponent.new(title: 'Qualifications') do %>
-      <%= render partial: 'courses/entry_requirements' %>
-    <% end %>
-
     <h3 class="govuk-heading-m">Qualifications needed</h3>
     <div data-qa="course__required_qualifications">
       <%= markdown(course.required_qualifications) %>
     </div>
+  <% else %>
+    <%= render AdviceComponent.new(title: 'The qualifications you need') do %>
+      <%= render partial: 'courses/entry_requirements' %>
+    <% end %>
   <% end %>
 
   <% if course.personal_qualities.present? %>
