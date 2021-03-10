@@ -300,6 +300,24 @@ describe 'Course show', type: :feature do
     end
   end
 
+  describe 'A course without qualification requirements' do
+    let(:course) do
+      build(:course,
+            course_code: 'X130',
+            fee_uk_eu: '9250.0',
+            fee_international: nil,
+            provider: provider,
+            provider_code: provider.provider_code,
+            provider_type: provider.provider_type,
+            recruitment_cycle: current_recruitment_cycle,
+            accrediting_provider: accrediting_provider)
+    end
+
+    it 'renders GIT advice box' do
+      expect(course_page).to have_content('The qualifications you need')
+    end
+  end
+
   def jsonapi_site_status(name, study_mode, status)
     build(:site_status, study_mode, site: build(:site, location_name: name, travel_to_work_area: 'Leeds'), status: status)
   end
