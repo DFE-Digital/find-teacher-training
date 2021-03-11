@@ -318,6 +318,61 @@ describe 'Course show', type: :feature do
     end
   end
 
+  describe 'Where you will train advice box' do
+    let(:course) do
+      build(:course,
+            course_code: 'X000',
+            fee_uk_eu: '9250.0',
+            fee_international: nil,
+            provider: provider,
+            provider_code: provider.provider_code,
+            provider_type: provider.provider_type,
+            recruitment_cycle: current_recruitment_cycle,
+            accrediting_provider: accrediting_provider,
+            program_type: program_type)
+    end
+
+    context 'higher_education_programme' do
+      let(:program_type) { 'higher_education_programme' }
+
+      it 'renders the HEI where will you train advice box' do
+        expect(course_page).to have_content('Universities can work with over 100 potential placement schools. Most will be within 10 miles of the university')
+      end
+    end
+
+    context 'scitt_programme' do
+      let(:program_type) { 'scitt_programme' }
+
+      it 'renders the SCITT where will you train advice box' do
+        expect(course_page).to have_content('You’ll be placed in different schools during your training. You can’t pick which schools you want to be in')
+      end
+    end
+
+    context 'pg_teaching_apprenticeship' do
+      let(:program_type) { 'pg_teaching_apprenticeship' }
+
+      it 'does not render the where will you train advice box' do
+        expect(course_page).not_to have_content('Advice from Get Into Teaching Where you will train')
+      end
+    end
+
+    context 'school_direct_training_programme' do
+      let(:program_type) { 'school_direct_training_programme' }
+
+      it 'does not render the where will you train advice box' do
+        expect(course_page).not_to have_content('Advice from Get Into Teaching Where you will train')
+      end
+    end
+
+    context 'school_direct_salaried_training_programme' do
+      let(:program_type) { 'school_direct_salaried_training_programme' }
+
+      it 'does not render the where will you train advice box' do
+        expect(course_page).not_to have_content('Advice from Get Into Teaching Where you will train')
+      end
+    end
+  end
+
   def jsonapi_site_status(name, study_mode, status)
     build(:site_status, study_mode, site: build(:site, location_name: name, travel_to_work_area: 'Leeds'), status: status)
   end
