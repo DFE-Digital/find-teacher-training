@@ -97,7 +97,7 @@ describe('CookieBanner', () => {
     it('only loads analytics once a user has accepted cookies', () => {
       const banner = new CookieBanner()
       banner.acceptCookie()
-      expect(loadAnalytics).not.toBeCalled()
+      expect(loadAnalytics).toBeCalled()
     })
 
     it('sets consented-to-cookies to true', () => {
@@ -116,15 +116,16 @@ describe('CookieBanner', () => {
     })
 
     it('does not load analytics once a user has rejected cookies', () => {
-      const banner = new CookieBanner().rejectCookie()
-      expect(loadAnalytics).not.toBeCalled()
+      const banner = new CookieBanner()
+      banner.rejectCookie()
+      expect(loadAnalytics).not.toHaveBeenCalled()
     })
 
     it('sets consented-to-cookies to false', () => {
       const banner = new CookieBanner()
       banner.rejectCookie()
       expect(setConsentedToCookie).toHaveBeenCalled()
-      expect(checkConsentedToCookieExists).toBeFalsy()
+      expect(banner.checkConsentedToCookieExists).not.toBeTruthy()
     })
   })
 })
