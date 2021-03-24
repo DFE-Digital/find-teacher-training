@@ -171,7 +171,7 @@ GEM
       ruby2_keywords
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
-    ffi (1.14.2)
+    ffi (1.15.0)
     foreman (0.87.2)
     geocoder (1.6.6)
     geokit (1.13.1)
@@ -213,7 +213,7 @@ GEM
     kaminari-core (1.2.1)
     launchy (2.5.0)
       addressable (~> 2.7)
-    listen (3.4.1)
+    listen (3.5.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.9.0)
@@ -444,7 +444,7 @@ DEPENDENCIES
   jsonapi-serializable
   kaminari
   launchy
-  listen (>= 3.0.5, < 3.5)
+  listen (>= 3.0.5, < 3.6)
   pkg-config (~> 1.4.5)
   pry-byebug
   puma (~> 5.2)
