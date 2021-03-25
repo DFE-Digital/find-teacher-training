@@ -1,24 +1,22 @@
 <%= content_for :page_title, title_with_error_prefix('Cookies', flash[:error].present?) %>
 
 <div class="govuk-width-container">
-  <h1 class="govuk-heading-xl">Cookies</h1>
+  <h1 class="govuk-heading-l">Cookies</h1>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <%= render partial: 'cookie_preferences_form' %>
-
-      <h2 class="govuk-heading-l">How we use cookies</h2>
+      <p class="govuk-body">Cookies are small files saved on your phone, tablet or computer when you visit a website.</p>
+      <p class="govuk-body">We use cookies to make ‘Find postgraduate teacher training’ work and collect information about how you use our service.</p>
 
       <h3 class="govuk-heading-m">Essential cookies</h3>
-
-      <p class="govuk-body">Essential ‘Find postgraduate teacher training’ cookies include:</p>
+      <p class="govuk-body">Essential cookies keep your information secure while you use ‘Find postgraduate teacher training’. We do not need to ask permission to use them.</p>
 
       <table class="govuk-table">
         <thead class="govuk-table__header">
         <tr>
-          <th class="govuk-table__header">Name</th>
-          <th class="govuk-table__header">Purpose</th>
-          <th class="govuk-table__header">Expires</th>
+          <th class="govuk-table__header govuk-!-width-one-third">Name</th>
+          <th class="govuk-table__header govuk-!-width-one-third">Purpose</th>
+          <th class="govuk-table__header govuk-!-width-one-third">Expires</th>
         </tr>
         </thead>
         <tbody class="govuk-table__body">
@@ -30,46 +28,16 @@
         <tr>
           <td class="govuk-table__cell">consented-to-cookies</td>
           <td class="govuk-table__cell">Saves your cookie consent settings</td>
-          <td class="govuk-table__cell">6 months</td>
+          <td class="govuk-table__cell">6&nbsp;months</td>
         </tr>
         </tbody>
       </table>
 
-      <h3 class="govuk-heading-m">Measuring website usage (Google Analytics)</h3>
+      <h3 class="govuk-heading-m">Analytics cookies (optional)</h3>
 
-      <p class="govuk-body">Google Analytics sets the following cookies:</p>
 
-      <table class="govuk-table">
-        <thead class="govuk-table__header">
-          <tr>
-            <th class="govuk-table__header">Name</th>
-            <th class="govuk-table__header">Purpose</th>
-            <th class="govuk-table__header">Expires</th>
-          </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_ga</td>
-            <td class="govuk-table__cell">Used to distinguish anonymous users</td>
-            <td class="govuk-table__cell">2 years</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_gid</td>
-            <td class="govuk-table__cell">Used to distinguish anonymous users</td>
-            <td class="govuk-table__cell">24 hours</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_gat</td>
-            <td class="govuk-table__cell">Throttle requests</td>
-            <td class="govuk-table__cell">10 minutes</td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">_gat_gtag_UA_112932657_1</td>
-            <td class="govuk-table__cell">Throttle requests</td>
-            <td class="govuk-table__cell">10 minutes</td>
-          </tr>
-        </tbody>
-      </table>
+      <%= render partial: 'cookie_preferences_form' %>
+
     </div>
   </div>
 </div>
