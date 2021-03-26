@@ -15,8 +15,8 @@ RSpec.describe 'Cookie consent', type: :feature do
 
   it 'Consent to cookies' do
     visit cookie_preferences_path
-    page.choose('Yes, opt-in to Google Analytics cookies')
-    click_button 'Save changes'
+    page.choose('Yes')
+    click_button 'Save cookie settings'
 
     expect(page).to have_text(I18n.t('cookie_preferences.success'))
     expect(cookie_preferences_page.cookie_consent_accept).to be_checked
@@ -25,8 +25,8 @@ RSpec.describe 'Cookie consent', type: :feature do
 
   it 'Does not consent to cookies' do
     visit cookie_preferences_path
-    page.choose('No, do not track my website usage')
-    click_button 'Save changes'
+    page.choose('No')
+    click_button 'Save cookie settings'
 
     expect(page).to have_text(I18n.t('cookie_preferences.success'))
     expect(cookie_preferences_page.cookie_consent_deny).to be_checked
@@ -35,7 +35,7 @@ RSpec.describe 'Cookie consent', type: :feature do
 
   it 'No cookie preference selected' do
     visit cookie_preferences_path
-    click_button 'Save changes'
+    click_button 'Save cookie settings'
 
     expect(page).to have_text(I18n.t('cookie_preferences.no_option_error'))
   end
