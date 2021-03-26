@@ -44,8 +44,8 @@ Rails.application.routes.draw do
   get '/accessibility', to: 'pages#accessibility', as: 'accessibility'
   get '/privacy-policy', to: 'pages#privacy', as: 'privacy'
 
-  get '/cookie-preferences', to: 'cookie_preferences#new', as: 'cookie_preferences'
-  post '/cookie-preferences', to: 'cookie_preferences#create', as: 'create_cookie_preferences'
+  get '/cookies', to: 'cookie_preferences#new', as: 'cookie_preferences'
+  post '/cookies', to: 'cookie_preferences#create', as: 'create_cookie_preferences'
 
   get '/404', to: 'errors#not_found', via: :all
   get '/422', to: 'errors#unprocessable_entity', via: :all
