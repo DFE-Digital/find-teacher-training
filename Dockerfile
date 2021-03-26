@@ -7,7 +7,7 @@ RUN apk add --update --no-cache tzdata && \
     echo "Europe/London" > /etc/timezone
 
 RUN apk add --update --no-cache --virtual runtime-dependances \
-    yarn
+    yarn shared-mime-info
 
 WORKDIR /app
 
@@ -30,8 +30,10 @@ RUN bundle exec rake assets:precompile && \
 
 FROM ${BASE_RUBY_IMAGE}
 ARG COMMIT_SHA
+ENV FREEDESKTOP_MIME_TYPES_PATH=/usr/share/mime/packages/freedesktop.org.xml
 
 WORKDIR /app
+COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
 COPY --from=base-image /app /app
 COPY --from=base-image /usr/local/bundle/ /usr/local/bundle/
 
