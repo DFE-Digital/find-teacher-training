@@ -25,7 +25,19 @@
     </script>
 
     <% unless current_page?(cookie_preferences_path) %>
-      <%= render GovukComponent::CookieBanner.new(title: 'Cookies on Find postgraduate teacher training', html_attributes: { hidden: true, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-cookie-banner', 'data-qa': 'cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        title: 'Cookies on Find postgraduate teacher training',
+        html_attributes: {
+          hidden: true,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-cookie-banner',
+            qa: 'cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
           <p class="govuk-body">We use some essential cookies to make this service work.</p>
           <p class="govuk-body">We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
@@ -37,7 +49,18 @@
         <% end %>
       <% end %>
 
-      <%= render GovukComponent::CookieBanner.new(html_attributes: { hidden: true, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-hide-cookie-banner', 'data-qa': 'hide-cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        html_attributes: {
+          hidden: true,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-hide-cookie-banner',
+            qa: 'hide-cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
           <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, { data: { qa: 'cookie-banner__preference-link' } }) %> at any time.</p>
         <% end %>
@@ -46,7 +69,19 @@
         <% end %>
       <% end %>
 
-      <%= render GovukComponent::CookieBanner.new(title: 'Cookies on Find postgraduate teacher training', html_attributes: { hidden: false, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-fallback-cookie-banner', 'data-qa': 'fallback-cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        title: 'Cookies on Find postgraduate teacher training',
+        html_attributes: {
+          hidden: false,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-fallback-cookie-banner',
+            qa: 'fallback-cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
           <p class="govuk-body">We use cookies to make this service work and collect analytics information. To accept or reject cookies, turn on JavaScript in your browser settings or reload this page.</p>
         <% end %>
