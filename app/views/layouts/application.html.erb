@@ -70,7 +70,7 @@
 
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <% if flash[:success] %>
-          <%= render GovukComponent::NotificationBanner.new(title: 'Success', success: true, title_id: 'success-message', html_attributes: { role: 'alert' }) do |notification_banner| %>
+          <%= govuk_notification_banner(title: 'Success', success: true, title_id: 'success-message', html_attributes: { role: 'alert' }) do |notification_banner| %>
             <%= notification_banner.slot(:heading, text: flash[:success]) %>
           <% end %>
         <% end %>
