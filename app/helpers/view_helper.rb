@@ -38,24 +38,6 @@ module ViewHelper
     link_to(body, url, html_options)
   end
 
-  def govuk_button_to(name, options = {}, html_options = {}, &_block)
-    if block_given?
-      html_options = options
-      options = name
-    end
-
-    html_options = {
-      class: prepend_css_class('govuk-button', html_options[:class]),
-      role: 'button',
-      data: { module: 'govuk-button' },
-      draggable: false,
-    }.merge(html_options)
-
-    return button_to(options, html_options) { yield } if block_given?
-
-    button_to(name, options, html_options)
-  end
-
   def govuk_back_link_to(url, link_text = 'Back')
     link_to link_text, url, class: 'govuk-back-link', data: { qa: 'page-back' }
   end
