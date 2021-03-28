@@ -1,8 +1,4 @@
 module ViewHelper
-  def govuk_back_link_to(url, link_text = 'Back')
-    link_to link_text, url, class: 'govuk-back-link', data: { qa: 'page-back' }
-  end
-
   def permitted_referrer?
     return false if request.referer.blank?
 
