@@ -7,9 +7,7 @@
         <span class="app-description-list__hint govuk-!-margin-top-0">University</span>
       <% else %>
         <span class="app-description-list__hint govuk-!-margin-top-0">Placement schools</span>
-        <%= render GovukComponent::Details.new(
-          summary: @results_view.placement_schools_summary(course),
-        ) do %>
+        <%= govuk_details(summary: @results_view.placement_schools_summary(course)) do %>
           <p>You can’t pick which schools you want to be in, but your university will try to place you in schools you can commute to.</p>
           <p>Universities usually work with over 100 potential placement schools. Most will be within 10 miles of the university, but sometimes they can cover a wider area, especially outside of cities.</p>
           <%= govuk_link_to 'More about placements on this course', course_path(provider_code: course.provider_code, course_code: course.course_code, anchor: 'section-schools') %>
