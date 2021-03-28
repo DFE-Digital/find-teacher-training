@@ -62,7 +62,7 @@
     ) %>
 
     <div class="govuk-width-container">
-      <%= render GovukComponent::PhaseBanner.new(phase: 'Beta') do %>
+      <%= render govuk_phase_banner(phase: 'Beta') do %>
         This is a new service – <%= govuk_link_to 'give feedback or report a problem', 'mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training', class: 'govuk-link--no-visited-state' %>
       <% end %>
 
