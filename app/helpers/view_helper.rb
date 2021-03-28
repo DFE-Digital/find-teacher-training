@@ -3,41 +3,6 @@ module ViewHelper
     mail_to(email, name, html_options.merge(class: 'govuk-link'), &block)
   end
 
-  def govuk_link_to(body = nil, url = nil, html_options = nil, &block)
-    if block_given?
-      html_options = url
-      url = body
-      body = block
-    end
-    html_options ||= {}
-
-    html_options[:class] = prepend_css_class('govuk-link', html_options[:class])
-
-    return link_to(url, html_options) { yield } if block_given?
-
-    link_to(body, url, html_options)
-  end
-
-  def govuk_button_link_to(body = nil, url = nil, html_options = nil, &block)
-    if block_given?
-      html_options = url
-      url = body
-      body = block
-    end
-    html_options ||= {}
-
-    html_options = {
-      class: prepend_css_class('govuk-button', html_options[:class]),
-      role: 'button',
-      data: { module: 'govuk-button' },
-      draggable: false,
-    }.merge(html_options)
-
-    return link_to(url, html_options) { yield } if block_given?
-
-    link_to(body, url, html_options)
-  end
-
   def govuk_back_link_to(url, link_text = 'Back')
     link_to link_text, url, class: 'govuk-back-link', data: { qa: 'page-back' }
   end
