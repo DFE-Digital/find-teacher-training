@@ -10,8 +10,8 @@ module ViewHelper
     Settings.service_support.contact_email_address
   end
 
-  def bat_contact_mail_to(name = nil, subject: nil, link_class: 'govuk-link')
-    mail_to bat_contact_email_address, name || bat_contact_email_address, subject: subject, class: link_class
+  def bat_contact_mail_to(name = nil, subject: nil)
+    govuk_mail_to bat_contact_email_address, name || bat_contact_email_address, subject: subject
   end
 
   def title_with_error_prefix(title, error)
