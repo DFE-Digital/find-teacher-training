@@ -13,7 +13,9 @@
           <%= accordion.add_section(
             title: subject_area.name,
             expanded: subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?),
-            html_attributes: { 'data-qa': 'subject_area' },
+            html_attributes: {
+              data: { qa: 'subject_area' },
+            },
           ) do %>
             <fieldset class="govuk-fieldset">
               <legend class="govuk-fieldset__legend govuk-visually-hidden" data-qa="subject_area__legend">
@@ -70,7 +72,9 @@
         <%= accordion.add_section(
           title: 'Special educational needs and disability (SEND)',
           expanded: params[:senCourses] == 'true',
-          html_attributes: { 'data-qa': 'send_area' },
+          html_attributes: {
+            data: { qa: 'send_area' },
+          },
         ) do %>
           <div class="govuk-checkboxes" id="send-content">
             <div class="govuk-checkboxes__item" data-qa="subject">

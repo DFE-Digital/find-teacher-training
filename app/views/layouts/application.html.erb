@@ -45,7 +45,7 @@
         <%= cookie_banner.with(:actions) do %>
           <button type="button" class="govuk-button" data-accept-cookie="true">Accept analytics cookies</button>
           <button type="button" class="govuk-button" data-accept-cookie="false">Reject analytics cookies</button>
-          <%= govuk_link_to('View cookies', cookie_preferences_path, { data: { qa: 'cookie-banner__preference-link' } }) %>
+          <%= govuk_link_to('View cookies', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) %>
         <% end %>
       <% end %>
 
@@ -62,7 +62,7 @@
         },
       ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
-          <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, { data: { qa: 'cookie-banner__preference-link' } }) %> at any time.</p>
+          <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) %> at any time.</p>
         <% end %>
         <%= cookie_banner.with(:actions) do %>
           <button type="button" class="govuk-button" data-accept-cookie="hide-banner">Hide this message</button>
@@ -105,7 +105,12 @@
 
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <% if flash[:success] %>
-          <%= govuk_notification_banner(title: 'Success', success: true, title_id: 'success-message', html_attributes: { role: 'alert' }) do |notification_banner| %>
+          <%= govuk_notification_banner(
+            title: 'Success',
+            success: true,
+            title_id: 'success-message',
+            html_attributes: { role: 'alert' },
+          ) do |notification_banner| %>
             <%= notification_banner.slot(:heading, text: flash[:success]) %>
           <% end %>
         <% end %>
