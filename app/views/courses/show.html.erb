@@ -2,7 +2,13 @@
 
 <% if permitted_referrer? %>
   <%= content_for(:before_content) do %>
-    <%= govuk_back_link_to(request.referer, 'Back to search results') %>
+    <%= govuk_back_link({
+      text: 'Back to search results',
+      href: request.referer,
+      html_attributes: {
+        data: { qa: 'page-back' },
+      },
+    }) %>
   <% end %>
 <% end %>
 

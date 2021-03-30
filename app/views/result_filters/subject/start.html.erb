@@ -1,5 +1,11 @@
 <% content_for :before_content do %>
-  <%= govuk_back_link_to(root_path(@results_filter_query_parameters), 'Back to location') %>
+  <%= govuk_back_link({
+    text: 'Back to location',
+    href: root_path(@results_filter_query_parameters),
+    html_attributes: {
+      data: { qa: 'page-back' },
+    },
+  }) %>
 <% end %>
 
 <%= render 'result_filters/subject/form', submit_button_text: 'Continue' %>

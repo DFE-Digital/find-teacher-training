@@ -25,7 +25,19 @@
     </script>
 
     <% unless current_page?(cookie_preferences_path) %>
-      <%= render GovukComponent::CookieBanner.new(title: 'Cookies on Find postgraduate teacher training', html_attributes: { hidden: true, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-cookie-banner', 'data-qa': 'cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        title: 'Cookies on Find postgraduate teacher training',
+        html_attributes: {
+          hidden: true,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-cookie-banner',
+            qa: 'cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
           <p class="govuk-body">We use some essential cookies to make this service work.</p>
           <p class="govuk-body">We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
@@ -33,36 +45,59 @@
         <%= cookie_banner.with(:actions) do %>
           <button type="button" class="govuk-button" data-accept-cookie="true">Accept analytics cookies</button>
           <button type="button" class="govuk-button" data-accept-cookie="false">Reject analytics cookies</button>
-          <%= govuk_link_to('View cookies', cookie_preferences_path, { data: { qa: 'cookie-banner__preference-link' } }) %>
+          <%= govuk_link_to('View cookies', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) %>
         <% end %>
       <% end %>
 
-      <%= render GovukComponent::CookieBanner.new(html_attributes: { hidden: true, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-hide-cookie-banner', 'data-qa': 'hide-cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        html_attributes: {
+          hidden: true,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-hide-cookie-banner',
+            qa: 'hide-cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
-          <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, { data: { qa: 'cookie-banner__preference-link' } }) %> at any time.</p>
+          <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) %> at any time.</p>
         <% end %>
         <%= cookie_banner.with(:actions) do %>
           <button type="button" class="govuk-button" data-accept-cookie="hide-banner">Hide this message</button>
         <% end %>
       <% end %>
 
-      <%= render GovukComponent::CookieBanner.new(title: 'Cookies on Find postgraduate teacher training', html_attributes: { hidden: false, 'aria-label': 'Cookies on Find postgraduate teacher training', 'data-module': 'govuk-fallback-cookie-banner', 'data-qa': 'fallback-cookie-banner' }) do |cookie_banner| %>
+      <%= govuk_cookie_banner(
+        title: 'Cookies on Find postgraduate teacher training',
+        html_attributes: {
+          hidden: false,
+          aria: {
+            label: 'Cookies on Find postgraduate teacher training',
+          },
+          data: {
+            module: 'govuk-fallback-cookie-banner',
+            qa: 'fallback-cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
         <%= cookie_banner.with(:body) do %>
           <p class="govuk-body">We use cookies to make this service work and collect analytics information. To accept or reject cookies, turn on JavaScript in your browser settings or reload this page.</p>
         <% end %>
       <% end %>
     <% end %>
 
-    <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+    <%= govuk_skip_link %>
 
-    <%= render GovukComponent::Header.new(
+    <%= govuk_header(
       logo: 'GOV.UK',
       service_name: 'Find postgraduate teacher training',
       service_name_href: root_path,
     ) %>
 
     <div class="govuk-width-container">
-      <%= render GovukComponent::PhaseBanner.new(phase: 'Beta') do %>
+      <%= govuk_phase_banner(phase: 'Beta') do %>
         This is a new service – <%= govuk_link_to 'give feedback or report a problem', 'mailto:becomingateacher@digital.education.gov.uk?subject=Feedback%20about%20Find%20postgraduate%20teacher%20training', class: 'govuk-link--no-visited-state' %>
       <% end %>
 
@@ -70,7 +105,12 @@
 
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <% if flash[:success] %>
-          <%= render GovukComponent::NotificationBanner.new(title: 'Success', success: true, title_id: 'success-message', html_attributes: { role: 'alert' }) do |notification_banner| %>
+          <%= govuk_notification_banner(
+            title: 'Success',
+            success: true,
+            title_id: 'success-message',
+            html_attributes: { role: 'alert' },
+          ) do |notification_banner| %>
             <%= notification_banner.slot(:heading, text: flash[:success]) %>
           <% end %>
         <% end %>
@@ -88,7 +128,7 @@
       ) %>
     <% end %>
 
-    <%= render GovukComponent::Footer.new do |footer| %>
+    <%= govuk_footer do |footer| %>
       <%= footer.slot(:meta) do %>
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
           <h2 class="govuk-heading-m">Get support</h2>
