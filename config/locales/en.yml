@@ -72,9 +72,8 @@ en:
   service_name:
     get_into_teaching: Get Into Teaching
   get_into_teaching:
-    # TODO: Update to 0800 389 2500 when GIT leaves beta
-    tel: 0800 389 2501
+    tel: 0800 389 2500
     opening_times: "Monday to Friday, 8.30am to 5pm"
-    # TODO: Update domain names when GIT leaves beta
+    # TODO: Update domain names when Get an adviser leaves beta
     url_get_an_advisor: https://beta-adviser-getintoteaching.education.gov.uk
-    url_online_chat: https://beta-getintoteaching.education.gov.uk/#talk-to-us
+    url_online_chat: https://getintoteaching.education.gov.uk/#talk-to-us
