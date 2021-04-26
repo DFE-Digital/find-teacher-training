@@ -14,11 +14,11 @@
       <%= markdown(course.how_school_placements_work) %>
     <% end %>
 
-    <% if FeatureFlag.active?(:ucas_only_locations) && course.has_vacancies? && course.site_statuses.map(&:site).uniq.many? %>
-      <h2 class="govuk-heading-m">Locations</h2>
+    <% if FeatureFlag.active?(:ucas_only_locations) && course.site_statuses.map(&:site).uniq.many? %>
+      <h3 class="govuk-heading-m">Locations</h3>
       <p class="govuk-body">You can select one of the following locations when you apply.</p>
       <table class="govuk-table app-table--vertical-align-middle" data-qa="course__choose_a_training_location">
-        <caption class="govuk-visually-hidden">Choose a training location - List of locations, vacancies and codes</caption>
+        <caption class="govuk-visually-hidden">List of locations and vacancies</caption>
         <thead class="govuk-table__head">
           <tr class="govuk-table__row">
             <th class="govuk-table__header" scope="col">Location</th>
