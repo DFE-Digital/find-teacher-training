@@ -86,9 +86,13 @@
         <%= render partial: 'courses/about_course' %>
       <% end %>
 
-      <% if course.how_school_placements_work.present? || course.program_type == 'higher_education_programme' || course.program_type == 'scitt_programme' %>
+      <% if course.how_school_placements_work.present? ||
+        course.program_type == 'higher_education_programme' ||
+        course.program_type == 'scitt_programme' ||
+        (FeatureFlag.active?(:ucas_only_locations) && course.site_statuses.map(&:site).uniq.many?) %>
         <%= render partial: 'courses/about_schools' %>
       <% end %>
+
 
       <%= render partial: 'courses/entry_requirements_qualifications' %>
 
