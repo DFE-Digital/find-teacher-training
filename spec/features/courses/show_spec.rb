@@ -89,7 +89,6 @@ describe 'Course show', type: :feature do
       resources: course,
       include: ['subjects', 'site_statuses.site', 'provider.sites', 'accrediting_provider'],
     )
-
     visit course_path(course.provider_code, course.course_code)
   end
 
@@ -337,6 +336,24 @@ describe 'Course show', type: :feature do
 
       it 'renders the HEI where will you train advice box' do
         expect(course_page).to have_content('Universities can work with over 100 potential placement schools. Most will be within 10 miles of the university')
+      end
+
+      context 'The Bedfordshire Schools Training Partnership' do
+        let(:provider) do
+          build(
+            :provider,
+            provider_name: 'The Bedfordshire Schools Training Partnership',
+            provider_code: 'B31',
+            provider_type: 'scitt',
+            website: 'https://scitt.org',
+            address1: '1 Long Rd',
+            postcode: 'E1 ABC',
+          )
+        end
+
+        it 'does not render the HEI where will you train advice box' do
+          expect(course_page).not_to have_content('Universities can work with over 100 potential placement schools. Most will be within 10 miles of the university')
+        end
       end
     end
 
