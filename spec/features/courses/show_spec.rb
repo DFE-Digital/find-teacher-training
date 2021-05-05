@@ -363,6 +363,24 @@ describe 'Course show', type: :feature do
       it 'renders the SCITT where will you train advice box' do
         expect(course_page).to have_content('You’ll be placed in different schools during your training. You can’t pick which schools you want to be in')
       end
+
+      context 'Educate Teacher Training' do
+        let(:provider) do
+          build(
+            :provider,
+            provider_name: 'Educate Teacher Training',
+            provider_code: 'E65',
+            provider_type: 'scitt',
+            website: 'https://scitt.org',
+            address1: '1 Long Rd',
+            postcode: 'E1 ABC',
+          )
+        end
+
+        it 'does not render the SCITT where will you train advice box' do
+          expect(course_page).not_to have_content('You’ll be placed in different schools during your training. You can’t pick which schools you want to be in')
+        end
+      end
     end
 
     context 'pg_teaching_apprenticeship' do
