@@ -1,11 +1,11 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-schools"><%= course.placements_heading %></h2>
   <div data-qa="course__about_schools">
-    <% if course.program_type == 'higher_education_programme'  && course.provider.provider_code != 'B31'  %>
+    <% if course.program_type == 'higher_education_programme' && course.provider.provider_code != 'B31'  %>
       <%= render AdviceComponent.new(title: 'Where you will train') do %>
         <%= render partial: 'courses/placement/hei', locals: { course: course } %>
       <% end %>
-    <% elsif course.program_type == 'scitt_programme' %>
+    <% elsif course.program_type == 'scitt_programme'  && course.provider.provider_code != 'E65' %>
       <%= render AdviceComponent.new(title: 'Where you will train') do %>
         <%= render partial: 'courses/placement/scitt', locals: { course: course } %>
       <% end %>
