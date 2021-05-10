@@ -7,7 +7,7 @@ export const FilterToggleButton = class {
 
   setupResponsiveChecks () {
     this.mq = window.matchMedia(this.options.bigModeMediaQuery)
-    this.mq.addEventListener('change', $.proxy(this, 'checkMode'))
+    this.mq.addListener($.proxy(this, 'checkMode'))
     this.checkMode(this.mq)
   }
 
