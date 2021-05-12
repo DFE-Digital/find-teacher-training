@@ -664,6 +664,19 @@ describe ResultsView do
       )
     end
 
+    let(:site5) do
+      build(
+        :site,
+        latitude: 51.4985,
+        longitude: 0.1358,
+        address1: 'No vacancies road',
+        address2: 'Witham',
+        address3: 'Essex',
+        address4: 'UK',
+        postcode: 'CM8 2SD',
+      )
+    end
+
     let(:course) do
       build(
         :course,
@@ -672,6 +685,7 @@ describe ResultsView do
           build(:site_status, :full_time_and_part_time, site: site2),
           build(:site_status, :full_time_and_part_time, site: site3),
           build(:site_status, :full_time_and_part_time, site: site4, status: 'suspended'),
+          build(:site_status, :full_time_and_part_time, site: site5, has_vacancies?: false),
         ],
       )
     end
@@ -681,7 +695,7 @@ describe ResultsView do
     end
 
     describe '#nearest_address' do
-      it 'returns the address to the nearest site' do
+      it 'returns the address to the nearest site with vacancies' do
         allow(Geokit::LatLng).to receive(:new).and_return(geocoder)
         allow(geocoder).to receive(:distance_to).with('51.4985,0.1367')
         allow(geocoder).to receive(:distance_to).with(',').and_raise(Geokit::Geocoders::GeocodeError)
@@ -701,13 +715,13 @@ describe ResultsView do
     end
 
     describe '#sites_count' do
-      it 'returns the running or new sites count' do
+      it 'returns the running or new sites with vacancies count' do
         expect(results_view.sites_count(course)).to eq(1)
       end
     end
 
     describe '#site_distance' do
-      it 'returns the running or new sites count' do
+      it 'returns the running or new sites with vacancies count' do
         expect(results_view.site_distance(course)).to eq(0.1)
       end
     end

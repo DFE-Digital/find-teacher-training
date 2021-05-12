@@ -162,7 +162,7 @@ class ResultsView
   end
 
   def site_distance(course)
-    distances = new_or_running_sites_for(course).map do |site|
+    distances = new_or_running_sites_with_vacancies_for(course).map do |site|
       lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
     end
 
@@ -190,11 +190,11 @@ class ResultsView
   end
 
   def has_sites?(course)
-    !new_or_running_sites_for(course).empty?
+    !new_or_running_sites_with_vacancies_for(course).empty?
   end
 
   def sites_count(course)
-    new_or_running_sites_for(course).count
+    new_or_running_sites_with_vacancies_for(course).count
   end
 
   def nearest_location_name(course)
@@ -277,7 +277,7 @@ class ResultsView
 private
 
   def nearest_location(course)
-    new_or_running_sites_for(course).min_by do |site|
+    new_or_running_sites_with_vacancies_for(course).min_by do |site|
       lat_long.distance_to("#{site[:latitude]},#{site[:longitude]}")
     end
   end
@@ -295,10 +295,11 @@ private
     qualification
   end
 
-  def new_or_running_sites_for(course)
+  def new_or_running_sites_with_vacancies_for(course)
     sites = course
       .site_statuses
       .select(&:new_or_running?)
+      .select(&:has_vacancies?)
       .map(&:site)
       .reject do |site|
         # Sites that have no address details whatsoever are not to be considered
