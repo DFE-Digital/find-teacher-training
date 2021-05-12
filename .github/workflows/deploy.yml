@@ -77,7 +77,7 @@ jobs:
         with:
           terraform_version: 0.13.5
 
-      - uses: azure/login@v1
+      - uses: azure/login@v1.3.0
         with:
           creds: ${{ secrets[format('AZURE_CREDENTIALS_{0}', env.DEPLOY_ENV)] }}
 
