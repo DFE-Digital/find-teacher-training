@@ -33,6 +33,10 @@
     <dd data-qa="course__qualifications">
       <%= render partial: 'courses/qualification' %>
     </dd>
+    <% if course.age_range_in_years.present? %>
+      <dt class="app-description-list__label">Age range</dt>
+      <dd data-qa="course__age_range"><%= course.age_range_in_years.humanize %></dd>
+    <% end %>
     <% if course.length.present? %>
       <dt class="app-description-list__label">Course length</dt>
       <dd data-qa="course__length"><%= course.length %></dd>
