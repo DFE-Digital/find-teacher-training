@@ -47,6 +47,7 @@ module PageObjects
       element :end_of_cycle_notice, '[data-qa=course__end_of_cycle_notice]'
       element :training_location_guidance, '[data-qa=course__training_location_guidance]'
       element :feedback_link, '[data-qa=feedback-link]'
+      element :age_range, '[data-qa=course__age_range]'
     end
   end
 end

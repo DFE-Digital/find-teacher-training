@@ -23,6 +23,7 @@ describe 'Course show', type: :feature do
       provider_type: provider.provider_type,
       recruitment_cycle: current_recruitment_cycle,
       accrediting_provider: accrediting_provider,
+      age_range_in_years: '11_to_16',
       course_length: 'OneYear',
       applications_open_from: '2019-01-01T00:00:00Z',
       start_date: '2019-09-01T00:00:00Z',
@@ -112,6 +113,10 @@ describe 'Course show', type: :feature do
 
       expect(course_page.qualifications).to have_content(
         'PGCE with QTS',
+      )
+
+      expect(course_page.age_range).to have_content(
+        '11 to 16',
       )
 
       expect(course_page.funding_option).to have_content(
