@@ -27,10 +27,11 @@ locals {
   web_app_start_command = "bundle exec rails server -b 0.0.0.0"
   logging_service_name  = "find-logit-${var.app_environment}"
   service_gov_uk_host_names = {
-    qa      = ["qa"]
-    staging = ["staging"]
-    sandbox = ["sandbox"]
-    prod    = ["www", "www2"]
+    qa       = ["qa"]
+    staging  = ["staging"]
+    sandbox  = ["sandbox"]
+    rollover = ["rollover"]
+    prod     = ["www", "www2"]
   }
   web_app_service_gov_uk_route_ids = [for r in cloudfoundry_route.web_app_service_gov_uk_route : r.id]
   web_app_routes                   = concat(local.web_app_service_gov_uk_route_ids, [cloudfoundry_route.web_app_cloudapps_digital_route.id])
