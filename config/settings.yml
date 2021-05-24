@@ -1,5 +1,6 @@
 application_name: find-teacher-training
 base_url: http://localhost:3002
+apply_base_url: https://www.apply-for-teacher-training.service.gov.uk
 teacher_training_api:
   # URL of the API app (teacher-training-api)
   base_url: http://localhost:3001

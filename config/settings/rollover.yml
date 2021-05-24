@@ -1,4 +1,5 @@
 base_url: https://find-rollover.london.cloudapps.digital
+apply_base_url: https://apply-rollover.london.cloudapps.digital
 teacher_training_api:
   base_url: https://teacher-training-api-rollover.london.cloudapps.digital
 valid_referers:
