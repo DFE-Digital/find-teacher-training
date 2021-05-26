@@ -1,4 +1,5 @@
 base_url: https://www.find-postgraduate-teacher-training.service.gov.uk
+apply_base_url: https://www.apply-for-teacher-training.service.gov.uk
 teacher_training_api:
   base_url: https://api.publish-teacher-training-courses.service.gov.uk
 valid_referers:

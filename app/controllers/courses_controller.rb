@@ -27,7 +27,7 @@ class CoursesController < ApplicationController
 
     Rails.logger.info("Course apply conversion. Provider: #{course.provider.provider_code}. Course: #{course.course_code}")
 
-    redirect_to "https://www.apply-for-teacher-training.service.gov.uk/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
+    redirect_to "#{Settings.apply_base_url}/candidate/apply?providerCode=#{course.provider.provider_code}&courseCode=#{course.course_code}"
   rescue JsonApiClient::Errors::NotFound
     render template: 'errors/not_found', status: :not_found, formats: [:html]
   end
