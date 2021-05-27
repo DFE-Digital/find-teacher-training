@@ -39,7 +39,7 @@ jobs:
         run: echo "DOCKER_IMAGE=dfedigital/find-teacher-training:${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Build Docker Image
-        uses: docker/build-push-action@v2.4.0
+        uses: docker/build-push-action@v2.5.0
         with:
           tags: ${{ env.DOCKER_IMAGE}}
           push: ${{ github.actor != 'dependabot[bot]' }}
