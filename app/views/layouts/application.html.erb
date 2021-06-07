@@ -91,9 +91,8 @@
     <%= govuk_skip_link %>
 
     <%= govuk_header(
-      logo: 'GOV.UK',
       service_name: 'Find postgraduate teacher training',
-      service_name_href: root_path,
+      service_url: root_path,
       classes: "govuk-!-display-none-print app-header #{environment_header_class}",
     ) %>
 
@@ -117,7 +116,7 @@
             title_id: 'success-message',
             html_attributes: { role: 'alert' },
           ) do |notification_banner| %>
-            <%= notification_banner.slot(:heading, text: flash[:success]) %>
+            <%= notification_banner.heading(text: flash[:success]) %>
           <% end %>
         <% end %>
 
@@ -135,7 +134,7 @@
     <% end %>
 
     <%= govuk_footer do |footer| %>
-      <%= footer.slot(:meta) do %>
+      <%= footer.meta do %>
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
           <h2 class="govuk-heading-m">Get support</h2>
           <div class="govuk-grid-row govuk-!-margin-bottom-5">

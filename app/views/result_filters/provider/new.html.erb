@@ -20,7 +20,7 @@
     <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
     <div>
-      <%= govuk_details(summary: 'Try another provider') do %>
+      <%= govuk_details(summary_text: 'Try another provider') do %>
         <%= form_with url: provider_path, method: :get, data: { 'ga-event-form' => 'Provider' } do |form| %>
           <fieldset class="govuk-fieldset">
             <div class="govuk-form-group">
