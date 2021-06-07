@@ -9,13 +9,10 @@ module ViewHelper
   end
 
   def environment_label
-    case Rails.env
-    when 'development'
-      'Development'
-    when 'sandbox'
-      'Sandbox'
-    when 'production'
+    if Rails.env.production?
       'Beta'
+    else
+      Rails.env.humanize
     end
   end
 

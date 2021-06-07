@@ -91,20 +91,19 @@
     <%= govuk_skip_link %>
 
     <%= govuk_header(
-      logo: 'GOV.UK',
       service_name: 'Find postgraduate teacher training',
-      service_name_href: root_path,
+      service_url: root_path,
       classes: "govuk-!-display-none-print app-header #{environment_header_class}",
     ) %>
 
     <div class="govuk-width-container">
       <%= govuk_phase_banner(
-        phase_tag: {
+        tag: {
           text: environment_label,
           colour: environment_colour,
         },
       ) do %>
-        This is a new service – <%= bat_contact_mail_to 'give feedback or report a problem', subject: 'Feedback about Find postgraduate teacher training', class: 'govuk-link--no-visited-state' %>
+        This is a new service – <%= bat_contact_mail_to 'give feedback or report a problem', subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
       <% end %>
 
       <%= yield(:before_content) %>
@@ -112,12 +111,12 @@
       <main class="govuk-main-wrapper" id="main-content" role="main">
         <% if flash[:success] %>
           <%= govuk_notification_banner(
-            title: 'Success',
+            title_text: 'Success',
             success: true,
             title_id: 'success-message',
             html_attributes: { role: 'alert' },
           ) do |notification_banner| %>
-            <%= notification_banner.slot(:heading, text: flash[:success]) %>
+            <% notification_banner.heading(text: flash[:success]) %>
           <% end %>
         <% end %>
 
@@ -137,7 +136,7 @@
     <% end %>
 
     <%= govuk_footer do |footer| %>
-      <%= footer.slot(:meta) do %>
+      <%= footer.meta do %>
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
           <h2 class="govuk-heading-m">Get support</h2>
           <div class="govuk-grid-row govuk-!-margin-bottom-5">
