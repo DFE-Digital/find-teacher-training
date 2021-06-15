@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include EmitRequestEvents
+
   before_action :store_request_id
   before_action :assign_sentry_contexts
 

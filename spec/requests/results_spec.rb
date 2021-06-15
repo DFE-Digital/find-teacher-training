@@ -14,6 +14,12 @@ describe '/results', type: :request do
       get '/results'
       expect(response).to have_http_status(200)
     end
+
+    xit "sends an event to BigQuery" do
+      get '/results'
+      #expect(
+    end
+
   end
 
   context 'API returns client error (400)' do
