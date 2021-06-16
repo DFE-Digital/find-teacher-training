@@ -13,20 +13,24 @@ module Events
     end
 
     def with_request_details(rack_request)
-      @event_hash.merge!(
+      @event_hash.deep_merge!(
         request_uuid: rack_request.uuid,
         request_data: {
           path: rack_request.path,
           method: rack_request.method,
           user_agent: rack_request.user_agent,
-        }
+        },
       )
 
       self
     end
 
     def with_response_details(response)
-      @event_hash[:request_data][:status] = response.status
+      @event_hash.deep_merge!(
+        request_data: {
+          status: response.status,
+        },
+      )
 
       self
     end
