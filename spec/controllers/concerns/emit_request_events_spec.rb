@@ -22,13 +22,7 @@ RSpec.describe EmitRequestEvents, type: :request, with_bigquery: true do
 
       job_args = enqueued_jobs.last[:args]
 
-      expect(job_args.first['type']).to eq('web_request')
-      expect(job_args.first['request_path']).to eq('/')
-      expect(job_args.first['request_method']).to eq('GET')
-      expect(job_args.first['response_status']).to eq(200)
-      expect(job_args.first['user_agent']).to eq('test user agent')
-      expect(job_args.first['environment']).to eq('test')
-      expect(job_args.first['timestamp']).to eq(now.iso8601)
+      expect(job_args.first['event_type']).to eq('web_request')
     end
   end
 end
