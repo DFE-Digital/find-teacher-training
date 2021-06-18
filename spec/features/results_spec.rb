@@ -6,7 +6,7 @@ describe 'results', type: :feature do
 
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'provider.provider_name,name' }
-  let(:params) {}
+  let(:params) { nil }
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
   before do

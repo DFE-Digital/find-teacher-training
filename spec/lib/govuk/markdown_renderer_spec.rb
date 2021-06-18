@@ -2,7 +2,7 @@ require 'rails_helper'
 
 # Ignore whitespace
 def expect_equal_ignoring_ws(first, second)
-  expect(first.lines.map(&:strip).join('')).to eq(second.lines.map(&:strip).join(''))
+  expect(first.lines.map(&:strip).join).to eq(second.lines.map(&:strip).join)
 end
 
 describe Govuk::MarkdownRenderer do

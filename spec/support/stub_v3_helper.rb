@@ -2,14 +2,12 @@ module StubV3Helper
   def stub_api_v3_request(url_path, stub, method = :get, status = 200)
     url = "#{Settings.teacher_training_api.base_url}/api/v3#{url_path}"
 
-    stubbed_request = stub_request(method, url)
+    stub_request(method, url)
                         .to_return(
                           status: status,
                           body: stub.to_json,
                           headers: { 'Content-Type': 'application/vnd.api+json' },
                         )
-
-    stubbed_request
   end
 
 private

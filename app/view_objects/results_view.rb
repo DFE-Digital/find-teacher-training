@@ -137,20 +137,20 @@ class ResultsView
 
   def courses
     @courses ||= begin
-                   base_query = course_query(include_location: location_filter?)
+      base_query = course_query(include_location: location_filter?)
 
-                   base_query = if sort_by_distance?
-                                  base_query.order(:distance)
-                                else
-                                  base_query
-                                    .order("provider.provider_name": results_order)
-                                    .order("name": results_order)
-                                end
+      base_query = if sort_by_distance?
+                     base_query.order(:distance)
+                   else
+                     base_query
+                       .order("provider.provider_name": results_order)
+                       .order("name": results_order)
+                   end
 
-                   base_query
-                     .page(query_parameters[:page] || 1)
-                     .per(results_per_page)
-                 end
+      base_query
+        .page(query_parameters[:page] || 1)
+        .per(results_per_page)
+    end
   end
 
   def course_count

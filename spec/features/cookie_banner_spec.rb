@@ -5,7 +5,7 @@ describe 'cookie banner', type: :feature do
   include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:params) {}
+  let(:params) { nil }
   let(:subject_areas) do
     [
       build(

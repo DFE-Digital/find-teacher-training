@@ -7,6 +7,11 @@ inherit_from:
 Govuk/GovukSubmit:
   Enabled: false
 
+AllCops:
+  Exclude:
+    - 'node_modules/**/*'
+    - 'bin/**/*'
+
 Govuk/GovukLinkTo:
   Exclude:
     # link_to in footer

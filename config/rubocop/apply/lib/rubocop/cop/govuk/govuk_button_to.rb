@@ -3,7 +3,6 @@
 # Add overrides in this repository’s .rubocop.yml
 #
 
-
 module RuboCop
   module Cop
     module Govuk
