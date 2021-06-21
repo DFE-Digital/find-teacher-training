@@ -12,8 +12,6 @@ google:
   gcp_api_key: replace_me
   places_api_host: "https://maps.googleapis.com"
   places_api_path: "/maps/api/place/autocomplete/json"
-  big_query_project_id: bat-find-test
-  big_query_dataset: bat-find-test-events
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 log_level: info

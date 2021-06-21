@@ -5,3 +5,6 @@ valid_referers:
 feature_flags:
   new_filters: false
   ucas_only_locations: false
+google:
+  big_query_project_id: bat-find-test
+  big_query_dataset: bat-find-test-events
