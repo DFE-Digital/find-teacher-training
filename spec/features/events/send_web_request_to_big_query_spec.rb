@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'viewing the root page' do
   include ActiveJob::TestHelper
-  include BigqueryTestHelper
+  include BigQueryTestHelper
 
   it 'sends a web request event to BigQuery' do
-    table = stub_bigquery_table
+    table = stub_big_query_table
 
     allow(table).to receive(:insert)
 
-    activate_feature(:send_web_requests_to_bigquery)
+    activate_feature(:send_web_requests_to_big_query)
 
     request_uuid = SecureRandom.uuid
 

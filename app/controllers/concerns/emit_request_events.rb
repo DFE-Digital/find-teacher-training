@@ -7,12 +7,12 @@ module EmitRequestEvents
   end
 
   def trigger_request_event
-    if FeatureFlag.active?(:send_web_requests_to_bigquery)
+    if FeatureFlag.active?(:send_web_requests_to_big_query)
       request_event = Events::WebRequest.new
                         .with_request_details(request)
                         .with_response_details(response)
 
-      SendEventToBigqueryJob.perform_later(request_event.as_json)
+      SendEventToBigQueryJob.perform_later(request_event.as_json)
     end
   end
 end

@@ -1,4 +1,4 @@
-class SendEventToBigqueryJob < ApplicationJob
+class SendEventToBigQueryJob < ApplicationJob
   TABLE_NAME = 'events'.freeze
 
   def perform(request_event_json)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe SendEventToBigqueryJob do
-  include BigqueryTestHelper
+RSpec.describe SendEventToBigQueryJob do
+  include BigQueryTestHelper
 
   describe '#perform' do
     let(:request_event) do
@@ -19,13 +19,13 @@ RSpec.describe SendEventToBigqueryJob do
       }
     end
 
-    let(:table) { stub_bigquery_table }
+    let(:table) { stub_big_query_table }
 
     before do
       allow(table).to receive(:insert)
     end
 
-    it 'sends request event JSON to Bigquery' do
+    it 'sends request event JSON to BigQuery' do
       described_class.new.perform(request_event.as_json)
 
       expect(table).to have_received(:insert).with([request_event.as_json])
