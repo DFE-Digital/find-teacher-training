@@ -8,18 +8,34 @@ RSpec.describe EmitRequestEvents, type: :request, with_bigquery: true do
   let(:table) { stub_bigquery_table }
 
   before do
-    activate_feature(:send_web_requests_to_bigquery)
-
     allow(table).to receive(:insert)
   end
 
-  it 'enqueues job to send event to bigquery' do
-    get '/'
+  context 'with send_web_requests_to_bigquery enabled' do
+    before do
+      activate_feature(:send_web_requests_to_bigquery)
+    end
 
-    expect(SendEventToBigqueryJob).to have_been_enqueued.exactly(:once)
+    it 'enqueues job to send event to bigquery' do
+      get '/'
 
-    job_args = enqueued_jobs.last[:args]
+      expect(SendEventToBigqueryJob).to have_been_enqueued.exactly(:once)
 
-    expect(job_args.first['event_type']).to eq('web_request')
+      job_args = enqueued_jobs.last[:args]
+
+      expect(job_args.first['event_type']).to eq('web_request')
+    end
+  end
+
+  context 'with send_web_requests_to_bigquery disabled' do
+    before do
+      deactivate_feature(:send_web_requests_to_bigquery)
+    end
+
+    it 'does not enqueue any jobs' do
+      get '/'
+
+      expect(SendEventToBigqueryJob).not_to have_been_enqueued
+    end
   end
 end
