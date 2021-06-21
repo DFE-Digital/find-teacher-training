@@ -1,4 +1,4 @@
-require_relative '../../app/services/deprecated_parameters_service.rb'
+require_relative '../../app/services/deprecated_parameters_service'
 
 describe DeprecatedParametersService do
   subject(:service) { described_class.new(parameters: parameters) }

@@ -1,8 +1,8 @@
 def api_v3_url(type:, params:, fields: nil, include: nil, pagination: nil, search: nil, sort: nil)
   query_params = {}
   unless fields.nil?
-    query_params[:fields] = fields.to_h do |model_name, model_fields|
-      [model_name, model_fields.join(',')]
+    query_params[:fields] = fields.transform_values do |model_fields|
+      model_fields.join(',')
     end
   end
   query_params[:include] = include.join(',') unless include.nil?

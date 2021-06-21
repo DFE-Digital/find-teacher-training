@@ -49,13 +49,20 @@ Application is hosted on [GOV.UK PaaS](https://www.cloud.service.gov.uk) and eve
 
 ## Linting
 
-It's best to lint just your app directories and not those belonging to the framework, e.g.
+### Rubocop
+
+We inherit the Rubocop config from [Apply for teacher training](https://github.com/DFE-Digital/apply-for-teacher-training).
+To pull the latest version, run `bundle exec rake rubocop:copy_config_from_apply`. Then to run Rubocop:
 
 ```bash
-bundle exec rubocop app config lib spec Gemfile --format clang -a
+bundle exec rubocop -a
+```
 
-or
+(`-a` will auto-correct violations where possible)
 
+### SCSS
+
+```bash
 bundle exec scss-lint app/webpacker/styles
 ```
 

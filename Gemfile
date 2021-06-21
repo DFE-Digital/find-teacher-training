@@ -79,8 +79,10 @@ group :development, :test do
   # Better use of test helpers such as save_and_open_page/screenshot
   gem 'launchy'
 
-  # GOV.UK interpretation of rubocop for linting Ruby
-  gem 'rubocop-govuk'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'rubocop-rails'
+  gem 'rubocop-rake'
   gem 'scss_lint-govuk'
   gem 'erb_lint', require: false
 
