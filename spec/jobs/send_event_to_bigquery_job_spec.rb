@@ -8,7 +8,7 @@ RSpec.describe SendEventToBigqueryJob do
       {
         environment: 'production',
         event_type: 'web_request',
-        occured_at: Time.zone.now.iso8601,
+        occurred_at: Time.zone.now.iso8601,
         request_data: {
           method: 'GET',
           path: '/',

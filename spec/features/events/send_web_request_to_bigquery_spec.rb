@@ -26,7 +26,7 @@ RSpec.describe 'viewing the root page' do
           [{
             'environment' => 'test',
             'event_type' => 'web_request',
-            'occured_at' => Time.now.utc.iso8601,
+            'occurred_at' => Time.now.utc.iso8601,
             'request_data' => {
               'method' => 'GET',
               'path' => '/',

@@ -2,7 +2,7 @@ module Events
   class WebRequest
     def initialize
       @event_hash = {
-        occured_at: Time.zone.now.iso8601,
+        occurred_at: Time.zone.now.iso8601,
         environment: Rails.env,
         event_type: 'web_request',
       }
