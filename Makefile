@@ -121,7 +121,7 @@ install-fetch-config: ## Install the fetch-config script
 .PHONY: edit-app-secrets
 edit-app-secrets: install-fetch-config ## Edit Find App Secrets
 	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
-		-e -d azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} -f yaml
+		-e -d azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} -f yaml -c
 
 .PHONY: print-app-secrets
 print-app-secrets: install-fetch-config ## View Find App Secrets
