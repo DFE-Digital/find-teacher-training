@@ -66,17 +66,31 @@ bundle exec rubocop -a
 bundle exec scss-lint app/webpacker/styles
 ```
 
-## Application Secrets
+## Setting environment variables
 
-Secrets like API keys and tokens are configured in a YAML file and stored as `base64` encoded string in GitHub secrets.
-```yaml
-SENTRY_DSN: xxx
-SETTINGS__GOOGLE__GCP_API_KEY : xxx
-SETTINGS__GOOGLE__MAPS_API_KEY : xxx
-SETTINGS__SKYLIGHT_AUTH_TOKEN: xxx
+Environment variables and app secrets for each environment are stored in Azure KeyVault and gets applied each time the application is deployed. There are make commands which assist in viewing/editing these environment variables from a local console.
+Please note that you need to have the [az cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) installed for this to work.
+
+You also need an activated PIM request to view/edit secrets all environments except qa.
+
+Environment | KeyVault             | Azure Subscription
+----------- | -------------------- | ------ |
+qa          | s121d01-shared-kv-01 | s121-findpostgraduateteachertraining-development
+staging     | s106t01-shared-kv-01 | s106-applyforpostgraduateteachertraining-test
+rollover    | s106t01-shared-kv-01 | s106-applyforpostgraduateteachertraining-test
+sandbox     | s106p01-shared-kv-01 | s106-applyforpostgraduateteachertraining-production
+production  | s106p01-shared-kv-01 | s106-applyforpostgraduateteachertraining-production
+
+### View environment variables
+
+From the root of the repository run the below command, for environments other than qa, make sure you have an activated PIM request
 ```
-The above yaml file is populated with values for each environment and the output of the below command is stored in GitHub secrets as `APP_SECRETS_QA`, or `APP_SECRETS_STAGING` or `APP_SECRETS_PRODUCTION` respectively.
-```shell
-base64 -w0 app_secrets.yml
+make <qa|staging|sandbox|production> print-app-secrets
 ```
-Note: This process will soon be moved to Azure keyVault for easier management of secrets.
+
+### Edit environment variables
+From the root of the repository run the below command, for environments other than qa, make sure you have an activated PIM request
+```
+make <qa|staging|sandbox|production> edit-app-secrets
+```
+This will present the app secrets in YAML format in your editor (`vim`), you can make changes to the file and once saved, the secrets will be uploaded to KeyVault and applied to the app after the subsequent deployment.
