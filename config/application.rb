@@ -5,6 +5,7 @@ require_relative 'boot'
 require 'rails'
 # Pick the frameworks you want:
 require 'active_model/railtie'
+require 'active_job/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
 require 'view_component/engine'
@@ -29,5 +30,9 @@ module FindTeacherTraining
     config.middleware.use Rack::Deflater
 
     config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
+
+    # Configure ActiveJobs to use on-server thread pool. This is acceptable for
+    # BigQuery event sending for now, can be changed to Sidekiq in the future.
+    config.active_job.queue_adapter = :async
   end
 end

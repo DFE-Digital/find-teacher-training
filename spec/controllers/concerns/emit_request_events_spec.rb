@@ -1,0 +1,41 @@
+require 'rails_helper'
+
+RSpec.describe EmitRequestEvents, type: :request, with_bigquery: true do
+  include BigQueryTestHelper
+
+  let(:project) { instance_double(Google::Cloud::Bigquery::Project, dataset: dataset) }
+  let(:dataset) { instance_double(Google::Cloud::Bigquery::Dataset, table: table) }
+  let(:table) { stub_big_query_table }
+
+  before do
+    allow(table).to receive(:insert)
+  end
+
+  context 'with send_web_requests_to_big_query enabled' do
+    before do
+      activate_feature(:send_web_requests_to_big_query)
+    end
+
+    it 'enqueues job to send event to bigquery' do
+      get '/'
+
+      expect(SendEventToBigQueryJob).to have_been_enqueued.exactly(:once)
+
+      job_args = enqueued_jobs.last[:args]
+
+      expect(job_args.first['event_type']).to eq('web_request')
+    end
+  end
+
+  context 'with send_web_requests_to_big_query disabled' do
+    before do
+      deactivate_feature(:send_web_requests_to_big_query)
+    end
+
+    it 'does not enqueue any jobs' do
+      get '/'
+
+      expect(SendEventToBigQueryJob).not_to have_been_enqueued
+    end
+  end
+end
