@@ -15,6 +15,7 @@ RSpec.describe 'viewing the root page' do
 
     page.driver.header 'USER_AGENT', 'test agent'
     page.driver.header 'X_REQUEST_ID', request_uuid
+    page.driver.header 'REFERER', 'http://www.gov.uk'
 
     Timecop.freeze do
       visit '/' # , headers: { 'HTTP_USER_AGENT' => 'test user agent' }
@@ -27,13 +28,13 @@ RSpec.describe 'viewing the root page' do
             'environment' => 'test',
             'event_type' => 'web_request',
             'occurred_at' => Time.now.utc.iso8601,
-            'request_data' => {
-              'method' => 'GET',
-              'path' => '/',
-              'status' => 200,
-              'user_agent' => 'test agent',
-            },
+            'request_method' => 'GET',
+            'request_path' => '/',
+            'request_user_agent' => 'test agent',
+            'request_referer' => 'http://www.gov.uk',
             'request_uuid' => request_uuid,
+            'response_content_type' => 'text/html; charset=utf-8',
+            'response_status' => 200,
           }],
         ),
       )

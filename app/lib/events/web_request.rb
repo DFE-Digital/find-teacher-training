@@ -15,11 +15,11 @@ module Events
     def with_request_details(rack_request)
       @event_hash.deep_merge!(
         request_uuid: rack_request.uuid,
-        request_data: {
-          path: rack_request.path,
-          method: rack_request.method,
-          user_agent: rack_request.user_agent,
-        },
+        request_path: rack_request.path,
+        request_method: rack_request.method,
+        request_user_agent: rack_request.user_agent,
+        request_referer: rack_request.referer,
+        request_query: query_to_kv_pairs(rack_request.query_string),
       )
 
       self
@@ -27,9 +27,8 @@ module Events
 
     def with_response_details(response)
       @event_hash.deep_merge!(
-        request_data: {
-          status: response.status,
-        },
+        response_status: response.status,
+        response_content_type: response.content_type,
       )
 
       self

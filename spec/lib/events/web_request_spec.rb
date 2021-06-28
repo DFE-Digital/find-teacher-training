@@ -39,8 +39,9 @@ RSpec.describe Events::WebRequest do
     let(:method)       { 'GET' }
     let(:user_agent)   { 'not real test user agent' }
     let(:uuid)         { '19bd4d16-da8f-46ed-b211-874eeac377bd' }
+    let(:referer)      { 'http://127.0.0.1/' }
 
-    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid) }
+    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid, referer: referer) }
     let(:web_request)  { Events::WebRequest.new.with_request_details(rack_request) }
 
     it 'sets request_uuid' do
@@ -48,25 +49,34 @@ RSpec.describe Events::WebRequest do
     end
 
     it 'sets request path' do
-      expect(web_request.as_json['request_data']['path']).to eq path
+      expect(web_request.as_json['request_path']).to eq path
     end
 
     it 'sets request method' do
-      expect(web_request.as_json['request_data']['method']).to eq method
+      expect(web_request.as_json['request_method']).to eq method
     end
 
     it 'sets request user_agent' do
-      expect(web_request.as_json['request_data']['user_agent']).to eq user_agent
+      expect(web_request.as_json['request_user_agent']).to eq user_agent
+    end
+
+    it 'sets request referer' do
+      expect(web_request.as_json['request_referer']).to eq referer
     end
   end
 
   describe '#with_response_data' do
-    it 'sets the response status' do
-      status = instance_double(Integer)
-      response = instance_double(ActionDispatch::Response, status: status)
-      web_request = Events::WebRequest.new.with_response_details(response)
+    let(:status) { instance_double(Integer) }
+    let(:response) { instance_double(ActionDispatch::Response, status: status, content_type: content_type) }
+    let(:content_type) { 'text/htnl' }
+    let(:web_request) { Events::WebRequest.new.with_response_details(response) }
 
-      expect(web_request.as_json['request_data']['status']).to eq status.as_json
+    it 'sets the response status' do
+      expect(web_request.as_json['response_status']).to eq status.as_json
+    end
+
+    it 'sets the response content type' do
+      expect(web_request.as_json['response_content_type']).to eq content_type
     end
   end
 end
