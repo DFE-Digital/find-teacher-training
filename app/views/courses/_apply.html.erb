@@ -2,7 +2,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=<%= Settings.google.maps_api_key %>&callback=initLocationsMap" async defer></script>
 <% end %>
 
-<div class="govuk-!-margin-bottom-8" id="section-apply">
+<div class="govuk-!-margin-bottom-8">
+  <h2 class="govuk-heading-l" id="section-apply">Apply</h2>
+
   <% if @course.has_vacancies? %>
     <%= render 'apply_button' %>
 
