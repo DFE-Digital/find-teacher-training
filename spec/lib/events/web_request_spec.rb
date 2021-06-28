@@ -40,8 +40,9 @@ RSpec.describe Events::WebRequest do
     let(:user_agent)   { 'not real test user agent' }
     let(:uuid)         { '19bd4d16-da8f-46ed-b211-874eeac377bd' }
     let(:referer)      { 'http://127.0.0.1/' }
+    let(:query_string) { 'param=val' }
 
-    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid, referer: referer) }
+    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid, referer: referer, query_string: query_string) }
     let(:web_request)  { Events::WebRequest.new.with_request_details(rack_request) }
 
     it 'sets request_uuid' do
@@ -62,6 +63,23 @@ RSpec.describe Events::WebRequest do
 
     it 'sets request referer' do
       expect(web_request.as_json['request_referer']).to eq referer
+    end
+
+    it 'sets request params, converting to array' do
+      expect(web_request.as_json['request_query']).to(
+        eq([{ 'key' => 'param', 'value' => ['val'] }]),
+      )
+    end
+
+    context 'query string with array' do
+      let(:query_string) { 'param=val&params[]=one&params[]=two' }
+
+      it 'sets request params, converting to array' do
+        expect(web_request.as_json['request_query']).to(
+          eq([{ 'key' => 'param', 'value' => ['val'] },
+              { 'key' => 'params[]', 'value' => %w[one two] }]),
+        )
+      end
     end
   end
 

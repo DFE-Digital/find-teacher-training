@@ -32,6 +32,7 @@ RSpec.describe 'viewing the root page' do
             'request_path' => '/',
             'request_user_agent' => 'test agent',
             'request_referer' => 'http://www.gov.uk',
+            'request_query' => [],
             'request_uuid' => request_uuid,
             'response_content_type' => 'text/html; charset=utf-8',
             'response_status' => 200,

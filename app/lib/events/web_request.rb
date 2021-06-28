@@ -33,5 +33,14 @@ module Events
 
       self
     end
+
+  private
+
+    def query_to_kv_pairs(query_string)
+      vars = Rack::Utils.parse_query(query_string)
+      vars.map do |(key, value)|
+        { 'key' => key, 'value' => Array.wrap(value) }
+      end
+    end
   end
 end
