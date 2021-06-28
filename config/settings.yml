@@ -12,7 +12,8 @@ google:
   gcp_api_key: replace_me
   places_api_host: "https://maps.googleapis.com"
   places_api_path: "/maps/api/place/autocomplete/json"
-  big_query_table_name: events
+  big_query:
+    table_name: events
 service_support:
   contact_email_address: becomingateacher@digital.education.gov.uk
 log_level: info
