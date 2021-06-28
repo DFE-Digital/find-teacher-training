@@ -5,7 +5,7 @@ RSpec.describe 'viewing the root page' do
   include BigQueryTestHelper
 
   it 'sends a web request event to BigQuery' do
-    table = stub_big_query_table
+    table = stub_big_query_table(table_name: 'events')
 
     allow(table).to receive(:insert)
 

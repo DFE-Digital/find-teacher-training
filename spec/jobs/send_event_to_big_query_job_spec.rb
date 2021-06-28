@@ -19,7 +19,7 @@ RSpec.describe SendEventToBigQueryJob do
       }
     end
 
-    let(:table) { stub_big_query_table }
+    let(:table) { stub_big_query_table(table_name: 'events') }
 
     before do
       allow(table).to receive(:insert)
