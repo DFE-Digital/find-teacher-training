@@ -50,6 +50,9 @@ gem 'jsonapi-deserializable'
 gem 'jsonapi-renderer'
 gem 'jsonapi-serializable'
 
+# Validate JSON schema
+gem 'json-schema'
+
 # Settings for the app
 gem 'config'
 

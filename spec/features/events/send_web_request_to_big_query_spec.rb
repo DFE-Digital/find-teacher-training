@@ -22,6 +22,12 @@ RSpec.describe 'viewing the root page' do
 
       perform_enqueued_jobs
 
+      expect(table).to have_received(:insert) do |*args|
+        schema = File.read('config/event-schema.json')
+        schema_validator = JSONSchemaValidator.new(schema, args.first.first)
+        expect(schema_validator).to be_valid, schema_validator.failure_message
+      end
+
       expect(table).to(
         have_received(:insert).with(
           [{
