@@ -5,10 +5,6 @@
     <div data-qa="course__required_qualifications">
       <%= markdown(course.required_qualifications) %>
     </div>
-  <% else %>
-    <%= render AdviceComponent.new(title: 'The qualifications you need') do %>
-      <%= render partial: 'courses/entry_requirements' %>
-    <% end %>
   <% end %>
 
   <% if course.personal_qualities.present? %>
