@@ -102,6 +102,7 @@ plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, ma
 	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
 	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
+	terraform plan -var-file terraform/workspace_variables/${DEPLOY_ENV}.tfvars terraform
 
 .PHONY: deploy
 deploy: ## Run terraform apply for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
