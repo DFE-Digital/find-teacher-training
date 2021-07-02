@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 jest.mock('./cookie-helper')
 
 import { initFormAnalytics, 

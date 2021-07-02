@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 jest.mock('./analytics', () => {
   return { loadAnalytics : jest.fn() }
 })

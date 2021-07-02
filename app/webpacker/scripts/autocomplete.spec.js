@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import initAutocomplete, {getPath, request} from "./autocomplete";
 
 const abortMock = jest.fn();

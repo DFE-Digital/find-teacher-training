@@ -1,4 +1,8 @@
-import {setConsentedToCookie, 
+/**
+ * @jest-environment jsdom
+ */
+
+import {setConsentedToCookie,
   fetchConsentedToCookieValue,
   checkConsentedToCookieExists,
   removeAllPreviousUsedCookies,
