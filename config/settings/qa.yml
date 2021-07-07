@@ -4,3 +4,6 @@ teacher_training_api:
   base_url: https://api.publish-teacher-training-courses.service.gov.uk
 valid_referers:
   - https://qa.find-postgraduate-teacher-training.education.gov.uk
+
+feature_flags:
+  send_web_requests_to_big_query: true
