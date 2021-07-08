@@ -83,10 +83,41 @@ RSpec.describe Events::WebRequest do
       )
     end
 
-    it 'sets the anonymised user identifier' do
-      expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
-        eq(Digest::SHA2.hexdigest(user_agent + remote_ip))
-      )
+    describe 'anonymised_user_agent_and_ip' do
+      context 'when user agent and ip address both present' do
+        it 'is set to a hash of user agent and ip' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
+            eq(Digest::SHA2.hexdigest(user_agent + remote_ip)),
+          )
+        end
+      end
+
+      context 'when user agent is present but ip address is blank' do
+        let(:remote_ip) { nil }
+
+        it 'is blank' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_blank
+        end
+      end
+
+      context 'when user agent is blank but ip address is present' do
+        let(:user_agent) { nil }
+
+        it 'is set to a hash of the ip' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
+            eq(Digest::SHA2.hexdigest(remote_ip)),
+          )
+        end
+      end
+
+      context 'when user agent and ip address are both blank' do
+        let(:remote_ip) { nil }
+        let(:user_agent) { nil }
+
+        it 'is blank' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_blank
+        end
+      end
     end
 
     context 'query string with array' do
