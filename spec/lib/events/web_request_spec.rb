@@ -95,8 +95,8 @@ RSpec.describe Events::WebRequest do
       context 'when user agent is present but ip address is blank' do
         let(:remote_ip) { nil }
 
-        it 'is blank' do
-          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_blank
+        it 'is nil' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_nil
         end
       end
 
@@ -114,8 +114,8 @@ RSpec.describe Events::WebRequest do
         let(:remote_ip) { nil }
         let(:user_agent) { nil }
 
-        it 'is blank' do
-          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_blank
+        it 'is nil' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_nil
         end
       end
     end
