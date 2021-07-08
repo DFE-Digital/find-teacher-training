@@ -20,6 +20,7 @@ module Events
         request_user_agent: rack_request.user_agent,
         request_referer: rack_request.referer,
         request_query: query_to_kv_pairs(rack_request.query_string),
+        anonymised_user_agent_and_ip: anonymise(rack_request.user_agent.to_s + rack_request.remote_ip.to_s),
       )
 
       self
@@ -41,6 +42,10 @@ module Events
       vars.map do |(key, value)|
         { 'key' => key, 'value' => Array.wrap(value) }
       end
+    end
+
+    def anonymise(text)
+      Digest::SHA2.hexdigest(text)
     end
   end
 end

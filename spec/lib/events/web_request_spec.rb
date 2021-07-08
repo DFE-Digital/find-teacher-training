@@ -41,9 +41,21 @@ RSpec.describe Events::WebRequest do
     let(:uuid)         { '19bd4d16-da8f-46ed-b211-874eeac377bd' }
     let(:referer)      { 'http://127.0.0.1/' }
     let(:query_string) { 'param=val' }
+    let(:remote_ip)    { '10.0.0.1' }
 
-    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid, referer: referer, query_string: query_string) }
-    let(:web_request)  { Events::WebRequest.new.with_request_details(rack_request) }
+    let(:rack_request) do
+      instance_double(
+        ActionDispatch::Request,
+        path: path,
+        method: method,
+        user_agent: user_agent,
+        uuid: uuid,
+        referer: referer,
+        query_string: query_string,
+        remote_ip: remote_ip,
+      )
+    end
+    let(:web_request) { Events::WebRequest.new.with_request_details(rack_request) }
 
     it 'sets request_uuid' do
       expect(web_request.as_json['request_uuid']).to eq uuid
@@ -68,6 +80,12 @@ RSpec.describe Events::WebRequest do
     it 'sets request params, converting to array' do
       expect(web_request.as_json['request_query']).to(
         eq([{ 'key' => 'param', 'value' => ['val'] }]),
+      )
+    end
+
+    it 'sets the anonymised user identifier' do
+      expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
+        eq(Digest::SHA2.hexdigest(user_agent + remote_ip))
       )
     end
 

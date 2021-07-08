@@ -42,6 +42,7 @@ RSpec.describe 'viewing the root page' do
             'request_uuid' => request_uuid,
             'response_content_type' => 'text/html; charset=utf-8',
             'response_status' => 200,
+            'anonymised_user_agent_and_ip' => Digest::SHA2.hexdigest('test agent127.0.0.1'),
           }],
         ),
       )
