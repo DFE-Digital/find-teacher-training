@@ -1,4 +1,4 @@
-<% if FeatureFlag.active?(:display_apply_button) %>
+<% if CycleTimetable.mid_cycle? %>
   <p class="govuk-body">
     <%= govuk_start_now_button(
       text: 'Apply for this course',
