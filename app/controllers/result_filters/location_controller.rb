@@ -73,12 +73,12 @@ module ResultFilters
     end
 
     def back_to_current_page_if_error(form_params)
-      if flash[:start_wizard] && (FeatureFlag.active?(:cycle_ending_soon) || CycleTimetable.preview_mode?)
+      if flash[:start_wizard] && CycleTimetable.preview_mode?
         # In this scenario we do not want to redirect to 'root_path'
         # because root_path is '/cycle-ending-soon' and the
         # validation errors will be lost
         redirect_to start_location_path(form_params)
-      elsif flash[:start_wizard] && (!FeatureFlag.active?(:cycle_ending_soon) || !CycleTimetable.preview_mode?)
+      elsif flash[:start_wizard] && !CycleTimetable.preview_mode?
         redirect_to root_path(form_params)
       else
         redirect_to location_path(form_params)
