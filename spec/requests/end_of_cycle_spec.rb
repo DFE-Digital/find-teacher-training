@@ -11,13 +11,12 @@ describe '/cycle-has-ended', type: :request do
 
   context 'end of cycle' do
     before do
-      activate_feature(:cycle_has_ended)
-      deactivate_feature(:cycle_ending_soon)
+      Timecop.freeze(2021, 10, 3, 1)
       Rails.application.reload_routes!
     end
 
     after do
-      deactivate_feature(:cycle_has_ended)
+      Timecop.return
       Rails.application.reload_routes!
     end
 

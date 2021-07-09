@@ -250,15 +250,23 @@ describe 'Course show', type: :feature do
 
     context 'End of cycle' do
       before do
-        deactivate_feature(:display_apply_button)
         deactivate_feature(:ucas_only_locations)
+        Timecop.freeze(CycleTimetable.apply_2_deadline + 1.hour)
         visit course_path(course.provider_code, course.course_code)
+      end
+
+      after do
+        Timecop.return
       end
 
       it "does not display the 'apply for this course' button" do
         expect(course_page).not_to have_apply_link
         expect(course_page).to have_end_of_cycle_notice
         expect(course_page).not_to have_training_location_guidance
+      end
+
+      it 'renders the deadline banner' do
+        expect(page).to have_content "It’s no longer possible to apply for teacher training starting in the #{CycleTimetable.current_year} to #{CycleTimetable.next_year} academic year"
       end
     end
   end

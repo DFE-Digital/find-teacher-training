@@ -215,23 +215,23 @@ RSpec.feature 'Results page new area and provider filter' do
 
       context 'within cycle and no option selected' do
         it 'displays an error' do
-          deactivate_feature(:cycle_ending_soon)
+          Timecop.travel(Time.zone.local(2020, 10, 6, 10, 0, 0)) do
+            start_page.load
+            start_page.find_courses.click
 
-          start_page.load
-          start_page.find_courses.click
-
-          expect(start_page).to have_content(/Select an option to find courses/)
+            expect(start_page).to have_content(/Select an option to find courses/)
+          end
         end
       end
 
       context 'nearing end of cycle and no options selected' do
         it 'displays an error' do
-          activate_feature(:cycle_ending_soon)
+          Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+            start_page.load
+            start_page.find_courses.click
 
-          start_page.load
-          start_page.find_courses.click
-
-          expect(start_page).to have_content(/Select an option to find courses/)
+            expect(start_page).to have_content(/Select an option to find courses/)
+          end
         end
       end
     end
@@ -286,13 +286,13 @@ RSpec.feature 'Results page new area and provider filter' do
       end
 
       it 'stays on start page after validations' do
-        deactivate_feature(:cycle_ending_soon)
+        Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+          visit root_path
+          filter_page.find_courses.click
 
-        visit root_path
-        filter_page.find_courses.click
-
-        expect(filter_page).to have_error
-        expect(page).to have_current_path(root_path, ignore_query: true)
+          expect(filter_page).to have_error
+          expect(page).to have_current_path(root_path, ignore_query: true)
+        end
       end
 
       context "selecting 'By school, university or other training provider'" do

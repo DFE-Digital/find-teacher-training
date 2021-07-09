@@ -4,7 +4,7 @@ class CycleTimetable
       find_opens: DateTime.new(2020, 10, 6, 9),
       apply_opens: DateTime.new(2020, 10, 13, 9),
       first_deadline_banner: DateTime.new(2021, 7, 12, 9),
-      apply_1_deadline: DateTime.new(2021, 8, 24, 18),
+      apply_1_deadline: DateTime.new(2021, 9, 7, 18),
       apply_2_deadline: DateTime.new(2021, 9, 20, 18),
       find_closes: DateTime.new(2021, 10, 3),
     },
@@ -14,7 +14,7 @@ class CycleTimetable
       # the dates from below here are not the finalised but are required for
       # the current implementation
       first_deadline_banner: DateTime.new(2022, 7, 12, 9),
-      apply_1_deadline: DateTime.new(2022, 8, 24, 18),
+      apply_1_deadline: DateTime.new(2021, 9, 7, 18),
       apply_2_deadline: DateTime.new(2022, 9, 20, 18),
       find_closes: DateTime.new(2022, 10, 3),
     },
