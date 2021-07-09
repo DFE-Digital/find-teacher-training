@@ -428,6 +428,6 @@ describe 'Course show', type: :feature do
   end
 
   def jsonapi_site_status(name, study_mode, status)
-    build(:site_status, study_mode, site: build(:site, location_name: name, travel_to_work_area: 'Leeds'), status: status)
+    build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
   end
 end
