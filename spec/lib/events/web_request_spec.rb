@@ -41,9 +41,21 @@ RSpec.describe Events::WebRequest do
     let(:uuid)         { '19bd4d16-da8f-46ed-b211-874eeac377bd' }
     let(:referer)      { 'http://127.0.0.1/' }
     let(:query_string) { 'param=val' }
+    let(:remote_ip)    { '10.0.0.1' }
 
-    let(:rack_request) { instance_double(ActionDispatch::Request, path: path, method: method, user_agent: user_agent, uuid: uuid, referer: referer, query_string: query_string) }
-    let(:web_request)  { Events::WebRequest.new.with_request_details(rack_request) }
+    let(:rack_request) do
+      instance_double(
+        ActionDispatch::Request,
+        path: path,
+        method: method,
+        user_agent: user_agent,
+        uuid: uuid,
+        referer: referer,
+        query_string: query_string,
+        remote_ip: remote_ip,
+      )
+    end
+    let(:web_request) { Events::WebRequest.new.with_request_details(rack_request) }
 
     it 'sets request_uuid' do
       expect(web_request.as_json['request_uuid']).to eq uuid
@@ -69,6 +81,43 @@ RSpec.describe Events::WebRequest do
       expect(web_request.as_json['request_query']).to(
         eq([{ 'key' => 'param', 'value' => ['val'] }]),
       )
+    end
+
+    describe 'anonymised_user_agent_and_ip' do
+      context 'when user agent and ip address both present' do
+        it 'is set to a hash of user agent and ip' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
+            eq('611cc7906e5a7781acc6747562057dcaf132ce10afcb3f9b59897d75b3994645'),
+          )
+        end
+      end
+
+      context 'when user agent is present but ip address is blank' do
+        let(:remote_ip) { nil }
+
+        it 'is nil' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_nil
+        end
+      end
+
+      context 'when user agent is blank but ip address is present' do
+        let(:user_agent) { nil }
+
+        it 'is set to a hash of the ip' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
+            eq('f5047344122f0dee9974ba6761e61c6b8649e1f3968d13a635ebbf7be53a3a0d'),
+          )
+        end
+      end
+
+      context 'when user agent and ip address are both blank' do
+        let(:remote_ip) { nil }
+        let(:user_agent) { nil }
+
+        it 'is nil' do
+          expect(web_request.as_json['anonymised_user_agent_and_ip']).to be_nil
+        end
+      end
     end
 
     context 'query string with array' do

@@ -43,8 +43,12 @@
     },
     "response_status": {
       "type": "integer"
+    },
+    "anonymised_user_agent_and_ip": {
+      "type": "string"
     }
   },
+  "additionalProperties": false,
   "required": [
     "environment",
     "occurred_at",
