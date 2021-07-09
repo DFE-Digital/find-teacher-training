@@ -250,9 +250,13 @@ describe 'Course show', type: :feature do
 
     context 'End of cycle' do
       before do
-        deactivate_feature(:display_apply_button)
         deactivate_feature(:ucas_only_locations)
+        Timecop.freeze(Time.zone.local(2021, 9, 20, 19, 0, 0))
         visit course_path(course.provider_code, course.course_code)
+      end
+
+      after do
+        Timecop.return
       end
 
       it "does not display the 'apply for this course' button" do

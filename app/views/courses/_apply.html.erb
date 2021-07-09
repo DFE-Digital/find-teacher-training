@@ -8,7 +8,7 @@
   <% if @course.has_vacancies? %>
     <%= render 'apply_button' %>
 
-    <% if FeatureFlag.active?(:display_apply_button) %>
+    <% if CycleTimetable.mid_cycle? %>
       <h3 class="govuk-heading-m">Choose a training location</h3>
       <p class="govuk-body" data-qa="course__training_location_guidance">You’ll also need to choose a training location – select the relevant location name on the application form.</p>
     <% else %>
