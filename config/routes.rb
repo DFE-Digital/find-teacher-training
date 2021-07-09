@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get :healthcheck, controller: :heartbeat
   get :sha, controller: :heartbeat
 
-  if FeatureFlag.active?(:cycle_has_ended)
+  if FeatureFlag.active?(:cycle_has_ended) || CycleTimetable.find_down?
     get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
     get '/', to: redirect('/cycle-has-ended', status: 302)
     get '/results', to: redirect('/cycle-has-ended', status: 302), as: 'results_redirect'
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     get '/cycle-has-ended', to: redirect('/', status: 301)
   end
 
-  if FeatureFlag.active?(:cycle_ending_soon)
+  if FeatureFlag.active?(:cycle_ending_soon) || CycleTimetable.preview_mode?
     root to: redirect('/cycle-ending-soon', status: 302), as: 'cycle_ending_soon_root'
     get '/cycle-ending-soon', to: 'pages#cycle_ending_soon'
     scope module: 'result_filters', path: '/start' do
