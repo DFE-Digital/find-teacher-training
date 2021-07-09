@@ -87,7 +87,7 @@ RSpec.describe Events::WebRequest do
       context 'when user agent and ip address both present' do
         it 'is set to a hash of user agent and ip' do
           expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
-            eq(Digest::SHA2.hexdigest(user_agent + remote_ip)),
+            eq('611cc7906e5a7781acc6747562057dcaf132ce10afcb3f9b59897d75b3994645'),
           )
         end
       end
@@ -105,7 +105,7 @@ RSpec.describe Events::WebRequest do
 
         it 'is set to a hash of the ip' do
           expect(web_request.as_json['anonymised_user_agent_and_ip']).to(
-            eq(Digest::SHA2.hexdigest(remote_ip)),
+            eq('f5047344122f0dee9974ba6761e61c6b8649e1f3968d13a635ebbf7be53a3a0d'),
           )
         end
       end
