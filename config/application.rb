@@ -26,6 +26,8 @@ module FindTeacherTraining
 
     config.exceptions_app = routes
 
+    config.time_zone = 'London'
+
     # https://thoughtbot.com/blog/content-compression-with-rack-deflater
     config.middleware.use Rack::Deflater
 

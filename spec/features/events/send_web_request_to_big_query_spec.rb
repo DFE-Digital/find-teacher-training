@@ -33,7 +33,7 @@ RSpec.describe 'viewing the root page' do
           [{
             'environment' => 'test',
             'event_type' => 'web_request',
-            'occurred_at' => Time.now.utc.iso8601,
+            'occurred_at' => Time.zone.now.iso8601,
             'request_method' => 'GET',
             'request_path' => '/',
             'request_user_agent' => 'test agent',
