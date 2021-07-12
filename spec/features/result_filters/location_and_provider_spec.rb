@@ -234,6 +234,16 @@ RSpec.feature 'Results page new area and provider filter' do
           end
         end
       end
+
+      context 'nearing end of cycle' do
+        it 'displays the deadline banner' do
+          Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+            start_page.load
+
+            expect(start_page).to have_content('there’s no guarantee that the courses currently shown on this website will be on offer next year.')
+          end
+        end
+      end
     end
   end
 
