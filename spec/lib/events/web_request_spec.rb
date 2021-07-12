@@ -17,10 +17,10 @@ RSpec.describe Events::WebRequest do
     end
 
     it 'sets the occurred_at to now' do
-      Timecop.freeze('2021-06-16 12:00:00') do
+      Timecop.freeze(Time.zone.local(2021, 6, 16, 12)) do
         web_request = Events::WebRequest.new
 
-        expect(web_request.as_json['occurred_at']).to eq '2021-06-16T12:00:00Z'
+        expect(web_request.as_json['occurred_at']).to eq '2021-06-16T12:00:00+01:00'
       end
     end
 
