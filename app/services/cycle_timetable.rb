@@ -96,5 +96,9 @@ class CycleTimetable
     year == CYCLE_DATES.keys.last
   end
 
+  def self.cycle_year_range(year = current_year)
+    "#{year} to #{year + 1}"
+  end
+
   private_class_method :last_recruitment_cycle_year?
 end
