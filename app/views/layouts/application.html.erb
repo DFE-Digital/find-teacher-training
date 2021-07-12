@@ -120,8 +120,8 @@
             <%= notification_banner.slot(:heading, text: flash[:success]) %>
           <% end %>
         <% end %>
-        
-        <%= render DeadlineBannerComponent.new(flash_empty: flash.empty?) unless request.url.include?('/results/filter/subject')%>
+
+        <%= render DeadlineBannerComponent.new(flash_empty: flash.reject { |flash| flash[0] == "start_wizard" }.empty?) unless request.url.include?('/results/filter/subject')%>
 
         <%= yield %>
       </main>
