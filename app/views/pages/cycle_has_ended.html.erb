@@ -6,10 +6,10 @@
       <h1 class="govuk-heading-l">Find postgraduate teacher training</h1>
 
       <h2 class="govuk-heading-m">Applications closed</h2>
-      <p class="govuk-body">Applications for this academic year (2020 to 2021) are now closed.</p>
+      <p class="govuk-body">Applications for the <%= CycleTimetable.cycle_year_range %> academic year are now closed.</p>
 
-      <h2 class="govuk-heading-m">Find courses starting next academic year (2021 to 2022)</h2>
-      <p class="govuk-body">You can find courses from 6 October 2020 and apply from 13 October 2020.</p>
+      <h2 class="govuk-heading-m">Find courses starting in the <%= CycleTimetable.cycle_year_range(CycleTimetable.next_year) %> academic year</h2>
+      <p class="govuk-body">You can find courses from 9am on <%= CycleTimetable.find_reopens.strftime('%e %B %Y') %> and apply from 9am on <%= CycleTimetable.apply_reopens.strftime('%e %B %Y') %>.</p>
     </div>
   </div>
 </div>
