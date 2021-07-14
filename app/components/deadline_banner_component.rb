@@ -12,18 +12,18 @@ class DeadlineBannerComponent < ViewComponent::Base
 private
 
   def apply_1_deadline
-    CycleTimetable.apply_1_deadline.strftime('%e %B %Y')
+    CycleTimetable.apply_1_deadline.to_s(:govuk_date_and_time)
   end
 
   def apply_2_deadline
-    CycleTimetable.apply_2_deadline.strftime('%e %B %Y')
+    CycleTimetable.apply_2_deadline.to_s(:govuk_date_and_time)
   end
 
   def find_reopens
-    CycleTimetable.find_reopens.strftime('%e %B %Y')
+    CycleTimetable.find_reopens.to_s(:govuk_date_and_time)
   end
 
   def apply_reopens
-    CycleTimetable.apply_reopens.strftime('%e %B %Y')
+    CycleTimetable.apply_reopens.to_s(:govuk_date_and_time)
   end
 end
