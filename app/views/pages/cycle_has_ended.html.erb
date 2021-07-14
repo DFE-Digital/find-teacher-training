@@ -9,7 +9,7 @@
       <p class="govuk-body">Applications for the <%= CycleTimetable.cycle_year_range %> academic year are now closed.</p>
 
       <h2 class="govuk-heading-m">Find courses starting in the <%= CycleTimetable.cycle_year_range(CycleTimetable.next_year) %> academic year</h2>
-      <p class="govuk-body">You can find courses from 9am on <%= CycleTimetable.find_reopens.strftime('%e %B %Y') %> and apply from 9am on <%= CycleTimetable.apply_reopens.strftime('%e %B %Y') %>.</p>
+      <p class="govuk-body">You can find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %> and apply from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %>.</p>
     </div>
   </div>
 </div>
