@@ -10,7 +10,7 @@
 
       <%= govuk_accordion(id: 'subject-area-accordion') do |accordion| %>
         <% @subject_areas.each_with_index do |subject_area, counter| %>
-          <%= accordion.add_section(
+          <%= accordion.section(
             title: subject_area.name,
             expanded: subject_area_is_selected?(subject_area: subject_area) || (counter.zero? && no_subject_selected_error?),
             html_attributes: {
@@ -69,7 +69,7 @@
             </fieldset>
           <% end %>
         <% end %>
-        <%= accordion.add_section(
+        <%= accordion.section(
           title: 'Special educational needs and disability (SEND)',
           expanded: params[:senCourses] == 'true',
           html_attributes: {

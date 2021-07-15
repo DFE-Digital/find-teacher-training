@@ -209,10 +209,10 @@ GEM
       multi_json (~> 1.11)
       os (>= 0.9, < 2.0)
       signet (~> 0.14)
-    govuk-components (1.2.0)
+    govuk-components (2.0.0b5)
       activemodel (>= 6.0)
       railties (>= 6.0)
-      view_component (~> 2.20)
+      view_component (~> 2.31.1)
     hashdiff (1.0.1)
     html_tokenizer (0.0.7)
     httparty (0.18.1)
@@ -485,7 +485,7 @@ DEPENDENCIES
   geocoder
   geokit
   google-cloud-bigquery
-  govuk-components
+  govuk-components (= 2.0.0b5)
   httparty
   json-schema
   json_api_client
