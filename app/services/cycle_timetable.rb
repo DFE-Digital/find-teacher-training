@@ -1,27 +1,27 @@
 class CycleTimetable
   CYCLE_DATES = {
     2021 => {
-      find_opens: DateTime.new(2020, 10, 6, 9),
-      apply_opens: DateTime.new(2020, 10, 13, 9),
-      first_deadline_banner: DateTime.new(2021, 7, 12, 9),
-      apply_1_deadline: DateTime.new(2021, 9, 7, 18),
-      apply_2_deadline: DateTime.new(2021, 9, 20, 18),
-      find_closes: DateTime.new(2021, 10, 3),
+      find_opens: Time.zone.local(2020, 10, 6, 9),
+      apply_opens: Time.zone.local(2020, 10, 13, 9),
+      first_deadline_banner: Time.zone.local(2021, 7, 12, 9),
+      apply_1_deadline: Time.zone.local(2021, 9, 7, 18),
+      apply_2_deadline: Time.zone.local(2021, 9, 20, 18),
+      find_closes: Time.zone.local(2021, 10, 3),
     },
     2022 => {
-      find_opens: DateTime.new(2021, 10, 5, 9),
-      apply_opens: DateTime.new(2021, 10, 12, 9),
+      find_opens: Time.zone.local(2021, 10, 5, 9),
+      apply_opens: Time.zone.local(2021, 10, 12, 9),
       # the dates from below here are not the finalised but are required for
       # the current implementation
-      first_deadline_banner: DateTime.new(2022, 7, 12, 9),
-      apply_1_deadline: DateTime.new(2021, 9, 7, 18),
-      apply_2_deadline: DateTime.new(2022, 9, 20, 18),
-      find_closes: DateTime.new(2022, 10, 3),
+      first_deadline_banner: Time.zone.local(2022, 7, 12, 9),
+      apply_1_deadline: Time.zone.local(2022, 9, 7, 18),
+      apply_2_deadline: Time.zone.local(2022, 9, 20, 18),
+      find_closes: Time.zone.local(2022, 10, 3),
     },
   }.freeze
 
   def self.current_year
-    now = DateTime.now
+    now = Time.zone.now
 
     CYCLE_DATES.keys.detect do |year|
       return year if last_recruitment_cycle_year?(year)
