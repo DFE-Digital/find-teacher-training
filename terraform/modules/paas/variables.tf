@@ -30,7 +30,6 @@ locals {
     qa       = ["qa"]
     staging  = ["staging"]
     sandbox  = ["sandbox"]
-    rollover = ["rollover"]
     prod     = ["www", "www2"]
   }
   web_app_service_gov_uk_route_ids = [for r in cloudfoundry_route.web_app_service_gov_uk_route : r.id]

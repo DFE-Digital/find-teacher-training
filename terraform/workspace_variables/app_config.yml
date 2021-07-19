@@ -22,8 +22,3 @@ sandbox:
   <<: *default
   RAILS_ENV: sandbox
   RACK_ENV: sandbox
-
-rollover:
-  <<: *default
-  RAILS_ENV: rollover
-  RACK_ENV: rollover

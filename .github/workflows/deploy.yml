@@ -19,10 +19,6 @@ on:
         description: Deploy to sandbox?
         default: 'false'
         required: true
-      rollover:
-        description: Deploy to rollover?
-        default: 'false'
-        required: true
       sha:
         description: Commit sha to be deployed
         required: true
@@ -67,7 +63,7 @@ jobs:
         run: |
           echo "DOCKER_IMAGE=$DOCKER_IMAGE" >> $GITHUB_ENV
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
-          
+
           . terraform/workspace_variables/$DEPLOY_ENV.sh
           echo "TF_VAR_key_vault_name=$TF_VAR_key_vault_name" >> $GITHUB_ENV
           echo "TF_VAR_key_vault_app_secret_name=$TF_VAR_key_vault_app_secret_name" >> $GITHUB_ENV
@@ -117,7 +113,7 @@ jobs:
         uses: fountainhead/action-wait-for-check@v1.0.0
         with:
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          checkName: smoke-tests-${{ env.DEPLOY_ENV }} 
+          checkName: smoke-tests-${{ env.DEPLOY_ENV }}
           ref: ${{ github.ref }}
           timeoutSeconds: 300
           intervalSeconds: 15
