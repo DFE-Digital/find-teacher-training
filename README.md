@@ -77,7 +77,6 @@ Environment | KeyVault             | Azure Subscription
 ----------- | -------------------- | ------ |
 qa          | s121d01-shared-kv-01 | s121-findpostgraduateteachertraining-development
 staging     | s106t01-shared-kv-01 | s106-applyforpostgraduateteachertraining-test
-rollover    | s106t01-shared-kv-01 | s106-applyforpostgraduateteachertraining-test
 sandbox     | s106p01-shared-kv-01 | s106-applyforpostgraduateteachertraining-production
 production  | s106p01-shared-kv-01 | s106-applyforpostgraduateteachertraining-production
 

@@ -34,7 +34,7 @@ jobs:
           key: ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-buildx-
-      
+
       - name: Set Environment Variable
         run: echo "DOCKER_IMAGE=dfedigital/find-teacher-training:${{ github.sha }}" >> $GITHUB_ENV
 
@@ -51,16 +51,16 @@ jobs:
 
       - name: Run ruby linter
         run: make rubocop
-      
+
       - name: Run sass linter
         run: make lint-sass
-      
+
       - name: Run brakeman static analysis
         run: make brakeman
-      
+
       - name: Run ruby tests
         run: make rspec
-      
+
       - name: Run javascript tests
         run: make js.test
 
@@ -70,11 +70,11 @@ jobs:
         env:
           GIT_BRANCH: ${{ github.ref }}
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
-      
+
       - name: Trigger QA Deployment
         if: ${{ success() && github.ref == 'refs/heads/master' }}
         uses: benc-uk/workflow-dispatch@v1.1
         with:
           workflow: Deploy
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "rollover": "true", "sha": "${{ github.sha }}"}'
+          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ github.sha }}"}'
