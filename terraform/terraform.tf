@@ -40,6 +40,7 @@ module paas {
   app_docker_image          = var.paas_app_docker_image
   web_app_instances         = var.paas_web_app_instances
   web_app_memory            = var.paas_web_app_memory
+  redis_service_plan        = var.paas_redis_service_plan
   logstash_url              = local.infra_secrets.LOGSTASH_URL
   app_environment_variables = local.paas_app_environment_variables
   docker_credentials        = local.docker_credentials

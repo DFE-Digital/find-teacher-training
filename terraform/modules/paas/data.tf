@@ -14,3 +14,7 @@ data cloudfoundry_domain london_cloudapps_digital {
 data cloudfoundry_domain find_service_gov_uk {
   name = "find-postgraduate-teacher-training.service.gov.uk"
 }
+
+data "cloudfoundry_service" "redis" {
+  name = "redis"
+}
