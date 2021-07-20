@@ -35,6 +35,9 @@ resource cloudfoundry_app web_app {
   service_binding {
     service_instance = cloudfoundry_user_provided_service.logging.id
   }
+  service_binding {
+    service_instance = cloudfoundry_service_instance.redis.id
+  }
   docker_credentials = var.docker_credentials
 }
 
@@ -56,4 +59,14 @@ resource cloudfoundry_user_provided_service logging {
   name             = local.logging_service_name
   space            = data.cloudfoundry_space.space.id
   syslog_drain_url = var.logstash_url
+}
+
+resource "cloudfoundry_service_instance" "redis" {
+  name         = local.redis_service_name
+  space        = data.cloudfoundry_space.space.id
+  service_plan = data.cloudfoundry_service.redis.service_plans[var.redis_service_plan]
+  timeouts {
+    create = "30m"
+    update = "30m"
+  }
 }
