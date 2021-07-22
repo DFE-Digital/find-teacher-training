@@ -5,10 +5,7 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-# rubocop:disable Rake/Desc
 task lint_ruby: ['lint:ruby']
 task lint_scss: ['lint:scss']
 task lint_erb: ['lint:erb']
-# rubocop:enable Rake/Desc
-
 task default: %i[spec js_spec lint_ruby lint_scss lint_erb]

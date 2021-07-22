@@ -78,6 +78,9 @@
         <% if course.interview_process.present? %>
           <li><%= govuk_link_to 'Interview process', '#section-interviews' %></li>
         <% end %>
+        <% if course.show_visa_sponsorship? %>
+          <li><%= govuk_link_to 'International students', '#section-international-students' %></li>
+        <% end %>
         <% if course.provider.train_with_disability.present? %>
           <li><%= govuk_link_to 'Training with disabilities and other needs', '#section-train-with-disabilities' %></li>
         <% end %>
@@ -111,6 +114,10 @@
 
       <% if course.interview_process.present? %>
         <%= render partial: 'courses/interview_process' %>
+      <% end %>
+
+      <% if course.show_visa_sponsorship? %>
+        <%= render partial: 'courses/international_students' %>
       <% end %>
 
       <% if course.provider.train_with_disability.present? %>

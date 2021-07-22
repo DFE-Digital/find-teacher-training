@@ -10,6 +10,8 @@ describe 'Course show', type: :feature do
       website: 'https://scitt.org',
       address1: '1 Long Rd',
       postcode: 'E1 ABC',
+      can_sponsor_student_visa: true,
+      can_sponsor_skilled_worker_visa: false,
     )
   end
 
@@ -53,7 +55,8 @@ describe 'Course show', type: :feature do
     )
   end
 
-  let(:current_recruitment_cycle) { build :recruitment_cycle }
+  let(:recruitment_cycle_year) { 2021 }
+  let(:current_recruitment_cycle) { build :recruitment_cycle, year: recruitment_cycle_year }
 
   let(:course_page) { PageObjects::Page::Course.new }
 
@@ -193,6 +196,8 @@ describe 'Course show', type: :feature do
         course.about_accrediting_body,
       )
 
+      expect(course_page).not_to have_international_students
+
       expect(course_page.train_with_disability).to have_content(
         provider.train_with_disability,
       )
@@ -246,6 +251,17 @@ describe 'Course show', type: :feature do
       expect(course_page).to have_training_location_guidance
 
       expect(course_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/course/T92/X130&find_controller=courses')
+    end
+
+    context 'when visa sponsorship is visible' do
+      let(:recruitment_cycle_year) { 2022 }
+
+      it 'shows the course show page with the international students section' do
+        expect(course_page).to have_international_students
+        expect(course_page.international_students).to have_content(
+          'We can sponsor Student visas, but this is not guaranteed.',
+        )
+      end
     end
 
     context 'End of cycle' do

@@ -33,6 +33,8 @@ FactoryBot.define do
     gt12_contact { 'gt12_contact@acme-scitt.org' }
     application_alert_contact { 'application_alert_contact@acme-scitt.org' }
     send_application_alerts { 'all' }
+    can_sponsor_student_visa { true }
+    can_sponsor_skilled_worker_visa { false }
 
     after :build do |provider, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.
