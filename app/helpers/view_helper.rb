@@ -48,18 +48,6 @@ module ViewHelper
     "#{t('page_titles.error_prefix') if error}#{title}"
   end
 
-  def visa_sponsorship_status(provider)
-    if provider.can_sponsor_all_visas?
-      'can sponsor Student and Skilled Worker visas, but this is not guaranteed'
-    elsif provider.can_only_sponsor_student_visa?
-      'can sponsor Student visas, but this is not guaranteed'
-    elsif provider.can_only_sponsor_skilled_worker_visa?
-      'can sponsor Skilled Worker visas, but this is not guaranteed'
-    else
-      'cannot sponsor visas'
-    end
-  end
-
 private
 
   def prepend_css_class(css_class, current_class)
