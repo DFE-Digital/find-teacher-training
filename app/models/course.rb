@@ -30,4 +30,5 @@ class Course < Base
   def show_visa_sponsorship?
     recruitment_cycle_year.to_i >= SHOW_VISA_SPONSORSHIP_FROM
   end
+  alias_method :show_structured_entry_requirements?, :show_visa_sponsorship?
 end

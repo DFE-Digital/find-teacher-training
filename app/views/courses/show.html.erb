@@ -100,7 +100,11 @@
         <%= render partial: 'courses/about_schools' %>
       <% end %>
 
-      <%= render partial: 'courses/entry_requirements_qualifications' %>
+      <% if course.show_structured_entry_requirements? %>
+        <%= render Courses::EntryRequirementsComponent.new(course: course) %>
+      <% else %>
+        <%= render partial: 'courses/entry_requirements_qualifications' %>
+      <% end %>
 
       <% if course.salaried? %>
         <%= render partial: 'courses/salary' %>
