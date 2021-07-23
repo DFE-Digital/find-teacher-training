@@ -56,6 +56,12 @@ FactoryBot.define do
     age_range_in_years { '11_to_16' }
     program_type { 'pg_teaching_apprenticeship' }
     changed_at { Time.zone.now }
+    accept_pending_gcse { Faker::Boolean.boolean }
+    accept_gcse_equivalency { Faker::Boolean.boolean }
+    accept_english_gcse_equivalency { Faker::Boolean.boolean }
+    accept_maths_gcse_equivalency { Faker::Boolean.boolean }
+    accept_science_gcse_equivalency { Faker::Boolean.boolean }
+    additional_gcse_equivalencies { Faker::Lorem.sentence(word_count: 100) }
 
     after :build do |course, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.

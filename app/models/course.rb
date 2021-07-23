@@ -26,7 +26,7 @@ class Course < Base
     level == 'further_education' && subjects.any? { |s| s.subject_name == 'Further education' || s.subject_code = '41' }
   end
 
-  SHOW_VISA_SPONSORSHIP_FROM = 2021
+  SHOW_VISA_SPONSORSHIP_FROM = 2022
   def show_visa_sponsorship?
     recruitment_cycle_year.to_i >= SHOW_VISA_SPONSORSHIP_FROM
   end

@@ -52,6 +52,12 @@ describe 'Course show', type: :feature do
         jsonapi_site_status('Running site with no vacancies', :no_vacancies, 'running'),
       ],
       subjects: [subject],
+      accept_pending_gcse: true,
+      accept_gcse_equivalency: true,
+      accept_english_gcse_equivalency: true,
+      accept_maths_gcse_equivalency: false,
+      accept_science_gcse_equivalency: false,
+      additional_gcse_equivalencies: 'You need to work hard',
     )
   end
 
@@ -253,13 +259,28 @@ describe 'Course show', type: :feature do
       expect(course_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/course/T92/X130&find_controller=courses')
     end
 
-    context 'when visa sponsorship is visible' do
+    context 'from the 2022 recruitment cycle' do
       let(:recruitment_cycle_year) { 2022 }
 
       it 'shows the course show page with the international students section' do
         expect(course_page).to have_international_students
         expect(course_page.international_students).to have_content(
           'We can sponsor Student visas, but this is not guaranteed.',
+        )
+      end
+
+      it 'shows the course show page with structured GCSE requirements' do
+        expect(course_page.required_qualifications).to have_content(
+          'Grade 4 (C) or above in English and maths, or equivalent qualification.',
+        )
+        expect(course_page.required_qualifications).to have_content(
+          'Candidates with pending GCSEs will be considered.',
+        )
+        expect(course_page.required_qualifications).to have_content(
+          'Equivalency tests will be accepted in English.',
+        )
+        expect(course_page.required_qualifications).to have_content(
+          'You need to work hard.',
         )
       end
     end
