@@ -226,7 +226,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
       context 'nearing end of cycle and no options selected' do
         it 'displays an error' do
-          Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+          Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
             start_page.load
             start_page.find_courses.click
 
@@ -237,7 +237,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
       context 'nearing end of cycle' do
         it 'displays the deadline banner' do
-          Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+          Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
             start_page.load
 
             expect(start_page).to have_content('there’s no guarantee that the courses currently shown on this website will be on offer next year.')

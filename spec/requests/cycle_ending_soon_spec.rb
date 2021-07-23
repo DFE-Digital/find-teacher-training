@@ -11,7 +11,7 @@ RSpec.describe '/cycle-ending-soon', type: :request do
 
   context 'cycle ending soon' do
     it "redirects from '/' to the '/cycle-ending-soon'" do
-      Timecop.travel(Time.zone.local(2021, 9, 20, 19)) do
+      Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
         Rails.application.reload_routes!
         get '/'
 
