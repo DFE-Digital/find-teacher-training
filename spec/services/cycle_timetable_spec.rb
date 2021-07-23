@@ -6,8 +6,8 @@ RSpec.describe CycleTimetable do
   let(:one_hour_before_first_deadline_banner) { Time.zone.local(2021, 7, 12, 8, 0, 0) }
   let(:one_hour_before_apply_1_deadline) { Time.zone.local(2021, 8, 24, 17, 0, 0) }
   let(:one_hour_after_apply_1_deadline) { Time.zone.local(2021, 9, 7, 19, 0, 0) }
-  let(:one_hour_before_apply_2_deadline) { Time.zone.local(2021, 9, 20, 17, 0, 0) }
-  let(:one_hour_after_apply_2_deadline) { Time.zone.local(2021, 9, 20, 19, 0, 0) }
+  let(:one_hour_before_apply_2_deadline) { Time.zone.local(2021, 9, 21, 17, 0, 0) }
+  let(:one_hour_after_apply_2_deadline) { Time.zone.local(2021, 9, 21, 19, 0, 0) }
   let(:one_hour_after_find_closes) { Time.zone.local(2021, 10, 4, 1, 0, 0) }
   let(:one_hour_after_find_reopens) { Time.zone.local(2021, 10, 5, 10, 0, 0) }
 

@@ -15,7 +15,7 @@ describe '/start', type: :request do
     end
 
     it "navigates to '/start/location'" do
-      Timecop.travel(Time.zone.local(2021, 9, 20, 19, 0, 0)) do
+      Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
         Rails.application.reload_routes!
 
         get '/start/location'
