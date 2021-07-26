@@ -52,6 +52,9 @@ describe 'Course show', type: :feature do
         jsonapi_site_status('Running site with no vacancies', :no_vacancies, 'running'),
       ],
       subjects: [subject],
+      degree_grade: 'two_one',
+      additional_degree_subject_requirements: true,
+      degree_subject_requirements: 'Certificate must be print in blue ink',
       accept_pending_gcse: true,
       accept_gcse_equivalency: true,
       accept_english_gcse_equivalency: true,
@@ -281,6 +284,15 @@ describe 'Course show', type: :feature do
         )
         expect(course_page.required_qualifications).to have_content(
           'You need to work hard.',
+        )
+      end
+
+      it 'shows the course show page with structured degree requirements' do
+        expect(course_page.required_qualifications).to have_content(
+          '2:1 or above, or equivalent.',
+        )
+        expect(course_page.required_qualifications).to have_content(
+          'Certificate must be print in blue ink',
         )
       end
     end

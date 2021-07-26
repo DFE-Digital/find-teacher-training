@@ -92,4 +92,23 @@ describe Courses::EntryRequirementsComponent do
       )
     end
   end
+
+  context 'when the provider requires a 2:2 and specifies addtional requirements', type: :component do
+    it 'renders correct message' do
+      course = build(
+        :course,
+        degree_grade: 'two_two',
+        additional_degree_subject_requirements: true,
+        degree_subject_requirements: 'Certificate must be printed on green paper.',
+      )
+      result = render_inline(described_class.new(course: course))
+
+      expect(result.text).to include(
+        '2:2 or above, or equivalent.',
+      )
+      expect(result.text).to include(
+        'Certificate must be printed on green paper.',
+      )
+    end
+  end
 end

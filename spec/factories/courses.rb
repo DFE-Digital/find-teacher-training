@@ -56,6 +56,8 @@ FactoryBot.define do
     age_range_in_years { '11_to_16' }
     program_type { 'pg_teaching_apprenticeship' }
     changed_at { Time.zone.now }
+    degree_grade { 'two_one' }
+    degree_subject_requirements { nil }
     accept_pending_gcse { Faker::Boolean.boolean }
     accept_gcse_equivalency { Faker::Boolean.boolean }
     accept_english_gcse_equivalency { Faker::Boolean.boolean }
