@@ -76,7 +76,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider accepts equivalant GCSE grades for maths and science', type: :component do
+  context 'when the provider accepts equivalant GCSE grades for Maths and science', type: :component do
     it 'renders correct message' do
       course = build(
         :course,
