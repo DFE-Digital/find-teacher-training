@@ -117,7 +117,7 @@
       <% end %>
 
       <% if course.show_visa_sponsorship? %>
-        <%= render Courses::InternationalStudentsComponent.new(provider: course.provider) %>
+        <%= render Courses::InternationalStudentsComponent.new(course: course) %>
       <% end %>
 
       <% if course.provider.train_with_disability.present? %>
