@@ -93,7 +93,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider requires a 2:2 and specifies addtional requirements', type: :component do
+  context 'when the provider requires a 2:2 and specifies additional requirements', type: :component do
     it 'renders correct message' do
       course = build(
         :course,
