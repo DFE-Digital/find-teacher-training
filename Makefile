@@ -91,7 +91,6 @@ sandbox: ## Set DEPLOY_ENV to production
 
 .PHONY: plan
 plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
-	$(eval export TF_VAR_paas_app_secrets_file=terraform/workspace_variables/app_secrets.yml)
 	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
 	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
@@ -99,7 +98,6 @@ plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, ma
 
 .PHONY: deploy
 deploy: ## Run terraform apply for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
-	$(eval export TF_VAR_paas_app_secrets_file=terraform/workspace_variables/app_secrets.yml)
 	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
 	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
