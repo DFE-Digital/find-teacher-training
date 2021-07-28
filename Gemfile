@@ -56,7 +56,7 @@ gem 'json-schema'
 # Settings for the app
 gem 'config'
 
-gem 'redis', '~> 4.3', '>= 4.3.1'
+gem 'redis', '~> 4.4'
 
 # Calculate distance between two locations
 gem 'geokit'
