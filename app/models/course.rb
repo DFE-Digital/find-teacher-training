@@ -43,4 +43,8 @@ class Course < Base
       4
     end
   end
+
+  def accept_gcse_equivalency?
+    accept_gcse_equivalency
+  end
 end

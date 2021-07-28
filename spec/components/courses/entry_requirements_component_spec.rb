@@ -88,7 +88,7 @@ describe Courses::EntryRequirementsComponent do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Equivalency tests will be accepted in Maths and science.',
+        'Equivalency tests will be accepted in maths and science.',
       )
     end
   end

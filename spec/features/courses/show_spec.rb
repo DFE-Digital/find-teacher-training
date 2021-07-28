@@ -283,7 +283,7 @@ describe 'Course show', type: :feature do
           'Equivalency tests will be accepted in English.',
         )
         expect(course_page.required_qualifications).to have_content(
-          'You need to work hard.',
+          'You need to work hard',
         )
       end
 

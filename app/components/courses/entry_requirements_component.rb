@@ -41,27 +41,20 @@ module Courses
     end
 
     def gcse_equivalency_content(course)
-      return 'Equivalency tests will not be accepted' unless course.accept_gcse_equivalency?
-
-      case equivalencies.count
-      when 0
-        ''
-      when 1
-        "Equivalency tests will be accepted in #{equivalencies[0].capitalize}"
-      when 2
-        "Equivalency tests will be accepted in #{equivalencies[0].capitalize} and #{equivalencies[1]}"
-      when 3
-        "Equivalency tests will be accepted in #{equivalencies[0].capitalize}, #{equivalencies[1]} and #{equivalencies[2]}"
+      if course.accept_gcse_equivalency?
+        "Equivalency tests will be accepted in #{equivalencies}"
+      else
+        'Equivalency tests will not be accepted'
       end
     end
 
     def equivalencies
-      {
-        english: course.accept_english_gcse_equivalency.present?,
-        maths: course.accept_maths_gcse_equivalency.present?,
-        science: course.accept_science_gcse_equivalency.present?,
+      subjects = []
+      subjects << 'English' if course.accept_english_gcse_equivalency.present?
+      subjects << 'maths' if course.accept_maths_gcse_equivalency.present?
+      subjects << 'science' if course.accept_science_gcse_equivalency.present?
 
-      }.select { |_k, v| v }.keys
+      subjects.to_sentence(last_word_connector: ' and ')
     end
   end
 end
