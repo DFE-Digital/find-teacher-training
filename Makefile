@@ -2,7 +2,7 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-IMAGE=${DOCKER_IMAGE}
+IMAGE=dfedigital/find-teacher-training:${DOCKER_IMAGE_TAG}
 
 .PHONY: help
 help: ## Show this help
