@@ -29,18 +29,18 @@ RUN bundle exec rake assets:precompile && \
 
 
 FROM ${BASE_RUBY_IMAGE}
-ARG COMMIT_SHA
 ENV FREEDESKTOP_MIME_TYPES_PATH=/usr/share/mime/packages/freedesktop.org.xml
-
 WORKDIR /app
-COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
-COPY --from=base-image /app /app
-COPY --from=base-image /usr/local/bundle/ /usr/local/bundle/
-
-ENV SHA=${COMMIT_SHA}
 
 RUN apk add --update --no-cache tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
+
+COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
+COPY --from=base-image /app /app
+COPY --from=base-image /usr/local/bundle/ /usr/local/bundle/
+
+ARG COMMIT_SHA
+ENV SHA=${COMMIT_SHA}
 
 CMD bundle exec rails server -b 0.0.0.0

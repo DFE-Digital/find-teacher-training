@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  DOCKER_IMAGE: dfedigital/find-teacher-training
+
 jobs:
   build:
     name: build
@@ -24,30 +27,60 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v1.5.1
+        uses: docker/setup-buildx-action@v1
 
-      - name: Cache Docker layers
-        uses: actions/cache@v2.1.6
+      - name: Set Environment Variables (Push)
+        if: github.event_name == 'push'
+        run: |
+          GIT_REF=${{ github.ref }}
+          GIT_BRANCH=${GIT_REF##*/}
+          echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE_TAG=$GITHUB_SHA" >> $GITHUB_ENV
+
+      - name: Set Environment Variables (Pull request)
+        if: github.event_name == 'pull_request'
+        run: |
+          # This is the actual PR branch
+          GIT_REF=${{ github.head_ref }}
+          GIT_BRANCH=${GIT_REF##*/}
+          echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV
+          # This is the latest commit on the actual PR branch
+          echo "DOCKER_IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+
+      - name: Build Docker Image - base-image target
+        uses: docker/build-push-action@v2
         with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      - name: Set Environment Variable
-        run: echo "DOCKER_IMAGE=dfedigital/find-teacher-training:${{ github.sha }}" >> $GITHUB_ENV
-
-      - name: Build Docker Image
-        uses: docker/build-push-action@v2.6.1
-        with:
-          tags: ${{ env.DOCKER_IMAGE}}
+          tags: |
+            ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
           push: ${{ github.actor != 'dependabot[bot]' }}
           load: ${{ github.actor == 'dependabot[bot]' }}
-          builder: ${{ steps.buildx.outputs.name }}
-          cache-to:   type=local,dest=/tmp/.buildx-cache
-          cache-from: type=local,src=/tmp/.buildx-cache
-          build-args: COMMIT_SHA=${{ github.sha }}
+          target: base-image
+          cache-from: |
+            ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
+            ${{ env.DOCKER_IMAGE}}:base-image-master
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            COMMIT_SHA=${{ env.DOCKER_IMAGE_TAG}}
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          tags: |
+            ${{ env.DOCKER_IMAGE}}:${{ env.DOCKER_IMAGE_TAG}}
+            ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
+          push: ${{ github.actor != 'dependabot[bot]' }}
+          load: ${{ github.actor == 'dependabot[bot]' }}
+          cache-from: |
+            ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
+            ${{ env.DOCKER_IMAGE}}:master
+            ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
+          build-args: |
+            BUILDKIT_INLINE_CACHE=1
+            COMMIT_SHA=${{ env.DOCKER_IMAGE_TAG}}
+
+      - name: Pull image if not loaded
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        run: docker pull ${DOCKER_IMAGE}:${{ env.DOCKER_IMAGE_TAG }}
 
       - name: Run ruby linter
         run: make rubocop
@@ -68,7 +101,7 @@ jobs:
         if: github.actor != 'dependabot[bot]'
         run: make publish.codeclimate
         env:
-          GIT_BRANCH: ${{ github.ref }}
+          GIT_BRANCH: ${{ env.BRANCH_TAG }}
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
 
       - name: Trigger QA Deployment
@@ -77,4 +110,4 @@ jobs:
         with:
           workflow: Deploy
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ github.sha }}"}'
+          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ env.DOCKER_IMAGE_TAG}}"}'
