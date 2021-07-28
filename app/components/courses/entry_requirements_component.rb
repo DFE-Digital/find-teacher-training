@@ -41,7 +41,7 @@ module Courses
     end
 
     def gcse_equivalency_content(course)
-      return 'Equivalency tests will not be accepted' unless course.accept_gcse_equivalency
+      return 'Equivalency tests will not be accepted' unless course.accept_gcse_equivalency?
 
       case equivalencies.count
       when 0
