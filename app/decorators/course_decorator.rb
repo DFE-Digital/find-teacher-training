@@ -131,6 +131,10 @@ class CourseDecorator < Draper::Decorator
     end
   end
 
+  def accept_gcse_equivalency?
+    object.accept_gcse_equivalency
+  end
+
 private
 
   def find_max(attribute)
