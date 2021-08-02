@@ -35,19 +35,19 @@ describe 'cookie banner', type: :feature do
   end
 
   it 'renders a visible js fallback banner' do
-    expect(page).to have_selector('[data-qa="fallback-cookie-banner"]')
+    expect(page).to have_selector('[data-qa="cookie-banner-fallback-message"]')
     expect(page).to have_text('To accept or reject cookies, turn on JavaScript')
   end
 
   it 'renders a hidden cookie banner' do
-    expect(page).to have_selector('[data-qa="cookie-banner"]', visible: :hidden)
+    expect(page).to have_selector('[data-qa="cookie-banner-choice-message"]', visible: :hidden)
     expect(page).to have_button('Accept analytics cookies', visible: :hidden)
     expect(page).to have_button('Reject analytics cookies', visible: :hidden)
     expect(page).to have_link('View cookies', visible: :hidden)
   end
 
   it 'renders a hidden hide message banner' do
-    expect(page).to have_selector('[data-qa="hide-cookie-banner"]', visible: :hidden)
+    expect(page).to have_selector('[data-qa="cookie-banner-confirmation-message"]', visible: :hidden)
     expect(page).to have_link('View cookies', visible: :hidden)
     expect(page).to have_button('Hide this message', visible: :hidden)
   end

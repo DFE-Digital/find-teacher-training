@@ -5,30 +5,21 @@ import {setConsentedToCookie,
 
 export default class CookieBanner {
   constructor() {
-    this.$fallbackModule = document.querySelector('[data-module="govuk-fallback-cookie-banner"]')
+    this.$fallbackMessageModule = document.querySelector('[data-module="govuk-cookie-banner-fallback-message"]')
 
-    //If the page doesn't have the fallback banner then stop
-    if (!this.$fallbackModule) {
+    // If the page doesn't have the fallback banner then stop
+    if (!this.$fallbackMessageModule) {
       return;
     }
 
-    this.$fallbackModule.hidden = true;
+    this.$fallbackMessageModule.hidden = true;
 
-    this.$cookieModule = document.querySelector('[data-module="govuk-cookie-banner"]');
-
-    this.$hideMessageModule = document.querySelector('[data-module="govuk-hide-cookie-banner"]');
-
-    this.acceptButton = this.$cookieModule.querySelector(
-      '[data-accept-cookie="true"]'
-    );
-
-    this.rejectButton = this.$cookieModule.querySelector(
-      '[data-accept-cookie="false"]'
-    );
-
-    this.hideMessageButton = this.$hideMessageModule.querySelector(
-      '[data-accept-cookie="hide-banner"]'
-    );
+    this.$cookieBannerModule = document.querySelector('[data-module="govuk-cookie-banner"]');
+    this.$choiceMessageModule = document.querySelector('[data-module="govuk-cookie-banner-choice-message"]');
+    this.$confirmationMessageModule = document.querySelector('[data-module="govuk-cookie-banner-confirmation-message"]');
+    this.acceptButton = this.$choiceMessageModule.querySelector('[data-accept-cookie="true"]');
+    this.rejectButton = this.$choiceMessageModule.querySelector('[data-accept-cookie="false"]');
+    this.hideMessageButton = this.$confirmationMessageModule.querySelector('[data-accept-cookie="hide-banner"]');
 
     // consentCookie is false if user has not accept/rejected cookies
     if (!checkConsentedToCookieExists()) {
@@ -36,42 +27,45 @@ export default class CookieBanner {
       removeAllPreviousUsedCookies()
       this.showCookieMessage();
       this.bindEvents();
+    } else {
+      // TODO: Remove this once this is hidden server side
+      this.hideModule(this.$cookieBannerModule);
     }
   }
 
   bindEvents() {
     this.acceptButton.addEventListener("click", () => this.acceptCookie());
-    this.acceptButton.addEventListener("click", () => this.showHideMessage("accepted"));
+    this.acceptButton.addEventListener("click", () => this.showConfirmationMessage("accepted"));
     this.rejectButton.addEventListener("click", () => this.rejectCookie());
-    this.rejectButton.addEventListener("click", () => this.showHideMessage("rejected"));
-    this.hideMessageButton.addEventListener("click", () => this.hideMessage());
+    this.rejectButton.addEventListener("click", () => this.showConfirmationMessage("rejected"));
+    this.hideMessageButton.addEventListener("click", () => this.hideCookieBanner());
   }
 
   acceptCookie() {
-    this.hideBannerMessage(this.$cookieModule);
+    this.hideModule(this.$choiceMessageModule);
     setConsentedToCookie(true);
     loadAnalytics();
   }
 
   rejectCookie() {
-    this.hideBannerMessage(this.$cookieModule);
+    this.hideModule(this.$choiceMessageModule);
     setConsentedToCookie(false);
   }
 
-  showHideMessage(content) {
-    this.$hideMessageModule.hidden = false;
-    this.$hideMessageModule.querySelector('[id="user-answer"]').textContent=`${content}`;
+  showConfirmationMessage(content) {
+    this.$confirmationMessageModule.hidden = false;
+    this.$confirmationMessageModule.querySelector('[id="user-answer"]').textContent=`${content}`;
   }
 
-  hideMessage(){
-    this.hideBannerMessage(this.$hideMessageModule);
+  hideCookieBanner() {
+    this.hideModule(this.$cookieBannerModule);
   }
 
   showCookieMessage() {
-    this.$cookieModule.hidden = false;
+    this.$choiceMessageModule.hidden = false;
   }
 
-  hideBannerMessage(module) {
+  hideModule(module) {
     module.hidden = true;
   }
 }
