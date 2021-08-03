@@ -41,12 +41,9 @@ module PageObjects
       element :contact_address, '[data-qa=provider__address]'
       element :course_advice, '#section-advice'
       element :course_apply, '#section-apply'
-      element :choose_a_training_location_table, '[data-qa=course__choose_a_training_location]'
-      element :locations_map, '[data-qa=course__locations_map]'
       element :apply_link, 'a[data-qa=course__apply_link]'
       element :back_link, '[data-qa=page-back]'
       element :end_of_cycle_notice, '[data-qa=course__end_of_cycle_notice]'
-      element :training_location_guidance, '[data-qa=course__training_location_guidance]'
       element :feedback_link, '[data-qa=feedback-link]'
       element :age_range, '[data-qa=course__age_range]'
     end

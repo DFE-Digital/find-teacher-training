@@ -21,8 +21,4 @@ skylight_auth_token: replace_me
 skylight_enable: true
 
 feature_flags:
-  cycle_ending_soon: false
-  cycle_has_ended: false
-  display_apply_button: true
-  ucas_only_locations: true
   send_web_requests_to_big_query: false
