@@ -96,7 +96,7 @@
       <% if course.how_school_placements_work.present? ||
         course.program_type == 'higher_education_programme' ||
         course.program_type == 'scitt_programme' ||
-        (FeatureFlag.active?(:ucas_only_locations) && course.site_statuses.map(&:site).uniq.many?) %>
+        course.site_statuses.map(&:site).uniq.many? %>
         <%= render partial: 'courses/about_schools' %>
       <% end %>
 
@@ -132,13 +132,16 @@
 
       <%= render partial: 'courses/advice' %>
 
-      <% if FeatureFlag.active?(:ucas_only_locations) %>
-        <div class="govuk-!-margin-bottom-8" id="section-apply">
+      <div class="govuk-!-margin-bottom-8" id="section-apply">
+        <% if CycleTimetable.mid_cycle? %>
           <%= @course.has_vacancies? ? render('apply_button') : render('no_vacancies_warning') %>
-        </div>
-      <% else %>
-          <%= render 'apply' %>
-      <% end %>
+        <% else %>
+          <div data-qa="course__end_of_cycle_notice">
+            <h1 class="govuk-heading-xl">You can apply to this course from <%= CycleTimetable.apply_reopens.to_s(:short_month_and_year) %></h1>
+            <p class="govuk-body">Courses are currently closed. You can find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %> and apply from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %>.</p>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

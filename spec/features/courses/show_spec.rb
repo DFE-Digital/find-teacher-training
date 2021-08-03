@@ -227,25 +227,11 @@ describe 'Course show', type: :feature do
         '1 Long Rd E1 ABC',
       )
 
-      expect(course_page).to have_choose_a_training_location_table
-      expect(course_page.choose_a_training_location_table).not_to have_content('Suspended site with vacancies')
+      expect(course_page.school_placements).not_to have_content('Suspended site with vacancies')
 
-      [
-        ['New site with no vacancies', 'No'],
-        ['New site with vacancies', 'Yes'],
-        ['Running site with no vacancies', 'No'],
-        ['Running site with vacancies', 'Yes'],
-      ].each_with_index do |site, index|
-        name, has_vacancies_string = site
-
-        expect(course_page.choose_a_training_location_table)
-          .to have_selector("tbody tr:nth-child(#{index + 1}) strong", text: name)
-
-        expect(course_page.choose_a_training_location_table)
-          .to have_selector("tbody tr:nth-child(#{index + 1}) td", text: has_vacancies_string)
+      course.site_statuses.map(&:site).uniq.each do |site|
+        expect(course_page).to have_content(site.decorate.full_address)
       end
-
-      expect(course_page).to have_locations_map
 
       expect(course_page).to have_course_advice
 
@@ -256,8 +242,6 @@ describe 'Course show', type: :feature do
       expect(course_page).not_to have_content('When you apply you’ll need these codes for the Choices section of your application form')
 
       expect(course_page).not_to have_end_of_cycle_notice
-
-      expect(course_page).to have_training_location_guidance
 
       expect(course_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/course/T92/X130&find_controller=courses')
     end
@@ -299,7 +283,6 @@ describe 'Course show', type: :feature do
 
     context 'End of cycle' do
       before do
-        deactivate_feature(:ucas_only_locations)
         Timecop.freeze(CycleTimetable.apply_2_deadline + 1.hour)
         visit course_path(course.provider_code, course.course_code)
       end
@@ -311,7 +294,6 @@ describe 'Course show', type: :feature do
       it "does not display the 'apply for this course' button" do
         expect(course_page).not_to have_apply_link
         expect(course_page).to have_end_of_cycle_notice
-        expect(course_page).not_to have_training_location_guidance
       end
 
       it 'renders the deadline banner' do
@@ -452,34 +434,20 @@ describe 'Course show', type: :feature do
     end
   end
 
-  context 'with the :ucas_only_locations flag on' do
-    before do
-      allow(FeatureFlag).to receive(:active?).with(:ucas_only_locations).and_return true
-    end
+  context 'with one site' do
+    let(:course) do
+      build(:course,
+            course_code: 'X130',
+            fee_uk_eu: '9250.0',
+            fee_international: nil,
+            provider_code: provider.provider_code,
+            provider_type: provider.provider_type,
+            recruitment_cycle: current_recruitment_cycle,
+            accrediting_provider: accrediting_provider,
+            site_statuses: [jsonapi_site_status('Running site with vacancies', :full_time, 'running')])
 
-    context 'with one site' do
-      let(:course) do
-        build(:course,
-              course_code: 'X130',
-              fee_uk_eu: '9250.0',
-              fee_international: nil,
-              provider_code: provider.provider_code,
-              provider_type: provider.provider_type,
-              recruitment_cycle: current_recruitment_cycle,
-              accrediting_provider: accrediting_provider,
-              site_statuses: [jsonapi_site_status('Running site with vacancies', :full_time, 'running')])
-
-        it 'does not render the locations details in the about_schools section' do
-          expect(course_page).not_to have_content(course.site_statuses.first.site.decorate.full_address)
-        end
-      end
-    end
-
-    context 'with many sites' do
-      it 'renders the locations details in the about_schools section' do
-        course.site_statuses.map(&:site).uniq.each do |site|
-          expect(course_page).to have_content(site.decorate.full_address)
-        end
+      it 'does not render the locations details in the about_schools section' do
+        expect(course_page).not_to have_content(course.site_statuses.first.site.decorate.full_address)
       end
     end
   end
