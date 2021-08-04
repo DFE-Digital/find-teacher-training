@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :store_request_id
   before_action :assign_sentry_contexts
 
+  default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
+
   def store_request_id
     RequestStore.store[:request_id] = request.uuid
   end
