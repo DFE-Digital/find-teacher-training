@@ -76,3 +76,22 @@ en:
     opening_times: "Monday to Friday, 8.30am to 5pm"
     url_get_an_advisor: https://adviser-getintoteaching.education.gov.uk
     url_online_chat: https://getintoteaching.education.gov.uk/#talk-to-us
+  cycles:
+    real:
+      name: 'Same as production environment'
+      description: ''
+    today_is_mid_cycle:
+      name: Mid cycle and deadlines should be displayed
+      description: Candidates can see upcoming application deadlines
+    today_is_after_apply_1_deadline_passed:
+      name: Apply 1 deadline has passed
+      description: Candidates can no longer submit their initial application
+    today_is_after_apply_2_deadline_passed:
+      name: Apply 2 deadline has passed
+      description: Candidates can no longer submit any subsequent applications
+    today_is_after_find_closes:
+      name: Find has closed
+      description: Candidates can no longer browse courses on Find
+    today_is_after_find_opens:
+      name: Find has reopened
+      description: Candidates can browse courses on Find
