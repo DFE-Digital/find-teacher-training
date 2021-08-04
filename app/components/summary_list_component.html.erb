@@ -1,0 +1,11 @@
+<%= govuk_summary_list do |component| %>
+  <% rows.each do |row| %>
+    <%= component.slot(
+      :row,
+      key: row[:key],
+      value: value(row),
+      action: action(row),
+      html_attributes: html_attributes(row),
+    ) %>
+  <% end %>
+<% end %>
