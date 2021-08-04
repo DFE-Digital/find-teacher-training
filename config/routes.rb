@@ -24,6 +24,12 @@ Rails.application.routes.draw do
   # legacy c# app so we're redirecting to root
   get '/start/location', to: redirect('/', status: '301')
 
+  get '/cycles', to: 'switcher#cycles', as: :cycles
+
+  unless HostingEnvironment.production?
+    post '/cycles', to: 'switcher#update', as: :switch_cycle_schedule
+  end
+
   scope module: 'result_filters' do
     root to: 'location#start'
   end

@@ -87,6 +87,9 @@ RSpec.configure do |config|
   #   # test failures related to randomization by passing the same `--seed` value
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
+
+  config.before { RedisService.new.flushdb }
+
   require 'webmock/rspec'
   require 'factory_bot'
   config.include FactoryBot::Syntax::Methods
