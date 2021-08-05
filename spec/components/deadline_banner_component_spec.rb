@@ -46,4 +46,14 @@ describe DeadlineBannerComponent, type: :component do
       end
     end
   end
+
+  context 'when find is down' do
+    it 'does not render' do
+      Timecop.travel(CycleTimetable.find_closes + 1.hour) do
+        result = render_inline(described_class.new(flash_empty: true))
+
+        expect(result.text).to be_blank
+      end
+    end
+  end
 end
