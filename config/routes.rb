@@ -18,19 +18,11 @@ Rails.application.routes.draw do
     get '/cycle-has-ended', to: redirect('/', status: 301)
   end
 
-  if CycleTimetable.preview_mode?
-    root to: redirect('/cycle-ending-soon', status: 302), as: 'cycle_ending_soon_root'
-    get '/cycle-ending-soon', to: 'pages#cycle_ending_soon'
-    scope module: 'result_filters', path: '/start' do
-      get 'location', to: 'location#start', as: 'start_location'
-    end
-  else
-    get '/cycle-ending-soon', to: redirect('/', status: 301)
-    # During the cycle there is no need for a separate path for
-    # start#location but this was the root path in the
-    # legacy c# app so we're redirecting to root
-    get '/start/location', to: redirect('/', status: '301')
-  end
+  get '/cycle-ending-soon', to: redirect('/', status: 301)
+  # During the cycle there is no need for a separate path for
+  # start#location but this was the root path in the
+  # legacy c# app so we're redirecting to root
+  get '/start/location', to: redirect('/', status: '301')
 
   scope module: 'result_filters' do
     root to: 'location#start'
