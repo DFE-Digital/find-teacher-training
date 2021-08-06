@@ -6,7 +6,7 @@ class DeadlineBannerComponent < ViewComponent::Base
   end
 
   def render?
-    flash_empty
+    flash_empty && !CycleTimetable.find_down?
   end
 
 private

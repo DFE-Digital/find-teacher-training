@@ -8,6 +8,4 @@ class PagesController < ApplicationController
   def accessibilty; end
 
   def cycle_has_ended; end
-
-  def cycle_ending_soon; end
 end
