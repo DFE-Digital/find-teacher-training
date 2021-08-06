@@ -37,7 +37,7 @@ class Course < Base
   PROVIDERS_REQUIRING_GCSE_GRADE_5 = %w[U80 I30].freeze
 
   def gcse_grade_required
-    if PROVIDERS_REQUIRING_GCSE_GRADE_5.include?(provider_code)
+    if PROVIDERS_REQUIRING_GCSE_GRADE_5.include?(provider_code) || PROVIDERS_REQUIRING_GCSE_GRADE_5.include?(accrediting_provider&.provider_code)
       5
     else
       4

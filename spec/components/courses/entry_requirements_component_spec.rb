@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Courses::EntryRequirementsComponent do
-  context 'when the provider accepts pending GCSEs', type: :component do
+describe Courses::EntryRequirementsComponent, type: :component do
+  context 'when the provider accepts pending GCSEs' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -15,7 +15,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider does NOT accept pending GCSEs', type: :component do
+  context 'when the provider does NOT accept pending GCSEs' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -29,7 +29,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider requires grade 4 and the course is secondary', type: :component do
+  context 'when the provider requires grade 4 and the course is secondary' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -44,7 +44,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider requires grade 5 and the course is secondary', type: :component do
+  context 'when the provider requires grade 5 and the course is secondary' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -57,9 +57,27 @@ describe Courses::EntryRequirementsComponent do
         'Grade 5 (C) or above in English and maths, or equivalent qualification.',
       )
     end
+
+    context 'when the accrediting provider requires grade 5 and the course is secondary' do
+      it 'renders correct message' do
+        accrediting_provider = build(:provider, provider_code: 'U80')
+        course = build(
+          :course,
+          provider: build(:provider),
+          accrediting_provider: accrediting_provider,
+          level: 'secondary',
+        )
+
+        result = render_inline(described_class.new(course: course))
+
+        expect(result.text).to include(
+          'Grade 5 (C) or above in English and maths, or equivalent qualification.',
+        )
+      end
+    end
   end
 
-  context 'when the provider does not accept equivalant GCSE grades', type: :component do
+  context 'when the provider does not accept equivalant GCSE grades' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -76,7 +94,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider accepts equivalant GCSE grades for Maths and science', type: :component do
+  context 'when the provider accepts equivalant GCSE grades for Maths and science' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -93,7 +111,7 @@ describe Courses::EntryRequirementsComponent do
     end
   end
 
-  context 'when the provider requires a 2:2 and specifies additional requirements', type: :component do
+  context 'when the provider requires a 2:2 and specifies additional requirements' do
     it 'renders correct message' do
       course = build(
         :course,
