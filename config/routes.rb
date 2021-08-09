@@ -8,15 +8,7 @@ Rails.application.routes.draw do
   get :healthcheck, controller: :heartbeat
   get :sha, controller: :heartbeat
 
-  if CycleTimetable.find_down?
-    get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
-    get '/', to: redirect('/cycle-has-ended', status: 302)
-    get '/results', to: redirect('/cycle-has-ended', status: 302), as: 'results_redirect'
-    get '/course/*path', to: redirect('/cycle-has-ended', status: 302)
-    get '/start/*path', to: redirect('/cycle-has-ended', status: 302)
-  else
-    get '/cycle-has-ended', to: redirect('/', status: 301)
-  end
+  get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
 
   get '/cycle-ending-soon', to: redirect('/', status: 301)
   # During the cycle there is no need for a separate path for
