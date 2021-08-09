@@ -24,6 +24,9 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 
+ENV HOSTING_ENVIRONMENT_NAME=production \
+    RAILS_ENV=production
+
 RUN bundle exec rake assets:precompile && \
     rm -rf node_modules /usr/local/bundle/cache
 
