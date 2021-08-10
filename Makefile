@@ -8,6 +8,10 @@ IMAGE=dfedigital/find-teacher-training:${DOCKER_IMAGE_TAG}
 help: ## Show this help
 	@grep -E '^[a-zA-Z\.\-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY: build
+build: ## Build docker image; make build [DOCKER_IMAGE_TAG=<docker image tag>]
+		docker-compose build
+
 .PHONY: webpacker-compile
 webpacker-compile: ## Run webpack
 		docker run --rm ${IMAGE} rails webpacker:compile
@@ -26,8 +30,8 @@ brakeman: ## Run Brakeman static analysis
 
 .PHONY: rspec
 rspec: ## Run Ruby tests
-		docker run -t -e RAILS_ENV=test --name find-rspec-runner ${IMAGE} \
-		                  rspec --format RspecJunitFormatter --out rspec-results.xml --format documentation
+		docker-compose run -T -e RAILS_ENV=test --name find-rspec-runner \
+		                  web rspec --format RspecJunitFormatter --out rspec-results.xml --format documentation
 		test_result=$$?
 		docker cp find-rspec-runner:/app/coverage .
 		docker cp find-rspec-runner:/app/rspec-results.xml .
@@ -35,7 +39,8 @@ rspec: ## Run Ruby tests
 
 .PHONY: js.test
 js.test: ## Run Javascript tests
-		docker run --name find-yarn-test-runner ${IMAGE} /bin/sh -c 'apk add yarn && yarn install --frozen-lockfile && yarn test --coverage'
+		docker-compose run -T --name find-yarn-test-runner \
+		web /bin/sh -c 'apk add yarn && yarn install --frozen-lockfile && yarn test --coverage'
 		test_result=$$?
 		docker cp find-yarn-test-runner:/app/coverage .
 		exit ${test_result}
