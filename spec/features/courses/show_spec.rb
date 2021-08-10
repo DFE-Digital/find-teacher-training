@@ -261,10 +261,10 @@ describe 'Course show', type: :feature do
           'Grade 4 (C) or above in English and maths, or equivalent qualification.',
         )
         expect(course_page.required_qualifications).to have_content(
-          'Candidates with pending GCSEs will be considered.',
+          'We will consider candidates with pending GCSEs.',
         )
         expect(course_page.required_qualifications).to have_content(
-          'Equivalency tests will be accepted in English.',
+          'We will accept equivalency tests in English.',
         )
         expect(course_page.required_qualifications).to have_content(
           'You need to work hard',

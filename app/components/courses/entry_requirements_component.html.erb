@@ -3,7 +3,7 @@
   <h3 class="govuk-heading-m">Qualifications needed</h3>
   <div data-qa="course__required_qualifications">
     <p class="govuk-body">
-      <%= degree_grade_content(course) %>.
+      <%= degree_grade_content(course) %>
     </p>
 
     <% if course.degree_subject_requirements.present? %>
@@ -13,15 +13,15 @@
     <% end %>
 
     <p class="govuk-body">
-      <%= required_gcse_content(course) %>.
+      <%= required_gcse_content(course) %>
     </p>
 
     <p class="govuk-body">
-      <%= pending_gcse_content(course) %>.
+      <%= pending_gcse_content(course) %>
     </p>
 
     <p class="govuk-body">
-      <%= gcse_equivalency_content(course) %>.
+      <%= gcse_equivalency_content(course) %>
     </p>
 
     <% if course.additional_gcse_equivalencies.present? %>

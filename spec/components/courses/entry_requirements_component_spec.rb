@@ -10,7 +10,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Candidates with pending GCSEs will be considered',
+        'We will consider candidates with pending GCSEs.',
       )
     end
   end
@@ -24,7 +24,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Candidates with pending GCSEs will not be considered',
+        'We will not consider candidates with pending GCSEs.',
       )
     end
   end
@@ -39,7 +39,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Grade 4 (C) or above in English, maths and science, or equivalent qualification',
+        'Grade 4 (C) or above in English, maths and science, or equivalent qualification.',
       )
     end
   end
@@ -89,7 +89,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Equivalency tests will not be accepted.',
+        'We do not accept equivalency tests.',
       )
     end
   end
@@ -106,7 +106,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
       result = render_inline(described_class.new(course: course))
 
       expect(result.text).to include(
-        'Equivalency tests will be accepted in maths and science.',
+        'We will accept equivalency tests in maths and science.',
       )
     end
   end
