@@ -1,0 +1,14 @@
+version: "3.6"
+services:
+  redis:
+    image: redis:alpine
+  web:
+    build: .
+    image: dfedigital/find-teacher-training:${DOCKER_IMAGE_TAG:-latest}
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
