@@ -75,6 +75,8 @@ class CycleTimetable
   end
 
   def self.mid_cycle?
+    return true if current_cycle_schedule == :today_is_after_find_opens
+
     Time.zone.now.between?(find_opens, apply_2_deadline)
   end
 

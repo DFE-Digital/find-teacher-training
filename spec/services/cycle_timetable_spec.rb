@@ -91,6 +91,13 @@ RSpec.describe CycleTimetable do
         expect(CycleTimetable.mid_cycle?).to be false
       end
     end
+
+    context 'when current_cycle_schedule returns `:today_is_after_find_opens`' do
+      it 'returns true' do
+        allow(CycleTimetable).to receive(:current_cycle_schedule).and_return(:today_is_after_find_opens)
+        expect(CycleTimetable.mid_cycle?).to be true
+      end
+    end
   end
 
   describe '.show_apply_1_deadline_banner?' do
