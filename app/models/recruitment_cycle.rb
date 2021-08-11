@@ -8,4 +8,16 @@ class RecruitmentCycle < Base
   def self.current
     RecruitmentCycle.includes(:providers).find(Settings.current_cycle).first
   end
+
+  def self.current_year
+    CycleTimetable.current_year
+  end
+
+  def self.next_year
+    CycleTimetable.next_year
+  end
+
+  def self.previous_year
+    current_year - 1
+  end
 end

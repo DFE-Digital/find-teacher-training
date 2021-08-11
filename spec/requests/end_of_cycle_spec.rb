@@ -22,9 +22,9 @@ describe '/cycle-has-ended', type: :request do
 
     [
       '/',
-      '/start/foo',
+      '/start/subject?l=2',
       '/results',
-      '/course/foo',
+      '/course/1N1/238T',
     ].each do |path|
       it "redirects #{path} to '/cycle-has-ended'" do
         get path

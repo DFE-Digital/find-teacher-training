@@ -8,21 +8,17 @@ Rails.application.routes.draw do
   get :healthcheck, controller: :heartbeat
   get :sha, controller: :heartbeat
 
-  if CycleTimetable.find_down?
-    get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
-    get '/', to: redirect('/cycle-has-ended', status: 302)
-    get '/results', to: redirect('/cycle-has-ended', status: 302), as: 'results_redirect'
-    get '/course/*path', to: redirect('/cycle-has-ended', status: 302)
-    get '/start/*path', to: redirect('/cycle-has-ended', status: 302)
-  else
-    get '/cycle-has-ended', to: redirect('/', status: 301)
-  end
+  get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
 
   get '/cycle-ending-soon', to: redirect('/', status: 301)
   # During the cycle there is no need for a separate path for
   # start#location but this was the root path in the
   # legacy c# app so we're redirecting to root
   get '/start/location', to: redirect('/', status: '301')
+
+  get '/cycles', to: 'switcher#cycles', as: :cycles
+
+  post '/cycles', to: 'switcher#update', as: :switch_cycle_schedule
 
   scope module: 'result_filters' do
     root to: 'location#start'

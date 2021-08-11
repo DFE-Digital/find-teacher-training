@@ -6,3 +6,4 @@ google:
   big_query:
     project_id: bat-find-test
     dataset: bat-find-test-events
+redis_url: redis://localhost:6379/9
