@@ -36,6 +36,17 @@ jobs:
           npm install
           npx cypress run
 
+      - name: Upload Cypress screenshot and videos
+        if:   always()
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: smoke-test-${{ github.event.inputs.environment }}
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: 'Nofiy #twd_apply_tech on failure'
         if: failure()
         uses: rtCamp/action-slack-notify@master
