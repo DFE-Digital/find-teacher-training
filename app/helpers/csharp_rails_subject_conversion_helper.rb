@@ -23,7 +23,7 @@ module CsharpRailsSubjectConversionHelper
   end
 
   def csharp_to_subject_code(csharp_id:)
-    rails_data = csharp_subject_code_conversion_table.find do |entry|
+    rails_data = CsharpRailsSubjectConversionHelper.subject_codes.find do |entry|
       entry[:csharp_id] == csharp_id
     end
 
@@ -39,7 +39,7 @@ module CsharpRailsSubjectConversionHelper
   end
 
   def subject_code_to_csharp_subject_id(subject_id:)
-    csharp_data = csharp_subject_code_conversion_table.find do |entry|
+    csharp_data = CsharpRailsSubjectConversionHelper.subject_codes.find do |entry|
       entry[:subject_code] == subject_id
     end
 
@@ -48,7 +48,7 @@ module CsharpRailsSubjectConversionHelper
     csharp_data[:csharp_id]
   end
 
-  def csharp_subject_code_conversion_table
-    @@subject_codes ||= Rails.application.config_for(:subject_codes)['subject_codes'].map(&:symbolize_keys)
+  def self.subject_codes
+    @subject_codes ||= Rails.application.config_for(:subject_codes)['subject_codes'].map(&:symbolize_keys)
   end
 end
