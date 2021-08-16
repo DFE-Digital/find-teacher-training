@@ -34,7 +34,7 @@ module Courses
 
     def pending_gcse_content(course)
       if course.accept_pending_gcse
-        'We will consider candidates with pending GCSEs.'
+        'We’ll consider candidates with pending GCSEs.'
       else
         'We will not consider candidates with pending GCSEs.'
       end
@@ -42,9 +42,9 @@ module Courses
 
     def gcse_equivalency_content(course)
       if course.accept_gcse_equivalency?
-        "We will accept equivalency tests in #{equivalencies}."
+        "We’ll consider candidates who need to take a GCSE equivalency test in #{equivalencies}."
       else
-        'We do not accept equivalency tests.'
+        'We will not consider candidates who need to take a GCSE equivalency test.'
       end
     end
 
@@ -54,7 +54,7 @@ module Courses
       subjects << 'maths' if course.accept_maths_gcse_equivalency.present?
       subjects << 'science' if course.accept_science_gcse_equivalency.present?
 
-      subjects.to_sentence(last_word_connector: ' and ')
+      subjects.to_sentence(last_word_connector: ' or ', two_words_connector: ' or ')
     end
   end
 end
