@@ -41,6 +41,9 @@ en:
     formats:
       default: "%-d %B %Y"
       short: "%B %Y"
+  time:
+    formats:
+      hour_and_median: "%l%P"
   qualifications:
     qts: "QTS"
     pgce: "PGCE"

@@ -5,11 +5,21 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">Find postgraduate teacher training</h1>
 
-      <h2 class="govuk-heading-m">Applications closed</h2>
-      <p class="govuk-body">Applications for the <%= CycleTimetable.cycle_year_range %> academic year are now closed.</p>
+      <h2 class="govuk-heading-m">Courses are currently closed but you can get ready to apply</h2>
 
-      <h2 class="govuk-heading-m">Find courses starting in the <%= CycleTimetable.cycle_year_range(CycleTimetable.next_year) %> academic year</h2>
-      <p class="govuk-body">You can find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %> and apply from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %>.</p>
+      <p class="govuk-body">Applications for the <%= CycleTimetable.cycle_year_range %> academic year are closed.</p>
+
+      <p class="govuk-body">
+        You can <%= govuk_link_to('start or continue an application', Settings.apply_base_url) %>
+        for courses starting in the <%= CycleTimetable.next_cycle_year_range %>
+        academic year.
+      </p>
+
+      <p class="govuk-body">You'll be able to:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>find courses from <%= l(CycleTimetable.find_opens.to_time, format: :hour_and_median) %> on <%= l(CycleTimetable.find_opens.to_date) %></li>
+        <li>submit your application from <%= l(CycleTimetable.apply_reopens.to_time, format: :hour_and_median) %> on <%= l(CycleTimetable.apply_reopens.to_date) %></li>
+      </ul>
     </div>
   </div>
 </div>

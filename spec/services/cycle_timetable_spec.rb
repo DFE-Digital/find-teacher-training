@@ -159,4 +159,20 @@ RSpec.describe CycleTimetable do
       end
     end
   end
+
+  describe '.cycle_year_range' do
+    it 'returns the correctly formatted value' do
+      Timecop.travel(one_hour_before_apply_1_deadline) do
+        expect(CycleTimetable.cycle_year_range).to eq('2021 to 2022')
+      end
+    end
+  end
+
+  describe '.next_cycle_year_range' do
+    it 'returns the correctly formatted value' do
+      Timecop.travel(one_hour_before_apply_1_deadline) do
+        expect(CycleTimetable.next_cycle_year_range).to eq('2022 to 2023')
+      end
+    end
+  end
 end

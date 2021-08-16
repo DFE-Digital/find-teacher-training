@@ -110,6 +110,10 @@ class CycleTimetable
     "#{year} to #{year + 1}"
   end
 
+  def self.next_cycle_year_range(year = current_year)
+    "#{year + 1} to #{year + 2}"
+  end
+
   def self.current_cycle_schedule
     # Make sure this setting only has effect on non-production environments
     return :real if HostingEnvironment.production?
