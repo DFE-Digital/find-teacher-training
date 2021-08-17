@@ -18,7 +18,7 @@ module Courses
       elsif @course.salaried? && provider.can_sponsor_skilled_worker_visa
         "We can sponsor #{govuk_link_to('Skilled Worker visas', TRAIN_TO_TEACH_URL)}, but this is not guaranteed.".html_safe
       else
-        "We cannot sponsor visas. You will need to #{govuk_link_to('get the right visa or status to study in the UK', TRAIN_TO_TEACH_URL)}.".html_safe
+        "We cannot sponsor visas. You’ll need to #{govuk_link_to('get the right visa or status to study in the UK', TRAIN_TO_TEACH_URL)}.".html_safe
       end
     end
   end
