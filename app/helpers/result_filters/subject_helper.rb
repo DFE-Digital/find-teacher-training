@@ -26,7 +26,7 @@ module ResultFilters
     def filtered_subject_names
       request.params['subjects']
              .map { |csharp_id|
-               csharp_data = csharp_subject_code_conversion_table.find do |entry|
+               csharp_data = CsharpRailsSubjectConversionHelper.subject_codes.find do |entry|
                  entry[:csharp_id] == csharp_id
                end
                csharp_data[:name]
