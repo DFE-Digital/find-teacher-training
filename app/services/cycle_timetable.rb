@@ -6,7 +6,7 @@ class CycleTimetable
       first_deadline_banner: Time.zone.local(2021, 7, 12, 9),
       apply_1_deadline: Time.zone.local(2021, 9, 7, 18),
       apply_2_deadline: Time.zone.local(2021, 9, 21, 18),
-      find_closes: Time.zone.local(2021, 10, 3),
+      find_closes: Time.zone.local(2021, 10, 4, 23, 59, 59),
     },
     2022 => {
       find_opens: Time.zone.local(2021, 10, 5, 9),
@@ -16,7 +16,7 @@ class CycleTimetable
       first_deadline_banner: Time.zone.local(2022, 7, 12, 9),
       apply_1_deadline: Time.zone.local(2022, 9, 7, 18),
       apply_2_deadline: Time.zone.local(2022, 9, 21, 18),
-      find_closes: Time.zone.local(2022, 10, 3),
+      find_closes: Time.zone.local(2022, 10, 4, 23, 59, 59),
     },
     2023 => {
       find_opens: Time.zone.local(2022, 10, 5, 9),

@@ -11,7 +11,7 @@ describe '/cycle-has-ended', type: :request do
 
   context 'end of cycle' do
     before do
-      Timecop.freeze(2021, 10, 3, 1)
+      Timecop.freeze(CycleTimetable.find_closes)
       Rails.application.reload_routes!
     end
 
