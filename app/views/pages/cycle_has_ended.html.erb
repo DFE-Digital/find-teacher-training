@@ -3,11 +3,9 @@
 <div class="govuk-width-container">
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">Find postgraduate teacher training</h1>
+      <h1 class="govuk-heading-l">Applications are currently closed but you can get ready to apply</h2>
 
-      <h2 class="govuk-heading-m">Courses are currently closed but you can get ready to apply</h2>
-
-      <p class="govuk-body">Applications for the <%= CycleTimetable.cycle_year_range %> academic year are closed.</p>
+      <p class="govuk-body">Applications for courses starting in the <%= CycleTimetable.cycle_year_range %> academic year are closed.</p>
 
       <p class="govuk-body">
         You can <%= govuk_link_to('start or continue an application', Settings.apply_base_url) %>
@@ -17,8 +15,8 @@
 
       <p class="govuk-body">You'll be able to:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>find courses from <%= l(CycleTimetable.find_opens.to_time, format: :hour_and_median) %> on <%= l(CycleTimetable.find_opens.to_date) %></li>
-        <li>submit your application from <%= l(CycleTimetable.apply_reopens.to_time, format: :hour_and_median) %> on <%= l(CycleTimetable.apply_reopens.to_date) %></li>
+        <li>find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %></li>
+        <li>submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %></li>
       </ul>
     </div>
   </div>

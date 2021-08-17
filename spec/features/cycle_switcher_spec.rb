@@ -42,7 +42,7 @@ RSpec.describe 'Cycle switcher', type: :feature do
     click_button 'Update point in recruitment cycle'
     visit root_path
 
-    expect(page).to have_content('Courses are currently closed but you can get ready to apply')
+    expect(page).to have_content('Applications are currently closed but you can get ready to apply')
   end
 
   it 'opens Find' do
