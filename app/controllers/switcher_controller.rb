@@ -1,6 +1,6 @@
 class SwitcherController < ApplicationController
   skip_before_action :redirect_to_cycle_has_ended_if_find_is_down
-  before_action redirect_to root_path if Rails.env.production?
+  before_action :redirect_to_homepage_if_in_production
 
   def cycles; end
 
@@ -9,5 +9,11 @@ class SwitcherController < ApplicationController
     SiteSetting.set(name: 'cycle_schedule', value: new_cycle)
     flash[:success] = 'Cycle schedule updated'
     redirect_to cycles_path
+  end
+
+private
+
+  def redirect_to_homepage_if_in_production
+    redirect_to root_path if Rails.env.production?
   end
 end
