@@ -1,9 +1,14 @@
 <% if CycleTimetable.show_apply_1_deadline_banner? %>
   <%= govuk_notification_banner(title: "Important") do |notification_banner| %>
-    <%= notification_banner.slot(:heading, text: "Apply now to get on a course starting in the #{CycleTimetable.cycle_year_range} academic year") %>
-    <p class="govuk-body">Courses can fill up at any time, so you should apply as soon as you can.</p>
-    <p class="govuk-body">If you’re applying for the first time since applications opened in <%= CycleTimetable.find_opens.to_s(:month_and_year) %>, apply no later than <%= apply_1_deadline %>.</p>
-    <p class="govuk-body">If your application did not lead to a place and you’re applying again, apply no later than <%= apply_2_deadline %>.</p>
+    <%= notification_banner.slot(:heading, text: "If you’re applying for the first time since applications opened in October 2020") %>
+    <p class="govuk-body">It’s no longer possible to apply for teacher training starting in the <%= CycleTimetable.cycle_year_range %> academic year.</p>
+    <p class="govuk-body">You can <%= govuk_link_to('start or continue your application', Settings.apply_base_url) %> to get it ready for courses starting in the <%= CycleTimetable.cycle_year_range(CycleTimetable.next_year) %> academic year.</p>
+    <p class="govuk-body">
+      You’ll be able to find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %> and submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %>.
+    </p>
+
+    <h2 class="govuk-heading-m">If your application did not lead to a place and you’re applying again</h2>
+    <p class="govuk-body">You can continue to search and apply for courses starting in the <%= CycleTimetable.cycle_year_range %> academic year until <%= CycleTimetable.apply_2_deadline.to_s(:govuk_date_and_time) %>.</p>
   <% end %>
 <% elsif CycleTimetable.show_apply_2_deadline_banner? %>
   <%= govuk_notification_banner(title: "Important") do |notification_banner| %>

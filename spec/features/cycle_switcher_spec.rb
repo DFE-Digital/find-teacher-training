@@ -15,7 +15,7 @@ RSpec.describe 'Cycle switcher', type: :feature do
     click_button 'Update point in recruitment cycle'
     visit root_path
 
-    expect(page).to have_text("Apply now to get on a course starting in the #{CycleTimetable.cycle_year_range} academic year")
+    expect(page).to have_text('If you’re applying for the first time since applications opened in October 2020')
   end
 
   it 'shows the Apply 1 has closed banner' do
