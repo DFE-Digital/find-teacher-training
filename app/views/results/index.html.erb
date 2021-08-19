@@ -1,7 +1,10 @@
 <%= content_for :page_title, @number_of_courses_string %>
 
+<% unless @results_view.courses.all.empty? %>
+  <%= render LocationSubjectFilterComponent.new(results: @results_view)%>
+<% end %>
+
 <h1 class="govuk-heading-xl" data-qa="heading">
-  <span class="govuk-caption-l">Teacher training courses</span>
   <span data-qa="course-count"><%= "#{@results_view.number_of_courses_string} found" %></span>
 </h1>
 

@@ -10,6 +10,7 @@ RSpec.feature 'Results page new area and provider filter' do
   let(:start_page) { PageObjects::Page::Start.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
+  let(:subjects_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:query_params) { {} }
   let(:base_parameters) { results_page_parameters }
 
@@ -31,7 +32,7 @@ RSpec.feature 'Results page new area and provider filter' do
       )
 
       stub_courses(
-        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0', 'filter[subjects]' => '00'),
         course_count: 4,
       )
     end
@@ -44,6 +45,8 @@ RSpec.feature 'Results page new area and provider filter' do
         filter_page.provider_search.fill_in(with: 'ACME')
         filter_page.find_courses.click
         provider_page.provider_suggestions[0].hyperlink.click
+        subjects_page.subject_areas.first.subjects[0].checkbox.click
+        subjects_page.continue.click
       end
 
       it 'displays the courses' do
@@ -57,13 +60,9 @@ RSpec.feature 'Results page new area and provider filter' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
             'l' => '3',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
             'query' => 'ACME SCITT 0',
+            'subjects' => %w[31],
           },
         )
       end
@@ -124,9 +123,6 @@ RSpec.feature 'Results page new area and provider filter' do
         page: results_page,
         expected_query_params: {
           'c' => 'England',
-          'fulltime' => 'false',
-          'parttime' => 'false',
-          'hasvacancies' => 'true',
           'l' => '1',
           'lat' => '51.4980188',
           'lng' => '-0.1300436',
@@ -134,8 +130,6 @@ RSpec.feature 'Results page new area and provider filter' do
           'lq' => 'SW1P 3BT',
           'rad' => '50',
           'sortby' => '2',
-          'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-          'senCourses' => 'false',
         },
       )
     end
@@ -162,9 +156,6 @@ RSpec.feature 'Results page new area and provider filter' do
           page: results_page,
           expected_query_params: {
             'c' => 'England',
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
             'l' => '1',
             'lat' => '53.83365879999999',
             'lng' => '-1.0564076',
@@ -172,8 +163,6 @@ RSpec.feature 'Results page new area and provider filter' do
             'lq' => 'Station Rise',
             'rad' => '50',
             'sortby' => '2',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
           },
         )
       end

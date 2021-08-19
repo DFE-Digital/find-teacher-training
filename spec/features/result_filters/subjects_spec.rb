@@ -48,10 +48,6 @@ RSpec.feature 'Results page new subject filter' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'subjects' => %w[31 32 3 5 47],
           },
         )
@@ -86,10 +82,6 @@ RSpec.feature 'Results page new subject filter' do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          'fulltime' => 'false',
-          'parttime' => 'false',
-          'hasvacancies' => 'true',
-          'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           'subjects' => %w[31 32 3],
           'senCourses' => 'true',
         },
