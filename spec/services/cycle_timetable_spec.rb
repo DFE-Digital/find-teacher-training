@@ -1,38 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe CycleTimetable do
-  let(:one_hour_before_find_opens) { Time.zone.local(2020, 10, 6, 8, 0, 0) }
-  let(:one_hour_after_find_opens) { Time.zone.local(2020, 10, 6, 10, 0, 0) }
-  let(:one_hour_before_first_deadline_banner) { Time.zone.local(2021, 7, 12, 8, 0, 0) }
-  let(:one_hour_before_apply_1_deadline) { Time.zone.local(2021, 8, 24, 17, 0, 0) }
-  let(:one_hour_after_apply_1_deadline) { Time.zone.local(2021, 9, 7, 19, 0, 0) }
-  let(:one_hour_before_apply_2_deadline) { Time.zone.local(2021, 9, 21, 17, 0, 0) }
-  let(:one_hour_after_apply_2_deadline) { Time.zone.local(2021, 9, 21, 19, 0, 0) }
-  let(:one_hour_after_find_closes) { Time.zone.local(2021, 10, 4, 1, 0, 0) }
-  let(:one_hour_after_find_reopens) { Time.zone.local(2021, 10, 5, 10, 0, 0) }
+  let(:one_hour_before_find_opens) { CycleTimetable.find_opens - 1.hour }
+  let(:one_hour_after_find_opens) { CycleTimetable.find_opens + 1.hour }
+  let(:one_hour_before_first_deadline_banner) { CycleTimetable.first_deadline_banner - 1.hour }
+  let(:one_hour_before_apply_1_deadline) { CycleTimetable.apply_1_deadline - 1.hour }
+  let(:one_hour_after_apply_1_deadline) { CycleTimetable.apply_1_deadline + 1.hour  }
+  let(:one_hour_before_apply_2_deadline) { CycleTimetable.apply_2_deadline - 1.hour }
+  let(:one_hour_after_apply_2_deadline) { CycleTimetable.apply_2_deadline + 1.hour }
+  let(:one_hour_after_find_closes) { CycleTimetable.find_closes + 1.hour }
+  let(:one_hour_after_find_reopens) { CycleTimetable.find_reopens + 1.hour }
 
   describe '.current_year' do
     it 'is 2021 if we are in the middle of the 2021 cycle' do
-      Timecop.travel(Time.zone.local(2021, 1, 1, 12, 0, 0)) do
+      Timecop.travel(one_hour_after_find_opens) do
         expect(CycleTimetable.current_year).to eq(2021)
       end
     end
 
     it 'is 2022 if we are in the middle of the 2022 cycle' do
-      Timecop.travel(Time.zone.local(2021, 11, 1, 12, 0, 0)) do
+      Timecop.travel(one_hour_after_find_reopens) do
         expect(CycleTimetable.current_year).to eq(2022)
       end
     end
   end
 
   describe '.next_year' do
-    it 'is 2021 if we are in the middle of the 2021 cycle' do
+    it 'is 2022 if we are in the middle of the 2021 cycle' do
       Timecop.travel(Time.zone.local(2021, 1, 1, 12, 0, 0)) do
         expect(CycleTimetable.next_year).to eq(2022)
       end
     end
 
-    it 'is 2022 if we are in the middle of the 2022 cycle' do
+    it 'is 2023 if we are in the middle of the 2022 cycle' do
       Timecop.travel(Time.zone.local(2021, 11, 1, 12, 0, 0)) do
         expect(CycleTimetable.next_year).to eq(2023)
       end
