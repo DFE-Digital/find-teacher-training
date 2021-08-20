@@ -33,7 +33,8 @@ RSpec.describe 'Cycle switcher', type: :feature do
     click_button 'Update point in recruitment cycle'
     visit root_path
 
-    expect(page).to have_text("It’s no longer possible to apply for teacher training starting in the #{CycleTimetable.cycle_year_range} academic year")
+    expect(page).to have_text('Courses are currently closed but you can get your application ready')
+    expect(page).to have_text("Courses starting in the #{CycleTimetable.cycle_year_range} academic year are closed")
   end
 
   it "redirects to the 'cycle has ended' page" do

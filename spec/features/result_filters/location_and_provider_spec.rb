@@ -240,7 +240,7 @@ RSpec.feature 'Results page new area and provider filter' do
           Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
             start_page.load
 
-            expect(start_page).to have_content('there’s no guarantee that the courses currently shown on this website will be on offer next year.')
+            expect(start_page).to have_content('Courses are currently closed but you can get your application ready')
           end
         end
       end
