@@ -19,6 +19,10 @@ private
     CycleTimetable.apply_2_deadline.to_s(:govuk_date_and_time)
   end
 
+  def find_opens
+    CycleTimetable.find_opens.to_s(:month_and_year)
+  end
+
   def find_reopens
     CycleTimetable.find_reopens.to_s(:govuk_date_and_time)
   end
