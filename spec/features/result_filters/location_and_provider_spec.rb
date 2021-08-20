@@ -39,8 +39,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
     context 'valid provider search' do
       before do
-        results_page.load
-        results_page.area_and_provider_filter.link.click
+        filter_page.load
         filter_page.by_provider.click
         filter_page.provider_search.fill_in(with: 'ACME')
         filter_page.find_courses.click
@@ -51,9 +50,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
       it 'displays the courses' do
         expect(results_page.courses.first).to have_main_address
-        expect(results_page.heading.text).to eq('Teacher training courses 4 courses found')
-        expect(results_page.area_and_provider_filter.name.text).to eq('ACME SCITT 0')
-        expect(results_page.area_and_provider_filter.link.text).to eq('Change provider or choose a location')
+        expect(results_page.heading.text).to eq('4 courses found')
       end
 
       it 'retains the query parameters' do
@@ -71,8 +68,7 @@ RSpec.feature 'Results page new area and provider filter' do
     context 'invalid provider search' do
       context 'blank search' do
         it 'displays an error' do
-          results_page.load
-          results_page.area_and_provider_filter.link.click
+          filter_page.load
           filter_page.by_provider.click
           filter_page.find_courses.click
 
@@ -82,8 +78,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
       context 'invalid one character provider search' do
         it 'displays an error' do
-          results_page.load
-          results_page.area_and_provider_filter.link.click
+          filter_page.load
           filter_page.by_provider.click
           filter_page.provider_search.fill_in(with: 'A')
           filter_page.find_courses.click
@@ -105,17 +100,14 @@ RSpec.feature 'Results page new area and provider filter' do
       )
       stub_courses(query: query, course_count: 10)
 
-      results_page.load
-      results_page.area_and_provider_filter.link.click
+      filter_page.load
       filter_page.by_postcode_town_or_city.click
       filter_page.location_query.fill_in(with: 'SW1P 3BT')
       filter_page.find_courses.click
     end
 
     it 'displays the courses' do
-      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-      expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
-      expect(results_page.area_and_provider_filter.link.text).to eq('Change location or choose a provider')
+      expect(results_page.heading.text).to eq('10 courses found')
     end
 
     it 'retains the query parameters' do
@@ -147,7 +139,7 @@ RSpec.feature 'Results page new area and provider filter' do
       end
 
       it 'updates and retains the query parameters' do
-        results_page.area_and_provider_filter.link.click
+        filter_page.load
         filter_page.by_postcode_town_or_city.click
         filter_page.location_query.fill_in(with: 'Station Rise')
         filter_page.find_courses.click
@@ -170,11 +162,9 @@ RSpec.feature 'Results page new area and provider filter' do
 
     context 'course has sites' do
       it 'displays the courses' do
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
+        expect(results_page.heading.text).to eq('10 courses found')
 
         expect(results_page.courses.first).not_to have_main_address
-
-        expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
       end
     end
 
@@ -182,7 +172,7 @@ RSpec.feature 'Results page new area and provider filter' do
       # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
       # 'nearest site' or 'distance to site' info
       it 'does not display nearest site information' do
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
+        expect(results_page.heading.text).to eq('10 courses found')
       end
     end
 

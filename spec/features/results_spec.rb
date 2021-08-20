@@ -151,8 +151,7 @@ describe 'results', type: :feature do
     end
 
     it 'sets all parameters correctly' do
-      expect(results_page.area_and_provider_filter.name).to have_content('Across England')
-      expect(results_page.subjects_filter.subjects.first.text).to eq('Biology, Business studies, Chemistry')
+      expect(results_page.text).to include('Biology, Business studies and Chemistry courses in England')
       expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
       expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
       expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
