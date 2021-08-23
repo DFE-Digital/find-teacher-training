@@ -17,8 +17,9 @@
   <% end %>
 <% elsif CycleTimetable.show_cycle_closed_banner? %>
   <%= govuk_notification_banner(title: "Important") do |notification_banner| %>
-    <%= notification_banner.slot(:heading, text: "It’s no longer possible to apply for teacher training starting in the #{CycleTimetable.cycle_year_range} academic year") %>
-    <p class="govuk-body">Come back from <%= find_reopens %> to find courses starting in the <%= CycleTimetable.cycle_year_range %> academic year, as there’s no guarantee that the courses currently shown on this website will be on offer next year.</p>
-    <p class="govuk-body">You can submit an application from <%= apply_reopens %>.</p>
+    <%= notification_banner.slot(:heading, text: "Courses are currently closed but you can get your application ready") %>
+    <p class="govuk-body">Courses starting in the <%= CycleTimetable.cycle_year_range %> academic year are closed.</p>
+    <p class="govuk-body">You can <%= govuk_link_to('start or continue your application', Settings.apply_base_url) %> to get it ready for courses starting in the <%= CycleTimetable.next_cycle_year_range %> academic year.</p>
+    <p class="govuk-body">You’ll be able to find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %> and submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %>.</p>
   <% end %>
 <% end %>

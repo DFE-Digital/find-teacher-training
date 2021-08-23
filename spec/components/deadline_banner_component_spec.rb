@@ -40,7 +40,7 @@ describe DeadlineBannerComponent, type: :component do
       Timecop.travel(CycleTimetable.apply_2_deadline + 1.hour) do
         result = render_inline(described_class.new(flash_empty: true))
 
-        expect(result.text).to include('as there’s no guarantee that the courses currently shown on this website will be on offer next year.')
+        expect(result.text).to include("Courses starting in the #{CycleTimetable.cycle_year_range} academic year are closed")
         expect(result.text).not_to include('Courses can fill up at any time, so you should apply as soon as you can.')
         expect(result.text).not_to include("If your application did not lead to a place and you’re applying again, apply no later than 6pm on #{CycleTimetable.apply_2_deadline.strftime('%e %B %Y')}.")
       end

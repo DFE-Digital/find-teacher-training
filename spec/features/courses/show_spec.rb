@@ -297,7 +297,7 @@ describe 'Course show', type: :feature do
       end
 
       it 'renders the deadline banner' do
-        expect(page).to have_content "It’s no longer possible to apply for teacher training starting in the #{CycleTimetable.current_year} to #{CycleTimetable.next_year} academic year"
+        expect(page).to have_content 'Courses are currently closed but you can get your application ready'
       end
     end
   end
