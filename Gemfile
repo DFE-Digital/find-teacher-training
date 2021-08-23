@@ -59,7 +59,11 @@ gem 'json-schema'
 # Settings for the app
 gem 'config'
 
-gem 'redis', '~> 4.4'
+#Redis for sidekiq & cache
+gem 'redis'
+
+#Sidekiq for background jobs
+gem 'sidekiq'
 
 # Calculate distance between two locations
 gem 'geokit'

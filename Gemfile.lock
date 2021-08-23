@@ -103,6 +103,7 @@ GEM
     config (3.1.0)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
+    connection_pool (2.2.5)
     crack (0.4.5)
       rexml
     crass (1.0.6)
@@ -406,6 +407,10 @@ GEM
     semantic_range (3.0.0)
     sentry-raven (3.1.2)
       faraday (>= 1.0)
+    sidekiq (6.2.1)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     signet (0.15.0)
       addressable (~> 2.3)
       faraday (>= 0.17.3, < 2.0)
@@ -508,7 +513,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   rails_semantic_logger
   redcarpet
-  redis (~> 4.4)
+  redis
   request_store
   rspec-rails (~> 5.0.2)
   rspec_junit_formatter
@@ -519,6 +524,7 @@ DEPENDENCIES
   rubypants
   scss_lint-govuk
   sentry-raven
+  sidekiq
   simplecov (< 0.18)
   site_prism
   skylight

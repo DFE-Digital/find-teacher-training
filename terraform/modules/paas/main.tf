@@ -18,6 +18,7 @@ resource cloudfoundry_app web_app {
   name                       = local.web_app_name
   command                    = local.web_app_start_command
   docker_image               = var.app_docker_image
+  docker_credentials         = var.docker_credentials
   health_check_type          = "http"
   health_check_http_endpoint = "/ping"
   instances                  = var.web_app_instances
@@ -38,7 +39,26 @@ resource cloudfoundry_app web_app {
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
+}
+
+resource cloudfoundry_app worker_app {
+  name               = local.worker_app_name
+  command            = local.worker_app_start_command
+  docker_image       = var.app_docker_image
   docker_credentials = var.docker_credentials
+  health_check_type  = "process"
+  instances          = var.worker_app_instances
+  memory             = var.worker_app_memory
+  space              = data.cloudfoundry_space.space.id
+  strategy           = "blue-green-v2"
+  timeout            = 180
+  environment        = var.app_environment_variables
+  service_binding {
+    service_instance = cloudfoundry_user_provided_service.logging.id
+  }
+  service_binding {
+    service_instance = cloudfoundry_service_instance.redis.id
+  }
 }
 
 resource cloudfoundry_route web_app_cloudapps_digital_route {
