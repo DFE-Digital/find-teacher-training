@@ -124,6 +124,10 @@ class ResultsView
     query_parameters['l'] == '3'
   end
 
+  def location_search
+    query_parameters['lq']
+  end
+
   def sort_by_distance?
     sort_by == DISTANCE
   end
