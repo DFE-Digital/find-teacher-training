@@ -33,8 +33,6 @@ module FindTeacherTraining
 
     config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
 
-    # Configure ActiveJobs to use on-server thread pool. This is acceptable for
-    # BigQuery event sending for now, can be changed to Sidekiq in the future.
-    config.active_job.queue_adapter = :async
+    config.active_job.queue_adapter = :sidekiq
   end
 end
