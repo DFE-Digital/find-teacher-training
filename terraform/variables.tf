@@ -10,6 +10,10 @@ variable paas_web_app_instances { default = 1 }
 
 variable paas_web_app_memory { default = 512 }
 
+variable paas_worker_app_instances { default = 1 }
+
+variable paas_worker_app_memory { default = 512 }
+
 variable paas_redis_service_plan {}
 
 variable paas_app_config_file { default = "./workspace_variables/app_config.yml" }

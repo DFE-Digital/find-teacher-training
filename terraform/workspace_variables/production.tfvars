@@ -1,13 +1,15 @@
 # PaaS
-paas_sso_code           = ""
-paas_app_environment    = "prod"
-paas_cf_space           = "bat-prod"
-paas_web_app_instances  = 2
-paas_web_app_memory     = 1024
-paas_redis_service_plan = "micro-ha-5_x"
+paas_sso_code             = ""
+paas_app_environment      = "prod"
+paas_cf_space             = "bat-prod"
+paas_web_app_instances    = 2
+paas_web_app_memory       = 1024
+paas_worker_app_instances = 2
+paas_worker_app_memory    = 1024
+paas_redis_service_plan   = "micro-ha-5_x"
 
 # KeyVault
-key_vault_resource_group    = "s121p01-shared-rg"
+key_vault_resource_group = "s121p01-shared-rg"
 
 #StatusCake
 statuscake_alerts = {
