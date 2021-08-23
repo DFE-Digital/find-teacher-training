@@ -5,7 +5,6 @@ class ResultsView
   include ActionView::Helpers::NumberHelper
 
   MAXIMUM_NUMBER_OF_SUBJECTS = 43
-  NUMBER_OF_SUBJECTS_DISPLAYED = 4
   DISTANCE = '2'.freeze
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
@@ -79,7 +78,7 @@ class ResultsView
   def number_of_extra_subjects
     return 37 if number_of_subjects_selected == MAXIMUM_NUMBER_OF_SUBJECTS
 
-    number_of_subjects_selected - NUMBER_OF_SUBJECTS_DISPLAYED
+    number_of_subjects_selected
   end
 
   def location
@@ -206,7 +205,7 @@ class ResultsView
   end
 
   def subjects
-    subject_codes.any? ? filtered_subjects : all_subjects[0...NUMBER_OF_SUBJECTS_DISPLAYED]
+    subject_codes.any? ? filtered_subjects : all_subjects
   end
 
   def all_subjects
@@ -383,8 +382,7 @@ private
   end
 
   def filtered_subjects
-    all_matching = all_subjects.select { |subject| subject_codes.include?(subject.subject_code) }
-    all_matching[0...NUMBER_OF_SUBJECTS_DISPLAYED]
+    all_subjects.select { |subject| subject_codes.include?(subject.subject_code) }
   end
 
   def number_of_subjects_selected

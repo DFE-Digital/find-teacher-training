@@ -228,7 +228,7 @@ describe ResultsView do
       let(:parameter_hash) { { 'subjects' => %w[1 2 3 4 5] } }
 
       it 'returns the number of the extra subjects' do
-        expect(results_view.number_of_extra_subjects).to eq(-5)
+        expect(results_view.number_of_extra_subjects).to eq(5)
       end
     end
 
@@ -411,18 +411,49 @@ describe ResultsView do
 
       it 'returns the subjects in alphabetical order' do
         expect(results_view.subjects.map(&:subject_name)).to eq(
-          [
-            'Art and design',
-            'Biology',
-            'Business studies',
-            'Chemistry',
-            'Citizenship',
-            'Classics',
-            'Communication and media studies',
-            'Computing',
-            'Dance',
-            'Design and technology',
-          ],
+          ['Art and design',
+           'Biology',
+           'Business studies',
+           'Chemistry',
+           'Citizenship',
+           'Classics',
+           'Communication and media studies',
+           'Computing',
+           'Dance',
+           'Design and technology',
+           'Drama',
+           'Economics',
+           'English',
+           'English as a second or other language',
+           'French',
+           'Further education',
+           'Geography',
+           'German',
+           'Health and social care',
+           'History',
+           'Italian',
+           'Japanese',
+           'Mandarin',
+           'Mathematics',
+           'Modern Languages',
+           'Modern languages (other)',
+           'Music',
+           'Philosophy',
+           'Physical education',
+           'Physics',
+           'Primary',
+           'Primary with English',
+           'Primary with geography and history',
+           'Primary with mathematics',
+           'Primary with modern languages',
+           'Primary with physical education',
+           'Primary with science',
+           'Psychology',
+           'Religious education',
+           'Russian',
+           'Science',
+           'Social sciences',
+           'Spanish'],
         )
       end
 
