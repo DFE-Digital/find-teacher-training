@@ -41,11 +41,12 @@ locals {
   logging_service_name     = "find-logit-${local.app_name_suffix}"
   redis_service_name       = "find-redis-${local.app_name_suffix}"
   service_gov_uk_host_names = {
-    qa      = ["qa"]
-    staging = ["staging"]
-    sandbox = ["sandbox"]
-    prod    = ["www", "www2"]
-    review  = [local.app_name_suffix]
+    qa       = ["qa"]
+    staging  = ["staging"]
+    sandbox  = ["sandbox"]
+    prod     = ["www", "www2"]
+    review   = [local.app_name_suffix]
+    loadtest = ["loadtest"]
   }
   web_app_service_gov_uk_route_ids = [for r in cloudfoundry_route.web_app_service_gov_uk_route : r.id]
   web_app_routes                   = concat(local.web_app_service_gov_uk_route_ids, [cloudfoundry_route.web_app_cloudapps_digital_route.id])
