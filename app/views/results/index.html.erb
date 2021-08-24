@@ -64,43 +64,11 @@
     <% if @results_view.has_results? %>
       <ul class="app-search-results">
         <% @courses.each do |course| %>
-          <li class="app-search-results__item" data-qa="course">
-            <h2 class="app-search-result__item-title">
-              <%= govuk_link_to course_path(provider_code: course.provider_code, course_code: course.course_code), data: { qa: 'course__link' } do %>
-                <span class="app-search-result__provider-name" data-qa="course__provider_name"><%= smart_quotes(course.provider.provider_name) %></span>
-                <span class="app-search-result__course-name" data-qa="course__name"><%= course.decorate.display_title %></span>
-              <% end %>
-            </h2>
-            <dl class="app-description-list app-description-list--search-result">
-              <dt class="app-description-list__label">Study type</dt>
-              <dd data-qa="course__study_mode"><%= course.study_mode.humanize %></dd>
-              <dt class="app-description-list__label">Qualification</dt>
-              <dd data-qa="course__qualification"><%= course.qualification.humanize %></dd>
-              <% if @results_view.location_filter? && @results_view.has_sites?(course) %>
-                <% if course.university_based? %>
-                  <%= render partial: 'results/university', locals: { course: course } %>
-                <% else %>
-                  <%= render partial: 'results/non_university', locals: { course: course } %>
-                <% end %>
-              <% end %>
-              <dt class="app-description-list__label">Financial support</dt>
-              <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
-              <% if course['accrediting_provider'].present? %>
-                <dt class="app-description-list__label">Accredited body</dt>
-                <dd data-qa="course__accrediting_provider"><%= smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
-              <% end %>
-              <% unless @results_view.location_filter? %>
-                <dt class="app-description-list__label">Locations</dt>
-                <dd data-qa="course__main_address">
-                  <%= smart_quotes(course.provider.decorate.short_address) %>
-                </dd>
-              <% end %>
-              <dt class="app-description-list__label">Vacancies</dt>
-              <dd data-qa="course__has_vacancies">
-                <%= course.decorate.has_vacancies? %>
-              </dd>
-            </dl>
-          </li>
+          <%= render Courses::SearchResultComponent.new(
+            course: course,
+            has_sites: @results_view.has_sites?(course),
+            filtered_by_location: @results_view.location_filter?,
+          ) %>
         <% end %>
       </ul>
     <% end %>
