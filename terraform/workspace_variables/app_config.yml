@@ -22,3 +22,8 @@ sandbox:
   <<: *default
   RAILS_ENV: sandbox
   RACK_ENV: sandbox
+
+loadtest:
+  <<: *default
+  RAILS_ENV: loadtest
+  RACK_ENV: loadtest

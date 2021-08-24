@@ -35,9 +35,6 @@ resource cloudfoundry_app web_app {
     }
   }
   service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
-  }
-  service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
 }
@@ -55,9 +52,6 @@ resource cloudfoundry_app worker_app {
   timeout            = 180
   environment        = var.app_environment_variables
   service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
-  }
-  service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
 }
@@ -74,12 +68,6 @@ resource cloudfoundry_route web_app_service_gov_uk_route {
   domain   = data.cloudfoundry_domain.find_service_gov_uk.id
   space    = data.cloudfoundry_space.space.id
   hostname = each.value
-}
-
-resource cloudfoundry_user_provided_service logging {
-  name             = local.logging_service_name
-  space            = data.cloudfoundry_space.space.id
-  syslog_drain_url = var.logstash_url
 }
 
 resource "cloudfoundry_service_instance" "redis" {

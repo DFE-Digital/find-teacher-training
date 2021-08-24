@@ -98,6 +98,13 @@ sandbox: ## Set DEPLOY_ENV to production
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval space=bat-prod)
 
+.PHONY: loadtest
+loadtest: ## Set DEPLOY_ENV to loadtest
+	$(eval DEPLOY_ENV=loadtest)
+	$(eval env=loadtest)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
+	$(eval space=bat-prod)
+
 .PHONY: deploy-plan
 deploy-plan: deploy-init ## Run terraform plan for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
 	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
