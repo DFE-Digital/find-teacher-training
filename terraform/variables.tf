@@ -1,4 +1,4 @@
-variable paas_sso_code {}
+variable paas_sso_code { default = "" }
 
 variable paas_cf_space {}
 

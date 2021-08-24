@@ -1,10 +1,10 @@
 variable cf_api_url {}
 
-variable cf_user {}
+variable cf_user { default = null }
 
-variable cf_user_password {}
+variable cf_user_password { default = null }
 
-variable cf_sso_passcode {}
+variable cf_sso_passcode { default = "" }
 
 variable cf_space {}
 
