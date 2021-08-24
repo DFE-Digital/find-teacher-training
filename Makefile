@@ -65,13 +65,17 @@ publish.codeclimate: ## Publish coverage to Code Climate
 		# Upload the our test coverage to code climate
 		./cc-test-reporter upload-coverage --input coverage/total.json
 
+.PHONY: ci
+ci:	## Run in automation
+	$(eval export DISABLE_PASSCODE=true)
+	$(eval export AUTO_APPROVE=-auto-approve)
+
 .PHONY: qa
 qa: ## Set DEPLOY_ENV to qa
 	$(eval DEPLOY_ENV=qa)
 	$(eval env=qa)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
 	$(eval space=bat-qa)
-
 
 .PHONY: staging
 staging: ## Set DEPLOY_ENV to staging
@@ -94,19 +98,25 @@ sandbox: ## Set DEPLOY_ENV to production
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval space=bat-prod)
 
-.PHONY: plan
-plan: ## Run terraform for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
-	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
+.PHONY: deploy-plan
+deploy-plan: deploy-init ## Run terraform plan for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
+	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
+		&& terraform plan -var-file=workspace_variables/$(DEPLOY_ENV).tfvars
+
+deploy-init:
+	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=master))
+	$(if $(or $(DISABLE_PASSCODE),$(PASSCODE)), , $(error Missing environment variable "PASSCODE", retrieve from https://login.london.cloud.service.gov.uk/passcode))
+	$(eval export TF_VAR_paas_sso_passcode=$(PASSCODE))
+	$(eval export TF_VAR_paas_app_docker_image=dfedigital/find-teacher-training:$(IMAGE_TAG))
+	$(eval export TF_VAR_paas_app_config_file=./workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
-	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
-	terraform plan -var-file terraform/workspace_variables/${DEPLOY_ENV}.tfvars terraform
+	cd terraform && terraform init -reconfigure -backend-config=workspace_variables/$(DEPLOY_ENV)_backend.tfvars
+	echo "🚀 DEPLOY_ENV is $(DEPLOY_ENV)"
 
 .PHONY: deploy
-deploy: ## Run terraform apply for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
-	$(eval export TF_VAR_paas_app_config_file=terraform/workspace_variables/app_config.yml)
-	az account set -s ${AZ_SUBSCRIPTION} && az account show
-	terraform init -backend-config terraform/workspace_variables/${DEPLOY_ENV}_backend.tfvars terraform
-	terraform apply -var-file terraform/workspace_variables/${DEPLOY_ENV}.tfvars terraform
+deploy: deploy-init ## Run terraform apply for ${DEPLOY_ENV} eg: make qa deploy, make staging deploy, make production deploy
+	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
+		&& terraform apply -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
 
 .PHONY: install-fetch-config
 install-fetch-config: ## Install the fetch-config script
