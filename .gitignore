@@ -49,6 +49,7 @@ lock.json
 terraform/**/*.yml
 !terraform/**/app_config.yml
 terraform/**/*.base64
+.cftoken
 
 ## sanitised production data
 *.sql.gz
