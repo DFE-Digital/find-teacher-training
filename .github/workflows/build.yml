@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - load-test
   pull_request:
     branches:
       - master
