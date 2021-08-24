@@ -36,9 +36,5 @@
         <%= helpers.smart_quotes(course.provider.decorate.short_address) %>
       </dd>
     <% end %>
-    <dt class="app-description-list__label">Vacancies</dt>
-    <dd data-qa="course__has_vacancies">
-      <%= course.decorate.has_vacancies? %>
-    </dd>
   </dl>
 </li>
