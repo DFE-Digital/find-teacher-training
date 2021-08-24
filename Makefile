@@ -106,7 +106,7 @@ deploy-plan: deploy-init ## Run terraform plan for ${DEPLOY_ENV} eg: make qa pla
 deploy-init:
 	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=master))
 	$(if $(or $(DISABLE_PASSCODE),$(PASSCODE)), , $(error Missing environment variable "PASSCODE", retrieve from https://login.london.cloud.service.gov.uk/passcode))
-	$(eval export TF_VAR_paas_sso_passcode=$(PASSCODE))
+	$(eval export TF_VAR_paas_sso_code=$(PASSCODE))
 	$(eval export TF_VAR_paas_app_docker_image=dfedigital/find-teacher-training:$(IMAGE_TAG))
 	$(eval export TF_VAR_paas_app_config_file=./workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
