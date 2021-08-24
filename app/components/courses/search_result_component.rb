@@ -30,5 +30,17 @@ module Courses
         'An undergraduate degree, or equivalent.'
       end
     end
+
+    def visa_sponsorship
+      if course.provider&.can_sponsor_all_visas?
+        'Student and Skilled Worker visas can be sponsored'
+      elsif course.provider&.can_only_sponsor_student_visa?
+        'Student visas can be sponsored'
+      elsif course.provider&.can_only_sponsor_skilled_worker_visa?
+        'Skilled Worker visas can be sponsored'
+      else
+        'None'
+      end
+    end
   end
 end

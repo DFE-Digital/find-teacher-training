@@ -23,6 +23,9 @@
     <dt class="app-description-list__label">Degree required</dt>
     <dd data-qa="course__degree_required"><%= degree_required %></dd>
 
+    <dt class="app-description-list__label">Visa sponsorship</dt>
+    <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship %></dd>
+
     <% if course['accrediting_provider'].present? %>
       <dt class="app-description-list__label">Accredited body</dt>
       <dd data-qa="course__accrediting_provider"><%= helpers.smart_quotes(course['accrediting_provider']['provider_name']) %></dd>
