@@ -15,6 +15,12 @@
   }
 }
 
+
+.app-description-list--search-result > dt {
+  @include govuk-font($size: 19, $weight: regular);
+  color: $govuk-secondary-text-colour;
+}
+
 %app-description-list > dd {
   @include govuk-font($size: 19, $weight: normal);
   margin: 0 0 govuk-spacing(2) 0;
