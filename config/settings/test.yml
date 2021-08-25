@@ -7,3 +7,5 @@ google:
     project_id: bat-find-test
     dataset: bat-find-test-events
 redis_url: redis://localhost:6379/9
+feature_flags:
+  degree_required_filter: true
