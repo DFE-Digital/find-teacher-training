@@ -54,6 +54,7 @@ RSpec.feature 'Results page new qualifications filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
+            'degree_required' => '1',
             'qualifications' => %w[QtsOnly],
           },
         )
@@ -90,6 +91,7 @@ RSpec.feature 'Results page new qualifications filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
+            'degree_required' => '1',
             'qualifications' => %w[PgdePgceWithQts],
           },
         )

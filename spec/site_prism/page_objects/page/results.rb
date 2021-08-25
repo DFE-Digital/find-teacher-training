@@ -57,6 +57,14 @@ module PageObjects
         element :link, '[data-qa="link"]'
       end
 
+      class RequiredDegreeSection < SitePrism::Section
+        element :legend, 'legend'
+        element :show_all_courses_radio, '[data-qa="show_all_courses"]'
+        element :two_two_radio, '[data-qa="two_two"]'
+        element :third_class_radio, '[data-qa="third_class"]'
+        element :not_required_radio, '[data-qa="not_required"]'
+      end
+
       class FundingSection < SitePrism::Section
         element :legend, 'legend'
         element :checkbox, 'input[name="funding"]'
@@ -83,6 +91,7 @@ module PageObjects
       section :vacancies_filter, VacanciesSection, '[data-qa="filters__vacancies"]'
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
+      section :degree_required_filter, RequiredDegreeSection, '[data-qa="filters__degree_required"]'
 
       section :area_and_provider_filter, LocationAndProviderSection, '[data-qa="filters__area_and_provider"]'
       section :send_filter, SendSection, '[data-qa="filters__send"]'

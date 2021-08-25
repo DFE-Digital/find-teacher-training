@@ -66,6 +66,26 @@ module ResultFilters
       params[:hasvacancies].nil?
     end
 
+    def all_courses_radio_chosen?
+      params[:degree_required] == '1'
+    end
+
+    def default_all_courses_radio_to_true
+      params[:degree_required].nil?
+    end
+
+    def two_two_radio_chosen?
+      params[:degree_required] == '2'
+    end
+
+    def third_class_radio_chosen?
+      params[:degree_required] == '3'
+    end
+
+    def any_degree_grade_radio_chosen?
+      params[:degree_required] == '4'
+    end
+
     def location_query_params
       {
         c: params[:c],

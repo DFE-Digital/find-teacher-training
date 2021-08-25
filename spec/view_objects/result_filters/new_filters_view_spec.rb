@@ -236,7 +236,7 @@ module ResultFilters
       end
     end
 
-    describe '#default_to_true' do
+    describe '#default_study_types_to_true' do
       subject { described_class.new(params: params).default_study_types_to_true }
 
       context 'when parameters are not present' do
@@ -250,6 +250,90 @@ module ResultFilters
           {
             parttime: 'true',
             fulltime: 'false',
+          }
+        end
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
+    describe '#all_courses_radio_chosen?' do
+      subject { described_class.new(params: params).all_courses_radio_chosen? }
+
+      context 'when parameter is present' do
+        let(:params) { { degree_required: '1' } }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameter is not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
+    describe '#two_two_radio_chosen?' do
+      subject { described_class.new(params: params).two_two_radio_chosen? }
+
+      context 'when parameter is present' do
+        let(:params) { { degree_required: '2' } }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameter is not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
+    describe '#third_class_radio_chosen?' do
+      subject { described_class.new(params: params).third_class_radio_chosen? }
+
+      context 'when parameter is present' do
+        let(:params) { { degree_required: '3' } }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameter is not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
+    describe '#any_degree_grade_radio_chosen?' do
+      subject { described_class.new(params: params).any_degree_grade_radio_chosen? }
+
+      context 'when parameter is present' do
+        let(:params) { { degree_required: '4' } }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameter is not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
+    describe '#default_all_courses_radio_to_true' do
+      subject { described_class.new(params: params).default_all_courses_radio_to_true }
+
+      context 'when parameters are not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameters are present' do
+        let(:params) do
+          {
+            degree_required: '2',
           }
         end
 

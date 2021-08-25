@@ -1,0 +1,48 @@
+<fieldset class="govuk-fieldset app-filter__group" data-qa="filters__degree_required">
+  <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">Degree required</legend>
+
+  <div class="govuk-radios govuk-radios--small">
+    <div class="govuk-radios__item">
+      <%= form.radio_button(
+            :degree_required,
+            '1',
+            class: 'govuk-radios__input',
+            data: { qa: 'show_all_courses' },
+            checked: @filters_view.all_courses_radio_chosen? || @filters_view.default_all_courses_radio_to_true
+          ) %>
+      <%= form.label :all_courses, 'Show all courses', class: 'govuk-label govuk-radios__label' %>
+    </div>
+    <div class='govuk-radios__divider'>or</div>
+    <div class="govuk-radios__item">
+      <%= form.radio_button(
+            :degree_required,
+            '2',
+            class: 'govuk-radios__input',
+            data: { qa: 'two_two' },
+            checked: @filters_view.two_two_radio_chosen?,
+          ) %>
+      <%= form.label :two_two, 'Only show courses that accept a 2:2 degree', class: 'govuk-label govuk-radios__label' %>
+    </div>
+    <div class="govuk-radios__item">
+      <%= form.radio_button(
+            :degree_required,
+            '3',
+            class: 'govuk-radios__input',
+            data: { qa: 'third_class' },
+            checked: @filters_view.third_class_radio_chosen?,
+          ) %>
+      <%= form.label :third_class, 'Only show courses that accept a Third class degree', class: 'govuk-label govuk-radios__label' %>
+    </div>
+    <div class="govuk-radios__item">
+      <%= form.radio_button(
+            :degree_required,
+            '4',
+            class: 'govuk-radios__input',
+            data: { qa: 'not_required' },
+            checked: @filters_view.any_degree_grade_radio_chosen?,
+          ) %>
+      <%= form.label :any_degree_grade, 'Only show courses that accept any degree grade', class: 'govuk-label govuk-radios__label' %>
+    </div>
+  </div>
+</fieldset>
+

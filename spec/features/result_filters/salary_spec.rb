@@ -50,6 +50,7 @@ RSpec.feature 'Results page new funding filter' do
             'parttime' => 'true',
             'hasvacancies' => 'true',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+            'degree_required' => '1',
             'funding' => '8',
           },
         )

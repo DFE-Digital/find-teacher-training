@@ -42,6 +42,10 @@ class ResultsView
     query_parameters['parttime'] == 'true'
   end
 
+  def degree_required?
+    query_parameters['degree_required'].present? && query_parameters['degree_required'] != '1'
+  end
+
   def hasvacancies?
     return true if query_parameters['hasvacancies'].nil?
 
@@ -368,6 +372,19 @@ private
     '9'
   end
 
+  def degree_grade_types
+    degree_required_parameter = query_parameters['degree_required']
+
+    case degree_required_parameter
+    when '2'
+      'two_two,third_class,not_required'
+    when '3'
+      'third_class,not_required'
+    when '4'
+      'not_required'
+    end
+  end
+
   def study_type
     return 'full_time,part_time' if fulltime? && parttime?
     return 'full_time' if fulltime?
@@ -404,6 +421,7 @@ private
     base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: true) if hasvacancies?
     base_query = base_query.where(study_type: study_type) if study_type.present?
+    base_query = base_query.where(degree_grade: degree_grade_types) if degree_required?
 
     base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
     base_query = base_query.where(subjects: subject_codes.join(',')) if subject_codes.any?

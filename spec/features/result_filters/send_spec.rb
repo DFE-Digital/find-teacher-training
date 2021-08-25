@@ -49,6 +49,7 @@ RSpec.feature 'Results page new SEND filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
+            'degree_required' => '1',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'senCourses' => 'true',
           },
