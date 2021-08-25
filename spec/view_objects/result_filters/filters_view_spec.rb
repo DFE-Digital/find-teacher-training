@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 module ResultFilters
-  describe NewFiltersView do
+  describe FiltersView do
     describe '#qts_only_checked?' do
       subject { described_class.new(params: params).qts_only_checked? }
 

@@ -1,5 +1,5 @@
 module ResultFilters
-  class NewFiltersView
+  class FiltersView
     def initialize(params:)
       @params = params
     end
