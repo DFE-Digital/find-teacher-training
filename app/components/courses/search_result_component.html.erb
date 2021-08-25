@@ -29,11 +29,13 @@
     <dt class="app-description-list__label">Financial support</dt>
     <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
 
-    <dt class="app-description-list__label">Degree required</dt>
-    <dd data-qa="course__degree_required"><%= degree_required %></dd>
+    <% if show_visa_sponsorship_and_degree_required? %>
+      <dt class="app-description-list__label">Degree required</dt>
+      <dd data-qa="course__degree_required"><%= degree_required %></dd>
 
-    <dt class="app-description-list__label">Visa sponsorship</dt>
-    <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship %></dd>
+      <dt class="app-description-list__label">Visa sponsorship</dt>
+      <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship %></dd>
+    <% end %>
 
     <% unless filtered_by_location? %>
       <dt class="app-description-list__label">Locations</dt>

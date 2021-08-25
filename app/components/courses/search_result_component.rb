@@ -20,6 +20,10 @@ module Courses
 
   private
 
+    def show_visa_sponsorship_and_degree_required?
+      course.show_visa_sponsorship?
+    end
+
     def degree_required
       case course.degree_grade
       when 'two_one'

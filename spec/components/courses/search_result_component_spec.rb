@@ -1,56 +1,80 @@
 require 'rails_helper'
 
 describe Courses::SearchResultComponent, type: :component do
-  context 'when the course specifies a required degree grade' do
-    it 'renders correct message' do
+  let(:cycle_2021) { build(:recruitment_cycle, year: 2021) }
+  let(:cycle_2022) { build(:recruitment_cycle, year: 2022) }
+
+  context 'in the 2021 recruitment cycle' do
+    it 'does not render visa sponsorship or degree required fields' do
       course = build(
         :course,
         degree_required: :two_one,
+        recruitment_cycle: cycle_2021,
         provider: build(:provider),
       )
       result = render_inline(described_class.new(course: course))
 
-      expect(result.text).to include(
-        'An undergraduate degree at class 2:1 or above, or equivalent',
-      )
+      expect(result.text).not_to include('Visa sponsorship')
+      expect(result.text).not_to include('Degree required')
     end
   end
 
-  context 'when the provider specifies visa sponsorship' do
-    it 'renders correct message when only one kind of visa is sponsored' do
-      course = build(
-        :course,
-        provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: false),
-      )
-      result = render_inline(described_class.new(course: course))
+  context 'in the 2022 recruitment cycle' do
+    context 'when the course specifies a required degree grade' do
+      it 'renders correct message' do
+        course = build(
+          :course,
+          degree_required: :two_one,
+          recruitment_cycle: cycle_2022,
+          provider: build(:provider),
+        )
+        result = render_inline(described_class.new(course: course))
 
-      expect(result.text).to include(
-        'Student visas can be sponsored',
-      )
+        expect(result.text).to include(
+          'An undergraduate degree at class 2:1 or above, or equivalent',
+        )
+      end
     end
 
-    it 'renders correct message when both kinds of visa are sponsored' do
-      course = build(
-        :course,
-        provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: true),
-      )
-      result = render_inline(described_class.new(course: course))
+    context 'when the provider specifies visa sponsorship' do
+      it 'renders correct message when only one kind of visa is sponsored' do
+        course = build(
+          :course,
+          recruitment_cycle: cycle_2022,
+          provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: false),
+        )
+        result = render_inline(described_class.new(course: course))
 
-      expect(result.text).to include(
-        'Student and Skilled Worker visas can be sponsored',
-      )
-    end
+        expect(result.text).to include(
+          'Student visas can be sponsored',
+        )
+      end
 
-    it 'renders correct message when neither kind of visa is sponsored' do
-      course = build(
-        :course,
-        provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: false),
-      )
-      result = render_inline(described_class.new(course: course))
+      it 'renders correct message when both kinds of visa are sponsored' do
+        course = build(
+          :course,
+          recruitment_cycle: cycle_2022,
+          provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: true),
+        )
+        result = render_inline(described_class.new(course: course))
 
-      expect(result.text).to include(
-        'None',
-      )
+        expect(result.text).to include(
+          'Student and Skilled Worker visas can be sponsored',
+        )
+      end
+
+      it 'renders correct message when neither kind of visa is sponsored' do
+        course = build(
+          :course,
+          recruitment_cycle: cycle_2022,
+          provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: false),
+        )
+        result = render_inline(described_class.new(course: course))
+
+        expect(result.text).to include(
+          'None',
+        )
+      end
     end
   end
 
