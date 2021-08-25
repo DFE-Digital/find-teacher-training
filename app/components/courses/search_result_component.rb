@@ -18,6 +18,8 @@ module Courses
       @has_sites = has_sites
     end
 
+  private
+
     def degree_required
       case course.degree_grade
       when 'two_one'
@@ -41,6 +43,12 @@ module Courses
       else
         'None'
       end
+    end
+
+    def accredited_body
+      return nil unless course['accrediting_provider']
+
+      "QTS ratified by #{helpers.smart_quotes(course['accrediting_provider']['provider_name'])}"
     end
   end
 end

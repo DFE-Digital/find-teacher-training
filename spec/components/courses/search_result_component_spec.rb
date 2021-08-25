@@ -53,4 +53,30 @@ describe Courses::SearchResultComponent, type: :component do
       )
     end
   end
+
+  context 'when there is an accrediting provider' do
+    it 'renders correct message' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        accrediting_provider: build(:provider, provider_name: 'ACME SCITT A1'),
+      )
+      result = render_inline(described_class.new(course: course))
+
+      expect(result.text).to include('QTS ratified by ACME SCITT A1')
+    end
+  end
+
+  context 'when there is no accrediting provider' do
+    it 'renders correct message' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        accrediting_provider: nil,
+      )
+      result = render_inline(described_class.new(course: course))
+
+      expect(result.text).not_to include('QTS ratified by')
+    end
+  end
 end
