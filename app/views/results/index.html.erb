@@ -1,6 +1,6 @@
 <%= content_for :page_title, @number_of_courses_string %>
 
-<% unless @results_view.courses.all.empty? %>
+<% unless @results_view.courses_empty? %>
   <%= render LocationSubjectFilterComponent.new(results: @results_view)%>
 <% end %>
 

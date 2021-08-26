@@ -257,6 +257,10 @@ class ResultsView
     end
   end
 
+  def courses_empty?
+    course_count.zero?
+  end
+
   def placement_schools_summary(course)
     site_distance = site_distance(course)
 
