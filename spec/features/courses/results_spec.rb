@@ -46,12 +46,12 @@ describe 'Search results', type: :feature do
       results_page.courses.first.then do |first_course|
         expect(first_course.name.text).to eq('Geography (385N)')
         expect(first_course.provider_name.text).to eq('BHSSA')
-        expect(first_course.qualification.text).to eq('PGCE with QTS')
+        expect(first_course.qualification.text).to include('PGCE with QTS')
+        expect(first_course.qualification.text).to include('QTS ratified by University of Brighton')
         expect(first_course.study_mode.text).to eq('Full time')
-        expect(first_course.accrediting_provider.text).to eq('University of Brighton')
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
         expect(first_course.main_address.text).to eq('Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA')
-        expect(first_course).to have_show_vacancies
+        expect(first_course).not_to have_show_vacancies
       end
     end
   end
