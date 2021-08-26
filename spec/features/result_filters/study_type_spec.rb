@@ -49,7 +49,7 @@ RSpec.feature 'Results page new study type filter' do
           expected_query_params: {
             'fulltime' => 'true',
             'hasvacancies' => 'true',
-            'degree_required' => '1',
+            'degree_required' => 'show_all_courses',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )
@@ -82,7 +82,7 @@ RSpec.feature 'Results page new study type filter' do
           expected_query_params: {
             'parttime' => 'true',
             'hasvacancies' => 'true',
-            'degree_required' => '1',
+            'degree_required' => 'show_all_courses',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )
@@ -115,7 +115,7 @@ RSpec.feature 'Results page new study type filter' do
           page: results_page,
           expected_query_params: {
             'hasvacancies' => 'true',
-            'degree_required' => '1',
+            'degree_required' => 'show_all_courses',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )

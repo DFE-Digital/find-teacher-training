@@ -49,7 +49,7 @@ RSpec.feature 'Results page required degree filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
-            'degree_required' => '2',
+            'degree_required' => 'two_two',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )
@@ -83,7 +83,7 @@ RSpec.feature 'Results page required degree filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
-            'degree_required' => '3',
+            'degree_required' => 'third_class',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )
@@ -117,7 +117,7 @@ RSpec.feature 'Results page required degree filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
-            'degree_required' => '4',
+            'degree_required' => 'not_required',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )

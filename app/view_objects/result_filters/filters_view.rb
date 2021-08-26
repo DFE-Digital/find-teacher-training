@@ -67,7 +67,7 @@ module ResultFilters
     end
 
     def all_courses_radio_chosen?
-      params[:degree_required] == '1'
+      params[:degree_required] == 'show_all_courses'
     end
 
     def default_all_courses_radio_to_true
@@ -75,15 +75,15 @@ module ResultFilters
     end
 
     def two_two_radio_chosen?
-      params[:degree_required] == '2'
+      params[:degree_required] == 'two_two'
     end
 
     def third_class_radio_chosen?
-      params[:degree_required] == '3'
+      params[:degree_required] == 'third_class'
     end
 
     def any_degree_grade_radio_chosen?
-      params[:degree_required] == '4'
+      params[:degree_required] == 'not_required'
     end
 
     def location_query_params

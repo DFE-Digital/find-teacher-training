@@ -261,7 +261,7 @@ module ResultFilters
       subject { described_class.new(params: params).all_courses_radio_chosen? }
 
       context 'when parameter is present' do
-        let(:params) { { degree_required: '1' } }
+        let(:params) { { degree_required: 'show_all_courses' } }
 
         it { is_expected.to eq(true) }
       end
@@ -277,7 +277,7 @@ module ResultFilters
       subject { described_class.new(params: params).two_two_radio_chosen? }
 
       context 'when parameter is present' do
-        let(:params) { { degree_required: '2' } }
+        let(:params) { { degree_required: 'two_two' } }
 
         it { is_expected.to eq(true) }
       end
@@ -293,7 +293,7 @@ module ResultFilters
       subject { described_class.new(params: params).third_class_radio_chosen? }
 
       context 'when parameter is present' do
-        let(:params) { { degree_required: '3' } }
+        let(:params) { { degree_required: 'third_class' } }
 
         it { is_expected.to eq(true) }
       end
@@ -309,7 +309,7 @@ module ResultFilters
       subject { described_class.new(params: params).any_degree_grade_radio_chosen? }
 
       context 'when parameter is present' do
-        let(:params) { { degree_required: '4' } }
+        let(:params) { { degree_required: 'not_required' } }
 
         it { is_expected.to eq(true) }
       end

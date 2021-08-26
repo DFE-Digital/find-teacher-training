@@ -5,7 +5,7 @@
     <div class="govuk-radios__item">
       <%= form.radio_button(
             :degree_required,
-            '1',
+            'show_all_courses',
             class: 'govuk-radios__input',
             data: { qa: 'show_all_courses' },
             checked: @filters_view.all_courses_radio_chosen? || @filters_view.default_all_courses_radio_to_true
@@ -16,7 +16,7 @@
     <div class="govuk-radios__item">
       <%= form.radio_button(
             :degree_required,
-            '2',
+            'two_two',
             class: 'govuk-radios__input',
             data: { qa: 'two_two' },
             checked: @filters_view.two_two_radio_chosen?,
@@ -26,7 +26,7 @@
     <div class="govuk-radios__item">
       <%= form.radio_button(
             :degree_required,
-            '3',
+            'third_class',
             class: 'govuk-radios__input',
             data: { qa: 'third_class' },
             checked: @filters_view.third_class_radio_chosen?,
@@ -36,7 +36,7 @@
     <div class="govuk-radios__item">
       <%= form.radio_button(
             :degree_required,
-            '4',
+            'not_required',
             class: 'govuk-radios__input',
             data: { qa: 'not_required' },
             checked: @filters_view.any_degree_grade_radio_chosen?,

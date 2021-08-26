@@ -43,7 +43,7 @@ class ResultsView
   end
 
   def degree_required?
-    query_parameters['degree_required'].present? && query_parameters['degree_required'] != '1'
+    query_parameters['degree_required'].present? && query_parameters['degree_required'] != 'show_all_courses'
   end
 
   def hasvacancies?
@@ -376,11 +376,11 @@ private
     degree_required_parameter = query_parameters['degree_required']
 
     case degree_required_parameter
-    when '2'
+    when 'two_two'
       'two_two,third_class,not_required'
-    when '3'
+    when 'third_class'
       'third_class,not_required'
-    when '4'
+    when 'not_required'
       'not_required'
     end
   end
