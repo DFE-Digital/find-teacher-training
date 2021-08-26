@@ -21,7 +21,7 @@ describe 'results', type: :feature do
   describe 'course count' do
     context 'when API returns courses' do
       it 'displays the correct course count' do
-        expect(results_page.course_count).to have_content('10 courses found')
+        expect(results_page.text).to have_content('10 courses found')
       end
     end
   end
