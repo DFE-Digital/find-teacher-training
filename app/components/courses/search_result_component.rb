@@ -13,7 +13,7 @@ module Courses
     end
 
     def initialize(course:, filtered_by_location: false, has_sites: false)
-      @course = course
+      @course = course.decorate
       @filtered_by_location = filtered_by_location
       @has_sites = has_sites
     end
@@ -24,7 +24,7 @@ module Courses
       course.show_visa_sponsorship?
     end
 
-    def degree_required
+    def degree_required_status
       case course.degree_grade
       when 'two_one'
         'An undergraduate degree at class 2:1 or above, or equivalent.'
@@ -37,15 +37,13 @@ module Courses
       end
     end
 
-    def visa_sponsorship
-      if course.provider&.can_sponsor_all_visas?
-        'Student and Skilled Worker visas can be sponsored'
-      elsif course.provider&.can_only_sponsor_student_visa?
+    def visa_sponsorship_status
+      if !course.salaried? && course.provider&.can_sponsor_student_visa
         'Student visas can be sponsored'
-      elsif course.provider&.can_only_sponsor_skilled_worker_visa?
+      elsif course.salaried? && course.provider&.can_sponsor_skilled_worker_visa
         'Skilled Worker visas can be sponsored'
       else
-        'None'
+        'Visas cannot be sponsored'
       end
     end
 

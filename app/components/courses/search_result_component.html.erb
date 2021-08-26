@@ -31,10 +31,10 @@
 
     <% if show_visa_sponsorship_and_degree_required? %>
       <dt class="app-description-list__label">Degree required</dt>
-      <dd data-qa="course__degree_required"><%= degree_required %></dd>
+      <dd data-qa="course__degree_required"><%= degree_required_status %></dd>
 
       <dt class="app-description-list__label">Visa sponsorship</dt>
-      <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship %></dd>
+      <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship_status %></dd>
     <% end %>
 
     <% unless filtered_by_location? %>
