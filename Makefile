@@ -2,14 +2,14 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-IMAGE=dfedigital/find-teacher-training:${DOCKER_IMAGE_TAG}
+IMAGE=dfedigital/find-teacher-training:${IMAGE_TAG}
 
 .PHONY: help
 help: ## Show this help
 	@grep -E '^[a-zA-Z\.\-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: build
-build: ## Build docker image; make build [DOCKER_IMAGE_TAG=<docker image tag>]
+build: ## Build docker image; make build [IMAGE_TAG=<docker image tag>]
 		docker-compose build
 
 .PHONY: webpacker-compile
