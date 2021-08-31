@@ -150,3 +150,8 @@ print-app-secrets: install-fetch-config ## View Find App Secrets
 console:
 	cf target -s ${space}
 	cf ssh find-${env} -t -c "cd /app && /usr/local/bin/bundle exec rails c"
+
+.PHONY: destroy ## terraform destroy
+destroy: deploy-init
+	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
+		&& terraform destroy -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
