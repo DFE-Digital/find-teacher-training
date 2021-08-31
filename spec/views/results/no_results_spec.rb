@@ -20,7 +20,7 @@ describe 'results/no_results.html.erb', type: :view do
     it 'renders Welsh teacher training website' do
       expect(html).to match('This service is for courses in England')
       expect(html).to have_link('Learn more about teacher training in Wales',
-                                href: 'https://www.discoverteaching.wales/routes-into-teaching/')
+                                href: 'https://educators.wales/teachers')
     end
   end
 
