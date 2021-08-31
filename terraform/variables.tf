@@ -4,7 +4,11 @@ variable paas_cf_space {}
 
 variable paas_app_environment {}
 
+variable paas_app_environment_config {}
+
 variable paas_app_docker_image {}
+
+variable paas_web_app_host_name {}
 
 variable paas_web_app_instances { default = 1 }
 
@@ -36,7 +40,7 @@ variable statuscake_alerts {
 
 locals {
   cf_api_url                     = "https://api.london.cloud.service.gov.uk"
-  app_config                     = yamldecode(file(var.paas_app_config_file))[var.paas_app_environment]
+  app_config                     = yamldecode(file(var.paas_app_config_file))[var.paas_app_environment_config]
   app_secrets                    = yamldecode(data.azurerm_key_vault_secret.app_secrets.value)
   infra_secrets                  = yamldecode(data.azurerm_key_vault_secret.infra_secrets.value)
   paas_app_environment_variables = merge(local.app_config, local.app_secrets)

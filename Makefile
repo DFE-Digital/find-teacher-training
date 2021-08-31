@@ -77,7 +77,7 @@ review: ## Init review environment
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
 	$(eval backend_key=-backend-config=key=pr-$(APP_NAME).tfstate)
 	$(eval export TF_VAR_paas_app_environment_config=review)
-	$(eval export TF_VAR_paas_app_environment=review-$(APP_NAME))
+	$(eval export TF_VAR_paas_app_environment=pr-$(APP_NAME))
 	$(eval export TF_VAR_paas_web_app_host_name=$(APP_NAME))
 	echo Review app: https://find-pr-$(APP_NAME).london.cloudapps.digital in bat-qa space
 
