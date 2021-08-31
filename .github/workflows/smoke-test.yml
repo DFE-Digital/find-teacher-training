@@ -5,6 +5,9 @@ on:
       environment:
         description: 'The environment to run tests against (qa, staging, production or sandbox)'
         required: true
+      pr:
+        description: 'The PR number if the environment is review'
+        required: false
 
 jobs:
   smoke_tests:
@@ -27,6 +30,10 @@ jobs:
         run: |
           echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
           echo "CYPRESS_ENVIRONMENT=$RAILS_ENV" >> $GITHUB_ENV
+          if [ -n "${{ github.event.inputs.pr }}" ]; then
+            PR_NUMBER=${{ github.event.inputs.pr }}
+            echo "CYPRESS_ENV_VARS=--env BASE_URL=https://find-pr-${{github.event.inputs.pr}}.london.cloudapps.digital" >> $GITHUB_ENV
+          fi;
         env:
           RAILS_ENV: ${{ github.event.inputs.environment }}
 
@@ -34,7 +41,7 @@ jobs:
         id: cypress_run
         run: |
           npm install
-          npx cypress run
+          npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
       - name: Upload Cypress screenshot and videos
         if:   always()
