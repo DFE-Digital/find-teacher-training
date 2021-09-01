@@ -1,12 +1,14 @@
 # PaaS
-paas_sso_code             = ""
-paas_app_environment      = "sandbox"
-paas_cf_space             = "bat-prod"
-paas_web_app_instances    = 2
-paas_web_app_memory       = 512
-paas_worker_app_instances = 2
-paas_worker_app_memory    = 512
-paas_redis_service_plan   = "micro-5_x"
+paas_sso_code               = ""
+paas_app_environment        = "sandbox"
+paas_app_environment_config = "sandbox"
+paas_cf_space               = "bat-prod"
+paas_web_app_host_name      = "sandbox"
+paas_web_app_instances      = 2
+paas_web_app_memory         = 512
+paas_worker_app_instances   = 2
+paas_worker_app_memory      = 512
+paas_redis_service_plan     = "micro-5_x"
 
 # KeyVault
 key_vault_resource_group = "s121p01-shared-rg"

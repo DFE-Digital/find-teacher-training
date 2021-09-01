@@ -22,3 +22,8 @@ sandbox:
   <<: *default
   RAILS_ENV: sandbox
   RACK_ENV: sandbox
+
+review:
+  <<: *default
+  RAILS_ENV: review
+  RACK_ENV: review

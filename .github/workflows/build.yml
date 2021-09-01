@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - master
+    types: [opened, reopened, synchronize, labeled]
 
 env:
   DOCKER_IMAGE: dfedigital/find-teacher-training
@@ -35,7 +36,7 @@ jobs:
           GIT_REF=${{ github.ref }}
           GIT_BRANCH=${GIT_REF##*/}
           echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV
-          echo "DOCKER_IMAGE_TAG=$GITHUB_SHA" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Set Environment Variables (Pull request)
         if: github.event_name == 'pull_request'
@@ -45,7 +46,7 @@ jobs:
           GIT_BRANCH=${GIT_REF##*/}
           echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV
           # This is the latest commit on the actual PR branch
-          echo "DOCKER_IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
+          echo "IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
 
       - name: Build Docker Image - base-image target
         uses: docker/build-push-action@v2
@@ -60,13 +61,13 @@ jobs:
             ${{ env.DOCKER_IMAGE}}:base-image-master
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            COMMIT_SHA=${{ env.DOCKER_IMAGE_TAG}}
+            COMMIT_SHA=${{ env.IMAGE_TAG}}
 
       - name: Build Docker Image
         uses: docker/build-push-action@v2
         with:
           tags: |
-            ${{ env.DOCKER_IMAGE}}:${{ env.DOCKER_IMAGE_TAG}}
+            ${{ env.DOCKER_IMAGE}}:${{ env.IMAGE_TAG}}
             ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
           push: ${{ github.actor != 'dependabot[bot]' }}
           load: ${{ github.actor == 'dependabot[bot]' }}
@@ -76,11 +77,20 @@ jobs:
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
           build-args: |
             BUILDKIT_INLINE_CACHE=1
-            COMMIT_SHA=${{ env.DOCKER_IMAGE_TAG}}
+            COMMIT_SHA=${{ env.IMAGE_TAG}}
+
+      - name: Trigger Review App Deployment
+        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Deploy
+          ref:    ${{ github.head_ref }}
+          token:  ${{ secrets.ACTIONS_API_ACCESS_TOKEN  }}
+          inputs: '{"pr": "${{ github.event.pull_request.number }}", "sha": "${{ env.IMAGE_TAG }}"}'
 
       - name: Pull image if not loaded
         if: ${{ github.actor != 'dependabot[bot]' }}
-        run: docker pull ${DOCKER_IMAGE}:${{ env.DOCKER_IMAGE_TAG }}
+        run: docker pull ${DOCKER_IMAGE}:${{ env.IMAGE_TAG }}
 
       - name: Run ruby linter
         run: make rubocop
@@ -110,4 +120,19 @@ jobs:
         with:
           workflow: Deploy
           token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ env.DOCKER_IMAGE_TAG}}"}'
+          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ env.IMAGE_TAG }}"}'
+
+      - name: Wait for review app deployment
+        id: wait_for_review_app_deployment
+        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+          checkName: ${{ github.event.pull_request.number }} Deployment
+          timeoutSeconds:  1800
+          intervalSeconds: 10
+
+      - name: Exit if review app deployment failed
+        if: ${{ steps.wait_for_review_app_deployment.outputs.conclusion != '' && steps.wait_for_review_app_deployment.outputs.conclusion != 'success' }}
+        run: exit 1

@@ -2,14 +2,14 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-IMAGE=dfedigital/find-teacher-training:${DOCKER_IMAGE_TAG}
+IMAGE=dfedigital/find-teacher-training:${IMAGE_TAG}
 
 .PHONY: help
 help: ## Show this help
 	@grep -E '^[a-zA-Z\.\-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: build
-build: ## Build docker image; make build [DOCKER_IMAGE_TAG=<docker image tag>]
+build: ## Build docker image; make build [IMAGE_TAG=<docker image tag>]
 		docker-compose build
 
 .PHONY: webpacker-compile
@@ -70,6 +70,17 @@ ci:	## Run in automation
 	$(eval export DISABLE_PASSCODE=true)
 	$(eval export AUTO_APPROVE=-auto-approve)
 
+.PHONY: review
+review: ## Init review environment
+	$(eval DEPLOY_ENV=review)
+	$(if $(APP_NAME), , $(error Missing environment variable "APP_NAME", Please specify a name for your review app))
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
+	$(eval backend_key=-backend-config=key=pr-$(APP_NAME).tfstate)
+	$(eval export TF_VAR_paas_app_environment_config=review)
+	$(eval export TF_VAR_paas_app_environment=pr-$(APP_NAME))
+	$(eval export TF_VAR_paas_web_app_host_name=$(APP_NAME))
+	echo Review app: https://find-pr-$(APP_NAME).london.cloudapps.digital in bat-qa space
+
 .PHONY: qa
 qa: ## Set DEPLOY_ENV to qa
 	$(eval DEPLOY_ENV=qa)
@@ -86,6 +97,7 @@ staging: ## Set DEPLOY_ENV to staging
 
 .PHONY: production
 production: ## Set DEPLOY_ENV to production
+	$(if $(CONFIRM_PRODUCTION), , $(error Production can only run with CONFIRM_PRODUCTION))
 	$(eval DEPLOY_ENV=production)
 	$(eval env=prod)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
@@ -138,3 +150,8 @@ print-app-secrets: install-fetch-config ## View Find App Secrets
 console:
 	cf target -s ${space}
 	cf ssh find-${env} -t -c "cd /app && /usr/local/bin/bundle exec rails c"
+
+.PHONY: destroy ## terraform destroy
+destroy: deploy-init
+	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
+		&& terraform destroy -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
