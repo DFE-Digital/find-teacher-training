@@ -95,6 +95,12 @@ RSpec.configure do |config|
   require 'factory_bot'
   config.include FactoryBot::Syntax::Methods
 
+  config.around do |example|
+    Timecop.travel(DateTime.new(RecruitmentCycle.current_year, 1, 1)) do
+      example.run
+    end
+  end
+
   RSpec::Matchers.define :appear_before do |later_content|
     match do |earlier_content|
       page.body.index(earlier_content) < page.body.index(later_content)
