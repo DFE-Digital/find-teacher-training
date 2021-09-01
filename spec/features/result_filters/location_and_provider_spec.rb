@@ -10,6 +10,7 @@ RSpec.feature 'Results page new area and provider filter' do
   let(:start_page) { PageObjects::Page::Start.new }
   let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
+  let(:subjects_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
   let(:query_params) { {} }
   let(:base_parameters) { results_page_parameters }
 
@@ -31,39 +32,34 @@ RSpec.feature 'Results page new area and provider filter' do
       )
 
       stub_courses(
-        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0'),
+        query: base_parameters.merge('filter[provider.provider_name]' => 'ACME SCITT 0', 'filter[subjects]' => '00'),
         course_count: 4,
       )
     end
 
     context 'valid provider search' do
       before do
-        results_page.load
-        results_page.area_and_provider_filter.link.click
+        filter_page.load
         filter_page.by_provider.click
         filter_page.provider_search.fill_in(with: 'ACME')
         filter_page.find_courses.click
         provider_page.provider_suggestions[0].hyperlink.click
+        subjects_page.subject_areas.first.subjects[0].checkbox.click
+        subjects_page.continue.click
       end
 
       it 'displays the courses' do
         expect(results_page.courses.first).to have_main_address
-        expect(results_page.heading.text).to eq('Teacher training courses 4 courses found')
-        expect(results_page.area_and_provider_filter.name.text).to eq('ACME SCITT 0')
-        expect(results_page.area_and_provider_filter.link.text).to eq('Change provider or choose a location')
+        expect(results_page.heading.text).to eq('4 courses found')
       end
 
       it 'retains the query parameters' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
             'l' => '3',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
             'query' => 'ACME SCITT 0',
+            'subjects' => %w[31],
           },
         )
       end
@@ -72,8 +68,7 @@ RSpec.feature 'Results page new area and provider filter' do
     context 'invalid provider search' do
       context 'blank search' do
         it 'displays an error' do
-          results_page.load
-          results_page.area_and_provider_filter.link.click
+          filter_page.load
           filter_page.by_provider.click
           filter_page.find_courses.click
 
@@ -83,8 +78,7 @@ RSpec.feature 'Results page new area and provider filter' do
 
       context 'invalid one character provider search' do
         it 'displays an error' do
-          results_page.load
-          results_page.area_and_provider_filter.link.click
+          filter_page.load
           filter_page.by_provider.click
           filter_page.provider_search.fill_in(with: 'A')
           filter_page.find_courses.click
@@ -106,17 +100,14 @@ RSpec.feature 'Results page new area and provider filter' do
       )
       stub_courses(query: query, course_count: 10)
 
-      results_page.load
-      results_page.area_and_provider_filter.link.click
+      filter_page.load
       filter_page.by_postcode_town_or_city.click
       filter_page.location_query.fill_in(with: 'SW1P 3BT')
       filter_page.find_courses.click
     end
 
     it 'displays the courses' do
-      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-      expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
-      expect(results_page.area_and_provider_filter.link.text).to eq('Change location or choose a provider')
+      expect(results_page.heading.text).to eq('10 courses found')
     end
 
     it 'retains the query parameters' do
@@ -124,9 +115,6 @@ RSpec.feature 'Results page new area and provider filter' do
         page: results_page,
         expected_query_params: {
           'c' => 'England',
-          'fulltime' => 'false',
-          'parttime' => 'false',
-          'hasvacancies' => 'true',
           'l' => '1',
           'lat' => '51.4980188',
           'lng' => '-0.1300436',
@@ -134,8 +122,6 @@ RSpec.feature 'Results page new area and provider filter' do
           'lq' => 'SW1P 3BT',
           'rad' => '50',
           'sortby' => '2',
-          'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-          'senCourses' => 'false',
         },
       )
     end
@@ -153,7 +139,7 @@ RSpec.feature 'Results page new area and provider filter' do
       end
 
       it 'updates and retains the query parameters' do
-        results_page.area_and_provider_filter.link.click
+        filter_page.load
         filter_page.by_postcode_town_or_city.click
         filter_page.location_query.fill_in(with: 'Station Rise')
         filter_page.find_courses.click
@@ -162,9 +148,6 @@ RSpec.feature 'Results page new area and provider filter' do
           page: results_page,
           expected_query_params: {
             'c' => 'England',
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
             'l' => '1',
             'lat' => '53.83365879999999',
             'lng' => '-1.0564076',
@@ -172,8 +155,6 @@ RSpec.feature 'Results page new area and provider filter' do
             'lq' => 'Station Rise',
             'rad' => '50',
             'sortby' => '2',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-            'senCourses' => 'false',
           },
         )
       end
@@ -181,11 +162,9 @@ RSpec.feature 'Results page new area and provider filter' do
 
     context 'course has sites' do
       it 'displays the courses' do
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
+        expect(results_page.heading.text).to eq('10 courses found')
 
         expect(results_page.courses.first).not_to have_main_address
-
-        expect(results_page.area_and_provider_filter.name.text).to eq('SW1P 3BT')
       end
     end
 
@@ -193,7 +172,7 @@ RSpec.feature 'Results page new area and provider filter' do
       # See site id:11208653 in the stub. When a course has no sites with addresses we cannot show
       # 'nearest site' or 'distance to site' info
       it 'does not display nearest site information' do
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
+        expect(results_page.heading.text).to eq('10 courses found')
       end
     end
 

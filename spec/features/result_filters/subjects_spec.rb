@@ -27,8 +27,7 @@ RSpec.feature 'Results page new subject filter' do
           course_count: 10,
         )
 
-        results_page.load
-        results_page.subjects_filter.link.click
+        filter_page.load
         filter_page.subject_areas.first.subjects[0].checkbox.click
         filter_page.subject_areas.first.subjects[1].checkbox.click
         filter_page.subject_areas.second.subjects[3].checkbox.click
@@ -38,20 +37,14 @@ RSpec.feature 'Results page new subject filter' do
       end
 
       it 'lists the results' do
-        expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-        expect(results_page.subjects_filter.subjects.first.text).to eq(
-          'Chemistry, Classics, Communication and media studies, Primary, Primary with English',
-        )
+        expect(results_page.heading.text).to eq('10 courses found')
+        expect(results_page.text).to include('Chemistry, Classics, Communication and media studies, Primary and Primary with English')
       end
 
       it 'retains the query parameters' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'fulltime' => 'false',
-            'parttime' => 'false',
-            'hasvacancies' => 'true',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'subjects' => %w[31 32 3 5 47],
           },
         )
@@ -67,8 +60,7 @@ RSpec.feature 'Results page new subject filter' do
       )
       stub_courses(query: query, course_count: 10)
 
-      results_page.load
-      results_page.subjects_filter.link.click
+      filter_page.load
       filter_page.subject_areas.first.subjects[0].checkbox.click
       filter_page.subject_areas.first.subjects[1].checkbox.click
       filter_page.subject_areas.second.subjects[3].checkbox.click
@@ -77,8 +69,8 @@ RSpec.feature 'Results page new subject filter' do
     end
 
     it 'lists the results' do
-      expect(results_page.heading.text).to eq('Teacher training courses 10 courses found')
-      expect(results_page.subjects_filter.subjects.map.first.text).to eq('Chemistry, Primary, Primary with English')
+      expect(results_page.heading.text).to eq('10 courses found')
+      expect(results_page.text).to include('Chemistry, Primary and Primary with English')
       expect(results_page.send_filter.checkbox.checked?).to be(true)
     end
 
@@ -86,10 +78,6 @@ RSpec.feature 'Results page new subject filter' do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          'fulltime' => 'false',
-          'parttime' => 'false',
-          'hasvacancies' => 'true',
-          'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           'subjects' => %w[31 32 3],
           'senCourses' => 'true',
         },
@@ -265,12 +253,7 @@ RSpec.feature 'Results page new subject filter' do
       filter_page.send_area.subjects.first.checkbox.click
       filter_page.continue.click
 
-      expect(results_page.subjects_filter.subjects.map(&:text))
-        .to eq(
-          [
-            'Primary with English',
-          ],
-        )
+      expect(results_page.text).to include('Primary with English')
     end
   end
 

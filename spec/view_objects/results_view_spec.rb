@@ -228,7 +228,7 @@ describe ResultsView do
       let(:parameter_hash) { { 'subjects' => %w[1 2 3 4 5] } }
 
       it 'returns the number of the extra subjects' do
-        expect(results_view.number_of_extra_subjects).to eq(1)
+        expect(results_view.number_of_extra_subjects).to eq(5)
       end
     end
 
@@ -409,14 +409,51 @@ describe ResultsView do
     context 'when no parameters are passed' do
       let(:results_view) { described_class.new(query_parameters: {}) }
 
-      it 'returns the first four subjects in alphabetical order' do
+      it 'returns the subjects in alphabetical order' do
         expect(results_view.subjects.map(&:subject_name)).to eq(
-          [
-            'Art and design',
-            'Biology',
-            'Business studies',
-            'Chemistry',
-          ],
+          ['Art and design',
+           'Biology',
+           'Business studies',
+           'Chemistry',
+           'Citizenship',
+           'Classics',
+           'Communication and media studies',
+           'Computing',
+           'Dance',
+           'Design and technology',
+           'Drama',
+           'Economics',
+           'English',
+           'English as a second or other language',
+           'French',
+           'Further education',
+           'Geography',
+           'German',
+           'Health and social care',
+           'History',
+           'Italian',
+           'Japanese',
+           'Mandarin',
+           'Mathematics',
+           'Modern Languages',
+           'Modern languages (other)',
+           'Music',
+           'Philosophy',
+           'Physical education',
+           'Physics',
+           'Primary',
+           'Primary with English',
+           'Primary with geography and history',
+           'Primary with mathematics',
+           'Primary with modern languages',
+           'Primary with physical education',
+           'Primary with science',
+           'Psychology',
+           'Religious education',
+           'Russian',
+           'Science',
+           'Social sciences',
+           'Spanish'],
         )
       end
 
@@ -439,13 +476,14 @@ describe ResultsView do
         let(:mathematics_csharp_id) { '24' }
         let(:russian_csharp_id) { '41' }
 
-        it 'returns the first four matching subjects in alphabetical order' do
+        it 'returns the subjects in alphabetical order' do
           expect(results_view.subjects.map(&:subject_name)).to eq(
             %w[
               French
               Mathematics
               Primary
               Russian
+              Spanish
             ],
           )
         end

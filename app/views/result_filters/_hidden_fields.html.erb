@@ -3,3 +3,9 @@
     <%= form.hidden_field(k, value: v) %>
   <% end %>
 <% end %>
+
+<% if params["subjects"].present? %>
+  <% request.params['subjects'].each do |subject_id| %>
+    <%= form.hidden_field(:subjects, multiple: true, value: subject_id) %>
+  <% end %>
+<% end %>

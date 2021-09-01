@@ -1,8 +1,11 @@
 <%= content_for :page_title, @number_of_courses_string %>
 
+<% unless @results_view.courses_empty? %>
+  <%= render LocationSubjectFilterComponent.new(results: @results_view)%>
+<% end %>
+
 <h1 class="govuk-heading-xl" data-qa="heading">
-  <span class="govuk-caption-l">Teacher training courses</span>
-  <span data-qa="course-count"><%= "#{@results_view.number_of_courses_string} found" %></span>
+  <%= "#{@results_view.number_of_courses_string} found" %>
 </h1>
 
 <div class="app-filter-toggle"></div>
@@ -40,9 +43,6 @@
             <% end %>
           <% end %>
 
-          <p class="govuk-body">
-            <%= govuk_link_to 'New search', root_path, class: 'govuk-link--no-visited-state' %>
-          </p>
         </div>
       <% end %>
     <% end %>
