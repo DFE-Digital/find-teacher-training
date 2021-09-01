@@ -1,5 +1,5 @@
 module ResultFilters
-  class NewFiltersView
+  class FiltersView
     def initialize(params:)
       @params = params
     end
@@ -64,6 +64,26 @@ module ResultFilters
 
     def default_with_vacancies_to_true
       params[:hasvacancies].nil?
+    end
+
+    def all_courses_radio_chosen?
+      params[:degree_required] == 'show_all_courses'
+    end
+
+    def default_all_courses_radio_to_true
+      params[:degree_required].nil?
+    end
+
+    def two_two_radio_chosen?
+      params[:degree_required] == 'two_two'
+    end
+
+    def third_class_radio_chosen?
+      params[:degree_required] == 'third_class'
+    end
+
+    def any_degree_grade_radio_chosen?
+      params[:degree_required] == 'not_required'
     end
 
     def location_query_params

@@ -50,6 +50,7 @@ RSpec.feature 'Results page new vacancies filter' do
             'fulltime' => 'true',
             'parttime' => 'true',
             'hasvacancies' => 'true',
+            'degree_required' => 'show_all_courses',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
           },
         )
