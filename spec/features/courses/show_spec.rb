@@ -86,7 +86,7 @@ describe 'Course show', type: :feature do
     stub_api_v3_resource(
       type: RecruitmentCycle,
       params: {
-        recruitment_cycle_year: CycleTimetable.current_year,
+        recruitment_cycle_year: RecruitmentCycle.current_year,
       },
       resources: current_recruitment_cycle,
     )
@@ -94,7 +94,7 @@ describe 'Course show', type: :feature do
     stub_api_v3_resource(
       type: Course,
       params: {
-        recruitment_cycle_year: CycleTimetable.current_year,
+        recruitment_cycle_year: RecruitmentCycle.current_year,
         provider_code: course.provider_code,
         provider_type: course.provider_type,
         course_code: course.course_code,
@@ -317,7 +317,7 @@ describe 'Course show', type: :feature do
 
     it 'only displays uk fees' do
       expect(course_page).to have_content(
-        "The course fees for UK students in #{CycleTimetable.current_year} to #{CycleTimetable.next_year} are £9,250",
+        "The course fees for UK students in #{RecruitmentCycle.current_year} to #{RecruitmentCycle.current_year + 1} are £9,250",
       )
 
       expect(course_page).not_to have_international_fees

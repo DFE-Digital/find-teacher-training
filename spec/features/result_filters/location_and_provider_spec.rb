@@ -324,7 +324,7 @@ RSpec.feature 'Results page new area and provider filter' do
         type: Provider,
         resources: providers,
         fields: { providers: %i[provider_code provider_name] },
-        params: { recruitment_cycle_year: CycleTimetable.current_year },
+        params: { recruitment_cycle_year: RecruitmentCycle.current_year },
         search: 'ACME',
       )
 
@@ -347,7 +347,7 @@ RSpec.feature 'Results page new area and provider filter' do
           type: Provider,
           resources: providers,
           fields: { providers: %i[provider_code provider_name] },
-          params: { recruitment_cycle_year: CycleTimetable.current_year },
+          params: { recruitment_cycle_year: RecruitmentCycle.current_year },
           search: 'ACME',
         )
 
