@@ -59,10 +59,10 @@ gem 'json-schema'
 # Settings for the app
 gem 'config'
 
-#Redis for sidekiq & cache
+# Redis for sidekiq & cache
 gem 'redis'
 
-#Sidekiq for background jobs
+# Sidekiq for background jobs
 gem 'sidekiq'
 
 # Calculate distance between two locations
