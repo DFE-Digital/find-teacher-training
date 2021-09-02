@@ -452,6 +452,28 @@ describe 'Course show', type: :feature do
     end
   end
 
+  context 'contact details for London School of Jewish Studies and the course code is X104' do
+    let(:provider) do
+      build(
+        :provider,
+        provider_code: '28T',
+      )
+    end
+
+    let(:course) do
+      build(:course,
+            course_code: 'X104',
+            provider: provider)
+    end
+
+    it 'renders the custom address requested via zendesk' do
+      expect(course_page).to have_content 'LSJS'
+      expect(course_page).to have_content '44A Albert Road'
+      expect(course_page).to have_content 'London'
+      expect(course_page).to have_content 'NW4 2SJ'
+    end
+  end
+
   def jsonapi_site_status(name, study_mode, status)
     build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
   end

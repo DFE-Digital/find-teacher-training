@@ -24,7 +24,17 @@
         </dd>
       <% end %>
 
-      <% if course.provider.decorate.full_address.present? %>
+      <% if course.provider.provider_code == '28T' && course.course_code == 'X104' %>
+        <dt class="app-description-list__label">Address</dt>
+        <dd data-qa="provider__address">
+          LSJS,
+          <br>
+          44A Albert Road,
+          <br>
+          London,
+          <br>
+          NW4 2SJ
+      <% elsif course.provider.decorate.full_address.present? %>
         <dt class="app-description-list__label">Address</dt>
         <dd data-qa="provider__address">
           <%= course.provider.decorate.full_address %>
