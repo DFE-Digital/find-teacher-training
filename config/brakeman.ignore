@@ -9,14 +9,14 @@
       "file": "app/controllers/courses_controller.rb",
       "line": 30,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(\"#{Settings.apply_base_url}/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
+      "code": "redirect_to(\"#{Settings.apply_base_url}/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => SiteSetting.recruitment_cycle_year).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
       "render_path": null,
       "location": {
         "type": "method",
         "class": "CoursesController",
         "method": "apply"
       },
-      "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code",
+      "user_input": "Course.includes(:provider).where(:recruitment_cycle_year => SiteSetting.recruitment_cycle_year).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code",
       "confidence": "High",
       "note": ""
     }

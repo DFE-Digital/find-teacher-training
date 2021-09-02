@@ -19,7 +19,7 @@ describe '/sitemap.xml', type: :request do
     stub_api_v3_resource(
       type: RecruitmentCycle,
       params: {
-        recruitment_cycle_year: Settings.current_cycle,
+        recruitment_cycle_year: CycleTimetable.current_year,
       },
       resources: current_recruitment_cycle,
     )
@@ -27,7 +27,7 @@ describe '/sitemap.xml', type: :request do
     stub_api_v3_resource(
       type: Course,
       params: {
-        recruitment_cycle_year: Settings.current_cycle,
+        recruitment_cycle_year: CycleTimetable.current_year,
       },
       pagination: {
         page: 1,

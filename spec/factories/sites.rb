@@ -15,7 +15,7 @@ FactoryBot.define do
     latitude { nil }
     longitude { nil }
     london_borough { nil }
-    recruitment_cycle_year { Settings.current_cycle }
+    recruitment_cycle_year { CycleTimetable.current_year }
 
     after :build do |course, evaluator|
       course.recruitment_cycle = evaluator.recruitment_cycle

@@ -23,7 +23,7 @@ module Helpers
     # This is needed because we check the provider count on all pages
     # TODO: Move this to be returned with the user.
     stub_api_v2_request(
-      "/recruitment_cycles/#{Settings.current_cycle}/providers",
+      "/recruitment_cycles/#{CycleTimetable.current_year}/providers",
       resource_to_jsonapi(provider),
     )
     Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:dfe]
