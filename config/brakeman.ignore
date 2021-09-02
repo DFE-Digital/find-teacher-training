@@ -3,13 +3,13 @@
     {
       "warning_type": "Redirect",
       "warning_code": 18,
-      "fingerprint": "f0b3eb7d8280ec2b850565fa0b992affb215b084c89d46868aea46ba826b9ff3",
+      "fingerprint": "27875778fbcfb0dc96458e8be610ff3fb0b452c8a45c3c17c960b5a3b72f36be",
       "check_name": "Redirect",
       "message": "Possible unprotected redirect",
       "file": "app/controllers/courses_controller.rb",
       "line": 30,
       "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
-      "code": "redirect_to(\"#{Settings.apply_base_url}/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => SiteSetting.recruitment_cycle_year).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => Settings.current_cycle).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
+      "code": "redirect_to(\"#{Settings.apply_base_url}/candidate/apply?providerCode=#{Course.includes(:provider).where(:recruitment_cycle_year => SiteSetting.recruitment_cycle_year).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.provider.provider_code}&courseCode=#{Course.includes(:provider).where(:recruitment_cycle_year => SiteSetting.recruitment_cycle_year).where(:provider_code => params[:provider_code]).find(params[:course_code]).first.course_code}\")",
       "render_path": null,
       "location": {
         "type": "method",
@@ -21,6 +21,6 @@
       "note": ""
     }
   ],
-  "updated": "2021-05-25 10:00:00 +0100",
-  "brakeman_version": "5.0.1"
+  "updated": "2021-09-02 16:17:22 +0100",
+  "brakeman_version": "5.1.1"
 }
