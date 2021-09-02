@@ -90,6 +90,7 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
 
   config.before { RedisService.new.flushdb }
+  config.before { Rails.cache.clear }
 
   require 'webmock/rspec'
   require 'factory_bot'
