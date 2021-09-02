@@ -111,6 +111,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.2'
 end
 
+gem 'rack-mini-profiler', require: ['prepend_net_http_patch']
+
 group :development do
   # For better errors
   gem 'better_errors'
