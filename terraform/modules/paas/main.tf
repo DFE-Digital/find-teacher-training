@@ -74,6 +74,9 @@ resource "cloudfoundry_service_instance" "redis" {
   name         = local.redis_service_name
   space        = data.cloudfoundry_space.space.id
   service_plan = data.cloudfoundry_service.redis.service_plans[var.redis_service_plan]
+  json_params  = jsonencode({
+    maxmemory_policy = "noeviction"
+  })
   timeouts {
     create = "30m"
     update = "30m"
