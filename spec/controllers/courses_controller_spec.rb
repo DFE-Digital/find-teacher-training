@@ -12,7 +12,7 @@ RSpec.describe CoursesController do
         stub_api_v3_resource(
           type: Course,
           params: {
-            recruitment_cycle_year: Settings.current_cycle,
+            recruitment_cycle_year: CycleTimetable.current_year,
             provider_code: course.provider_code,
             course_code: course.course_code,
           },
@@ -40,7 +40,7 @@ RSpec.describe CoursesController do
       before do
         stub_request(
           :get,
-          "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers/#{course.provider_code}/courses/#{course.course_code}?include=provider",
+          "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{CycleTimetable.current_year}/providers/#{course.provider_code}/courses/#{course.course_code}?include=provider",
         ).to_raise(JsonApiClient::Errors::NotFound)
       end
 

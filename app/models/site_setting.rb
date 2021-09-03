@@ -5,6 +5,10 @@ class SiteSetting < Base
     RedisService.new.get('cycle_schedule')&.to_sym || :real
   end
 
+  def self.recruitment_cycle_year
+    RedisService.new.get('recruitment_cycle_year') || CycleTimetable.current_year
+  end
+
   def self.set(name:, value:)
     RedisService.new.set(name, value)
   end

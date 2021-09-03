@@ -28,7 +28,7 @@ module StubbedRequests
     end
 
     def providers_url
-      "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{Settings.current_cycle}/providers"
+      "#{Settings.teacher_training_api.base_url}/api/v3/recruitment_cycles/#{CycleTimetable.current_year}/providers"
     end
   end
 end

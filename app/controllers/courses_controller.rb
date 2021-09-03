@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
       .includes(site_statuses: [:site])
       .includes(provider: [:sites])
       .includes(:accrediting_provider)
-      .where(recruitment_cycle_year: Settings.current_cycle)
+      .where(recruitment_cycle_year: SiteSetting.recruitment_cycle_year)
       .where(provider_code: params[:provider_code])
       .find(params[:course_code])
       .first
@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
   def apply
     course = Course
       .includes(:provider)
-      .where(recruitment_cycle_year: Settings.current_cycle)
+      .where(recruitment_cycle_year: SiteSetting.recruitment_cycle_year)
       .where(provider_code: params[:provider_code])
       .find(params[:course_code])
       .first
