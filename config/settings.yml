@@ -21,4 +21,4 @@ skylight_enable: true
 
 feature_flags:
   send_web_requests_to_big_query: false
-  degree_required_filter: false
+  new_filters: false

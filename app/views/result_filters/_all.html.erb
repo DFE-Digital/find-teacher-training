@@ -8,8 +8,9 @@
     <%= render 'result_filters/vacancy_filter', form: form %>
     <%= render 'result_filters/study_type_filter', form: form %>
     <%= render 'result_filters/qualifications_filter', form: form %>
-    <% if FeatureFlag.active?(:degree_required_filter) %>
+    <% if FeatureFlag.active?(:new_filters) %>
       <%= render 'result_filters/degree_required_filter', form: form %>
+      <%= render 'result_filters/visa_filter', form: form %>
     <% end %>
     <%= render 'result_filters/salary_filter', form: form %>
     <%= render 'result_filters/hidden_fields', form: form %>

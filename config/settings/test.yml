@@ -8,4 +8,4 @@ google:
     dataset: bat-find-test-events
 redis_url: redis://localhost:6379/9
 feature_flags:
-  degree_required_filter: true
+  new_filters: true
