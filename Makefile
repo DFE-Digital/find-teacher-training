@@ -122,7 +122,7 @@ deploy-init:
 	$(eval export TF_VAR_paas_app_docker_image=dfedigital/find-teacher-training:$(IMAGE_TAG))
 	$(eval export TF_VAR_paas_app_config_file=./workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
-	cd terraform && terraform init -reconfigure -backend-config=workspace_variables/$(DEPLOY_ENV)_backend.tfvars
+	cd terraform && terraform init -reconfigure -backend-config=workspace_variables/$(DEPLOY_ENV)_backend.tfvars $(backend_key)
 	echo "🚀 DEPLOY_ENV is $(DEPLOY_ENV)"
 
 .PHONY: deploy
