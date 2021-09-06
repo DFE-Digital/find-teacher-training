@@ -82,7 +82,7 @@ gem 'skylight'
 
 # Allows the creation of components which encapsulate and test logic in views
 gem 'view_component'
-gem 'govuk-components'
+gem 'govuk-components', '~> 2.0.1'
 
 # Data integration with BigQuery
 gem 'google-cloud-bigquery'

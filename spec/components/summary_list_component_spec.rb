@@ -5,39 +5,75 @@ describe SummaryListComponent, type: :component do
     rows = [
       key: 'Name:',
       value: 'Lando Calrissian',
-      action: 'Name',
-      change_path: '/some/url',
+      action: {
+        href: '/some/url',
+        visually_hidden_text: 'name',
+      },
     ]
     result = render_inline(described_class.new(rows: rows))
 
     expect(result.css('.govuk-summary-list__key').text).to include('Name:')
     expect(result.css('.govuk-summary-list__value').text).to include('Lando Calrissian')
     expect(result.css('.govuk-summary-list__actions a').attr('href').value).to include('/some/url')
-    expect(result.css('.govuk-summary-list__actions').text).to include('Change Name')
+    expect(result.css('.govuk-summary-list__actions').text).to include('Change name')
   end
 
   describe 'array content' do
     it 'renders array content when passed in' do
       rows = [
-        key: 'Address:',
+        key: 'Address',
         value: ['Whoa Drive', 'Wewvile', 'London'],
-        action: 'Name',
-        change_path: '/some/url',
+        action: {
+          href: '/some/url',
+          visually_hidden_text: 'address',
+        },
       ]
       result = render_inline(described_class.new(rows: rows))
 
       expect(result.css('.govuk-summary-list__value').to_html).to include('Whoa Drive<br>Wewvile<br>London')
     end
 
+    it 'renders values surrounded by <p> tags if specified for the row' do
+      rows = [
+        key: 'Address',
+        value: %w[A list of items],
+        paragraph_format: true,
+      ]
+      result = render_inline(described_class.new(rows: rows))
+
+      html = <<~HTML
+        <p class="govuk-body">A</p>
+        <p class="govuk-body">list</p>
+        <p class="govuk-body">of</p>
+        <p class="govuk-body">items</p>
+      HTML
+
+      expect(result.to_html).to include html.chomp
+    end
+
+    it 'safely escapes markup when rendering values as <p> tags' do
+      rows = [
+        key: 'Address',
+        value: ['<script></script>', '<br>'],
+        paragraph_format: true,
+      ]
+      result = render_inline(described_class.new(rows: rows))
+
+      expect(result.to_html).to include(<<~HTML)
+        <p class="govuk-body">&lt;script&gt;&lt;/script&gt;</p>
+        <p class="govuk-body">&lt;br&gt;</p>
+      HTML
+    end
+
     it 'renders values as bullets if specified for the row' do
       rows = [
-        key: 'Address:',
+        key: 'Address',
         value: %w[A list of items],
         bulleted_format: true,
       ]
       result = render_inline(described_class.new(rows: rows))
 
-      expect(result.to_html).to include(<<~HTML)
+      html = <<~HTML
         <ul class="govuk-list govuk-list--bullet">
         <li>A</li>
         <li>list</li>
@@ -45,22 +81,26 @@ describe SummaryListComponent, type: :component do
         <li>items</li>
         </ul>
       HTML
+
+      expect(result.to_html).to include html.chomp
     end
 
     it 'safely escapes markup when rendering values as bullets' do
       rows = [
-        key: 'Address:',
+        key: 'Address',
         value: ['<script></script>', '<br>'],
         bulleted_format: true,
       ]
       result = render_inline(described_class.new(rows: rows))
 
-      expect(result.to_html).to include(<<~HTML)
+      html = <<~HTML
         <ul class="govuk-list govuk-list--bullet">
         <li>&lt;script&gt;&lt;/script&gt;</li>
         <li>&lt;br&gt;</li>
         </ul>
       HTML
+
+      expect(result.to_html).to include html.chomp
     end
   end
 
@@ -68,8 +108,10 @@ describe SummaryListComponent, type: :component do
     rows = [
       key: 'Please enter the sound a cat makes',
       value: 'Meow',
-      action: 'Enter cat sounds',
-      action_path: '/cat/sounds',
+      action: {
+        text: 'Enter cat sounds',
+        href: '/cat/sounds',
+      },
     ]
     result = render_inline(described_class.new(rows: rows))
 
@@ -102,7 +144,11 @@ describe SummaryListComponent, type: :component do
   it 'supports adding data_qa to rows' do
     rows = [{ key: 'Job',
               value: 'Ice cream man',
-              data_qa: 'ice-cream-man' }]
+              html_attributes: {
+                data: {
+                  qa: 'ice-cream-man',
+                },
+              } }]
 
     result = render_inline(described_class.new(rows: rows))
 
@@ -114,8 +160,8 @@ describe SummaryListComponent, type: :component do
       { key: 'Role',
         value: 'Chef de partie',
         actions: [
-          { verb: 'Change', object: 'role', path: '#change-role' },
-          { verb: 'Remove', object: 'this chef', path: '#remove' },
+          { text: 'Change', visually_hidden_text: 'role', href: '#change-role' },
+          { text: 'Remove', visually_hidden_text: 'this chef', href: '#remove' },
         ] },
     ]
 
