@@ -14,9 +14,7 @@
   </div>
   <div class="app-filter-layout__content">
     <% if @results_view.no_results_found? %>
-      <div class="app-search-results">
-        <%= render partial: 'no_results', locals: { country: @results_view.country, devolved_nation: @results_view.devolved_nation? } %>
-      </div>
+      <%= render Courses::NoResultsComponent.new(results: @results_view) %>
     <% else %>
       <% unless @results_view.provider_filter? %>
         <div class="app-search-results-header">
