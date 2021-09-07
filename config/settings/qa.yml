@@ -7,4 +7,4 @@ valid_referers:
 
 feature_flags:
   send_web_requests_to_big_query: true
-  degree_required_filter: true
+  new_filters: true

@@ -65,6 +65,11 @@ module PageObjects
         element :not_required_radio, '[data-qa="not_required"]'
       end
 
+      class VisaSection < SitePrism::Section
+        element :legend, 'legend'
+        element :checkbox, 'input[name="can_sponsor_visa"]'
+      end
+
       class FundingSection < SitePrism::Section
         element :legend, 'legend'
         element :checkbox, 'input[name="funding"]'
@@ -92,9 +97,9 @@ module PageObjects
       section :funding_filter, FundingSection, '[data-qa="filters__funding"]'
       section :provider_filter, ProviderSection, '[data-qa="filters__provider"]'
       section :degree_required_filter, RequiredDegreeSection, '[data-qa="filters__degree_required"]'
-
-      section :area_and_provider_filter, LocationAndProviderSection, '[data-qa="filters__area_and_provider"]'
       section :send_filter, SendSection, '[data-qa="filters__send"]'
+      section :visa_filter, VisaSection, '[data-qa="filters__visa"]'
+      section :area_and_provider_filter, LocationAndProviderSection, '[data-qa="filters__area_and_provider"]'
 
       element :heading, '[data-qa="heading"]'
       element :next_button, '[data-qa="next_button"]'

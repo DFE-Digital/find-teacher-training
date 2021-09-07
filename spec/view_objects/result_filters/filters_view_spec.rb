@@ -188,6 +188,22 @@ module ResultFilters
       end
     end
 
+    describe '#visa_checked?' do
+      subject { described_class.new(params: params).visa_checked? }
+
+      context 'when parameter is present' do
+        let(:params) { { can_sponsor_visa: 'true' } }
+
+        it { is_expected.to eq(true) }
+      end
+
+      context 'when parameter is not present' do
+        let(:params) { {} }
+
+        it { is_expected.to eq(false) }
+      end
+    end
+
     describe '#has_vacancies_checked?' do
       subject { described_class.new(params: params).has_vacancies_checked? }
 

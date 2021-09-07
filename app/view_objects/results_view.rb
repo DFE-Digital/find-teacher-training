@@ -79,6 +79,10 @@ class ResultsView
     query_parameters['senCourses'].present? && query_parameters['senCourses'].downcase == 'true'
   end
 
+  def visa_courses?
+    query_parameters['can_sponsor_visa'].present? && query_parameters['can_sponsor_visa'].downcase == 'true'
+  end
+
   def number_of_extra_subjects
     return 37 if number_of_subjects_selected == MAXIMUM_NUMBER_OF_SUBJECTS
 
@@ -428,6 +432,7 @@ private
     base_query = base_query.where(has_vacancies: true) if hasvacancies?
     base_query = base_query.where(study_type: study_type) if study_type.present?
     base_query = base_query.where(degree_grade: degree_grade_types) if degree_required?
+    base_query = base_query.where(can_sponsor_visa: true) if visa_courses?
 
     base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
     base_query = base_query.where(subjects: subject_codes.join(',')) if subject_codes.any?

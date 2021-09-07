@@ -46,6 +46,10 @@ module ResultFilters
       params[:senCourses] == 'true'
     end
 
+    def visa_checked?
+      params[:can_sponsor_visa] == 'true'
+    end
+
     def has_vacancies_checked?
       params[:hasvacancies] == 'true'
     end
