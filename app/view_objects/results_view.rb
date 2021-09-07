@@ -422,7 +422,7 @@ private
       .includes(site_statuses: [:site])
       .includes(:provider)
       .includes(:subjects)
-      .where(recruitment_cycle_year: SiteSetting.recruitment_cycle_year)
+      .where(recruitment_cycle_year: RecruitmentCycle.current_year)
 
     base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: true) if hasvacancies?

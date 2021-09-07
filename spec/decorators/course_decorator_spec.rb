@@ -392,7 +392,7 @@ describe CourseDecorator do
 
   describe '#year_range' do
     it 'returns correct year range' do
-      expect(decorated_course.year_range).to eq("#{CycleTimetable.current_year} to #{CycleTimetable.next_year}")
+      expect(decorated_course.year_range).to eq("#{RecruitmentCycle.current_year} to #{RecruitmentCycle.current_year + 1}")
     end
   end
 

@@ -6,7 +6,7 @@ class RecruitmentCycle < Base
   self.primary_key = :year
 
   def self.current
-    RecruitmentCycle.includes(:providers).find(CycleTimetable.current_year).first
+    RecruitmentCycle.includes(:providers).find(RecruitmentCycle.current_year).first
   end
 
   def self.current_year
