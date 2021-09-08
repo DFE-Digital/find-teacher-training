@@ -101,7 +101,7 @@ describe ResultsView do
       }
     end
 
-    subject(:results_view) { described_class.new(query_parameters: default_query_parameters).filter_path_with_unescaped_commas('/test') }
+    subject(:results_view) { described_class.new(query_parameters: default_query_parameters).filter_params_with_unescaped_commas('/test') }
 
     it 'appends an unescaped querystring to the passed path' do
       allow(UnescapedQueryStringService).to receive(:call).with(
@@ -903,6 +903,46 @@ describe ResultsView do
 
       it 'returns false' do
         expect(results_view.devolved_nation?).to be false
+      end
+    end
+  end
+
+  describe '#filter_params_for' do
+    context 'when the user has searched for a location that is within a devolved nation' do
+      let(:query_parameters) do
+        {
+          'c' => 'Wales',
+          'lat' => '1.23456',
+          'long' => '0.54321',
+          'loc' => 'Cardiff',
+          'lq' => 'Cardiff',
+          'l' => '1',
+        }
+      end
+
+      subject(:results_view) { described_class.new(query_parameters: query_parameters) }
+
+      it 'returns default params without the location params' do
+        expect(results_view.filter_params_for('/')).to eq '/?fulltime=false&hasvacancies=true&parttime=false&qualifications%5B%5D=QtsOnly&qualifications%5B%5D=PgdePgceWithQts&qualifications%5B%5D=Other&senCourses=false'
+      end
+    end
+
+    context 'when the user has searched for a location that is within England' do
+      let(:query_parameters) do
+        {
+          'c' => 'England',
+          'lat' => '1.23456',
+          'long' => '0.54321',
+          'loc' => 'Brixton',
+          'lq' => 'Brixton',
+          'l' => '1',
+        }
+      end
+
+      subject(:results_view) { described_class.new(query_parameters: query_parameters) }
+
+      it 'returns default params without the location params' do
+        expect(results_view.filter_params_for('/')).to eq '/?c=England&fulltime=false&hasvacancies=true&l=1&lat=1.23456&loc=Brixton&long=0.54321&lq=Brixton&parttime=false&qualifications%5B%5D=QtsOnly&qualifications%5B%5D=PgdePgceWithQts&qualifications%5B%5D=Other&senCourses=false'
       end
     end
   end

@@ -7,5 +7,5 @@
       <%= smart_quotes(@results_view.provider) %>
     </li>
   </ul>
-  <%= govuk_link_to 'Change provider or choose a location', @results_view.filter_path_with_unescaped_commas(location_path), data: { qa: 'link' } %>
+  <%= govuk_link_to 'Change provider or choose a location', @results_view.filter_params_with_unescaped_commas(location_path), data: { qa: 'link' } %>
 </div>
