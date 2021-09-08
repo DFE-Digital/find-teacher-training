@@ -11,5 +11,5 @@
       <% end %>
     </li>
   </ul>
-  <%= govuk_link_to 'Change vacancies', @results_view.filter_path_with_unescaped_commas(vacancy_path), data: { qa: 'link' } %>
+  <%= govuk_link_to 'Change vacancies', @results_view.filter_params_with_unescaped_commas(vacancy_path), data: { qa: 'link' } %>
 </div>

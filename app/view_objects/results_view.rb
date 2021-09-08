@@ -25,8 +25,21 @@ class ResultsView
       .merge(subject_parameters)
   end
 
-  def filter_path_with_unescaped_commas(base_path, parameters: query_parameters_with_defaults)
+  def filter_params_for(path)
+    if devolved_nation?
+      stripped_devolved_nation_params(path)
+    else
+      filter_params_with_unescaped_commas(path)
+    end
+  end
+
+  def filter_params_with_unescaped_commas(base_path, parameters: query_parameters_with_defaults)
     UnescapedQueryStringService.call(base_path: base_path, parameters: parameters)
+  end
+
+  def stripped_devolved_nation_params(path)
+    parameters = query_parameters_with_defaults.except('c', 'lat', 'long', 'loc', 'lq', 'l')
+    filter_params_with_unescaped_commas(path, parameters: parameters)
   end
 
   def fulltime?
