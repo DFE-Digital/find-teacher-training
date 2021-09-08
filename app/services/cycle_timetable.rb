@@ -27,10 +27,18 @@ class CycleTimetable
   def self.current_year
     now = Time.zone.now
 
-    CYCLE_DATES.keys.detect do |year|
+    current_year = CYCLE_DATES.keys.detect do |year|
       return year if last_recruitment_cycle_year?(year)
 
       now.between?(CYCLE_DATES[year][:find_opens], CYCLE_DATES[year + 1][:find_opens])
+    end
+
+    # If the cycle switcher has been set to 'find has reopened' then
+    # we want request next year's courses from the TTAPI
+    if SiteSetting.cycle_schedule == :today_is_after_find_opens
+      current_year + 1
+    else
+      current_year
     end
   end
 
