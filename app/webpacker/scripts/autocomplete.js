@@ -48,7 +48,7 @@ const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
         name: $input.name,
         defaultValue: $input.value,
         minLength: 3,
-        source: throttle(request(path), 500),
+        source: throttle(request(path), 2000),
         templates: {
           inputValue: selectNameAndCode ? suggestionTemplate : inputValueTemplate,
           suggestion: suggestionTemplate
