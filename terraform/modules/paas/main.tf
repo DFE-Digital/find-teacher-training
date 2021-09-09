@@ -21,7 +21,7 @@ resource cloudfoundry_app web_app {
   docker_image               = var.app_docker_image
   docker_credentials         = var.docker_credentials
   health_check_type          = "http"
-  health_check_http_endpoint = "/check"
+  health_check_http_endpoint = "/check.txt"
   instances                  = var.web_app_instances
   memory                     = var.web_app_memory
   space                      = data.cloudfoundry_space.space.id

@@ -43,6 +43,6 @@ COPY --from=base-image /usr/local/bundle/ /usr/local/bundle/
 ARG COMMIT_SHA
 ENV SHA=${COMMIT_SHA}
 
-RUN echo ${COMMIT_SHA} > public/check
+RUN echo ${COMMIT_SHA} > public/check.txt
 
 CMD bundle exec rails server -b 0.0.0.0
