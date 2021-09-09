@@ -44,5 +44,6 @@ ARG COMMIT_SHA
 ENV SHA=${COMMIT_SHA}
 
 RUN echo ${COMMIT_SHA} > public/check.txt
+RUN echo ${COMMIT_SHA} > public/check
 
 CMD bundle exec rails server -b 0.0.0.0
