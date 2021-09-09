@@ -23,6 +23,16 @@ RSpec.describe CycleTimetable do
         expect(CycleTimetable.current_year).to eq(2022)
       end
     end
+
+    context "We are in the middle of the 2021 cycle and the cycle switcher has been set to 'find has reopened'" do
+      it 'is 2022' do
+        allow(SiteSetting).to receive(:cycle_schedule).and_return(:today_is_after_find_opens)
+
+        Timecop.travel(one_hour_after_find_opens) do
+          expect(CycleTimetable.current_year).to eq(2022)
+        end
+      end
+    end
   end
 
   describe '.next_year' do
