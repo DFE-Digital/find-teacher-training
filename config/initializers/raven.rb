@@ -13,6 +13,7 @@ Raven.configure do |config|
   config.excluded_exceptions += [
     'ActionController::BadRequest',
     'JsonApiClient::Errors::ConnectionError',
+    'URI::InvalidURIError',
     'Mime::Type::InvalidMimeType',
   ]
 end
