@@ -1,4 +1,5 @@
 base_url: https://sandbox.find-postgraduate-teacher-training.service.gov.uk
+assets_url: https://sandbox-assets.find-postgraduate-teacher-training.service.gov.uk
 apply_base_url: https://sandbox.apply-for-teacher-training.service.gov.uk
 teacher_training_api:
   base_url: https://sandbox.api.publish-teacher-training-courses.service.gov.uk
