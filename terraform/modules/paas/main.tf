@@ -76,6 +76,12 @@ resource cloudfoundry_route web_app_service_gov_uk_route {
   hostname = each.value
 }
 
+resource "cloudfoundry_route" "web_app_assets_service_gov_uk_route" {
+  domain   = data.cloudfoundry_domain.find_service_gov_uk.id
+  space    = data.cloudfoundry_space.space.id
+  hostname = local.assets_host_names[var.app_environment_config]
+}
+
 resource cloudfoundry_user_provided_service logging {
   name             = local.logging_service_name
   space            = data.cloudfoundry_space.space.id
