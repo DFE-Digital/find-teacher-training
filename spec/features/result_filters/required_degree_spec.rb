@@ -16,7 +16,7 @@ RSpec.feature 'Results page required degree filter' do
     it 'shows all courses' do
       results_page.load
 
-      expect(results_page.degree_required_filter.legend.text).to eq('Degree required')
+      expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
       expect(results_page.degree_required_filter.show_all_courses_radio.checked?).to be(true)
     end
   end
@@ -38,7 +38,7 @@ RSpec.feature 'Results page required degree filter' do
       end
 
       it 'list the filtered courses' do
-        expect(results_page.degree_required_filter.legend.text).to eq('Degree required')
+        expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
         expect(results_page.degree_required_filter.two_two_radio.checked?).to be(true)
       end
 
@@ -72,7 +72,7 @@ RSpec.feature 'Results page required degree filter' do
       end
 
       it 'list the filtered courses' do
-        expect(results_page.degree_required_filter.legend.text).to eq('Degree required')
+        expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
         expect(results_page.degree_required_filter.third_class_radio.checked?).to be(true)
       end
 
@@ -106,7 +106,7 @@ RSpec.feature 'Results page required degree filter' do
       end
 
       it 'list the filtered courses' do
-        expect(results_page.degree_required_filter.legend.text).to eq('Degree required')
+        expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
         expect(results_page.degree_required_filter.not_required_radio.checked?).to be(true)
       end
 
