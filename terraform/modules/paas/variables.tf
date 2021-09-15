@@ -41,11 +41,12 @@ locals {
   logging_service_name     = "find-logit-${local.app_name_suffix}"
   redis_service_name       = "find-redis-${local.app_name_suffix}"
   service_gov_uk_host_names = {
-    qa      = ["qa"]
-    staging = ["staging"]
-    sandbox = ["sandbox"]
-    prod    = ["www", "www2"]
-    review  = [local.app_name_suffix]
+    qa       = ["qa"]
+    staging  = ["staging"]
+    sandbox  = ["sandbox"]
+    prod     = ["www", "www2"]
+    review   = [local.app_name_suffix]
+    loadtest = ["loadtest"]
   }
   assets_host_names = {
     qa        = "qa-assets"

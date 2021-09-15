@@ -21,7 +21,7 @@ resource cloudfoundry_app web_app {
   docker_image               = var.app_docker_image
   docker_credentials         = var.docker_credentials
   health_check_type          = "http"
-  health_check_http_endpoint = "/ping"
+  health_check_http_endpoint = "/check.txt"
   instances                  = var.web_app_instances
   memory                     = var.web_app_memory
   space                      = data.cloudfoundry_space.space.id
@@ -33,9 +33,6 @@ resource cloudfoundry_app web_app {
     content {
       route = routes.value
     }
-  }
-  service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
   }
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
@@ -54,9 +51,6 @@ resource cloudfoundry_app worker_app {
   strategy           = "blue-green-v2"
   timeout            = 180
   environment        = var.app_environment_variables
-  service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
-  }
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
@@ -82,16 +76,13 @@ resource "cloudfoundry_route" "web_app_assets_service_gov_uk_route" {
   hostname = local.assets_host_names[var.app_environment_config]
 }
 
-resource cloudfoundry_user_provided_service logging {
-  name             = local.logging_service_name
-  space            = data.cloudfoundry_space.space.id
-  syslog_drain_url = var.logstash_url
-}
-
 resource "cloudfoundry_service_instance" "redis" {
   name         = local.redis_service_name
   space        = data.cloudfoundry_space.space.id
   service_plan = data.cloudfoundry_service.redis.service_plans[var.redis_service_plan]
+  json_params  = jsonencode({
+    maxmemory_policy = "noeviction"
+  })
   timeouts {
     create = "30m"
     update = "30m"
