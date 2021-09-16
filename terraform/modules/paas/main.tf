@@ -69,11 +69,9 @@ resource cloudfoundry_route web_app_cloudapps_digital_route {
 }
 
 resource cloudfoundry_route web_app_service_gov_uk_route {
-  for_each = toset(local.service_gov_uk_host_names[var.app_environment_config])
-
   domain   = data.cloudfoundry_domain.find_service_gov_uk.id
   space    = data.cloudfoundry_space.space.id
-  hostname = each.value
+  hostname = local.service_gov_uk_host_names[var.app_environment_config]
 }
 
 resource "cloudfoundry_route" "web_app_assets_service_gov_uk_route" {
