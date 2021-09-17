@@ -22,7 +22,7 @@ class ResultsController < ApplicationController
     end
   end
 
-  private
+private
 
   def convert_csharp_params_to_rails
     if params['rails_subjects'].blank? && convert_csharp_subject_id_params_to_subject_code.present?
