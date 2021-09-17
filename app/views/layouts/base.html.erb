@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+  <%= render partial: 'layouts/head' %>
+
+  <body class="govuk-template__body ">
+
+    <%= render partial: 'layouts/cookie_banner' %>
+
+    <%= govuk_skip_link %>
+
+    <%= govuk_header(
+      service_name: 'Find postgraduate teacher training',
+      service_url: root_path,
+      classes: "govuk-!-display-none-print app-header #{environment_header_class}",
+    ) %>
+
+    <div class="govuk-width-container">
+      <%= govuk_phase_banner(
+        tag: {
+          text: environment_label,
+          colour: environment_colour,
+        },
+      ) do %>
+        This is a new service – <%= bat_contact_mail_to 'give feedback or report a problem', subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
+      <% end %>
+
+      <%= yield(:before_content) %>
+
+      <%= render partial: 'layouts/main' %>
+    </div>
+
+    <% if @render_feedback_component %>
+      <%= render(
+        FeedbackComponent.new(
+          path: request.env['PATH_INFO'],
+          controller: params[:controller],
+        ),
+      ) %>
+    <% end %>
+
+    <%= render 'layouts/footer' %>
+
+    <%= javascript_pack_tag 'application' %>
+    <%= content_for(:body_end) %>
+  </body>
+</html>
