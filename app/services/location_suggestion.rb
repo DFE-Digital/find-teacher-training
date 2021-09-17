@@ -14,7 +14,7 @@ class LocationSuggestion
           .map(&format_prediction)
           .take(5)
       elsif response['error_message'].present?
-        Raven.send_event(error_message: response['error_message'])
+        Sentry.capture_message(message: response['error_message'])
       end
     end
 

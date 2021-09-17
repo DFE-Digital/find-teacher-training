@@ -68,11 +68,12 @@ gem 'sidekiq'
 # Calculate distance between two locations
 gem 'geokit'
 
-# Error tracking
-gem 'sentry-raven'
-
 # Render nice markdown
 gem 'redcarpet'
+
+# Error tracking
+gem 'sentry-rails'
+gem 'sentry-sidekiq'
 
 # Render smart quotes
 gem 'rubypants'

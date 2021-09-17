@@ -65,14 +65,14 @@ describe LocationSuggestion do
       let(:error_message) { 'The provided API key is invalid.' }
 
       before do
-        allow(Raven).to receive(:send_event)
+        allow(Sentry).to receive(:capture_message)
       end
 
       it 'sends a sentry error with the received error_message' do
         stub_query(error_message: error_message)
         location_suggestions
 
-        expect(Raven).to have_received(:send_event).with(error_message: error_message)
+        expect(Sentry).to have_received(:capture_message).with(message: error_message)
       end
     end
 

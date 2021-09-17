@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_sentry_contexts
-    Raven.tags_context(request_id: RequestStore.store[:request_id])
+    Sentry.set_tags(request_id: RequestStore.store[:request_id])
   end
 
   def append_info_to_payload(payload)
