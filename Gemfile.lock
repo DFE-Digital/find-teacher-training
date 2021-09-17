@@ -407,8 +407,6 @@ GEM
     semantic_logger (4.8.2)
       concurrent-ruby (~> 1.0)
     semantic_range (3.0.0)
-    sentry-raven (3.1.2)
-      faraday (>= 1.0)
     sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -526,7 +524,6 @@ DEPENDENCIES
   rubocop-rspec
   rubypants
   scss_lint-govuk
-  sentry-raven
   sidekiq
   simplecov (< 0.18)
   site_prism

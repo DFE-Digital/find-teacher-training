@@ -68,9 +68,6 @@ gem 'sidekiq'
 # Calculate distance between two locations
 gem 'geokit'
 
-# Error tracking
-gem 'sentry-raven'
-
 # Render nice markdown
 gem 'redcarpet'
 
