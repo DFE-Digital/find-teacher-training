@@ -8,8 +8,6 @@ class ApplicationController < ActionController::Base
   before_action :redirect_to_maintenance_page_if_flag_is_active
   before_action :redirect_to_cycle_has_ended_if_find_is_down
 
-  default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
-
   def store_request_id
     RequestStore.store[:request_id] = request.uuid
   end
