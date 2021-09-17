@@ -4,17 +4,17 @@ module ResultFilters
     include CsharpRailsSubjectConversionHelper
 
     def subject_is_selected?(subject_code:)
-      if !params['subjects']&.length.nil?
-        subject_code.in?(params['subjects'])
+      if !params['rails_subjects']&.length.nil?
+        subject_code.in?(params['rails_subjects'])
       else
         false
       end
     end
 
     def subject_area_is_selected?(subject_area:)
-      return false if params['subjects'].nil?
+      return false if params['rails_subjects'].nil?
 
-      (params['subjects'] & subject_area.subjects.map(&:subject_code)).any?
+      (params['rails_subjects'] & subject_area.subjects.map(&:subject_code)).any?
     end
 
     def no_subject_selected_error?
