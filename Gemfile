@@ -71,6 +71,10 @@ gem 'geokit'
 # Render nice markdown
 gem 'redcarpet'
 
+# Error tracking
+gem 'sentry-rails'
+gem 'sentry-sidekiq'
+
 # Render smart quotes
 gem 'rubypants'
 
