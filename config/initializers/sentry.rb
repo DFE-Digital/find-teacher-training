@@ -1,6 +1,7 @@
 # https://docs.sentry.io/clients/ruby/config
-Raven.configure do |config|
-  config.silence_ready = true
+Sentry.init do |config|
+  config.environment = Rails.env
+  config.release = ENV['SHA']
 
   # > Inspect an incoming exception's causes when determining whether or not that
   # exception should be excluded
