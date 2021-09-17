@@ -225,7 +225,7 @@ describe ResultsView do
     end
 
     context 'more than NUMBER_OF_SUBJECTS_DISPLAYED subjects are selected' do
-      let(:parameter_hash) { { 'rails_subjects' => %w[00 01 F1 Q8 P3] } }
+      let(:parameter_hash) { { 'subject_codes' => %w[00 01 F1 Q8 P3] } }
 
       it 'returns the number of the extra subjects' do
         expect(results_view.number_of_extra_subjects).to eq(5)
@@ -460,7 +460,7 @@ describe ResultsView do
       context 'when subject parameters are passed' do
         let(:results_view) do
           described_class.new(query_parameters: {
-            'rails_subjects' => [
+            'subject_codes' => [
               french_subject_code,
               russian_subject_code,
               primary_subject_code,

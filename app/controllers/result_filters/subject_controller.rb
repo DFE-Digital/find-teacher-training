@@ -16,7 +16,7 @@ module ResultFilters
     end
 
     def create
-      if params[:rails_subjects].blank? && (params[:senCourses].blank? || params[:senCourses] == 'false')
+      if params[:subject_codes].blank? && (params[:senCourses].blank? || params[:senCourses] == 'false')
         flash[:error] = [I18n.t('subject_filter.errors.no_option')]
 
         if flash[:start_wizard]
@@ -25,14 +25,16 @@ module ResultFilters
           redirect_to subject_path(filter_params)
         end
       else
-        redirect_to results_path(filter_params.merge(rails_subjects: params[:rails_subjects]))
+        redirect_to results_path(filter_params.merge(subject_codes: params[:subject_codes]))
       end
     end
 
   private
 
     def convert_csharp_params_to_rails
-      params['rails_subjects'] = convert_csharp_subject_id_params_to_subject_code if convert_csharp_subject_id_params_to_subject_code.present?
+      if params['subject_codes'].blank? && convert_csharp_subject_id_params_to_subject_code.present?
+        request.query_parameters['subject_codes'] = convert_csharp_subject_id_params_to_subject_code
+      end
     end
 
     def build_subject_areas

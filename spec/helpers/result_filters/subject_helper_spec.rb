@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'ResultFilters::SubjectHelper', type: :helper do
   describe '#subject_is_selected?' do
     it 'indicates that the subject is selected' do
-      controller.params[:rails_subjects] = '00,01,02'
+      controller.params[:subject_codes] = '00,01,02'
       expect(helper.subject_is_selected?(subject_code: '02')).to eq(true)
     end
 

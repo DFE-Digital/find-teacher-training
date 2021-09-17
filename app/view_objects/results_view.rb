@@ -373,15 +373,15 @@ private
   end
 
   def subject_parameters
-    query_parameters['rails_subjects'].present? ? { 'rails_subjects' => query_parameters['rails_subjects'].presence } : {}
+    query_parameters['subject_codes'].present? ? { 'subject_codes' => query_parameters['subject_codes'].presence } : {}
   end
 
   def subject_parameters_array
-    query_parameters['rails_subjects'] || []
+    query_parameters['subject_codes'] || []
   end
 
   def subject_codes
-    query_parameters['rails_subjects'] || []
+    query_parameters['subject_codes'] || []
   end
 
   def latitude

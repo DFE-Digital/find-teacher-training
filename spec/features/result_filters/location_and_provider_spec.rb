@@ -59,7 +59,7 @@ RSpec.feature 'Results page new area and provider filter' do
           expected_query_params: {
             'l' => '3',
             'query' => 'ACME SCITT 0',
-            'rails_subjects' => %w[00],
+            'subject_codes' => %w[00],
           },
         )
       end
