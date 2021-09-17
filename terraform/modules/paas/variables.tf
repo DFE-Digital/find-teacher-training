@@ -48,18 +48,20 @@ locals {
     }
   )
   service_gov_uk_host_names = {
-    qa      = "qa"
-    staging = "staging"
-    sandbox = "sandbox"
-    prod    = "www"
-    review  = local.app_name_suffix
+    qa       = "qa"
+    staging  = "staging"
+    sandbox  = "sandbox"
+    prod     = "www"
+    loadtest = "loadtest"
+    review   = local.app_name_suffix
   }
   assets_host_names = {
-    qa      = "qa-assets"
-    staging = "staging-assets"
-    sandbox = "sandbox-assets"
-    prod    = "assets"
-    review  = "${local.app_name_suffix}-assets"
+    qa       = "qa-assets"
+    staging  = "staging-assets"
+    sandbox  = "sandbox-assets"
+    prod     = "assets"
+    loadtest = "loadtest-assets"
+    review   = "${local.app_name_suffix}-assets"
   }
   web_app_routes = [
     cloudfoundry_route.web_app_service_gov_uk_route.id,
