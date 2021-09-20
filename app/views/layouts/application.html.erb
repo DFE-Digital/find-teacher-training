@@ -1,1 +1,180 @@
-<%= render template: 'layouts/base' %>
+<!DOCTYPE html>
+<html lang="en" class="govuk-template">
+  <head>
+    <title><%= content_for(:page_title) %> - Find postgraduate teacher training - GOV.UK</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= canonical_tag %>
+    <%= tag :meta, name: 'viewport', content: 'width=device-width, initial-scale=1' %>
+    <%= tag :meta, property: 'og:image', content: asset_pack_path('media/images/govuk-opengraph-image.png') %>
+    <%= tag :meta, name: 'theme-color', content: '#0b0c0c' %>
+    <%= favicon_link_tag asset_pack_path('media/images/favicon.ico') %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-mask-icon.svg'), rel: 'mask-icon', type: 'image/svg', color: '#0b0c0c' %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon.png'), rel: 'apple-touch-icon', type: 'image/png' %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon-152x152.png'), rel: 'apple-touch-icon', type: 'image/png', size: '152x152' %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon-167x167.png'), rel: 'apple-touch-icon', type: 'image/png', size: '167x167' %>
+    <%= favicon_link_tag asset_pack_path('media/images/govuk-apple-touch-icon-180x180.png'), rel: 'apple-touch-icon', type: 'image/png', size: '180x180' %>
+    <%= stylesheet_pack_tag 'application' %>
+    <%= content_for(:head) %>
+
+  </head>
+
+  <body class="govuk-template__body ">
+    <script>
+      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
+
+    <% unless current_page?(cookie_preferences_path) %>
+      <% heading_text = 'Cookies on Find postgraduate teacher training' %>
+      <%= govuk_cookie_banner(
+        html_attributes: {
+          aria: {
+            label: heading_text,
+          },
+          classes: 'govuk-!-display-none-print',
+          data: {
+            module: 'govuk-cookie-banner',
+            qa: 'cookie-banner',
+          },
+        },
+      ) do |cookie_banner| %>
+        <% cookie_banner.message(
+          heading_text: heading_text,
+          hidden: true,
+          html_attributes: {
+            data: {
+              module: 'govuk-cookie-banner-choice-message',
+              qa: 'cookie-banner-choice-message',
+            },
+          }
+        ) do |message| %>
+          <p>We use some essential cookies to make this service work.</p>
+          <p>We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
+          <% message.action { button_tag('Accept analytics cookies', class: 'govuk-button', data: { 'accept-cookie': 'true' }) } %>
+          <% message.action { button_tag('Reject analytics cookies', class: 'govuk-button', data: { 'accept-cookie': 'false' }) } %>
+          <% message.action { govuk_link_to('View cookies', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) } %>
+        <% end %>
+
+        <% cookie_banner.message(
+          heading_text: heading_text,
+          hidden: true,
+          html_attributes: {
+            data: {
+              module: 'govuk-cookie-banner-confirmation-message',
+              qa: 'cookie-banner-confirmation-message',
+            },
+          }
+        ) do |message| %>
+          <p>You’ve <span id="user-answer"></span> analytics cookies. You can <%= govuk_link_to('change your cookie settings', cookie_preferences_path, data: { qa: 'cookie-banner__preference-link' }) %> at any time.</p>
+          <% message.action { button_tag('Hide this message', class: 'govuk-button', data: { 'accept-cookie': 'hide-banner' }) } %>
+        <% end %>
+
+        <% cookie_banner.message(
+          heading_text: heading_text,
+          hidden: false,
+          html_attributes: {
+            data: {
+              module: 'govuk-cookie-banner-fallback-message',
+              qa: 'cookie-banner-fallback-message',
+            },
+          }
+        ) do |message| %>
+          <p>We use cookies to make this service work and collect analytics information. To accept or reject cookies, turn on JavaScript in your browser settings or reload this page.</p>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= govuk_skip_link %>
+
+    <%= govuk_header(
+      service_name: 'Find postgraduate teacher training',
+      service_url: root_path,
+      classes: "govuk-!-display-none-print app-header #{environment_header_class}",
+    ) %>
+
+    <div class="govuk-width-container">
+      <%= govuk_phase_banner(
+        tag: {
+          text: environment_label,
+          colour: environment_colour,
+        },
+      ) do %>
+        This is a new service – <%= bat_contact_mail_to 'give feedback or report a problem', subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
+      <% end %>
+
+      <%= yield(:before_content) %>
+
+      <main class="govuk-main-wrapper" id="main-content" role="main">
+        <% if flash[:success] %>
+          <%= govuk_notification_banner(
+            title_text: 'Success',
+            success: true,
+            title_id: 'success-message',
+            html_attributes: { role: 'alert' },
+          ) do |notification_banner| %>
+            <% notification_banner.heading(text: flash[:success]) %>
+          <% end %>
+        <% end %>
+
+        <%= render DeadlineBannerComponent.new(flash_empty: flash.reject { |flash| flash[0] == "start_wizard" }.empty?) unless request.url.include?('/results/filter/subject')%>
+
+        <%= yield %>
+      </main>
+    </div>
+
+    <% if @render_feedback_component %>
+      <%= render(
+        FeedbackComponent.new(
+          path: request.env['PATH_INFO'],
+          controller: params[:controller],
+        ),
+      ) %>
+    <% end %>
+
+    <%= govuk_footer do |footer| %>
+      <%= footer.meta do %>
+        <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+          <h2 class="govuk-heading-m">Get support</h2>
+          <div class="govuk-grid-row govuk-!-margin-bottom-5">
+            <div class="govuk-grid-column-one-half">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Telephone</h2>
+              <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16">
+                <li><%= t('get_into_teaching.tel') %></li>
+                <li><%= t('get_into_teaching.opening_times') %></li>
+                <li>Free of charge</li>
+              </ul>
+            </div>
+            <div class="govuk-grid-column-one-half">
+              <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Online chat</h2>
+              <ul class="govuk-footer__meta-custom govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-8">
+                <li><%= link_to 'Talk to an adviser online', t('get_into_teaching.url_online_chat'), class: 'govuk-footer__link' %></li>
+                <li><%= t('get_into_teaching.opening_times') %></li>
+              </ul>
+            </div>
+          </div>
+          <h2 class="govuk-visually-hidden">Support links</h2>
+          <ul class="govuk-footer__inline-list govuk-!-margin-bottom-0">
+            <li class="govuk-footer__inline-list-item">
+              <%= link_to 'Accessibility', accessibility_path, class: 'govuk-footer__link' %>
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <%= link_to 'Cookies', cookie_preferences_path, class: 'govuk-footer__link' %>
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <%= link_to 'Privacy policy', privacy_path, class: 'govuk-footer__link' %>
+            </li>
+            <li class="govuk-footer__inline-list-item">
+              <%= link_to 'Terms and conditions', terms_path, class: 'govuk-footer__link' %>
+            </li>
+          </ul>
+        </div>
+        <div class="govuk-footer__meta-item">
+          <a class="govuk-footer__link govuk-footer__copyright-logo govuk-!-margin-bottom-1" href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/">© Crown copyright</a>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= javascript_pack_tag 'application' %>
+    <%= content_for(:body_end) %>
+  </body>
+</html>
