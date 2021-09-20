@@ -1,4 +1,16 @@
 class Course < Base
+  TTAPI_CALLS_EXPIRY = 10.minutes
+
+  connection do |conn|
+    conn.faraday.response(:caching, write_options: { expires_in: TTAPI_CALLS_EXPIRY }) do
+      if Settings.feature_flags.cache_courses
+        Rails.cache
+      else
+        ActiveSupport::Cache::NullStore.new
+      end
+    end
+  end
+
   belongs_to :recruitment_cycle, through: :provider, param: :recruitment_cycle_year
   belongs_to :provider, param: :provider_code, shallow_path: true
   has_many :site_statuses

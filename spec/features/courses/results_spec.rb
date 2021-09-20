@@ -65,4 +65,20 @@ describe 'Search results', type: :feature do
       expect(stub_courses_request).to have_been_requested
     end
   end
+
+  context 'with courses API caching' do
+    it 'shows the same search results until the cache expires' do
+      expect(results_page.courses.count).to eq(10)
+      stub_courses(query: base_parameters, course_count: 4)
+
+      not_yet_expired = Course::TTAPI_CALLS_EXPIRY - 1.minute
+      Timecop.travel(Time.zone.now + not_yet_expired)
+      results_page.load
+      expect(results_page.courses.count).to eq(10)
+
+      Timecop.travel(Time.zone.now + 1.minute)
+      results_page.load
+      expect(results_page.courses.count).to eq(4)
+    end
+  end
 end

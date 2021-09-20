@@ -9,3 +9,4 @@ google:
 redis_url: redis://localhost:6379/9
 feature_flags:
   new_filters: true
+  cache_courses: true

@@ -6,3 +6,4 @@ log_level: debug
 redis_url: redis://localhost:6379/0
 feature_flags:
   degree_required_filter: false
+  cache_courses: true
