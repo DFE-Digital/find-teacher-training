@@ -81,7 +81,7 @@
               <%= f.check_box(:senCourses, { checked: params[:senCourses] == 'true', data: { qa: 'subject__checkbox' }, id: 'subject_send', class: 'govuk-checkboxes__input' }, 'true', nil) %>
               <%= f.label(:subjects, { for: 'subject_send', data: { qa: 'subject__name' } }, class: 'govuk-label govuk-checkboxes__label') do %>
                 <span class="govuk-checkboxes__label-text">
-                  Show only courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
+                  Only show courses with a <abbr title="Special educational needs and disability">SEND</abbr> specialism
                 </span>
                 <span class="govuk-!-display-block"></span>
               <% end %>
