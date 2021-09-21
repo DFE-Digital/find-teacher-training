@@ -13,6 +13,8 @@ RSpec.describe 'Maintenance mode', type: :feature do
 
   context 'given the maintenance_mode feature flag is deactive and i visit the maintenance_path' do
     it 'sends me to the homepage' do
+      deactivate_feature(:maintenance_mode)
+
       visit maintainance_path
 
       expect(page).to have_current_path root_path
