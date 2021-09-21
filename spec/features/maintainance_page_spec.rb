@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'View pages', type: :feature do
-  context 'given the maintainance_mode feature flag is active and i arrive at the site' do
+  context 'given the maintenance_mode feature flag is active and i arrive at the site' do
     it 'sends me to the maintainance page' do
-      activate_feature(:maintainance_mode)
+      activate_feature(:maintenance_mode)
 
       visit '/'
 
@@ -11,7 +11,7 @@ RSpec.describe 'View pages', type: :feature do
     end
   end
 
-  context 'given the maintainance_mode feature flag is deactive and i visit the maintainance_path' do
+  context 'given the maintenance_mode feature flag is deactive and i visit the maintainance_path' do
     it 'sends me to the homepage' do
       visit maintainance_path
 
