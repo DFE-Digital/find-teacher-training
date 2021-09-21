@@ -22,3 +22,4 @@ skylight_enable: true
 feature_flags:
   send_web_requests_to_big_query: false
   new_filters: false
+  maintenance_mode: false
