@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get :sha, controller: :heartbeat
 
   get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
+  get '/maintainance', to: 'pages#maintainance', as: 'maintainance'
 
   get '/cycle-ending-soon', to: redirect('/', status: 301)
   # During the cycle there is no need for a separate path for

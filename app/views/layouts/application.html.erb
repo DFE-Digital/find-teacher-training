@@ -116,6 +116,7 @@
           <% end %>
         <% end %>
 
+        <%= render MaintenanceBannerComponent.new %>
         <%= render DeadlineBannerComponent.new(flash_empty: flash.reject { |flash| flash[0] == "start_wizard" }.empty?) unless request.url.include?('/results/filter/subject')%>
 
         <%= yield %>
