@@ -133,7 +133,7 @@ describe 'results', type: :feature do
     end
   end
 
-  context 'with C# parameters' do
+  context 'with depracated C# parameters' do
     let(:base_parameters) { results_page_parameters('sort' => sort, 'filter[subjects]' => 'C1,08,F1') }
 
     let(:params) do

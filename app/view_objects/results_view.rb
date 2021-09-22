@@ -373,15 +373,15 @@ private
   end
 
   def subject_parameters
-    query_parameters['subjects'].present? ? { 'subjects' => query_parameters['subjects'].presence } : {}
+    query_parameters['subject_codes'].present? ? { 'subject_codes' => query_parameters['subject_codes'].presence } : {}
   end
 
   def subject_parameters_array
-    query_parameters['subjects'] || []
+    query_parameters['subject_codes'] || []
   end
 
   def subject_codes
-    csharp_array_to_subject_codes(subject_parameters_array)
+    query_parameters['subject_codes'] || []
   end
 
   def latitude

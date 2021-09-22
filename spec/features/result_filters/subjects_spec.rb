@@ -45,7 +45,7 @@ RSpec.feature 'Results page new subject filter' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
           expected_query_params: {
-            'subjects' => %w[31 32 3 5 47],
+            'subject_codes' => %w[00 01 F1 Q8 P3],
           },
         )
       end
@@ -78,7 +78,7 @@ RSpec.feature 'Results page new subject filter' do
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          'subjects' => %w[31 32 3],
+          'subject_codes' => %w[00 01 F1],
           'senCourses' => 'true',
         },
       )
@@ -231,7 +231,7 @@ RSpec.feature 'Results page new subject filter' do
 
   context 'with previously selected subjects' do
     it 'automatically selects the given checkboxes' do
-      visit subject_path(subjects: %w[31], senCourses: 'true')
+      visit subject_path(subject_codes: %w[00], senCourses: 'true')
       expect(filter_page.subject_areas.first.subjects.first.checkbox).to be_checked
       expect(filter_page.send_area.subjects.first.checkbox).to be_checked
     end
@@ -247,10 +247,11 @@ RSpec.feature 'Results page new subject filter' do
         course_count: 10,
       )
 
-      visit subject_path(subjects: %w[31], senCourses: 'true')
+      visit subject_path(subject_codes: %w[00], senCourses: 'true')
       filter_page.subject_areas.first.subjects[0].checkbox.click
       filter_page.subject_areas.first.subjects[1].checkbox.click
       filter_page.send_area.subjects.first.checkbox.click
+
       filter_page.continue.click
 
       expect(results_page.text).to include('Primary with English')
@@ -266,12 +267,12 @@ RSpec.feature 'Results page new subject filter' do
     end
 
     it 'only changes the subjects params' do
-      visit subject_path(subjects: %w[32 31], other_param: 'param_value')
+      visit subject_path(subject_codes: %w[00 01], other_param: 'param_value')
       filter_page.continue.click
       expect_page_to_be_displayed_with_query(
         page: results_page,
         expected_query_params: {
-          'subjects' => %w[31 32],
+          'subject_codes' => %w[00 01],
           'other_param' => 'param_value',
         },
       )

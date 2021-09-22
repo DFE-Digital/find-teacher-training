@@ -1,4 +1,4 @@
-# These functions are barely tested and temporary, they should be removed when the results page is filtering in Rails
+# These functions are being used to map bookmarked requests. This module should be deleted at the end of 2021
 module CsharpRailsSubjectConversionHelper
   def convert_csharp_subject_id_params_to_subject_code
     subjects = if params['subjects'].is_a?(String)

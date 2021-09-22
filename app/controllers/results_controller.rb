@@ -1,5 +1,7 @@
 class ResultsController < ApplicationController
-  before_action :render_feedback_component
+  include CsharpRailsSubjectConversionHelper
+
+  before_action :render_feedback_component, :convert_csharp_params_to_rails
 
   def index
     service = DeprecatedParametersService.new(parameters: request.query_parameters)
@@ -17,6 +19,14 @@ class ResultsController < ApplicationController
       expires_in 10.minutes
     rescue JsonApiClient::Errors::ClientError
       render template: 'errors/unprocessable_entity', status: :unprocessable_entity
+    end
+  end
+
+private
+
+  def convert_csharp_params_to_rails
+    if params['subject_codes'].blank? && convert_csharp_subject_id_params_to_subject_code.present?
+      request.query_parameters['subject_codes'] = convert_csharp_subject_id_params_to_subject_code
     end
   end
 end
