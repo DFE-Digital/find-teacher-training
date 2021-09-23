@@ -33,13 +33,16 @@ variable app_environment_variables { type = map }
 variable docker_credentials { type = map }
 
 locals {
-  app_name_suffix          = var.app_environment_config != "review" ? var.app_environment : "pr-${var.web_app_host_name}"
-  web_app_name             = "find-${local.app_name_suffix}"
-  worker_app_name          = "find-worker-${local.app_name_suffix}"
-  web_app_start_command    = "bundle exec rails server -b 0.0.0.0"
-  worker_app_start_command = "bundle exec sidekiq -c 5 -C config/sidekiq.yml"
-  logging_service_name     = "find-logit-${local.app_name_suffix}"
-  redis_service_name       = "find-redis-${local.app_name_suffix}"
+  app_name_suffix           = var.app_environment_config != "review" ? var.app_environment : "pr-${var.web_app_host_name}"
+  web_app_name              = "find-${local.app_name_suffix}"
+  worker_app_name           = "find-worker-${local.app_name_suffix}"
+  web_app_start_command     = "bundle exec rails server -b 0.0.0.0"
+  worker_app_start_command  = "bundle exec sidekiq -c 5 -C config/sidekiq.yml"
+  logging_service_name      = "find-logit-${local.app_name_suffix}"
+  worker_redis_service_name = "find-worker-redis-${local.app_name_suffix}"
+  cache_redis_service_name  = "find-cache-redis-${local.app_name_suffix}"
+  app_environment_variables = merge(var.app_environment_variables,
+  { REDIS_CACHE_URL = cloudfoundry_service_key.cache_redis_key.credentials.uri })
   service_gov_uk_host_names = {
     qa      = "qa"
     staging = "staging"

@@ -40,6 +40,9 @@ resource cloudfoundry_app web_app {
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
+  service_binding {
+    service_instance = cloudfoundry_service_instance.cache_redis.id
+  }
 }
 
 resource cloudfoundry_app worker_app {
@@ -59,6 +62,9 @@ resource cloudfoundry_app worker_app {
   }
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
+  }
+  service_binding {
+    service_instance = cloudfoundry_service_instance.cache_redis.id
   }
 }
 
@@ -87,11 +93,28 @@ resource cloudfoundry_user_provided_service logging {
 }
 
 resource "cloudfoundry_service_instance" "redis" {
-  name         = local.redis_service_name
+  name         = local.worker_redis_service_name
   space        = data.cloudfoundry_space.space.id
   service_plan = data.cloudfoundry_service.redis.service_plans[var.redis_service_plan]
+  json_params  = jsonencode({ maxmemory_policy = "noeviction" })
   timeouts {
     create = "30m"
     update = "30m"
   }
+}
+
+resource "cloudfoundry_service_instance" "cache_redis" {
+  name         = local.cache_redis_service_name
+  space        = data.cloudfoundry_space.space.id
+  service_plan = data.cloudfoundry_service.redis.service_plans[var.redis_service_plan]
+  json_params  = jsonencode({ maxmemory_policy = "allkeys-lru" })
+  timeouts {
+    create = "30m"
+    update = "30m"
+  }
+}
+
+resource "cloudfoundry_service_key" "cache_redis_key" {
+  name             = "${local.cache_redis_service_name}-key"
+  service_instance = cloudfoundry_service_instance.cache_redis.id
 }
