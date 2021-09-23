@@ -22,5 +22,5 @@ skylight_enable: true
 feature_flags:
   send_web_requests_to_big_query: false
   new_filters: false
-  maintenance_mode: false
-  maintenance_banner: true
+  maintenance_mode: true
+  maintenance_banner: false
