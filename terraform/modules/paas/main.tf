@@ -27,7 +27,7 @@ resource cloudfoundry_app web_app {
   space                      = data.cloudfoundry_space.space.id
   strategy                   = "blue-green-v2"
   timeout                    = 180
-  environment                = var.app_environment_variables
+  environment                = local.app_environment_variables
   dynamic "routes" {
     for_each = local.web_app_routes
     content {
@@ -56,7 +56,7 @@ resource cloudfoundry_app worker_app {
   space              = data.cloudfoundry_space.space.id
   strategy           = "blue-green-v2"
   timeout            = 180
-  environment        = var.app_environment_variables
+  environment        = local.app_environment_variables
   service_binding {
     service_instance = cloudfoundry_user_provided_service.logging.id
   }
