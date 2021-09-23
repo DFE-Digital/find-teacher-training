@@ -95,6 +95,13 @@ staging: ## Set DEPLOY_ENV to staging
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
 	$(eval space=bat-staging)
 
+.PHONY: pen
+pen: ## Set DEPLOY_ENV to pen
+	$(eval DEPLOY_ENV=pen)
+	$(eval env=pen)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
+	$(eval space=bat-staging)
+
 .PHONY: production
 production: ## Set DEPLOY_ENV to production
 	$(if $(CONFIRM_PRODUCTION), , $(error Production can only run with CONFIRM_PRODUCTION))

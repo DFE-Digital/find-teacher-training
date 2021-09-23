@@ -48,6 +48,7 @@ locals {
     staging = "staging"
     sandbox = "sandbox"
     prod    = "www"
+    pen     = "pen"
     review  = local.app_name_suffix
   }
   assets_host_names = {
@@ -55,6 +56,7 @@ locals {
     staging = "staging-assets"
     sandbox = "sandbox-assets"
     prod    = "assets"
+    pen     = "pen-assets"
     review  = "${local.app_name_suffix}-assets"
   }
   web_app_routes = [
