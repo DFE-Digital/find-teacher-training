@@ -24,3 +24,4 @@ feature_flags:
   new_filters: false
   maintenance_mode: false
   maintenance_banner: false
+  cache_courses: false

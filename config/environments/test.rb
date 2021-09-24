@@ -20,6 +20,9 @@ Rails.application.configure do
     'Cache-Control' => 'public, max-age=3600',
   }
 
+  # Ensure that our tests are accounting for caching behaviour
+  config.cache_store = :memory_store
+
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
