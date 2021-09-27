@@ -1,7 +1,7 @@
 base_url: https://pen.find-postgraduate-teacher-training.service.gov.uk
 apply_base_url: https://staging.apply-for-teacher-training.service.gov.uk
 teacher_training_api:
-  base_url: https://staging.api.publish-teacher-training-courses.service.gov.uk
+  base_url: https://pen.api.publish-teacher-training-courses.service.gov.uk
 valid_referers:
   - https://pen.find-postgraduate-teacher-training.education.gov.uk
 
