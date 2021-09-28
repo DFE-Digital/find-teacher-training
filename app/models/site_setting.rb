@@ -1,4 +1,4 @@
-require './app/lib/redis'
+require './app/lib/redis_service'
 
 class SiteSetting < Base
   def self.cycle_schedule

@@ -1,4 +1,4 @@
-require './app/lib/redis'
+require './app/lib/redis_service'
 
 Sidekiq.configure_server do |config|
   config.redis = {
