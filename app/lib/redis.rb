@@ -1,5 +1,9 @@
 require 'redis'
 class RedisService
+  def self.current
+    @current ||= Redis.new(url: RedisService.redis_url)
+  end
+
   def self.new
     Redis.new(url: RedisService.redis_url)
   end
