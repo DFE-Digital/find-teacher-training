@@ -1,10 +1,10 @@
 # These functions are being used to map bookmarked requests. This module should be deleted at the end of 2021
 module CsharpRailsSubjectConversionHelper
-  def convert_csharp_subject_id_params_to_subject_code
-    subjects = if params['subjects'].is_a?(String)
-                 params['subjects'].split(',')
+  def convert_csharp_subject_id_params_to_subject_code(csharp_subjects)
+    subjects = if csharp_subjects.is_a?(String)
+                 csharp_subjects.split(',')
                else
-                 params['subjects']
+                 csharp_subjects
                end
 
     subjects&.map do |subject|
