@@ -61,7 +61,7 @@ describe CourseDecorator do
 
   context 'financial incentives' do
     describe '#salaried?' do
-      let(:subject) { decorated_course }
+      subject { decorated_course }
 
       context 'course is salaried' do
         let(:course) { build :course, funding_type: 'salary' }
@@ -83,7 +83,7 @@ describe CourseDecorator do
     end
 
     describe '#funding_option' do
-      let(:subject) { decorated_course.funding_option }
+      subject { decorated_course.funding_option }
 
       context 'Salary' do
         let(:course) { build :course, funding_type: 'salary' }
@@ -135,7 +135,8 @@ describe CourseDecorator do
       end
 
       context 'course has one subject' do
-        let(:subject) { build :subject, subject_name: 'Computer Science' }
+        subject { build :subject, subject_name: 'Computer Science' }
+
         let(:course) { build :course, subjects: [subject] }
 
         it 'return the subject name' do
@@ -145,7 +146,7 @@ describe CourseDecorator do
     end
 
     describe '#bursary_requirements' do
-      let(:subject) { decorated_course.bursary_requirements }
+      subject { decorated_course.bursary_requirements }
 
       context 'Course with mathematics as a subject' do
         let(:mathematics) { build :subject, :mathematics, subject_name: 'Primary with Mathematics' }
@@ -173,7 +174,7 @@ describe CourseDecorator do
     end
 
     describe '#bursary_first_line_ending' do
-      let(:subject) { decorated_course.bursary_first_line_ending }
+      subject { decorated_course.bursary_first_line_ending }
 
       context 'More than one requirement' do
         let(:mathematics) { build :subject, :mathematics, subject_name: 'Primary with Mathematics' }
@@ -196,7 +197,7 @@ describe CourseDecorator do
     end
 
     describe '#bursary_only' do
-      let(:subject) { decorated_course }
+      subject { decorated_course }
 
       context 'course only has bursary financial incentives' do
         let(:mathematics) { build :subject, bursary_amount: '2000' }
@@ -246,7 +247,8 @@ describe CourseDecorator do
     end
 
     describe '#excluded_from_bursary?' do
-      let(:subject) { decorated_course }
+      subject { decorated_course }
+
       let(:english) { build :subject, bursary_amount: '30000' }
       let(:drama) { build :subject, subject_name: 'Drama' }
       let(:pe) { build :subject, subject_name: 'PE' }
