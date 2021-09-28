@@ -3,6 +3,7 @@ require 'rails_helper'
 describe 'results', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
+  include ActiveJob::TestHelper
 
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'provider.provider_name,name' }
@@ -133,7 +134,7 @@ describe 'results', type: :feature do
     end
   end
 
-  context 'with depracated C# parameters' do
+  context 'with deprecated C# parameters' do
     let(:base_parameters) { results_page_parameters('sort' => sort, 'filter[subjects]' => 'C1,08,F1') }
 
     let(:params) do
@@ -159,6 +160,17 @@ describe 'results', type: :feature do
       expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
       expect(results_page.funding_filter.checkbox.checked?).to be(false)
       expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
+    end
+
+    it 'transmits translated subject codes to BigQuery' do
+      activate_feature(:send_web_requests_to_big_query)
+      visit results_path(params)
+
+      bq_event = enqueued_jobs.first['arguments'].first
+      subject_codes = bq_event['request_query'].find { |q| q['key'] == 'subject_codes[]' }
+
+      expect(subject_codes).to be_present
+      expect(subject_codes['value']).to eq %w[C1 08 F1]
     end
   end
 end

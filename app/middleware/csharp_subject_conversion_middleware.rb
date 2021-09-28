@@ -19,6 +19,12 @@ class CsharpSubjectConversionMiddleware
     if request.params['subject_codes'].blank? && converted_params.present?
       request.update_param('subject_codes', converted_params)
       request.delete_param('subjects')
+
+      # we must update the query string because this is what BigQuery looks at
+      # when it sends the request params, and we care about the mapped subjects there
+      query_vars = Rack::Utils.parse_query(request.query_string)
+      query_vars['subject_codes[]'] = converted_params
+      request.set_header(Rack::QUERY_STRING, Rack::Utils.build_query(query_vars))
     end
 
     @status, @headers, @response = @app.call(env)

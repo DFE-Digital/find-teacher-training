@@ -41,4 +41,6 @@ Rails.application.configure do
 
   # Only log warnings and above in test environment.
   config.log_level = :warn
+
+  config.active_job.queue_adapter = :test
 end
