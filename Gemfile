@@ -13,9 +13,6 @@ gem 'draper'
 # http client
 gem 'httparty'
 
-# Semantic Logger makes logs pretty
-gem 'rails_semantic_logger'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.4'
 
@@ -87,6 +84,11 @@ gem 'govuk-components', '~> 2.0.1'
 
 # Data integration with BigQuery
 gem 'google-cloud-bigquery'
+
+# Semantic Logger makes production logs consumable by logit
+group :production do
+  gem 'rails_semantic_logger'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
