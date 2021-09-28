@@ -118,3 +118,8 @@ resource "cloudfoundry_service_key" "cache_redis_key" {
   name             = "${local.cache_redis_service_name}-key"
   service_instance = cloudfoundry_service_instance.cache_redis.id
 }
+
+resource "cloudfoundry_service_key" "worker_redis_key" {
+  name             = "${local.worker_redis_service_name}-key"
+  service_instance = cloudfoundry_service_instance.redis.id
+}

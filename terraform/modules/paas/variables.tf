@@ -42,7 +42,11 @@ locals {
   worker_redis_service_name = "find-worker-redis-${local.app_name_suffix}"
   cache_redis_service_name  = "find-cache-redis-${local.app_name_suffix}"
   app_environment_variables = merge(var.app_environment_variables,
-  { REDIS_CACHE_URL = cloudfoundry_service_key.cache_redis_key.credentials.uri })
+    {
+      REDIS_CACHE_URL  = cloudfoundry_service_key.cache_redis_key.credentials.uri
+      REDIS_WORKER_URL = cloudfoundry_service_key.worker_redis_key.credentials.uri
+    }
+  )
   service_gov_uk_host_names = {
     qa      = "qa"
     staging = "staging"

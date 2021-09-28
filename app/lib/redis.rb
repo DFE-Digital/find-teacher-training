@@ -8,10 +8,7 @@ class RedisService
     @redis_credentials ||= begin
       redis_credentials = ENV['REDIS_URL'] || Settings.redis_url
       if ENV.key?('VCAP_SERVICES')
-        service_config = JSON.parse(ENV['VCAP_SERVICES'])
-        redis_config = service_config['redis'].first
-        vcap_redis_credentials = redis_config['credentials']
-        redis_credentials = vcap_redis_credentials['uri']
+        ENV.fetch('REDIS_WORKER_URL')
       end
       redis_credentials
     end
