@@ -259,14 +259,12 @@ RSpec.feature 'Results page new subject filter' do
   end
 
   context 'with existing parameters' do
-    before do
+    it 'only changes the subjects params' do
       stub_courses(
         query: base_parameters.merge('filter[subjects]' => '00,01'),
         course_count: 10,
       )
-    end
 
-    it 'only changes the subjects params' do
       visit subject_path(subject_codes: %w[00 01], other_param: 'param_value')
       filter_page.continue.click
       expect_page_to_be_displayed_with_query(
@@ -276,6 +274,18 @@ RSpec.feature 'Results page new subject filter' do
           'other_param' => 'param_value',
         },
       )
+    end
+
+    it 'translates CSharp subjects to Rails' do
+      api_request = stub_courses(
+        query: base_parameters.merge('filter[subjects]' => '24'),
+        course_count: 10,
+      )
+
+      visit subject_path(subjects: %w[49], other_param: 'param_value')
+      filter_page.continue.click
+
+      expect(api_request).to have_been_made
     end
   end
 

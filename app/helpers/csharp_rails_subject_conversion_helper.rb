@@ -12,18 +12,8 @@ module CsharpRailsSubjectConversionHelper
     end
   end
 
-  def convert_subject_code_params_to_csharp
-    params['subjects']&.map do |subject|
-      subject_code_to_csharp_subject_id(subject_id: subject)
-    end
-  end
-
-  def csharp_array_to_subject_codes(csharp_id_array)
-    csharp_id_array&.map { |csharp_id| csharp_to_subject_code(csharp_id: csharp_id) }
-  end
-
   def csharp_to_subject_code(csharp_id:)
-    rails_data = CsharpRailsSubjectConversionHelper.subject_codes.find do |entry|
+    rails_data = subject_codes.find do |entry|
       entry[:csharp_id] == csharp_id
     end
 
@@ -38,17 +28,7 @@ module CsharpRailsSubjectConversionHelper
     rails_data[:subject_code]
   end
 
-  def subject_code_to_csharp_subject_id(subject_id:)
-    csharp_data = CsharpRailsSubjectConversionHelper.subject_codes.find do |entry|
-      entry[:subject_code] == subject_id
-    end
-
-    return '[non-existent subject id]' if csharp_data.nil?
-
-    csharp_data[:csharp_id]
-  end
-
-  def self.subject_codes
+  def subject_codes
     @subject_codes ||= Rails.application.config_for(:subject_codes)['subject_codes'].map(&:symbolize_keys)
   end
 end
