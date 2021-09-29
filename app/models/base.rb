@@ -17,5 +17,6 @@ class Base < JsonApiClient::Resource
 
   self.site = "#{Settings.teacher_training_api.base_url}/api/v3/"
   self.paginator = JsonApiClient::Paginating::NestedParamPaginator
+  self.connection_options = { adapter: :net_http_persistent }
   self.connection_class = ConnectionWithRequestId
 end
