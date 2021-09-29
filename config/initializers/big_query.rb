@@ -2,13 +2,7 @@ require 'google/cloud/bigquery'
 
 BIG_QUERY_API_JSON_KEY = ENV['BIG_QUERY_API_JSON_KEY']
 
-# https://guides.rubyonrails.org/autoloading_and_reloading_constants.html#autoloading-when-the-application-boots
-big_query_enabled = false
-Rails.application.reloader.to_prepare do
-  big_query_enabled = FeatureFlag.active?(:send_web_requests_to_big_query)
-end
-
-if big_query_enabled
+if FeatureFlag.active?(:send_web_requests_to_big_query)
   # Validate that the JSON key exists and that it is parseable.
   raise 'BigQuery JSON key missing. Disable feature if not sending events to BigQuery.' if BIG_QUERY_API_JSON_KEY.blank?
 
