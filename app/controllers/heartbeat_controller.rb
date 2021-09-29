@@ -21,7 +21,7 @@ class HeartbeatController < ActionController::API
 private
 
   def api_alive?
-    response = HTTParty.get("#{Settings.teacher_training_api.base_url}/healthcheck")
+    response = Faraday.get("#{Settings.teacher_training_api.base_url}/healthcheck")
     response.success?
   rescue StandardError
     false
