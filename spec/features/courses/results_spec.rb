@@ -5,10 +5,17 @@ describe 'Search results', type: :feature do
   include StubbedRequests::Subjects
 
   let(:results_page) { PageObjects::Page::Results.new }
+  let(:accrediting_provider) { build(:provider) }
+  let(:decorated_course) { course.decorate }
+  let(:courses) { [course] }
+  let(:page_index) { nil }
+  let(:stub_courses_request) do
+    stub_courses(query: base_parameters, course_count: 10)
+  end
 
   let(:base_parameters) { results_page_parameters }
 
-  let(:subject) do
+  subject do
     build(
       :subject,
       :english,
@@ -16,16 +23,6 @@ describe 'Search results', type: :feature do
       bursary_amount: '4000',
       early_career_payments: '1000',
     )
-  end
-
-  let(:accrediting_provider) { build(:provider) }
-  let(:decorated_course) { course.decorate }
-  let(:courses) { [course] }
-
-  let(:page_index) { nil }
-
-  let(:stub_courses_request) do
-    stub_courses(query: base_parameters, course_count: 10)
   end
 
   before do

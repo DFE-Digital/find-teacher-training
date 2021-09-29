@@ -14,7 +14,7 @@ describe ProviderDecorator do
   let(:decorated_provider) { provider.decorate }
 
   describe '#website' do
-    let(:subject) { decorated_provider.website }
+    subject { decorated_provider.website }
 
     context 'with website' do
       it { is_expected.to eq('http://www.acmescitt.com') }

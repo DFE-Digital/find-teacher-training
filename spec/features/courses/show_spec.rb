@@ -14,6 +14,8 @@ describe 'Course show', type: :feature do
       can_sponsor_skilled_worker_visa: false,
     )
   end
+  let(:accrediting_provider) { build(:provider) }
+  let(:decorated_course) { course.decorate }
 
   let(:course) do
     build(
@@ -69,7 +71,7 @@ describe 'Course show', type: :feature do
 
   let(:course_page) { PageObjects::Page::Course.new }
 
-  let(:subject) do
+  subject do
     build(
       :subject,
       :english,
@@ -78,9 +80,6 @@ describe 'Course show', type: :feature do
       early_career_payments: '1000',
     )
   end
-
-  let(:accrediting_provider) { build(:provider) }
-  let(:decorated_course) { course.decorate }
 
   before do
     stub_api_v3_resource(
