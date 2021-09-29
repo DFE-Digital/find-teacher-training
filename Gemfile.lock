@@ -495,6 +495,7 @@ DEPENDENCIES
   erb_lint
   factory_bot_rails
   faker
+  faraday
   foreman
   geocoder
   geokit
@@ -536,7 +537,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
-  tzinfo-data
   view_component
   web-console (>= 3.3.0)
   webdrivers (~> 4.6)

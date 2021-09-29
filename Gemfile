@@ -10,7 +10,8 @@ gem 'pkg-config', '~> 1.4.6'
 # Decorate logic to keep it of the views and helper methods
 gem 'draper'
 
-# Keep-Alive a http connection
+# HTTP client library
+gem 'faraday'
 gem 'net-http-persistent'
 
 # Semantic Logger makes logs pretty
