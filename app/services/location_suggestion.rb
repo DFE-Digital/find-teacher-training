@@ -1,16 +1,12 @@
 class LocationSuggestion
-  include HTTParty
-
-  base_uri Settings.google.places_api_host
-
   class << self
     def suggest(input)
       query = build_query(input)
 
-      response = get("#{Settings.google.places_api_path}?#{query.to_query}")
+      response = connection.get("#{Settings.google.places_api_path}?#{query.to_query}").body
 
       if response['predictions'].present?
-        JSON.parse(response.body)['predictions']
+        response['predictions']
           .map(&format_prediction)
           .take(5)
       elsif response['error_message'].present?
@@ -19,6 +15,13 @@ class LocationSuggestion
     end
 
   private
+
+    def connection
+      Faraday.new(Settings.google.places_api_host) do |f|
+        f.adapter :net_http_persistent
+        f.response :json
+      end
+    end
 
     def format_prediction
       lambda do |prediction|
