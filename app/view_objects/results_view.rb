@@ -1,7 +1,6 @@
 require 'geokit'
 
 class ResultsView
-  include CsharpRailsSubjectConversionHelper
   include ActionView::Helpers::NumberHelper
 
   MAXIMUM_NUMBER_OF_SUBJECTS = 43

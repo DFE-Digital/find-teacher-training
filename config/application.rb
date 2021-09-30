@@ -9,6 +9,7 @@ require 'active_job/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
 require 'view_component/engine'
+require './app/middleware/csharp_subject_conversion_middleware'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -30,6 +31,7 @@ module FindTeacherTraining
 
     # https://thoughtbot.com/blog/content-compression-with-rack-deflater
     config.middleware.use Rack::Deflater
+    config.middleware.use CsharpSubjectConversionMiddleware
 
     config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
 
