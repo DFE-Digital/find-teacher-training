@@ -35,6 +35,8 @@ export const request = endpoint => {
 const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
   const $input = document.getElementById(input);
   const $el = document.getElementById(element);
+  if (!$el) return;
+
   const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
   const suggestionTemplate = result =>
     typeof result === "string" ? result : result && `${result.name} (${result.code})`;

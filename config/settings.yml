@@ -25,3 +25,4 @@ feature_flags:
   maintenance_mode: false
   maintenance_banner: false
   cache_courses: false
+  provider_autocomplete: true
