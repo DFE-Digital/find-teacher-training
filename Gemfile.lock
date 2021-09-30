@@ -221,9 +221,6 @@ GEM
       deep_merge (~> 1.2.1)
     hashdiff (1.0.1)
     html_tokenizer (0.0.7)
-    httparty (0.19.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -267,16 +264,14 @@ GEM
     marcel (1.0.1)
     memoist (0.16.2)
     method_source (1.0.0)
-    mime-types (3.3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0901)
     mini_mime (1.1.1)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
-    multi_xml (0.6.0)
     multipart-post (2.1.1)
+    net-http-persistent (4.0.1)
+      connection_pool (~> 2.2)
     nio4r (2.5.8)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
@@ -385,9 +380,8 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
-    rubocop-rspec (2.4.0)
-      rubocop (~> 1.0)
-      rubocop-ast (>= 1.1.0)
+    rubocop-rspec (2.5.0)
+      rubocop (~> 1.19)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubypants (0.7.1)
@@ -455,7 +449,7 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
-    unicode-display_width (2.0.0)
+    unicode-display_width (2.1.0)
     view_component (2.36.0)
       activesupport (>= 5.0.0, < 8.0)
       method_source (~> 1.0)
@@ -501,13 +495,13 @@ DEPENDENCIES
   erb_lint
   factory_bot_rails
   faker
+  faraday
   foreman
   geocoder
   geokit
   google-cloud-bigquery
   govuk-components (~> 2.0.1)
   govuk_design_system_formbuilder (~> 2.7.4)
-  httparty
   json-schema
   json_api_client
   jsonapi-deserializable
@@ -516,6 +510,7 @@ DEPENDENCIES
   kaminari
   launchy
   listen (>= 3.0.5, < 3.8)
+  net-http-persistent
   pkg-config (~> 1.4.6)
   pry-byebug
   puma (~> 5.5)
@@ -542,7 +537,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
-  tzinfo-data
   view_component
   web-console (>= 3.3.0)
   webdrivers (~> 4.6)

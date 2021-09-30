@@ -10,8 +10,9 @@ gem 'pkg-config', '~> 1.4.6'
 # Decorate logic to keep it of the views and helper methods
 gem 'draper'
 
-# http client
-gem 'httparty'
+# HTTP client library
+gem 'faraday'
+gem 'net-http-persistent'
 
 # Semantic Logger makes logs pretty
 gem 'rails_semantic_logger'
@@ -155,6 +156,3 @@ group :test do
   # Control time
   gem 'timecop'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

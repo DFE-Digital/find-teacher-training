@@ -1,4 +1,6 @@
 class SendEventToBigQueryJob < ApplicationJob
+  self.logger = ActiveSupport::TaggedLogging.new(Logger.new(IO::NULL))
+
   def perform(request_event_json)
     bq = Google::Cloud::Bigquery.new(project: Settings.google.big_query.project_id)
     dataset = bq.dataset(Settings.google.big_query.dataset, skip_lookup: true)

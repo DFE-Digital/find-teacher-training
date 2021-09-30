@@ -14,6 +14,8 @@ class SwitcherController < ApplicationController
 private
 
   def redirect_to_homepage_if_in_production
-    redirect_to root_path if Rails.env.production?
+    # rubocop:disable Rails/UnknownEnv
+    redirect_to root_path if Rails.env.production? || Rails.env.loadtest?
+    # rubocop:enable Rails/UnknownEnv
   end
 end
