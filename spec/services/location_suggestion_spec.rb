@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe LocationSuggestion do
-  describe '#suggest' do
+  describe '.suggest' do
     let(:location1) { 'Cardiff, UK' }
     let(:location2) { 'Cardiff Road, Newport, UK' }
     let(:location3) { 'Cardiff House, Peckham Park Road, London, UK' }
@@ -25,11 +25,15 @@ describe LocationSuggestion do
     let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
 
     let(:location_suggestions) do
-      LocationSuggestion.suggest(query)
+      suggest!
     end
 
     let(:query_stub) do
       stub_query(predictions: predictions)
+    end
+
+    def suggest!
+      LocationSuggestion.suggest(query)
     end
 
     def stub_query(status: 200, predictions: {}, error_message: nil)
@@ -57,6 +61,28 @@ describe LocationSuggestion do
           expect(location_suggestions.first).to eq('Cardiff')
           expect(location_suggestions.second).to eq('Cardiff Road, Newport')
           expect(location_suggestions.last).to eq('Cardiff House, Peckham Park Road, London')
+        end
+      end
+    end
+
+    context 'caching' do
+      before do
+        query_stub
+      end
+
+      it 'caches suggestions for a period of time' do
+        result = suggest!
+        expect(result.count).to eq 3
+        expect(query_stub).to have_been_requested.once
+
+        cached_result = suggest!
+        expect(cached_result.count).to eq(3)
+        expect(query_stub).to have_been_requested.once # no API call this time
+
+        Timecop.travel(Time.zone.now + 30.minutes) do
+          subsequent_result = suggest!
+          expect(subsequent_result.count).to eq(3)
+          expect(query_stub).to have_been_requested.twice
         end
       end
     end
