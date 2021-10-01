@@ -2,7 +2,7 @@
 
 require 'site_prism'
 require 'simplecov'
-require './app/lib/redis'
+require './app/lib/redis_service'
 
 SimpleCov.minimum_coverage 95
 SimpleCov.start 'rails' do
