@@ -101,12 +101,15 @@
                   </span>
                   <% end %>
                 <% end %>
-                <%= form.text_field :query,
-                                    id: 'provider',
-                                    value: params[:query],
-                                    class: 'govuk-input',
-                                    data: { qa: 'provider-search' } %>
-                <div id="provider-autocomplete" class="govuk-body"></div>
+                <%= form.text_field(
+                  :query,
+                  id: 'provider',
+                  value: params[:query],
+                  class: 'govuk-input',
+                  data: { qa: 'provider-search' } ) %>
+                <% if FeatureFlag.active?(:provider_autocomplete) %>
+                  <div id="provider-autocomplete" class="govuk-body"></div>
+                <% end %>
               </div>
             </div>
           </div>
