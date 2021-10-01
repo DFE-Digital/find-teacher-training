@@ -23,24 +23,21 @@ describe LocationSuggestion do
       }.to_query
     end
     let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
-
-    let(:location_suggestions) do
-      suggest!
-    end
-
-    let(:query_stub) do
-      stub_query(predictions: predictions)
-    end
+    let(:location_suggestions) { suggest! }
+    let(:query_stub) { stub_query(predictions: predictions) }
 
     def suggest!
       LocationSuggestion.suggest(query)
     end
 
-    def stub_query(status: 200, predictions: {}, error_message: nil)
+    def stub_query(status: 200, predictions: [], error_message: nil)
+      body = { predictions: predictions }
+      body[:error_message] = error_message if error_message.present?
+
       stub_request(:get, url)
         .to_return(
           status: status,
-          body: { error_message: error_message, predictions: predictions }.to_json,
+          body: body.to_json,
           headers: { 'Content-Type': 'application/json' },
         )
     end
@@ -66,9 +63,7 @@ describe LocationSuggestion do
     end
 
     context 'caching' do
-      before do
-        query_stub
-      end
+      before { query_stub }
 
       it 'caches suggestions for a period of time' do
         result = suggest!
@@ -85,6 +80,30 @@ describe LocationSuggestion do
           expect(query_stub).to have_been_requested.twice
         end
       end
+
+      it 'caches nothing when the API returns an empty result' do
+        stub_query(predictions: [])
+        result = suggest!
+
+        expect(result).to be_nil
+        expect(Rails.cache.instance_variable_get(:@data)).to eq({})
+      end
+
+      it 'caches nothing when the API returns a bad HTTP status' do
+        stub_query(status: 500)
+        result = suggest!
+
+        expect(result).to be_nil
+        expect(Rails.cache.instance_variable_get(:@data)).to eq({})
+      end
+
+      it 'caches nothing when the API returns an error' do
+        stub_query(error_message: 'Something went wrong')
+        result = suggest!
+
+        expect(result).to be_nil
+        expect(Rails.cache.instance_variable_get(:@data)).to eq({})
+      end
     end
 
     context 'with an error message in the body' do
@@ -92,13 +111,30 @@ describe LocationSuggestion do
 
       before do
         allow(Sentry).to receive(:capture_message)
+        stub_query(error_message: error_message)
       end
 
       it 'sends a sentry error with the received error_message' do
-        stub_query(error_message: error_message)
-        location_suggestions
+        suggest!
 
-        expect(Sentry).to have_received(:capture_message).with(message: error_message)
+        expect(Sentry).to have_received(:capture_message).with(
+          "Google Places API error - status: 200, body: {\"predictions\"=>[], \"error_message\"=>\"#{error_message}\"}",
+        )
+      end
+    end
+
+    context 'unsuccessful request' do
+      before do
+        allow(Sentry).to receive(:capture_message)
+        stub_query(status: 500)
+      end
+
+      it 'sends a sentry error' do
+        suggest!
+
+        expect(Sentry).to have_received(:capture_message).with(
+          'Google Places API error - status: 500, body: {"predictions"=>[]}',
+        )
       end
     end
 
@@ -117,16 +153,6 @@ describe LocationSuggestion do
 
       it 'returns a maximum of 5 suggestions' do
         expect(location_suggestions.count).to eq(5)
-      end
-    end
-
-    context 'unsuccessful request' do
-      before do
-        stub_query(status: 500)
-      end
-
-      it 'returns nothing' do
-        expect(location_suggestions).to be_nil
       end
     end
   end
