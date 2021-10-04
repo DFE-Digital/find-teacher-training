@@ -102,6 +102,7 @@ production: ## Set DEPLOY_ENV to production
 	$(eval env=prod)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval space=bat-prod)
+	$(eval HOSTNAME=www)
 
 .PHONY: sandbox
 sandbox: ## Set DEPLOY_ENV to production
@@ -155,3 +156,19 @@ console:
 destroy: deploy-init
 	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
 		&& terraform destroy -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
+
+enable-maintenance: ## make qa enable-maintenance / make prod enable-maintenance CONFIRM_PRODUCTION=y
+	$(if $(HOSTNAME), $(eval REAL_HOSTNAME=${HOSTNAME}), $(eval REAL_HOSTNAME=${APP_ENV}))
+	cf target -s ${SPACE}
+	cd service_unavailable_page && cf push
+	cf map-route find-unavailable find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+	echo Waiting 5s for route to be registered... && sleep 5
+	cf unmap-route find-${APP_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+
+disable-maintenance: ## make qa disable-maintenance / make prod disable-maintenance CONFIRM_PRODUCTION=y
+	$(if $(HOSTNAME), $(eval REAL_HOSTNAME=${HOSTNAME}), $(eval REAL_HOSTNAME=${APP_ENV}))
+	cf target -s ${SPACE}
+	cf map-route find-${APP_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+	echo Waiting 5s for route to be registered... && sleep 5
+	cf unmap-route find-unavailable find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+	cf delete -rf find-unavailable
