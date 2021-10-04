@@ -9,3 +9,5 @@ valid_referers:
 feature_flags:
   send_web_requests_to_big_query: true
   cache_courses: true
+  provider_autocomplete: false
+  bursaries_and_scholarships_announced: false
