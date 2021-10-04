@@ -26,8 +26,10 @@
       <% end %>
     <% end %>
 
-    <dt class="app-description-list__label">Financial support</dt>
-    <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+    <% if FeatureFlag.active?(:bursaries_and_scholarships_announced) %>
+      <dt class="app-description-list__label">Financial support</dt>
+      <dd data-qa="course__funding_options"><%= course.decorate.funding_option %></dd>
+    <% end %>
 
     <% if show_visa_sponsorship_and_degree_required? %>
       <dt class="app-description-list__label">Degree required</dt>
