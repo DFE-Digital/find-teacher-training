@@ -25,13 +25,20 @@ RSpec.feature 'Results page new SEND filter' do
     before do
       stub_courses(
         query: base_parameters.merge(
+          'filter[subjects]' => '00',
+        ),
+        course_count: 10,
+      )
+      stub_courses(
+        query: base_parameters.merge(
           'filter[send_courses]' => 'true',
           'filter[study_type]' => 'full_time,part_time',
+          'filter[subjects]' => '00',
         ),
         course_count: 10,
       )
 
-      results_page.load
+      visit results_path(subject_codes: ['00'])
       results_page.send_filter.checkbox.check
       results_page.apply_filters_button.click
     end
@@ -52,6 +59,7 @@ RSpec.feature 'Results page new SEND filter' do
             'degree_required' => 'show_all_courses',
             'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
             'senCourses' => 'true',
+            'subject_codes' => ['00'],
           },
         )
       end
