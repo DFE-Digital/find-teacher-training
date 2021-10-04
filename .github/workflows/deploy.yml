@@ -114,6 +114,27 @@ jobs:
           IMAGE_TAG :               ${{ github.event.inputs.sha }}
           CONFIRM_PRODUCTION:       yes
 
+      - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
+        uses: benc-uk/workflow-dispatch@v1.1
+        with:
+          workflow: Smoke Tests
+          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          inputs: '{"environment": "${{ env.DEPLOY_ENV }}", "pr": "${{ env.PR_NUMBER }}"}'
+
+      - name: Wait for smoke tests
+        id: wait_for_smoke_tests
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        with:
+          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          checkName: smoke-tests-${{ env.DEPLOY_ENV }}
+          ref: ${{ github.ref }}
+          timeoutSeconds: 300
+          intervalSeconds: 15
+
+      - name: Stop when smoke tests fail
+        if:  steps.wait_for_smoke_tests.outputs.conclusion == 'failure'
+        run: exit 1
+
       - name: Update ${{ matrix.environment }} status
         if: ${{ always() }}
         uses: bobheadxi/deployments@v0.6.0
