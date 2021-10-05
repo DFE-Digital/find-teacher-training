@@ -92,23 +92,33 @@
             <div class="govuk-radios__conditional <%= 'govuk-radios__conditional--hidden' unless params[:l] == '3' %>"
               id="query-container" data-qa="by-provider-conditional">
               <div class="govuk-form-group <%= 'govuk-form-group--error' if provider_error? %>" data-module="track-no-provider-results">
-                <%= form.label :query, { class: 'govuk-label', for: 'provider' } do %>
-                  School, university or other training provider
-                  <span class="govuk-hint">Enter the name or provider code</span>
-                  <% if provider_error? %>
+                <% if FeatureFlag.active?(:cache_providers) %>
+                  <%= form.govuk_collection_select(
+                    :query,
+                    select_provider_options,
+                    :id,
+                    :name,
+                    label: { text: 'School, university or other training provider'},
+                    hint: { text: 'Enter the name or provider code'}
+                  ) %>
+                <% else %>
+                  <%= form.label :query, { class: 'govuk-label', for: 'provider' } do %>
+                    School, university or other training provider
+                    <span class="govuk-hint">Enter the name or provider code</span>
+                    <% if provider_error? %>
                     <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
                   </span>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <%= form.text_field(
-                  :query,
-                  id: 'provider',
-                  value: params[:query],
-                  class: 'govuk-input',
-                  data: { qa: 'provider-search' } ) %>
-                <% if FeatureFlag.active?(:provider_autocomplete) %>
-                  <div id="provider-autocomplete" class="govuk-body"></div>
+                  <%= form.text_field :query,
+                    id: 'provider',
+                    value: params[:query],
+                    class: 'govuk-input',
+                    data: { qa: 'provider-search' } %>
+                  <% if FeatureFlag.active?(:provider_autocomplete) %>
+                    <div id="provider-autocomplete" class="govuk-body"></div>
+                  <% end %>
                 <% end %>
               </div>
             </div>

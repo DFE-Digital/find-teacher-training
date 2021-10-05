@@ -6,3 +6,4 @@ log_level: debug
 redis_url: redis://localhost:6379/0
 feature_flags:
   cache_courses: true
+  cache_providers: true

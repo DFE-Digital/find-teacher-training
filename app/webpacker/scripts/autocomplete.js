@@ -62,7 +62,7 @@ const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
       $input.parentNode.removeChild($input);
     }
   } catch(err) {
-    console.error("Failed to initialise provider autocomplete:", err);
+    console.error(`Failed to initialise ${input} autocomplete:`, err);
   }
 };
 
