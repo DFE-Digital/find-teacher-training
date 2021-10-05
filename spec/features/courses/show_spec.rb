@@ -183,8 +183,33 @@ describe 'Course show', type: :feature do
 
       expect(course_page.financial_support_details).to have_content('Financial support from the training provider')
 
-      expect(course_page.required_qualifications).to have_content(
+      expect(course_page.required_qualifications).not_to have_content(
         course.required_qualifications,
+      )
+
+      expect(course_page).to have_international_students
+      expect(course_page.international_students).to have_content(
+        'We can sponsor Student visas, but this is not guaranteed.',
+      )
+
+      expect(course_page.required_qualifications).to have_content(
+        'Grade 4 (C) or above in English and maths, or equivalent qualification.',
+      )
+      expect(course_page.required_qualifications).to have_content(
+        'We’ll consider candidates with pending GCSEs.',
+      )
+      expect(course_page.required_qualifications).to have_content(
+        'We’ll consider candidates who need to take a GCSE equivalency test in English.',
+      )
+      expect(course_page.required_qualifications).to have_content(
+        'You need to work hard',
+      )
+
+      expect(course_page.required_qualifications).to have_content(
+        '2:1 or above, or equivalent.',
+      )
+      expect(course_page.required_qualifications).to have_content(
+        'Certificate must be print in blue ink',
       )
 
       expect(course_page.personal_qualities).to have_content(
@@ -202,8 +227,6 @@ describe 'Course show', type: :feature do
       expect(course_page.about_accrediting_body).to have_content(
         course.about_accrediting_body,
       )
-
-      expect(course_page).not_to have_international_students
 
       expect(course_page.train_with_disability).to have_content(
         provider.train_with_disability,
@@ -242,41 +265,6 @@ describe 'Course show', type: :feature do
       expect(course_page).not_to have_end_of_cycle_notice
 
       expect(course_page.feedback_link[:href]).to eq('https://www.apply-for-teacher-training.service.gov.uk/candidate/find-feedback?path=/course/T92/X130&find_controller=courses')
-    end
-
-    context 'from the 2022 recruitment cycle' do
-      let(:recruitment_cycle_year) { 2022 }
-
-      it 'shows the course show page with the international students section' do
-        expect(course_page).to have_international_students
-        expect(course_page.international_students).to have_content(
-          'We can sponsor Student visas, but this is not guaranteed.',
-        )
-      end
-
-      it 'shows the course show page with structured GCSE requirements' do
-        expect(course_page.required_qualifications).to have_content(
-          'Grade 4 (C) or above in English and maths, or equivalent qualification.',
-        )
-        expect(course_page.required_qualifications).to have_content(
-          'We’ll consider candidates with pending GCSEs.',
-        )
-        expect(course_page.required_qualifications).to have_content(
-          'We’ll consider candidates who need to take a GCSE equivalency test in English.',
-        )
-        expect(course_page.required_qualifications).to have_content(
-          'You need to work hard',
-        )
-      end
-
-      it 'shows the course show page with structured degree requirements' do
-        expect(course_page.required_qualifications).to have_content(
-          '2:1 or above, or equivalent.',
-        )
-        expect(course_page.required_qualifications).to have_content(
-          'Certificate must be print in blue ink',
-        )
-      end
     end
 
     context 'End of cycle' do
