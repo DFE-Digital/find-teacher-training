@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": "16245",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "26F",
+        "provider_name": "Working together"
+      }
+    },
+    {
+      "id": "15608",
+      "type": "providers",
+      "attributes": {
+        "provider_code": "1ZT",
+        "provider_name": "Worlingham Church of England Voluntary Controlled Primary School"
+      }
+    }
+  ],
+  "jsonapi": {
+    "version": "1.0"
+  }
+}
