@@ -66,8 +66,7 @@ describe 'Course show', type: :feature do
     )
   end
 
-  let(:recruitment_cycle_year) { 2021 }
-  let(:current_recruitment_cycle) { build :recruitment_cycle, year: recruitment_cycle_year }
+  let(:current_recruitment_cycle) { build :recruitment_cycle, year: RecruitmentCycle.current_year }
 
   let(:course_page) { PageObjects::Page::Course.new }
 
