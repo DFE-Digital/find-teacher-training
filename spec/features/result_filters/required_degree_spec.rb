@@ -26,7 +26,7 @@ RSpec.feature 'Results page required degree filter' do
       before do
         stub_courses(
           query: base_parameters.merge(
-            'filter[degree_grade]' => 'two_two,third_class,not_required',
+            'filter[degree_grade]' => 'two_one,two_two',
             'filter[study_type]' => 'full_time,part_time',
           ),
           course_count: 10,
@@ -60,7 +60,7 @@ RSpec.feature 'Results page required degree filter' do
       before do
         stub_courses(
           query: base_parameters.merge(
-            'filter[degree_grade]' => 'third_class,not_required',
+            'filter[degree_grade]' => 'two_one,two_two,third_class',
             'filter[study_type]' => 'full_time,part_time',
           ),
           course_count: 10,
@@ -94,7 +94,7 @@ RSpec.feature 'Results page required degree filter' do
       before do
         stub_courses(
           query: base_parameters.merge(
-            'filter[degree_grade]' => 'not_required',
+            'filter[degree_grade]' => 'two_one,two_two,third_class,not_required',
             'filter[study_type]' => 'full_time,part_time',
           ),
           course_count: 10,

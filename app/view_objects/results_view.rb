@@ -400,11 +400,11 @@ private
 
     case degree_required_parameter
     when 'two_two'
-      'two_two,third_class,not_required'
+      'two_one,two_two'
     when 'third_class'
-      'third_class,not_required'
+      'two_one,two_two,third_class'
     when 'not_required'
-      'not_required'
+      'two_one,two_two,third_class,not_required'
     end
   end
 
