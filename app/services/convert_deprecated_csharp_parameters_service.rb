@@ -1,7 +1,7 @@
 class ConvertDeprecatedCsharpParametersService
   def call(parameters:)
     boolean_parameter_names = %w[fulltime hasvacancies parttime senCourses]
-    array_parameter_names = %w[qualifications subjects]
+    array_parameter_names = %w[qualifications subjects subject_codes]
 
     have_legacy_params = false
     params_hash = parameters

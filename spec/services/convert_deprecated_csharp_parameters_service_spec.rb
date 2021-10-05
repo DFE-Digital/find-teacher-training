@@ -13,6 +13,7 @@ RSpec.describe ConvertDeprecatedCsharpParametersService do
         'senCourses' => 'True',
         'qualifications' => 'QtsOnly,PgdePgceWithQts,Other',
         'subjects' => '1,2,3',
+        'subject_codes' => { '0' => '00' },
       }
     end
 
@@ -28,6 +29,7 @@ RSpec.describe ConvertDeprecatedCsharpParametersService do
         'senCourses' => true,
         'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
         'subjects' => %w[1 2 3],
+        'subject_codes' => ['00'],
       })
     end
   end
