@@ -26,7 +26,6 @@ describe 'Search results', type: :feature do
   end
 
   before do
-    activate_feature(:bursaries_and_scholarships_announced)
     stub_subjects
     stub_courses_request
 
@@ -50,15 +49,6 @@ describe 'Search results', type: :feature do
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
         expect(first_course.main_address.text).to eq('Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA')
         expect(first_course).not_to have_show_vacancies
-      end
-    end
-
-    context 'with the bursaries_and_scholarships_announced flag inactive' do
-      it 'does not return any funding options' do
-        deactivate_feature(:bursaries_and_scholarships_announced)
-        visit results_path(page: page_index)
-
-        expect(page).not_to have_content 'Student finance if you’re eligible'
       end
     end
   end
