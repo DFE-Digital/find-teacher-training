@@ -852,9 +852,9 @@ describe ResultsView do
       end
     end
 
-    context 'where there are 10 results' do
+    context 'where there are 30 results' do
       before do
-        stub_request_with_meta_count(10)
+        stub_request_with_meta_count(30)
       end
 
       it 'returns 1 page' do
@@ -862,9 +862,9 @@ describe ResultsView do
       end
     end
 
-    context 'where there are 20 results' do
+    context 'where there are 60 results' do
       before do
-        stub_request_with_meta_count(20)
+        stub_request_with_meta_count(60)
       end
 
       it 'returns 2 pages' do

@@ -7,7 +7,7 @@ class ResultsView
   DISTANCE = '2'.freeze
   SUGGESTED_SEARCH_THRESHOLD = 3
   MAXIMUM_NUMBER_OF_SUGGESTED_LINKS = 2
-  RESULTS_PER_PAGE = 10
+  RESULTS_PER_PAGE = 30
   MILES = '50'.freeze
 
   def initialize(query_parameters:)
