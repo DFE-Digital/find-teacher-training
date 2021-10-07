@@ -8,7 +8,7 @@
 
     <% if course.degree_subject_requirements.present? %>
       <p class="govuk-body">
-        <%= course.degree_subject_requirements %>
+        <%= helpers.markdown(course.degree_subject_requirements) %>
       </p>
     <% end %>
 
@@ -26,7 +26,7 @@
 
     <% if course.additional_gcse_equivalencies.present? %>
       <p class="govuk-body">
-        <%= course.additional_gcse_equivalencies %>
+        <%= helpers.markdown(course.additional_gcse_equivalencies) %>
       </p>
     <% end %>
   </div>
