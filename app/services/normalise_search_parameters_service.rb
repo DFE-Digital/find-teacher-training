@@ -25,7 +25,7 @@ class NormaliseSearchParametersService
       return { deprecated: true, parameters: params_hash }
     end
 
-    return { deprecated: false, parameters: params_hash }
+    { deprecated: false, parameters: params_hash }
   end
 
 private
@@ -50,4 +50,3 @@ private
     boolean == 'True'
   end
 end
-
