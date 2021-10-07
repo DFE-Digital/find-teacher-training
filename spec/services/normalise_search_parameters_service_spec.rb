@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ConvertDeprecatedCsharpParametersService do
+RSpec.describe NormaliseSearchParametersService do
   let(:service) { described_class.new }
   let(:service_call) { service.call(parameters: input_parameters) }
 

@@ -1,16 +1,16 @@
 class DeprecatedParametersService
   def initialize(parameters:)
     @original_parameters = parameters
-    @csharp_parameter_converter = ConvertDeprecatedCsharpParametersService.new.call(parameters: params_hash)
+    @search_parameter_service = NormaliseSearchParametersService.new.call(parameters: params_hash)
   end
 
   def deprecated?
-    csharp_parameter_converter[:deprecated] || legacy_params_values?
+    search_parameter_service[:deprecated] || legacy_params_values?
   end
 
   def parameters
     if deprecated?
-      csharp_parameter_converter[:parameters]
+      search_parameter_service[:parameters]
     else
       params_hash
     end
@@ -33,5 +33,5 @@ private
     original_parameters
   end
 
-  attr_reader :original_parameters, :csharp_parameter_converter
+  attr_reader :original_parameters, :search_parameter_service
 end
