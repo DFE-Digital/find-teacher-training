@@ -1,396 +1,136 @@
 {
   "data": [
     {
-      "id": "12929485",
+      "id": "12966519",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "open_for_applications?": true,
-        "has_vacancies?": true,
+        "course_code": "H411",
+        "name": "Primary (5-11) with SEND",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "fee",
+        "level": "primary",
+        "provider_code": "1X3",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": {
+          "data": {
+            "type": "providers",
+            "id": "17837"
+          }
+        },
+        "site_statuses": {
+          "data": [
+            {
+              "type": "site_statuses",
+              "id": "22406192"
+            },
+            {
+              "type": "site_statuses",
+              "id": "22412416"
+            },
+            {
+              "type": "site_statuses",
+              "id": "22412415"
+            },
+            {
+              "type": "site_statuses",
+              "id": "22412414"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "12962220",
+      "type": "courses",
+      "attributes": {
         "course_code": "X130",
         "name": "Primary",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published_with_unpublished_changes",
-        "ucas_status": "running",
         "funding_type": "fee",
         "level": "primary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": "equivalence_test",
-        "gcse_subjects_required": [
-          "maths",
-          "english",
-          "science"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": null,
-        "accrediting_provider_code": null,
-        "changed_at": "2019-11-11T11:41:29.292Z",
-        "start_date": "September 2020",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-11-06T20:27:55Z",
-        "about_accrediting_body": null,
         "provider_code": "T92",
-        "recruitment_cycle_year": "2020",
-        "about_course": "SCITT (School Centred Initial Teacher Training) is a school-based route into becoming a qualified teacher and achieving QTS. The course lasts for one year full-time, from September to July. Most of the course is spent in school, where successful applicants are placed in a class under the supervision and guidance of a mentor.\r\n\r\nTrainees will complete their year’s training at [Oakthorpe Primary School](https://www.oakthorpe.enfield.sch.uk/), an Ofsted graded ‘outstanding’ school situated in the London Borough of Enfield. \r\n\r\n\r\nAll trainees on the 2Schools Consortium SCITT Programme have the opportunity to work towards a PGCE (Primary Education) award which will be validated by the University of East London as well as Qualified Teacher Status (awarded by 2Schools Consortium, the Teacher Training provider). \r\n\r\nTRAINING SESSIONS\r\nTrainees will be required to attend a weekly face-to-face training session (during the Autumn and Spring term at Hazelwood Sports Centre and 2 at UEL Startford campus) delivered  by a range of experienced teachers, outstanding practitioners and leading figures in their field.\r\n\r\nASSESSMENT\r\n\r\n\r\nTeaching is assessed against Qualified Teacher Status (QTS) Standards, on three teaching practices across two school placements. \r\n\r\nAssessment of the teaching is carried out regularly through observations of lessons, discussion and feedback on academic tasks and assignments.\r\n\r\nA personalised training plan guides the trainee through weekly expectations of their learning through class based activities, tasks and assignments and out of school training.\r\n\r\nCOURSE TIMETABLE\r\n\r\nTerm 1:        \r\n\r\n* 4 days per week in school, observing and shadowing the class teacher, increasing to teaching 4 sessions per week by the end of term\r\n\r\n* Every Thursday- training all day\r\n\r\n* 2 academic assignments and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 2:        \r\n\r\n* 4 days per week in school in a different Key Stage, then in a different school (contrasting setting) observing and shadowing class teacher, increasing to 3-4 days teaching\r\n\r\n* Most Thursdays- training all day\r\n\r\n* 1 academic assignment and weekly academic tasks \r\n\r\n* Collation of evidence for Standards files \r\n\r\nTerm 3: \r\n\r\n* 5 days teaching up to 85% of the week in main placement school.\r\nTraining will take place up to 3 times over the course of the term\r\n\r\n* Collation of evidence for Standards files \r\n\r\n* Final moderation consisting of one lesson observation, discussion and scrutiny of Standards Files\r\n\r\nIf you would like to find out more or have questions please contact us by [post, phone, fax or email](http://www.2schools.org/foo/).\r\n",
-        "course_length": "OneYear",
-        "fee_details": null,
-        "fee_international": null,
-        "fee_uk_eu": 9000,
-        "financial_support": null,
-        "how_school_placements_work": "Most of the course is spent at the main placement school, Oakthorpe Primary School (children age 3-11) in a class under the supervision and guidance of an experienced and supportive mentor (often the class teacher or a senior member of the school’s staff).\r\nTrainees on the course can choose to focus on EYFS and KS1 (3-7) or KS1 and 2 (5-11) but all trainees will be exposed to the primary curriculum and the focai are flexible.\r\n\r\nThe course will include a minimum of three placements/practices. One of these practices will take place in a partnership school and in a different Key Stage. Our partnership includes around 40 schools across North London and regularly expands. \r\n\r\nExperience in school progresses from observing and working alongside the class teacher, to taking full responsibility, initially for individuals and groups, and later, for a whole class.\r\n\r\nThroughout this experience trainees acquire the skills, knowledge and understanding of the range of elements which make an outstanding teacher, as specified in the Teachers’ Standards; from developing good relationships with children that promote learning, with other colleagues to working within a framework and national and school policies to deliver the Curriculum.",
-        "interview_process": "Applicants are shortlisted by the training team according to a scoring system against our (person specification)[http://www.2schools.org/scitt/what-are-we-looking-for/].\r\nCandidates invited to interview must take the numeracy and literacy skills tests and the interview is subject to passing both tests.\r\n\r\nINTERVIEW DAY\r\n\r\nShortlisted candidates are invited to spend the day at Oakthorpe Primary School.\r\n\r\nThe day consists of:\r\n\r\n* Group introduction\r\n\r\n* Tour of the school\r\n\r\n* Half a day in class\r\n\r\n* Reading a story to a class (observed by class teacher/ member of school’s SLT/ Programme Leaders)\r\n\r\n* Interview with up to three members of the management board\r\n\r\n* Internally set maths and literacy tasks\r\n\r\n* Summative assessment by class teacher\r\n\r\nSuccessful applicants are then offered a place subject to:\r\n\r\n\r\n* Satisfactory completion of up to 5 days of school experience\r\n\r\n* Satisfactory criminal record (DBS) and health checks\r\n\r\n* Satisfactory references\r\n\r\nDuring the 3-5  day school experience, candidates are observed in a variety of situations and by a range of staff.  We look at their approach to teamwork, relationships with staff and children, professionalism, flexibility and initiative during this period.\r\n\r\nObservations made by class teachers and the training managers, applications, interviews, subject audits, and trainees self-audit of prior experience, all inform the needs analysis and development of a training plan once the candidate is registered on the course.",
-        "other_requirements": "\r\nSatisfactory criminal record (DBS) check.\r\nApplicants will need two references that meet safer recruitment requirements.\r\nAll offers of appointment into the profession are conditional upon the satisfactory outcome of a health questionnaire.",
-        "personal_qualities": "* Ability to work on own initiative and manage own work load \r\n\r\n* Ability to combine work and study\r\n\r\n* Ability to work co-operatively and effectively with colleagues\r\n\r\n* Ability to build relationships with children that promote learning\r\n\r\n* Clear and accurate verbal and written communication skills\r\n\r\n* An interest in and enjoyment of working with children \r\n\r\n* Ability to reflect on own practice and learning and listen to advice \r\n\r\n* An understanding of children’s needs\r\n\r\n* An understanding of the professional boundaries related to child protection procedures\r\n\r\n* Willingness to implement and promote equal opportunities policies\r\n",
-        "required_qualifications": "\r\n* Degree from a United Kingdom Higher education institution or equivalent, passed at 2.2 or above (we may accept candidates with 3rd class degrees when they demonstrate the subject knowledge and personal qualities required to start a teacher training course)\r\n\r\n* English, Maths and Science GCSE grade C/4 or above or the equivalent \r\n\r\nIf your qualifications were awarded abroad, you must submit proof of equivalency from NARIC with your application.",
-        "salary_details": null
+        "provider_type": "scitt"
       },
       "relationships": {
         "provider": {
           "data": {
             "type": "providers",
-            "id": "14468"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
+            "id": "17500"
           }
         },
         "site_statuses": {
           "data": [
             {
               "type": "site_statuses",
-              "id": "22329867"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "data": [
-            {
-              "type": "subjects",
-              "id": "1"
+              "id": "22397080"
             }
           ]
         }
       }
     },
     {
-      "id": "12927251",
+      "id": "12962308",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "2XNM",
-        "name": "Primary",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published_with_unpublished_changes",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "primary",
-        "is_send?": false,
-        "english": "expect_to_achieve_before_training_begins",
-        "maths": "expect_to_achieve_before_training_begins",
-        "science": "expect_to_achieve_before_training_begins",
-        "gcse_subjects_required": [
-          "maths",
-          "english",
-          "science"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13300,
-          "address4": "Derbyshire",
-          "provider_name": "University of Derby",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Admissions",
-          "year_code": "2019",
-          "provider_code": "D39",
-          "provider_type": "university",
-          "postcode": "DE22 1GB",
-          "website": "www.derby.ac.uk",
-          "address1": "University of Derby",
-          "address2": "Kedleston Road",
-          "address3": "Derby",
-          "email": "foo@bar.com",
-          "telephone": "01332 123456",
-          "region_code": null,
-          "created_at": "2019-07-19T08:17:46.070Z",
-          "updated_at": "2019-12-12T15:08:15.123Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2020-01-23T17:22:09.515Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "You’re on the threshold of making one of the most important decisions of your life - to teach!\r\n\r\nTrain to teach at Derby and you’re on your way to a worthwhile, rewarding and enjoyable career in Teaching, one where you can truly make a difference. With a rich heritage of teacher training dating back 165 years, we’re a major provider of newly qualified teachers in the East Midlands.\r\n\r\nWe have a strong reputation for nurturing successful, confident and forward-thinking teachers. Our teaching courses are highly regarded, with Ofsted awarding us an ‘Outstanding’ rating for our Primary and Further Education and Skills provision. We are also currently ranked as a Top 25 institution for our Education courses. \r\n\r\nPractical teaching experience lies at the heart of all of our teacher training courses. High-quality placements in different educational settings will build your skills in the classroom and you’ll benefit from the support of expert mentors throughout. We have partnerships with over 400 schools, so we’ll arrange your placements for you.\r\n\r\nAt Derby, you’ll discover exciting teacher training courses which will prepare you to teach the age group of your choice - primary, secondary and post-14 learners. Whether you’re embarking on your first degree, or you’re ready to study one of our PGCE courses, we offer a choice to suit you.\r\n\r\n",
-          "train_with_disability": "Our on-site Wellbeing Centre provides information and guidance to help you look after your wellbeing during your time at University.  \r\n\r\nHere, you can book appointments with our specialist advisers or contact the service through the dedicated helpline available during the week. \r\n\r\nThere’s also a free counselling service and unique workshops that you can sign up to throughout the year‌.\r\n\r\nFor general enquiries and appointment booking:\r\n\r\nTel: +44 (0)1332 593000\r\nE: studentwellbeing@derby.ac.uk\r\nE: psychologicalwellbeing@derby.ac.uk",
-          "accrediting_provider_enrichments": [],
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true,
-          "latitude": 52.9378882,
-          "longitude": -1.4971764
-        },
-        "accrediting_provider_code": "D39",
-        "changed_at": "2020-01-29T16:26:15.184Z",
-        "start_date": "September 2020",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-10-04T09:04:16Z",
-        "about_accrediting_body": "",
-        "provider_code": "2C4",
-        "recruitment_cycle_year": "2020",
-        "about_course": "From the beginning of the academic year, you will be a full member of the school and engage in all areas of school life. From day one you will be observing, working, teaching and learning in a classroom.\r\n\r\nYou will be based in your school 4 days a week where you will gradually build up your teaching time, observe examples of best practice, participate in group activities and wider professional development. You will have a dedicated mentor who will meet with you formally once a week to discuss your progress and help you succeed.\r\n\r\nOne day a week will be dedicated to your professional development with sessions delivered at both the University of Derby and at our hub sessions.\r\n\r\nThe university sessions will predominantly focus on the Masters level modules and assessment for the PGCE element. The hub sessions whilst creating a supportive community will have a strong focus on classroom based teaching and learning with lots of practical ideas for you to take away and use. The hub sessions also allows time to network with your fellow ITT colleagues and share experiences and learning.\r\n\r\n",
-        "course_length": "OneYear",
-        "fee_details": "You may be eligible for [financial support while you study, including bursaries, scholarships and loans.](https://www.gov.uk/teacher-training-funding)\r\n\r\n[Financial support if you’re from outside of the UK.](https://getintoteaching.education.gov.uk/international-candidates)",
-        "fee_international": null,
-        "fee_uk_eu": 9250,
-        "financial_support": null,
-        "how_school_placements_work": "We offer primary training in 3-7 years and 5-11.\r\n\r\nAll trainees are allocated a main placement school which they are based in during the Autumn and Summer term. During the Spring term trainees have a second placement school where they develop their skills in an alternative Key Stage. \r\n\r\nThroughout your placement, you will have a dedicated mentor who will support you and work closely with our Alliance team.\r\n\r\nInformation regarding all of our placement schools is available on our website: [Alliance Schools]( http://www.4derbyshiretsa.com)\r\n\r\nWe will consider specific requests made by you but may not be able to guarantee your first choice of placement school. Reasonable consideration will be given for travel and personal circumstances but it is not guaranteed. ",
-        "interview_process": "We have a thorough interview process to ensure that we are matching potential trainees to the right schools.\r\n\r\nOur interviews involve:\r\n\r\n* tour of the school\r\n\r\n* candidates deliver child activity (teaching)\r\n\r\n* Literacy and numeracy skills will be assessed through the university and Teaching School Alliance (TSA) in line with the DfE’s new requirements. The TSA will give you further details of this process on receipt of your application’\r\n\r\n* a formal interview\r\n\r\nFull details are provided prior to the interview.\r\n\r\n",
-        "other_requirements": "Work experience in a school is highly desirable.\r\n\r\nUniversity of Derby will complete a Disclosure and Barring Service (DBS) check, which is required at the point of accepting a place at the University.\r\n\r\nYou must also have successfully completed the National College for Teaching and Leadership’s Skills Tests in literacy and numeracy before Sunday 1 August 2019 in order to secure a place on the course. You must have registered for the tests before we can interview you. We offer Skills Test preparation days to help you to gain the knowledge to successfully complete the tests.",
-        "personal_qualities": "Demand for places on the course is very high, so you must also:\r\n\r\n* be able to communicate clearly and in spoken and written English, with a good understanding of correct grammar\r\n\r\n* meet the Secretary of State's requirements for physical and mental fitness to teach\r\n\r\n* achieve clearance from the Disclosure and Barring Service at the start of the course. You must not have previously been excluded from teaching or working with children\r\n\r\n* meet all the Department for Education entry requirements for Initial Teacher Education courses including suitability and fitness to teach checks",
-        "required_qualifications": "You must have a good UK Honours degree (preferably 2:1) or equivalent, plus grade C / grade 4 or above in GCSE Mathematics, English Language and a Science. You need to have already gained the required GCSE grades when you apply. There are currently a range of equivalences which can be accepted - please contact our Admissions team if you need clarification.",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "14252"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22326299"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "data": [
-            {
-              "type": "subjects",
-              "id": "1"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "12936237",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "AK12",
-        "name": "Art and design",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": "not_required",
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": "11_to_16",
-        "accrediting_provider": null,
-        "accrediting_provider_code": null,
-        "changed_at": "2019-11-05T10:56:06.230Z",
-        "start_date": "September 2020",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "applications_open_from": "2019-10-25",
-        "last_published_at": "2019-11-05T10:56:06Z",
-        "about_accrediting_body": null,
-        "provider_code": "2AT",
-        "recruitment_cycle_year": "2020",
-        "about_course": "Our secondary courses are designed and taught by a dedicated team of practising teachers. Each is based on developing each trainee with a bespoke plan and experience designed to make you the best teacher you can be. All programmes are an 11-16 programme with a post 16 enhancement. It is taught by practising art/design teachers, including specialist leaders of education. You will be placed in two schools for your assessed placement from across our partnership schools in West Yorkshire. The normal pattern of the year is to be in your placement school for four days per week and to attend our training programme one day per week. We have very experienced mentors who are there to guide and support trainees throughout their training year and you will have the opportunity to visit a variety of schools on training days to broaden your experience and understanding. We provide all our trainees with their own laptop during the programme and have a dedicated website for trainee support and resources. All trainees are registered with the University of Huddersfield for a  PGCE. We are looking for candidates with normally either a degree in their subject or related to it, or for candidates with a non-related degree an A level in the subject at C or above.",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": null,
-        "fee_uk_eu": 9250,
-        "financial_support": "ITT bursaries are provided by the government. We are responsible for making the bursary payments to eligible students. The bursaries are given to UK and EU students only (so you must meet the residency eligibility criteria set for statutory student finance) and depend on which ITT course subject you are studying and the degree you currently hold. To find out what bursaries are available and the eligibility criteria please visit https://getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships. You do not need to apply for a bursary, this is processed automatically upon enrolment by us.\r\n\r\nTo find out how the scholarships and bursaries are paid please visit https://getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships.  We will provide eligible students with payment information with their entitlement letter. Students will need to sign eligibility declaration forms before starting the course and during the course in order to receive payment of the bursary. ",
-        "how_school_placements_work": "Our programme places you in two schools from within the partnership across the year and you will work across two key stages; key stage 3 (11-14) and 4 (14-16) with post-16 enhancement. Our Secondary partners are based in Halifax, Huddersfield, Bradford \u0026 Leeds. Partnering with local schools in the area, we feel fully encompasses the geographical, social and economic diversity of West Yorkshire, offering our alliance breadth and depth. A key strength of our partnership is the diversity of schools; your two placement schools will be contrasting and the range of children and teachers you will work with will come from across the entire alliance ensuring you are trained to teach in all schools from the very start of your career.",
-        "interview_process": "Interviews take place throughout the year, they include an interview with a selected panel of staff, a short activity for a group of pupils and a written test to assess your literacy and numeracy.",
-        "other_requirements": "* It would be helpful to have spent time in school to ensure you have an understanding of the role of the teacher. This is something we can help with if you struggle to find a school experience place.  \r\n\r\n* You will also need to undertake an enhanced DBS check and an occupational health check",
-        "personal_qualities": "We are first and foremost looking for potential!  This is a training programme so we do not expect you to be the finished article but we are looking for people who are committed to teaching as a career, who are highly motivated, reflective and creative.  ",
-        "required_qualifications": "* GCSE grades (or equivalent) at grade C or above in English and maths\r\n* A subject relevant degree usually at 2:2 or above.\r\n* In some cases we would require you to complete a subject knowledge enhancement programme as a condition of acceptance on the course",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13996"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22344093"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "data": [
-            {
-              "type": "subjects",
-              "id": "8"
-            }
-          ]
-        }
-      }
-    },
-    {
-      "id": "12925682",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "3CXD",
+        "course_code": "2DGY",
         "name": "Biology",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
         "funding_type": "fee",
         "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": null,
-        "accrediting_provider_code": null,
-        "changed_at": "2019-09-25T08:11:02.854Z",
-        "start_date": "September 2020",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-09-25T08:11:02Z",
-        "about_accrediting_body": null,
-        "provider_code": "2AT",
-        "recruitment_cycle_year": "2020",
-        "about_course": "Our secondary courses are designed and taught by a dedicated team of practising teachers. Each is based on developing each trainee with a bespoke plan and experience designed to make you the best teacher you can be. All programmes are an 11-16 programme with a post 16 enhancement. It is taught by practising science teachers, including specialist leaders of education. You will be placed in two schools for your assessed placement from across our partnership schools in West Yorkshire. The normal pattern of the year is to be in your placement school for four days per week and to attend our training programme one day per week. We have very experienced mentors who are there to guide and support trainees throughout their training year and you will have the opportunity to visit a variety of schools on training days to broaden your experience and understanding. We provide all our trainees with their own laptop during the programme and have a dedicated website for trainee support and resources. All trainees are registered with the University of Huddersfield for a  PGCE. We are looking for candidates with normally either a degree in their subject or related to it or for candidates with a non related degree and an A level in the subject at C or above.",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": null,
-        "fee_uk_eu": 9250,
-        "financial_support": "ITT bursaries are provided by the government. We are responsible for making the bursary payments to eligible students. The bursaries are given to UK and EU students only (so you must meet the residency eligibility criteria set for statutory student finance) and depend on which ITT course subject you are studying and the degree you currently hold. To find out what bursaries are available and the eligibility criteria please visit https://getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships. You do not need to apply for a bursary, this is processed automatically upon enrolment by us.\r\n\r\nTo find out how the scholarships and bursaries are paid please visit https://getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships.  We will provide eligible students with payment information with their entitlement letter. Students will need to sign eligibility declaration forms before starting the course and during the course in order to receive payment of the bursary. ",
-        "how_school_placements_work": "Our programme places you in two schools from within the partnership across the year and you will work across two key stages; key stage 3 (11-14) and 4 (14-16) with post 16 enhancement. Our Secondary partners are based in Halifax, Huddersfield, Bradford \u0026 Leeds. Partnering with local schools in the area, we feel fully encompasses the geographical, social and economic diversity of West Yorkshire, offering our alliance breadth and depth. A key strength of our partnership is the diversity of schools; your two placement schools will be contrasting and the range of children and teachers you will work with will come from across the entire alliance ensuring you are trained to teach in all schools from the very start of your career.",
-        "interview_process": "Interviews take place throughout the year, they include an interview with a selected panel of staff, a short activity for a group of pupils and a written test to asses your literacy and numeracy.",
-        "other_requirements": "* It would be helpful to have spent time in school to ensure you have an understanding of the role of the teacher.   This is something we can help with if you struggle to find a school experience place.  \r\n\r\n* You will also need to undertake an enhanced DBS check and an occupational health check",
-        "personal_qualities": "We are first and foremost looking for potential!  This is a training programme so we do not expect you to be the finished article but we are looking for people who are committed to teaching as a career, who are highly motivated, reflective and creative.  ",
-        "required_qualifications": "* GCSE grades (or equivalent) at grade C or above in English and maths\r\n* A subject relevant degree usually at 2:2 or above.  \r\n* In some cases we would require you to complete a subject knowledge enhancement programme as a condition of acceptance on the course",
-        "salary_details": null
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
       },
       "relationships": {
         "provider": {
           "data": {
             "type": "providers",
-            "id": "13996"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
+            "id": "17513"
           }
         },
         "site_statuses": {
           "data": [
             {
               "type": "site_statuses",
-              "id": "22324439"
+              "id": "22397185"
+            },
+            {
+              "type": "site_statuses",
+              "id": "22397180"
             }
           ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
+        }
+      }
+    },
+    {
+      "id": "12962309",
+      "type": "courses",
+      "attributes": {
+        "course_code": "2DGZ",
+        "name": "Biology",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "salary",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": {
+          "data": {
+            "type": "providers",
+            "id": "17513"
           }
         },
-        "subjects": {
+        "site_statuses": {
           "data": [
             {
-              "type": "subjects",
-              "id": "10"
+              "type": "site_statuses",
+              "id": "22412252"
             }
           ]
         }
@@ -399,54 +139,97 @@
   ],
   "included": [
     {
-      "id": "14468",
+      "id": "17837",
       "type": "providers",
       "attributes": {
-        "provider_code": "T92",
+        "provider_name": " Linwood Training, Support and Advice",
+        "address1": "Poole SCITT",
+        "address2": "Ad Astra Infant School, Sherborn Crescent",
+        "address3": "Poole",
+        "address4": "Dorset",
+        "postcode": "BH17 8AP"
+      }
+    },
+    {
+      "id": "22406192",
+      "type": "site_statuses",
+      "attributes": {
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11233046"
+          }
+        }
+      }
+    },
+    {
+      "id": "22412416",
+      "type": "site_statuses",
+      "attributes": {
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11233045"
+          }
+        }
+      }
+    },
+    {
+      "id": "22412415",
+      "type": "site_statuses",
+      "attributes": {
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11233040"
+          }
+        }
+      }
+    },
+    {
+      "id": "22412414",
+      "type": "site_statuses",
+      "attributes": {
+        "status": "running",
+        "has_vacancies?": true
+      },
+      "relationships": {
+        "site": {
+          "data": {
+            "type": "sites",
+            "id": "11233032"
+          }
+        }
+      }
+    },
+    {
+      "id": "17500",
+      "type": "providers",
+      "attributes": {
         "provider_name": "2Schools Consortium",
-        "accredited_body?": true,
-        "can_add_more_sites?": true,
-        "accredited_bodies": [],
-        "train_with_us": "Ranked in the 10 best Teacher Training providers for Primary Teacher Training in 2015, 2Schools Consortium has been an accredited provider since 2002 and has a wealth of experience in mentoring trainees and in delivering training.\r\n\r\nThe 2Schools Consortium (Ofsted Outstanding, May 2014) consists of a lead school, Oakthorpe Primary School (Ofsted Outstanding, 2008), in Enfield, and approximately 30 partnership schools where trainees are placed.\r\n\r\n\r\n\r\nAll trainees on the 2Schools Consortium School Direct Salaried and SCITT Programme have the opportunity to work towards a PGCE award which will be validated by the University of East London.\r\n\r\nQuotes:\r\n'I’ve had so much fun this year and although it sounds crazy, I just wish I could do it all over again! '\r\nI feel that this year has changed me in so many different ways and made me so much more comfortable and confident in my teaching'.\r\nLorne-Rhys Jones, Qualified Teacher, Worcesters Primary School, School Direct Salaried 2017.18\r\n\r\n'Once again very pleased with this year’s trainee. I have been using school direct for 6 years and half my staff next year are from the programme. Without it would not be able to recruit. It has produced wonderful teacher. Thank you.'\r\nMaria Jay, Headteacher St Michael at Bowes Junior School, June 2018\r\n",
-        "train_with_disability": "At 2Schools we want to enable everyone to reach their full potential. After all teaching is the profession that unlocks potential in children.  If you do have and declare a disability we will do everything we reasonably can to make special arrangements. Please provide details on your application form so that we can ensure this happens. This will not affect your application.\r\n\r\nWe are committed to provide equality and fairness for all in our recruitment and employment practices and not to discriminate on grounds of age, disability, gender reassignment, marriage/civil partnership status, pregnancy and maternity, race, religion or belief, sex, or sexual orientation. We oppose all forms of unlawful and unfair discrimination.\r\n\r\nWe have regularly successfully supported a number of trainee with dyslexia, mental health conditions and learning difficulties and will continue to provide high level of support for any disability.",
-        "can_sponsor_skilled_worker_visa": false,
-        "can_sponsor_student_visa": true,
-        "latitude": 51.6139314,
-        "longitude": -0.0935379,
         "address1": "Oakthorpe Primary School",
         "address2": "c/o Tile Kiln Lane",
         "address3": "Palmers Green",
         "address4": "London",
-        "postcode": "N13 6BY",
-        "region_code": "london",
-        "telephone": "0895123456",
-        "email": "foo@bar.com",
-        "website": "",
-        "recruitment_cycle_year": "2020",
-        "gt12_contact": null,
-        "application_alert_contact": null,
-        "type_of_gt12": "no_response",
-        "send_application_alerts": "none"
-      },
-      "relationships": {
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "courses": {
-          "meta": {
-            "count": 1
-          }
-        }
+        "postcode": "N13 6BY"
       }
     },
     {
-      "id": "22329867",
+      "id": "22397080",
       "type": "site_statuses",
       "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
         "status": "running",
         "has_vacancies?": true
       },
@@ -454,78 +237,27 @@
         "site": {
           "data": {
             "type": "sites",
-            "id": "11214484"
+            "id": "11230551"
           }
         }
       }
     },
     {
-      "id": "1",
-      "type": "subjects",
-      "attributes": {
-        "subject_name": "Primary",
-        "subject_code": "00",
-        "bursary_amount": null,
-        "early_career_payments": null,
-        "scholarship": null,
-        "subject_knowledge_enhancement_course_available": null
-      }
-    },
-    {
-      "id": "14252",
+      "id": "17513",
       "type": "providers",
       "attributes": {
-        "provider_code": "2C4",
-        "provider_name": "4Derbyshire Teaching School Alliance",
-        "accredited_body?": false,
-        "can_add_more_sites?": true,
-        "accredited_bodies": [
-          {
-            "provider_name": "University of Derby",
-            "provider_code": "D39",
-            "description": ""
-          }
-        ],
-        "train_with_us": "4 Derbyshire Teaching School Alliance in collaboration with the 'outstanding' Ofsted rated HE provider Derby University, are pleased to offer School Direct places for Initial Teacher Training from September 2020.\r\n\r\nOur training will provide trainees with a Post Graduate Certificate in Education (PGCE)  and Qualified Teacher Status (QTS) from Derby University. \r\n\r\nPlaces are available in an excellent and varied network of schools across Derbyshire. The schools who are partnered with the Alliance will offer high quality training for trainees who wish to train to teach in Primary Phases. Our Primary places also include training opportunities for people who would like to teach in a special school context. \r\n\r\nYou will be assigned an experienced mentor in your placement school to support you through your day to day and also a link tutor to guide and assess you through each stage. Your wellbeing and success is our priority.\r\n\r\n",
-        "train_with_disability": "We value inclusion and  are committed to equitable treatment and elimination of discrimination in all its forms at all levels and throughout all programs and training.\r\n\r\nAll schools within the alliances offering School Direct placements have full disabled access.\r\n\r\nApplicants who would benefit from disabled access should let us know on their application so they can be considered for placements accordingly. \r\n\r\n",
-        "can_sponsor_skilled_worker_visa": false,
-        "can_sponsor_student_visa": true,
-        "latitude": 53.086088,
-        "longitude": -1.3236877,
-        "address1": "C/O Longwood Infant Academy, Wharf",
-        "address2": "Pinxton",
-        "address3": "Pinxton",
-        "address4": "Nottingham",
-        "postcode": "NG16 6PA",
-        "region_code": "east_midlands",
-        "telephone": "01773 123456",
-        "email": "foo@bar.com",
-        "website": "http://www.4derbyshiretsa.com",
-        "recruitment_cycle_year": "2020",
-        "gt12_contact": null,
-        "application_alert_contact": null,
-        "type_of_gt12": "coming_or_not",
-        "send_application_alerts": "all"
-      },
-      "relationships": {
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "courses": {
-          "meta": {
-            "count": 1
-          }
-        }
+        "provider_name": "ARK Teacher Training",
+        "address1": "The Yellow Building",
+        "address2": "1 Nicholas Road",
+        "address3": "London",
+        "address4": "London",
+        "postcode": "W114AN"
       }
     },
     {
-      "id": "22326299",
+      "id": "22397185",
       "type": "site_statuses",
       "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
         "status": "running",
         "has_vacancies?": true
       },
@@ -533,60 +265,15 @@
         "site": {
           "data": {
             "type": "sites",
-            "id": "11213440"
+            "id": "11230642"
           }
         }
       }
     },
     {
-      "id": "13996",
-      "type": "providers",
-      "attributes": {
-        "provider_code": "2AT",
-        "provider_name": "AA Teamworks West Yorkshire SCITT",
-        "accredited_body?": true,
-        "can_add_more_sites?": true,
-        "accredited_bodies": [],
-        "train_with_us": "Training with AA Teamworks is a great way to kick start your teaching career, beginning your time in school from the start of the programme, trainees are fully immersed into school life, building up their confidence and school contact time as they go on. We offer both primary and secondary training in a wide range of subjects and work with a collection of schools in the local area. We offer diverse school placements, ensuring trainees have experience in different types of school environments, preparing you for when you complete the programme and begin your NQT year. AA Teamworks is one of only 33 schools to be awarded research school status by the Education Endowment Fund (EEF) \u0026 The Department for Education (DfE) giving our trainees access to the latest evidence-based practices before anyone else. Out teaching team are dedicated and experienced educators who work with us to create a personalised learning experience.  Once training is complete AA Teamworks recommend you for QTS status and a PGCE is awarded from The University of Huddersfield. Working with The University of Huddersfield also provides our trainee with full access to all their facilities.   Applicants who do not qualify for a DfE bursary are awarded a bursary by us of £500 and all trainees are provided with a laptop for thier use through the programme.",
-        "train_with_disability": "At AA Teamworks we are fully committed to supporting every student regardless of their needs. Our current training facilities also comply with the current accessibility legislation.  \r\n",
-        "can_sponsor_skilled_worker_visa": false,
-        "can_sponsor_student_visa": true,
-        "latitude": 53.6896047,
-        "longitude": -1.8706233,
-        "address1": "AA Teamworks W Yorks SCITT - The Greetland Academy ",
-        "address2": "Stainland Road, Greetland",
-        "address3": "Halifax",
-        "address4": "West Yorkshire",
-        "postcode": " HX4 8LS",
-        "region_code": "yorkshire_and_the_humber",
-        "telephone": "01422 123456",
-        "email": "foo@bar.com",
-        "website": "http://www.teamworkstsa.org/home-page-s-c-i-t-t-teacher-training/",
-        "recruitment_cycle_year": "2020",
-        "gt12_contact": null,
-        "application_alert_contact": null,
-        "type_of_gt12": "coming_or_not",
-        "send_application_alerts": "all"
-      },
-      "relationships": {
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "courses": {
-          "meta": {
-            "count": 16
-          }
-        }
-      }
-    },
-    {
-      "id": "22344093",
+      "id": "22397180",
       "type": "site_statuses",
       "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
         "status": "running",
         "has_vacancies?": true
       },
@@ -594,29 +281,15 @@
         "site": {
           "data": {
             "type": "sites",
-            "id": "11212415"
+            "id": "11230625"
           }
         }
       }
     },
     {
-      "id": "8",
-      "type": "subjects",
-      "attributes": {
-        "subject_name": "Art and design",
-        "subject_code": "W1",
-        "bursary_amount": "9000",
-        "early_career_payments": null,
-        "scholarship": null,
-        "subject_knowledge_enhancement_course_available": false
-      }
-    },
-    {
-      "id": "22324439",
+      "id": "22412252",
       "type": "site_statuses",
       "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
         "status": "running",
         "has_vacancies?": true
       },
@@ -624,25 +297,85 @@
         "site": {
           "data": {
             "type": "sites",
-            "id": "11212415"
+            "id": "11230629"
           }
         }
       }
     },
     {
-      "id": "10",
-      "type": "subjects",
+      "id": "11233046",
+      "type": "sites",
       "attributes": {
-        "subject_name": "Biology",
-        "subject_code": "C1",
-        "bursary_amount": "26000",
-        "early_career_payments": null,
-        "scholarship": null,
-        "subject_knowledge_enhancement_course_available": true
+        "code": "Y",
+        "location_name": "Poole SCITT",
+        "address1": "Ad Astra Infant School",
+        "address2": "Sherborn Crescent",
+        "address3": "Poole",
+        "address4": "Dorset",
+        "postcode": "BH17 8AP",
+        "region_code": "south_west",
+        "latitude": 50.7497483,
+        "longitude": -1.9652909,
+        "urn": "141755",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11214484",
+      "id": "11233045",
+      "type": "sites",
+      "attributes": {
+        "code": "W",
+        "location_name": "Winchelsea School",
+        "address1": "Guernsey Road",
+        "address2": "Parkstone",
+        "address3": "Poole",
+        "address4": "",
+        "postcode": "BH12 4LL",
+        "region_code": "south_west",
+        "latitude": 50.7481466,
+        "longitude": -1.9342923,
+        "urn": "113955",
+        "recruitment_cycle_year": "2022"
+      }
+    },
+    {
+      "id": "11233040",
+      "type": "sites",
+      "attributes": {
+        "code": "9",
+        "location_name": "Springwood (ASD) Campus",
+        "address1": "Andrew's Close",
+        "address2": "Springwater Road",
+        "address3": "",
+        "address4": "Bournemouth",
+        "postcode": "BH11 8HB",
+        "region_code": "south_west",
+        "latitude": 50.7572959,
+        "longitude": -1.9145968,
+        "urn": "113961",
+        "recruitment_cycle_year": "2022"
+      }
+    },
+    {
+      "id": "11233032",
+      "type": "sites",
+      "attributes": {
+        "code": "1",
+        "location_name": "Linwood School",
+        "address1": "Alma Road",
+        "address2": "Winton",
+        "address3": "Bournemouth",
+        "address4": "",
+        "postcode": "BH9 1AJ",
+        "region_code": "south_west",
+        "latitude": 50.738208,
+        "longitude": -1.8684318,
+        "urn": "113961",
+        "recruitment_cycle_year": "2022"
+      }
+    },
+    {
+      "id": "11230551",
       "type": "sites",
       "attributes": {
         "code": "O",
@@ -655,48 +388,65 @@
         "region_code": "london",
         "latitude": 51.6139314,
         "longitude": -0.0935379,
-        "recruitment_cycle_year": "2020"
+        "urn": "131407",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11213440",
+      "id": "11230642",
       "type": "sites",
       "attributes": {
-        "code": "-",
-        "location_name": "Main Site",
-        "address1": "Wharf Road",
-        "address2": "Pinxton",
-        "address3": "",
-        "address4": "Nottingham",
-        "postcode": "NG16 6PA",
-        "region_code": "east_midlands",
-        "latitude": 53.0893521,
-        "longitude": -1.3173158,
-        "recruitment_cycle_year": "2020"
+        "code": "U",
+        "location_name": "Ark Walworth Academy",
+        "address1": "Ark Walworth Academy",
+        "address2": "Shorncliffe Road",
+        "address3": "London",
+        "address4": "",
+        "postcode": "SE1 5UJ",
+        "region_code": "london",
+        "latitude": 51.487446,
+        "longitude": -0.0781839,
+        "urn": "135315",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11212415",
+      "id": "11230625",
       "type": "sites",
       "attributes": {
-        "code": "-",
-        "location_name": "Main Site",
-        "address1": "AA Teamworks W Yorks SCITT",
-        "address2": "School Street",
-        "address3": "Greetland",
-        "address4": "Halifax",
-        "postcode": "HX4 8JB",
-        "region_code": "yorkshire_and_the_humber",
-        "latitude": 53.6896047,
-        "longitude": -1.8706233,
-        "recruitment_cycle_year": "2020"
+        "code": "A",
+        "location_name": "Ark All Saints Academy",
+        "address1": "Ark All Saints Academy, 140 Wyndham Road",
+        "address2": "Camberwell",
+        "address3": "London",
+        "address4": "",
+        "postcode": "SE5 0UB",
+        "region_code": "london",
+        "latitude": 51.4783394,
+        "longitude": -0.100159,
+        "urn": "139718",
+        "recruitment_cycle_year": "2022"
+      }
+    },
+    {
+      "id": "11230629",
+      "type": "sites",
+      "attributes": {
+        "code": "E",
+        "location_name": "Ark Academy",
+        "address1": "Ark Academy",
+        "address2": "Bridge Road",
+        "address3": "Wembley",
+        "address4": "London",
+        "postcode": "HA9 9JP",
+        "region_code": "london",
+        "latitude": 51.5644873,
+        "longitude": -0.2784025,
+        "urn": "135600",
+        "recruitment_cycle_year": "2022"
       }
     }
   ],
-  "links": {
-    "next": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=2\u0026page%5Bper_page%5D=4\u0026sort=provider.provider_name%2Cname",
-    "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Bhas_vacancies%5D=true\u0026include=site_statuses.site%2Cprovider%2Csubjects\u0026page%5Bpage%5D=2861\u0026page%5Bper_page%5D=4\u0026sort=provider.provider_name%2Cname"
-  },
   "meta": {
     "count": 4
   },
@@ -704,3 +454,4 @@
     "version": "1.0"
   }
 }
+
