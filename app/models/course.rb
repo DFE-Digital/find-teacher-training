@@ -1,5 +1,5 @@
 class Course < Base
-  TTAPI_CALLS_EXPIRY = 30.minutes
+  TTAPI_CALLS_EXPIRY = 15.minutes
 
   connection do |conn|
     conn.faraday.response(:caching, write_options: { expires_in: TTAPI_CALLS_EXPIRY }) do
