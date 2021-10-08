@@ -8,6 +8,8 @@
       <%= render 'shared/hidden_fields', exclude_keys: %w[subject_codes senCourses], form: f %>
       <h1 class="govuk-heading-l" data-qa="heading"><%= I18n.t('page_titles.subjects_filter') %></h1>
 
+      <p class="govuk-body">Some subjects may offer bursaries or scholarships. Funding will be announced later this autumn.</p>
+
       <%= govuk_accordion(id: 'subject-area-accordion') do |accordion| %>
         <% @subject_areas.each_with_index do |subject_area, counter| %>
           <%= accordion.section(
@@ -41,25 +43,28 @@
                           <% end %>
                         </span>
 
-                        <% if subject.decorate.has_scholarship_and_bursary? %>
-                          <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
-                        <% elsif subject.decorate.has_scholarship? %>
-                          <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} are available" %>
-                        <% elsif subject.decorate.has_bursary? %>
-                          <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} available" %>
-                        <% end %>
-                        <% if subject.decorate.early_career_payments? %>
-                          <% financial_info.concat(', \n with early career payments of £2,000 each in your second, third and fourth year of teaching (£3,000 in some areas of England).') %>
-                        <% elsif subject.decorate.has_scholarship? || subject.decorate.has_bursary? %>
-                          <% financial_info.concat('.') %>
-                        <% end %>
-                        <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
+                        <% if FeatureFlag.active?(:bursaries_and_scholarships_announced) %>
+                          <% if subject.decorate.has_scholarship_and_bursary? %>
+                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
+                          <% elsif subject.decorate.has_scholarship? %>
+                            <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} are available" %>
+                          <% elsif subject.decorate.has_bursary? %>
+                            <% financial_info = "Bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} available" %>
+                          <% end %>
+                          <% if subject.decorate.early_career_payments? %>
+                            <% financial_info.concat(', \n with early career payments of £2,000 each in your second, third and fourth year of teaching (£3,000 in some areas of England).') %>
+                          <% elsif subject.decorate.has_scholarship? || subject.decorate.has_bursary? %>
+                            <% financial_info.concat('.') %>
+                          <% end %>
 
-                        <% if subject.subject_knowledge_enhancement_course_available %>
-                          <span class="govuk-!-display-block" data-qa="subject__ske_course">
-                            You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? 'also' : '' %> take a
-                            <%= govuk_link_to 'subject knowledge enhancement (SKE) course', 'https://getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %>.
-                          </span>
+                          <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
+
+                          <% if subject.subject_knowledge_enhancement_course_available %>
+                            <span class="govuk-!-display-block" data-qa="subject__ske_course">
+                              You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? 'also' : '' %> take a
+                              <%= govuk_link_to 'subject knowledge enhancement (SKE) course', 'https://getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %>.
+                            </span>
+                          <% end %>
                         <% end %>
                       <% end %>
                     </div>

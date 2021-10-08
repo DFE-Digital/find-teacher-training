@@ -1,5 +1,5 @@
 import accessibleAutocomplete from "accessible-autocomplete";
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 
 export const getPath = (endpoint,query) => {
   return `${endpoint}?query=${query}`;
@@ -35,6 +35,8 @@ export const request = endpoint => {
 const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
   const $input = document.getElementById(input);
   const $el = document.getElementById(element);
+  if (!$el) return;
+
   const inputValueTemplate = result => (typeof result === "string" ? result : result && result.name);
   const suggestionTemplate = result =>
     typeof result === "string" ? result : result && `${result.name} (${result.code})`;
@@ -48,7 +50,7 @@ const initAutocomplete = ({element, input, path, selectNameAndCode}) => {
         name: $input.name,
         defaultValue: $input.value,
         minLength: 3,
-        source: throttle(request(path), 2000),
+        source: debounce(request(path), 900),
         templates: {
           inputValue: selectNameAndCode ? suggestionTemplate : inputValueTemplate,
           suggestion: suggestionTemplate

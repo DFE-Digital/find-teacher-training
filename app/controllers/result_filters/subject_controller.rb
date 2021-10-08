@@ -1,10 +1,8 @@
 module ResultFilters
   class SubjectController < ApplicationController
     include FilterParameters
-    include CsharpRailsSubjectConversionHelper
 
     before_action :build_results_filter_query_parameters
-    before_action :convert_csharp_params_to_rails, except: [:create]
     before_action :build_subject_areas, except: [:create]
 
     before_action { params['senCourses'].downcase! if params['senCourses'].present? }
@@ -30,12 +28,6 @@ module ResultFilters
     end
 
   private
-
-    def convert_csharp_params_to_rails
-      if params['subject_codes'].blank? && convert_csharp_subject_id_params_to_subject_code.present?
-        request.query_parameters['subject_codes'] = convert_csharp_subject_id_params_to_subject_code
-      end
-    end
 
     def build_subject_areas
       @subject_areas = SubjectArea.includes(:subjects).all

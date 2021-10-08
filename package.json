@@ -8,10 +8,10 @@
     "govuk-frontend": "^3.13.1",
     "jquery": "^3.6.0",
     "lodash.throttle": "^4.1.1",
-    "yarn": "^1.22.11"
+    "yarn": "^1.22.13"
   },
   "devDependencies": {
-    "jest": "^27.2.3",
+    "jest": "^27.2.4",
     "webpack-dev-server": "^4.3.0"
   },
   "scripts": {

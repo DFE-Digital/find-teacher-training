@@ -222,10 +222,30 @@ RSpec.feature 'Results page new subject filter' do
       )
     end
 
-    it 'displays financial information' do
-      subjects = filter_page.subject_areas.first.subjects
-      expect(subjects.fourth.info.text).to eq('Bursaries of £6,000 available.')
-      expect(subjects.fourth.ske_course.text).to eq('You can also take a subject knowledge enhancement (SKE) course.')
+    context 'when the `bursaries_and_scholarships_announced` flag is active' do
+      before do
+        activate_feature(:bursaries_and_scholarships_announced)
+        filter_page.load
+      end
+
+      it 'displays financial information' do
+        subjects = filter_page.subject_areas.first.subjects
+
+        expect(subjects.fourth.info.text).to eq('Bursaries of £6,000 available.')
+        expect(subjects.fourth.ske_course.text).to eq('You can also take a subject knowledge enhancement (SKE) course.')
+      end
+    end
+
+    context 'when the `bursaries_and_scholarships_announced` flag inactive' do
+      before do
+        deactivate_feature(:bursaries_and_scholarships_announced)
+        filter_page.load
+      end
+
+      it 'displays financial information' do
+        expect(page).not_to have_content 'Bursaries of £6,000 available.'
+        expect(page).not_to have_content 'You can also take a subject knowledge enhancement (SKE) course.'
+      end
     end
   end
 
@@ -259,14 +279,12 @@ RSpec.feature 'Results page new subject filter' do
   end
 
   context 'with existing parameters' do
-    before do
+    it 'only changes the subjects params' do
       stub_courses(
         query: base_parameters.merge('filter[subjects]' => '00,01'),
         course_count: 10,
       )
-    end
 
-    it 'only changes the subjects params' do
       visit subject_path(subject_codes: %w[00 01], other_param: 'param_value')
       filter_page.continue.click
       expect_page_to_be_displayed_with_query(
@@ -276,6 +294,18 @@ RSpec.feature 'Results page new subject filter' do
           'other_param' => 'param_value',
         },
       )
+    end
+
+    it 'translates CSharp subjects to Rails' do
+      api_request = stub_courses(
+        query: base_parameters.merge('filter[subjects]' => '24'),
+        course_count: 10,
+      )
+
+      visit subject_path(subjects: %w[49], other_param: 'param_value')
+      filter_page.continue.click
+
+      expect(api_request).to have_been_made
     end
   end
 

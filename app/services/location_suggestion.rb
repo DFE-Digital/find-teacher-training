@@ -1,20 +1,41 @@
 class LocationSuggestion
+  CACHE_EXPIRY = 30.minutes
+
   class << self
     def suggest(input)
       query = build_query(input)
+      cached_result = Rails.cache.read(location_query_cache_key(input))
+      return cached_result unless cached_result.nil?
 
-      response = connection.get("#{Settings.google.places_api_path}?#{query.to_query}").body
+      response = connection.get("#{Settings.google.places_api_path}?#{query.to_query}")
 
-      if response['predictions'].present?
-        response['predictions']
-          .map(&format_prediction)
-          .take(5)
-      elsif response['error_message'].present?
-        Sentry.capture_message(message: response['error_message'])
+      if do_not_cache?(response)
+        report_error(response)
+        return
       end
+
+      result = response.body['predictions'].map(&format_prediction).take(5)
+      Rails.cache.write(location_query_cache_key(input), result, expires_in: CACHE_EXPIRY)
+      result
     end
 
   private
+
+    def do_not_cache?(response)
+      response.status != 200 ||
+        response.body['error_message'].present? ||
+        response.body['predictions'].blank?
+    end
+
+    def report_error(response)
+      if response.status != 200 || response.body['error_message'].present?
+        Sentry.capture_message("Google Places API error - status: #{response.status}, body: #{response.body}")
+      end
+    end
+
+    def location_query_cache_key(input)
+      "location-query-#{input.upcase}"
+    end
 
     def connection
       Faraday.new(Settings.google.places_api_host) do |f|

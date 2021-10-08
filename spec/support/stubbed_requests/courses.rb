@@ -22,6 +22,10 @@ module StubbedRequests
         'four_courses.json'
       when 10
         'ten_courses.json'
+      when 30
+        'thirty_courses.json'
+      when 60
+        'sixty_courses.json'
       end
     end
 
