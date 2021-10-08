@@ -1,7 +1,7 @@
 import accessibleAutocomplete from "accessible-autocomplete";
 
 export const initCachedProvidersAutocomplete = () => {
-  const inputId = 'query-field'
+  const inputId = 'provider'
   const autocompleteId = 'provider-autocomplete'
 
   try {

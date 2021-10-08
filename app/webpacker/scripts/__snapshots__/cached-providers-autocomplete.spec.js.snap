@@ -7,7 +7,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
   
           
   <label
-    for="query-field"
+    for="provider"
   >
     Enter something
   </label>
@@ -23,7 +23,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
         <div
           aria-atomic="true"
           aria-live="polite"
-          id="query-field__status--A"
+          id="provider__status--A"
           role="status"
         >
           
@@ -31,7 +31,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
         <div
           aria-atomic="true"
           aria-live="polite"
-          id="query-field__status--B"
+          id="provider__status--B"
           role="status"
         >
           
@@ -40,43 +40,27 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
       
       <input
         aria-autocomplete="list"
-        aria-describedby="query-field__assistiveHint"
+        aria-describedby="provider__assistiveHint"
         aria-expanded="false"
-        aria-owns="query-field__listbox"
+        aria-owns="provider__listbox"
         autocomplete="off"
-        class="autocomplete__input autocomplete__input--show-all-values"
-        id="query-field"
+        class="autocomplete__input autocomplete__input--default"
+        id="provider"
         name=""
         placeholder=""
         role="combobox"
         type="text"
       />
-      <svg
-        class="autocomplete__dropdown-arrow-down"
-        focusable="false"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <g
-          fill="none"
-          fill-rule="evenodd"
-          stroke="none"
-        >
-          <polygon
-            fill="#000000"
-            points="0 0 22 0 11 17"
-          />
-        </g>
-      </svg>
+      
       <ul
         class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-        id="query-field__listbox"
+        id="provider__listbox"
         role="listbox"
       >
         
       </ul>
       <span
-        id="query-field__assistiveHint"
+        id="provider__assistiveHint"
         style="display: none;"
       >
         When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.
@@ -84,7 +68,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
     </div>
   </div>
   <select
-    id="query-field-select"
+    id="provider-select"
     style="display: none;"
   >
     
