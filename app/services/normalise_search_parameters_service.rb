@@ -1,27 +1,27 @@
-class ConvertDeprecatedCsharpParametersService
+class NormaliseSearchParametersService
+  BOOLEAN_PARAMETER_NAMES = %w[fulltime hasvacancies parttime senCourses].freeze
+  ARRAY_PARAMETER_NAMES = %w[qualifications subjects subject_codes].freeze
+
   def call(parameters:)
-    boolean_parameter_names = %w[fulltime hasvacancies parttime senCourses]
-    array_parameter_names = %w[qualifications subjects]
-
-    have_legacy_params = false
     params_hash = parameters
+    invalid_params_present = false
 
-    boolean_parameter_names.each do |parameter_name|
+    BOOLEAN_PARAMETER_NAMES.each do |parameter_name|
       if is_legacy_boolean?(parameters[parameter_name])
-        have_legacy_params = true
+        invalid_params_present = true
         params_hash = params_hash.merge(parameter_name => legacy_to_rails_boolean(parameters[parameter_name]))
       end
     end
 
-    array_parameter_names.each do |parameter_name|
+    ARRAY_PARAMETER_NAMES.each do |parameter_name|
       if is_legacy_array?(parameters[parameter_name])
         params_hash = params_hash.merge(parameter_name => legacy_to_rails_array(parameters[parameter_name]))
-        have_legacy_params = true
+        invalid_params_present = true
       end
     end
 
-    if have_legacy_params
-      Rails.logger.warn('The user navigated to the results page using the deprecated C# parameterisation scheme') if Rails.env.production?
+    if invalid_params_present
+      Rails.logger.warn('The user navigated to the results page using the deprecated or invalid parameters') if Rails.env.production?
       return { deprecated: true, parameters: params_hash }
     end
 
@@ -30,12 +30,12 @@ class ConvertDeprecatedCsharpParametersService
 
 private
 
-  def is_legacy_boolean?(parameter)
-    parameter.in?(%w[True False])
+  def is_legacy_boolean?(value)
+    value.in?(%w[True False])
   end
 
-  def is_legacy_array?(parameter)
-    parameter.present? && !parameter.instance_of?(Array)
+  def is_legacy_array?(value)
+    value.present? && !value.instance_of?(Array)
   end
 
   def legacy_to_rails_array(array)

@@ -1,3 +1,4 @@
+require 'rails_helper'
 require_relative '../../app/services/deprecated_parameters_service'
 
 describe DeprecatedParametersService do
