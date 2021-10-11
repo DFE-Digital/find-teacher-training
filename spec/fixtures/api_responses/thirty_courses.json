@@ -14,32 +14,16 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17837"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17837" } },
         "site_statuses": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22406192"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22412416"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22412415"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22412414"
-            }
+            { "type": "site_statuses", "id": "22406192" },
+            { "type": "site_statuses", "id": "22412416" },
+            { "type": "site_statuses", "id": "22412415" },
+            { "type": "site_statuses", "id": "22412414" }
           ]
-        }
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "1" }] }
       }
     },
     {
@@ -56,20 +40,11 @@
         "provider_type": "scitt"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17500"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17500" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397080"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22397080" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "1" }] }
       }
     },
     {
@@ -86,24 +61,14 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397185"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22397180"
-            }
+            { "type": "site_statuses", "id": "22397185" },
+            { "type": "site_statuses", "id": "22397180" }
           ]
-        }
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
       }
     },
     {
@@ -120,20 +85,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412252"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412252" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
       }
     },
     {
@@ -150,20 +106,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412253"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412253" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
       }
     },
     {
@@ -180,20 +127,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397205"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22397205" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "12" }] }
       }
     },
     {
@@ -210,20 +148,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412254"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412254" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "12" }] }
       }
     },
     {
@@ -240,20 +169,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412255"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412255" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "16" }] }
       }
     },
     {
@@ -270,20 +190,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412256"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412256" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "16" }] }
       }
     },
     {
@@ -300,20 +211,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412257"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412257" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "21" }] }
       }
     },
     {
@@ -330,20 +232,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22411374"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22411374" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "21" }] }
       }
     },
     {
@@ -360,20 +253,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397430"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22397430" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "21" }] }
       }
     },
     {
@@ -390,20 +274,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412258"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412258" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "22" }] }
       }
     },
     {
@@ -420,20 +295,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412259"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412259" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "22" }] }
       }
     },
     {
@@ -450,20 +316,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22411391"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22411391" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "22" }] }
       }
     },
     {
@@ -480,20 +337,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412260"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412260" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "24" }] }
       }
     },
     {
@@ -510,20 +358,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412261"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412261" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "24" }] }
       }
     },
     {
@@ -540,20 +379,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412262"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412262" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "24" }] }
       }
     },
     {
@@ -570,20 +400,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412318"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412318" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "25" }] }
       }
     },
     {
@@ -600,24 +421,14 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412319"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22397266"
-            }
+            { "type": "site_statuses", "id": "22412319" },
+            { "type": "site_statuses", "id": "22397266" }
           ]
-        }
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "25" }] }
       }
     },
     {
@@ -634,20 +445,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412320"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412320" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "25" }] }
       }
     },
     {
@@ -664,18 +466,14 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412321" }]
+        },
+        "subjects": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412321"
-            }
+            { "type": "subjects", "id": "33" },
+            { "type": "subjects", "id": "42" }
           ]
         }
       }
@@ -694,18 +492,14 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412322" }]
+        },
+        "subjects": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412322"
-            }
+            { "type": "subjects", "id": "33" },
+            { "type": "subjects", "id": "42" }
           ]
         }
       }
@@ -724,18 +518,15 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412323" }]
+        },
+        "subjects": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412323"
-            }
+            { "type": "subjects", "id": "33" },
+            { "type": "subjects", "id": "34" },
+            { "type": "subjects", "id": "41" }
           ]
         }
       }
@@ -754,20 +545,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412324"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412324" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "26" }] }
       }
     },
     {
@@ -784,20 +566,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412325"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412325" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "26" }] }
       }
     },
     {
@@ -814,20 +587,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412326"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412326" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "26" }] }
       }
     },
     {
@@ -844,20 +608,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397295"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22397295" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "29" }] }
       }
     },
     {
@@ -874,20 +629,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22397316"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22397316" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "29" }] }
       }
     },
     {
@@ -904,20 +650,11 @@
         "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "17513"
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22412327"
-            }
-          ]
-        }
+          "data": [{ "type": "site_statuses", "id": "22412327" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "1" }] }
       }
     }
   ],
@@ -937,66 +674,39 @@
     {
       "id": "22406192",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11233046"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233046" } }
       }
     },
     {
       "id": "22412416",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11233045"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233045" } }
       }
     },
     {
       "id": "22412415",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11233040"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233040" } }
       }
     },
     {
       "id": "22412414",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11233032"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233032" } }
       }
+    },
+    {
+      "id": "1",
+      "type": "subjects",
+      "attributes": { "subject_name": "Primary", "subject_code": "00" }
     },
     {
       "id": "17500",
@@ -1013,17 +723,9 @@
     {
       "id": "22397080",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230551"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230551" } }
       }
     },
     {
@@ -1041,481 +743,309 @@
     {
       "id": "22397185",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230642"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230642" } }
       }
     },
     {
       "id": "22397180",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230625"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230625" } }
       }
+    },
+    {
+      "id": "10",
+      "type": "subjects",
+      "attributes": { "subject_name": "Biology", "subject_code": "C1" }
     },
     {
       "id": "22412252",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412253",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22397205",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "12",
+      "type": "subjects",
+      "attributes": { "subject_name": "Chemistry", "subject_code": "F1" }
     },
     {
       "id": "22412254",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412255",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "16",
+      "type": "subjects",
+      "attributes": { "subject_name": "Computing", "subject_code": "11" }
     },
     {
       "id": "22412256",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412257",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "21",
+      "type": "subjects",
+      "attributes": { "subject_name": "English", "subject_code": "Q3" }
     },
     {
       "id": "22411374",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22397430",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412258",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "22",
+      "type": "subjects",
+      "attributes": { "subject_name": "Geography", "subject_code": "F8" }
     },
     {
       "id": "22412259",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22411391",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412260",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "24",
+      "type": "subjects",
+      "attributes": { "subject_name": "History", "subject_code": "V1" }
     },
     {
       "id": "22412261",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412262",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412318",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "25",
+      "type": "subjects",
+      "attributes": { "subject_name": "Mathematics", "subject_code": "G1" }
     },
     {
       "id": "22412319",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22397266",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230641"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230641" } }
       }
     },
     {
       "id": "22412320",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412321",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
+      }
+    },
+    {
+      "id": "33",
+      "type": "subjects",
+      "attributes": { "subject_name": "Modern Languages", "subject_code": null }
+    },
+    {
+      "id": "42",
+      "type": "subjects",
+      "attributes": {
+        "subject_name": "Modern languages (other)",
+        "subject_code": "24"
       }
     },
     {
       "id": "22412322",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412323",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "34",
+      "type": "subjects",
+      "attributes": { "subject_name": "French", "subject_code": "15" }
+    },
+    {
+      "id": "41",
+      "type": "subjects",
+      "attributes": { "subject_name": "Spanish", "subject_code": "22" }
     },
     {
       "id": "22412324",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "26",
+      "type": "subjects",
+      "attributes": { "subject_name": "Music", "subject_code": "W3" }
     },
     {
       "id": "22412325",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412326",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22397295",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
+    },
+    {
+      "id": "29",
+      "type": "subjects",
+      "attributes": { "subject_name": "Physics", "subject_code": "F3" }
     },
     {
       "id": "22397316",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
       "id": "22412327",
       "type": "site_statuses",
-      "attributes": {
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11230629"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
@@ -1681,11 +1211,7 @@
       }
     }
   ],
-  "meta": {
-    "count": 2160
-  },
-  "jsonapi": {
-    "version": "1.0"
-  }
+  "meta": { "count": 30 },
+  "jsonapi": { "version": "1.0" }
 }
 
