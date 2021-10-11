@@ -23,7 +23,7 @@ feature_flags:
   send_web_requests_to_big_query: false
   new_filters: true
   maintenance_mode: false
-  maintenance_banner: true
+  maintenance_banner: false
   cache_courses: false
   provider_autocomplete: true
   bursaries_and_scholarships_announced: true
