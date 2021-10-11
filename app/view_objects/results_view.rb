@@ -437,15 +437,38 @@ private
     base_query = Course
       .includes(site_statuses: [:site])
       .includes(:provider)
-      .includes(:subjects)
-      .where(recruitment_cycle_year: RecruitmentCycle.current_year)
+      .select(
+        :name,
+        :course_code,
+        :provider_code,
+        :study_mode,
+        :qualification,
+        :funding_type,
+        :provider_type,
+        :level,
+        :provider,
+        :site_statuses,
+        providers: %i[
+          provider_name
+          address1
+          address2
+          address3
+          address4
+          postcode
+        ],
+        site_statuses: %i[
+          status
+          has_vacancies?
+          site
+        ],
+      )
 
+    base_query = base_query.where(recruitment_cycle_year: RecruitmentCycle.current_year)
     base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: true) if hasvacancies?
     base_query = base_query.where(study_type: study_type) if study_type.present?
     base_query = base_query.where(degree_grade: degree_grade_types) if degree_required?
     base_query = base_query.where(can_sponsor_visa: true) if visa_courses?
-
     base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
     base_query = base_query.where(subjects: subject_codes.join(',')) if subject_codes.any?
     base_query = base_query.where(send_courses: true) if send_courses?
