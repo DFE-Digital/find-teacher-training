@@ -1,11 +1,11 @@
 module TeacherTrainingPublicAPI
   class ProvidersCache
     def self.save(providers)
-      Redis.current.set('providers', providers)
+      RedisService.current.set('providers', providers)
     end
 
     def self.read
-      Redis.current.get('providers')
+      RedisService.current.get('providers')
     end
   end
 end

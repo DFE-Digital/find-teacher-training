@@ -19,6 +19,12 @@ log_level: info
 skylight_auth_token: replace_me
 skylight_enable: true
 
+background_jobs:
+  sync_providers:
+    cron: "0 * * * *" # hourly
+    class: "SyncProvidersJob"
+    queue: sync_providers
+
 feature_flags:
   send_web_requests_to_big_query: false
   new_filters: true
@@ -27,4 +33,4 @@ feature_flags:
   cache_courses: false
   provider_autocomplete: true
   bursaries_and_scholarships_announced: true
-  cache_providers: false
+  cache_providers: true
