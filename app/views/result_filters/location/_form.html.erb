@@ -92,7 +92,7 @@
             <div class="govuk-radios__conditional <%= 'govuk-radios__conditional--hidden' unless params[:l] == '3' %>"
               id="query-container" data-qa="by-provider-conditional">
               <div class="govuk-form-group <%= 'govuk-form-group--error' if provider_error? %>" data-module="track-no-provider-results">
-                <% if FeatureFlag.active?(:cache_providers) %>
+                <% if FeatureFlag.active?(:cache_providers) && select_provider_options %>
                   <%= form.label :query, { class: 'govuk-label', for: 'provider'  } do %>
                     School, university or other training provider
                     <span class="govuk-hint">Enter the name or provider code</span>
