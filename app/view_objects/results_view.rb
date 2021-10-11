@@ -436,6 +436,7 @@ private
   def course_query(include_location:, radius_to_query: radius, include_salary: true)
     base_query = Course
       .includes(site_statuses: [:site])
+      .includes(:subjects)
       .includes(:provider)
       .select(
         :name,
@@ -448,6 +449,7 @@ private
         :level,
         :provider,
         :site_statuses,
+        :subjects,
         providers: %i[
           provider_name
           address1
@@ -460,6 +462,10 @@ private
           status
           has_vacancies?
           site
+        ],
+        subjects: %i[
+          subject_name
+          subject_code
         ],
       )
 
