@@ -10,6 +10,7 @@ require 'action_controller/railtie'
 require 'action_view/railtie'
 require 'view_component/engine'
 require './app/middleware/csharp_subject_conversion_middleware'
+require './app/middleware/handle_bad_multipart_form_data_middleware'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -32,6 +33,7 @@ module FindTeacherTraining
     # https://thoughtbot.com/blog/content-compression-with-rack-deflater
     config.middleware.use Rack::Deflater
     config.middleware.use CsharpSubjectConversionMiddleware
+    config.middleware.insert_before CsharpSubjectConversionMiddleware, HandleBadMultipartFormDataMiddleware
 
     config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
 

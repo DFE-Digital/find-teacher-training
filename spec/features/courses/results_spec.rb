@@ -41,13 +41,12 @@ describe 'Search results', type: :feature do
       expect(results_page.courses.count).to eq(10)
 
       results_page.courses.first.then do |first_course|
-        expect(first_course.name.text).to eq('Geography (385N)')
-        expect(first_course.provider_name.text).to eq('BHSSA')
+        expect(first_course.name.text).to eq('Primary (5-11) with SEND (H411)')
+        expect(first_course.provider_name.text).to eq('Linwood Training, Support and Advice')
         expect(first_course.qualification.text).to include('PGCE with QTS')
-        expect(first_course.qualification.text).to include('QTS ratified by University of Brighton')
         expect(first_course.study_mode.text).to eq('Full time')
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
-        expect(first_course.main_address.text).to eq('Hove Park School, Hangleton Way, Hove, East Sussex, BN3 8AA')
+        expect(first_course.main_address.text).to eq('Poole SCITT, Ad Astra Infant School, Sherborn Crescent, Poole, Dorset, BH17 8AP')
         expect(first_course).not_to have_show_vacancies
       end
     end

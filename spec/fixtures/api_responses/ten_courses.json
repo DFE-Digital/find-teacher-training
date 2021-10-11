@@ -1,2883 +1,544 @@
 {
   "data": [
     {
-      "id": "12917261",
+      "id": "12966519",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "385N",
-        "name": "Geography",
+        "course_code": "H411",
+        "name": "Primary (5-11) with SEND",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
         "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01485 644644",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@bar.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2019-09-25T09:00:39.460Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-09-25T09:00:39Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "There are four strands to this course: subject study/subject education, education studies, school placements and professional development.\r\nCourse content is kept up to date with changes in local and national initiatives and legislation, so you will be confident that your working knowledge is based on current theory and practice.\r\n\r\nThe subject study/subject education strand builds upon your existing expertise in geography and provides you with the opportunity to develop skills, knowledge and understanding of geography in the secondary school context. You will consider the learning and teaching strategies that are relevant to the specialist subject. \r\n\r\nThe subject education module is specifically related to teaching the specialist subject in school while the subject study module enables you to take your subject specialist studies to an increased depth. You can earn 20 masters-level credits through the assessment for the subject study module.\r\n\r\nThe education studies strand will give you a thorough understanding of the learning process itself, including an appreciation of individual differences. The study of the principles and practices of learning and teaching is through both school and university settings, allowing you to develop practical competencies, supported by analytical skills. By the end of the course you will:\r\n\r\n-refine your understanding of pedagogy, including an appreciation of current and emerging educational theories and debate\r\n\r\n-understand how to use and adapt a range of teaching, learning, management and assessment strategies in order to meet the varying needs of learners\r\n\r\n-understand how the progress and well-being of learners is affected by a range of influences and know how to take account of the principles of equality, inclusion and diversity.\r\n\r\nProfessional development is intrinsically linked to all key strands of the programme and is designed to enable you to evaluate critically and reflect upon your learning in order to make improvements. You will be expected to gather and justify evidence of your achievements on a regular basis and develop and implement improvement plans.\r\n\r\nStudents use an e-portfolio to record their achievements, and this is reviewed throughout the course. An action plan is used to support professional development during placements and makes up a significant part of the improvement planning process.\r\n\r\nAt the end of the course, the e-portfolio provides evidence that you have met the Teachers’ Standards for the award of Qualified Teacher Status.",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "You will spend a minimum of 120 days on school-based activities, with your training shared between the university and the partner school. \r\n\r\nYour school-based training will include observing teachers, working with individual pupils and groups of pupils, team teaching and independent teaching. Your training will also entail completing specific subject tasks and developing your knowledge of school policy and effective practices.\r\nYou will maintain a professional training portfolio and be supported to review your work critically and analytically as well as to set appropriately challenging targets. We will also develop an action plan with you to identify strengths, development needs and actions, so that your practice is continually developing.\r\n\r\nKey aims of the school-based training:\r\n-advance the development of your professional attributes, skills, knowledge and understanding\r\n-provide practical and specific experiences that enable you to critically analyse your professional practice and take responsibility for your own professional development\r\n-enable you to work collaboratively with colleagues in order to develop an understanding of the ways in which the attainment, development and well-being of all learners can be achieved with a unified support and teaching system\r\nprovide opportunities that enable you to adopt a creative and -constructively critical approach towards your practice, supported by appropriate reading and research.\r\n\r\nDuring your school-based training, university tutors, school mentors and teachers will support you and take shared responsibility for your professional development.\r\n\r\nYour progress will be observed and assessed throughout your school-based training by university and school staff, followed by feedback sessions to discuss your development. Your e-portfolio will also be evaluated as part of the overall assessment.\r\n\r\nThrough doing School Direct it allows you to have the choice of school you would like to be based in for your main placement, route you will be able to apply for the school you would like to teach in. \r\n",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant.\r\n\r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house tests available for candidates without qualifications in maths and English. \r\n",
-        "salary_details": null
+        "level": "primary",
+        "provider_code": "1X3",
+        "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17837" } },
         "site_statuses": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312723"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312724"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312725"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312727"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22336543"
-            }
+            { "type": "site_statuses", "id": "22406192" },
+            { "type": "site_statuses", "id": "22412416" },
+            { "type": "site_statuses", "id": "22412415" },
+            { "type": "site_statuses", "id": "22412414" }
           ]
         },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
+        "subjects": { "data": [{ "type": "subjects", "id": "1" }] }
       }
     },
     {
-      "id": "12917268",
+      "id": "12962220",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "38KK",
-        "name": "Physics",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13230,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Sussex",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Admissions Coordinator",
-          "year_code": "2019",
-          "provider_code": "S90",
-          "provider_type": "university",
-          "postcode": "BN1 9QQ",
-          "website": "http://www.sussex.ac.uk/education/ite",
-          "address1": "Sussex School of Education",
-          "address2": "Essex House",
-          "address3": "Falmer, Brighton",
-          "email": "bar@foo.com",
-          "telephone": "01273 873238",
-          "region_code": null,
-          "created_at": "2019-07-19T08:16:09.730Z",
-          "updated_at": "2019-12-24T15:39:32.114Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T13:15:25.083Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Sussex Schools Partnership offers high quality professional and academic teaching courses leading to Qualified Teacher Status (QTS), a PGCE of 90 Masters Level Credits and a progression route onto a Masters in Education. \r\n\r\n\r\nWith a history of innovation we pioneered a model of school-based teacher training 50 years ago, now adopted nationally. Schools are involved at every stage of the selection, training and assessment of our beginner teachers. This long standing relationship results in excellent support from experienced teachers mentoring trainees on placement and dedicated University tutors offering models of successful pedagogy. As a small friendly department we offer our trainees a personal approach and  aftercare support and training as Newly Qualified Teachers\r\n\r\n\r\nWe train 'thinking' teachers with a over riding desire to make a difference to the lives of young people.   \r\nA research intensive university, we believe teachers benefit from critical engagement in evidence-based practice, reflection on research and continuing professional development as well as excellent practical classroom skills. \r\n\r\nOur University sits on a leafy campus at the edge of the South Downs National Park, accessible by road or rail from East and West Sussex, Brighton and Hove, Surrey, Kent, Hampshire and South London. The historic \r\nseaside city of Brighton is minutes away, with its pebble beaches and vibrant social and cultural opportunities.\r\n\r\n\r\nCourse outcomes are consistently high;  100% achieving QTS on first attempt, \r\n94% completing with Merit or Distinction,  \r\n98% securing a teaching post and \r\n99% of ex-trainees rating the course 'good' or 'very good'.  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-          "train_with_disability": "The University of Sussex welcomes applications from all candidates who have the potential to make excellent teachers regardless of disability and additional needs. \r\n\r\nWe have previously successfully supported trainee teachers with dyslexia, dyspraxia, aspergers, mental wealth conditions and a range of physical, hearing and visual impairments.\r\n\r\nAll trainee teachers  are first screened for mental and physical fitness to teach by the University's Occupational Health Department before admission to the programme.  Following this, if you have a disability or health condition, you will register with the University Student Support service and an assessment is arranged to establish your needs. The team will identify the additional support and adjustments  recommended to help you be as successful as possible on the course.\r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8670895,
-          "longitude": -0.087914,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "S90",
-        "changed_at": "2019-10-01T08:00:48.320Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-10-01T08:00:48Z",
-        "about_accrediting_body": "University of Sussex tutors work with us to provide high quality inputs on how to teach and assess your chosen secondary subject or across the curriculum in primary schools. The University also provides a comprehensive programme of Professional Studies which complements the school-based training offered across our partnership.",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "The year is divided into four main sections.  We start with induction, and end with the enrichment week.  In between those are the two school professional practices and the assignments.  Induction – Placement one – APK – Placement 2 – RPK – Enrichment week \r\n \r\nInduction In this time, you will meet all the people who you will be working with for the rest of the course.  You will attend professional studies sessions as well as curriculum specific sessions. In Science we try to make sure that you head off on your professional practice with some sound basic knowledge of health and safety in the lab, some brief guidance on lesson planning as well as some broad ideas of how you can start to plan good lessons for the pupils. \r\n\r\n\r\nCurriculum Studies Sessions These sessions happen throughout your first professional practice, and occasionally in your second placement.  They are always on Fridays. \r\n \r\nThe structure varies from Friday to Friday, but you will normally be involved in some practical lab-based work, have a group tutorial, as well as have the opportunity to discuss and learn about some pedagogic aspect of teaching.  Some of the Friday sessions take place off campus.\r\n\r\nYou continue to come to University on Fridays for curriculum studies.  There will also be times in professional practice one when you are asked to come to campus for a review meeting. (see your calendar or the main handbook for these times).  You will be working on your APK in placement one and submit it at the start of placement two.  \r\n\r\nProfessional Practice Two In this professional practice, you will spend more of the week in school.  There are only a few Friday sessions at University to allow you to teach more hours in school.  As with professional practice one there should be a short period of induction when you arrive at professional practice two where you are given the opportunity to see how the school policies work in action. \r\n \r\nYou will be working towards a timetable of 12 hours per week in this professional practice.   \r\n \r\nEnd of the Course Once you have successfully completed your second professional practice, the final hurdle is to have a RPK interview.  This interview involves a professional discussion with your tutor and a mentor about your progress over the last year.  You will present your evidence folders as well as the subject knowledge scrapbook. \r\n\r\nhttp://www.sussex.ac.uk/education/ite/pgceandschooldirectsecondary/science \r\n",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "All routes and phases will complete two professional practices – this is a requirement for the award of QTS. Trainee teachers need a variety of experience in schools to enable them to meet all the Teachers’ Standards. They need to teach children and young people in their specified age range, from different backgrounds, as well as gaining experience of different approaches to teaching and to school organisation and management. \r\n \r\nProfessional Practice 1 is the period of time from the end of September to Christmas During Professional Practice 1, Trainees spend Monday to Thursday in school and Friday at University. \r\n \r\nProfessional Practice 2 is the period of time from January until May half term which includes the second school placement During Professional Practice 2, Trainees attend University on a fewer number of Fridays held at strategic points in the placement. ",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Degree\r\nNormally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant. \r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house equivalence tests are available for suitable candidates.",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312746"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312745"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312747"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312748"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312744"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312749"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339464"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339465"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339466"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
-      }
-    },
-    {
-      "id": "12917247",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "3855",
-        "name": "Chemistry",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13230,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Sussex",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Admissions Coordinator",
-          "year_code": "2019",
-          "provider_code": "S90",
-          "provider_type": "university",
-          "postcode": "BN1 9QQ",
-          "website": "http://www.sussex.ac.uk/education/ite",
-          "address1": "Sussex School of Education",
-          "address2": "Essex House",
-          "address3": "Falmer, Brighton",
-          "email": "bar@foo.com",
-          "telephone": "01273 873238",
-          "region_code": null,
-          "created_at": "2019-07-19T08:16:09.730Z",
-          "updated_at": "2019-12-24T15:39:32.114Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T13:15:25.083Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Sussex Schools Partnership offers high quality professional and academic teaching courses leading to Qualified Teacher Status (QTS), a PGCE of 90 Masters Level Credits and a progression route onto a Masters in Education. \r\n\r\n\r\nWith a history of innovation we pioneered a model of school-based teacher training 50 years ago, now adopted nationally. Schools are involved at every stage of the selection, training and assessment of our beginner teachers. This long standing relationship results in excellent support from experienced teachers mentoring trainees on placement and dedicated University tutors offering models of successful pedagogy. As a small friendly department we offer our trainees a personal approach and  aftercare support and training as Newly Qualified Teachers\r\n\r\n\r\nWe train 'thinking' teachers with a over riding desire to make a difference to the lives of young people.   \r\nA research intensive university, we believe teachers benefit from critical engagement in evidence-based practice, reflection on research and continuing professional development as well as excellent practical classroom skills. \r\n\r\nOur University sits on a leafy campus at the edge of the South Downs National Park, accessible by road or rail from East and West Sussex, Brighton and Hove, Surrey, Kent, Hampshire and South London. The historic \r\nseaside city of Brighton is minutes away, with its pebble beaches and vibrant social and cultural opportunities.\r\n\r\n\r\nCourse outcomes are consistently high;  100% achieving QTS on first attempt, \r\n94% completing with Merit or Distinction,  \r\n98% securing a teaching post and \r\n99% of ex-trainees rating the course 'good' or 'very good'.  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-          "train_with_disability": "The University of Sussex welcomes applications from all candidates who have the potential to make excellent teachers regardless of disability and additional needs. \r\n\r\nWe have previously successfully supported trainee teachers with dyslexia, dyspraxia, aspergers, mental wealth conditions and a range of physical, hearing and visual impairments.\r\n\r\nAll trainee teachers  are first screened for mental and physical fitness to teach by the University's Occupational Health Department before admission to the programme.  Following this, if you have a disability or health condition, you will register with the University Student Support service and an assessment is arranged to establish your needs. The team will identify the additional support and adjustments  recommended to help you be as successful as possible on the course.\r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8670895,
-          "longitude": -0.087914,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "S90",
-        "changed_at": "2019-10-01T07:59:56.495Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-10-01T07:59:56Z",
-        "about_accrediting_body": "University of Sussex tutors work with us to provide high quality inputs on how to teach and assess your chosen secondary subject or across the curriculum in primary schools. The University also provides a comprehensive programme of Professional Studies which complements the school-based training offered across our partnership.",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "The year is divided into four main sections.  We start with induction, and end with the enrichment week.  In between those are the two school professional practices and the assignments.  Induction – Placement one – APK – Placement 2 – RPK – Enrichment week \r\n \r\nInduction In this time, you will meet all the people who you will be working with for the rest of the course.  You will attend professional studies sessions as well as curriculum specific sessions. In Science we try to make sure that you head off on your professional practice with some sound basic knowledge of health and safety in the lab, some brief guidance on lesson planning as well as some broad ideas of how you can start to plan good lessons for the pupils. \r\n\r\nCurriculum Studies Sessions These sessions happen throughout your first professional practice, and occasionally in your second placement.  They are always on Fridays. \r\n \r\nThe structure varies from Friday to Friday, but you will normally be involved in some practical lab-based work, have a group tutorial, as well as have the opportunity to discuss and learn about some pedagogic aspect of teaching.  Some of the Friday sessions take place off campus.\r\n\r\nYou continue to come to University on Fridays for curriculum studies.  There will also be times in professional practice one when you are asked to come to campus for a review meeting. (see your calendar or the main handbook for these times).  You will be working on your APK in placement one and submit it at the start of placement two.  \r\n\r\nProfessional Practice Two In this professional practice, you will spend more of the week in school.  There are only a few Friday sessions at University to allow you to teach more hours in school.  As with professional practice one there should be a short period of induction when you arrive at professional practice two where you are given the opportunity to see how the school policies work in action. \r\n \r\nYou will be working towards a timetable of 12 hours per week in this professional practice.   \r\n \r\nEnd of the Course Once you have successfully completed your second professional practice, the final hurdle is to have a RPK interview.  This interview involves a professional discussion with your tutor and a mentor about your progress over the last year.  You will present your evidence folders as well as the subject knowledge scrapbook. \r\n\r\nhttp://www.sussex.ac.uk/education/ite/pgceandschooldirectsecondary/science \r\n",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "All routes and phases will complete two professional practices – this is a requirement for the award of QTS. Trainee teachers need a variety of experience in schools to enable them to meet all the Teachers’ Standards. They need to teach children and young people in their specified age range, from different backgrounds, as well as gaining experience of different approaches to teaching and to school organisation and management. \r\n \r\nProfessional Practice 1 is the period of time from the end of September to Christmas During Professional Practice 1, Trainees spend Monday to Thursday in school and Friday at University. \r\n \r\nProfessional Practice 2 is the period of time from January until May half term which includes the second school placement During Professional Practice 2, Trainees attend University on a fewer number of Fridays held at strategic points in the placement. ",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Degree \r\nNormally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant. \r\n\r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house equivalence tests are available for suitable candidates.",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312674"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312675"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312680"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312676"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312677"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312678"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312679"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339414"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
-      }
-    },
-    {
-      "id": "12917257",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "385J",
-        "name": "Art and Design",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published_with_unpublished_changes",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01456 634654",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@bar.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2019-10-22T13:11:21.489Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-09-25T08:50:31Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "There are four strands to this course: subject study/subject education, education studies, school placements and professional development.\r\nCourse content is kept up to date with changes in local and national initiatives and legislation, so you will be confident that your working knowledge is based on current theory and practice.\r\n\r\nThe subject study/subject education strand builds upon your existing expertise in art and design and provides you with the opportunity to develop skills, knowledge and understanding of art and design in the secondary school context. You will consider the learning and teaching strategies that are relevant to the specialist subject. \r\n\r\nThe subject education module is specifically related to teaching the specialist subject in school while the subject study module enables you to take your subject specialist studies to an increased depth. You can earn 20 masters-level credits through the assessment for the subject study module.\r\n\r\nThe education studies strand will give you a thorough understanding of the learning process itself, including an appreciation of individual differences. The study of the principles and practices of learning and teaching is through both school and university settings, allowing you to develop practical competencies, supported by analytical skills. By the end of the course you will:\r\n-refine your understanding of pedagogy, including an appreciation of current and emerging educational theories and debate\r\n-understand how to use and adapt a range of teaching, learning, management and assessment strategies in order to meet the varying needs of learners\r\n-understand how the progress and well-being of learners is affected by a range of influences and know how to take account of the principles of equality, inclusion and diversity.\r\n\r\nProfessional development is intrinsically linked to all key strands of the programme and is designed to enable you to evaluate critically and reflect upon your learning in order to make improvements. You will be expected to gather and justify evidence of your achievements on a regular basis and develop and implement improvement plans.\r\n\r\nStudents use an e-portfolio to record their achievements and this is reviewed throughout the course. An action plan is used to support professional development during placements and makes up a significant part of the improvement planning process.\r\n\r\nAt the end of the course, the e-portfolio provides evidence that you have met the Teachers’ Standards for the award of Qualified Teacher Status.",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "You will spend a minimum of 120 days on school-based activities, with your training shared between the university and the partner school. \r\n\r\nYour school-based training will include observing teachers, working with individual pupils and groups of pupils, team teaching and independent teaching. Your training will also entail completing specific subject tasks and developing your knowledge of school policy and effective practices.\r\nYou will maintain a professional training portfolio and be supported to review your work critically and analytically as well as to set appropriately challenging targets. We will also develop an action plan with you to identify strengths, development needs and actions, so that your practice is continually developing.\r\n\r\nKey aims of the school-based training:\r\n-advance the development of your professional attributes, skills, knowledge and understanding\r\n-provide practical and specific experiences that enable you to critically analyse your professional practice and take responsibility for your own professional development\r\n-enable you to work collaboratively with colleagues in order to develop an understanding of the ways in which the attainment, development and well-being of all learners can be achieved with a unified support and teaching system\r\nprovide opportunities that enable you to adopt a creative and -constructively critical approach towards your practice, supported by appropriate reading and research.\r\n\r\nDuring your school-based training, university tutors, school mentors and teachers will support you and take shared responsibility for your professional development.\r\n\r\nYour progress will be observed and assessed throughout your school-based training by university and school staff, followed by feedback sessions to discuss your development. Your e-portfolio will also be evaluated as part of the overall assessment.\r\n\r\nThrough doing School Direct it allows you to have the choice of school you would like to be based in for your main placement, route you will be able to apply for the school you would like to teach in. \r\n\r\n ",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n\r\n\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Normally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant. \r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house equivalence tests are available for suitable candidates.\r\n",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312702"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339408"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
-      }
-    },
-    {
-      "id": "12917272",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "3DTC",
-        "name": "Physical Education",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01456 634654",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@bar.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2019-09-25T09:33:53.735Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-09-25T09:33:53Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "All teaching takes place at the School of Sport and Service Management, based in Eastbourne, where there are extensive sports facilities such as six badminton court-sized sports halls, two gymnasiums, plus a fitness suite, Astro turf pitch and swimming pool.\r\n\r\nWhen studying with us at the university, you’ll experience and learn how to teach practical physical education through The A-list of physical activities. These include physical activities considered to be less conventional compared to more established types of activities. The A-list includes the following non-conventional physical activities: \r\n\r\nAlternative – Physical activities that depart from or challenge traditional norms and are considered to be non-traditional in a UK context such as tchoukball, kin-ball and korfball.\r\n\r\nAdapted – Physical activities suited to pupils with additional learning needs but that can also be practiced by all pupils within secondary schools such as boccia, goalball and new age kurling.\r\n\r\nArtistic – Physical activities related to cultural and artistic forms of dance.\r\n\r\nAesthetic – Physical activities that are creative and involve a combination of movements requiring precision, fluency and control such as urban gymnastics, cheerleading and trampolining.\r\n\r\nAquatic – Physical activities that take place in or on the water such as swimming, synchronised swimming, water aerobic dancing, water polo, life-saving and personal survival.\r\n\r\nAthletic – Physical activities that require physical skill, agility and stamina such as street surfing.\r\n\r\nAdventurous – Physical activities that require precise problem-solving and decision making skills such as orienteering and climbing.\r\n\r\nAerobic – Physical activities that are sustained and require low to high intensity such as jogging, rowing and cycling.\r\n\r\nAnaerobic – Physical activities that are non-endurance activities involving speed strength and power such as sprinting, jumping, and throwing.\r\n\r\nThe university works in partnership with schools and colleges to provide a high quality programme of support, ensuring a sound relationship between theory and practice. You will benefit from undertaking two placements in two schools or colleges, spending two-thirds of your year teaching, under supervision. You'll also have the opportunity to visit additional schools or colleges as part of the Peer Observation programme.\r\n",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "You will spend a minimum of 120 days on school-based activities, with your training shared between the university and the partner school. \r\n\r\nYour school-based training will include observing teachers, working with individual pupils and groups of pupils, team teaching and independent teaching. Your training will also entail completing specific subject tasks and developing your knowledge of school policy and effective practices.\r\n\r\nYou will maintain a professional training portfolio and be supported to review your work critically and analytically as well as to set appropriately challenging targets. We will also develop an action plan with you to identify strengths, development needs and actions, so that your practice is continually developing.\r\n\r\nKey aims of the school-based training-\r\n-Advance the development of your professional attributes, skills, knowledge and understanding.\r\n-Provide practical and specific experiences that enable you to critically analyse your professional practice and take responsibility for your own professional development.\r\n-Enable you to work collaboratively with colleagues in order to develop an understanding of the ways in which the attainment, development and wellbeing of all learners can be achieved with a unified support and teaching system.\r\n-Provide opportunities that enable you to adopt a creative and constructively critical approach towards your practice, supported by appropriate reading and research.",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Degree\r\nNormally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant.\r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. ",
-        "salary_details": null
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22339169"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
-      }
-    },
-    {
-      "id": "12936457",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "Z923",
-        "name": "Mathematics",
-        "study_mode": "full_time",
-        "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time teaching apprenticeship",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "apprenticeship",
-        "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": "11_to_18",
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01456 634654",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@bar.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2020-02-13T16:34:22.721Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "June 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2020-01-21T10:12:41Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "Postgraduate Teaching Apprenticeship programmes are a nationally-recognised, work-based route into teaching. It is an alternative to a traditional full-time university course, offering a postgraduate-level qualification, no tuition fees, and the opportunity to earn while you learn.\r\nPostgraduate Teaching Apprenticeships are available for prospective primary and secondary school teachers in England.\r\n\r\nYou’ll be employed by a school while you learn on the job. In some cases, this may be a school you’re already working at, or have an existing relationship with.\r\n\r\nAs Postgraduate Teaching Apprenticeships are new, there are currently only a limited number of vacancies. Each training provider will have a set plan for when they’re opening theirs, so keep a look out.\r\nIf you’re currently working as an unqualified teacher or teaching assistant, it offers new opportunities for career progression, plus higher earning capacity, recognition, and status.\r\n\r\nYou’ll receive a combination of classroom teaching and off-the-job training as you to work towards Qualified Teacher Status (QTS).\r\n\r\nCheck with your training provider to find out if the apprenticeship also includes a PGCE and master's level credits. Where this is an option, there may be an additional cost required for completion of the PGCE.\r\n\r\nSimilar to School Direct (salaried) programmes, you’ll be employed directly by the school. Unlike School Direct (salaried) programmes:\r\nPostgraduate Teaching Apprenticeship programmes combine paid work with on and off-the-job training. The design of the programme has been led by a group of experienced schools and teachers, specifically for apprentices\r\n\r\napprentices will split their time between school and university study. You’ll receive practical, school-led training alongside experienced staff, and spend at least 20% of your time off-timetable to learn the pedagogy of teaching\r\n\r\nin addition to working towards QTS on successful completion of the course, apprentices will also complete an end point assessment (EPA) after the summer to consolidate learning from initial teacher training",
-        "course_length": "OneYear",
-        "fee_details": null,
-        "fee_international": null,
-        "fee_uk_eu": null,
-        "financial_support": null,
-        "how_school_placements_work": "Similar to School Direct (salaried) programmes, you’ll be employed directly by the school. \r\n\r\n-apprentices will split their time between school and university study. You’ll receive practical, school-led training alongside experienced staff, and spend at least 20% of your time off-timetable to learn the pedagogy of teaching\r\n\r\n\r\n",
-        "interview_process": "",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "To qualify you’ll need the following or equivalents:\r\na degree\r\ngrade 4 (C) or above in English and maths GCSEs\r\ngrade 4 (C) or above in GCSE science if you want to teach primary",
-        "salary_details": "With Postgraduate Teaching Apprenticeship programmes, you won’t need to pay any tuition fees. You'll be employed by a school, and salaries will differ between employers. Please check with your chosen training providers before you apply."
-      },
-      "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
-        "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22345423"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22345349"
-            }
-          ]
-        },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
-      }
-    },
-    {
-      "id": "12917274",
-      "type": "courses",
-      "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "3FL7",
+        "course_code": "X130",
         "name": "Primary",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time teaching apprenticeship",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "apprenticeship",
+        "funding_type": "fee",
         "level": "primary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": "equivalence_test",
-        "gcse_subjects_required": [
-          "maths",
-          "english",
-          "science"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01456 634654",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@bar.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2020-01-21T10:26:48.654Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "June 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2020-01-21T10:26:48Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "Postgraduate Teaching Apprenticeship programmes are a nationally-recognised, work-based route into teaching. It is an alternative to a traditional full-time university course, offering a postgraduate-level qualification, no tuition fees, and the opportunity to earn while you learn.\r\nPostgraduate Teaching Apprenticeships are available for prospective primary and secondary school teachers in England.\r\n\r\nYou’ll be employed by a school while you learn on the job. In some cases, this may be a school you’re already working at, or have an existing relationship with.\r\n\r\nAs Postgraduate Teaching Apprenticeships are new, there are currently only a limited number of vacancies. Each training provider will have a set plan for when they’re opening theirs, so keep a look out.\r\nIf you’re currently working as an unqualified teacher or teaching assistant, it offers new opportunities for career progression, plus higher earning capacity, recognition, and status.\r\n\r\nYou’ll receive a combination of classroom teaching and off-the-job training as you to work towards Qualified Teacher Status (QTS).\r\n\r\nCheck with your training provider to find out if the apprenticeship also includes a PGCE and master's level credits. Where this is an option, there may be an additional cost required for completion of the PGCE.\r\n\r\nSimilar to School Direct (salaried) programmes, you’ll be employed directly by the school. Unlike School Direct (salaried) programmes:\r\nPostgraduate Teaching Apprenticeship programmes combine paid work with on and off-the-job training. The design of the programme has been led by a group of experienced schools and teachers, specifically for apprentices\r\n\r\napprentices will split their time between school and university study. You’ll receive practical, school-led training alongside experienced staff, and spend at least 20% of your time off-timetable to learn the pedagogy of teaching\r\n\r\nin addition to working towards QTS on successful completion of the course, apprentices will also complete an end point assessment (EPA) after the summer to consolidate learning from initial teacher training",
-        "course_length": "OneYear",
-        "fee_details": null,
-        "fee_international": null,
-        "fee_uk_eu": null,
-        "financial_support": null,
-        "how_school_placements_work": "Similar to School Direct (salaried) programmes, you’ll be employed directly by the school. \r\n\r\n-apprentices will split their time between school and university study. You’ll receive practical, school-led training alongside experienced staff, and spend at least 20% of your time off-timetable to learn the pedagogy of teaching\r\n\r\n\r\n",
-        "interview_process": "",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "To qualify you’ll need the following or equivalents:\r\na degree\r\ngrade 4 (C) or above in English and maths GCSEs\r\ngrade 4 (C) or above in GCSE science if you want to teach primary",
-        "salary_details": "With Postgraduate Teaching Apprenticeship programmes, you won’t need to pay any tuition fees. You'll be employed by a school, and salaries will differ between employers. Please check with your chosen training providers before you apply."
+        "provider_code": "T92",
+        "provider_type": "scitt"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17500" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312755"
-            }
-          ]
+          "data": [{ "type": "site_statuses", "id": "22397080" }]
         },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
+        "subjects": { "data": [{ "type": "subjects", "id": "1" }] }
       }
     },
     {
-      "id": "12917246",
+      "id": "12962308",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "3854",
-        "name": "Classics",
+        "course_code": "2DGY",
+        "name": "Biology",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
         "funding_type": "fee",
         "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13230,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Sussex",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Admissions Coordinator",
-          "year_code": "2019",
-          "provider_code": "S90",
-          "provider_type": "university",
-          "postcode": "BN1 9QQ",
-          "website": "http://www.sussex.ac.uk/education/ite",
-          "address1": "Sussex School of Education",
-          "address2": "Essex House",
-          "address3": "Falmer, Brighton",
-          "email": "bar@foo.com",
-          "telephone": "01273 873238",
-          "region_code": null,
-          "created_at": "2019-07-19T08:16:09.730Z",
-          "updated_at": "2019-12-24T15:39:32.114Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T13:15:25.083Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Sussex Schools Partnership offers high quality professional and academic teaching courses leading to Qualified Teacher Status (QTS), a PGCE of 90 Masters Level Credits and a progression route onto a Masters in Education. \r\n\r\n\r\nWith a history of innovation we pioneered a model of school-based teacher training 50 years ago, now adopted nationally. Schools are involved at every stage of the selection, training and assessment of our beginner teachers. This long standing relationship results in excellent support from experienced teachers mentoring trainees on placement and dedicated University tutors offering models of successful pedagogy. As a small friendly department we offer our trainees a personal approach and  aftercare support and training as Newly Qualified Teachers\r\n\r\n\r\nWe train 'thinking' teachers with a over riding desire to make a difference to the lives of young people.   \r\nA research intensive university, we believe teachers benefit from critical engagement in evidence-based practice, reflection on research and continuing professional development as well as excellent practical classroom skills. \r\n\r\nOur University sits on a leafy campus at the edge of the South Downs National Park, accessible by road or rail from East and West Sussex, Brighton and Hove, Surrey, Kent, Hampshire and South London. The historic \r\nseaside city of Brighton is minutes away, with its pebble beaches and vibrant social and cultural opportunities.\r\n\r\n\r\nCourse outcomes are consistently high;  100% achieving QTS on first attempt, \r\n94% completing with Merit or Distinction,  \r\n98% securing a teaching post and \r\n99% of ex-trainees rating the course 'good' or 'very good'.  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-          "train_with_disability": "The University of Sussex welcomes applications from all candidates who have the potential to make excellent teachers regardless of disability and additional needs. \r\n\r\nWe have previously successfully supported trainee teachers with dyslexia, dyspraxia, aspergers, mental wealth conditions and a range of physical, hearing and visual impairments.\r\n\r\nAll trainee teachers  are first screened for mental and physical fitness to teach by the University's Occupational Health Department before admission to the programme.  Following this, if you have a disability or health condition, you will register with the University Student Support service and an assessment is arranged to establish your needs. The team will identify the additional support and adjustments  recommended to help you be as successful as possible on the course.\r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8670895,
-          "longitude": -0.087914,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "S90",
-        "changed_at": "2019-10-01T07:47:02.249Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-10-01T07:47:02Z",
-        "about_accrediting_body": "University of Sussex tutors work with us to provide high quality inputs on how to teach and assess your chosen secondary subject or across the curriculum in primary schools. The University also provides a comprehensive programme of Professional Studies which complements the school-based training offered across our partnership.",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "Each seminar tackles a specific teaching Classics topic through a variety of teaching styles and resources, emphasising interactive activities and practical teaching strategies.  Sessions include a focus on subject knowledge, teaching and learning theory, pedagogic demands, assessment, differentiation, course/exam requirements and learning technologies.  They will also consolidate generic skills such as lesson planning, questioning, whole class teaching and classroom organisation in the context of classics classrooms. Additionally there will be regular opportunities for peer teaching, progress reviews and discussions of emerging classroom issues. Below is an outline of the topics to be covered and an indication of timings. Please note however that for each individual session a full outline will be provided identifying intended learning outcomes, key issues to be addressed, suggested readings and follow up tasks. \r\n \r\nUniversity curriculum sessions are mainly delivered on Fridays. \r\n\r\nhttp://www.sussex.ac.uk/education/ite/pgceandschooldirectsecondary/classics\r\n",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "All routes and phases will complete two professional practices – this is a requirement for the award of QTS. Trainee teachers need a variety of experience in schools to enable them to meet all the Teachers’ Standards. They need to teach children and young people in their specified age range, from different backgrounds, as well as gaining experience of different approaches to teaching and to school organisation and management. \r\n \r\nProfessional Practice 1 is the period of time from the end of September to Christmas During Professional Practice 1, Trainees spend Monday to Thursday in school and Friday at University. \r\n \r\nProfessional Practice 2 is the period of time from January until May half term which includes the second school placement During Professional Practice 2, Trainees attend University on a fewer number of Fridays held at strategic points in the placement. \r\n ",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Degree\r\nNormally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant. \r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house equivalence tests are available for suitable candidates.",
-        "salary_details": null
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
           "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312673"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339415"
-            }
+            { "type": "site_statuses", "id": "22397185" },
+            { "type": "site_statuses", "id": "22397180" }
           ]
         },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
       }
     },
     {
-      "id": "12917238",
+      "id": "12962309",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "384R",
-        "name": "History",
+        "course_code": "2DGZ",
+        "name": "Biology",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
+        "funding_type": "salary",
         "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13230,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Sussex",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Admissions Coordinator",
-          "year_code": "2019",
-          "provider_code": "S90",
-          "provider_type": "university",
-          "postcode": "BN1 9QQ",
-          "website": "http://www.sussex.ac.uk/education/ite",
-          "address1": "Sussex School of Education",
-          "address2": "Essex House",
-          "address3": "Falmer, Brighton",
-          "email": "bar@foo.com",
-          "telephone": "01273 873666",
-          "region_code": null,
-          "created_at": "2019-07-19T08:16:09.730Z",
-          "updated_at": "2019-12-24T15:39:32.114Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T13:15:25.083Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Sussex Schools Partnership offers high quality professional and academic teaching courses leading to Qualified Teacher Status (QTS), a PGCE of 90 Masters Level Credits and a progression route onto a Masters in Education. \r\n\r\n\r\nWith a history of innovation we pioneered a model of school-based teacher training 50 years ago, now adopted nationally. Schools are involved at every stage of the selection, training and assessment of our beginner teachers. This long standing relationship results in excellent support from experienced teachers mentoring trainees on placement and dedicated University tutors offering models of successful pedagogy. As a small friendly department we offer our trainees a personal approach and  aftercare support and training as Newly Qualified Teachers\r\n\r\n\r\nWe train 'thinking' teachers with a over riding desire to make a difference to the lives of young people.   \r\nA research intensive university, we believe teachers benefit from critical engagement in evidence-based practice, reflection on research and continuing professional development as well as excellent practical classroom skills. \r\n\r\nOur University sits on a leafy campus at the edge of the South Downs National Park, accessible by road or rail from East and West Sussex, Brighton and Hove, Surrey, Kent, Hampshire and South London. The historic \r\nseaside city of Brighton is minutes away, with its pebble beaches and vibrant social and cultural opportunities.\r\n\r\n\r\nCourse outcomes are consistently high;  100% achieving QTS on first attempt, \r\n94% completing with Merit or Distinction,  \r\n98% securing a teaching post and \r\n99% of ex-trainees rating the course 'good' or 'very good'.  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-          "train_with_disability": "The University of Sussex welcomes applications from all candidates who have the potential to make excellent teachers regardless of disability and additional needs. \r\n\r\nWe have previously successfully supported trainee teachers with dyslexia, dyspraxia, aspergers, mental wealth conditions and a range of physical, hearing and visual impairments.\r\n\r\nAll trainee teachers  are first screened for mental and physical fitness to teach by the University's Occupational Health Department before admission to the programme.  Following this, if you have a disability or health condition, you will register with the University Student Support service and an assessment is arranged to establish your needs. The team will identify the additional support and adjustments  recommended to help you be as successful as possible on the course.\r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8670895,
-          "longitude": -0.087914,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "S90",
-        "changed_at": "2019-10-01T07:51:31.272Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-10-01T07:51:31Z",
-        "about_accrediting_body": "University of Sussex tutors work with us to provide high quality inputs on how to teach and assess your chosen secondary subject or across the curriculum in primary schools. The University also provides a comprehensive programme of Professional Studies which complements the school-based training offered across our partnership.",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "The year is divided into four main sections.  We start with induction, and end with the enrichment week.  In between those are the two school professional practices and the assignments.  Induction – Placement one – APK – Placement 2 – RPK – Enrichment week \r\n \r\nInduction \r\n\r\nThe structure is mainly the same each Friday. In the morning you will be involved as a Cosmo group in exploring some practical aspects of teaching as well as have the opportunity to discuss and learn about some pedagogic aspect of teaching.  In the afternoon you will meet with your subject tutor who will follow your subject specific programme for the year \r\n \r\nProfessional Practice One \r\n \r\nIn your first Professional practice, you will be inducted into school in the first few weeks.  You should have the opportunity to observe pupils and teachers as a way of seeing how the school policies work in action.  It is intended that you will have a gradual introduction to teaching a lesson and should be able to plan small sections of lessons (such as starters and plenaries) before being given a whole lesson to teach.  Normally we would not expect a trainee teacher to teach more than one whole lesson before the October half term, although this may be modified for the skills of the individual teacher.  Note that everyone will have different inductions in their schools.  Try not to compare or fret; if you are unsettled talk to your tutor.  \r\n \r\nWe would hope that you would be working towards a timetable of 8 hours by Christmas.  Remember that we will all progress at various rates and there is no ‘normal’ progression for a trainee teacher.  You will maintain these 8 hours after Christmas to the end of the placement. \r\n\r\n\r\nProfessional Practice Two In this professional practice, you will spend more of the week in school.  There are only a few Friday sessions at University to allow you to teach more hours in school.  As with professional practice one there should be a short period of induction when you arrive at professional practice two where you are given the opportunity to see how the school policies work in action. \r\n \r\nYou will be working towards a timetable of 12 hours per week in this professional practice.  Possibly a few more hours towards the end of the placement.  \r\n\r\nhttp://www.sussex.ac.uk/education/ite/pgceandschooldirectsecondary/history \r\n\r\n ",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "All routes and phases will complete two professional practices – this is a requirement for the award of QTS. Trainee teachers need a variety of experience in schools to enable them to meet all the Teachers’ Standards. They need to teach children and young people in their specified age range, from different backgrounds, as well as gaining experience of different approaches to teaching and to school organisation and management. \r\n \r\nProfessional Practice 1 is the period of time from the end of September to Christmas During Professional Practice 1, Trainees spend Monday to Thursday in school and Friday at University. \r\n \r\nProfessional Practice 2 is the period of time from January until May half term which includes the second school placement During Professional Practice 2, Trainees attend University on a fewer number of Fridays held at strategic points in the placement. \r\n ",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Degree \r\nNormally an honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant. \r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house equivalence tests are available for suitable candidates.",
-        "salary_details": null
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312628"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312629"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312631"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312634"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312636"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312630"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312632"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312633"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22312635"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339709"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22339710"
-            }
-          ]
+          "data": [{ "type": "site_statuses", "id": "22412252" }]
         },
-        "sites": {
-          "meta": {
-            "included": false
-          }
-        },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
       }
     },
     {
-      "id": "12917266",
+      "id": "12962329",
       "type": "courses",
       "attributes": {
-        "findable?": true,
-        "provider_type": "university",
-        "open_for_applications?": true,
-        "has_vacancies?": true,
-        "course_code": "385V",
-        "name": "Religious Education",
+        "course_code": "A794",
+        "name": "Biology",
         "study_mode": "full_time",
         "qualification": "pgce_with_qts",
-        "description": "PGCE with QTS full time",
-        "content_status": "published",
-        "ucas_status": "running",
-        "funding_type": "fee",
+        "funding_type": "apprenticeship",
         "level": "secondary",
-        "is_send?": false,
-        "english": "equivalence_test",
-        "maths": "equivalence_test",
-        "science": null,
-        "gcse_subjects_required": [
-          "maths",
-          "english"
-        ],
-        "age_range_in_years": null,
-        "accrediting_provider": {
-          "id": 13965,
-          "address4": "Brighton and Hove",
-          "provider_name": "University of Brighton",
-          "scheme_member": "is_a_UCAS_ITT_member",
-          "contact_name": "Sau",
-          "year_code": "2019",
-          "provider_code": "B72",
-          "provider_type": "university",
-          "postcode": "BN2 4AT",
-          "website": "http://www.brighton.ac.uk",
-          "address1": "Mithras House",
-          "address2": "Lewes Road",
-          "address3": "Brighton",
-          "email": "foo@bar.com",
-          "telephone": "01456 634654",
-          "region_code": "south_east",
-          "created_at": "2019-07-19T08:28:43.429Z",
-          "updated_at": "2019-12-24T15:52:00.367Z",
-          "accrediting_provider": "accredited_body",
-          "changed_at": "2019-12-27T12:46:40.451Z",
-          "recruitment_cycle_id": 2,
-          "discarded_at": null,
-          "train_with_us": "The University of Brighton is one of the UK’s largest providers of education and teacher training. We have a long-established reputation for high quality courses and have been educating teachers and other professionals for over 100 years. We were rated ‘outstanding’ by Ofsted in 2018 for early years, primary and secondary initial teacher training.\r\n\r\nAs one of the leading initial teacher training providers in the country, our strength lies with our school-led partnership, one that works to ensure trainee teachers receive the best possible support and education. Through our partnership we work closely with over 600 schools and colleges in the region who provide high quality school-based training opportunities. \r\n\r\nOur specialist facilities include the Curriculum Centre which houses more than 30,000 specialist resources for trainee teachers.  \r\n\r\nWe are ranked in the top 10 for education courses in England in The Times and Sunday Times Good University Guide 2019. In the Guardian University League Tables 2020 we are in the UK top 20 for education courses.\r\n\r\nOur students develop the skills and knowledge needed to be great educators, able to change our societies for the better. Employment rates for our students are consistently above the sector average and they are highly sought by our partner schools.",
-          "train_with_disability": "If you have a disability, long-term health condition or a specific learning difficulty, we will do everything we can to make sure you have equal opportunities to learn and take part in all aspects of student life. \r\n\r\nWe have a dedicated team who will support you, and facilities and equipment to help you make the most of university.\r\n\r\nYou can find out more about how we can support you [on our website.](https://www.brighton.ac.uk/studying-here/applying-to-brighton/advice-for-students/index.aspx) You can also email us to: foo@barr.com or call on 01273 643799.   \r\n",
-          "accrediting_provider_enrichments": [],
-          "latitude": 50.8420449,
-          "longitude": -0.1198916,
-          "can_sponsor_skilled_worker_visa": false,
-          "can_sponsor_student_visa": true
-        },
-        "accrediting_provider_code": "B72",
-        "changed_at": "2019-10-15T07:54:37.302Z",
-        "accept_pending_gcse": false,
-        "accept_gcse_equivalency": true,
-        "accept_english_gcse_equivalency": true,
-        "accept_maths_gcse_equivalency": false,
-        "accept_science_gcse_equivalency": true,
-        "additional_gcse_equivalencies": false,
-        "degree_grade": "two_one",
-        "additional_degree_subject_requirements": null,
-        "degree_subject_requirements": null,
-        "start_date": "September 2020",
-        "applications_open_from": "2019-10-08",
-        "last_published_at": "2019-09-25T09:37:30Z",
-        "about_accrediting_body": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n",
-        "provider_code": "1KN",
-        "recruitment_cycle_year": "2020",
-        "about_course": "The subject knowledge required for Key Stages 3/4 includes the six major world faiths, religious philosophy and ethics, and secular philosophies and other religious traditions. \r\n\r\nThere are four strands to this course: subject study/subject education, education studies, school placements and professional development.\r\nCourse content is kept up to date with changes in local and national initiatives and legislation, so you will be confident that your working knowledge is based on current theory and practice.\r\n\r\nThe subject study/subject education strand builds upon your existing expertise in religious studies and provides you with the opportunity to develop skills, knowledge and understanding of religious studies in the secondary school context. You will consider the learning and teaching strategies that are relevant to the specialist subject. \r\n\r\nThe subject education module is specifically related to teaching the specialist subject in school while the subject study module enables you to take your subject specialist studies to an increased depth. You can earn 20 masters-level credits through the assessment for the subject study module.\r\n\r\nThe education studies strand will give you a thorough understanding of the learning process itself, including an appreciation of individual differences. The study of the principles and practices of learning and teaching is through both school and university settings, allowing you to develop practical competencies, supported by analytical skills. By the end of the course you will:\r\n\r\n-refine your understanding of pedagogy, including an appreciation of current and emerging educational theories and debate\r\n-understand how to use and adapt a range of teaching, learning, management and assessment strategies in order to meet the varying needs of learners\r\n-understand how the progress and well-being of learners is affected by a range of influences and know how to take account of the principles of equality, inclusion and diversity.\r\n\r\nProfessional development is intrinsically linked to all key strands of the programme and is designed to enable you to evaluate critically and reflect upon your learning in order to make improvements. You will be expected to gather and justify evidence of your achievements on a regular basis and develop and implement improvement plans.\r\n\r\nStudents use an e-portfolio to record their achievements, and this is reviewed throughout the course. An action plan is used to support professional development during placements and makes up a significant part of the improvement planning process.\r\n",
-        "course_length": "OneYear",
-        "fee_details": "",
-        "fee_international": 14460,
-        "fee_uk_eu": 9250,
-        "financial_support": "",
-        "how_school_placements_work": "You will spend a minimum of 120 days on school-based activities, with your training shared between the university and the partner school. \r\n\r\nYour school-based training will include observing teachers, working with individual pupils and groups of pupils, team teaching and independent teaching. Your training will also entail completing specific subject tasks and developing your knowledge of school policy and effective practices.\r\nYou will maintain a professional training portfolio and be supported to review your work critically and analytically as well as to set appropriately challenging targets. We will also develop an action plan with you to identify strengths, development needs and actions, so that your practice is continually developing.\r\n\r\nKey aims of the school-based training:\r\n-advance the development of your professional attributes, skills, knowledge and understanding\r\n-provide practical and specific experiences that enable you to critically analyse your professional practice and take responsibility for your own professional development\r\n-enable you to work collaboratively with colleagues in order to develop an understanding of the ways in which the attainment, development and well-being of all learners can be achieved with a unified support and teaching system\r\n-provide opportunities that enable you to adopt a creative and constructively critical approach towards your practice, supported by appropriate reading and research.\r\n\r\nDuring your school-based training, university tutors, school mentors and teachers will support you and take shared responsibility for your professional development.\r\n\r\nYour progress will be observed and assessed throughout your placement by university and school staff, followed by feedback sessions to discuss your development. Your e-portfolio will also be evaluated as part of the overall assessment.",
-        "interview_process": "You will be required to attend two interviews one at the University and one at the school that you wish to apply for. \r\n\r\nBelow is an example of  the University and School interview process-\r\n\r\nUniversity Interview\r\nArrival and document check \r\n11.00 – 12.30 Welcome and overview of the programme with opportunity to ask questions.  Writing task. \r\n12.30- 13.25 Lunch Break \r\n13.30 – 16.00 Presentations \u0026 individual interviews\r\n\r\nSchool Interview\r\n8.45 Arrival and document check \r\n9.00 - 9.20 Teaching Task to a group of students\r\n9.30-9.50 Interview\r\n",
-        "other_requirements": "",
-        "personal_qualities": "",
-        "required_qualifications": "Honours degree, or equivalent qualification, in the subject specialism or a subject that is directly relevant.\r\nGCSE (minimum grade C or grade 4)\r\nAt least English language and maths. In-house tests are available for candidates without qualifications in mathematics and English.\r\n",
-        "salary_details": null
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
       },
       "relationships": {
-        "provider": {
-          "data": {
-            "type": "providers",
-            "id": "13122"
-          }
-        },
-        "accrediting_provider": {
-          "meta": {
-            "included": false
-          }
-        },
+        "provider": { "data": { "type": "providers", "id": "17513" } },
         "site_statuses": {
-          "data": [
-            {
-              "type": "site_statuses",
-              "id": "22312742"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22336580"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22336579"
-            },
-            {
-              "type": "site_statuses",
-              "id": "22343834"
-            }
-          ]
+          "data": [{ "type": "site_statuses", "id": "22412253" }]
         },
-        "sites": {
-          "meta": {
-            "included": false
-          }
+        "subjects": { "data": [{ "type": "subjects", "id": "10" }] }
+      }
+    },
+    {
+      "id": "12962310",
+      "type": "courses",
+      "attributes": {
+        "course_code": "2DH3",
+        "name": "Chemistry",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "fee",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": { "data": { "type": "providers", "id": "17513" } },
+        "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22397205" }]
         },
-        "subjects": {
-          "meta": {
-            "included": false
-          }
-        }
+        "subjects": { "data": [{ "type": "subjects", "id": "12" }] }
+      }
+    },
+    {
+      "id": "12962311",
+      "type": "courses",
+      "attributes": {
+        "course_code": "2DH4",
+        "name": "Chemistry",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "salary",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": { "data": { "type": "providers", "id": "17513" } },
+        "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412254" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "12" }] }
+      }
+    },
+    {
+      "id": "12962332",
+      "type": "courses",
+      "attributes": {
+        "course_code": "K396",
+        "name": "Computing",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "fee",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": { "data": { "type": "providers", "id": "17513" } },
+        "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412255" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "16" }] }
+      }
+    },
+    {
+      "id": "12962334",
+      "type": "courses",
+      "attributes": {
+        "course_code": "S332",
+        "name": "Computing",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "apprenticeship",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": { "data": { "type": "providers", "id": "17513" } },
+        "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412256" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "16" }] }
+      }
+    },
+    {
+      "id": "12962312",
+      "type": "courses",
+      "attributes": {
+        "course_code": "2DH5",
+        "name": "English",
+        "study_mode": "full_time",
+        "qualification": "pgce_with_qts",
+        "funding_type": "salary",
+        "level": "secondary",
+        "provider_code": "1CS",
+        "provider_type": "lead_school"
+      },
+      "relationships": {
+        "provider": { "data": { "type": "providers", "id": "17513" } },
+        "site_statuses": {
+          "data": [{ "type": "site_statuses", "id": "22412257" }]
+        },
+        "subjects": { "data": [{ "type": "subjects", "id": "21" }] }
       }
     }
   ],
   "included": [
     {
-      "id": "13122",
+      "id": "17837",
       "type": "providers",
       "attributes": {
-        "provider_code": "1KN",
-        "provider_name": "BHSSA",
-        "accredited_body?": false,
-        "can_add_more_sites?": true,
-        "accredited_bodies": [
-          {
-            "provider_name": "University of Sussex",
-            "provider_code": "S90",
-            "description": "University of Sussex tutors work with us to provide high quality inputs on how to teach and assess your chosen secondary subject or across the curriculum in primary schools. The University also provides a comprehensive programme of Professional Studies which complements the school-based training offered across our partnership."
-          },
-          {
-            "provider_name": "University of Brighton",
-            "provider_code": "B72",
-            "description": "The University of Brighton offer both School Direct Tuition and School Direct Salaried programmes in primary and secondary age phases.\r\n\r\nYou will be mentored by a successful teaching team with an outstanding national reputation and comprehensive research profile that informs course content.\r\n"
-          }
-        ],
-        "train_with_us": "The Brighton \u0026 Hove School Direct Partnership is a large alliance of schools from Brighton \u0026 Hove and the surrounding area. As a partnership Hove Park School is the Lead School in an alliance of 27 different schools from across the City and beyond, and we are committed to initial teacher training, we feel that training with us is a highly rewarding and innovative experience that will provide you with an excellent training ground in your first steps to becoming an outstanding practitioner. \r\n\r\n•The Primary, secondary schools and Sixth form Colleges in our alliance have had consistently good and outstanding OFSTED grading for their teaching and learning in recent years.\r\n•Our schools are very experienced in both university and school based teacher training routes, and mentors and coaches are well trained to support you through your training year. We also have a network of very supportive and experienced professional tutors and in-school mentors that will stretch and challenge you, so that you become the best practitioner that you can over the year. \r\n• The diversity within the partnership enables you as a trainees to engage with a wide variety of teaching methods and styles of learning.\r\n•Each year we have a large selection of trainees in our schools, including PGCE, so you will not be alone but will benefit from the peer to peer support that is so important when learning new skills.",
-        "train_with_disability": "As a partnership we do our best to cater for all individual needs. Applicants would need to be in contact with the schools directly to see what support they have in place.",
-        "latitude": 50.844912,
-        "longitude": -0.2018483,
-        "can_sponsor_skilled_worker_visa": false,
-        "can_sponsor_student_visa": true,
-        "address1": "Hove Park School",
-        "address2": "Hangleton Way",
-        "address3": "Hove",
-        "address4": "East Sussex",
-        "postcode": "BN3 8AA",
-        "region_code": "south_east",
-        "telephone": "01273295555",
-        "email": "a@b.com",
-        "website": "http://www.hovepark.org.uk/",
-        "recruitment_cycle_year": "2020",
-        "gt12_contact": null,
-        "application_alert_contact": null,
-        "type_of_gt12": "no_response",
-        "send_application_alerts": "all"
-      },
-      "relationships": {
-        "sites": {
-          "data": [
-            {
-              "type": "sites",
-              "id": "11208636"
-            },
-            {
-              "type": "sites",
-              "id": "11208637"
-            },
-            {
-              "type": "sites",
-              "id": "11208638"
-            },
-            {
-              "type": "sites",
-              "id": "11208639"
-            },
-            {
-              "type": "sites",
-              "id": "11208640"
-            },
-            {
-              "type": "sites",
-              "id": "11208641"
-            },
-            {
-              "type": "sites",
-              "id": "11208642"
-            },
-            {
-              "type": "sites",
-              "id": "11208643"
-            },
-            {
-              "type": "sites",
-              "id": "11208644"
-            },
-            {
-              "type": "sites",
-              "id": "11208645"
-            },
-            {
-              "type": "sites",
-              "id": "11208646"
-            },
-            {
-              "type": "sites",
-              "id": "11208647"
-            },
-            {
-              "type": "sites",
-              "id": "11208648"
-            },
-            {
-              "type": "sites",
-              "id": "11208649"
-            },
-            {
-              "type": "sites",
-              "id": "11208650"
-            },
-            {
-              "type": "sites",
-              "id": "11208651"
-            },
-            {
-              "type": "sites",
-              "id": "11208652"
-            },
-            {
-              "type": "sites",
-              "id": "11208653"
-            },
-            {
-              "type": "sites",
-              "id": "11208654"
-            },
-            {
-              "type": "sites",
-              "id": "11208655"
-            },
-            {
-              "type": "sites",
-              "id": "11208656"
-            },
-            {
-              "type": "sites",
-              "id": "11208657"
-            },
-            {
-              "type": "sites",
-              "id": "11208658"
-            },
-            {
-              "type": "sites",
-              "id": "11208659"
-            },
-            {
-              "type": "sites",
-              "id": "11208660"
-            },
-            {
-              "type": "sites",
-              "id": "11208661"
-            },
-            {
-              "type": "sites",
-              "id": "11208662"
-            },
-            {
-              "type": "sites",
-              "id": "11208663"
-            },
-            {
-              "type": "sites",
-              "id": "11208664"
-            },
-            {
-              "type": "sites",
-              "id": "11208665"
-            },
-            {
-              "type": "sites",
-              "id": "11208666"
-            },
-            {
-              "type": "sites",
-              "id": "11208667"
-            }
-          ]
-        },
-        "courses": {
-          "meta": {
-            "count": 54
-          }
-        }
+        "provider_name": " Linwood Training, Support and Advice",
+        "address1": "Poole SCITT",
+        "address2": "Ad Astra Infant School, Sherborn Crescent",
+        "address3": "Poole",
+        "address4": "Dorset",
+        "postcode": "BH17 8AP"
       }
     },
     {
-      "id": "22312723",
+      "id": "22406192",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233046" } }
       }
     },
     {
-      "id": "22312724",
+      "id": "22412416",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208647"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233045" } }
       }
     },
     {
-      "id": "22312725",
+      "id": "22412415",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208639"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233040" } }
       }
     },
     {
-      "id": "22312727",
+      "id": "22412414",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208641"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11233032" } }
       }
     },
     {
-      "id": "22336543",
+      "id": "1",
+      "type": "subjects",
+      "attributes": { "subject_name": "Primary", "subject_code": "00" }
+    },
+    {
+      "id": "17500",
+      "type": "providers",
+      "attributes": {
+        "provider_name": "2Schools Consortium",
+        "address1": "Oakthorpe Primary School",
+        "address2": "c/o Tile Kiln Lane",
+        "address3": "Palmers Green",
+        "address4": "London",
+        "postcode": "N13 6BY"
+      }
+    },
+    {
+      "id": "22397080",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230551" } }
       }
     },
     {
-      "id": "22312746",
+      "id": "17513",
+      "type": "providers",
+      "attributes": {
+        "provider_name": "ARK Teacher Training",
+        "address1": "The Yellow Building",
+        "address2": "1 Nicholas Road",
+        "address3": "London",
+        "address4": "London",
+        "postcode": "W114AN"
+      }
+    },
+    {
+      "id": "22397185",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208637"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230642" } }
       }
     },
     {
-      "id": "22312745",
+      "id": "22397180",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208648"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230625" } }
       }
     },
     {
-      "id": "22312747",
+      "id": "10",
+      "type": "subjects",
+      "attributes": { "subject_name": "Biology", "subject_code": "C1" }
+    },
+    {
+      "id": "22412252",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208649"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22312748",
+      "id": "22412253",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22312744",
+      "id": "22397205",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208638"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22312749",
+      "id": "12",
+      "type": "subjects",
+      "attributes": { "subject_name": "Chemistry", "subject_code": "F1" }
+    },
+    {
+      "id": "22412254",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208662"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22339464",
+      "id": "22412255",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208660"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22339465",
+      "id": "16",
+      "type": "subjects",
+      "attributes": { "subject_name": "Computing", "subject_code": "11" }
+    },
+    {
+      "id": "22412256",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208665"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22339466",
+      "id": "22412257",
       "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
+      "attributes": { "status": "running", "has_vacancies?": true },
       "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
+        "site": { "data": { "type": "sites", "id": "11230629" } }
       }
     },
     {
-      "id": "22312674",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208662"
-          }
-        }
-      }
+      "id": "21",
+      "type": "subjects",
+      "attributes": { "subject_name": "English", "subject_code": "Q3" }
     },
     {
-      "id": "22312675",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208637"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312680",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208640"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312676",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208649"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312677",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208648"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312678",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312679",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339414",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208660"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312702",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339408",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208660"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339169",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
-      }
-    },
-    {
-      "id": "22345423",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
-      }
-    },
-    {
-      "id": "22345349",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208636"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312755",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208667"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312673",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208640"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339415",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208639"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312628",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208662"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312629",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208661"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312631",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312634",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208640"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312636",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208637"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312630",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208653"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312632",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208649"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312633",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208641"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312635",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208639"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339709",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208638"
-          }
-        }
-      }
-    },
-    {
-      "id": "22339710",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208647"
-          }
-        }
-      }
-    },
-    {
-      "id": "22312742",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208639"
-          }
-        }
-      }
-    },
-    {
-      "id": "22336580",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "unpublished",
-        "status": "suspended",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208666"
-          }
-        }
-      }
-    },
-    {
-      "id": "22336579",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208662"
-          }
-        }
-      }
-    },
-    {
-      "id": "22343834",
-      "type": "site_statuses",
-      "attributes": {
-        "vac_status": "full_time_vacancies",
-        "publish": "published",
-        "status": "running",
-        "has_vacancies?": true
-      },
-      "relationships": {
-        "site": {
-          "data": {
-            "type": "sites",
-            "id": "11208638"
-          }
-        }
-      }
-    },
-    {
-      "id": "11208636",
+      "id": "11233046",
       "type": "sites",
       "attributes": {
-        "code": "-",
-        "location_name": "Main Site",
-        "address1": "Nevill Road",
-        "address2": "",
-        "address3": "",
-        "address4": "Hove",
-        "postcode": "BN3 7BN",
-        "region_code": "south_east",
-        "latitude": 50.8453356,
-        "longitude": -0.1787603,
-        "recruitment_cycle_year": "2020"
+        "code": "Y",
+        "location_name": "Poole SCITT",
+        "address1": "Ad Astra Infant School",
+        "address2": "Sherborn Crescent",
+        "address3": "Poole",
+        "address4": "Dorset",
+        "postcode": "BH17 8AP",
+        "region_code": "south_west",
+        "latitude": 50.7497483,
+        "longitude": -1.9652909,
+        "urn": "141755",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208637",
+      "id": "11233045",
       "type": "sites",
       "attributes": {
-        "code": "1",
-        "location_name": "BACA",
-        "address1": "Lewes Road",
-        "address2": "",
-        "address3": "Brighton",
-        "address4": "East Sussex",
-        "postcode": "BN1 9PW",
-        "region_code": "south_east",
-        "latitude": 50.8582682,
-        "longitude": -0.0918826,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208638",
-      "type": "sites",
-      "attributes": {
-        "code": "2",
-        "location_name": "Portslade Aldridge Community Academy",
-        "address1": "Chalky Road",
-        "address2": "Portslade",
-        "address3": "Brighton",
-        "address4": "East Sussex ",
-        "postcode": "BN41 2WS",
-        "region_code": "south_east",
-        "latitude": 50.851177,
-        "longitude": -0.2246949,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208639",
-      "type": "sites",
-      "attributes": {
-        "code": "3",
-        "location_name": "Patcham High School",
-        "address1": "Ladies' Mile Rd",
-        "address2": "",
-        "address3": "Brighton",
-        "address4": "East Sussex ",
-        "postcode": "BN1 8PB",
-        "region_code": "south_east",
-        "latitude": 50.862798,
-        "longitude": -0.143616,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208640",
-      "type": "sites",
-      "attributes": {
-        "code": "4",
-        "location_name": "To Be confirmed",
-        "address1": "",
-        "address2": "",
-        "address3": "",
+        "code": "W",
+        "location_name": "Winchelsea School",
+        "address1": "Guernsey Road",
+        "address2": "Parkstone",
+        "address3": "Poole",
         "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": null,
-        "longitude": null,
-        "recruitment_cycle_year": "2020"
+        "postcode": "BH12 4LL",
+        "region_code": "south_west",
+        "latitude": 50.7481466,
+        "longitude": -1.9342923,
+        "urn": "113955",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208641",
-      "type": "sites",
-      "attributes": {
-        "code": "5",
-        "location_name": "Shoreham Academy",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8360404,
-        "longitude": -0.2474719,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208642",
-      "type": "sites",
-      "attributes": {
-        "code": "6",
-        "location_name": "Sir Robert Woodard Academy",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8346771,
-        "longitude": -0.3311184,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208643",
-      "type": "sites",
-      "attributes": {
-        "code": "7",
-        "location_name": "Holmbush Primary School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8441943,
-        "longitude": -0.2463746,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208644",
-      "type": "sites",
-      "attributes": {
-        "code": "8",
-        "location_name": "Coldean Primary School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8645616,
-        "longitude": -0.1124565,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208645",
+      "id": "11233040",
       "type": "sites",
       "attributes": {
         "code": "9",
-        "location_name": "St Nicolas C of E School",
-        "address1": "",
-        "address2": "",
+        "location_name": "Springwood (ASD) Campus",
+        "address1": "Andrew's Close",
+        "address2": "Springwater Road",
         "address3": "",
+        "address4": "Bournemouth",
+        "postcode": "BH11 8HB",
+        "region_code": "south_west",
+        "latitude": 50.7572959,
+        "longitude": -1.9145968,
+        "urn": "113961",
+        "recruitment_cycle_year": "2022"
+      }
+    },
+    {
+      "id": "11233032",
+      "type": "sites",
+      "attributes": {
+        "code": "1",
+        "location_name": "Linwood School",
+        "address1": "Alma Road",
+        "address2": "Winton",
+        "address3": "Bournemouth",
         "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 55.9309511,
-        "longitude": -3.4832345,
-        "recruitment_cycle_year": "2020"
+        "postcode": "BH9 1AJ",
+        "region_code": "south_west",
+        "latitude": 50.738208,
+        "longitude": -1.8684318,
+        "urn": "113961",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208646",
-      "type": "sites",
-      "attributes": {
-        "code": "A",
-        "location_name": "Benfield Primary School",
-        "address1": "255 Old Shoreham Road",
-        "address2": "",
-        "address3": "Brighton",
-        "address4": "East Sussex",
-        "postcode": "BN41 1XS",
-        "region_code": "south_east",
-        "latitude": 50.8376095,
-        "longitude": -0.2094359,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208647",
-      "type": "sites",
-      "attributes": {
-        "code": "B",
-        "location_name": "BHASVIC",
-        "address1": "205 Dyke Rd",
-        "address2": "",
-        "address3": "Hove",
-        "address4": "East Sussex",
-        "postcode": "BN3 6EG",
-        "region_code": "south_east",
-        "latitude": 50.8340967,
-        "longitude": -0.1511988,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208648",
-      "type": "sites",
-      "attributes": {
-        "code": "C",
-        "location_name": "Cardinal Newman Catholic School",
-        "address1": "The Upper Drive",
-        "address2": "",
-        "address3": " Hove",
-        "address4": "East Sussex",
-        "postcode": "BN3 6ND",
-        "region_code": "south_east",
-        "latitude": 50.8370688,
-        "longitude": -0.1589172,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208649",
-      "type": "sites",
-      "attributes": {
-        "code": "D",
-        "location_name": "Dorothy Stringer School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8486741,
-        "longitude": -0.1433491,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208650",
-      "type": "sites",
-      "attributes": {
-        "code": "E",
-        "location_name": "Hangleton Infant School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.848136,
-        "longitude": -0.1964166,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208651",
-      "type": "sites",
-      "attributes": {
-        "code": "F",
-        "location_name": "West Hove Infant School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8348718,
-        "longitude": -0.1902726,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208652",
-      "type": "sites",
-      "attributes": {
-        "code": "G",
-        "location_name": "Saltdean Primary",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8080415,
-        "longitude": -0.0398246,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208653",
-      "type": "sites",
-      "attributes": {
-        "code": "H",
-        "location_name": "Hove Park School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8405759,
-        "longitude": -0.180202,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208654",
-      "type": "sites",
-      "attributes": {
-        "code": "I",
-        "location_name": "Goldstone Primary School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8420459,
-        "longitude": -0.1929323,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208655",
-      "type": "sites",
-      "attributes": {
-        "code": "J",
-        "location_name": "Brighton Bilingual Primary School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.84349,
-        "longitude": -0.173942,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208656",
-      "type": "sites",
-      "attributes": {
-        "code": "K",
-        "location_name": "Cedar Centre",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 51.240604,
-        "longitude": -0.6105888,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208657",
-      "type": "sites",
-      "attributes": {
-        "code": "L",
-        "location_name": "Longhill School",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8181974,
-        "longitude": -0.0677553,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208658",
-      "type": "sites",
-      "attributes": {
-        "code": "M",
-        "location_name": "Blatchington Mill School",
-        "address1": "Nevill Avenue",
-        "address2": "",
-        "address3": "Hove",
-        "address4": "East Sussex",
-        "postcode": "BN3 7NB",
-        "region_code": "south_east",
-        "latitude": 50.84527,
-        "longitude": -0.1838225,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208659",
-      "type": "sites",
-      "attributes": {
-        "code": "N",
-        "location_name": "Bowden House",
-        "address1": "",
-        "address2": "",
-        "address3": "",
-        "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.4174138,
-        "longitude": -3.6882894,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208660",
+      "id": "11230551",
       "type": "sites",
       "attributes": {
         "code": "O",
-        "location_name": "Priory School",
-        "address1": "Mountfield Road",
-        "address2": "",
-        "address3": "Lewes",
-        "address4": "East Sussex ",
-        "postcode": "BN7 2XN",
-        "region_code": "south_east",
-        "latitude": 50.869128,
-        "longitude": 0.016324,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208661",
-      "type": "sites",
-      "attributes": {
-        "code": "P",
-        "location_name": "Peacehaven Community School",
-        "address1": "Greenwich Way",
-        "address2": "",
-        "address3": "Peacehaven",
-        "address4": "East Sussex ",
-        "postcode": "BN10 8RB",
-        "region_code": "south_east",
-        "latitude": 50.796101,
-        "longitude": 0.002905,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208662",
-      "type": "sites",
-      "attributes": {
-        "code": "Q",
-        "location_name": "Ratton School",
-        "address1": "Ratton School",
-        "address2": "",
-        "address3": "Eastbourne",
-        "address4": "East Sussex",
-        "postcode": "BN21 2XH",
-        "region_code": "south_east",
-        "latitude": 50.789742,
-        "longitude": 0.260544,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208663",
-      "type": "sites",
-      "attributes": {
-        "code": "R",
-        "location_name": "Warden Park",
-        "address1": "West Sussex",
+        "location_name": "Oakthorpe Primary School",
+        "address1": "Tile Kiln Lane",
         "address2": "",
         "address3": "",
         "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 51.0043,
-        "longitude": -0.13388,
-        "recruitment_cycle_year": "2020"
+        "postcode": "N13 6BY",
+        "region_code": "london",
+        "latitude": 51.6139314,
+        "longitude": -0.0935379,
+        "urn": "131407",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208664",
+      "id": "11230642",
       "type": "sites",
       "attributes": {
-        "code": "S",
-        "location_name": "Varndean College",
-        "address1": "",
-        "address2": "",
-        "address3": "",
+        "code": "U",
+        "location_name": "Ark Walworth Academy",
+        "address1": "Ark Walworth Academy",
+        "address2": "Shorncliffe Road",
+        "address3": "London",
         "address4": "",
-        "postcode": "",
-        "region_code": "south_east",
-        "latitude": 50.8516006,
-        "longitude": -0.143364,
-        "recruitment_cycle_year": "2020"
+        "postcode": "SE1 5UJ",
+        "region_code": "london",
+        "latitude": 51.487446,
+        "longitude": -0.0781839,
+        "urn": "135315",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208665",
+      "id": "11230625",
       "type": "sites",
       "attributes": {
-        "code": "T",
-        "location_name": "Steyning Grammar School",
-        "address1": "Shooting Field",
-        "address2": "",
-        "address3": "Steyning",
+        "code": "A",
+        "location_name": "Ark All Saints Academy",
+        "address1": "Ark All Saints Academy, 140 Wyndham Road",
+        "address2": "Camberwell",
+        "address3": "London",
         "address4": "",
-        "postcode": "BN44 3RX",
-        "region_code": "south_east",
-        "latitude": 50.892902,
-        "longitude": -0.329448,
-        "recruitment_cycle_year": "2020"
+        "postcode": "SE5 0UB",
+        "region_code": "london",
+        "latitude": 51.4783394,
+        "longitude": -0.100159,
+        "urn": "139718",
+        "recruitment_cycle_year": "2022"
       }
     },
     {
-      "id": "11208666",
+      "id": "11230629",
       "type": "sites",
       "attributes": {
-        "code": "V",
-        "location_name": "Varndean School",
-        "address1": "Balfour Rd",
-        "address2": "",
-        "address3": "Brighton",
-        "address4": "Eastb Sussex",
-        "postcode": "BN1 6NP",
-        "region_code": "south_east",
-        "latitude": 50.8501089,
-        "longitude": -0.1372455,
-        "recruitment_cycle_year": "2020"
-      }
-    },
-    {
-      "id": "11208667",
-      "type": "sites",
-      "attributes": {
-        "code": "Z",
-        "location_name": "Downs View School",
-        "address1": "Warren Road",
-        "address2": "Woodingdean",
-        "address3": "Brighton",
-        "address4": "",
-        "postcode": "BN2 6BB",
-        "region_code": "south_east",
-        "latitude": 50.8348359,
-        "longitude": -0.0791768,
-        "recruitment_cycle_year": "2020"
+        "code": "E",
+        "location_name": "Ark Academy",
+        "address1": "Ark Academy",
+        "address2": "Bridge Road",
+        "address3": "Wembley",
+        "address4": "London",
+        "postcode": "HA9 9JP",
+        "region_code": "london",
+        "latitude": 51.5644873,
+        "longitude": -0.2784025,
+        "urn": "135600",
+        "recruitment_cycle_year": "2022"
       }
     }
   ],
-  "links": {
-    "next": "/api/v3/recruitment_cycles/2020/courses?filter%5Blatitude%5D=50.82253000000001\u0026filter%5Blongitude%5D=-0.137163\u0026filter%5Bqualifications%5D=QtsOnly%2CPgdePgceWithQts%2COther\u0026filter%5Bradius%5D=20\u0026filter%5Bvacancies%5D=true\u0026include=site_statuses.site%2Cprovider.sites\u0026page%5Bpage%5D=7\u0026page%5Bper_page%5D=30\u0026sort=distance",
-    "prev": "/api/v3/recruitment_cycles/2020/courses?filter%5Blatitude%5D=50.82253000000001\u0026filter%5Blongitude%5D=-0.137163\u0026filter%5Bqualifications%5D=QtsOnly%2CPgdePgceWithQts%2COther\u0026filter%5Bradius%5D=20\u0026filter%5Bvacancies%5D=true\u0026include=site_statuses.site%2Cprovider.sites\u0026page%5Bpage%5D=5\u0026page%5Bper_page%5D=30\u0026sort=distance",
-    "last": "/api/v3/recruitment_cycles/2020/courses?filter%5Blatitude%5D=50.82253000000001\u0026filter%5Blongitude%5D=-0.137163\u0026filter%5Bqualifications%5D=QtsOnly%2CPgdePgceWithQts%2COther\u0026filter%5Bradius%5D=20\u0026filter%5Bvacancies%5D=true\u0026include=site_statuses.site%2Cprovider.sites\u0026page%5Bpage%5D=73\u0026page%5Bper_page%5D=30\u0026sort=distance"
-  },
-  "meta": {
-    "count": 10
-  },
-  "jsonapi": {
-    "version": "1.0"
-  }
+  "meta": { "count": 10 },
+  "jsonapi": { "version": "1.0" }
 }
+
