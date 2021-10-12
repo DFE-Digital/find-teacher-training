@@ -176,7 +176,7 @@ GEM
       faraday (~> 1.0)
     ffi (1.15.3)
     foreman (0.87.2)
-    geocoder (1.6.7)
+    geocoder (1.7.0)
     geokit (1.13.1)
     globalid (0.5.2)
       activesupport (>= 5.0)
