@@ -5,7 +5,7 @@ module TeacherTrainingPublicAPI
     def self.set_last_sync(time)
       RedisService.current.set(LAST_SUCCESSFUL_SYNC, time)
     end
-    
+
     def self.last_sync
       RedisService.current.get(LAST_SUCCESSFUL_SYNC)
     end
