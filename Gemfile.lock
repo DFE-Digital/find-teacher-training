@@ -214,7 +214,7 @@ GEM
       activemodel (>= 6.0)
       railties (>= 6.0)
       view_component (~> 2.36.0)
-    govuk_design_system_formbuilder (2.7.4)
+    govuk_design_system_formbuilder (2.7.5)
       actionview (>= 6.0)
       activemodel (>= 6.0)
       activesupport (>= 6.0)
@@ -501,7 +501,7 @@ DEPENDENCIES
   geokit
   google-cloud-bigquery
   govuk-components (~> 2.0.1)
-  govuk_design_system_formbuilder (~> 2.7.4)
+  govuk_design_system_formbuilder (~> 2.7.5)
   json-schema
   json_api_client
   jsonapi-deserializable
