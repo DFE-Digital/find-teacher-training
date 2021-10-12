@@ -466,6 +466,8 @@ private
         subjects: %i[
           subject_name
           subject_code
+          bursary_amount
+          scholarship
         ],
       )
 

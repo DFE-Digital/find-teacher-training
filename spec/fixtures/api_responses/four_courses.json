@@ -141,7 +141,12 @@
     {
       "id": "1",
       "type": "subjects",
-      "attributes": { "subject_name": "Primary", "subject_code": "00" }
+      "attributes": {
+        "subject_name": "Primary",
+        "subject_code": "00",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "17500",
@@ -194,7 +199,12 @@
     {
       "id": "10",
       "type": "subjects",
-      "attributes": { "subject_name": "Biology", "subject_code": "C1" }
+      "attributes": {
+        "subject_name": "Biology",
+        "subject_code": "C1",
+        "bursary_amount": "7000",
+        "scholarship": null
+      }
     },
     {
       "id": "22412252",

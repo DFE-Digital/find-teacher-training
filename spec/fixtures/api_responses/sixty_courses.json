@@ -1366,7 +1366,12 @@
     {
       "id": "1",
       "type": "subjects",
-      "attributes": { "subject_name": "Primary", "subject_code": "00" }
+      "attributes": {
+        "subject_name": "Primary",
+        "subject_code": "00",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "17500",
@@ -1419,7 +1424,12 @@
     {
       "id": "10",
       "type": "subjects",
-      "attributes": { "subject_name": "Biology", "subject_code": "C1" }
+      "attributes": {
+        "subject_name": "Biology",
+        "subject_code": "C1",
+        "bursary_amount": "7000",
+        "scholarship": null
+      }
     },
     {
       "id": "22412252",
@@ -1448,7 +1458,12 @@
     {
       "id": "12",
       "type": "subjects",
-      "attributes": { "subject_name": "Chemistry", "subject_code": "F1" }
+      "attributes": {
+        "subject_name": "Chemistry",
+        "subject_code": "F1",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22412254",
@@ -1469,7 +1484,12 @@
     {
       "id": "16",
       "type": "subjects",
-      "attributes": { "subject_name": "Computing", "subject_code": "11" }
+      "attributes": {
+        "subject_name": "Computing",
+        "subject_code": "11",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22412256",
@@ -1490,7 +1510,12 @@
     {
       "id": "21",
       "type": "subjects",
-      "attributes": { "subject_name": "English", "subject_code": "Q3" }
+      "attributes": {
+        "subject_name": "English",
+        "subject_code": "Q3",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22411374",
@@ -1519,7 +1544,12 @@
     {
       "id": "22",
       "type": "subjects",
-      "attributes": { "subject_name": "Geography", "subject_code": "F8" }
+      "attributes": {
+        "subject_name": "Geography",
+        "subject_code": "F8",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22412259",
@@ -1548,7 +1578,12 @@
     {
       "id": "24",
       "type": "subjects",
-      "attributes": { "subject_name": "History", "subject_code": "V1" }
+      "attributes": {
+        "subject_name": "History",
+        "subject_code": "V1",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22412261",
@@ -1577,7 +1612,12 @@
     {
       "id": "25",
       "type": "subjects",
-      "attributes": { "subject_name": "Mathematics", "subject_code": "G1" }
+      "attributes": {
+        "subject_name": "Mathematics",
+        "subject_code": "G1",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22412319",
@@ -1614,14 +1654,21 @@
     {
       "id": "33",
       "type": "subjects",
-      "attributes": { "subject_name": "Modern Languages", "subject_code": null }
+      "attributes": {
+        "subject_name": "Modern Languages",
+        "subject_code": null,
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "42",
       "type": "subjects",
       "attributes": {
         "subject_name": "Modern languages (other)",
-        "subject_code": "24"
+        "subject_code": "24",
+        "bursary_amount": "10000",
+        "scholarship": null
       }
     },
     {
@@ -1643,12 +1690,22 @@
     {
       "id": "34",
       "type": "subjects",
-      "attributes": { "subject_name": "French", "subject_code": "15" }
+      "attributes": {
+        "subject_name": "French",
+        "subject_code": "15",
+        "bursary_amount": "10000",
+        "scholarship": null
+      }
     },
     {
       "id": "41",
       "type": "subjects",
-      "attributes": { "subject_name": "Spanish", "subject_code": "22" }
+      "attributes": {
+        "subject_name": "Spanish",
+        "subject_code": "22",
+        "bursary_amount": "10000",
+        "scholarship": null
+      }
     },
     {
       "id": "22412324",
@@ -1661,7 +1718,12 @@
     {
       "id": "26",
       "type": "subjects",
-      "attributes": { "subject_name": "Music", "subject_code": "W3" }
+      "attributes": {
+        "subject_name": "Music",
+        "subject_code": "W3",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22412325",
@@ -1690,7 +1752,12 @@
     {
       "id": "29",
       "type": "subjects",
-      "attributes": { "subject_name": "Physics", "subject_code": "F3" }
+      "attributes": {
+        "subject_name": "Physics",
+        "subject_code": "F3",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22397316",
@@ -1737,7 +1804,9 @@
       "type": "subjects",
       "attributes": {
         "subject_name": "Religious education",
-        "subject_code": "V6"
+        "subject_code": "V6",
+        "bursary_amount": null,
+        "scholarship": null
       }
     },
     {
@@ -1803,7 +1872,12 @@
     {
       "id": "8",
       "type": "subjects",
-      "attributes": { "subject_name": "Art and design", "subject_code": "W1" }
+      "attributes": {
+        "subject_name": "Art and design",
+        "subject_code": "W1",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22404232",
@@ -1850,7 +1924,9 @@
       "type": "subjects",
       "attributes": {
         "subject_name": "Design and technology",
-        "subject_code": "DT"
+        "subject_code": "DT",
+        "bursary_amount": null,
+        "scholarship": null
       }
     },
     {
@@ -1864,7 +1940,12 @@
     {
       "id": "19",
       "type": "subjects",
-      "attributes": { "subject_name": "Drama", "subject_code": "13" }
+      "attributes": {
+        "subject_name": "Drama",
+        "subject_code": "13",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22404240",
@@ -1951,7 +2032,9 @@
       "type": "subjects",
       "attributes": {
         "subject_name": "Physical education",
-        "subject_code": "C6"
+        "subject_code": "C6",
+        "bursary_amount": null,
+        "scholarship": null
       }
     },
     {
@@ -2017,7 +2100,12 @@
     {
       "id": "11",
       "type": "subjects",
-      "attributes": { "subject_name": "Business studies", "subject_code": "08" }
+      "attributes": {
+        "subject_name": "Business studies",
+        "subject_code": "08",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "22404400",

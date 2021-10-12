@@ -96,7 +96,12 @@
     {
       "id": "1",
       "type": "subjects",
-      "attributes": { "subject_name": "Primary", "subject_code": "00" }
+      "attributes": {
+        "subject_name": "Primary",
+        "subject_code": "00",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "17500",
