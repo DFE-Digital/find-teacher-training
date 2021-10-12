@@ -8,7 +8,9 @@
       <%= render 'shared/hidden_fields', exclude_keys: %w[subject_codes senCourses], form: f %>
       <h1 class="govuk-heading-l" data-qa="heading"><%= I18n.t('page_titles.subjects_filter') %></h1>
 
-      <p class="govuk-body">Some subjects may offer bursaries or scholarships. Funding will be announced later this autumn.</p>
+      <% unless FeatureFlag.active?('bursaries_and_scholarships_announced') %>
+        <p class="govuk-body">Some subjects may offer bursaries or scholarships. Funding will be announced later this autumn.</p>
+      <% end %>
 
       <%= govuk_accordion(id: 'subject-area-accordion') do |accordion| %>
         <% @subject_areas.each_with_index do |subject_area, counter| %>
