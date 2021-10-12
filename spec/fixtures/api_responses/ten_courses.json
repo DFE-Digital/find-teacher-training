@@ -267,7 +267,12 @@
     {
       "id": "1",
       "type": "subjects",
-      "attributes": { "subject_name": "Primary", "subject_code": "00" }
+      "attributes": {
+        "subject_name": "Primary",
+        "subject_code": "00",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "17500",
@@ -320,7 +325,12 @@
     {
       "id": "10",
       "type": "subjects",
-      "attributes": { "subject_name": "Biology", "subject_code": "C1" }
+      "attributes": {
+        "subject_name": "Biology",
+        "subject_code": "C1",
+        "bursary_amount": "7000",
+        "scholarship": null
+      }
     },
     {
       "id": "22412252",
@@ -349,7 +359,12 @@
     {
       "id": "12",
       "type": "subjects",
-      "attributes": { "subject_name": "Chemistry", "subject_code": "F1" }
+      "attributes": {
+        "subject_name": "Chemistry",
+        "subject_code": "F1",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22412254",
@@ -370,7 +385,12 @@
     {
       "id": "16",
       "type": "subjects",
-      "attributes": { "subject_name": "Computing", "subject_code": "11" }
+      "attributes": {
+        "subject_name": "Computing",
+        "subject_code": "11",
+        "bursary_amount": "24000",
+        "scholarship": "26000"
+      }
     },
     {
       "id": "22412256",
@@ -391,7 +411,12 @@
     {
       "id": "21",
       "type": "subjects",
-      "attributes": { "subject_name": "English", "subject_code": "Q3" }
+      "attributes": {
+        "subject_name": "English",
+        "subject_code": "Q3",
+        "bursary_amount": null,
+        "scholarship": null
+      }
     },
     {
       "id": "11233046",
