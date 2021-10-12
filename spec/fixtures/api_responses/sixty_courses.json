@@ -10,7 +10,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "1X3",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -36,7 +38,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "not_required",
         "provider_code": "T92",
+        "recruitment_cycle_year": "2022",
         "provider_type": "scitt"
       },
       "relationships": {
@@ -57,7 +61,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -81,7 +87,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -102,7 +110,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -123,7 +133,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -144,7 +156,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -165,7 +179,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -186,7 +202,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -207,7 +225,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -228,7 +248,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -249,7 +271,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -270,7 +294,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -291,7 +317,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -312,7 +340,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -333,7 +363,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -354,7 +386,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -375,7 +409,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -396,7 +432,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -417,7 +455,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -441,7 +481,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -462,7 +504,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -488,7 +532,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -514,7 +560,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -541,7 +589,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -562,7 +612,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -583,7 +635,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -604,7 +658,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -625,7 +681,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -646,7 +704,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -667,7 +727,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -688,7 +750,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -709,7 +773,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "salary",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -730,7 +796,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -751,7 +819,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "apprenticeship",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "1CS",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -772,7 +842,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -798,7 +870,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -822,7 +896,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -843,7 +919,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -867,7 +945,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -888,7 +968,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -914,7 +996,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -935,7 +1019,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -956,7 +1042,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -980,7 +1068,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1004,7 +1094,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1028,7 +1120,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "2CZ",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1049,7 +1143,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1070,7 +1166,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1091,7 +1189,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1112,7 +1212,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1133,7 +1235,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1154,7 +1258,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1175,7 +1281,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1196,7 +1304,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1217,7 +1327,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1238,7 +1350,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1259,7 +1373,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1280,7 +1396,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1306,7 +1424,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "secondary",
+        "degree_grade": "not_required",
         "provider_code": "2FD",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -1328,7 +1448,9 @@
         "address2": "Ad Astra Infant School, Sherborn Crescent",
         "address3": "Poole",
         "address4": "Dorset",
-        "postcode": "BH17 8AP"
+        "postcode": "BH17 8AP",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {
@@ -1382,7 +1504,9 @@
         "address2": "c/o Tile Kiln Lane",
         "address3": "Palmers Green",
         "address4": "London",
-        "postcode": "N13 6BY"
+        "postcode": "N13 6BY",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {
@@ -1402,7 +1526,9 @@
         "address2": "1 Nicholas Road",
         "address3": "London",
         "address4": "London",
-        "postcode": "W114AN"
+        "postcode": "W114AN",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {
@@ -1834,7 +1960,9 @@
         "address2": "Sheldrick Way",
         "address3": "Mildenhall",
         "address4": "Suffolk",
-        "postcode": "IP28 7JX."
+        "postcode": "IP28 7JX.",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {
@@ -2070,7 +2198,9 @@
         "address2": "",
         "address3": "Middlesbrough",
         "address4": "",
-        "postcode": "TS5 8PB"
+        "postcode": "TS5 8PB",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {

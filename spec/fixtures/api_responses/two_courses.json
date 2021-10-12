@@ -10,7 +10,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "two_two",
         "provider_code": "1X3",
+        "recruitment_cycle_year": "2022",
         "provider_type": "lead_school"
       },
       "relationships": {
@@ -36,7 +38,9 @@
         "qualification": "pgce_with_qts",
         "funding_type": "fee",
         "level": "primary",
+        "degree_grade": "not_required",
         "provider_code": "T92",
+        "recruitment_cycle_year": "2022",
         "provider_type": "scitt"
       },
       "relationships": {
@@ -58,7 +62,9 @@
         "address2": "Ad Astra Infant School, Sherborn Crescent",
         "address3": "Poole",
         "address4": "Dorset",
-        "postcode": "BH17 8AP"
+        "postcode": "BH17 8AP",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {
@@ -112,7 +118,9 @@
         "address2": "c/o Tile Kiln Lane",
         "address3": "Palmers Green",
         "address4": "London",
-        "postcode": "N13 6BY"
+        "postcode": "N13 6BY",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       }
     },
     {

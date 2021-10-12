@@ -450,6 +450,8 @@ private
         :provider,
         :site_statuses,
         :subjects,
+        :recruitment_cycle_year,
+        :degree_grade,
         providers: %i[
           provider_name
           address1
@@ -457,6 +459,8 @@ private
           address3
           address4
           postcode
+          can_sponsor_student_visa
+          can_sponsor_skilled_worker_visa
         ],
         site_statuses: %i[
           status
