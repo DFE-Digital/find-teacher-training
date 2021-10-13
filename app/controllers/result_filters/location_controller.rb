@@ -2,6 +2,7 @@ module ResultFilters
   class LocationController < ApplicationController
     include FilterParameters
 
+    before_action :check_provider_cache_is_populated
     before_action :build_results_filter_query_parameters
 
     def new; end
@@ -35,6 +36,13 @@ module ResultFilters
       @results_filter_query_parameters = merge_previous_parameters(
         ResultsView.new(query_parameters: request.query_parameters).query_parameters_with_defaults,
       )
+    end
+
+    def check_provider_cache_is_populated
+      if Rails.env.development? && TeacherTrainingPublicAPI::ProvidersCache.read.empty?
+        message = 'The TeacherTrainingPublicAPI::ProvidersCache is currently empty. Please run `TeacherTrainingPublicAPI::SyncAllProviders.call` in the Rails console.'
+        raise ProviderCacheEmptyError, message
+      end
     end
 
     def location_option_selected?
@@ -86,3 +94,5 @@ module ResultFilters
     end
   end
 end
+
+class ProviderCacheEmptyError < StandardError; end
