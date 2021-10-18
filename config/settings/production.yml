@@ -6,8 +6,11 @@ teacher_training_api:
 valid_referers:
   - https://www.find-postgraduate-teacher-training.education.gov.uk
 
+background_jobs: # scheduled jobs run on all environments except prod, dev and test
+
 feature_flags:
   send_web_requests_to_big_query: true
   cache_courses: true
   provider_autocomplete: false
   bursaries_and_scholarships_announced: true
+  cache_providers: false

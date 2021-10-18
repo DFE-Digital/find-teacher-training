@@ -162,6 +162,8 @@ GEM
       rubocop
       smart_properties
     erubi (1.10.0)
+    et-orbi (1.2.4)
+      tzinfo
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -176,6 +178,9 @@ GEM
       faraday (~> 1.0)
     ffi (1.15.3)
     foreman (0.87.2)
+    fugit (1.4.4)
+      et-orbi (~> 1.1, >= 1.1.8)
+      raabro (~> 1.4)
     geocoder (1.7.0)
     geokit (1.13.1)
     globalid (0.5.2)
@@ -290,6 +295,7 @@ GEM
     public_suffix (4.0.6)
     puma (5.5.0)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-mini-profiler (2.3.3)
@@ -414,6 +420,9 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    sidekiq-cron (1.2.0)
+      fugit (~> 1.1)
+      sidekiq (>= 4.2.1)
     signet (0.16.0)
       addressable (~> 2.8)
       faraday (>= 0.17.3, < 2.0)
@@ -531,6 +540,7 @@ DEPENDENCIES
   sentry-rails
   sentry-sidekiq
   sidekiq
+  sidekiq-cron (~> 1.1)
   simplecov (< 0.18)
   site_prism
   skylight
