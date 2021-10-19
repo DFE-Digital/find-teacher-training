@@ -44,7 +44,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # logging
-  config.log_level = Settings.log_level
-
-  config.logger = ActiveSupport::Logger.new(STDOUT)
+  config.log_format = :color
 end

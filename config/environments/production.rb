@@ -60,6 +60,5 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Logging
-  config.log_tags = [:request_id] # Prepend all log lines with the following tags.
-  config.log_level = Settings.log_level
+  config.log_format = :json
 end
