@@ -365,6 +365,44 @@ RSpec.feature 'Results page new area and provider filter' do
     end
   end
 
+  describe 'searching by cached provider' do
+    let(:provider_name) { 'Provider 1' }
+    let(:provider_code) { 'ABC' }
+    let(:cached_providers) {
+      [
+        {
+          name: 'Provider 1',
+          code: 'ABC',
+        },
+      ].to_json
+    }
+    let(:providers) { [build(:provider, provider_name: provider_name, provider_code: provider_code)] }
+
+    before do
+      allow(FeatureFlag).to receive(:active?).and_call_original
+      allow(FeatureFlag).to receive(:active?).with(:cache_providers).and_return(true)
+      allow(TeacherTrainingPublicAPI::ProvidersCache).to receive(:read).and_return(cached_providers)
+
+      stub_api_v3_resource(
+        type: Provider,
+        resources: providers,
+        fields: { providers: %i[provider_code provider_name] },
+        params: { recruitment_cycle_year: RecruitmentCycle.current_year },
+        search: "#{provider_name} (#{provider_code})",
+      )
+
+      filter_page.load(query: query_params)
+    end
+
+    it 'can search by provider' do
+      filter_page.by_provider.click
+      filter_page.provider_search.select(provider_name)
+      filter_page.find_courses.click
+
+      expect(page).to have_current_path('/start/subject?l=3&query=Provider+1')
+    end
+  end
+
   describe 'distance sorting' do
     let(:distance_stub) do
       query = base_parameters.merge(

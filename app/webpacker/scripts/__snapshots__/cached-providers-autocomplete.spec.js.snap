@@ -7,7 +7,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
   
           
   <label
-    for="provider"
+    for="query"
   >
     Enter something
   </label>
@@ -23,7 +23,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
         <div
           aria-atomic="true"
           aria-live="polite"
-          id="provider__status--A"
+          id="query__status--A"
           role="status"
         >
           
@@ -31,7 +31,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
         <div
           aria-atomic="true"
           aria-live="polite"
-          id="provider__status--B"
+          id="query__status--B"
           role="status"
         >
           
@@ -40,12 +40,12 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
       
       <input
         aria-autocomplete="list"
-        aria-describedby="provider__assistiveHint"
+        aria-describedby="query__assistiveHint"
         aria-expanded="false"
-        aria-owns="provider__listbox"
+        aria-owns="query__listbox"
         autocomplete="off"
         class="autocomplete__input autocomplete__input--default"
-        id="provider"
+        id="query"
         name=""
         placeholder=""
         role="combobox"
@@ -54,13 +54,13 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
       
       <ul
         class="autocomplete__menu autocomplete__menu--inline autocomplete__menu--hidden"
-        id="provider__listbox"
+        id="query__listbox"
         role="listbox"
       >
         
       </ul>
       <span
-        id="provider__assistiveHint"
+        id="query__assistiveHint"
         style="display: none;"
       >
         When autocomplete results are available use up and down arrows to review and enter to select.  Touch device users, explore by touch or with swipe gestures.
@@ -68,7 +68,7 @@ exports[`initACachedProvidersAutocomplete should instantiate an autocomplete 1`]
     </div>
   </div>
   <select
-    id="provider-select"
+    id="query-select"
     style="display: none;"
   >
     
