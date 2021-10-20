@@ -112,6 +112,9 @@ group :development, :test do
   # Debugging
   gem 'pry-byebug'
 
+  # Prettify logs
+  gem 'amazing_print'
+
   # Testing framework
   gem 'rspec-rails', '~> 5.0.2'
 end
