@@ -38,5 +38,6 @@ module FindTeacherTraining
     config.skylight.environments = Settings.skylight_enable ? [Rails.env] : []
 
     config.active_job.queue_adapter = :sidekiq
+    config.action_view.default_form_builder = GOVUKDesignSystemFormBuilder::FormBuilder
   end
 end
