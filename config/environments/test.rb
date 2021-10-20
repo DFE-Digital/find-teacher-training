@@ -43,4 +43,7 @@ Rails.application.configure do
   config.log_level = :warn
 
   config.active_job.queue_adapter = :test
+
+  # logging
+  config.log_format = :color
 end
