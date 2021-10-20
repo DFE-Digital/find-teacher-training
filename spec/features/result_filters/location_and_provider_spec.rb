@@ -379,8 +379,6 @@ RSpec.feature 'Results page new area and provider filter' do
     let(:providers) { [build(:provider, provider_name: provider_name, provider_code: provider_code)] }
 
     before do
-      allow(FeatureFlag).to receive(:active?).and_call_original
-      allow(FeatureFlag).to receive(:active?).with(:cache_providers).and_return(true)
       allow(TeacherTrainingPublicAPI::ProvidersCache).to receive(:read).and_return(cached_providers)
 
       stub_api_v3_resource(

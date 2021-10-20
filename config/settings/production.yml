@@ -12,4 +12,3 @@ feature_flags:
   send_web_requests_to_big_query: true
   cache_courses: true
   bursaries_and_scholarships_announced: true
-  cache_providers: false

@@ -33,4 +33,3 @@ feature_flags:
   cache_courses: false
   provider_autocomplete: true
   bursaries_and_scholarships_announced: true
-  cache_providers: true
