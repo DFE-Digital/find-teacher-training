@@ -41,7 +41,6 @@ Rails.application.routes.draw do
   get '/course/:provider_code/:course_code', to: 'courses#show', as: 'course'
   get '/results', to: 'results#index', as: 'results'
 
-  get '/provider-suggestions', to: 'provider_suggestions#index'
   get '/location-suggestions', to: 'location_suggestions#index'
 
   scope module: 'result_filters', path: '/results/filter' do
