@@ -78,9 +78,7 @@
         <% if course.interview_process.present? %>
           <li><%= govuk_link_to 'Interview process', '#section-interviews' %></li>
         <% end %>
-        <% if course.show_visa_sponsorship? %>
-          <li><%= govuk_link_to 'International students', '#section-international-students' %></li>
-        <% end %>
+        <li><%= govuk_link_to 'International students', '#section-international-students' %></li>
         <% if course.provider.train_with_disability.present? %>
           <li><%= govuk_link_to 'Training with disabilities and other needs', '#section-train-with-disabilities' %></li>
         <% end %>
@@ -100,11 +98,7 @@
         <%= render partial: 'courses/about_schools' %>
       <% end %>
 
-      <% if course.show_structured_entry_requirements? %>
-        <%= render Courses::EntryRequirementsComponent.new(course: course) %>
-      <% else %>
-        <%= render partial: 'courses/entry_requirements_qualifications' %>
-      <% end %>
+      <%= render Courses::EntryRequirementsComponent.new(course: course) %>
 
       <% if course.salaried? %>
         <%= render partial: 'courses/salary' %>
@@ -120,9 +114,7 @@
         <%= render partial: 'courses/interview_process' %>
       <% end %>
 
-      <% if course.show_visa_sponsorship? %>
-        <%= render Courses::InternationalStudentsComponent.new(course: course) %>
-      <% end %>
+      <%= render Courses::InternationalStudentsComponent.new(course: course) %>
 
       <% if course.provider.train_with_disability.present? %>
         <%= render partial: 'courses/train_with_disabilities' %>

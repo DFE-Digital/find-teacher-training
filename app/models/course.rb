@@ -38,12 +38,6 @@ class Course < Base
     level == 'further_education' && subjects.any? { |s| s.subject_name == 'Further education' || s.subject_code = '41' }
   end
 
-  SHOW_VISA_SPONSORSHIP_FROM = 2022
-  def show_visa_sponsorship?
-    recruitment_cycle_year.to_i >= SHOW_VISA_SPONSORSHIP_FROM
-  end
-  alias_method :show_structured_entry_requirements?, :show_visa_sponsorship?
-
   # Most providers require GCSE grade 4 ("C"),
   # but some require grade 5 ("strong C")
   PROVIDERS_REQUIRING_GCSE_GRADE_5 = %w[U80 I30].freeze
