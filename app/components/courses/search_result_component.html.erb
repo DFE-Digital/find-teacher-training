@@ -36,10 +36,7 @@
     <dd data-qa="course__visa_sponsorship"><%= visa_sponsorship_status %></dd>
 
     <% unless filtered_by_location? %>
-      <dt class="app-description-list__label">Locations</dt>
-      <dd data-qa="course__main_address">
-        <%= helpers.smart_quotes(course.provider.decorate.short_address) %>
-      </dd>
+        <%= render partial: 'results/sites', locals: { course: course, results_view: results_view } %>
     <% end %>
   </dl>
 </li>
