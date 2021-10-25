@@ -2,7 +2,7 @@ module Courses
   class SearchResultComponent < ViewComponent::Base
     include ViewHelper
 
-    attr_reader :course
+    attr_reader :course, :results_view
 
     def filtered_by_location?
       @filtered_by_location
@@ -12,10 +12,11 @@ module Courses
       @has_sites
     end
 
-    def initialize(course:, filtered_by_location: false, has_sites: false)
+    def initialize(course:, results_view:)
       @course = course.decorate
-      @filtered_by_location = filtered_by_location
-      @has_sites = has_sites
+      @filtered_by_location = results_view.location_filter?
+      @has_sites = results_view.has_sites?(course)
+      @results_view = results_view
     end
 
   private

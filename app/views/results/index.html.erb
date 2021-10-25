@@ -61,8 +61,7 @@
         <% @courses.each do |course| %>
           <%= render Courses::SearchResultComponent.new(
             course: course,
-            has_sites: @results_view.has_sites?(course),
-            filtered_by_location: @results_view.location_filter?,
+            results_view: @results_view,
           ) %>
         <% end %>
       </ul>

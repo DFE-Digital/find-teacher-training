@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Courses::SearchResultComponent, type: :component do
   let(:cycle_2022) { build(:recruitment_cycle, year: 2022) }
+  let(:results_view) { instance_double(ResultsView, location_filter?: false, has_sites?: false, sites_count: nil, nearest_address: nil, nearest_location_name: nil) }
 
   context 'when the course specifies a required degree grade' do
     it 'renders correct message' do
@@ -11,7 +12,8 @@ describe Courses::SearchResultComponent, type: :component do
         recruitment_cycle: cycle_2022,
         provider: build(:provider),
       )
-      result = render_inline(described_class.new(course: course))
+
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include(
         'An undergraduate degree at class 2:1 or above, or equivalent',
@@ -27,7 +29,7 @@ describe Courses::SearchResultComponent, type: :component do
         funding_type: 'salary',
         provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: true),
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include(
         'Skilled Worker visas can be sponsored',
@@ -43,7 +45,7 @@ describe Courses::SearchResultComponent, type: :component do
         funding_type: 'fee',
         provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: true),
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include(
         'Visas cannot be sponsored',
@@ -58,7 +60,7 @@ describe Courses::SearchResultComponent, type: :component do
         recruitment_cycle: cycle_2022,
         provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: false),
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include(
         'Student visas can be sponsored',
@@ -71,7 +73,7 @@ describe Courses::SearchResultComponent, type: :component do
         recruitment_cycle: cycle_2022,
         provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: false),
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include(
         'Visas cannot be sponsored',
@@ -86,7 +88,7 @@ describe Courses::SearchResultComponent, type: :component do
         provider: build(:provider),
         accrediting_provider: build(:provider, provider_name: 'ACME SCITT A1'),
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).to include('QTS ratified by ACME SCITT A1')
     end
@@ -99,7 +101,7 @@ describe Courses::SearchResultComponent, type: :component do
         provider: build(:provider),
         accrediting_provider: nil,
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course: course, results_view: results_view))
 
       expect(result.text).not_to include('QTS ratified by')
     end
