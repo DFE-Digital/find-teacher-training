@@ -11,5 +11,4 @@ background_jobs: # scheduled jobs run on all environments except dev and test - 
 feature_flags:
   new_filters: true
   cache_courses: true
-  cache_providers: false
   bursaries_and_scholarships_announced: true

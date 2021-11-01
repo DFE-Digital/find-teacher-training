@@ -50,14 +50,8 @@ initAutocomplete({
   path: "/location-suggestions",
 });
 
-initAutocomplete({
-  element: "provider-autocomplete",
-  input: "provider",
-  path: "/provider-suggestions",
-  selectNameAndCode: true,
-});
-
-initCachedProvidersAutocomplete()
+initCachedProvidersAutocomplete();
 
 loadAnalytics();
+
 new initCookieBanner();
