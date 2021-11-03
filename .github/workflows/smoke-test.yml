@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
 
       - name: Checkout
-        uses: actions/checkout@v2.3.5
+        uses: actions/checkout@v2.4.0
         with:
           repository: DFE-Digital/find-teacher-training-tests
           ref: refs/heads/master
