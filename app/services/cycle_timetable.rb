@@ -136,9 +136,7 @@ class CycleTimetable
 
   def self.current_cycle_schedule
     # Make sure this setting only has effect on non-production environments
-    # rubocop:disable Rails/UnknownEnv
-    return :real if HostingEnvironment.production? || Rails.env.loadtest?
-    # rubocop:enable Rails/UnknownEnv
+    return :real if HostingEnvironment.production?
 
     SiteSetting.cycle_schedule
   end
