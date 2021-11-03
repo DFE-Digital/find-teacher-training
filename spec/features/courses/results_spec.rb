@@ -46,7 +46,6 @@ describe 'Search results', type: :feature do
         expect(first_course.qualification.text).to include('PGCE with QTS')
         expect(first_course.study_mode.text).to eq('Full time')
         expect(first_course.funding_options.text).to eq('Student finance if you’re eligible')
-        expect(first_course.main_address.text).to eq('Poole SCITT, Ad Astra Infant School, Sherborn Crescent, Poole, Dorset, BH17 8AP')
         expect(first_course).not_to have_show_vacancies
       end
     end
