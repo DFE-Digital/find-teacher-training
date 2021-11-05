@@ -48,11 +48,6 @@ RSpec.feature 'Results page new area and provider filter' do
         subjects_page.continue.click
       end
 
-      it 'displays the courses' do
-        expect(results_page.courses.first).to have_main_address
-        expect(results_page.heading.text).to eq('4 courses found')
-      end
-
       it 'retains the query parameters' do
         expect_page_to_be_displayed_with_query(
           page: results_page,
