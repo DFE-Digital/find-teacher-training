@@ -420,7 +420,7 @@ GEM
     sentry-sidekiq (4.7.3)
       sentry-ruby-core (~> 4.7.0)
       sidekiq (>= 3.0)
-    sidekiq (6.2.2)
+    sidekiq (6.3.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
