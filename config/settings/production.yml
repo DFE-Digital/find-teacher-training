@@ -10,3 +10,7 @@ feature_flags:
   send_web_requests_to_big_query: true
   cache_courses: true
   bursaries_and_scholarships_announced: true
+
+basic_auth_enabled: true
+basic_auth_username: replace_me
+basic_auth_password: replace_me

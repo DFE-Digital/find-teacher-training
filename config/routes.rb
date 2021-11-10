@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   post '/cycles', to: 'switcher#update', as: :switch_cycle_schedule
 
+  get '/feature-flags', to: 'feature_flags#index'
+
   scope module: 'result_filters' do
     root to: 'location#start'
   end
