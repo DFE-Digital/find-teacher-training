@@ -32,3 +32,4 @@ feature_flags:
   maintenance_banner: false
   cache_courses: false
   bursaries_and_scholarships_announced: true
+  new_subjects_flow: true
