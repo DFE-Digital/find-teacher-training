@@ -45,6 +45,14 @@ module ViewHelper
     "#{t('page_titles.error_prefix') if error}#{title}"
   end
 
+  def protect_against_mistakes
+    if session[:confirmed_environment_at] && session[:confirmed_environment_at] > 5.minutes.ago
+      yield
+    else
+      govuk_link_to 'Confirm environment to make changes', confirm_environment_path(from: request.fullpath)
+    end
+  end
+
 private
 
   def prepend_css_class(css_class, current_class)

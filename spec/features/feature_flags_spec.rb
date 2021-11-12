@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Feature flags', type: :feature do
+  around do |example|
+    Timecop.freeze(Time.zone.local(2021, 12, 1, 12)) do
+      example.run
+    end
+  end
+
   scenario 'Manage features' do
     given_there_is_a_feature_flag_set_up
 
@@ -9,17 +15,13 @@ RSpec.describe 'Feature flags', type: :feature do
 
     when_i_activate_the_feature
     then_the_feature_is_activated
-    and_i_can_see_the_activation
 
     when_i_deactivate_the_feature
     then_the_feature_is_deactivated
-    and_i_can_see_the_deactivation
   end
 
   def given_there_is_a_feature_flag_set_up
-    allow(FeatureFlags).to receive(:all).and_return(
-      [[:test_feature, "It's a test feature", 'Jasmine Java']],
-    )
+    allow(FeatureFlags).to receive(:all).and_return([[:test_feature, "It's a test feature", 'Jasmine Java']])
 
     FeatureFlag.deactivate('test_feature')
   end
@@ -37,40 +39,34 @@ RSpec.describe 'Feature flags', type: :feature do
   end
 
   def when_i_activate_the_feature
-    within(pilot_open_summary_card) { click_link 'Confirm environment to make changes' }
+    within(summary_card) { click_link 'Confirm environment to make changes' }
     fill_in 'Type ‘test’ to confirm that you want to proceed', with: 'test'
     click_button 'Continue'
 
-    within(pilot_open_summary_card) { click_button 'Activate' }
+    within(summary_card) { click_button 'Activate' }
   end
 
   def then_the_feature_is_activated
+    expect(FeatureFlag.activated?('test_feature')).to be true
+    expect(page).to have_content('Feature ‘Test feature’ activated')
     expect(page).to have_content('Active')
-    expect(FeatureFlag.active?('test_feature')).to be true
-  end
-
-  def and_i_can_see_the_activation
-    expect(page).to have_content('Changed to active')
+    expect(page).to have_content('12pm on 1 December 2021')
   end
 
   def when_i_deactivate_the_feature
-    within(pilot_open_summary_card) { click_button 'Deactivate' }
+    within(summary_card) { click_button 'Deactivate' }
   end
 
   def then_the_feature_is_deactivated
     expect(page).to have_content('Inactive')
-    expect(FeatureFlag.active?('Test feature')).to be false
+    expect(FeatureFlag.activated?('test_feature')).to be false
   end
 
-  def and_i_can_see_the_deactivation
-    expect(page).to have_content('Changed to inactive')
-  end
-
-  def pilot_open_summary_card
+  def summary_card
     find('.app-summary-card', text: 'Test feature')
   end
 
   def feature
-    @feature ||= FeatureFlag::FEATURES[:test_feature]
+    @feature ||= FeatureFlag.features[:test_feature]
   end
 end

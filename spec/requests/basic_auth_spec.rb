@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Require basic authentication', type: :request do
+  before do
+    allow(FeatureFlags).to receive(:all).and_return([[:test_feature, "It's a test feature", 'Jasmine Java']])
+    FeatureFlag.activate('test_feature')
+  end
+
   it 'requests when basic auth is disabled are let through' do
     allow(Settings).to receive(:basic_auth_enabled).and_return false
 
