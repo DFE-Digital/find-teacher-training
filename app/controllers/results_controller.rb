@@ -1,4 +1,6 @@
 class ResultsController < ApplicationController
+  before_action :render_feedback_component
+
   def index
     service = DeprecatedParametersService.new(parameters: request.query_parameters)
     if service.deprecated?

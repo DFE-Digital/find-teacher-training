@@ -27,6 +27,10 @@ describe 'results', type: :feature do
     end
   end
 
+  it 'displays a feedback link' do
+    expect(results_page.text).to have_content('How can we improve this page?')
+  end
+
   context 'provider sorting' do
     let(:ascending_stub) do
       stub_courses(
