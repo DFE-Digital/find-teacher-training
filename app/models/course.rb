@@ -3,7 +3,7 @@ class Course < Base
 
   connection do |conn|
     conn.faraday.response(:caching, write_options: { expires_in: TTAPI_CALLS_EXPIRY }) do
-      if Settings.feature_flags.cache_courses
+      if FeatureFlag.activated?(:cache_courses)
         Rails.cache
       else
         ActiveSupport::Cache::NullStore.new

@@ -8,7 +8,6 @@ valid_referers:
 
 feature_flags:
   send_web_requests_to_big_query: true
-  cache_courses: false
   bursaries_and_scholarships_announced: true
 
 basic_auth_username: replace_me

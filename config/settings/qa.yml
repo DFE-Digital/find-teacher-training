@@ -9,5 +9,4 @@ valid_referers:
 feature_flags:
   send_web_requests_to_big_query: true
   new_filters: true
-  cache_courses: true
   bursaries_and_scholarships_announced: false
