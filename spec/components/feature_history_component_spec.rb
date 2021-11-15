@@ -28,7 +28,7 @@ describe FeatureHistoryComponent, type: :component do
   end
 
   context 'feature has never been updated' do
-    it "renders a message saying the feature flag has not been updated" do
+    it 'renders a message saying the feature flag has not been updated' do
       allow(FeatureFlag).to receive(:activated?).and_return(false)
       allow(FeatureFlag).to receive(:last_updated).and_return(nil)
 
