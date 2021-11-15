@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "jest": "^27.2.5",
-    "webpack-dev-server": "^4.4.0"
+    "webpack-dev-server": "^4.5.0"
   },
   "scripts": {
     "test": "jest"
