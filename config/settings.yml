@@ -24,6 +24,3 @@ background_jobs:
     cron: "0 * * * *" # hourly
     class: "SyncProvidersJob"
     queue: sync_providers
-
-feature_flags:
-  new_filters: true
