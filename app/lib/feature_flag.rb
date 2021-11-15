@@ -12,7 +12,7 @@ class FeatureFlag
     def activated?(feature_name)
       feature = RedisService.current.get("feature_flags_#{feature_name}")
 
-      raise UnknownFeatureError unless feature
+      return false unless feature
 
       JSON.parse(feature)['state']
     end
@@ -37,6 +37,8 @@ class FeatureFlag
 
     def last_updated(feature_name)
       feature = RedisService.current.get("feature_flags_#{feature_name}")
+
+      return unless feature
 
       JSON.parse(feature)['updated_at']
     end

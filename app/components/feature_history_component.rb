@@ -5,12 +5,22 @@ class FeatureHistoryComponent < ViewComponent::Base
     @feature_name = feature_name
   end
 
-  def status
-    FeatureFlag.activated?(@feature_name) ? 'active' : 'inactive'
+  def history
+    if last_updated
+      formatted_date = DateTime.parse(last_updated).to_s(:govuk_date_and_time)
+      "Changed to #{status} at #{formatted_date}"
+    else
+      'This flag has not been updated'
+    end
   end
 
-  def date
-    last_updated = FeatureFlag.last_updated(@feature_name)
-    DateTime.parse(last_updated).to_s(:govuk_date_and_time)
+private
+
+  def last_updated
+    FeatureFlag.last_updated(@feature_name)
+  end
+
+  def status
+    FeatureFlag.activated?(@feature_name) ? 'active' : 'inactive'
   end
 end

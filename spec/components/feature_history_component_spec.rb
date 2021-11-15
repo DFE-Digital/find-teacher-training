@@ -26,4 +26,15 @@ describe FeatureHistoryComponent, type: :component do
       expect(result.text).to have_content 'Changed to inactive at 12pm on 1 December 2021'
     end
   end
+
+  context 'feature has never been updated' do
+    it "renders a message saying the feature flag has not been updated" do
+      allow(FeatureFlag).to receive(:activated?).and_return(false)
+      allow(FeatureFlag).to receive(:last_updated).and_return(nil)
+
+      result = render_inline(described_class.new(feature_name))
+
+      expect(result.text).to have_content 'This flag has not been updated'
+    end
+  end
 end

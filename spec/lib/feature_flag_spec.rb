@@ -38,8 +38,8 @@ RSpec.describe FeatureFlag do
       expect(described_class.activated?('test_feature')).to eq(true)
     end
 
-    it 'raises an UnknownFeatureError if the feature does not exist' do
-      expect { described_class.activated?('test_feature') }.to raise_error(FeatureFlag::UnknownFeatureError)
+    it 'returns false if the feature does not exist' do
+      expect(described_class.activated?('test_feature')).to eq(false)
     end
   end
 
@@ -56,6 +56,10 @@ RSpec.describe FeatureFlag do
   end
 
   describe '.activate' do
+    before do
+      allow(FeatureFlags).to receive(:all).and_return([[:test_feature, "It's a test feature", 'Jasmine Java']])
+    end
+
     it 'activates the feature flag' do
       described_class.activate('test_feature')
 
