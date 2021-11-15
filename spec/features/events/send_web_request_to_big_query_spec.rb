@@ -9,7 +9,7 @@ RSpec.describe 'viewing the root page' do
 
     allow(table).to receive(:insert)
 
-    activate_feature(:send_web_requests_to_big_query)
+    FeatureFlag.activate(:send_web_requests_to_big_query)
 
     request_uuid = SecureRandom.uuid
 

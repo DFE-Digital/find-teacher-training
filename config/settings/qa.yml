@@ -7,6 +7,5 @@ valid_referers:
   - https://qa.find-postgraduate-teacher-training.education.gov.uk
 
 feature_flags:
-  send_web_requests_to_big_query: true
   new_filters: true
   bursaries_and_scholarships_announced: false

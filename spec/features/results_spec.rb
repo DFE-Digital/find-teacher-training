@@ -167,7 +167,7 @@ describe 'results', type: :feature do
     end
 
     it 'transmits translated subject codes to BigQuery' do
-      activate_feature(:send_web_requests_to_big_query)
+      FeatureFlag.activate(:send_web_requests_to_big_query)
       visit results_path(params)
 
       bq_event = enqueued_jobs.first['arguments'].first

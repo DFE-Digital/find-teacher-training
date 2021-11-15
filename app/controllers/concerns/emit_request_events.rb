@@ -7,7 +7,7 @@ module EmitRequestEvents
   end
 
   def trigger_request_event
-    if FeatureFlag.active?(:send_web_requests_to_big_query)
+    if FeatureFlag.activated?(:send_web_requests_to_big_query)
       request_event = Events::WebRequest.new
                         .with_request_details(request)
                         .with_response_details(response)

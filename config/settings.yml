@@ -26,7 +26,6 @@ background_jobs:
     queue: sync_providers
 
 feature_flags:
-  send_web_requests_to_big_query: false
   new_filters: true
   maintenance_mode: false
   maintenance_banner: false
