@@ -81,6 +81,8 @@ describe 'Course show', type: :feature do
   end
 
   before do
+    FeatureFlag.activate(:bursaries_and_scholarships_announced)
+
     stub_api_v3_resource(
       type: RecruitmentCycle,
       params: {

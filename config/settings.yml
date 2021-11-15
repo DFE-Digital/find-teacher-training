@@ -27,6 +27,3 @@ background_jobs:
 
 feature_flags:
   new_filters: true
-  maintenance_mode: false
-  maintenance_banner: false
-  bursaries_and_scholarships_announced: true

@@ -8,4 +8,3 @@ valid_referers:
 
 feature_flags:
   new_filters: true
-  bursaries_and_scholarships_announced: false

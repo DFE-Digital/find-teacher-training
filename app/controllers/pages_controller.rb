@@ -23,6 +23,6 @@ private
   end
 
   def redirect_to_homepage_unless_in_maintenance_mode
-    redirect_to root_path unless FeatureFlag.active?(:maintenance_mode)
+    redirect_to root_path unless FeatureFlag.activated?(:maintenance_mode)
   end
 end

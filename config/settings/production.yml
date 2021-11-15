@@ -5,9 +5,5 @@ teacher_training_api:
   base_url: https://api.publish-teacher-training-courses.service.gov.uk
 valid_referers:
   - https://www.find-postgraduate-teacher-training.education.gov.uk
-
-feature_flags:
-  bursaries_and_scholarships_announced: true
-
 basic_auth_username: replace_me
 basic_auth_password: replace_me
