@@ -6,7 +6,7 @@ module HttpAuthConcern
   end
 
   def http_authenticate
-    return true unless Settings.basic_auth_enabled
+    return true unless FeatureFlag.activated?(:basic_auth_enabled)
 
     authenticate_or_request_with_http_basic do |username, password|
       username == Settings.basic_auth_username && password == Settings.basic_auth_password

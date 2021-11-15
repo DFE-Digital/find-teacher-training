@@ -11,6 +11,5 @@ feature_flags:
   cache_courses: false
   bursaries_and_scholarships_announced: true
 
-basic_auth_enabled: true
 basic_auth_username: replace_me
 basic_auth_password: replace_me

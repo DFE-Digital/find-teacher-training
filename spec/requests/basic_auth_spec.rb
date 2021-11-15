@@ -1,13 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Require basic authentication', type: :request do
-  before do
-    allow(FeatureFlags).to receive(:all).and_return([[:test_feature, "It's a test feature", 'Jasmine Java']])
-    FeatureFlag.activate('test_feature')
-  end
-
   it 'requests when basic auth is disabled are let through' do
-    allow(Settings).to receive(:basic_auth_enabled).and_return false
+    FeatureFlag.deactivate('basic_auth_enabled')
 
     get feature_flags_path
 
@@ -15,7 +10,7 @@ RSpec.describe 'Require basic authentication', type: :request do
   end
 
   it 'requests without basic auth get 401' do
-    allow(Settings).to receive(:basic_auth_enabled).and_return true
+    FeatureFlag.activate('basic_auth_enabled')
 
     get feature_flags_path
 
@@ -23,7 +18,7 @@ RSpec.describe 'Require basic authentication', type: :request do
   end
 
   it 'requests with invalid basic auth get 401' do
-    allow(Settings).to receive(:basic_auth_enabled).and_return true
+    FeatureFlag.activate('basic_auth_enabled')
 
     get feature_flags_path, headers: basic_auth_headers('wrong', 'auth')
 
@@ -31,7 +26,7 @@ RSpec.describe 'Require basic authentication', type: :request do
   end
 
   it 'requests with valid basic auth get 200' do
-    allow(Settings).to receive(:basic_auth_enabled).and_return true
+    FeatureFlag.activate('basic_auth_enabled')
 
     get feature_flags_path, headers: basic_auth_headers('foo', 'bar')
 
