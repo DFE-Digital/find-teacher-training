@@ -1,5 +1,5 @@
 <div data-qa="course__bursary_details">
-  <% if FeatureFlag.activated?(:bursaries_and_scholarships_announced) %>
+  <% if FeatureFlag.active?(:bursaries_and_scholarships_announced) %>
     <p class="govuk-body">
       You’ll get a bursary of <%= number_to_currency(course.bursary_amount) %> if you have <%= course.bursary_first_line_ending %>
     </p>

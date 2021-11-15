@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 private
 
   def redirect_to_maintenance_page_if_flag_is_active
-    redirect_to maintainance_path if FeatureFlag.activated?(:maintenance_mode)
+    redirect_to maintainance_path if FeatureFlag.active?(:maintenance_mode)
   end
 
   def redirect_to_cycle_has_ended_if_find_is_down

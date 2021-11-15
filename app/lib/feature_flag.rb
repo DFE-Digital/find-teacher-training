@@ -1,15 +1,6 @@
 class FeatureFlag
   class << self
-    def active?(feature)
-      setting = Settings.feature_flags.send(feature)
-      raise UnknownFeatureError if !setting.in? [true, false]
-
-      setting
-    end
-
-    # Currently checks feature flag state in Redis
-    # TODO: replace .active? with this implementation
-    def activated?(feature_name)
+    def active?(feature_name)
       feature = RedisService.current.get("feature_flags_#{feature_name}")
 
       return false unless feature

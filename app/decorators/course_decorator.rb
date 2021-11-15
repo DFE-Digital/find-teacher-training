@@ -102,9 +102,9 @@ class CourseDecorator < Draper::Decorator
       'Salary'
     elsif excluded_from_bursary?
       'Student finance if you’re eligible'
-    elsif has_scholarship_and_bursary? && FeatureFlag.activated?(:bursaries_and_scholarships_announced)
+    elsif has_scholarship_and_bursary? && FeatureFlag.active?(:bursaries_and_scholarships_announced)
       'Scholarships or bursaries, as well as student finance, are available if you’re eligible'
-    elsif has_bursary? && FeatureFlag.activated?(:bursaries_and_scholarships_announced)
+    elsif has_bursary? && FeatureFlag.active?(:bursaries_and_scholarships_announced)
       'Bursaries and student finance are available if you’re eligible'
     else
       'Student finance if you’re eligible'

@@ -1,6 +1,6 @@
 class MaintenanceBannerComponent < ViewComponent::Base
   include ViewHelper
   def render?
-    FeatureFlag.activated?(:maintenance_banner) && !FeatureFlag.activated?(:maintenance_mode)
+    FeatureFlag.active?(:maintenance_banner) && !FeatureFlag.active?(:maintenance_mode)
   end
 end

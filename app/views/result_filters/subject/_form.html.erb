@@ -8,7 +8,7 @@
       <%= render 'shared/hidden_fields', exclude_keys: %w[subject_codes senCourses], form: f %>
       <h1 class="govuk-heading-l" data-qa="heading"><%= I18n.t('page_titles.subjects_filter') %></h1>
 
-      <% unless FeatureFlag.activated?('bursaries_and_scholarships_announced') %>
+      <% unless FeatureFlag.active?('bursaries_and_scholarships_announced') %>
         <p class="govuk-body">Some subjects may offer bursaries or scholarships. Funding will be announced later this autumn.</p>
       <% end %>
 
@@ -45,7 +45,7 @@
                           <% end %>
                         </span>
 
-                        <% if FeatureFlag.activated?(:bursaries_and_scholarships_announced) %>
+                        <% if FeatureFlag.active?(:bursaries_and_scholarships_announced) %>
                           <% if subject.decorate.has_scholarship_and_bursary? %>
                             <% financial_info = "Scholarships of £#{number_with_delimiter(subject.scholarship, delimiter: ',')} and bursaries of £#{number_with_delimiter(subject.bursary_amount, delimiter: ',')} are available" %>
                           <% elsif subject.decorate.has_scholarship? %>

@@ -9,7 +9,7 @@ describe FeatureHistoryComponent, type: :component do
 
   context 'feature is active' do
     it 'renders the correctly formatted date and time' do
-      allow(FeatureFlag).to receive(:activated?).and_return(true)
+      allow(FeatureFlag).to receive(:active?).and_return(true)
 
       result = render_inline(described_class.new(feature_name))
 
@@ -19,7 +19,7 @@ describe FeatureHistoryComponent, type: :component do
 
   context 'feature is inactive' do
     it 'renders the correctly formatted date and time' do
-      allow(FeatureFlag).to receive(:activated?).and_return(false)
+      allow(FeatureFlag).to receive(:active?).and_return(false)
 
       result = render_inline(described_class.new(feature_name))
 
@@ -29,7 +29,7 @@ describe FeatureHistoryComponent, type: :component do
 
   context 'feature has never been updated' do
     it 'renders a message saying the feature flag has not been updated' do
-      allow(FeatureFlag).to receive(:activated?).and_return(false)
+      allow(FeatureFlag).to receive(:active?).and_return(false)
       allow(FeatureFlag).to receive(:last_updated).and_return(nil)
 
       result = render_inline(described_class.new(feature_name))
