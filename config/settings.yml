@@ -24,3 +24,15 @@ background_jobs:
     cron: "0 * * * *" # hourly
     class: "SyncProvidersJob"
     queue: sync_providers
+<<<<<<< HEAD
+=======
+
+feature_flags:
+  send_web_requests_to_big_query: false
+  new_filters: true
+  maintenance_mode: false
+  maintenance_banner: false
+  cache_courses: false
+  bursaries_and_scholarships_announced: true
+  componentised_results: true
+>>>>>>> f715206 (Add a `componentised_results` feature flag)

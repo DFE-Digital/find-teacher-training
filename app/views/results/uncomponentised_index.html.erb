@@ -1,6 +1,5 @@
 <%= content_for :page_title, @number_of_courses_string %>
 
-<!-- Courses::ResultsComponent -->
 <%= render LocationSubjectFilterComponent.new(results: @results_view)%>
 
 <h1 class="govuk-heading-xl" data-qa="heading">
@@ -11,14 +10,12 @@
 
 <div class="app-filter-layout">
   <div class="app-filter-layout__filter">
-    <!-- Courses::FilterComponent -->
     <%= render partial: 'result_filters/all' %>
   </div>
   <div class="app-filter-layout__content">
     <% if @results_view.no_results_found? %>
       <%= render Courses::NoResultsComponent.new(results: @results_view) %>
     <% else %>
-      <!-- Courses::SortByComponent -->
       <% unless @results_view.provider_filter? %>
         <div class="app-search-results-header">
           <% if @results_view.location_filter? %>
@@ -74,4 +71,3 @@
     <%= paginate(@courses, total_pages: @results_view.total_pages) %>
   </div>
 </div>
-
