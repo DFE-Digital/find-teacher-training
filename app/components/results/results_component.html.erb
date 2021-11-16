@@ -1,0 +1,75 @@
+<%= render LocationSubjectFilterComponent.new(results: results_view)%>
+
+<h1 class="govuk-heading-xl" data-qa="heading">
+  <%= "#{results_view.number_of_courses_string} found" %>
+</h1>
+
+<div class="app-filter-toggle"></div>
+
+<div class="app-filter-layout">
+  <div class="app-filter-layout__filter">
+    <!-- Results::FilterComponent -->
+    <%= render partial: 'result_filters/all' %>
+  </div>
+  <div class="app-filter-layout__content">
+    <% if results_view.no_results_found? %>
+      <%= render Results::NoResultsComponent.new(results: results_view) %>
+    <% else %>
+      <!-- Results::SortByComponent -->
+      <% unless results_view.provider_filter? %>
+        <div class="app-search-results-header">
+          <% if results_view.location_filter? %>
+            <p class="govuk-body">Sorted by distance</p>
+          <% else %>
+            <%= form_with(url: results_path, method: 'get', skip_enforcing_utf8: true, class: 'app-search-results-header__sort', data: { qa: 'sort-form' }) do |form| %>
+              <%= render 'shared/hidden_fields', form: form, exclude_keys: %w[sortby] %>
+              <%= form.label(:sortby, 'Sorted by', class: 'govuk-label govuk-!-display-inline-block') %>
+              <%= form.select(
+                :sortby,
+                options_for_select(results_view.sort_options, selected: params['sortby'].to_i || 0),
+                {},
+                {
+                  class: 'govuk-select',
+                  onchange: 'this.form.submit()',
+                  role: 'listbox',
+                  data: { qa: 'sort-form__options' },
+                },
+              ) %>
+              <%= form.submit('Update', name: nil, class: 'govuk-button', data: { qa: 'sort-form__submit' }) %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- Results::SuggestedSearchesComponent -->
+    <% if results_view.suggested_search_visible? %>
+      <div data-qa="suggested_searches">
+        <h3 class="govuk-heading-s" data-qa="suggested_search_heading">Suggested searches</h3>
+        <p class="govuk-body" data-qa="suggested_search_description">You can find:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <%- results_view.suggested_search_links.each do |link| %>
+            <li data-qa="suggested_search_link">
+              <%= govuk_link_to link.text, link.url, data: { qa: 'link' } %><%= link.suffix %>
+            </li>
+          <%- end -%>
+        </ul>
+      </div>
+    <% end %>
+
+    <!-- Results::SearchResultComponent (including pagination)-->
+    <% if results_view.has_results? %>
+      <ul class="app-search-results">
+        <% courses.each do |course| %>
+          <%= render Results::SearchResultComponent.new(
+            course: course,
+            has_sites: results_view.has_sites?(course),
+            filtered_by_location: results_view.location_filter?,
+          ) %>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <%= paginate(courses, total_pages: results_view.total_pages) %>
+  </div>
+</div>
