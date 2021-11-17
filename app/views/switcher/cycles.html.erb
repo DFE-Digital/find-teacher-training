@@ -23,7 +23,7 @@
 <h2 class="govuk-heading-m">Cycle years</h2>
 
 
- <%= render SummaryListComponent.new(rows: {
+ <%= render Utility::SummaryListComponent.new(rows: {
   'Previous cycle year' => RecruitmentCycle.previous_year,
   'Current cycle year' => RecruitmentCycle.current_year,
   'Next cycle year' => RecruitmentCycle.next_year,
@@ -33,7 +33,7 @@
 
 <p class="govuk-body">(Today is <%= Time.zone.today.to_s(:govuk_date) %>)</p>
 
-<%= render SummaryListComponent.new(rows: {
+<%= render Utility::SummaryListComponent.new(rows: {
   'Apply 1 deadline' => CycleTimetable.apply_1_deadline.to_s(:govuk_date),
   'Apply 2 deadline' => CycleTimetable.apply_2_deadline.to_s(:govuk_date),
   'Find closes on' => CycleTimetable.find_closes.to_s(:govuk_date),

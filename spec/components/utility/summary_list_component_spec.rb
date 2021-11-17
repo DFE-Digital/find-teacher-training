@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe SummaryListComponent, type: :component do
+RSpec.describe Utility::SummaryListComponent, type: :component do
   it 'renders component with correct structure' do
     rows = [
       key: 'Name:',
@@ -174,5 +174,48 @@ describe SummaryListComponent, type: :component do
 
     expect(links[1].text).to eq 'Remove this chef'
     expect(links[1].attr('href')).to eq '#remove'
+  end
+
+  it 'does not include action dd tags when none of the rows have actions' do
+    rows = [
+      {
+        key: 'Role',
+        value: 'Chef de partie',
+      },
+      {
+        key: 'Name',
+        value: 'Bob the builder',
+      },
+    ]
+
+    result = render_inline(described_class.new(rows: rows))
+
+    expect(result.css('.govuk-summary-list__actions')).to be_empty
+  end
+
+  it 'includes action dd tags when at least one of the rows has actions' do
+    rows = [
+      {
+        key: 'Role',
+        value: 'Chef de partie',
+        action: {
+          href: '/some/url',
+          visually_hidden_text: 'role',
+        },
+      },
+      {
+        key: 'Name',
+        value: 'Bob the builder',
+      },
+    ]
+
+    result = render_inline(described_class.new(rows: rows))
+
+    actions = result.css('.govuk-summary-list__actions')
+
+    expect(actions[0].text).to eq 'Change role'
+    expect(actions[0].css('a').first.attr('href')).to eq '/some/url'
+
+    expect(actions[1].text).to be_blank
   end
 end
