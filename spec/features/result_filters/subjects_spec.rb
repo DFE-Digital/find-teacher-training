@@ -238,7 +238,7 @@ RSpec.feature 'Results page new subject filter' do
 
     context 'when the `bursaries_and_scholarships_announced` flag inactive' do
       before do
-        deactivate_feature(:bursaries_and_scholarships_announced)
+        FeatureFlag.deactivate(:bursaries_and_scholarships_announced)
         filter_page.load
       end
 
