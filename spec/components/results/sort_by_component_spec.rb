@@ -10,7 +10,7 @@ describe Results::SortByComponent, type: :component do
 
   it 'renders when provider filter is not active and search is by location' do
     results_view = instance_double(
-      ResultsView, 
+      ResultsView,
       location_filter?: true,
       provider_filter?: false,
       location_search: 'London',
@@ -23,7 +23,7 @@ describe Results::SortByComponent, type: :component do
 
   it 'renders when provider filter is not active and search is not by location' do
     results_view = instance_double(
-      ResultsView, 
+      ResultsView,
       location_filter?: false,
       provider_filter?: false,
       sort_options: [

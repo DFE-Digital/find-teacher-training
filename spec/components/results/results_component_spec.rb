@@ -31,7 +31,6 @@ describe Results::ResultsComponent, type: :component do
     let(:courses) { Course.where(recruitment_cycle_year: RecruitmentCycle.current_year).all }
 
     it 'renders a "No courses found" message when there are no results' do
-
       stub_courses(query: {}, course_count: 0)
       courses = Course.where(recruitment_cycle_year: RecruitmentCycle.current_year).all
       component = render_inline(
@@ -67,17 +66,19 @@ describe Results::ResultsComponent, type: :component do
     end
 
     it 'renders "10 courses found" and a `SearchResultComponent` for each course' do
-      courses.each do |course|
-        expect(Results::SearchResultComponent).to receive(:new).with(
-          course: course,
-          has_sites: true,
-          filtered_by_location: false,
-        ).and_return(plain: '')
-      end
+      allow(Results::SearchResultComponent).to receive(:new).and_return(plain: '')
 
       component = render_inline(
         described_class.new(results: results_view, courses: courses),
       )
+
+      courses.each do |course|
+        expect(Results::SearchResultComponent).to have_received(:new).with(
+          course: course,
+          has_sites: true,
+          filtered_by_location: false,
+        )
+      end
 
       expect(component.text).to include('10 courses found')
     end
