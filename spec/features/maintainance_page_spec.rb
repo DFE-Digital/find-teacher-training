@@ -22,4 +22,14 @@ RSpec.describe 'Maintenance mode', type: :feature do
       expect(page).to have_current_path root_path
     end
   end
+
+  context 'given the maintenance_mode feature flag is active and I visit the feature flag page' do
+    it 'sends me to the feature flags page' do
+      FeatureFlag.activate(:maintenance_mode)
+
+      visit feature_flags_path
+
+      expect(page).to have_current_path feature_flags_path
+    end
+  end
 end
