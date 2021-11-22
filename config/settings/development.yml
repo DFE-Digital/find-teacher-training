@@ -5,5 +5,3 @@ valid_referers:
 log_level: debug
 redis_url: redis://localhost:6379/0
 background_jobs: # scheduled jobs run on all environments except dev and test
-feature_flags:
-  cache_courses: true

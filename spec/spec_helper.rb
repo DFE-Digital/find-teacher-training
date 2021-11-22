@@ -91,6 +91,7 @@ RSpec.configure do |config|
 
   config.before { RedisService.new.flushdb }
   config.before { Rails.cache.clear }
+  config.before { FeatureFlag.activate(:cache_courses) }
 
   require 'webmock/rspec'
   require 'factory_bot'

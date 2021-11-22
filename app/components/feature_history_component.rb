@@ -21,6 +21,6 @@ private
   end
 
   def status
-    FeatureFlag.activated?(@feature_name) ? 'active' : 'inactive'
+    FeatureFlag.active?(@feature_name) ? 'active' : 'inactive'
   end
 end

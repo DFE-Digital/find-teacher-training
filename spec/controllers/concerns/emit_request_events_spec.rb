@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EmitRequestEvents, type: :request, with_bigquery: true do
   context 'with send_web_requests_to_big_query enabled' do
     before do
-      activate_feature(:send_web_requests_to_big_query)
+      FeatureFlag.activate(:send_web_requests_to_big_query)
     end
 
     it 'enqueues job to send event to bigquery' do
@@ -19,7 +19,7 @@ RSpec.describe EmitRequestEvents, type: :request, with_bigquery: true do
 
   context 'with send_web_requests_to_big_query disabled' do
     before do
-      deactivate_feature(:send_web_requests_to_big_query)
+      FeatureFlag.deactivate(:send_web_requests_to_big_query)
     end
 
     it 'does not enqueue any jobs' do

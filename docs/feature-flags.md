@@ -1,49 +1,30 @@
 # Feature Flags
 
-Find has a basic feature flag facility based on the [config gem](https://github.com/rubyconfig/config).
+Find has a feature flag facility at '/feature-flags'. When a flag is toggled, its state is updated in Redis. 
 
 # Adding new feature flags
 
-All flags are defined under the `feature_flags` key of [config/settings.yml](config/settings.yml).
+All flags are defined under '/app/lib/feature-flags.rb'.
 
-Add new feature names in alphabetical order, setting true/false as required. Typically most flags should be set to false initially.
+Add new feature names to this file. Flags will be deemed to have a 'false' state initially until you toggle them via the UI (see 'Switching them on and off in deployed environments').
 
 # Using them in code
 
 In code, feature flag state should be checked via the `FeatureFlag` class.
 
-`FeatureFlag.active?(:display_apply_button)`
+```sh
+$ FeatureFlag.active?(:display_apply_button)
+```
 
 This will raise an appropriate error if the feature name isn't recognised.
 
 # Switching them on and off in deployed environments
 
-- Change the true/false value for the flag in [config/settings.yml](config/settings.yml)
-- Commit the change
-- Raise and merge a PR
+- Change the true/false value for the flag in the Feature Flags UI (`/feature-flags`)
+- Note this `/feature-flags` is publicly accessible in all environments except production. In production `/feature-flags` is protected by _basic auth_ and you will require the necessary credentials to gain access.
+- You can also toggle feature flags in the console via the `FeatureFlag` class if you prefer
 
-This will change the flag across QA, Staging, and Production.
-
-To test a feature on QA before deploying to Staging and Production, instead of updating settings.yml you can add a temporary environment variable override to [app_config.yml](terraform/workspace_variables/app_config.yml), eg -
-
+```sh
+$ FeatureFlag.activate(:foo)
+$ FeatureFlag.deactivate(:foo)
 ```
-qa:
-  <<: *default
-  RAILS_ENV: qa
-  RACK_ENV: qa
-  SETTINGS__FEATURE_FLAGS__<FEATURE_NAME>: true
-```
-
-This should be removed as soon as the feature is ready to be switched on in production. Refrain from adding overrides to the staging and production blocks of this file so as to minimise the spread of feature flag config across two files.
-
-# Urgent changes to feature flags
-
-If a feature needs to be switched off quickly, the process is the same as above. If another dev isn't around to review the PR (eg - an out of hours change), then merge without approval.
-
-It is possible to modify the environment variable created by the config gem for a given feature flag, however restarting the server manually causes a short period of downtime. As deploys are fairly quick, the time saved from changing the environment variable directly isn't considerable and should be discouraged.
-
-# Development and Test
-
-When developing a feature, switch the flag in settings.yml but don't commit the change until it's ready to be switched on in a deployed environment.
-
-When writing tests, use the methods in FeatureFlagHelper to stub flag checks as required.

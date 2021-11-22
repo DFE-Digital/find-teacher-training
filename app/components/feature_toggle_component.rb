@@ -8,11 +8,11 @@ class FeatureToggleComponent < ViewComponent::Base
   end
 
   def toggle_label
-    FeatureFlag.activated?(feature_name) ? 'Deactivate' : 'Activate'
+    FeatureFlag.active?(feature_name) ? 'Deactivate' : 'Activate'
   end
 
   def toggle_link
-    if FeatureFlag.activated?(feature_name)
+    if FeatureFlag.active?(feature_name)
       feature_flags_path(feature_name: feature_name, state: :deactivate)
     else
       feature_flags_path(feature_name: feature_name, state: :activate)

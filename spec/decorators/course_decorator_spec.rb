@@ -100,10 +100,12 @@ describe CourseDecorator do
       let(:mathematics) { build(:subject, :mathematics, scholarship: '2000', bursary_amount: '3000') }
       let(:course) { build :course, subjects: [mathematics] }
 
+      before { FeatureFlag.activate(:bursaries_and_scholarships_announced) }
+
       it { is_expected.to eq('Scholarships or bursaries, as well as student finance, are available if you’re eligible') }
 
       context 'when bursaries_and_scholarships_announced feature is off' do
-        before { deactivate_feature(:bursaries_and_scholarships_announced) }
+        before { FeatureFlag.deactivate(:bursaries_and_scholarships_announced) }
 
         it { is_expected.to eq('Student finance if you’re eligible') }
       end
@@ -113,10 +115,12 @@ describe CourseDecorator do
       let(:mathematics) { build(:subject, :mathematics, bursary_amount: '3000') }
       let(:course) { build :course, subjects: [mathematics] }
 
+      before { FeatureFlag.activate(:bursaries_and_scholarships_announced) }
+
       it { is_expected.to eq('Bursaries and student finance are available if you’re eligible') }
 
       context 'when bursaries_and_scholarships_announced feature is off' do
-        before { deactivate_feature(:bursaries_and_scholarships_announced) }
+        before { FeatureFlag.deactivate(:bursaries_and_scholarships_announced) }
 
         it { is_expected.to eq('Student finance if you’re eligible') }
       end

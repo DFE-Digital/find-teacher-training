@@ -7,13 +7,7 @@ google:
     project_id: bat-find-test
     dataset: bat-find-test-events
 redis_url: redis://localhost:6379/9
-background_jobs: # scheduled jobs run on all environments except dev and test - see settings.yml
-
-feature_flags:
-  new_filters: true
-  cache_courses: true
-  bursaries_and_scholarships_announced: true
-
+background_jobs: # scheduled jobs run on all environments except dev and test - see settings:
 basic_auth_enabled: false
 basic_auth_username: foo
 basic_auth_password: bar

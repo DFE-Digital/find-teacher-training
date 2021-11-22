@@ -1,6 +1,8 @@
 class FeatureFlagsController < ApplicationController
   include HttpAuthConcern
 
+  skip_before_action :redirect_to_maintenance_page_if_flag_is_active
+
   def index; end
 
   def update

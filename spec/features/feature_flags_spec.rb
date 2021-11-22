@@ -47,7 +47,7 @@ RSpec.describe 'Feature flags', type: :feature do
   end
 
   def then_the_feature_is_activated
-    expect(FeatureFlag.activated?('test_feature')).to be true
+    expect(FeatureFlag.active?('test_feature')).to be true
     expect(page).to have_content('Feature ‘Test feature’ activated')
     expect(page).to have_content('Active')
     expect(page).to have_content('12pm on 1 December 2021')
@@ -59,7 +59,7 @@ RSpec.describe 'Feature flags', type: :feature do
 
   def then_the_feature_is_deactivated
     expect(page).to have_content('Inactive')
-    expect(FeatureFlag.activated?('test_feature')).to be false
+    expect(FeatureFlag.active?('test_feature')).to be false
   end
 
   def summary_card
