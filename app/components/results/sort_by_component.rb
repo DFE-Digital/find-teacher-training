@@ -9,7 +9,7 @@ module Results
     end
 
     def render?
-      !results.provider_filter?
+      !results.no_results_found? && !results.provider_filter?
     end
   end
 end

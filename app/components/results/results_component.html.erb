@@ -11,12 +11,8 @@
     <%= render Results::FilterComponent.new(results: results) %>
   </div>
   <div class="app-filter-layout__content">
-    <% if results.no_results_found? %>
-      <%= render Results::NoResultsComponent.new(results: results) %>
-    <% else %>
-      <%= render Results::SortByComponent.new(results: results) %>
-    <% end %>
-
+    <%= render Results::NoResultsComponent.new(results: results) %>
+    <%= render Results::SortByComponent.new(results: results) %>
     <%= render Results::SuggestedSearchesComponent.new(results: results) %>
 
     <% if results.has_results? %>

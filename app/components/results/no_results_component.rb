@@ -8,5 +8,9 @@ module Results
     def initialize(results:)
       @results = results
     end
+
+    def render?
+      results.no_results_found?
+    end
   end
 end
