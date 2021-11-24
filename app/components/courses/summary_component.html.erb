@@ -6,20 +6,7 @@
   <dt class="app-description-list__label">Financial support</dt>
   <dd data-qa="course__funding_option"><%= funding_option %></dd>
   <dt class="app-description-list__label">Qualification</dt>
-  <dd data-qa="course__qualifications">
-    <% case outcome %>
-    <% when 'QTS' %>
-      <%= render partial: 'courses/qualification/qts' %>
-    <% when 'PGCE with QTS' %>
-      <%= render partial: 'courses/qualification/pgce_with_qts' %>
-    <% when 'PGDE with QTS' %>
-      <%= render partial: 'courses/qualification/pgde_with_qts' %>
-    <% when 'PGCE' %>
-      <%= render partial: 'courses/qualification/pgce' %>
-    <% when 'PGDE' %>
-      <%= render partial: 'courses/qualification/pgde' %>
-    <% end %>
-  </dd>
+  <%= render Courses::QualificationsSummaryComponent.new(outcome) %>
   <% if age_range_in_years.present? %>
     <dt class="app-description-list__label">Age range</dt>
     <dd data-qa="course__age_range"><%= age_range_in_years.humanize %></dd>
