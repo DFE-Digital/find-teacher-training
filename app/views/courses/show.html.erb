@@ -32,12 +32,7 @@
         <%= render partial: 'courses/about_course' %>
       <% end %>
 
-      <% if course.how_school_placements_work.present? ||
-        course.program_type == 'higher_education_programme' ||
-        course.program_type == 'scitt_programme' ||
-        course.site_statuses.map(&:site).uniq.many? %>
-        <%= render partial: 'courses/about_schools' %>
-      <% end %>
+      <%= render Courses::AboutSchoolsComponent.new(course) %>
 
       <%= render Courses::EntryRequirementsComponent.new(course: course) %>
 
