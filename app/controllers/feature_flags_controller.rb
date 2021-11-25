@@ -8,6 +8,11 @@ class FeatureFlagsController < ApplicationController
   def update
     FeatureFlag.send(action, feature_name)
 
+    SlackNotificationJob.perform_now(
+      ":flags: Feature ‘#{feature_name}‘ was activated",
+      feature_flags_path,
+    )
+
     flash[:success] = "Feature ‘#{feature_name.humanize}’ #{action}d"
     redirect_to feature_flags_path
   end

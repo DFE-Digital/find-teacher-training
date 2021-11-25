@@ -42,6 +42,7 @@ RSpec.describe 'Feature flags', type: :feature do
     within(summary_card) { click_link 'Confirm environment to make changes' }
     fill_in 'Type ‘test’ to confirm that you want to proceed', with: 'test'
     click_button 'Continue'
+    stub_slack_notification_job
 
     within(summary_card) { click_button 'Activate' }
   end
@@ -68,5 +69,18 @@ RSpec.describe 'Feature flags', type: :feature do
 
   def feature
     @feature ||= FeatureFlag.features[:test_feature]
+  end
+
+  def stub_slack_notification_job
+    stub_request(:post, 'https://example.com/webhook')
+      .with(
+        body: '{"username":"Find postgraduate teacher training","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was activated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
+        headers: {
+          'Connection' => 'close',
+          'Host' => 'example.com',
+          'User-Agent' => 'http.rb/5.0.4',
+        },
+      )
+      .to_return(status: 200, body: '', headers: {})
   end
 end

@@ -7,3 +7,4 @@ valid_referers:
   - https://www.find-postgraduate-teacher-training.education.gov.uk
 basic_auth_username: replace_me
 basic_auth_password: replace_me
+STATE_CHANGE_SLACK_URL: replace_me
