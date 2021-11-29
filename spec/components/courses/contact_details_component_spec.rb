@@ -8,7 +8,7 @@ describe Courses::ContactDetailsComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('LSJS','44A Albert Road','London','NW4 2SJ')
+      expect(result.text).to include('LSJS', '44A Albert Road', 'London', 'NW4 2SJ')
     end
   end
 end

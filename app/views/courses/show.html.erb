@@ -60,30 +60,7 @@
 
       <%= render partial: 'courses/advice' %>
 
-      <div class="govuk-!-margin-bottom-8" id="section-apply">
-        <% if CycleTimetable.mid_cycle? %>
-          <%= @course.has_vacancies? ? render('apply_button') : render('no_vacancies_warning') %>
-        <% else %>
-          <div data-qa="course__end_of_cycle_notice">
-            <h1 class="govuk-heading-l">Apply</h1>
-            <p class="govuk-body">
-              Courses are currently closed but you can still
-              <%= govuk_link_to('start or continue an application', Settings.apply_base_url) %>
-              anyway.
-            </p>
-
-            <p class="govuk-body">You’ll be able to:</p>
-
-            <ul class="govuk-list govuk-list--bullet">
-              <li>
-                find courses starting in the <%= CycleTimetable.next_cycle_year_range %>
-                academic year from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %>
-              </li>
-              <li>submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %></li>
-            </ul>
-          </div>
-        <% end %>
-      </div>
+      <%= render Courses::ApplyComponent.new(course) %>
     </div>
   </div>
 </div>
