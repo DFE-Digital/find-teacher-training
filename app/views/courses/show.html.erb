@@ -56,7 +56,7 @@
         <%= render partial: 'courses/train_with_disabilities' %>
       <% end %>
 
-      <%= render partial: 'courses/contact_details' %>
+      <%= render Courses::ContactDetailsComponent.new(course) %>
 
       <%= render partial: 'courses/advice' %>
 
