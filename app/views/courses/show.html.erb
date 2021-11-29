@@ -40,7 +40,7 @@
         <%= render partial: 'courses/salary' %>
       <% end %>
 
-      <%= render partial: 'courses/fees_and_financial_support' %>
+      <%= render Courses::FeesAndFinancialSupportComponent.new(course) %>
 
       <% if course.provider.train_with_us.present? ||  course.about_accrediting_body.present? %>
         <%= render partial: 'courses/about_the_provider' %>
