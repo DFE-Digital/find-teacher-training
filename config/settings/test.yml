@@ -11,3 +11,4 @@ background_jobs: # scheduled jobs run on all environments except dev and test - 
 basic_auth_enabled: false
 basic_auth_username: foo
 basic_auth_password: bar
+STATE_CHANGE_SLACK_URL: https://example.com/webhook
