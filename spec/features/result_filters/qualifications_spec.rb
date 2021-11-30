@@ -1,126 +1,152 @@
 require 'rails_helper'
 
-RSpec.feature 'Results page new qualifications filter' do
+RSpec.feature 'Qualifications filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
+  include FiltersFeatureSpecsHelper
 
-  let(:results_page) { PageObjects::Page::Results.new }
-  let(:base_parameters) { results_page_parameters }
+  scenario 'Candidate applies qualifications filters on results page' do
+    when_i_visit_the_results_page
+    then_i_see_all_qualifications_checkboxes_are_selected
 
-  before do
-    stub_subjects
-    stub_courses(query: base_parameters, course_count: 10)
+    when_i_unselect_the_pgce_and_further_education_qualification_checkboxes
+    and_apply_the_filters
+    then_i_see_that_the_pgce_and_further_education_qualification_checkboxes_are_still_unselected
+    and_the_qts_checkbox_is_unselected
+    and_the_qts_qualification_query_parameters_are_retained
+
+    when_i_select_the_pgce_qualification_checkbox
+    and_i_deselect_the_qts_qualification_checkbox
+    and_apply_the_filters
+    then_i_see_that_the_qts_and_further_education_checkboxes_are_still_unselected
+    and_the_pgce_checkbox_is_selected
+    and_the_pgce_qualification_query_parameters_are_retained
+
+    when_i_select_the_further_education_checkbox
+    and_i_deselect_the_pgce_checkbox
+    and_apply_the_filters
+    then_i_see_that_the_pgce_and_qts_checkboxes_are_still_unselected
+    and_the_further_education_checkbox_is_selected
+    and_the_further_education_qualification_query_parameters_are_retained
   end
 
-  describe 'viewing results without explicitly de-selecting a filter' do
-    it 'show courses with all qualification types selected' do
-      results_page.load
-
-      expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
-      expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
-      expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
-      expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
-    end
+  def then_i_see_all_qualifications_checkboxes_are_selected
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
+    expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
+    expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
   end
 
-  describe 'applying the filters' do
-    context 'show QTS courses only' do
-      before do
-        stub_courses(
-          query: base_parameters.merge(
-            'filter[qualification]' => 'qts',
-            'filter[study_type]' => 'full_time,part_time',
-          ),
-          course_count: 10,
-        )
+  def when_i_unselect_the_pgce_and_further_education_qualification_checkboxes
+    stub_courses(
+      query: results_page_parameters.merge(
+        'filter[qualification]' => 'qts',
+        'filter[study_type]' => 'full_time,part_time',
+      ),
+      course_count: 10,
+    )
 
-        results_page.load
-        results_page.qualifications_filter.pgce_checkbox.uncheck
-        results_page.qualifications_filter.further_education_checkbox.uncheck
-        results_page.apply_filters_button.click
-      end
+    results_page.qualifications_filter.pgce_checkbox.uncheck
+    results_page.qualifications_filter.further_education_checkbox.uncheck
+  end
 
-      it 'list the filtered courses' do
-        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
-        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
-        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
-        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
-      end
+  def then_i_see_that_the_pgce_and_further_education_qualification_checkboxes_are_still_unselected
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
+    expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+  end
 
-      it 'retains the query parameters' do
-        expect_page_to_be_displayed_with_query(
-          page: results_page,
-          expected_query_params: {
-            'fulltime' => 'true',
-            'parttime' => 'true',
-            'hasvacancies' => 'true',
-            'degree_required' => 'show_all_courses',
-            'qualifications' => %w[QtsOnly],
-          },
-        )
-      end
-    end
+  def and_the_qts_checkbox_is_unselected
+    expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
+  end
 
-    context 'show PGCE (or PGDE) with QTS courses only' do
-      before do
-        stub_courses(
-          query: base_parameters.merge(
-            'filter[qualification]' => 'pgce_with_qts,pgde_with_qts',
-            'filter[study_type]' => 'full_time,part_time',
-          ),
-          course_count: 10,
-        )
+  def and_the_qts_qualification_query_parameters_are_retained
+    expect_page_to_be_displayed_with_query(
+      page: results_page,
+      expected_query_params: {
+        'fulltime' => 'true',
+        'parttime' => 'true',
+        'hasvacancies' => 'true',
+        'degree_required' => 'show_all_courses',
+        'qualifications' => %w[QtsOnly],
+      },
+    )
+  end
 
-        results_page.load
-        results_page.qualifications_filter.further_education_checkbox.uncheck
-        results_page.qualifications_filter.qts_checkbox.uncheck
-        results_page.apply_filters_button.click
-      end
+  def when_i_select_the_pgce_qualification_checkbox
+    stub_courses(
+      query: results_page_parameters.merge(
+        'filter[qualification]' => 'pgce_with_qts,pgde_with_qts',
+        'filter[study_type]' => 'full_time,part_time',
+      ),
+      course_count: 10,
+    )
 
-      it 'lists the filtered courses' do
-        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
-        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
-        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
-        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
-      end
+    results_page.qualifications_filter.pgce_checkbox.check
+  end
 
-      it 'retains the query parameters' do
-        expect_page_to_be_displayed_with_query(
-          page: results_page,
-          expected_query_params: {
-            'fulltime' => 'true',
-            'parttime' => 'true',
-            'hasvacancies' => 'true',
-            'degree_required' => 'show_all_courses',
-            'qualifications' => %w[PgdePgceWithQts],
-          },
-        )
-      end
-    end
+  def and_i_deselect_the_qts_qualification_checkbox
+    results_page.qualifications_filter.qts_checkbox.uncheck
+  end
 
-    context 'show further education (PGCE or PGDE without QTS) courses only' do
-      before do
-        stub_courses(
-          query: base_parameters.merge(
-            'filter[qualification]' => 'pgce,pgde',
-            'filter[study_type]' => 'full_time,part_time',
-          ),
-          course_count: 10,
-        )
-      end
+  def then_i_see_that_the_qts_and_further_education_checkboxes_are_still_unselected
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
+    expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
+  end
 
-      it 'list the filtered courses' do
-        results_page.load
+  def and_the_pgce_checkbox_is_selected
+    expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
+  end
 
-        results_page.qualifications_filter.pgce_checkbox.uncheck
-        results_page.qualifications_filter.qts_checkbox.uncheck
-        results_page.apply_filters_button.click
+  def and_the_pgce_qualification_query_parameters_are_retained
+    expect_page_to_be_displayed_with_query(
+      page: results_page,
+      expected_query_params: {
+        'fulltime' => 'true',
+        'parttime' => 'true',
+        'hasvacancies' => 'true',
+        'degree_required' => 'show_all_courses',
+        'qualifications' => %w[PgdePgceWithQts],
+      },
+    )
+  end
 
-        expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
-        expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
-        expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
-        expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
-      end
-    end
+  def when_i_select_the_further_education_checkbox
+    stub_courses(
+      query: results_page_parameters.merge(
+        'filter[qualification]' => 'pgce,pgde',
+        'filter[study_type]' => 'full_time,part_time',
+      ),
+      course_count: 10,
+    )
+
+    results_page.qualifications_filter.further_education_checkbox.check
+  end
+
+  def and_i_deselect_the_pgce_checkbox
+    results_page.qualifications_filter.pgce_checkbox.uncheck
+  end
+
+  def then_i_see_that_the_pgce_and_qts_checkboxes_are_still_unselected
+    expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
+    expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
+  end
+
+  def and_the_further_education_checkbox_is_selected
+    expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
+  end
+
+  def and_the_further_education_qualification_query_parameters_are_retained
+    expect_page_to_be_displayed_with_query(
+      page: results_page,
+      expected_query_params: {
+        'fulltime' => 'true',
+        'parttime' => 'true',
+        'hasvacancies' => 'true',
+        'degree_required' => 'show_all_courses',
+        'qualifications' => %w[Other],
+      },
+    )
   end
 end
