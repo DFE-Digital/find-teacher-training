@@ -13,6 +13,7 @@ class ResultsController < ApplicationController
     begin
       @courses = @results_view.courses.all
       @number_of_courses_string = @results_view.number_of_courses_string
+      render FeatureFlag.active?(:componentised_results) ? :index : :uncomponentised_index
     rescue JsonApiClient::Errors::ClientError
       render template: 'errors/unprocessable_entity', status: :unprocessable_entity
     end
