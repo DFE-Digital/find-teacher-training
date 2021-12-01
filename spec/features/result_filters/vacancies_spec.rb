@@ -3,58 +3,49 @@ require 'rails_helper'
 RSpec.feature 'Results page new vacancies filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
+  include FiltersFeatureSpecsHelper
 
-  let(:results_page) { PageObjects::Page::Results.new }
-  let(:base_parameters) { results_page_parameters }
+  scenario 'Candidate applies vacancies filter on results page' do
+    when_i_visit_the_results_page
+    then_i_see_the_vacancies_checkbox_is_selected
 
-  before do
-    stub_subjects
-    stub_courses(query: base_parameters, course_count: 10)
+    when_i_unselect_the_vacancies_checkbox
+    and_apply_the_filters
+    then_i_see_that_the_vacancies_checkbox_is_still_unselected
+    and_the_vacancies_query_parameters_are_retained
   end
 
-  describe 'viewing results without explicitly selecting a filter' do
-    it 'show courses with or without vacancies' do
-      results_page.load
-
-      expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
-      expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
-    end
+  def then_i_see_the_vacancies_checkbox_is_selected
+    expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
+    expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
   end
 
-  describe 'applying the filter' do
-    before do
-      stub_courses(
-        query: base_parameters.merge(
-          'filter[has_vacancies]' => 'true',
-          'filter[study_type]' => 'full_time,part_time',
-        ),
-        course_count: 10,
-      )
+  def when_i_unselect_the_vacancies_checkbox
+    base_params = results_page_parameters
+    base_params.delete('filter[has_vacancies]')
 
-      results_page.load
+    stub_courses(
+      query: base_params.merge('filter[study_type]' => 'full_time,part_time'),
+      course_count: 10,
+    )
 
-      results_page.vacancies_filter.checkbox.check
-      results_page.apply_filters_button.click
-    end
+    results_page.vacancies_filter.checkbox.uncheck
+  end
 
-    context 'show courses with vacancies only' do
-      it 'list the filtered courses' do
-        expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
-        expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
-      end
+  def then_i_see_that_the_vacancies_checkbox_is_still_unselected
+    expect(results_page.vacancies_filter.checkbox.checked?).to be(false)
+  end
 
-      it 'retains the query parameters' do
-        expect_page_to_be_displayed_with_query(
-          page: results_page,
-          expected_query_params: {
-            'fulltime' => 'true',
-            'parttime' => 'true',
-            'hasvacancies' => 'true',
-            'degree_required' => 'show_all_courses',
-            'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
-          },
-        )
-      end
-    end
+  def and_the_vacancies_query_parameters_are_retained
+    expect_page_to_be_displayed_with_query(
+      page: results_page,
+      expected_query_params: {
+        'fulltime' => 'true',
+        'parttime' => 'true',
+        'hasvacancies' => 'false',
+        'degree_required' => 'show_all_courses',
+        'qualifications' => %w[QtsOnly PgdePgceWithQts Other],
+      },
+    )
   end
 end
