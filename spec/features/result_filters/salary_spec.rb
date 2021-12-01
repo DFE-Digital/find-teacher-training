@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Results page new funding filter' do
+RSpec.feature 'Funding filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
   include FiltersFeatureSpecsHelper
