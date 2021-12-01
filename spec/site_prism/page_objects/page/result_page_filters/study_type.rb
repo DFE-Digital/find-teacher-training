@@ -1,6 +1,6 @@
 module PageObjects
   module Page
-    module ResultFilters
+    module ResultPageFilters
       class StudyType < SitePrism::Page
         set_url '/results/filter/studytype{?query*}'
 

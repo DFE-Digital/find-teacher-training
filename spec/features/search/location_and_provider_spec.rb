@@ -6,11 +6,11 @@ RSpec.feature 'Results page new area and provider filter' do
   include StubbedRequests::SubjectAreas
   include StubbedRequests::Subjects
 
-  let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
+  let(:filter_page) { PageObjects::Page::Search::Location.new }
   let(:start_page) { PageObjects::Page::Start.new }
-  let(:provider_page) { PageObjects::Page::ResultFilters::ProviderPage.new }
+  let(:provider_page) { PageObjects::Page::Search::ProviderPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:subjects_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
+  let(:subjects_page) { PageObjects::Page::Search::SubjectPage.new }
   let(:query_params) { {} }
   let(:base_parameters) { results_page_parameters }
 

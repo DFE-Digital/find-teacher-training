@@ -1,6 +1,6 @@
 module PageObjects
   module Page
-    module ResultFilters
+    module Search
       class ProviderPage < SitePrism::Page
         set_url '/results/filter/provider{?query*}'
 

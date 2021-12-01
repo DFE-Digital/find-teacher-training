@@ -1,6 +1,6 @@
 module PageObjects
   module Page
-    module ResultFilters
+    module ResultPageFilters
       class Funding < SitePrism::Page
         set_url '/results/filter/funding{?query*}'
 
