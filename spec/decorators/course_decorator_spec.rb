@@ -400,12 +400,6 @@ describe CourseDecorator do
     end
   end
 
-  describe 'has_vacancies?' do
-    it 'returns if the course has vacancies' do
-      expect(decorated_course.has_vacancies?).to eq('Yes')
-    end
-  end
-
   describe '#year_range' do
     it 'returns correct year range' do
       expect(decorated_course.year_range).to eq("#{RecruitmentCycle.current_year} to #{RecruitmentCycle.current_year + 1}")
