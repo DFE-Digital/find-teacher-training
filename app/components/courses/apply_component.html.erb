@@ -1,6 +1,6 @@
 <div class="govuk-!-margin-bottom-8" id="section-apply">
   <% if CycleTimetable.mid_cycle? %>
-    <% if has_vacancies? == 'Yes' %>
+    <% if has_vacancies? %>
       <p class="govuk-body">
         <%= govuk_start_button(
               text: 'Apply for this course',
