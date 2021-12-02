@@ -12,7 +12,7 @@ RSpec.feature 'Qualifications filter' do
     when_i_unselect_the_pgce_and_further_education_qualification_checkboxes
     and_apply_the_filters
     then_i_see_that_the_pgce_and_further_education_qualification_checkboxes_are_still_unselected
-    and_the_qts_checkbox_is_unselected
+    and_the_qts_checkbox_is_selected
     and_the_qts_qualification_query_parameters_are_retained
 
     when_i_select_the_pgce_qualification_checkbox
@@ -56,7 +56,7 @@ RSpec.feature 'Qualifications filter' do
     expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
   end
 
-  def and_the_qts_checkbox_is_unselected
+  def and_the_qts_checkbox_is_selected
     expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
   end
 
