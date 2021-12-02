@@ -1,6 +1,6 @@
 module PageObjects
   module Page
-    module ResultFilters
+    module Search
       class Location < SitePrism::Page
         set_url '/results/filter/location{?query*}'
 

@@ -5,7 +5,7 @@ RSpec.feature 'Results page new subject filter' do
   include StubbedRequests::SubjectAreas
   include StubbedRequests::Subjects
 
-  let(:filter_page) { PageObjects::Page::ResultFilters::SubjectPage.new }
+  let(:filter_page) { PageObjects::Page::Search::SubjectPage.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:base_parameters) { results_page_parameters }
 

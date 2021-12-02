@@ -5,7 +5,7 @@ describe 'suggested searches', type: :feature do
   include StubbedRequests::Providers
   include StubbedRequests::Subjects
 
-  let(:filter_page) { PageObjects::Page::ResultFilters::Location.new }
+  let(:filter_page) { PageObjects::Page::Search::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'distance' }
   let(:base_parameters) { results_page_parameters('sort' => sort) }
