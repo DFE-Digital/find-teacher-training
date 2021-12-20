@@ -1,6 +1,8 @@
 en:
   age_groups:
     title: Which age group do you want to teach?
+    further_education:
+      hint: For example, teaching A levels or vocational courses
   activemodel:
     errors:
       models:
