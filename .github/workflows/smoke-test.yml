@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload Cypress screenshot and videos
         if:   always()
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: smoke-test-${{ github.event.inputs.environment }}
           path: |
