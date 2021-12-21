@@ -1,0 +1,10 @@
+en:
+  age_groups:
+    title: Which age group do you want to teach?
+  activemodel:
+    errors:
+      models:
+        search/age_groups_form:
+          attributes:
+            age_group:
+              blank: Select an age group
