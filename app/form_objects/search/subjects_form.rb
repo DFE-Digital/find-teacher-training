@@ -18,7 +18,7 @@ module Search
       secondary_subjects = subject_areas.find { |sa| sa.id == 'SecondarySubject' }.subjects
       modern_languages_subjects = subject_areas.find { |sa| sa.id == 'ModernLanguagesSubject' }.subjects
 
-      secondary_subjects + modern_languages_subjects.sort_by(&:subject_name)
+      (secondary_subjects + modern_languages_subjects).sort_by(&:subject_name)
     end
 
   private
