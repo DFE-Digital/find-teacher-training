@@ -1,0 +1,17 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class='govuk-heading-l'>
+      <%= I18n.t('subjects.secondary_title') %>
+    </h1>
+
+    <p class="govuk-hint">
+      Select all subjects you are interested in teaching. We’ll show you courses that train you to teach those subjects.
+    </p>
+
+    <%= form.govuk_collection_check_boxes :subject_codes, secondary_subjects,
+      :code, :name, :financial_info, legend: { text: "Which courses would you like to find?" }
+    %>
+
+    <%= form.govuk_submit 'Find courses' %>
+  </div>
+</div>

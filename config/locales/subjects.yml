@@ -1,0 +1,12 @@
+en:
+  subjects:
+    title: Select a subject
+    primary_title: Primary courses with subject specialisms
+    secondary_title: Which secondary subjects do you want to teach?
+  activemodel:
+    errors:
+      models:
+        search/subjects_form:
+          attributes:
+            subject_codes:
+              blank: Select at least one subject
