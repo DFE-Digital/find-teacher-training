@@ -91,7 +91,7 @@ RSpec.feature 'Searching across England' do
   end
 
   def then_i_should_see_the_subjects_form
-    expect(page).to have_content('Which secondary subjects are you interested in?')
+    expect(page).to have_content('Which secondary subjects do you want to teach?')
   end
 
   def and_i_click_find_courses
