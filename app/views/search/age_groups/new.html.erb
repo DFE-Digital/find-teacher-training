@@ -21,7 +21,7 @@
         form_name: :search_age_groups_form,
         exclude_keys: ['age_group']) %>
 
-      <%= f.govuk_radio_buttons_fieldset :age_group, legend: { text: I18n.t('age_groups.title'), size: 'xl', tag: 'h1' } do %>
+      <%= f.govuk_radio_buttons_fieldset :age_group, legend: { text: I18n.t('age_groups.title'), size: 'l', tag: 'h1' } do %>
         <%= f.govuk_radio_button :age_group, 'primary', label: { text: 'Primary' }, link_errors: true %>
         <%= f.govuk_radio_button :age_group, 'secondary', label: { text: 'Secondary' } %>
         <%= f.govuk_radio_divider %>
