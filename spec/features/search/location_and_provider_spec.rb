@@ -1,5 +1,8 @@
 require 'rails_helper'
 
+# TODO: these specs are deprecated and should be removed once the
+# new search flow is switched on permanently
+
 RSpec.feature 'Results page new area and provider filter' do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
