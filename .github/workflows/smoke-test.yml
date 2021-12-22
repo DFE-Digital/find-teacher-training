@@ -55,7 +55,7 @@ jobs:
           retention-days: 7
 
       - name: 'Nofiy #twd_apply_tech on failure'
-        if: failure()
+        if: failure() && github.event.inputs.pr == ''
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: twd_apply_tech
