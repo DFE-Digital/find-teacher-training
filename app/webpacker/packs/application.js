@@ -44,13 +44,25 @@ const filterToggleButton = new FilterToggleButton({
 
 filterToggleButton.init()
 
+//TODO: Deprecated - to be removed when new search flow feature flag is removed
 initAutocomplete({
   element: "location-autocomplete",
   input: "location",
   path: "/location-suggestions",
 });
 
-initCachedProvidersAutocomplete();
+// Autocomplete for new search flow location search
+initAutocomplete({
+  element: "location-autocomplete",
+  input: "search-start-form-lq-field",
+  path: "/location-suggestions",
+});
+
+//TODO: Deprecated - to be removed when new search flow feature flag is removed
+initCachedProvidersAutocomplete({inputIds: ['query']});
+
+// Autocomplete for new search flow provider search
+initCachedProvidersAutocomplete({inputIds: ['search-start-form-query-field', 'search-start-form-query-field-error']});
 
 loadAnalytics();
 

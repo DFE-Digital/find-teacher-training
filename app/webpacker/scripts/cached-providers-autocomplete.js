@@ -1,10 +1,10 @@
 import accessibleAutocomplete from "accessible-autocomplete";
 
-export const initCachedProvidersAutocomplete = () => {
-  const inputId = 'query'
+export const initCachedProvidersAutocomplete = ({inputIds}) => {
   const autocompleteId = 'provider-autocomplete'
 
-  try {
+  inputIds.forEach((inputId) => {
+    try {
       const selectElement = document.getElementById(inputId)
 
       if (!selectElement) return
@@ -17,8 +17,10 @@ export const initCachedProvidersAutocomplete = () => {
         autoselect: false,
         confirmOnBlur: false,
         showNoOptionsFound: true,
+        showAllValues: false,
       })
-  } catch (err) {
-    console.error(`Could not enhance ${autocompleteId}`, err)
-  }
+    } catch (err) {
+      console.error(`Could not enhance ${autocompleteId}`, err)
+    }
+  })
 }

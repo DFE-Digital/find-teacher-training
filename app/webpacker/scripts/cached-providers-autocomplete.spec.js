@@ -18,7 +18,7 @@ describe("initACachedProvidersAutocomplete", () => {
         </div>
       `
 
-    initCachedProvidersAutocomplete()
+    initCachedProvidersAutocomplete({inputIds: ['query']})
   })
 
   it('should instantiate an autocomplete', () => {
