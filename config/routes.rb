@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   post '/confirm-environment' => 'confirm_environment#create'
 
   # new search flow
+
   scope module: 'search' do
+    get 'start', to: 'start#new'
+    post 'start', to: 'start#create'
     get '/age-groups' => 'age_groups#new'
     get '/age-groups-submit' => 'age_groups#create', as: :age_groups_create
     get '/subjects' => 'subjects#new'

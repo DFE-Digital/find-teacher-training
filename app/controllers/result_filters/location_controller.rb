@@ -8,6 +8,11 @@ module ResultFilters
     def new; end
 
     def start
+      if FeatureFlag.active?(:new_search_flow)
+        redirect_to start_path
+        return
+      end
+
       flash[:start_wizard] = true
     end
 

@@ -1,0 +1,32 @@
+<%= content_for :page_title, title_with_error_prefix(I18n.t('start.title'), @start_form.errors.any?) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <%= form_with(model: @start_form, url: start_path, data: { 'ga-event-form' => 'Start' }, method: :post) do |f| %>
+      <%= f.govuk_error_summary %>
+
+      <%= render HiddenFieldsComponent.new(
+        query_params: request.query_parameters,
+        form: f,
+        form_name: :search_start_form,
+        exclude_keys: %w[l query rad]) %>
+
+      <%= f.govuk_radio_buttons_fieldset :search_types, legend: { text: 'Find courses by location or by training provider', size: 'l', tag: 'h1' } do %>
+        <%= f.govuk_radio_button :l, '1', label: { text: 'By city, town or postcode' }, link_errors: true do %>
+          <%= f.govuk_text_field :lq, label: { text: "Postcode, town or city" } %>
+          <div id="location-autocomplete" class="govuk-body"></div>
+        <% end %>
+        <%= f.govuk_radio_button :l, '2', label: { text: 'Across England' } %>
+        <%= f.govuk_radio_button :l, '3', label: { text: 'By school, university or other training provider' }, link_errors: true do %>
+          <% if select_provider_options %>
+            <%= f.govuk_collection_select :query, select_provider_options, :id, :name, label: { text: "School, university or other training provider"} %>
+          <% else %>
+            <%= f.govuk_text_field :query, label: { text: "School, university or other training provider" } %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <%= f.govuk_submit 'Continue' %>
+    <% end %>
+  </div>
+</div>

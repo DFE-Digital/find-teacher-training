@@ -1,0 +1,14 @@
+en:
+  start:
+    title: Find courses by location or by training provider
+  activemodel:
+    errors:
+      models:
+        search/start_form:
+          attributes:
+            l:
+              blank: Select an option to find courses
+            query:
+              blank: Enter a school, university or other training provider
+            lq:
+              blank: Enter a city, town or postcode
