@@ -25,7 +25,7 @@ module Search
 
       context 'provider search' do
         it 'is not valid if provider query is not present' do
-          form = described_class.new(l: '2')
+          form = described_class.new(l: '3')
 
           expect(form.valid?).to be(false)
         end

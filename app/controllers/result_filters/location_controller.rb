@@ -9,7 +9,7 @@ module ResultFilters
 
     def start
       if FeatureFlag.active?(:new_search_flow)
-        redirect_to start_path
+        redirect_to start_path(request.query_parameters)
         return
       end
 

@@ -3,23 +3,41 @@ module Search
     include FilterParameters
 
     before_action :check_provider_cache_is_populated
-    # before_action :build_results_filter_query_parameters
 
     def new
-      @start_form = StartForm.new
+      @start_form = StartForm.new(
+        l: params[:l],
+        lq: params[:lq],
+        query: params[:query],
+      )
     end
 
     def create
       @start_form = StartForm.new(form_params)
 
       if @start_form.valid?
-        redirect_to next_step
+        next_step_params = build_params(@start_form)
+        redirect_to age_groups_path(next_step_params)
       else
         render :new
       end
     end
 
   private
+
+    def build_params(form)
+      params = filter_params[:search_start_form]
+
+      if form.location_search?
+        location_params = GeocoderService.location_params_for(form.lq)
+        params.merge!(location_params)
+      end
+
+      # TODO: handle provider and across england search.
+      # Should this logic be extracted to a class or added to the FilterParameters module??
+
+      strip(params)
+    end
 
     def form_params
       params.require(:search_start_form).permit(:l, :lq, :query)
@@ -32,10 +50,10 @@ module Search
       end
     end
 
-    def build_results_filter_query_parameters
-      @results_filter_query_parameters = merge_previous_parameters(
-        ResultsView.new(query_parameters: request.query_parameters).query_parameters_with_defaults,
-      )
+    def strip(params)
+      params.reject { |_, v| v == '' }
     end
   end
+
+  class ProviderCacheEmptyError < StandardError; end
 end

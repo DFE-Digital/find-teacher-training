@@ -8,8 +8,6 @@ module Search
     validates :lq, presence: true, if: :location_search?
     validates :query, presence: true, if: :provider_search?
 
-    private
-
     def location_search?
       l == '1'
     end
