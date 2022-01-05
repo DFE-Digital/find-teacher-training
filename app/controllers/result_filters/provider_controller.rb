@@ -23,9 +23,12 @@ module ResultFilters
         flash[:error] = [I18n.t('location_filter.fields.provider'), I18n.t('location_filter.errors.missing_provider')]
         redirect_back
       elsif @provider_suggestions.count == 1
-        redirect_to start_subject_path(
-          filter_params_without_previous_parameters.merge(query: @provider_suggestions.first.provider_name),
-        )
+        params = filter_params_without_previous_parameters.merge(query: @provider_suggestions.first.provider_name)
+        if FeatureFlag.active?(:new_search_flow)
+          redirect_to age_groups_path(params)
+        else
+          redirect_to start_subject_path(params)
+        end
       end
     end
 
