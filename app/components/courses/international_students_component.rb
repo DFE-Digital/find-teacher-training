@@ -16,13 +16,13 @@ module Courses
 
     def visa_sponsorship_status      
       if !@course.salaried? && provider.can_sponsor_student_visa        
-        "<p class=\"govuk-body\">You’ll need a visa or other immigration status that allows you to work in the UK. You already have this if you:</p>
+        "<p class=\"govuk-body\">You’ll need a visa or other immigration status that allows you to study in the UK. You already have this if you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>are an Irish citizen</li>
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
         
-        <p class=\"govuk-body\">For courses that come with a salary, this often means #{govuk_link_to('applying for a Skilled Worker visa', VISA_GUIDANCE_URL)}.</p>
+        <p class=\"govuk-body\">You may need to #{govuk_link_to('apply for a Student visa', VISA_GUIDANCE_URL)}.</p>
 
         <p class=\"govuk-body\">To be able to apply for Student visa, you need a confirmed offer on a course.</p>
         
@@ -32,7 +32,7 @@ module Courses
         
         <p class=\"govuk-body\">Alternatively, you may be eligible for other visa types that allow you to #{govuk_link_to('train to be a teacher without a Student visa', OTHER_VISA_GUIDANCE_URL)}.</p>".html_safe
       elsif @course.salaried? && provider.can_sponsor_skilled_worker_visa
-        "<p class=\"govuk-body\">You’ll need a visa or other immigration status that allows you to study in the UK. You already have this if you:</p>
+        "<p class=\"govuk-body\">You’ll need a visa or other immigration status that allows you to work in the UK. You already have this if you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>are an Irish citizen</li>
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
