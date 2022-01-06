@@ -54,9 +54,9 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
         
-        <p class=\"govuk-body\">You cannot get visa sponsorship through this course.</p>
+        <p class=\"govuk-body\">Skilled Worker visa sponsorship is not available for this course.</p>
 
-        <p class=\"govuk-body\">If you need a visa, you can do one of the following:</p>
+        <p class=\"govuk-body\">If you do not already have the right to work in the UK, you can:</p>
 
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>search for courses where visa sponsorship is available</li>
@@ -70,9 +70,9 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
         
-        <p class=\"govuk-body\">You cannot get visa sponsorship through this course.</p>
+        <p class=\"govuk-body\">Student visa sponsorship is not available for this course.</p>
 
-        <p class=\"govuk-body\">If you need a visa, you can do one of the following:</p>
+        <p class=\"govuk-body\">If you do not already have the right to study in the UK, you can:</p>
 
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>search for courses where visa sponsorship is available</li>
