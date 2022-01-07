@@ -22,7 +22,7 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
 
-        <p class=\"govuk-body\">If you do not already have the right to study in the UK, you may need to apply for a Student visa. Student visa sponsorship is available for this course. You do not need to apply until you have a confirmed offer on a course.</p>
+        <p class=\"govuk-body\">If you do not already have the right to study in the UK, you may need to apply for a Student visa. Student visa sponsorship is available for this course. </p>
 
         <p class=\"govuk-body\">If you get a place on this course, we’ll help you apply for a Student visa.</p>
 
