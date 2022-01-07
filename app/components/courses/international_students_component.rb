@@ -24,7 +24,6 @@ module Courses
 
         <p class=\"govuk-body\">If you do not already have the right to study in the UK, you may need to apply for a Student visa. Student visa sponsorship is available for this course. If you get a place on this course, we’ll help you apply for your visa.</p>
 
-        <p class=\"govuk-body\">If you get a place on this course, we’ll help you apply for a Student visa.</p>
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train to be a teacher without a Student visa.</p>
       elsif @course.salaried? && provider.can_sponsor_skilled_worker_visa
