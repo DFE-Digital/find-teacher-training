@@ -44,7 +44,7 @@ describe("Basic", () => {
   it("should let user select an age group", () => {
     cy.contains("Secondary").click();
     cy.contains("Continue").click();
-    cy.get("h1").should("contain", "Which secondary subjects are you interested in?");
+    cy.get("h1").should("contain", "Which secondary subjects do you want to teach?");
   });
 
   it("should show a validation error if user does not select a subject", () => {
