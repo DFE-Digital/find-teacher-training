@@ -21,10 +21,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2.4.0
-        with:
-          repository: DFE-Digital/find-teacher-training-tests
-          ref: refs/heads/master
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
 
       - name: Set Environment variable
         run: |
