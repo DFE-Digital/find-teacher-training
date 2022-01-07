@@ -33,7 +33,18 @@ describe("Basic", () => {
     cy.contains("Across England").click();
     cy.contains("Continue").click();
     cy.get(".govuk-error-summary").should("not.exist");
-    cy.get("h1").should("contain", "Select the subjects you want to teach");
+    cy.get("h1").should("contain", "Which age group do you want to teach?");
+  });
+
+  it("should show a validation error if user does not select an age group", () => {
+    cy.contains("Continue").click();
+    cy.get(".govuk-error-summary").should("exist");
+  });
+
+  it("should let user select an age group", () => {
+    cy.contains("Secondary").click();
+    cy.contains("Continue").click();
+    cy.get("h1").should("contain", "Which secondary subjects are you interested in?");
   });
 
   it("should show a validation error if user does not select a subject", () => {
