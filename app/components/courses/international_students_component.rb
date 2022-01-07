@@ -38,6 +38,7 @@ module Courses
 
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train to be a teacher without a Skilled Worker visa.</p>
+         <p class=\"govuk-body\">Find out more about visas and immigration statuses.</p>
       elsif @course.salaried?
         "<p class=\"govuk-body\">You’ll need the right to work in the UK. You already have this if you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
