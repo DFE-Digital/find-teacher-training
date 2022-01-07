@@ -29,7 +29,7 @@ if(!global.URL) {
       break;
     case "sandbox":
       global.URL = "https://sandbox.find-postgraduate-teacher-training.service.gov.uk";
-      break;      
+      break;
     default:
       global.URL = "https://www.find-postgraduate-teacher-training.service.gov.uk";
       break;
