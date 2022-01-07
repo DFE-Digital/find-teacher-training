@@ -35,7 +35,6 @@ module Courses
 
         <p class=\"govuk-body\">If you do not already have the right to work in the UK, you may need to apply for a Skilled Worker visa. Skilled Worker visa sponsorship is available for this course. If you get a place on this course, we’ll help you apply for your visa.</p>
 
-        <p class=\"govuk-body\">If you get a place on this course, we’ll help you apply for a Skilled worker visa.</p>
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train to be a teacher without a Skilled Worker visa.</p>
       elsif @course.salaried?
