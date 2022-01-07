@@ -33,7 +33,7 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
 
-        <p class=\"govuk-body\">If you do not already have the right to work in the UK, you may need to apply for a Skilled Worker visa. Skilled Worker visa sponsorship is available for this course. You do not need to apply until you have a confirmed offer on a course.</p>
+        <p class=\"govuk-body\">If you do not already have the right to work in the UK, you may need to apply for a Skilled Worker visa. Skilled Worker visa sponsorship is available for this course. If you get a place on this course, we’ll help you apply for your visa.</p>
 
         <p class=\"govuk-body\">If you get a place on this course, we’ll help you apply for a Skilled worker visa.</p>
 
