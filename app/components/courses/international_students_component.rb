@@ -38,7 +38,7 @@ module Courses
 
         <p class=\"govuk-body\">If you get a place on this course, we’ll help you apply for a Skilled worker visa.</p>
 
-        <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to #{govuk_link_to('train to be a teacher without a Skilled Worker visa', OTHER_VISA_GUIDANCE_URL)}.</p>".html_safe
+        <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train to be a teacher without a Skilled Worker visa.</p>
       elsif @course.salaried?
         "<p class=\"govuk-body\">You’ll need the right to work in the UK. You already have this if you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
