@@ -17,7 +17,8 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "smoke-test": "cypress run --spec cypress/integration/find-teacher-training/**/*"
   },
   "jest": {
     "roots": [
