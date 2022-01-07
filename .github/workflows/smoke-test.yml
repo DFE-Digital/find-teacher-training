@@ -50,7 +50,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: 'Nofiy #twd_apply_tech on failure'
+      - name: 'Notify #twd_apply_tech on failure'
         if: failure() && github.event.inputs.pr == ''
         uses: rtCamp/action-slack-notify@master
         env:
