@@ -57,7 +57,7 @@ module Courses
 
         <p class=\"govuk-body\">If you do not already have the right to study in the UK, you can search for courses where visa sponsorship is available. Sponsorship is not available for this course.</p>
 
-        <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train to be a teacher without a Student visa.</p>".html_safe
+        <p class=\"govuk-body\">Alternatively, you may be eligible for a visa type or immigration status that allow you to train to be a teacher without visa sponsorship.</p>"
       end
     end
   end
