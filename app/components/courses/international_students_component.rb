@@ -60,7 +60,7 @@ module Courses
         <p class=\"govuk-body\">If you do not already have the right to study in the UK, you can search for courses where visa sponsorship is available. Sponsorship is not available for this course.</p>
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for a visa type that allows you to train without visa sponsorship.</p>
-        <p class=\"govuk-body\">Find out more about visas and immigration statuses.</p>".html_safe
+        <p class=\"govuk-body\">#{govuk_link_to('Find out more about visas and immigration statuses', VISA_GUIDANCE_URL)}.</p>.html_safe
       end
     end
   end
