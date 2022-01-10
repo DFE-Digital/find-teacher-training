@@ -13,7 +13,7 @@
   "devDependencies": {
     "jest": "^27.4.5",
     "webpack-dev-server": "^4.7.1",
-    "cypress": "^8.4.1",
+    "cypress": "^9.2.0",
     "typescript": "^4.4.3"
   },
   "scripts": {
