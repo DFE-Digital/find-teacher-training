@@ -51,7 +51,7 @@ module Courses
         <p class=\"govuk-body\">Alternatively, you may be eligible for visa types that allow you to train without visa sponsorship.</p>
         #<p class=\"govuk-body\">#{govuk_link_to('Find out more about visas and immigration statuses', VISA_GUIDANCE_URL)}.</p>.html_safe
       else
-        "<p class=\"govuk-body\">You’ll need the right to study in the UK. You already have this if you:</p>
+        "<p class=\"govuk-body\">You’ll need the right to study in the UK. You already have this if, for example, you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>are an Irish citizen</li>
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
