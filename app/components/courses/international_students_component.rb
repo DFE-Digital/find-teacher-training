@@ -49,7 +49,7 @@ module Courses
         <p class=\"govuk-body\">If you do not already have the right to work in the UK for the duration of this course, find out about your eligibility for different types of visa or immigration status.</p>
 
         <p class=\"govuk-body\">You will not be able to do this course if you need a Skilled Worker or Student visa, as these visas require sponsorship. Sponsorship is not available for this course.</p>
-        <p class=\"govuk-body\">#{govuk_link_to('Find out more about visas and immigration statuses', VISA_GUIDANCE_URL)}.</p>".html_safe
+        <p class=\"govuk-body\">However, you can search for courses where visa sponsorship is available.</p>".html_safe
       else
         "<p class=\"govuk-body\">You’ll need the right to study in the UK. You already have this if, for example, you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
