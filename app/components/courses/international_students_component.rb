@@ -57,7 +57,7 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
 
-        <p class=\"govuk-body\">If you do not already have the right to study in the UK, you can search for courses where visa sponsorship is available. Sponsorship is not available for this course.</p>
+        <p class=\"govuk-body\">If you do not already have the right to study in the UK for the duration of this course, find out about your eligibility for different types of visa or immigration status.</p>
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for a visa type that allows you to train without visa sponsorship.</p>
         <p class=\"govuk-body\">#{govuk_link_to('Find out more about visas and immigration statuses', VISA_GUIDANCE_URL)}.</p>".html_safe
