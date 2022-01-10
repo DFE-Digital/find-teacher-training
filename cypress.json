@@ -1,0 +1,5 @@
+{
+  "blockHosts": "www.google-analytics.com",
+  "video": true,
+  "supportFile": "cypress/support/index.ts"
+}

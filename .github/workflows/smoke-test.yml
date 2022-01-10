@@ -21,10 +21,6 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2.4.0
-        with:
-          repository: DFE-Digital/find-teacher-training-tests
-          ref: refs/heads/master
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
 
       - name: Set Environment variable
         run: |
@@ -54,7 +50,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
 
-      - name: 'Nofiy #twd_apply_tech on failure'
+      - name: 'Notify #twd_apply_tech on failure'
         if: failure() && github.event.inputs.pr == ''
         uses: rtCamp/action-slack-notify@master
         env:
