@@ -21,13 +21,18 @@ describe("Geocoding", () => {
     cy.contains("Westminster, London").click();
     cy.contains("Continue").click();
     cy.get(".govuk-error-summary").should("not.exist");
-    cy.get("h1").should("contain", "Select the subjects you want to teach");
+    cy.get("h1").should("contain", "Which age group do you want to teach?");
+  });
+
+  it("should let user select an age group", () => {
+    cy.contains("Primary").click();
+    cy.contains("Continue").click();
+    cy.get("h1").should("contain", "Primary courses with subject specialisms");
   });
 
   it("should let user search for a Primary course", () => {
-    cy.contains("Primary").click();
     cy.contains("Primary with English").click();
-    cy.contains("Continue").click();
+    cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("not.exist");
     cy.get("[id=filter-line]").contains("Primary with English courses in Westminster, London");
   });

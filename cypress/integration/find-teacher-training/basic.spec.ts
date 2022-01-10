@@ -33,18 +33,28 @@ describe("Basic", () => {
     cy.contains("Across England").click();
     cy.contains("Continue").click();
     cy.get(".govuk-error-summary").should("not.exist");
-    cy.get("h1").should("contain", "Select the subjects you want to teach");
+    cy.get("h1").should("contain", "Which age group do you want to teach?");
   });
 
-  it("should show a validation error if user does not select a subject", () => {
+  it("should show a validation error if user does not select an age group", () => {
     cy.contains("Continue").click();
     cy.get(".govuk-error-summary").should("exist");
   });
 
-  it("should let user search for Business Studies", () => {
+  it("should let user select an age group", () => {
     cy.contains("Secondary").click();
-    cy.contains("Business studies").click();
     cy.contains("Continue").click();
+    cy.get("h1").should("contain", "Which secondary subjects do you want to teach?");
+  });
+
+  it("should show a validation error if user does not select a subject", () => {
+    cy.contains("Find courses").click();
+    cy.get(".govuk-error-summary").should("exist");
+  });
+
+  it("should let user search for Business Studies", () => {
+    cy.contains("Business studies").click();
+    cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("not.exist");
     cy.get("[id=filter-line]").contains("Business studies courses in England");
   });
