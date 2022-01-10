@@ -48,14 +48,13 @@ describe("Basic", () => {
   });
 
   it("should show a validation error if user does not select a subject", () => {
-    cy.contains("Continue").click();
+    cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("exist");
   });
 
   it("should let user search for Business Studies", () => {
-    cy.contains("Secondary").click();
     cy.contains("Business studies").click();
-    cy.contains("Continue").click();
+    cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("not.exist");
     cy.get("[id=filter-line]").contains("Business studies courses in England");
   });
