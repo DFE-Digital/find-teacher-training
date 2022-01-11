@@ -16,7 +16,7 @@ module Courses
 
     def visa_sponsorship_status
       if !@course.salaried? && provider.can_sponsor_student_visa
-        "<p class=\"govuk-body\">You`ll need the right to study in the UK. You already have this if, for example, you:</p>
+        "<p class=\"govuk-body\">You’ll need the right to study in the UK. You already have this if, for example, you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
           <li>are an Irish citizen</li>
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
