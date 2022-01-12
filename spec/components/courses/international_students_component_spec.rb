@@ -15,8 +15,7 @@ describe Courses::InternationalStudentsComponent do
       )
       result = render_inline(described_class.new(course: CourseDecorator.new(course)))
 
-      expect(result.text).to include('We cannot sponsor visas. You’ll need to get the right visa or status to study in the UK')
-      expect(result).to have_selector("a[href='#{described_class::TRAIN_TO_TEACH_URL}']")
+      expect(result.text).to include('Sponsorship is not available for this course')
     end
   end
 
@@ -34,8 +33,7 @@ describe Courses::InternationalStudentsComponent do
       )
       result = render_inline(described_class.new(course: CourseDecorator.new(course)))
 
-      expect(result.text).to include('We can sponsor Student visas, but this is not guaranteed.')
-      expect(result).to have_selector("a[href='#{described_class::TRAIN_TO_TEACH_URL}']")
+      expect(result.text).to include('Student visa sponsorship is available for this course')
     end
   end
 
@@ -53,8 +51,7 @@ describe Courses::InternationalStudentsComponent do
       )
       result = render_inline(described_class.new(course: CourseDecorator.new(course)))
 
-      expect(result.text).to include('We can sponsor Skilled Worker visas, but this is not guaranteed.')
-      expect(result).to have_selector("a[href='#{described_class::TRAIN_TO_TEACH_URL}']")
+      expect(result.text).to include('Skilled Worker visa sponsorship is available for this course')
     end
   end
 end
