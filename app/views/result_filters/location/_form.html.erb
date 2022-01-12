@@ -47,9 +47,9 @@
               <div class="govuk-form-group <%= 'govuk-form-group--error' if location_error? %>">
                 <%= form.label :lq, 'Postcode, town or city', { class: 'govuk-label', for: 'location' } %>
                 <% if location_error? %>
-                  <div class="govuk-error-message" id="location-error" data-qa="location-error">
+                  <p class="govuk-error-message" id="location-error" data-qa="location-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
-                  </div>
+                  </p>
                 <% end %>
                 <%= form.text_field(
                   :lq,
@@ -97,10 +97,10 @@
                   <%= form.label :query, { class: 'govuk-label', data_qa: 'cached-providers-autocomplete',for: 'query'  } do %>
                     School, university or other training provider
                   <% end %>
-                  <span class="govuk-hint">Enter the name or provider code</span>
+                  <div class="govuk-hint">Enter the name or provider code</div>
                   <% if provider_error? %>
-                     <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
-                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %></span>
+                     <p class="govuk-error-message" id="provider-error" data-qa="provider-error">
+                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %></p>
                   <% end %>
                   <% aria_described_by = "provider-hint" %>
                   <% aria_described_by += " provider-error" if provider_error? %>
@@ -108,11 +108,11 @@
                 <% else %>
                   <%= form.label :query, { class: 'govuk-label', for: 'provider' } do %>
                     School, university or other training provider
-                    <span class="govuk-hint">Enter the name or provider code</span>
+                    <div class="govuk-hint">Enter the name or provider code</div>
                     <% if provider_error? %>
-                    <span class="govuk-error-message" id="provider-error" data-qa="provider-error">
+                    <p class="govuk-error-message" id="provider-error" data-qa="provider-error">
                     <span class="govuk-visually-hidden">Error: </span><%= flash[:error].last %>
-                  </span>
+                  </p>
                     <% end %>
                   <% end %>
                   <%= form.text_field :query,
