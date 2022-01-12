@@ -191,7 +191,7 @@ describe 'Course show', type: :feature do
 
       expect(course_page).to have_international_students
       expect(course_page.international_students).to have_content(
-        'We can sponsor Student visas, but this is not guaranteed.',
+        'Student visa sponsorship is available for this course',
       )
 
       expect(course_page.required_qualifications).to have_content(
