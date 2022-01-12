@@ -21,9 +21,9 @@ class FeatureFlag
     end
 
     def features
-      FeatureFlags.all.map do |name, description, owner|
+      FeatureFlags.all.to_h do |name, description, owner|
         [name, FeatureFlag.new(name: name, description: description, owner: owner)]
-      end.to_h.with_indifferent_access
+      end.with_indifferent_access
     end
 
     def last_updated(feature_name)
