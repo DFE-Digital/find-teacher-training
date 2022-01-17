@@ -304,7 +304,7 @@ GEM
     parallel (1.21.0)
     parser (3.1.0.0)
       ast (~> 2.4.1)
-    pkg-config (1.4.6)
+    pkg-config (1.4.7)
     pry (0.13.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -545,7 +545,7 @@ DEPENDENCIES
   launchy
   listen (>= 3.0.5, < 3.8)
   net-http-persistent
-  pkg-config (~> 1.4.6)
+  pkg-config (~> 1.4.7)
   pry-byebug
   puma (~> 5.5)
   rack-mini-profiler
