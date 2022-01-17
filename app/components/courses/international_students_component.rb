@@ -38,7 +38,7 @@ module Courses
 
 
         <p class=\"govuk-body\">Alternatively, you may be eligible for a visa type or immigration status that allows you to train to be a teacher without a sponsored visa.</p>
-        <p class=\"govuk-body\">Find out more about visas and immigration statuses.</p>".html_safe
+        <p class=\"govuk-body\">#{govuk_link_to('Find out more about visas and immigration statuses', VISA_GUIDANCE_URL)}.</p>".html_safe
       elsif @course.salaried?
         "<p class=\"govuk-body\">You’ll need the right to work in the UK. You already have this if, for example, you:</p>
         <ul class=\"govuk-list govuk-list--bullet\">
@@ -46,7 +46,7 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
 
-        <p class=\"govuk-body\">If you do not already have the right to work in the UK for the duration of this course, find out about your eligibility for different types of visa or immigration status.</p>
+        <p class=\"govuk-body\">If you do not already have the right to work in the UK for the duration of this course, #{govuk_link_to('find out about your eligibility for different types of visa or immigration status',VISA_GUIDANCE_URL)}.</p>
 
         <p class=\"govuk-body\">You will not be able to do this course if you need a Skilled Worker or Student visa, as these visas require sponsorship. Sponsorship is not available for this course.</p>
         <p class=\"govuk-body\">However, you can search for courses where visa sponsorship is available.</p>".html_safe
@@ -57,7 +57,7 @@ module Courses
           <li>have settled or pre-settled status under the EU Settlement Scheme</li>
         </ul>
 
-        <p class=\"govuk-body\">If you do not already have the right to study in the UK for the duration of this course, find out about your eligibility for different types of visa or immigration status.</p>
+        <p class=\"govuk-body\">If you do not already have the right to study in the UK for the duration of this course, #{govuk_link_to('find out about your eligibility for different types of visa or immigration status')}.</p>
 
         <p class=\"govuk-body\">You will not be able to do this course if you need a Skilled Worker or Student visa, as these visas require sponsorship. Sponsorship is not available for this course.</p>
         <p class=\"govuk-body\">However, you can search for courses where visa sponsorship is available.</p>".html_safe
