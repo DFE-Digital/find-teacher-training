@@ -48,6 +48,31 @@ jobs:
           # This is the latest commit on the actual PR branch
           echo "IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
 
+      - name: Set Environment variable
+        run: |
+          # tag build to the review env for vars and secrets
+          . terraform/workspace_variables/review.sh
+          echo "TF_VAR_key_vault_name=$TF_VAR_key_vault_name" >> $GITHUB_ENV
+          echo "TF_VAR_key_vault_infra_secret_name=$TF_VAR_key_vault_infra_secret_name" >> $GITHUB_ENV
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_REVIEW)] }}
+
+      - name: Validate Azure Key Vault secrets
+        uses: DFE-Digital/github-actions/validate-key-vault-secrets@master
+        with:
+          KEY_VAULT: ${{ env.TF_VAR_key_vault_name }}
+          SECRETS: |
+            ${{ env.TF_VAR_key_vault_infra_secret_name }}
+
+      - uses: DFE-Digital/keyvault-yaml-secret@v1
+        id: get-secret
+        with:
+          keyvault: ${{ env.TF_VAR_key_vault_name }}
+          secret: ${{ env.TF_VAR_key_vault_infra_secret_name }}
+          key: SNYK_TOKEN
+
       - name: Build Docker Image - base-image target
         uses: docker/build-push-action@v2
         with:
@@ -96,7 +121,7 @@ jobs:
         uses: snyk/actions/docker@master
         continue-on-error: true
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_ACCESS_TOKEN }}
+          SNYK_TOKEN: ${{ steps.get-secret.outputs.snyk_token }}
         with:
           image: ${{ env.DOCKER_IMAGE }}:${{ env.IMAGE_TAG }}
           args: --file=Dockerfile
