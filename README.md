@@ -6,8 +6,8 @@
 
 ## Prerequisites
 
-- Ruby 2.7.2
-- NodeJS 12.18.x
+- Ruby 2.7.5
+- NodeJS 16.13.x
 - Yarn 1.22.x
 
 ## Using asdf-vm to manage tool versions
