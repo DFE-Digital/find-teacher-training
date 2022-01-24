@@ -20,7 +20,7 @@ statuscake_alerts = {
     website_url    = "https://qa.find-postgraduate-teacher-training.service.gov.uk/ping"
     test_type      = "HTTP"
     check_rate     = 60
-    contact_group  = [188603]
+    contact_group  = [204421]
     trigger_rate   = 0
     node_locations = ["UKINT", "UK1", "MAN1", "MAN5", "DUB2"]
   }
