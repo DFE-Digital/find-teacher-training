@@ -71,7 +71,7 @@ describe 'Search results', type: :feature do
       results_page.load
       expect(results_page.courses.count).to eq(10)
 
-      Timecop.travel(Time.zone.now + 1.minute)
+      Timecop.travel(1.minute.from_now)
       results_page.load
       expect(results_page.courses.count).to eq(4)
     end

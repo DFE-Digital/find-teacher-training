@@ -24,6 +24,6 @@ private
       object.address3,
       object.address4,
       object.postcode,
-    ].reject(&:blank?)
+    ].compact_blank
   end
 end
