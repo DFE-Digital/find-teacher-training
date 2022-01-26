@@ -119,7 +119,7 @@ group :development, :test do
   gem 'amazing_print'
 
   # Testing framework
-  gem 'rspec-rails', '~> 5.0.2'
+  gem 'rspec-rails', '~> 5.1.0'
 end
 
 gem 'rack-mini-profiler', require: ['prepend_net_http_patch']
