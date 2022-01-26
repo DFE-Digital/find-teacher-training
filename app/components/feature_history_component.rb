@@ -7,7 +7,7 @@ class FeatureHistoryComponent < ViewComponent::Base
 
   def history
     if last_updated
-      formatted_date = DateTime.parse(last_updated).to_s(:govuk_date_and_time)
+      formatted_date = DateTime.parse(last_updated).to_formatted_s(:govuk_date_and_time)
       "Changed to #{status} at #{formatted_date}"
     else
       'This flag has not been updated'
