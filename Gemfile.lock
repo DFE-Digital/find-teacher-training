@@ -224,7 +224,7 @@ GEM
       activemodel (>= 6.1)
       railties (>= 6.1)
       view_component (~> 2.47.0)
-    govuk_design_system_formbuilder (3.0.0)
+    govuk_design_system_formbuilder (3.0.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -295,7 +295,7 @@ GEM
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
     nio4r (2.5.8)
-    nokogiri (1.13.0)
+    nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     os (1.1.4)
@@ -532,7 +532,7 @@ DEPENDENCIES
   geokit
   google-cloud-bigquery
   govuk-components (~> 3.0.1)
-  govuk_design_system_formbuilder (~> 3.0.0)
+  govuk_design_system_formbuilder (~> 3.0.1)
   http
   json-schema
   json_api_client
