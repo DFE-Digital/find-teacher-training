@@ -118,6 +118,11 @@ jobs:
           IMAGE_TAG :               ${{ github.event.inputs.sha }}
           CONFIRM_PRODUCTION:       yes
 
+      - name: Seed Review App
+        if: github.event.inputs.pr != ''
+        run: |
+          cf ssh apply-review-#{{github.events.inputs.pr}} -c "export DISABLE_DATABASE_ENVIRONMENT_CHECK=1 && cd /app && /usr/local/bin/bundle exec rails r 'FeatureFlag.activate(:new_search_flow)'"
+
       - name: Set Cypress environment variable
         run: |
           echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
