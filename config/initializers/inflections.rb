@@ -9,6 +9,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'QTS'
   inflect.acronym 'PGCE'
   inflect.acronym 'PGDE'
+  inflect.acronym 'API'
 end
 
 # These inflection rules are supported but not enabled by default:

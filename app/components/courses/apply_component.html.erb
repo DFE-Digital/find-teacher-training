@@ -27,9 +27,9 @@
       <ul class="govuk-list govuk-list--bullet">
         <li>
           find courses starting in the <%= CycleTimetable.next_cycle_year_range %>
-          academic year from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %>
+          academic year from <%= CycleTimetable.find_reopens.to_formatted_s(:govuk_date_and_time) %>
         </li>
-        <li>submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %></li>
+        <li>submit your application from <%= CycleTimetable.apply_reopens.to_formatted_s(:govuk_date_and_time) %></li>
       </ul>
     </div>
   <% end %>
