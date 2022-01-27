@@ -118,26 +118,33 @@ jobs:
           IMAGE_TAG :               ${{ github.event.inputs.sha }}
           CONFIRM_PRODUCTION:       yes
 
-      - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
-        uses: benc-uk/workflow-dispatch@v1.1
-        with:
-          workflow: Smoke Tests
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"environment": "${{ env.DEPLOY_ENV }}", "pr": "${{ env.PR_NUMBER }}"}'
+      - name: Set Cypress environment variable
+        run: |
+          echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
+          echo "CYPRESS_ENVIRONMENT=$RAILS_ENV" >> $GITHUB_ENV
+          if [ -n "${{ github.event.inputs.pr }}" ]; then
+            PR_NUMBER=${{ github.event.inputs.pr }}
+            echo "CYPRESS_ENV_VARS=--env BASE_URL=https://find-pr-${{github.event.inputs.pr}}.london.cloudapps.digital" >> $GITHUB_ENV
+          fi;
+        env:
+          RAILS_ENV: ${{ github.event.inputs.environment }}
 
-      - name: Wait for smoke tests
-        id: wait_for_smoke_tests
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        with:
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          checkName: smoke-tests-${{ env.DEPLOY_ENV }}
-          ref: ${{ github.ref }}
-          timeoutSeconds: 300
-          intervalSeconds: 15
+      - name: Run smoke tests
+        id: cypress_run
+        run: |
+          npm install
+          npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
-      - name: Stop when smoke tests fail
-        if:  steps.wait_for_smoke_tests.outputs.conclusion == 'failure'
-        run: exit 1
+      - name: Upload Cypress screenshot and videos
+        if:   always()
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: smoke-test-${{ github.event.inputs.environment }}
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Update ${{ matrix.environment }} status
         if: ${{ always() }}
@@ -150,3 +157,15 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           ref: ${{ github.event.inputs.sha }}
           env_url: ${{ env.DEPLOY_URL }}
+
+      - name: 'Notify #twd_apply_tech on failure'
+        if: failure() && github.event.inputs.pr == ''
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: twd_apply_tech
+          SLACK_COLOR: '#ef5343'
+          SLACK_ICON_EMOJI: ':sad-beaver:'
+          SLACK_USERNAME: Find Teacher Training
+          SLACK_TITLE: Smoke tests failure
+          SLACK_MESSAGE: ':alert: Smoke tests failure on ${{ github.event.inputs.environment }} :sadparrot:'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
