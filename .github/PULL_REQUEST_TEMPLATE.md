@@ -8,6 +8,6 @@
 
 ### Checklist
 
-- [ ] Rebased master
+- [ ] Rebased `main`
 - [ ] Cleaned commit history
 - [ ] Tested by running locally
