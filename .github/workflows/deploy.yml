@@ -76,8 +76,9 @@ jobs:
       - name: Set Environment variable
         run: |
           if [ -n "${{ github.event.inputs.pr }}" ]; then
-            PR_NUMBER=${{ github.event.inputs.pr }}
+            DEPLOY_ENV=review
             echo "DEPLOY_ENV=review" >> $GITHUB_ENV
+            PR_NUMBER=${{ github.event.inputs.pr }}
             echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
             echo "DEPLOY_URL=https://find-pr-$PR_NUMBER.london.cloudapps.digital" >> $GITHUB_ENV
           else
