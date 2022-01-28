@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
     types: [opened, reopened, synchronize, labeled]
 
 env:
@@ -58,7 +58,7 @@ jobs:
           target: base-image
           cache-from: |
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:base-image-master
+            ${{ env.DOCKER_IMAGE}}:base-image-main
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             COMMIT_SHA=${{ env.IMAGE_TAG}}
@@ -73,7 +73,7 @@ jobs:
           load: ${{ github.actor == 'dependabot[bot]' }}
           cache-from: |
             ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:master
+            ${{ env.DOCKER_IMAGE}}:main
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
           build-args: |
             BUILDKIT_INLINE_CACHE=1
@@ -115,7 +115,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
 
       - name: Trigger QA Deployment
-        if: ${{ success() && github.ref == 'refs/heads/master' }}
+        if: ${{ success() && github.ref == 'refs/heads/main' }}
         uses: benc-uk/workflow-dispatch@v1.1
         with:
           workflow: Deploy
