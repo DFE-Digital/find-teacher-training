@@ -80,6 +80,9 @@ en:
     url_get_an_advisor: https://adviser-getintoteaching.education.gov.uk
     url_online_chat: https://getintoteaching.education.gov.uk/#talk-to-us
     url_ways_to_train: https://getintoteaching.education.gov.uk/ways-to-train
+    url_funding_your_training: https://getintoteaching.education.gov.uk/funding-your-training
+    url_bursaries_and_scholarships: https://getintoteaching.education.gov.uk/funding-your-training#bursaries-and-scholarships
+    url_improve_your_subject_knowledge: https://getintoteaching.education.gov.uk/improve-your-subject-knowledge
   cycles:
     real:
       name: 'Same as production environment'
