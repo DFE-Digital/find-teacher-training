@@ -17,7 +17,10 @@ All PRs merged will be continuously deployed to `Production` using the below wor
 
 ![Deployment Process](./deploy-workflow.png "GitHub Actions Workflow")
 
-- A build is triggered for the merged PR commit and the tagged docker image is published to DockerHub, a QA deployment is next triggered (see [build.yml](/.github/workflows/build.yml))
+- A build is triggered for the merged PR commit
+- The built docker image is scanned by SNYK for vulnerabilities and then runs through various code tests. If these tests are successful the tagged image is published to DockerHub, and a QA deployment is next triggered (see [build.yml](/.github/workflows/build.yml))
+- If the docker image SNYK scan fails due to vulnerabilities, it may be the docker image cached layers must be refreshed. To do this, run the "Build No Cache" workflow manually. This workflow is scheduled to run every week to minimise this issue
+- Once a successful deployment to QA is complete, the workflow triggers a smoke test run for the environment and awaits a successful completion of smoke tests
 - Once a successful deployment to QA is complete, the workflow triggers a smoke test run for the environment and awaits a successful completion of smoke tests
 - Upon completion of the above, the workflow triggers the deployment to the next environment
 - The merged PR commit is finally deployed to `Production`. (see [deploy.yml](/.github/workflows/deploy.yml))
