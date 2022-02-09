@@ -56,10 +56,12 @@ jobs:
           echo "KEY_VAULT_INFRA_SECRET_NAME=$(jq -r '.key_vault_infra_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
 
       - uses: azure/login@v1
+        if: github.actor != 'dependabot[bot]'
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
 
       - uses: DFE-Digital/keyvault-yaml-secret@v1
+        if: github.actor != 'dependabot[bot]'
         id: get-secret
         with:
           keyvault: ${{ env.KEY_VAULT_NAME }}
@@ -111,6 +113,7 @@ jobs:
           inputs: '{"pr": "${{ github.event.pull_request.number }}", "sha": "${{ env.IMAGE_TAG }}"}'
 
       - name: Run Snyk to check Docker image for vulnerabilities
+        if: github.actor != 'dependabot[bot]'
         uses: snyk/actions/docker@master
         env:
           SNYK_TOKEN: ${{ steps.get-secret.outputs.snyk_token }}
@@ -141,7 +144,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
 
       - name: Push ${{ env.DOCKER_IMAGE }} images
-        if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') }}
+        if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') && github.actor != 'dependabot[bot]' }}
         run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
 
       - name: Trigger QA Deployment
