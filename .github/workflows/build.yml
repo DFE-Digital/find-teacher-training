@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
     types: [opened, reopened, synchronize, labeled]
 
 env:
@@ -48,6 +48,26 @@ jobs:
           # This is the latest commit on the actual PR branch
           echo "IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
 
+      - name: Set Environment variable
+        run: |
+          # tag build to the review env for vars and secrets
+          tf_vars_file=terraform/workspace_variables/review.tfvars.json
+          echo "KEY_VAULT_NAME=$(jq -r '.key_vault_name' ${tf_vars_file})" >> $GITHUB_ENV
+          echo "KEY_VAULT_INFRA_SECRET_NAME=$(jq -r '.key_vault_infra_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
+
+      - uses: azure/login@v1
+        if: github.actor != 'dependabot[bot]'
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
+
+      - uses: DFE-Digital/keyvault-yaml-secret@v1
+        if: github.actor != 'dependabot[bot]'
+        id: get-secret
+        with:
+          keyvault: ${{ env.KEY_VAULT_NAME }}
+          secret: ${{ env.KEY_VAULT_INFRA_SECRET_NAME }}
+          key: SNYK_TOKEN
+
       - name: Build Docker Image - base-image target
         uses: docker/build-push-action@v2
         with:
@@ -58,7 +78,7 @@ jobs:
           target: base-image
           cache-from: |
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:base-image-master
+            ${{ env.DOCKER_IMAGE}}:base-image-main
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             COMMIT_SHA=${{ env.IMAGE_TAG}}
@@ -69,15 +89,19 @@ jobs:
           tags: |
             ${{ env.DOCKER_IMAGE}}:${{ env.IMAGE_TAG}}
             ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
-          push: ${{ github.actor != 'dependabot[bot]' }}
-          load: ${{ github.actor == 'dependabot[bot]' }}
+          push: false
+          load: true
           cache-from: |
             ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:master
+            ${{ env.DOCKER_IMAGE}}:main
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             COMMIT_SHA=${{ env.IMAGE_TAG}}
+
+      - name: Push ${{ env.DOCKER_IMAGE }} images for review
+        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
+        run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
 
       - name: Trigger Review App Deployment
         if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
@@ -88,9 +112,14 @@ jobs:
           token:  ${{ secrets.ACTIONS_API_ACCESS_TOKEN  }}
           inputs: '{"pr": "${{ github.event.pull_request.number }}", "sha": "${{ env.IMAGE_TAG }}"}'
 
-      - name: Pull image if not loaded
-        if: ${{ github.actor != 'dependabot[bot]' }}
-        run: docker pull ${DOCKER_IMAGE}:${{ env.IMAGE_TAG }}
+      - name: Run Snyk to check Docker image for vulnerabilities
+        if: github.actor != 'dependabot[bot]'
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ steps.get-secret.outputs.snyk_token }}
+        with:
+          image: ${{ env.DOCKER_IMAGE }}:${{ env.IMAGE_TAG }}
+          args: --file=Dockerfile --severity-threshold=high
 
       - name: Run ruby linter
         run: make rubocop
@@ -114,8 +143,12 @@ jobs:
           GIT_BRANCH: ${{ env.BRANCH_TAG }}
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
 
+      - name: Push ${{ env.DOCKER_IMAGE }} images
+        if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') && github.actor != 'dependabot[bot]' }}
+        run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
+
       - name: Trigger QA Deployment
-        if: ${{ success() && github.ref == 'refs/heads/master' }}
+        if: ${{ success() && github.ref == 'refs/heads/main' }}
         uses: benc-uk/workflow-dispatch@v1.1
         with:
           workflow: Deploy

@@ -30,7 +30,6 @@ jobs:
   prepare-matrix:
     name: Prepare Environment Matrix
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     outputs:
       environments: ${{ steps.select-environments.outputs.environments || steps.set-pr-environment.outputs.environments }}
     steps:
@@ -48,6 +47,11 @@ jobs:
         name: Wait for other inprogress deployment runs
         env:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+        with:
+          initial-wait-seconds: 12
+          poll-interval-seconds: 20
+          abort-after-seconds: 1800
+          same-branch-only: true
 
   deploy:
     name: ${{ matrix.environment }} Deployment
@@ -72,19 +76,20 @@ jobs:
       - name: Set Environment variable
         run: |
           if [ -n "${{ github.event.inputs.pr }}" ]; then
-            PR_NUMBER=${{ github.event.inputs.pr }}
+            DEPLOY_ENV=review
             echo "DEPLOY_ENV=review" >> $GITHUB_ENV
+            PR_NUMBER=${{ github.event.inputs.pr }}
             echo "PR_NUMBER=$PR_NUMBER" >> $GITHUB_ENV
             echo "DEPLOY_URL=https://find-pr-$PR_NUMBER.london.cloudapps.digital" >> $GITHUB_ENV
-            . terraform/workspace_variables/review.sh
           else
             echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
-            . terraform/workspace_variables/$DEPLOY_ENV.sh
           fi;
 
-          echo "TF_VAR_key_vault_name=$TF_VAR_key_vault_name" >> $GITHUB_ENV
-          echo "TF_VAR_key_vault_app_secret_name=$TF_VAR_key_vault_app_secret_name" >> $GITHUB_ENV
-          echo "TF_VAR_key_vault_infra_secret_name=$TF_VAR_key_vault_infra_secret_name" >> $GITHUB_ENV
+          tf_vars_file=terraform/workspace_variables/${DEPLOY_ENV}.tfvars.json
+          echo "key_vault_name=$(jq -r '.key_vault_name' ${tf_vars_file})" >> $GITHUB_ENV
+          echo "key_vault_app_secret_name=$(jq -r '.key_vault_app_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
+          echo "key_vault_infra_secret_name=$(jq -r '.key_vault_infra_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
+          echo "cf_space=$(jq -r '.cf_space' ${tf_vars_file})" >> $GITHUB_ENV
         env:
           DEPLOY_ENV: ${{ matrix.environment }}
 
@@ -100,10 +105,10 @@ jobs:
       - name: Validate Azure Key Vault secrets
         uses: DFE-Digital/github-actions/validate-key-vault-secrets@master
         with:
-          KEY_VAULT: ${{ env.TF_VAR_key_vault_name }}
+          KEY_VAULT: ${{ env.key_vault_name }}
           SECRETS: |
-            ${{ env.TF_VAR_key_vault_app_secret_name }}
-            ${{ env.TF_VAR_key_vault_infra_secret_name }}
+            ${{ env.key_vault_app_secret_name }}
+            ${{ env.key_vault_infra_secret_name }}
 
       - name: Terraform init, plan & apply
         run: make ${{ env.DEPLOY_ENV }} ci deploy
@@ -114,26 +119,33 @@ jobs:
           IMAGE_TAG :               ${{ github.event.inputs.sha }}
           CONFIRM_PRODUCTION:       yes
 
-      - name: Trigger ${{ env.DEPLOY_ENV }} Smoke Tests
-        uses: benc-uk/workflow-dispatch@v1.1
-        with:
-          workflow: Smoke Tests
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"environment": "${{ env.DEPLOY_ENV }}", "pr": "${{ env.PR_NUMBER }}"}'
+      - name: Set Cypress environment variable
+        run: |
+          echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
+          echo "CYPRESS_ENVIRONMENT=$RAILS_ENV" >> $GITHUB_ENV
+          if [ -n "${{ github.event.inputs.pr }}" ]; then
+            PR_NUMBER=${{ github.event.inputs.pr }}
+            echo "CYPRESS_ENV_VARS=--env BASE_URL=https://find-pr-${{github.event.inputs.pr}}.london.cloudapps.digital" >> $GITHUB_ENV
+          fi;
+        env:
+          RAILS_ENV: ${{ github.event.inputs.environment }}
 
-      - name: Wait for smoke tests
-        id: wait_for_smoke_tests
-        uses: fountainhead/action-wait-for-check@v1.0.0
-        with:
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          checkName: smoke-tests-${{ env.DEPLOY_ENV }}
-          ref: ${{ github.ref }}
-          timeoutSeconds: 300
-          intervalSeconds: 15
+      - name: Run smoke tests
+        id: cypress_run
+        run: |
+          npm install
+          npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
-      - name: Stop when smoke tests fail
-        if:  steps.wait_for_smoke_tests.outputs.conclusion == 'failure'
-        run: exit 1
+      - name: Upload Cypress screenshot and videos
+        if:   always()
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: smoke-test-${{ github.event.inputs.environment }}
+          path: |
+            cypress/videos
+            cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Update ${{ matrix.environment }} status
         if: ${{ always() }}
@@ -146,3 +158,15 @@ jobs:
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
           ref: ${{ github.event.inputs.sha }}
           env_url: ${{ env.DEPLOY_URL }}
+
+      - name: 'Notify #twd_apply_tech on failure'
+        if: failure() && github.event.inputs.pr == ''
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: twd_apply_tech
+          SLACK_COLOR: '#ef5343'
+          SLACK_ICON_EMOJI: ':sad-beaver:'
+          SLACK_USERNAME: Find Teacher Training
+          SLACK_TITLE: Smoke tests failure
+          SLACK_MESSAGE: ':alert: Smoke tests failure on ${{ github.event.inputs.environment }} :sadparrot:'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

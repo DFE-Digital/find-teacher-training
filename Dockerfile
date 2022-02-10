@@ -1,4 +1,4 @@
-ARG BASE_RUBY_IMAGE=ruby:2.7.2-alpine3.12
+ARG BASE_RUBY_IMAGE=ruby:2.7.5-alpine3.15
 
 FROM ${BASE_RUBY_IMAGE} AS base-image
 
@@ -35,6 +35,9 @@ WORKDIR /app
 RUN apk add --update --no-cache tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
+
+# Remove once base image ruby:2.7.5-alpine3.15 has been updated with latest gmp
+RUN apk add --no-cache gmp=6.2.1-r1
 
 COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
 COPY --from=base-image /app /app

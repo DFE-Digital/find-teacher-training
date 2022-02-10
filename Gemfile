@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.5'
 
-gem 'pkg-config', '~> 1.4.6'
+gem 'pkg-config', '~> 1.4.7'
 
 # Decorate logic to keep it of the views and helper methods
 gem 'draper'
@@ -18,18 +18,18 @@ gem 'net-http-persistent'
 gem 'rails_semantic_logger'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 7.0.0'
 
 # Thread-safe global state
 gem 'request_store'
 
-gem 'puma', '~> 5.5'
+gem 'puma', '~> 5.6'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
 
 # Use the GOV UK form builder
-gem 'govuk_design_system_formbuilder', '~> 2.8.0'
+gem 'govuk_design_system_formbuilder', '~> 3.0.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -87,7 +87,7 @@ gem 'skylight'
 
 # Allows the creation of components which encapsulate and test logic in views
 gem 'view_component'
-gem 'govuk-components', '~> 2.0.1'
+gem 'govuk-components', '~> 3.0.1'
 
 # Data integration with BigQuery
 gem 'google-cloud-bigquery'
@@ -119,7 +119,7 @@ group :development, :test do
   gem 'amazing_print'
 
   # Testing framework
-  gem 'rspec-rails', '~> 5.0.2'
+  gem 'rspec-rails', '~> 5.1.0'
 end
 
 gem 'rack-mini-profiler', require: ['prepend_net_http_patch']

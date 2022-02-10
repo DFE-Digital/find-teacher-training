@@ -74,7 +74,7 @@ describe LocationSuggestion do
         expect(cached_result.count).to eq(3)
         expect(query_stub).to have_been_requested.once # no API call this time
 
-        Timecop.travel(Time.zone.now + 30.minutes) do
+        Timecop.travel(30.minutes.from_now) do
           subsequent_result = suggest!
           expect(subsequent_result.count).to eq(3)
           expect(query_stub).to have_been_requested.twice

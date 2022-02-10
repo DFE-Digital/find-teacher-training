@@ -9,7 +9,7 @@ class FeatureFlagsController < ApplicationController
     FeatureFlag.send(action, feature_name)
 
     SlackNotificationJob.perform_now(
-      ":flags: Feature ‘#{feature_name}‘ was activated",
+      ":flags: Feature ‘#{feature_name}‘ was #{action}d",
       feature_flags_path,
     )
 

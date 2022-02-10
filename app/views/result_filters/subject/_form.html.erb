@@ -59,12 +59,12 @@
                             <% financial_info.concat('.') %>
                           <% end %>
 
-                          <span class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></span>
+                          <div class="govuk-hint govuk-!-margin-bottom-0" data-qa="subject__info"><%= financial_info %></div>
 
                           <% if subject.subject_knowledge_enhancement_course_available %>
                             <span class="govuk-!-display-block" data-qa="subject__ske_course">
                               You can <%= subject.decorate.has_scholarship? || subject.decorate.has_bursary? ? 'also' : '' %> take a
-                              <%= govuk_link_to 'subject knowledge enhancement (SKE) course', 'https://getintoteaching.education.gov.uk/guidance/become-a-teacher-in-england#subject-knowledge-enhancement-courses' %>.
+                              <%= govuk_link_to 'subject knowledge enhancement (SKE) course', t('get_into_teaching.url_improve_your_subject_knowledge') %>.
                             </span>
                           <% end %>
                         <% end %>

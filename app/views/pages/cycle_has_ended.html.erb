@@ -15,8 +15,8 @@
 
       <p class="govuk-body">You’ll be able to:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>find courses from <%= CycleTimetable.find_reopens.to_s(:govuk_date_and_time) %></li>
-        <li>submit your application from <%= CycleTimetable.apply_reopens.to_s(:govuk_date_and_time) %></li>
+        <li>find courses from <%= CycleTimetable.find_reopens.to_formatted_s(:govuk_date_and_time) %></li>
+        <li>submit your application from <%= CycleTimetable.apply_reopens.to_formatted_s(:govuk_date_and_time) %></li>
       </ul>
     </div>
   </div>

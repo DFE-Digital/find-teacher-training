@@ -113,11 +113,10 @@ sandbox: ## Set DEPLOY_ENV to production
 
 .PHONY: deploy-plan
 deploy-plan: deploy-init ## Run terraform plan for ${DEPLOY_ENV} eg: make qa plan, make staging plan, make production plan
-	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
-		&& terraform plan -var-file=workspace_variables/$(DEPLOY_ENV).tfvars
+	cd terraform && terraform plan -var-file=workspace_variables/$(DEPLOY_ENV).tfvars.json
 
 deploy-init:
-	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=master))
+	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=main))
 	$(if $(or $(DISABLE_PASSCODE),$(PASSCODE)), , $(error Missing environment variable "PASSCODE", retrieve from https://login.london.cloud.service.gov.uk/passcode))
 	$(eval export TF_VAR_paas_sso_code=$(PASSCODE))
 	$(eval export TF_VAR_paas_app_docker_image=dfedigital/find-teacher-training:$(IMAGE_TAG))
@@ -128,8 +127,7 @@ deploy-init:
 
 .PHONY: deploy
 deploy: deploy-init ## Run terraform apply for ${DEPLOY_ENV} eg: make qa deploy, make staging deploy, make production deploy
-	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
-		&& terraform apply -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
+	cd terraform && terraform apply -var-file=workspace_variables/$(DEPLOY_ENV).tfvars.json $(AUTO_APPROVE)
 
 .PHONY: install-fetch-config
 install-fetch-config: ## Install the fetch-config script
@@ -138,15 +136,30 @@ install-fetch-config: ## Install the fetch-config script
 		&& chmod +x bin/fetch_config.rb \
 		|| true
 
+.PHONY: read-keyvault-config
+read-keyvault-config:
+	$(eval export key_vault_name=$(shell jq -r '.key_vault_name' terraform/workspace_variables/$(DEPLOY_ENV).tfvars.json))
+	$(eval key_vault_app_secret_name=$(shell jq -r '.key_vault_app_secret_name' terraform/workspace_variables/$(DEPLOY_ENV).tfvars.json))
+	$(eval key_vault_infra_secret_name=$(shell jq -r '.key_vault_infra_secret_name' terraform/workspace_variables/$(DEPLOY_ENV).tfvars.json))
+
 .PHONY: edit-app-secrets
-edit-app-secrets: install-fetch-config ## Edit Find App Secrets
-	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
-		-e -d azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} -f yaml -c
+edit-app-secrets: read-keyvault-config install-fetch-config ## Edit Find App Secrets
+	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_app_secret_name} \
+		-e -d azure-key-vault-secret:${key_vault_name}/${key_vault_app_secret_name} -f yaml -c
+
+.PHONY: edit-infra-secrets
+edit-infra-secrets: read-keyvault-config install-fetch-config 
+	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} \
+		-e -d azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} -f yaml -c
 
 .PHONY: print-app-secrets
-print-app-secrets: install-fetch-config ## View Find App Secrets
-	. terraform/workspace_variables/$(DEPLOY_ENV).sh && bin/fetch_config.rb -s azure-key-vault-secret:$${TF_VAR_key_vault_name}/$${TF_VAR_key_vault_app_secret_name} \
-		-f yaml
+print-app-secrets: read-keyvault-config install-fetch-config ## View Find App Secrets
+	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_app_secret_name} -f yaml
+
+.PHONY: print-infra-secrets
+print-infra-secrets: read-keyvault-config install-fetch-config 
+	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} -f yaml
+
 .PHONY: console ## start a rails console, eg: make qa console
 console:
 	cf target -s ${SPACE}
@@ -154,8 +167,7 @@ console:
 
 .PHONY: destroy ## terraform destroy
 destroy: deploy-init
-	cd terraform && . workspace_variables/$(DEPLOY_ENV).sh \
-		&& terraform destroy -var-file=workspace_variables/$(DEPLOY_ENV).tfvars $(AUTO_APPROVE)
+	cd terraform && terraform destroy -var-file=workspace_variables/$(DEPLOY_ENV).tfvars.json $(AUTO_APPROVE)
 
 enable-maintenance: ## make qa enable-maintenance / make prod enable-maintenance CONFIRM_PRODUCTION=y
 	$(if $(HOSTNAME), $(eval REAL_HOSTNAME=${HOSTNAME}), $(eval REAL_HOSTNAME=${DEPLOY_ENV}))
