@@ -42,7 +42,7 @@ module Courses
       else
         "<p class=\"govuk-body\">If you do not already have the right to study in the UK, you may need to apply for a visa. The main visa for fee-paying courses (those that you have to pay for) is the Student visa.</p>
 
-        <p class=\"govuk-body\">To do this, you’ll need to be sponsored by your training provider.</p>
+        <p class=\"govuk-body\">To apply for a Student visa, you’ll need to be sponsored by your training provider.</p>
 
         <p class=\"govuk-body\">Sponsorship is not available for this course.</p>
 
