@@ -3,15 +3,10 @@ require 'rails_helper'
 describe Courses::InternationalStudentsComponent, type: :component do
   context 'when the course is fee-paying and the provider does not sponsor Student visas' do
     before do
-      provider = build(
-        :provider,
-        can_sponsor_student_visa: false,
-        can_sponsor_skilled_worker_visa: false,
-      )
       course = build(
         :course,
         funding_type: 'fee',
-        provider: provider,
+        provider: build(:provider, can_sponsor_student_visa: false),
       )
       render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
@@ -27,15 +22,10 @@ describe Courses::InternationalStudentsComponent, type: :component do
 
   context 'when the course is fee-paying and the provider does sponsor Student visas' do
     before do
-      provider = build(
-        :provider,
-        can_sponsor_student_visa: true,
-        can_sponsor_skilled_worker_visa: false,
-      )
       course = build(
         :course,
         funding_type: 'fee',
-        provider: provider,
+        provider: build(:provider, can_sponsor_student_visa: true),
       )
       render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
@@ -51,15 +41,10 @@ describe Courses::InternationalStudentsComponent, type: :component do
 
   context 'when the course is salaried and the provider can sponsor Skilled Worker visas' do
     before do
-      provider = build(
-        :provider,
-        can_sponsor_student_visa: true,
-        can_sponsor_skilled_worker_visa: true,
-      )
       course = build(
         :course,
         funding_type: 'salary',
-        provider: provider,
+        provider: build(:provider, can_sponsor_skilled_worker_visa: true),
       )
       render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
@@ -75,15 +60,10 @@ describe Courses::InternationalStudentsComponent, type: :component do
 
   context 'when the course is salaried but the provider cannot sponsor Skilled Worker visas' do
     before do
-      provider = build(
-        :provider,
-        can_sponsor_student_visa: false,
-        can_sponsor_skilled_worker_visa: false,
-      )
       course = build(
         :course,
         funding_type: 'salary',
-        provider: provider,
+        provider: build(:provider, can_sponsor_skilled_worker_visa: false),
       )
       render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
