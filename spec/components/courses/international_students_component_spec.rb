@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe Courses::InternationalStudentsComponent do
-  context 'when the course is fee-paying and the provider does not sponsor Student visas', type: :component do
+describe Courses::InternationalStudentsComponent, type: :component do
+  context 'when the course is fee-paying and the provider does not sponsor Student visas' do
     before do
       provider = build(
         :provider,
@@ -25,7 +25,7 @@ describe Courses::InternationalStudentsComponent do
     end
   end
 
-  context 'when the course is fee-paying and the provider does sponsor Student visas', type: :component do
+  context 'when the course is fee-paying and the provider does sponsor Student visas' do
     before do
       provider = build(
         :provider,
@@ -49,7 +49,7 @@ describe Courses::InternationalStudentsComponent do
     end
   end
 
-  context 'when the course is salaried and the provider can sponsor Skilled Worker visas', type: :component do
+  context 'when the course is salaried and the provider can sponsor Skilled Worker visas' do
     before do
       provider = build(
         :provider,
@@ -73,7 +73,7 @@ describe Courses::InternationalStudentsComponent do
     end
   end
 
-  context 'when the course is salaried but the provider cannot sponsor Skilled Worker visas', type: :component do
+  context 'when the course is salaried but the provider cannot sponsor Skilled Worker visas' do
     before do
       provider = build(
         :provider,
