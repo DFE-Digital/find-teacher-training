@@ -13,15 +13,15 @@ describe Courses::InternationalStudentsComponent, type: :component do
         funding_type: 'fee',
         provider: provider,
       )
-      @result = render_inline(described_class.new(course: CourseDecorator.new(course)))
+      render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
 
     it 'tells candidates they’ll need the right to study' do
-      expect(@result.text).to include('You’ll need the right to study in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to study in the UK')
     end
 
     it 'tells candidates sponsorship is not available' do
-      expect(@result.text).to include('Sponsorship is not available for this course')
+      expect(rendered_component).to have_text('Sponsorship is not available for this course')
     end
   end
 
@@ -37,15 +37,15 @@ describe Courses::InternationalStudentsComponent, type: :component do
         funding_type: 'fee',
         provider: provider,
       )
-      @result = render_inline(described_class.new(course: CourseDecorator.new(course)))
+      render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
 
     it 'tells candidates they’ll need the right to study' do
-      expect(@result.text).to include('You’ll need the right to study in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to study in the UK')
     end
 
     it 'tells candidates visa sponsorship may be available, but they should check' do
-      expect(@result.text).to include('Before you apply for this course, contact us to check Student visa sponsorship is available. If it is, and you get a place on this course, we’ll help you apply for your visa.')
+      expect(rendered_component).to have_text('Before you apply for this course, contact us to check Student visa sponsorship is available. If it is, and you get a place on this course, we’ll help you apply for your visa.')
     end
   end
 
@@ -61,15 +61,15 @@ describe Courses::InternationalStudentsComponent, type: :component do
         funding_type: 'salary',
         provider: provider,
       )
-      @result = render_inline(described_class.new(course: CourseDecorator.new(course)))
+      render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
 
     it 'tells candidates they’ll need the right to work' do
-      expect(@result.text).to include('You’ll need the right to work in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to work in the UK')
     end
 
     it 'tells candidates visa sponsorship may be available, but they should check' do
-      expect(@result.text).to include('Before you apply for this course, contact us to check Skilled Worker visa sponsorship is available. If it is, and you get a place on this course, we’ll help you apply for your visa.')
+      expect(rendered_component).to have_text('Before you apply for this course, contact us to check Skilled Worker visa sponsorship is available. If it is, and you get a place on this course, we’ll help you apply for your visa.')
     end
   end
 
@@ -85,15 +85,15 @@ describe Courses::InternationalStudentsComponent, type: :component do
         funding_type: 'salary',
         provider: provider,
       )
-      @result = render_inline(described_class.new(course: CourseDecorator.new(course)))
+      render_inline(described_class.new(course: CourseDecorator.new(course)))
     end
 
     it 'tells candidates they’ll need the right to work' do
-      expect(@result.text).to include('You’ll need the right to work in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to work in the UK')
     end
 
     it 'tells candidates visa sponsorship is not available' do
-      expect(@result.text).to include('Sponsorship is not available for this course')
+      expect(rendered_component).to have_text('Sponsorship is not available for this course')
     end
   end
 end
