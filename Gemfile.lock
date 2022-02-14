@@ -244,7 +244,7 @@ GEM
       activemodel (>= 6.1)
       railties (>= 6.1)
       view_component (~> 2.47.0)
-    govuk_design_system_formbuilder (3.0.1)
+    govuk_design_system_formbuilder (3.0.2)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -297,7 +297,7 @@ GEM
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    loofah (2.13.0)
+    loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -544,7 +544,7 @@ DEPENDENCIES
   geokit
   google-cloud-bigquery
   govuk-components (~> 3.0.1)
-  govuk_design_system_formbuilder (~> 3.0.1)
+  govuk_design_system_formbuilder (~> 3.0.2)
   http
   json-schema
   json_api_client
