@@ -30,8 +30,6 @@ variable logstash_url {}
 
 variable app_environment_variables { type = map }
 
-variable docker_credentials { type = map }
-
 locals {
   app_name_suffix           = var.app_environment_config != "review" ? var.app_environment : "pr-${var.web_app_host_name}"
   web_app_name              = "find-${local.app_name_suffix}"

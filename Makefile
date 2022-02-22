@@ -2,7 +2,7 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-IMAGE=dfedigital/find-teacher-training:${IMAGE_TAG}
+IMAGE=ghcr.io/dfe-digital/find-teacher-training:${IMAGE_TAG}
 
 .PHONY: help
 help: ## Show this help
@@ -119,7 +119,7 @@ deploy-init:
 	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=main))
 	$(if $(or $(DISABLE_PASSCODE),$(PASSCODE)), , $(error Missing environment variable "PASSCODE", retrieve from https://login.london.cloud.service.gov.uk/passcode))
 	$(eval export TF_VAR_paas_sso_code=$(PASSCODE))
-	$(eval export TF_VAR_paas_app_docker_image=dfedigital/find-teacher-training:$(IMAGE_TAG))
+	$(eval export TF_VAR_paas_app_docker_image=ghcr.io/dfe-digital/find-teacher-training:$(IMAGE_TAG))
 	$(eval export TF_VAR_paas_app_config_file=./workspace_variables/app_config.yml)
 	az account set -s ${AZ_SUBSCRIPTION} && az account show
 	cd terraform && terraform init -reconfigure -backend-config=workspace_variables/$(DEPLOY_ENV)_backend.tfvars $(backend_key)
