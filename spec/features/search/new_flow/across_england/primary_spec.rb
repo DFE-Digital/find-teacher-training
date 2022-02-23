@@ -12,7 +12,6 @@ RSpec.feature 'Searching across England' do
   end
 
   scenario 'Candidate searches for primary courses across England' do
-    given_that_the_new_search_flow_feature_flag_is_enabled
     when_i_visit_the_start_page
     and_i_select_the_across_england_radio_button
     and_i_click_continue
@@ -47,11 +46,6 @@ RSpec.feature 'Searching across England' do
     when_i_select_the_primary_subject_textbox
     and_i_click_find_courses
     then_i_should_see_the_results_page
-  end
-
-  def given_that_the_new_search_flow_feature_flag_is_enabled
-    allow(FeatureFlag).to receive(:active?).and_call_original
-    allow(FeatureFlag).to receive(:active?).with(:new_search_flow).and_return(true)
   end
 
   def when_i_visit_the_start_page

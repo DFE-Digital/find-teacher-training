@@ -12,8 +12,6 @@ RSpec.feature 'Editing a search' do
   end
 
   scenario 'Candidate edits their search' do
-    given_that_the_new_search_flow_feature_flag_is_enabled
-
     when_i_execute_a_valid_search
     then_i_should_see_the_results_page
 
@@ -38,11 +36,6 @@ RSpec.feature 'Editing a search' do
     and_i_click_continue
     and_i_select_the_primary_subject_checkbox
     and_i_click_find_courses
-  end
-
-  def given_that_the_new_search_flow_feature_flag_is_enabled
-    allow(FeatureFlag).to receive(:active?).and_call_original
-    allow(FeatureFlag).to receive(:active?).with(:new_search_flow).and_return(true)
   end
 
   def when_i_visit_the_start_page

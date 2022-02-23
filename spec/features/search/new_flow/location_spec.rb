@@ -6,8 +6,6 @@ RSpec.feature 'Searching by location' do
   end
 
   scenario 'Candidate searches by location' do
-    given_that_the_new_search_flow_feature_flag_is_enabled
-
     when_i_visit_the_start_page
     and_i_select_the_location_radio_button
     and_i_click_continue
@@ -24,11 +22,6 @@ RSpec.feature 'Searching by location' do
 
     # Note that the remainder of the search flow is has
     # test coverage in 'spec/features/new_flow/across_england'
-  end
-
-  def given_that_the_new_search_flow_feature_flag_is_enabled
-    allow(FeatureFlag).to receive(:active?).and_call_original
-    allow(FeatureFlag).to receive(:active?).with(:new_search_flow).and_return(true)
   end
 
   def when_i_visit_the_start_page
