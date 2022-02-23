@@ -20,7 +20,7 @@ private
   end
 
   def find_opens
-    CycleTimetable.find_opens.to_s(:month_and_year)
+    CycleTimetable.find_opens.to_formatted_s(:month_and_year)
   end
 
   def find_reopens
