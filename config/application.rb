@@ -8,7 +8,6 @@ require 'active_model/railtie'
 require 'active_job/railtie'
 require 'action_controller/railtie'
 require 'action_view/railtie'
-require 'view_component/engine'
 require './app/middleware/csharp_subject_conversion_middleware'
 require './app/middleware/handle_bad_multipart_form_data_middleware'
 
