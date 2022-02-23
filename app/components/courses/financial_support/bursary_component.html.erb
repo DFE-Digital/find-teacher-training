@@ -5,8 +5,8 @@
     </p>
 
     <ul class="govuk-list govuk-list--bullet">
-      <% unless bursary_requirements.empty? %>
-        <% bursary_requirements.each do |requirement| %>
+     <% bursary_requirements.each do |requirement| %>
+      <% unless bursary_requirements.empty? || duplicate_requirement(requirement) %>
           <li><%= requirement %></li>
         <% end %>
       <% end %>
