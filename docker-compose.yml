@@ -4,7 +4,7 @@ services:
     image: redis:alpine
   web:
     build: .
-    image: dfedigital/find-teacher-training:${IMAGE_TAG:-latest}
+    image: ghcr.io/dfe-digital/find-teacher-training:${IMAGE_TAG:-latest}
     ports:
       - "3000:3000"
     depends_on:

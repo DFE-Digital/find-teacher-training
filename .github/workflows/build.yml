@@ -10,7 +10,7 @@ on:
     types: [opened, reopened, synchronize, labeled]
 
 env:
-  DOCKER_IMAGE: dfedigital/find-teacher-training
+  DOCKER_IMAGE: ghcr.io/dfe-digital/find-teacher-training
 
 jobs:
   build:
@@ -20,12 +20,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
-      - name: Login to DockerHub
+      - name: Login to GitHub Container Registry
         if: github.actor != 'dependabot[bot]'
         uses: docker/login-action@v1.12.0
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -77,8 +78,8 @@ jobs:
           load: ${{ github.actor == 'dependabot[bot]' }}
           target: base-image
           cache-from: |
-            ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:base-image-main
+            type=registry,ref=${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
+            type=registry,ref=${{ env.DOCKER_IMAGE}}:base-image-main
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             COMMIT_SHA=${{ env.IMAGE_TAG}}
@@ -92,9 +93,9 @@ jobs:
           push: false
           load: true
           cache-from: |
-            ${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
-            ${{ env.DOCKER_IMAGE}}:main
-            ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
+            type=registry,ref=${{ env.DOCKER_IMAGE}}:${{ env.BRANCH_TAG }}
+            type=registry,ref=${{ env.DOCKER_IMAGE}}:main
+            type=registry,ref=${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
           build-args: |
             BUILDKIT_INLINE_CACHE=1
             COMMIT_SHA=${{ env.IMAGE_TAG}}

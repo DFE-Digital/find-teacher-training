@@ -43,7 +43,7 @@ Setup the following environment variables. Hint: Use [direnv](https://direnv.net
 ```yml
   TF_VAR_paas_user= # cf username with SpaceDeveloper permissions
   TF_VAR_paas_password= #password of the cf user
-  TF_VAR_paas_app_docker_image= dfedigital/find-teacher-training:${COMMIT_SHA}
+  TF_VAR_paas_app_docker_image= ghcr.io/dfe-digital/find-teacher-training:${COMMIT_SHA}
 ```
 Login to azure cli and set the subscription context
 
