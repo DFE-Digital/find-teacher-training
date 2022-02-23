@@ -4,7 +4,6 @@ RSpec.feature 'Searching by provider' do
   include StubbedRequests::Providers
 
   scenario 'Candidate searches by provider' do
-    given_that_the_new_search_flow_feature_flag_is_enabled
     and_the_provider_cache_is_enabled
 
     when_i_visit_the_start_page
@@ -23,11 +22,6 @@ RSpec.feature 'Searching by provider' do
 
     # Note that the remainder of the search flow is has
     # test coverage in 'spec/features/new_flow/across_england'
-  end
-
-  def given_that_the_new_search_flow_feature_flag_is_enabled
-    allow(FeatureFlag).to receive(:active?).and_call_original
-    allow(FeatureFlag).to receive(:active?).with(:new_search_flow).and_return(true)
   end
 
   def and_the_provider_cache_is_enabled

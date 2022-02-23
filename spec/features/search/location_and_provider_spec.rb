@@ -183,7 +183,7 @@ RSpec.feature 'Results page new area and provider filter' do
           start_page.find_courses.click
 
           URI(current_url).then do |uri|
-            expect(uri.path).to eq('/start/subject')
+            expect(uri.path).to eq('/age-groups')
             expect(uri.query)
               .to eq('c=England&l=1&lat=51.4980188&lng=-0.1300436&loc=Westminster%2C+London+SW1P+3BT%2C+UK&lq=SW1P+3BT&rad=50&sortby=2')
           end
@@ -267,7 +267,7 @@ RSpec.feature 'Results page new area and provider filter' do
         filter_page.find_courses.click
 
         URI(current_url).then do |uri|
-          expect(uri.path).to eq('/start/subject')
+          expect(uri.path).to eq('/age-groups')
           expect(uri.query).to eq('l=2')
         end
       end
@@ -395,7 +395,7 @@ RSpec.feature 'Results page new area and provider filter' do
       filter_page.provider_search.select(provider_name)
       filter_page.find_courses.click
 
-      expect(page).to have_current_path('/start/subject?l=3&query=Provider+1')
+      expect(page).to have_current_path('/age-groups?l=3&query=Provider+1')
     end
   end
 

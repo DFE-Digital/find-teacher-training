@@ -74,11 +74,7 @@ module ResultFilters
     def next_step(all_params)
       submitted_params = get_params_for_selected_option(all_params)
       if flash[:start_wizard]
-        if FeatureFlag.active?(:new_search_flow)
-          age_groups_path(submitted_params)
-        else
-          start_subject_path(submitted_params)
-        end
+        age_groups_path(submitted_params)
       else
         results_path(submitted_params)
       end
