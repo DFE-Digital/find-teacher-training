@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-    types: [opened, reopened, synchronize, labeled]
+  # pull_request:
+  #   branches:
+  #     - main
+  #   types: [opened, reopened, synchronize, labeled]
 
 env:
   DOCKER_IMAGE: ghcr.io/dfe-digital/find-teacher-training
