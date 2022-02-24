@@ -82,7 +82,7 @@ jobs:
         env:
           AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING_REVIEW }}
 
-      - name: Update ${{ matrix.environment }} status
+      - name: Update ${{ env.PR_NUMBER }} status
         if:   ${{ always() && env.TF_STATE_EXISTS == 'true' }}
         uses: bobheadxi/deployments@v1
         with:
