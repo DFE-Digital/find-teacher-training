@@ -8,7 +8,7 @@ on:
 jobs:
   delete-review-app:
     name: Delete Review App ${{ github.event.pull_request.number }}
-    if: contains(github.event.pull_request.labels.*.name, 'deploy')
+    # if: contains(github.event.pull_request.labels.*.name, 'deploy')
     runs-on: ubuntu-latest
     steps:
       # - name: Wait for Deploy App Workflow for review
