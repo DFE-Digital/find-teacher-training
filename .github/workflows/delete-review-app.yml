@@ -88,4 +88,4 @@ jobs:
         with:
           step:   deactivate-env
           token:  ${{ secrets.GITHUB_TOKEN }}
-          env:    ${{ env.PR_NUMBER }}
+          env:    1225
