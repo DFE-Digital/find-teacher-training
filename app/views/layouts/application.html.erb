@@ -100,7 +100,7 @@
           colour: environment_colour,
         },
       ) do %>
-        This is a new service – <%= bat_contact_mail_to 'give feedback or report a problem', subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
+        Give feedback or report a problem: <%= bat_contact_mail_to subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
       <% end %>
 
       <%= yield(:before_content) %>
