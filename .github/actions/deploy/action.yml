@@ -1,0 +1,131 @@
+name: deploy
+description: deploys application
+
+inputs:
+  actions-api-access-token:
+    required: true
+  azure_credentials:
+    required: true
+  environment:
+    description: Environment to deploy to
+    required: true
+  pr:
+    description: PR number for the review app
+    required: false
+  sha:
+    description: Commit sha to be deployed
+    required: true
+  slack-webhook:
+    required: true
+  terraform-state-access-key:
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Start ${{ inputs.environment }} Deployment
+      uses: bobheadxi/deployments@v1
+      id: deployment
+      with:
+        step: start
+        token: ${{ inputs.actions-api-access-token }}
+        env: ${{ inputs.environment }}
+        ref: ${{ inputs.sha }}
+
+    - name: Set Environment variable
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.pr }}" ]; then
+          DEPLOY_ENV=review
+          echo "DEPLOY_ENV=review" >> $GITHUB_ENV
+          echo "DEPLOY_URL=https://find-pr-${{ inputs.pr }}.london.cloudapps.digital" >> $GITHUB_ENV
+        else
+          echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
+        fi;
+
+        tf_vars_file=terraform/workspace_variables/${DEPLOY_ENV}.tfvars.json
+        echo "key_vault_name=$(jq -r '.key_vault_name' ${tf_vars_file})" >> $GITHUB_ENV
+        echo "key_vault_app_secret_name=$(jq -r '.key_vault_app_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
+        echo "key_vault_infra_secret_name=$(jq -r '.key_vault_infra_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
+      env:
+        DEPLOY_ENV: ${{ inputs.environment }}
+
+    - name: Use Terraform v0.13.5
+      uses: hashicorp/setup-terraform@v1.3.2
+      with:
+        terraform_version: 0.13.5
+
+    - uses: azure/login@v1.3.0
+      with:
+        creds: ${{ inputs.azure_credentials }}
+
+    - name: Validate Azure Key Vault secrets
+      uses: DFE-Digital/github-actions/validate-key-vault-secrets@master
+      with:
+        KEY_VAULT: ${{ env.key_vault_name }}
+        SECRETS: |
+          ${{ env.key_vault_app_secret_name }}
+          ${{ env.key_vault_infra_secret_name }}
+
+    - name: Terraform init, plan & apply
+      shell: bash
+      run: make ${{ env.DEPLOY_ENV }} ci deploy
+      env:
+        APP_NAME:                 ${{ inputs.pr }}
+        ARM_ACCESS_KEY:           ${{ inputs.terraform-state-access-key }}
+        TF_VAR_azure_credentials: ${{ inputs.azure_credentials }}
+        IMAGE_TAG :               ${{ inputs.sha }}
+        CONFIRM_PRODUCTION:       yes
+
+    - name: Set Cypress environment variable
+      shell: bash
+      run: |
+        echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
+        echo "CYPRESS_ENVIRONMENT=$RAILS_ENV" >> $GITHUB_ENV
+        if [ -n "${{ inputs.pr }}" ]; then
+          echo "CYPRESS_ENV_VARS=--env BASE_URL=https://find-pr-${{ inputs.pr }}.london.cloudapps.digital" >> $GITHUB_ENV
+        fi;
+      env:
+        RAILS_ENV: ${{ inputs.environment }}
+
+    - name: Run smoke tests
+      id: cypress_run
+      shell: bash
+      run: |
+        npm install
+        npx cypress run ${{ env.CYPRESS_ENV_VARS }}
+
+    - name: Upload Cypress screenshot and videos
+      if:   always()
+      uses: actions/upload-artifact@v2.3.1
+      with:
+        name: smoke-test-${{ inputs.environment }}
+        path: |
+          cypress/videos
+          cypress/screenshots
+        if-no-files-found: ignore
+        retention-days: 7
+
+    - name: Update ${{ inputs.environment }} status
+      if: ${{ always() }}
+      uses: bobheadxi/deployments@v1
+      with:
+        step: finish
+        token: ${{ inputs.actions-api-access-token }}
+        env: ${{ inputs.environment }}
+        status: ${{ job.status }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        ref: ${{ inputs.sha }}
+        env_url: ${{ env.DEPLOY_URL }}
+
+    - name: 'Notify #twd_apply_tech on failure'
+      if: failure() && inputs.pr == ''
+      uses: rtCamp/action-slack-notify@master
+      env:
+        SLACK_CHANNEL: twd_apply_tech
+        SLACK_COLOR: '#ef5343'
+        SLACK_ICON_EMOJI: ':sad-beaver:'
+        SLACK_USERNAME: Find Teacher Training
+        SLACK_TITLE: Smoke tests failure
+        SLACK_MESSAGE: ':alert: Smoke tests failure on ${{ inputs.environment }} :sadparrot:'
+        SLACK_WEBHOOK: ${{ inputs.slack-webhook }}
