@@ -20,6 +20,9 @@ permissions:
 jobs:
   build:
     name: build
+    outputs: 
+      image_tag: ${{ env.IMAGE_TAG }}
+      branch_tag: ${{ env.BRANCH_TAG }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -107,15 +110,6 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
         run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
 
-      - name: Trigger Review App Deployment
-        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Deploy
-          ref:    ${{ github.head_ref }}
-          token:  ${{ secrets.ACTIONS_API_ACCESS_TOKEN  }}
-          inputs: '{"pr": "${{ github.event.pull_request.number }}", "sha": "${{ env.IMAGE_TAG }}"}'
-
       - name: Run Snyk to check Docker image for vulnerabilities
         if: github.actor != 'dependabot[bot]'
         uses: snyk/actions/docker@master
@@ -124,6 +118,21 @@ jobs:
         with:
           image: ${{ env.DOCKER_IMAGE }}:${{ env.IMAGE_TAG }}
           args: --file=Dockerfile --severity-threshold=high
+
+      - name: Push ${{ env.DOCKER_IMAGE }} images
+        if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') }}
+        run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
+
+  test:
+    name: Unit Tests
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Set Environment variable
+        run: echo "IMAGE_TAG=${{ needs.build.outputs.image_tag }}" >> $GITHUB_ENV
 
       - name: Run ruby linter
         run: make rubocop
@@ -144,32 +153,50 @@ jobs:
         if: github.actor != 'dependabot[bot]'
         run: make publish.codeclimate
         env:
-          GIT_BRANCH: ${{ env.BRANCH_TAG }}
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
+          GIT_BRANCH: ${{ needs.build.outputs.branch_tag }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }} 
 
-      - name: Push ${{ env.DOCKER_IMAGE }} images
-        if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') }}
-        run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
+  deploy_review:
+    name: Deploy Review Environment
+    concurrency: deploy_review_${{ github.event.pull_request.number }}
+    if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
 
-      - name: Trigger QA Deployment
-        if: ${{ success() && github.ref == 'refs/heads/main' }}
-        uses: benc-uk/workflow-dispatch@v1.1
+      - name: Deploy App to Review environment
+        uses: ./.github/actions/deploy/
         with:
-          workflow: Deploy
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          inputs: '{"qa": "true", "staging": "true", "production": "true", "sandbox": "true", "sha": "${{ env.IMAGE_TAG }}"}'
+          actions-api-access-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
+          environment: review
+          pr: ${{ github.event.pull_request.number }}
+          sha: ${{ needs.build.outputs.image_tag }}
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+          terraform-state-access-key: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY_REVIEW }}
 
-      - name: Wait for review app deployment
-        id: wait_for_review_app_deployment
-        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
-        uses: fountainhead/action-wait-for-check@v1.0.0
+  deploy_all:
+    name: Deployment To All
+    concurrency: deploy_all
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        environment: [qa,staging,production,sandbox]
+      max-parallel: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+
+      - name: Deploy App to ${{ matrix.environment }}
+        uses: ./.github/actions/deploy/
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.head_ref }}
-          checkName: ${{ github.event.pull_request.number }} Deployment
-          timeoutSeconds:  1800
-          intervalSeconds: 10
-
-      - name: Exit if review app deployment failed
-        if: ${{ steps.wait_for_review_app_deployment.outputs.conclusion != '' && steps.wait_for_review_app_deployment.outputs.conclusion != 'success' }}
-        run: exit 1
+          actions-api-access-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
+          environment: ${{ matrix.environment }}
+          sha: ${{ needs.build.outputs.image_tag }}
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+          terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
