@@ -181,7 +181,7 @@ jobs:
     name: Deployment To All
     concurrency: deploy_all
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [build]
+    needs: [test]
     runs-on: ubuntu-latest
     strategy:
       matrix: 
