@@ -50,7 +50,7 @@ describe Courses::FeesAndFinancialSupportComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You cannot claim both a bursary and a scholarship - you can only claim one.')
+      expect(result.text).to include('You could be eligible for either')
     end
   end
 
