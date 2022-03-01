@@ -1,7 +1,7 @@
 <div data-qa="course__bursary_details">
   <% if FeatureFlag.active?(:bursaries_and_scholarships_announced) %>
     <p class="govuk-body">
-      You’ll get a bursary of <%= number_to_currency(course.bursary_amount) %> if you have <%= course.bursary_first_line_ending %>
+      You may be eligible for a bursary of <%= number_to_currency(course.bursary_amount) %>.
     </p>
 
     <ul class="govuk-list govuk-list--bullet">
@@ -12,13 +12,8 @@
       <% end %>
     </ul>
 
-    <p class="govuk-body">
-      You do not have to apply for a bursary - if you’re eligible, you’ll automatically start receiving it once you begin your course.
-    </p>
-  <% end %>
-
   <p class="govuk-body">
-    You may be eligible for a <%= govuk_link_to 'loan while you study', t('get_into_teaching.url_funding_your_training') %>.
+    You may also be eligible for a <%= govuk_link_to 'loan while you study', t('get_into_teaching.url_funding_your_training') %>.
   </p>
 
   <p class="govuk-body">
