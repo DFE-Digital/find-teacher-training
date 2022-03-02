@@ -96,7 +96,7 @@ runs:
         npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
     - name: Upload Cypress screenshot and videos
-      if:   always()
+      if:   steps.cypress_run.outcome == 'success' || steps.cypress_run.outcome == 'failure' || steps.cypress_run.outcome == 'cancelled'
       uses: actions/upload-artifact@v2.3.1
       with:
         name: smoke-test-${{ inputs.environment }}
