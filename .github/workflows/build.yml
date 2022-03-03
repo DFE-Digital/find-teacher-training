@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   build:
-    name: build
+    name: Build
     outputs: 
       image_tag: ${{ env.IMAGE_TAG }}
       branch_tag: ${{ env.BRANCH_TAG }}
