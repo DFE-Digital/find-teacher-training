@@ -1,6 +1,8 @@
 module Courses
   module FinancialSupport
     class ScholarshipAndBursaryComponent < ViewComponent::Base
+      include ViewHelper
+
       attr_reader :course
 
       delegate :scholarship_amount,

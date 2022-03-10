@@ -5,8 +5,8 @@
     </p>
 
     <ul class="govuk-list govuk-list--bullet">
-      <li data-qa="course__scholarship_amount">a scholarship of <%= number_to_currency(scholarship_amount) %></li>
       <li data-qa="course__bursary_amount">a bursary of <%= number_to_currency(bursary_amount) %></li>
+      <li data-qa="course__scholarship_amount">a scholarship of <%= number_to_currency(scholarship_amount) %></li>
     </ul>
 
     <% if has_early_career_payments? %>
@@ -16,27 +16,19 @@
     <% end %>
 
     <p class="govuk-body">
-      To qualify for a scholarship you’ll need a degree of 2:1 or above in <%= subject_name %> or a related subject. For a bursary you’ll need a 2:2 or above in any subject.
+      To be eligible for a bursary you’ll need a 2:2 degree in any subject. You do not need to apply for a bursary. If you’re eligible, you’ll automatically start receiving it when you start the course.
     </p>
 
     <p class="govuk-body">
-      You cannot claim both a bursary and a scholarship - you can only claim one.
-    </p>
-
-    <p class="govuk-body">
-      <%= govuk_link_to 'Find out more about bursaries and scholarships', t('get_into_teaching.url_bursaries_and_scholarships') %>. You do not need to apply for a bursary - if you’re eligible, you’ll automatically start receiving it once you begin your course.
-    </p>
-
-    <p class="govuk-body">
-      You may also be eligible for a <%= govuk_link_to 'loan while you study', t('get_into_teaching.url_funding_your_training') %>.
-    </p>
-  <% else %>
-    <p class="govuk-body">
-      You may be eligible for a <%= govuk_link_to 'loan while you study', t('get_into_teaching.url_funding_your_training') %>.
+      For a scholarship, you’ll need to apply through the Chartered Institute for IT. <%= govuk_link_to('Check whether you’re eligible for a scholarship and find out how to apply', 'https://www.bcs.org/qualifications-and-certifications/training-and-scholarships-for-teachers/bcs-computer-teacher-scholarships/') %>.
     </p>
   <% end %>
 
   <p class="govuk-body">
-    Find out about financial support if you’re from <%= govuk_link_to 'outside the UK', 'https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen#rate' %>.
+    You may also be eligible for a student loan. These are normally for undergraduate courses but you can also apply if you do postgraduate teacher training. <%= govuk_link_to('Find out how much loan you could get using the student finance calculator', 'https://www.gov.uk/student-finance-calculator') %>.
+  </p>
+
+  <p class="govuk-body">
+    Depending on your immigration status, financial support may not be available. Find out about <%= govuk_link_to('training to teach if you’re a non-UK citizen', 'https://www.gov.uk/government/publications/train-to-teach-in-england-non-uk-applicants/train-to-teach-in-england-if-youre-a-non-uk-citizen') %>, including financial support.
   </p>
 </div>
