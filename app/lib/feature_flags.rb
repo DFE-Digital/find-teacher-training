@@ -1,7 +1,6 @@
 class FeatureFlags
   def self.all
     [
-      [:basic_auth_enabled, 'Protects requests with basic authentication', 'Apply team'],
       [:maintenance_mode, 'Puts Find into maintenance mode', 'Apply team'],
       [:maintenance_banner, 'Displays the maintenance mode banner', 'Apply team'],
       [:cache_courses, 'Caches request to the Teacher Training API for individual courses', 'Apply team'],
