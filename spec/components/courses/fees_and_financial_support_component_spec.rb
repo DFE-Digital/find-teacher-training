@@ -25,7 +25,7 @@ describe Courses::FeesAndFinancialSupportComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You may be eligible for a loan while you study')
+      expect(result.text).to include('You may be eligible for a student loan')
       expect(result.text).not_to include('You do not have to apply for a bursary')
     end
   end
@@ -38,7 +38,7 @@ describe Courses::FeesAndFinancialSupportComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You do not have to apply for a bursary')
+      expect(result.text).to include('You do not need to apply for a bursary')
     end
   end
 
@@ -50,7 +50,7 @@ describe Courses::FeesAndFinancialSupportComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You cannot claim both a bursary and a scholarship - you can only claim one.')
+      expect(result.text).to include('To be eligible for a bursary you’ll need a 2:2 degree in any subject')
     end
   end
 
@@ -60,7 +60,7 @@ describe Courses::FeesAndFinancialSupportComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You may be eligible for a loan while you study')
+      expect(result.text).to include('You may be eligible for a student loan')
     end
   end
 
