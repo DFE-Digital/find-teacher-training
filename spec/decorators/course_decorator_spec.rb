@@ -234,7 +234,7 @@ describe CourseDecorator do
   describe '#has_bursary' do
     context 'course has no bursary' do
       it 'returns false' do
-        expect(decorated_course.has_bursary?).to eq(false)
+        expect(decorated_course.has_bursary?).to be(false)
       end
     end
 
@@ -244,7 +244,7 @@ describe CourseDecorator do
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do
-        expect(decorated_course.has_bursary?).to eq(true)
+        expect(decorated_course.has_bursary?).to be(true)
       end
     end
   end
@@ -362,7 +362,7 @@ describe CourseDecorator do
   describe '#has_scholarship?' do
     context 'course has no scholarship' do
       it 'returns false' do
-        expect(decorated_course.has_scholarship?).to eq(false)
+        expect(decorated_course.has_scholarship?).to be(false)
       end
     end
 
@@ -372,7 +372,7 @@ describe CourseDecorator do
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do
-        expect(decorated_course.has_scholarship?).to eq(true)
+        expect(decorated_course.has_scholarship?).to be(true)
       end
     end
   end
@@ -380,7 +380,7 @@ describe CourseDecorator do
   context 'early careers payment option' do
     context 'course has no early career payment option' do
       it 'returns false' do
-        expect(decorated_course.has_early_career_payments?).to eq(false)
+        expect(decorated_course.has_early_career_payments?).to be(false)
       end
     end
 
@@ -389,7 +389,7 @@ describe CourseDecorator do
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do
-        expect(decorated_course.has_early_career_payments?).to eq(true)
+        expect(decorated_course.has_early_career_payments?).to be(true)
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe NormaliseSearchParametersService do
     end
 
     it 'flags that the parameters are deprecated' do
-      expect(service_call[:deprecated]).to eq(true)
+      expect(service_call[:deprecated]).to be(true)
     end
 
     it 'returns the correct parameters' do
@@ -47,7 +47,7 @@ RSpec.describe NormaliseSearchParametersService do
     end
 
     it 'does not flag that the parameters are deprecated' do
-      expect(service_call[:deprecated]).to eq(false)
+      expect(service_call[:deprecated]).to be(false)
     end
 
     it 'returns the same parameters' do

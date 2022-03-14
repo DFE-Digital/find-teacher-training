@@ -23,7 +23,7 @@ describe ProviderDecorator do
     context 'without website' do
       let(:provider) { build(:provider, website: nil) }
 
-      it { is_expected.to eq(nil) }
+      it { is_expected.to be_nil }
     end
   end
 

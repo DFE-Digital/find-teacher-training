@@ -180,7 +180,7 @@ describe ResultsView do
       let(:parameter_hash) { { 'qualifications' => 'QtsOnly,PgdePgceWithQts,Other' } }
 
       it 'returns true' do
-        expect(results_view.all_qualifications?).to eq(true)
+        expect(results_view.all_qualifications?).to be(true)
       end
     end
 
@@ -188,7 +188,7 @@ describe ResultsView do
       let(:parameter_hash) { { 'qualifications' => 'QtsOnly' } }
 
       it 'returns false' do
-        expect(results_view.all_qualifications?).to eq(false)
+        expect(results_view.all_qualifications?).to be(false)
       end
     end
   end
@@ -788,7 +788,7 @@ describe ResultsView do
         stub_courses(query: results_page_parameters, course_count: 10)
       end
 
-      it { is_expected.to eq(false) }
+      it { is_expected.to be(false) }
     end
 
     context 'there are no results' do
@@ -796,7 +796,7 @@ describe ResultsView do
         stub_courses(query: results_page_parameters, course_count: 0)
       end
 
-      it { is_expected.to eq(true) }
+      it { is_expected.to be(true) }
     end
   end
 

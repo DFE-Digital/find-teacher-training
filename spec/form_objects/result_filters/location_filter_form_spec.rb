@@ -13,7 +13,7 @@ module ResultFilters
         let(:params) { {} }
 
         it 'is not valid' do
-          expect(results_filters.valid?).to eq(false)
+          expect(results_filters.valid?).to be(false)
         end
 
         it 'has error' do
@@ -31,7 +31,7 @@ module ResultFilters
         let(:params) { { l: '1', lq: 'Unknown location' } }
 
         it 'is not valid' do
-          expect(results_filters.valid?).to eq(false)
+          expect(results_filters.valid?).to be(false)
         end
 
         it 'has error' do
@@ -49,7 +49,7 @@ module ResultFilters
         let(:params) { { l: '1', lq: 'SW1P 3BT' } }
 
         it 'is not valid' do
-          expect(results_filters.valid?).to eq(true)
+          expect(results_filters.valid?).to be(true)
         end
 
         it 'has no errors' do
