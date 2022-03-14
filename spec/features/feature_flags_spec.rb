@@ -11,6 +11,10 @@ RSpec.describe 'Feature flags', type: :feature do
     given_there_is_a_feature_flag_set_up
 
     when_i_visit_the_features_page
+    i_should_see_access_denied
+
+    given_i_am_authenticated
+    when_i_visit_the_features_page
     then_i_should_see_the_existing_feature_flags
 
     when_i_activate_the_feature
@@ -28,6 +32,14 @@ RSpec.describe 'Feature flags', type: :feature do
 
   def when_i_visit_the_features_page
     visit feature_flags_path
+  end
+
+  def given_i_am_authenticated
+    page.driver.browser.authorize 'foo', 'bar'
+  end
+
+  def i_should_see_access_denied
+    expect(page).to have_content('Access denied')
   end
 
   def then_i_should_see_the_existing_feature_flags
