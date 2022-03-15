@@ -102,3 +102,16 @@ en:
     today_is_after_find_opens:
       name: Find has reopened
       description: Candidates can browse courses on Find. Courses returned from the Teacher Traininig API will be from next year's recruitment cycle
+  scholarships:
+    physics:
+      body: Institute of Physics
+      url: https://www.iop.org/about/support-grants/iop-teacher-training-scholarships
+    chemistry:
+      body: Royal Society of Chemistry
+      url: https://www.rsc.org/prizes-funding/funding/teacher-training-scholarships/
+    computing:
+      body: Chartered Institute for IT
+      url: https://www.bcs.org/qualifications-and-certifications/training-and-scholarships-for-teachers/bcs-computer-teacher-scholarships/
+    mathematics:
+      body: Institute of Mathematics and its Applications
+      url: http://teachingmathsscholars.org/about

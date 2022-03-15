@@ -19,9 +19,11 @@
       To be eligible for a bursary you’ll need a 2:2 degree in any subject. You do not need to apply for a bursary. If you’re eligible, you’ll automatically start receiving it when you start the course.
     </p>
 
-    <p class="govuk-body">
-      For a scholarship, you’ll need to apply through the Chartered Institute for IT. <%= govuk_link_to('Check whether you’re eligible for a scholarship and find out how to apply', 'https://www.bcs.org/qualifications-and-certifications/training-and-scholarships-for-teachers/bcs-computer-teacher-scholarships/') %>.
-    </p>
+    <% if scholarship_body.present? %>
+      <p class="govuk-body">
+        For a scholarship, you’ll need to apply through the <%= scholarship_body %>. <%= govuk_link_to('Check whether you’re eligible for a scholarship and find out how to apply', scholarship_url) %>.
+      </p>
+    <% end %>
   <% end %>
 
   <p class="govuk-body">

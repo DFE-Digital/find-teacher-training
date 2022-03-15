@@ -13,6 +13,14 @@ module Courses
       def initialize(course)
         @course = course
       end
+
+      def scholarship_body
+        I18n.t("scholarships.#{subject_name.downcase}.body", default: nil)
+      end
+
+      def scholarship_url
+        I18n.t("scholarships.#{subject_name.downcase}.url", default: nil)
+      end
     end
   end
 end
