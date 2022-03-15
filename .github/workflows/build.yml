@@ -126,6 +126,8 @@ jobs:
   test:
     name: Unit Tests
     needs: [build]
+    outputs: 
+      image_tag: ${{ needs.build.outputs.image_tag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -197,6 +199,6 @@ jobs:
           actions-api-access-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
           environment: ${{ matrix.environment }}
-          sha: ${{ needs.build.outputs.image_tag }}
+          sha: ${{ needs.test.outputs.image_tag }}
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
           terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
