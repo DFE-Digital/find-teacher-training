@@ -6,7 +6,6 @@ class FeatureFlags
       [:cache_courses, 'Caches request to the Teacher Training API for individual courses', 'Apply team'],
       [:send_web_requests_to_big_query, 'Send events to Google Big Query', 'Apply team'],
       [:bursaries_and_scholarships_announced, 'Display scholarship and bursary information', 'Apply team'],
-      [:componentised_results, 'Refactors the view templates into Rails view components for the results page', 'Apply team'],
     ]
   end
 end
