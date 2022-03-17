@@ -213,7 +213,7 @@ GEM
     fugit (1.4.4)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
-    geocoder (1.7.3)
+    geocoder (1.7.5)
     geokit (1.13.1)
     globalid (1.0.0)
       activesupport (>= 5.0)
