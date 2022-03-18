@@ -52,13 +52,10 @@ describe Courses::FinancialSupport::ScholarshipAndBursaryComponent, type: :compo
       }
 
       it 'renders link to scholarship body' do
-        result = render_inline(described_class.new(course))
+        render_inline(described_class.new(course))
 
-        expect(result.text).to include('For a scholarship, you’ll need to apply through the Royal Society of Chemistry')
-        expect(result).to have_selector(
-          "a[href='https://www.rsc.org/prizes-funding/funding/teacher-training-scholarships/']",
-          text: 'Check whether you’re eligible for a scholarship and find out how to apply',
-        )
+        expect(rendered_component).to have_text('For a scholarship, you’ll need to apply through the Royal Society of Chemistry')
+        expect(rendered_component).to have_link('Check whether you’re eligible for a scholarship and find out how to apply', href: 'https://www.rsc.org/prizes-funding/funding/teacher-training-scholarships/')
       end
     end
 
