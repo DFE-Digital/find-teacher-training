@@ -1,6 +1,8 @@
 module Courses
   module FinancialSupport
     class ScholarshipAndBursaryComponent < ViewComponent::Base
+      include ViewHelper
+
       attr_reader :course
 
       delegate :scholarship_amount,
@@ -10,6 +12,14 @@ module Courses
 
       def initialize(course)
         @course = course
+      end
+
+      def scholarship_body
+        I18n.t("scholarships.#{subject_name.downcase}.body", default: nil)
+      end
+
+      def scholarship_url
+        I18n.t("scholarships.#{subject_name.downcase}.url", default: nil)
       end
     end
   end

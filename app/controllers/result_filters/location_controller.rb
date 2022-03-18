@@ -39,7 +39,7 @@ module ResultFilters
     end
 
     def check_provider_cache_is_populated
-      if Rails.env.development? && TeacherTrainingPublicAPI::ProvidersCache.read.empty?
+      if Rails.env.development? && !TeacherTrainingPublicAPI::ProvidersCache.read&.present?
         message = 'The TeacherTrainingPublicAPI::ProvidersCache is currently empty. Please run `TeacherTrainingPublicAPI::SyncAllProviders.call` in the Rails console.'
         raise ProviderCacheEmptyError, message
       end

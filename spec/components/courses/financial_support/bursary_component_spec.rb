@@ -10,12 +10,12 @@ describe Courses::FinancialSupport::BursaryComponent, type: :component do
     end
 
     it 'renders bursary details' do
-      expect(rendered_component).to have_text('You’ll get a bursary of £3,000')
+      expect(rendered_component).to have_text('You could be eligible for a bursary of £3,000')
     end
 
     context 'bursary requirements' do
       it 'renders bursary requirements' do
-        expect(rendered_component).to have_text('a degree of 2:2 or above in any subject')
+        expect(rendered_component).to have_text('To be eligible for a bursary you’ll need a 2:2 degree in any subject')
       end
     end
 
@@ -33,7 +33,7 @@ describe Courses::FinancialSupport::BursaryComponent, type: :component do
 
       context 'requirement and bursary_first_line_ending are not identical' do
         it 'renders both requirement and bursary first line ending' do
-          expect(rendered_component).to have_css('ul.govuk-list.govuk-list--bullet', text: 'a degree of 2:2 or above in any subject')
+          expect(rendered_component).to have_text('To be eligible for a bursary you’ll need a 2:2 degree in any subject')
           expect(described_class.new(course).duplicate_requirement(requirement)).to be_falsey
         end
       end
