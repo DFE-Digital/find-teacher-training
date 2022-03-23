@@ -20,19 +20,13 @@ inputs:
   terraform-state-access-key:
     required: true
 
+outputs:
+  deploy-url:
+    value: ${{ steps.set_env_var.outputs.deploy_url }}
+
 runs:
   using: composite
   steps:
-    # all steps prior to the "Evaluate job status" step require an id to ensure that we correctly report the deployment outcome
-    - name: Start ${{ inputs.environment }} Deployment
-      uses: bobheadxi/deployments@v1
-      id: deployment
-      with:
-        step: start
-        token: ${{ inputs.actions-api-access-token }}
-        env: ${{ inputs.environment }}
-        ref: ${{ inputs.sha }}
-
     - name: Set Environment variable
       id: set_env_var
       shell: bash
@@ -40,9 +34,14 @@ runs:
         if [ -n "${{ inputs.pr }}" ]; then
           DEPLOY_ENV=review
           echo "DEPLOY_ENV=review" >> $GITHUB_ENV
-          echo "DEPLOY_URL=https://find-pr-${{ inputs.pr }}.london.cloudapps.digital" >> $GITHUB_ENV
+          echo "::set-output name=deploy_url::https://find-pr-${{ inputs.pr }}.london.cloudapps.digital"
         else
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
+          if [ ${{ inputs.environment }} == "production" ]; then
+            echo "::set-output name=deploy_url::https://www.find-postgraduate-teacher-training.service.gov.uk"
+          else
+            echo "::set-output name=deploy_url::https://${{ inputs.environment }}.find-postgraduate-teacher-training.service.gov.uk"
+          fi
         fi
 
         tf_vars_file=terraform/workspace_variables/${DEPLOY_ENV}.tfvars.json
@@ -53,7 +52,6 @@ runs:
         DEPLOY_ENV: ${{ inputs.environment }}
 
     - name: Use Terraform v0.13.5
-      id: use_terraform
       uses: hashicorp/setup-terraform@v1.3.2
       with:
         terraform_version: 0.13.5
@@ -64,7 +62,6 @@ runs:
         creds: ${{ inputs.azure_credentials }}
 
     - name: Validate Azure Key Vault secrets
-      id: validate_key_vault_secrets
       uses: DFE-Digital/github-actions/validate-key-vault-secrets@master
       with:
         KEY_VAULT: ${{ env.key_vault_name }}
@@ -73,7 +70,6 @@ runs:
           ${{ env.key_vault_infra_secret_name }}
 
     - name: Terraform init, plan & apply
-      id: apply_terraform
       shell: bash
       run: make ${{ env.DEPLOY_ENV }} ci deploy
       env:
@@ -84,7 +80,6 @@ runs:
         CONFIRM_PRODUCTION:       yes
 
     - name: Set Cypress environment variable
-      id: set_cypress_env_var
       shell: bash
       run: |
         echo "RAILS_ENV=$RAILS_ENV" >> $GITHUB_ENV
@@ -103,7 +98,6 @@ runs:
         npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
     - name: Upload Cypress screenshot and videos
-      id: upload_cypress
       if:   steps.run_cypress.outcome == 'success' || steps.run_cypress.outcome == 'failure' || steps.run_cypress.outcome == 'cancelled'
       uses: actions/upload-artifact@v2.3.1
       with:
@@ -113,29 +107,6 @@ runs:
           cypress/screenshots
         if-no-files-found: ignore
         retention-days: 7
-
-    - name: Evaluate job status
-      if: always()
-      shell: bash
-      run: |
-        if [[ ${{ join(steps.*.outcome, ',') }} =~ "failure" ]]; then
-          echo JOB_STATUS="failure" >> $GITHUB_ENV
-        else
-          echo JOB_STATUS="success" >> $GITHUB_ENV
-        fi
-
-    - name: Update ${{ inputs.environment }} status
-      if: always()
-      uses: bobheadxi/deployments@v1
-      with:
-        step: finish
-        token: ${{ inputs.actions-api-access-token }}
-        env: ${{ inputs.environment }}
-        status: ${{ env.JOB_STATUS }}
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-        ref: ${{ inputs.sha }}
-        env_url: ${{ env.DEPLOY_URL }}
-        override: false
 
     - name: 'Notify #twd_apply_tech on failure'
       if: failure() && inputs.pr == ''
