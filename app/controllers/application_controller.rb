@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  include EmitRequestEvents
+  include DfE::Analytics::Requests
 
   before_action :store_request_id
   before_action :assign_sentry_contexts
   before_action :redirect_to_maintenance_page_if_flag_is_active
   before_action :redirect_to_cycle_has_ended_if_find_is_down
+
+  def current_user
+    nil # for DfE::Analytics
+  end
 
   def store_request_id
     RequestStore.store[:request_id] = request.uuid
