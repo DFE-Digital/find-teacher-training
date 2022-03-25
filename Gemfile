@@ -89,9 +89,6 @@ gem 'skylight'
 gem 'view_component'
 gem 'govuk-components', '~> 3.0.3'
 
-# Data integration with BigQuery
-gem 'google-cloud-bigquery'
-
 # For outgoing http requests
 gem 'http'
 
