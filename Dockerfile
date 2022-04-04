@@ -36,9 +36,6 @@ RUN apk add --update --no-cache tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
 
-# Remove once base image ruby:2.7.5-alpine3.15 has been updated with latest libretls
-RUN apk add --no-cache libretls=3.3.4-r3
-
 COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
 COPY --from=base-image /app /app
 COPY --from=base-image /usr/local/bundle/ /usr/local/bundle/
