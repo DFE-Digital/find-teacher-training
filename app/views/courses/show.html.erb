@@ -24,7 +24,7 @@
 
   <%= render Courses::SummaryComponent.new(course) %>
 
-    <%= render Courses::ApplyComponent.new(course) %>
+  <%= render Courses::ApplyComponent.new(course) %>
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -61,6 +61,8 @@
       <%= render Courses::ContactDetailsComponent.new(course) %>
 
       <%= render partial: 'courses/advice' %>
+
+      <%= render Courses::ApplyComponent.new(course) %>
 
     </div>
   </div>
