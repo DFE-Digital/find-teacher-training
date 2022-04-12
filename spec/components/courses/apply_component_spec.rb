@@ -21,7 +21,7 @@ describe Courses::ApplyComponent, type: :component do
 
       result = render_inline(described_class.new(course))
 
-      expect(result.text).to include('You cannot apply for this course because it currently has no vacancies.')
+      expect(result.text).to include('You cannot apply for this course because it has no vacancies.')
     end
   end
 
