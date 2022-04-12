@@ -1,4 +1,5 @@
 name: Deploy
+concurrency: build_and_deploy_${{ github.ref_name }}
 
 on:
   workflow_dispatch:
@@ -22,7 +23,6 @@ jobs:
     environment:
       name: ${{ github.event.inputs.environment }}
       url: ${{ steps.deploy_app.outputs.deploy-url }}
-    concurrency: deploy_all # ensures that the job waits for any deployments triggered by the build workflow to finish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
