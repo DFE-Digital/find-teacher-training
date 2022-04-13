@@ -48,4 +48,25 @@ describe Courses::ContentsComponent, type: :component do
       expect(result.text).not_to include('School placements')
     end
   end
+
+  context 'when the course has vacancies' do
+    it 'does render the apply link' do
+      provider = build(:provider).decorate
+      course = build(:course, has_vacancies?: true, provider: provider).decorate
+      result = render_inline(described_class.new(course))
+
+      expect(result.text).to include('Apply')
+    end
+  end
+
+  context 'when the course does not have vacancies' do
+    it 'does not render the apply link' do
+      provider = build(:provider).decorate
+      course = build(:course, has_vacancies?: false, provider: provider).decorate
+
+      result = render_inline(described_class.new(course))
+
+      expect(result.text).not_to include('Apply')
+    end
+  end
 end
