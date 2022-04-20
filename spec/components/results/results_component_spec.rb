@@ -39,6 +39,15 @@ describe Results::ResultsComponent, type: :component do
 
       expect(component.text).to include('No courses found')
     end
+
+    it 'renders the inset text' do
+      stub_courses(query: {}, course_count: 0)
+      courses = Course.where(recruitment_cycle_year: RecruitmentCycle.current_year).all
+      component = render_inline(
+        described_class.new(results: results_view, courses: courses),
+      )
+      expect(component.text).to include('Speak with teacher training providers near you')
+    end
   end
 
   context 'when there are 10 matching courses' do
@@ -81,6 +90,21 @@ describe Results::ResultsComponent, type: :component do
       end
 
       expect(component.text).to include('10 courses found')
+    end
+
+    it 'renders the inset text' do
+      component = render_inline(
+        described_class.new(results: results_view, courses: courses),
+      )
+
+      courses.each do |course|
+        expect(Results::SearchResultComponent).to have_received(:new).with(
+          course: course,
+          has_sites: true,
+          filtered_by_location: false,
+        )
+      end
+      expect(component.text).to include('Speak with teacher training providers near you')
     end
   end
 end
