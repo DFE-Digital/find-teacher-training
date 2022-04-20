@@ -12,6 +12,13 @@
   </div>
   <div class="app-filter-layout__content">
     <%= render Results::NoResultsComponent.new(results: results) %>
+
+    <div class="govuk-inset-text">
+      Speak with teacher training providers near you.
+      <%= govuk_link_to 'Teacher training events',
+                        'https://getintoteaching.education.gov.uk/events?utm_source=find-postgraduate-teacher-training.service.gov.uk&utm_medium=referral&utm_campaign=find_banner'
+      %>
+    </div>
     <%= render Results::SortByComponent.new(results: results) %>
     <%= render Results::SuggestedSearchesComponent.new(results: results) %>
 
