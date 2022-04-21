@@ -101,4 +101,4 @@ jobs:
               core.setFailed('An environment was not passed for deletion.')
             }
         env:
-          DEPLOY_ENV: ${{env.DEPLOY_ENV}}
+          DEPLOY_ENV: review-${{ env.PR_NUMBER }}
