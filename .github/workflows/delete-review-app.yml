@@ -79,26 +79,10 @@ jobs:
           token:  ${{ secrets.GITHUB_TOKEN }}
           env:    review-${{ env.PR_NUMBER }}
 
-      - uses: actions/github-script@v5
-        name: Remove environment entity
-        if: always() && (steps.deactivate-env.outcome == 'success')
+      - name: Delete review-${{ env.PR_NUMBER }} environment
+        if:   always() && (steps.deactivate-env.outcome == 'success')
+        uses: bobheadxi/deployments@v1
         with:
-          github-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
-          script: |
-            const environment = process.env.DEPLOY_ENV || ''
-
-            if (environment) {
-              github.rest.repos.deleteAnEnvironment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                environment_name: environment
-              }).then(res => {
-                  console.log(`The environment ${environment} was removed successfully.`)
-              }).catch(err => {
-                  core.setFailed(err.message)
-              })
-            } else {
-              core.setFailed('An environment was not passed for deletion.')
-            }
-        env:
-          DEPLOY_ENV: review-${{ env.PR_NUMBER }}
+          step:   delete-env
+          token:  ${{ secrets.GITHUB_TOKEN }}
+          env:    review-${{ env.PR_NUMBER }}
