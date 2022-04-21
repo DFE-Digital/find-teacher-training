@@ -46,7 +46,7 @@ describe Results::ResultsComponent, type: :component do
       component = render_inline(
         described_class.new(results: results_view, courses: courses),
       )
-      expect(component.text).to include('Talk to teacher training providers at an event near you')
+      expect(component.text).to include('event near you')
     end
   end
 
@@ -104,7 +104,7 @@ describe Results::ResultsComponent, type: :component do
           filtered_by_location: false,
         )
       end
-      expect(component.text).to include('Talk to teacher training providers at an event near you')
+      expect(component.text).to include('event near you')
     end
   end
 end
