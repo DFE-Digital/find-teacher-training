@@ -21,7 +21,7 @@ permissions:
 jobs:
   build:
     name: Build
-    outputs: 
+    outputs:
       image_tag: ${{ env.IMAGE_TAG }}
       branch_tag: ${{ env.BRANCH_TAG }}
     runs-on: ubuntu-latest
@@ -127,7 +127,7 @@ jobs:
   test:
     name: Unit Tests
     needs: [build]
-    outputs: 
+    outputs:
       image_tag: ${{ needs.build.outputs.image_tag }}
     runs-on: ubuntu-latest
     steps:
@@ -157,7 +157,7 @@ jobs:
         run: make publish.codeclimate
         env:
           GIT_BRANCH: ${{ needs.build.outputs.branch_tag }}
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }} 
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
 
   deploy_review:
     name: Deploy Review Environment
@@ -171,7 +171,7 @@ jobs:
         id: deployment
         with:
           step: start
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           env: review-${{ github.event.pull_request.number }}
           ref: ${{ needs.build.outputs.image_tag }}
 
@@ -182,7 +182,6 @@ jobs:
         id: deploy_review
         uses: ./.github/actions/deploy/
         with:
-          actions-api-access-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
           environment: review
           pr: ${{ github.event.pull_request.number }}
@@ -195,7 +194,7 @@ jobs:
         uses: bobheadxi/deployments@v1
         with:
           step: finish
-          token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           env: review-${{ github.event.pull_request.number }}
           status: ${{ job.status }}
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
@@ -211,7 +210,7 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
+      matrix:
         environment: [qa,staging,production,sandbox]
       max-parallel: 1
     steps:
@@ -222,7 +221,6 @@ jobs:
         id: deploy_app
         uses: ./.github/actions/deploy/
         with:
-          actions-api-access-token: ${{ secrets.ACTIONS_API_ACCESS_TOKEN }}
           azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
           environment: ${{ matrix.environment }}
           sha: ${{ needs.test.outputs.image_tag }}
