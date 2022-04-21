@@ -14,9 +14,9 @@
     <%= render Results::NoResultsComponent.new(results: results) %>
 
     <div class="govuk-inset-text">
-      Speak with teacher training providers near you.
-      <%= govuk_link_to 'Teacher training events',
+      <%= govuk_link_to 'Talk to teacher training providers at an event near you',
                         t('get_into_teaching.url_teacher_training_events')
+      .
       %>
     </div>
     <%= render Results::SortByComponent.new(results: results) %>
