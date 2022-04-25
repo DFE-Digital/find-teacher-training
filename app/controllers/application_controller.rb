@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :redirect_to_cycle_has_ended_if_find_is_down
 
   def current_user
-    nil # for DfE::Analytics
+    nil # for DfE::Analytics
   end
 
   def store_request_id
