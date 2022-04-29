@@ -22,7 +22,6 @@ describe '/cycle-has-ended', type: :request do
 
     [
       '/',
-      '/start/subject?l=2',
       '/results',
       '/course/1N1/238T',
     ].each do |path|
