@@ -28,24 +28,23 @@ describe 'suggested searches', type: :feature do
       'filter[latitude]' => 51.4980188,
       'filter[longitude]' => -0.1300436,
       'filter[radius]' => radius,
-      'filter[subjects]' => '00',
       'filter[expand_university]' => false,
+      'filter[subjects]' => '00',
     )
+
+    stub_courses(query: query, course_count: results_to_return)
+  end
+
+  def results_filter_subjects_request(results_to_return:)
+    query = base_parameters.except('page[page]', 'page[per_page]').merge(
+      'filter[subjects]' => '00',
+    )
+
     stub_courses(query: query, course_count: results_to_return)
   end
 
   def across_england_results_page_request(results_to_return:)
-    stub_courses(query: base_parameters, course_count: results_to_return)
-  end
-
-  def suggested_search_count_request(radius:, results_to_return:)
-    query = suggested_search_count_parameters.merge(
-      'filter[latitude]' => 51.4980188,
-      'filter[longitude]' => -0.1300436,
-      'filter[radius]' => radius,
-      'filter[subjects]' => '00',
-      'filter[expand_university]' => false,
-    )
+    query = base_parameters.merge('filter[subjects]' => '00')
     stub_courses(query: query, course_count: results_to_return)
   end
 
@@ -57,6 +56,7 @@ describe 'suggested searches', type: :feature do
     context 'when the search was filtered to the default 50 mile radius' do
       before do
         results_page_request(radius: 50, results_to_return: 0)
+        results_filter_subjects_request(results_to_return: 10)
         suggested_search_count_across_england(results_to_return: 10)
         across_england_results_page_request(results_to_return: 10)
       end
