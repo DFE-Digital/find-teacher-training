@@ -6,7 +6,6 @@ describe 'suggested searches', type: :feature do
   include StubbedRequests::Subjects
   include StubbedRequests::SubjectAreas
 
-
   let(:filter_page) { PageObjects::Page::Search::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
   let(:sort) { 'distance' }
@@ -163,5 +162,4 @@ describe 'suggested searches', type: :feature do
     check 'Primary'
     click_button 'Find courses'
   end
-
 end
