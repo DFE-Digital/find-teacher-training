@@ -21,7 +21,7 @@ module Search
   private
 
     def sanitised_subject_codes
-      form_params['subject_codes'].delete_if(&:blank?)
+      form_params['subject_codes'].compact_blank!
     end
 
     def form_params
