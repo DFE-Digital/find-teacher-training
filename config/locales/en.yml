@@ -103,6 +103,7 @@ en:
     today_is_after_find_opens:
       name: Find has reopened
       description: Candidates can browse courses on Find. Courses returned from the Teacher Traininig API will be from next year's recruitment cycle
+    updated: Cycle schedule updated
   scholarships:
     physics:
       body: Institute of Physics
