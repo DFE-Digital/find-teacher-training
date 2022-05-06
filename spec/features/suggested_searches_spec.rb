@@ -4,6 +4,7 @@ describe 'suggested searches', type: :feature do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
   include StubbedRequests::Subjects
+  include StubbedRequests::SubjectAreas
 
   let(:filter_page) { PageObjects::Page::Search::Location.new }
   let(:results_page) { PageObjects::Page::Results.new }
@@ -19,6 +20,7 @@ describe 'suggested searches', type: :feature do
   before do
     stub_geocoder
     stub_subjects
+    stub_subject_areas
   end
 
   def results_page_request(radius:, results_to_return:)
@@ -27,21 +29,22 @@ describe 'suggested searches', type: :feature do
       'filter[longitude]' => -0.1300436,
       'filter[radius]' => radius,
       'filter[expand_university]' => false,
+      'filter[subjects]' => '00',
     )
+
+    stub_courses(query: query, course_count: results_to_return)
+  end
+
+  def results_filter_subjects_request(results_to_return:)
+    query = base_parameters.except('page[page]', 'page[per_page]').merge(
+      'filter[subjects]' => '00',
+    )
+
     stub_courses(query: query, course_count: results_to_return)
   end
 
   def across_england_results_page_request(results_to_return:)
-    stub_courses(query: base_parameters, course_count: results_to_return)
-  end
-
-  def suggested_search_count_request(radius:, results_to_return:)
-    query = suggested_search_count_parameters.merge(
-      'filter[latitude]' => 51.4980188,
-      'filter[longitude]' => -0.1300436,
-      'filter[radius]' => radius,
-      'filter[expand_university]' => false,
-    )
+    query = base_parameters.merge('filter[subjects]' => '00')
     stub_courses(query: query, course_count: results_to_return)
   end
 
@@ -53,6 +56,7 @@ describe 'suggested searches', type: :feature do
     context 'when the search was filtered to the default 50 mile radius' do
       before do
         results_page_request(radius: 50, results_to_return: 0)
+        results_filter_subjects_request(results_to_return: 10)
         suggested_search_count_across_england(results_to_return: 10)
         across_england_results_page_request(results_to_return: 10)
       end
@@ -64,6 +68,8 @@ describe 'suggested searches', type: :feature do
 
         filter_page.find_courses.click
 
+        choose_primary_age_group
+        choose_primary_courses
         expect(results_page.suggested_search_heading.text).to eq('Suggested searches')
         expect(results_page.suggested_search_description.text).to eq('You can find:')
         expect(results_page.suggested_search_links.first.text).to eq('10 courses across England')
@@ -145,5 +151,15 @@ describe 'suggested searches', type: :feature do
 
       expect(results_page).not_to have_suggested_search_links
     end
+  end
+
+  def choose_primary_age_group
+    choose 'Primary'
+    click_button 'Continue'
+  end
+
+  def choose_primary_courses
+    check 'Primary'
+    click_button 'Find courses'
   end
 end

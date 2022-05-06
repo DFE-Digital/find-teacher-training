@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get '/confirm-environment' => 'confirm_environment#new'
   post '/confirm-environment' => 'confirm_environment#create'
 
+  # Old search flow: now redirects
+  get '/start/subject', to: redirect('/')
+
   # new search flow
   scope module: 'search' do
     get '/age-groups' => 'age_groups#new'
@@ -32,10 +35,6 @@ Rails.application.routes.draw do
 
   scope module: 'result_filters' do
     root to: 'location#start'
-  end
-
-  scope module: 'result_filters', path: '/start' do
-    get 'subject', to: 'subject#start', as: 'start_subject'
   end
 
   get '/terms-conditions', to: 'pages#terms', as: 'terms'

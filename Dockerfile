@@ -7,7 +7,7 @@ RUN apk add --update --no-cache tzdata && \
     echo "Europe/London" > /etc/timezone
 
 RUN apk add --update --no-cache --virtual runtime-dependances \
-    yarn shared-mime-info
+    yarn shared-mime-info git
 
 WORKDIR /app
 
