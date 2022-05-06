@@ -165,16 +165,5 @@ describe 'results', type: :feature do
       expect(results_page.funding_filter.checkbox.checked?).to be(false)
       expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
     end
-
-    it 'transmits translated subject codes to BigQuery' do
-      FeatureFlag.activate(:send_web_requests_to_big_query)
-      visit results_path(params)
-
-      bq_event = enqueued_jobs.first['arguments'].first
-      subject_codes = bq_event['request_query'].find { |q| q['key'] == 'subject_codes[]' }
-
-      expect(subject_codes).to be_present
-      expect(subject_codes['value']).to eq %w[C1 08 F1]
-    end
   end
 end

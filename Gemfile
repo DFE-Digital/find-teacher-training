@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.5'
 
@@ -89,8 +88,7 @@ gem 'skylight'
 gem 'view_component'
 gem 'govuk-components', '~> 3.0.3'
 
-# Data integration with BigQuery
-gem 'google-cloud-bigquery'
+gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v0.1.0'
 
 # For outgoing http requests
 gem 'http'
