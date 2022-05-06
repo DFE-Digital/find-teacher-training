@@ -491,8 +491,8 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-cron (1.3.0)
-      fugit (>= 1.1)
+    sidekiq-cron (1.4.0)
+      fugit (~> 1)
       sidekiq (>= 4.2.1)
     signet (0.16.1)
       addressable (~> 2.8)
@@ -611,7 +611,7 @@ DEPENDENCIES
   sentry-rails
   sentry-sidekiq
   sidekiq
-  sidekiq-cron (~> 1.3)
+  sidekiq-cron (~> 1.4)
   simplecov (< 0.18)
   site_prism
   skylight
