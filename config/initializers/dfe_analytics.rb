@@ -21,7 +21,7 @@ DfE::Analytics.configure do |config|
   # https://cloud.google.com/bigquery/docs/authentication/service-account-file
   #
   # config.bigquery_api_json_key = ENV['BIGQUERY_API_JSON_KEY']
-  config.bigquery_api_json_key = ENV['BIG_QUERY_API_JSON_KEY']
+  config.bigquery_api_json_key = ENV.fetch('BIG_QUERY_API_JSON_KEY', nil)
 
   # A proc which returns true or false depending on whether you want to
   # enable analytics. You might want to hook this up to a feature flag or

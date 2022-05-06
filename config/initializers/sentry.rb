@@ -1,7 +1,7 @@
 # https://docs.sentry.io/clients/ruby/config
 Sentry.init do |config|
   config.environment = Rails.env
-  config.release = ENV['SHA']
+  config.release = ENV.fetch('SHA', nil)
 
   # > Inspect an incoming exception's causes when determining whether or not that
   # exception should be excluded
