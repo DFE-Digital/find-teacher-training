@@ -7,7 +7,7 @@ class SwitcherController < ApplicationController
   def update
     new_cycle = params[:change_cycle_form][:cycle_schedule_name]
     SiteSetting.set(name: 'cycle_schedule', value: new_cycle)
-    flash[:success] = 'Cycle schedule updated'
+    flash[:success] = I18n.t('cycles.updated')
     redirect_to cycles_path
   end
 
