@@ -15,7 +15,7 @@ class HeartbeatController < ActionController::API
   end
 
   def sha
-    render json: { sha: ENV['SHA'] }
+    render json: { sha: ENV.fetch('SHA', nil) }
   end
 
 private
