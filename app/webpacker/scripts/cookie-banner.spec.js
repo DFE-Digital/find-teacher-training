@@ -12,11 +12,11 @@ import CookieBanner from './cookie-banner'
 import {checkConsentedToCookieExists} from './cookie-helper'
 
 const templateHTML = `
-<div class="govuk-cookie-banner" role="region" aria-label="Cookies on Find postgraduate teacher training" data-module="govuk-cookie-banner" data-qa="cookie-banner">
+<div class="govuk-cookie-banner" role="region" aria-label="Cookies on Find teacher training courses" data-module="govuk-cookie-banner" data-qa="cookie-banner">
   <div class="govuk-cookie-banner__message govuk-width-container" hidden="hidden" data-module="govuk-cookie-banner-choice-message" data-qa="cookie-banner-choice-message">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-cookie-banner__heading">Cookies on Find postgraduate teacher training</h2>
+        <h2 class="govuk-cookie-banner__heading">Cookies on Find teacher training courses</h2>
         <div class="govuk-cookie-banner__content">
           <p>We use some essential cookies to make this service work.</p>
           <p>We’d also like to use analytics cookies so we can understand how you use the service and make improvements.</p>
@@ -34,7 +34,7 @@ const templateHTML = `
   <div class="govuk-cookie-banner__message govuk-width-container" hidden="hidden" data-module="govuk-cookie-banner-confirmation-message" data-qa="cookie-banner-confirmation-message">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-cookie-banner__heading">Cookies on Find postgraduate teacher training</h2>
+        <h2 class="govuk-cookie-banner__heading">Cookies on Find teacher training courses</h2>
         <div class="govuk-cookie-banner__content">
           <p>
             You’ve
@@ -55,7 +55,7 @@ const templateHTML = `
   <div class="govuk-cookie-banner__message govuk-width-container" data-module="govuk-cookie-banner-fallback-message" data-qa="cookie-banner-fallback-message">
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
-        <h2 class="govuk-cookie-banner__heading">Cookies on Find postgraduate teacher training</h2>
+        <h2 class="govuk-cookie-banner__heading">Cookies on Find teacher training courses</h2>
         <div class="govuk-cookie-banner__content">
           <p>We use cookies to make this service work and collect analytics information. To accept or reject cookies, turn on JavaScript in your browser settings or reload this page.</p>
         </div>

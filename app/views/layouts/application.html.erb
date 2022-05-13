@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="govuk-template">
   <head>
-    <title><%= content_for(:page_title) %> - Find postgraduate teacher training - GOV.UK</title>
+    <title><%= content_for(:page_title) %> - Find teacher training courses - GOV.UK</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= canonical_tag %>
@@ -25,7 +25,7 @@
     </script>
 
     <% unless current_page?(cookie_preferences_path) %>
-      <% heading_text = 'Cookies on Find postgraduate teacher training' %>
+      <% heading_text = 'Cookies on Find teacher training courses' %>
       <%= govuk_cookie_banner(
         html_attributes: {
           aria: {
@@ -88,7 +88,7 @@
     <%= govuk_skip_link %>
 
     <%= govuk_header(
-      service_name: 'Find postgraduate teacher training',
+      service_name: 'Find teacher training courses',
       service_url: root_path,
       classes: "govuk-!-display-none-print app-header #{environment_header_class}",
     ) %>
@@ -100,7 +100,7 @@
           colour: environment_colour,
         },
       ) do %>
-        Give feedback or report a problem: <%= bat_contact_mail_to subject: 'Feedback about Find postgraduate teacher training', no_visited_state: true %>
+        Give feedback or report a problem: <%= bat_contact_mail_to subject: 'Feedback about Find teacher training courses', no_visited_state: true %>
       <% end %>
 
       <%= yield(:before_content) %>

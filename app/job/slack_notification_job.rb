@@ -25,7 +25,7 @@ private
     end
 
     payload = {
-      username: 'Find postgraduate teacher training',
+      username: 'Find teacher training courses',
       channel: slack_channel,
       text: slack_message,
       mrkdwn: true,

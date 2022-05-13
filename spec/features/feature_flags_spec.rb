@@ -87,7 +87,7 @@ RSpec.describe 'Feature flags', type: :feature do
   def stub_activate_slack_notification_job
     stub_request(:post, 'https://example.com/webhook')
       .with(
-        body: '{"username":"Find postgraduate teacher training","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was activated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
+        body: '{"username":"Find teacher training courses","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was activated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
         headers: {
           'Connection' => 'close',
           'Host' => 'example.com',
@@ -100,7 +100,7 @@ RSpec.describe 'Feature flags', type: :feature do
   def stub_deactivate_slack_notification_job
     stub_request(:post, 'https://example.com/webhook')
       .with(
-        body: '{"username":"Find postgraduate teacher training","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was deactivated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
+        body: '{"username":"Find teacher training courses","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was deactivated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
         headers: {
           'Connection' => 'close',
           'Host' => 'example.com',
