@@ -86,7 +86,7 @@ gem 'skylight'
 
 # Allows the creation of components which encapsulate and test logic in views
 gem 'view_component'
-gem 'govuk-components', '~> 3.0.3'
+gem 'govuk-components', '~> 3.0.4'
 
 gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v0.1.0'
 
