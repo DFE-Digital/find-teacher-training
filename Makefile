@@ -95,6 +95,13 @@ staging: ## Set DEPLOY_ENV to staging
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
 	$(eval SPACE=bat-staging)
 
+.PHONY: rollover
+rollover: ## Set DEPLOY_ENV to rollover
+	$(eval DEPLOY_ENV=rollover)
+	$(eval env=rollover)
+	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
+	$(eval SPACE=bat-prod)
+
 .PHONY: production
 production: ## Set DEPLOY_ENV to production
 	$(if $(CONFIRM_PRODUCTION), , $(error Production can only run with CONFIRM_PRODUCTION))
@@ -148,7 +155,7 @@ edit-app-secrets: read-keyvault-config install-fetch-config ## Edit Find App Sec
 		-e -d azure-key-vault-secret:${key_vault_name}/${key_vault_app_secret_name} -f yaml -c
 
 .PHONY: edit-infra-secrets
-edit-infra-secrets: read-keyvault-config install-fetch-config 
+edit-infra-secrets: read-keyvault-config install-fetch-config
 	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} \
 		-e -d azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} -f yaml -c
 
@@ -157,7 +164,7 @@ print-app-secrets: read-keyvault-config install-fetch-config ## View Find App Se
 	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_app_secret_name} -f yaml
 
 .PHONY: print-infra-secrets
-print-infra-secrets: read-keyvault-config install-fetch-config 
+print-infra-secrets: read-keyvault-config install-fetch-config
 	bin/fetch_config.rb -s azure-key-vault-secret:${key_vault_name}/${key_vault_infra_secret_name} -f yaml
 
 .PHONY: console ## start a rails console, eg: make qa console
