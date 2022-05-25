@@ -84,21 +84,21 @@ review: ## Init review environment
 .PHONY: qa
 qa: ## Set DEPLOY_ENV to qa
 	$(eval DEPLOY_ENV=qa)
-	$(eval env=qa)
+	$(eval APP_ENV=qa)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-development)
 	$(eval SPACE=bat-qa)
 
 .PHONY: staging
 staging: ## Set DEPLOY_ENV to staging
 	$(eval DEPLOY_ENV=staging)
-	$(eval env=staging)
+	$(eval APP_ENV=staging)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
 	$(eval SPACE=bat-staging)
 
 .PHONY: rollover
 rollover: ## Set DEPLOY_ENV to rollover
 	$(eval DEPLOY_ENV=rollover)
-	$(eval env=rollover)
+	$(eval APP_ENV=rollover)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval SPACE=bat-prod)
 
@@ -106,7 +106,7 @@ rollover: ## Set DEPLOY_ENV to rollover
 production: ## Set DEPLOY_ENV to production
 	$(if $(CONFIRM_PRODUCTION), , $(error Production can only run with CONFIRM_PRODUCTION))
 	$(eval DEPLOY_ENV=production)
-	$(eval env=prod)
+	$(eval APP_ENV=prod)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval SPACE=bat-prod)
 	$(eval HOSTNAME=www)
@@ -114,7 +114,7 @@ production: ## Set DEPLOY_ENV to production
 .PHONY: sandbox
 sandbox: ## Set DEPLOY_ENV to production
 	$(eval DEPLOY_ENV=sandbox)
-	$(eval env=sandbox)
+	$(eval APP_ENV=sandbox)
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
 	$(eval SPACE=bat-prod)
 
@@ -170,7 +170,7 @@ print-infra-secrets: read-keyvault-config install-fetch-config
 .PHONY: console ## start a rails console, eg: make qa console
 console:
 	cf target -s ${SPACE}
-	cf ssh find-${env} -t -c "cd /app && /usr/local/bin/bundle exec rails c"
+	cf ssh find-${APP_ENV} -t -c "cd /app && /usr/local/bin/bundle exec rails c"
 
 .PHONY: destroy ## terraform destroy
 destroy: deploy-init
@@ -182,12 +182,12 @@ enable-maintenance: ## make qa enable-maintenance / make prod enable-maintenance
 	cd service_unavailable_page && cf push
 	cf map-route find-unavailable find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
 	echo Waiting 5s for route to be registered... && sleep 5
-	cf unmap-route find-${DEPLOY_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+	cf unmap-route find-${APP_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
 
 disable-maintenance: ## make qa disable-maintenance / make prod disable-maintenance CONFIRM_PRODUCTION=y
 	$(if $(HOSTNAME), $(eval REAL_HOSTNAME=${HOSTNAME}), $(eval REAL_HOSTNAME=${DEPLOY_ENV}))
 	cf target -s ${SPACE}
-	cf map-route find-${DEPLOY_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
+	cf map-route find-${APP_ENV} find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
 	echo Waiting 5s for route to be registered... && sleep 5
 	cf unmap-route find-unavailable find-postgraduate-teacher-training.service.gov.uk --hostname ${REAL_HOSTNAME}
 	cf delete -rf find-unavailable
