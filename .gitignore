@@ -56,3 +56,5 @@ terraform/**/*.base64
 
 # Cached Rubocop files
 .rubocop-https*
+
+/.vscode/*
