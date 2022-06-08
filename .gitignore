@@ -58,3 +58,6 @@ terraform/**/*.base64
 .rubocop-https*
 
 /.vscode/*
+
+# Redis
+dump.rdb

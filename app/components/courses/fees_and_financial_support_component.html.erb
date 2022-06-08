@@ -1,5 +1,10 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-financial-support">Fees and financial support</h2>
+
+  <% if has_fees? %>
+    <%= render Courses::FeesComponent.new(course) %>
+  <% end %>
+
   <%= render AdviceComponent.new(title: 'Financial support from the government') do %>
     <% if salaried? %>
       <%= render partial: 'courses/financial_support/salaried' %>
@@ -12,10 +17,6 @@
     <% else %>
       <%= render partial: 'courses/financial_support/loan' %>
     <% end %>
-  <% end %>
-
-  <% if has_fees? %>
-    <%= render Courses::FeesComponent.new(course) %>
   <% end %>
 
   <% if financial_support.present? %>
