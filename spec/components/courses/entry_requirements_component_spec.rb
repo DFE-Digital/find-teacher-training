@@ -29,7 +29,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
     end
   end
 
-  context 'when the provider requires grade 4 and the course is secondary' do
+  context 'when the provider requires grade 4 and the course is primary' do
     it 'renders correct message' do
       course = build(
         :course,
@@ -40,6 +40,9 @@ describe Courses::EntryRequirementsComponent, type: :component do
 
       expect(result.text).to include(
         'Grade 4 (C) or above in English, maths and science, or equivalent qualification.',
+      )
+      expect(result.text).not_to include(
+        "Your degree subject should be in #{course.name} or a similar subject. Otherwise you’ll need to prove your subject knowledge in some other way",
       )
     end
   end
@@ -55,6 +58,9 @@ describe Courses::EntryRequirementsComponent, type: :component do
 
       expect(result.text).to include(
         'Grade 5 (C) or above in English and maths, or equivalent qualification.',
+      )
+      expect(result.text).to include(
+        "Your degree subject should be in #{course.name} or a similar subject. Otherwise you’ll need to prove your subject knowledge in some other way",
       )
     end
 

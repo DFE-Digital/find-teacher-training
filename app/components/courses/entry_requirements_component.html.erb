@@ -12,6 +12,12 @@
       </p>
     <% end %>
 
+    <% if course.level == 'secondary' %>
+      <p class="govuk-body">
+        <%= secondary_advisory(course) %>
+      </p>
+    <% end %>
+
     <p class="govuk-body">
       <%= required_gcse_content(course) %>
     </p>

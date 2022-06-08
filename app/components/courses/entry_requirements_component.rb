@@ -32,6 +32,10 @@ module Courses
       end
     end
 
+    def secondary_advisory(course)
+      "Your degree subject should be in #{course.name} or a similar subject. Otherwise you’ll need to prove your subject knowledge in some other way."
+    end
+
     def pending_gcse_content(course)
       if course.accept_pending_gcse
         'We’ll consider candidates with pending GCSEs.'
