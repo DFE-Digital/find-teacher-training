@@ -244,11 +244,11 @@ jobs:
         id: deploy_app
         uses: ./.github/actions/deploy/
         with:
-          azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
           environment: production
           sha: ${{ github.sha }}
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
-          terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
+          terraform-state-access-key: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY_PRODUCTION }}
 
   deploy-after-production:
     name: Parallel deployment After production
