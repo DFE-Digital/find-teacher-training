@@ -202,28 +202,76 @@ jobs:
           ref: ${{ needs.build.outputs.image_tag }}
           env_url: ${{ steps.deploy_review.outputs.deploy-url }}
 
-  deploy_all:
-    name: Deployment To All
+  deploy-before-production:
+    name: Parallel deployment before production
     environment:
       name: ${{ matrix.environment }}
-      url: ${{ steps.deploy_app.outputs.deploy-url }}
+      url: ${{ steps.deploy_app_before_production.outputs.deploy-url }}
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [test]
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        environment: [qa,staging,production,sandbox,rollover]
-      max-parallel: 1
+        environment: [qa,staging]
     steps:
       - name: Checkout
         uses: actions/checkout@v3.0.2
 
-      - name: Deploy App to ${{ matrix.environment }}
-        id: deploy_app
+      - name: Deploy app to ${{ matrix.environment }}
+        id: deploy_app_before_production
         uses: ./.github/actions/deploy/
         with:
           azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
           environment: ${{ matrix.environment }}
-          sha: ${{ needs.test.outputs.image_tag }}
+          sha: ${{ github.sha }}
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+          terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
+
+  deploy-production:
+    name: Production deployment
+    environment:
+      name: production
+      url: ${{ steps.deploy_app.outputs.deploy-url }}
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [deploy-before-production]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+
+      - name: Deploy app to production
+        id: deploy_app
+        uses: ./.github/actions/deploy/
+        with:
+          azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
+          environment: production
+          sha: ${{ github.sha }}
+          slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
+          terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
+
+  deploy-after-production:
+    name: Parallel deployment After production
+    environment:
+      name: ${{ matrix.environment }}
+      url: ${{ steps.deploy_app_after_production.outputs.deploy-url }}
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [deploy-production]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        environment: [sandbox,rollover]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+
+      - name: Deploy app to ${{ matrix.environment }}
+        id: deploy_app_after_production
+        uses: ./.github/actions/deploy/
+        with:
+          azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
+          environment: ${{ matrix.environment }}
+          sha: ${{ github.sha }}
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
           terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
