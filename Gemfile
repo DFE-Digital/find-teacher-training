@@ -17,7 +17,7 @@ gem 'net-http-persistent'
 gem 'rails_semantic_logger'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0.2'
+gem 'rails', '~> 7.0.3'
 
 # Thread-safe global state
 gem 'request_store'
@@ -66,7 +66,7 @@ gem 'redis'
 gem 'sidekiq'
 
 # Scheduler for sidekiq
-gem 'sidekiq-cron', '~> 1.4'
+gem 'sidekiq-cron', '~> 1.5'
 
 # Calculate distance between two locations
 gem 'geokit'
