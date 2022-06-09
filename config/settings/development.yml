@@ -5,3 +5,5 @@ valid_referers:
 log_level: debug
 redis_url: redis://localhost:6379/0
 background_jobs: # scheduled jobs run on all environments except dev and test
+basic_auth_username: replace_me
+basic_auth_password: replace_me
