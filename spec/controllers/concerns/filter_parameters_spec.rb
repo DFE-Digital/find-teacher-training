@@ -18,7 +18,7 @@ RSpec.describe FilterParameters do
     end
   end
   let(:request) do
-    instance_double('request', method: verb, query_parameters: query_parameters, request_parameters: request_parameters)
+    instance_double(ActionDispatch::Request, method: verb, query_parameters: query_parameters, request_parameters: request_parameters)
   end
   let(:query_parameters) { {} }
   let(:request_parameters) { {} }
