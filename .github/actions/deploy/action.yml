@@ -106,11 +106,11 @@ runs:
         if-no-files-found: ignore
         retention-days: 7
 
-    - name: 'Notify #twd_apply_tech on failure'
+    - name: 'Notify #twd_findpub_tech on failure'
       if: failure() && inputs.pr == ''
       uses: rtCamp/action-slack-notify@master
       env:
-        SLACK_CHANNEL: twd_apply_tech
+        SLACK_CHANNEL: twd_findpub_tech
         SLACK_COLOR: '#ef5343'
         SLACK_ICON_EMOJI: ':sad-beaver:'
         SLACK_USERNAME: Find Teacher Training

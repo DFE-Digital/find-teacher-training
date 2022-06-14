@@ -18,7 +18,7 @@ private
   def post_to_slack(text)
     if HostingEnvironment.production?
       slack_message = text
-      slack_channel = '#twd_apply_tech'
+      slack_channel = '#twd_findpub_tech'
     else
       slack_message = "[#{HostingEnvironment.environment_name.upcase}] #{text}"
       slack_channel = '#twd_apply_test'
