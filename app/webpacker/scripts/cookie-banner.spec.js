@@ -101,13 +101,6 @@ describe('CookieBanner', () => {
       expect(banner.$cookieBannerModule.hidden).toBeFalsy()
       expect(banner.$fallbackMessageModule.hidden).toBeTruthy()
     })
-
-    it('hides the cookie banner if user has already consented/rejected', () => {
-      checkConsentedToCookieExists.mockImplementationOnce(() => true );
-      const banner = new CookieBanner()
-
-      expect(banner.$cookieBannerModule.hidden).toBeTruthy()
-    })
   })
 
   describe('acceptCookie', () => {
