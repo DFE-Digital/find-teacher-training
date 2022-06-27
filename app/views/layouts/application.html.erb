@@ -24,7 +24,7 @@
       document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
-    <% unless current_page?(cookie_preferences_path) %>
+    <% unless hide_cookie_banner? %>
       <% heading_text = 'Cookies on Find postgraduate teacher training' %>
       <%= govuk_cookie_banner(
         html_attributes: {
