@@ -1,7 +1,7 @@
 <h2 class="govuk-heading-m">Contents</h2>
 <ul class="govuk-list app-list--dash course-contents govuk-!-margin-bottom-8">
   <% if about_course.present? %>
-    <li><%= govuk_link_to 'About the course', '#section-about' %></li>
+    <li><%= govuk_link_to 'Course summary', '#section-about' %></li>
   <% end %>
   <% if how_school_placements_work.present? || program_type == 'higher_education_programme' || program_type == 'scitt_programme' %>
     <li><%= govuk_link_to course.placements_heading, '#section-schools' %></li>
