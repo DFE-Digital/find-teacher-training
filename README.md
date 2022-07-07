@@ -28,6 +28,21 @@ The `.tool-version` file in the root of the repository is used to specify the ru
 2. Run `yarn` to install node dependencies
 3. Run `bundle exec rails server` to launch the app on http://localhost:3002
 
+## Running against a local version of Publish teacher training courses
+
+By default, in development mode Find will pull course data from the live
+Publish service.
+
+To pull course data from a local copy of Publish, create a file at
+`config/settings/development.local.yml` with the following contents:
+
+```yaml
+teacher_training_api:
+  base_url: http://localhost:3001 # this is the default Publish port
+```
+
+(Git will ignore this file.)
+
 ## Running specs, linter(without auto correct) and annotate models and serializers
 
 ```
