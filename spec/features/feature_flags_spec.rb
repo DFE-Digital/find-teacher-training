@@ -88,11 +88,6 @@ RSpec.describe 'Feature flags', type: :feature do
     stub_request(:post, 'https://example.com/webhook')
       .with(
         body: '{"username":"Find postgraduate teacher training","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was activated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
-        headers: {
-          'Connection' => 'close',
-          'Host' => 'example.com',
-          'User-Agent' => 'http.rb/5.0.4',
-        },
       )
       .to_return(status: 200, body: '', headers: {})
   end
@@ -101,11 +96,6 @@ RSpec.describe 'Feature flags', type: :feature do
     stub_request(:post, 'https://example.com/webhook')
       .with(
         body: '{"username":"Find postgraduate teacher training","channel":"#twd_apply_test","text":"[TEST] \\u003c/feature-flags|:flags: Feature ‘test_feature‘ was deactivated\\u003e","mrkdwn":true,"icon_emoji":":livecanary:"}',
-        headers: {
-          'Connection' => 'close',
-          'Host' => 'example.com',
-          'User-Agent' => 'http.rb/5.0.4',
-        },
       )
       .to_return(status: 200, body: '', headers: {})
   end
