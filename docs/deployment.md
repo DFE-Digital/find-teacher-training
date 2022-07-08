@@ -67,11 +67,11 @@ SETTINGS__GOOGLE__MAPS_API_KEY:
 SETTINGS__SKYLIGHT_AUTH_TOKEN:
 ```
 ### Download and install terraform
-The project uses terraform 0.14.11, [download](https://www.terraform.io/downloads.html) and verify you have the correct terraform version configured.
-Please make sure you are on `0.14.11`, if not there is a chance the state file could get corrupted.
+The project uses terraform 1.2.3, [download](https://www.terraform.io/downloads.html) and verify you have the correct terraform version configured.
+Please make sure you are on `1.2.3`, if not there is a chance the state file could get corrupted.
 Download and install on Linux machines:
 ```sh
-	wget -qO terraform.zip https://releases.hashicorp.com/terraform/0.14.11/terraform_0.14.11_linux_amd64.zip
+	wget -qO terraform.zip https://releases.hashicorp.com/terraform/1.2.3/terraform_1.2.3_linux_amd64.zip
 	sudo unzip -o terraform.zip -d /usr/local/bin
 	terraform version
 ```

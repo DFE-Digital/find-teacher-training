@@ -1,9 +1,9 @@
 terraform {
-  required_version = "~> 0.14.11"
+  required_version = "~> 1.2.3"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "2.45.1"
+      version = "3.12.0"
     }
     cloudfoundry = {
       source  = "cloudfoundry-community/cloudfoundry"
