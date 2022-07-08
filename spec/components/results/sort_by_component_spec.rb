@@ -44,8 +44,8 @@ describe Results::SortByComponent, type: :component do
       provider_filter?: false,
       no_results_found?: false,
       sort_options: [
-        ['Training provider (A-Z)', 0, { "data-qa": 'sort-form__options__ascending' }],
-        ['Training provider (Z-A)', 1, { "data-qa": 'sort-form__options__descending' }],
+        ['Training provider (A-Z)', 0, { 'data-qa': 'sort-form__options__ascending' }],
+        ['Training provider (Z-A)', 1, { 'data-qa': 'sort-form__options__descending' }],
       ],
     )
     component = render_inline(described_class.new(results: results_view))

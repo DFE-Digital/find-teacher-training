@@ -15,7 +15,7 @@ RSpec.describe Base do
           },
         ).to_return(status: 200, body: '', headers: {})
 
-      Base.new.save
+      described_class.new.save
 
       expect(stub).to have_been_requested
     end

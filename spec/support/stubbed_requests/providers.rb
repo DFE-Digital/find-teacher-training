@@ -5,7 +5,7 @@ module StubbedRequests
         .with(query: query)
         .to_return(
           body: File.new('spec/fixtures/api_responses/empty_providers.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
 
@@ -14,7 +14,7 @@ module StubbedRequests
         .with(query: query)
         .to_return(
           body: File.new('spec/fixtures/api_responses/one_provider.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
 
@@ -23,7 +23,7 @@ module StubbedRequests
         .with(query: query)
         .to_return(
           body: File.new('spec/fixtures/api_responses/providers.json'),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
 

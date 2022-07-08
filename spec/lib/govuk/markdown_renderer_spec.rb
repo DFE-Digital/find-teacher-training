@@ -6,7 +6,7 @@ def expect_equal_ignoring_ws(first, second)
 end
 
 describe Govuk::MarkdownRenderer do
-  let(:html) { Govuk::MarkdownRenderer.render(markdown) }
+  let(:html) { described_class.render(markdown) }
 
   describe 'ul' do
     let(:markdown) do

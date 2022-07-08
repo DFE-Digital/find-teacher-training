@@ -12,7 +12,7 @@ describe '/results', type: :request do
 
     it 'returns success (200)' do
       get '/results'
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 
@@ -26,7 +26,7 @@ describe '/results', type: :request do
 
     it 'returns unprocessable entity (422)' do
       get '/results'
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(:unprocessable_entity)
     end
   end
 end

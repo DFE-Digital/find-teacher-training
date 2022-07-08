@@ -6,7 +6,7 @@ module StubbedRequests
         .with(query: query)
         .to_return(
           body: File.new("spec/fixtures/api_responses/#{fixture_file}"),
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
 

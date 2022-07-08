@@ -1,7 +1,10 @@
+inherit_from:
+  - .rubocop_todo.yml
+  - ./config/rubocop/apply/.rubocop.yml
+
 # Fetch the latest Apply config by running rake rubocop:copy_config_from_apply
 # Add overrides in this file
-inherit_from:
-  - ./config/rubocop/apply/.rubocop.yml
+
 
 # Disabled because this project doesn’t use GOV.UK Design System Form Builder
 Govuk/GovukSubmit:

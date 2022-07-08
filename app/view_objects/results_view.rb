@@ -153,8 +153,8 @@ class ResultsView
 
   def sort_options
     [
-      ['Training provider (A-Z)', 0, { "data-qa": 'sort-form__options__ascending' }],
-      ['Training provider (Z-A)', 1, { "data-qa": 'sort-form__options__descending' }],
+      ['Training provider (A-Z)', 0, { 'data-qa': 'sort-form__options__ascending' }],
+      ['Training provider (Z-A)', 1, { 'data-qa': 'sort-form__options__descending' }],
     ]
   end
 
@@ -166,8 +166,8 @@ class ResultsView
                      base_query.order(:distance)
                    else
                      base_query
-                       .order("provider.provider_name": results_order)
-                       .order("name": results_order)
+                       .order('provider.provider_name': results_order)
+                       .order(name: results_order)
                    end
 
       base_query

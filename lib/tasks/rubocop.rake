@@ -26,8 +26,8 @@ namespace :rubocop do
       system 'touch .rubocop_todo.yml' # we don’t care about Apply’s version, but Rubocop will expect this file to be present
 
       apply_config = YAML.load_file('.rubocop.yml')
-      config_files = apply_config['inherit_from'].reject { |file| file.match(%r{rubocop_todo.yml}) }
-      deps_files = apply_config['require'].select { |dep| dep.match(%r{^\.}) }
+      config_files = apply_config['inherit_from'].reject { |file| file.match(/rubocop_todo.yml/) }
+      deps_files = apply_config['require'].select { |dep| dep.match(/^\./) }
 
       (config_files + deps_files).each do |file|
         puts "Getting #{file}"
