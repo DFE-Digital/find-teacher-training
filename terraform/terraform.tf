@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 0.13.3"
+  required_version = "~> 0.14.11"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -10,15 +10,15 @@ terraform {
       version = "0.12.6"
     }
     statuscake = {
-      source  = "terraform-providers/statuscake"
-      version = "1.0.0"
+      source  = "StatusCakeDev/statuscake"
+      version = "1.0.1"
     }
   }
-  backend azurerm {
+  backend "azurerm" {
   }
 }
 
-provider azurerm {
+provider "azurerm" {
   features {}
 
   skip_provider_registration = true
@@ -28,7 +28,7 @@ provider azurerm {
   tenant_id                  = try(local.azure_credentials.tenantId, null)
 }
 
-module paas {
+module "paas" {
   source = "./modules/paas"
 
   cf_api_url                = local.cf_api_url
@@ -49,12 +49,12 @@ module paas {
   app_environment_variables = local.paas_app_environment_variables
 }
 
-provider statuscake {
+provider "statuscake" {
   username = local.infra_secrets.STATUSCAKE_USERNAME
   apikey   = local.infra_secrets.STATUSCAKE_PASSWORD
 }
 
-module statuscake {
+module "statuscake" {
   source = "./modules/statuscake"
 
   alerts = var.statuscake_alerts
