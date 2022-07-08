@@ -772,8 +772,8 @@ describe ResultsView do
       it {
         expect(results_view).to eq(
           [
-            ['Training provider (A-Z)', 0, { "data-qa": 'sort-form__options__ascending' }],
-            ['Training provider (Z-A)', 1, { "data-qa": 'sort-form__options__descending' }],
+            ['Training provider (A-Z)', 0, { 'data-qa': 'sort-form__options__ascending' }],
+            ['Training provider (Z-A)', 1, { 'data-qa': 'sort-form__options__descending' }],
           ],
         )
       }
@@ -838,7 +838,7 @@ describe ResultsView do
         .with(query: results_page_parameters)
         .to_return(
           body: { meta: { count: count } }.to_json,
-          headers: { "Content-Type": 'application/vnd.api+json; charset=utf-8' },
+          headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
 

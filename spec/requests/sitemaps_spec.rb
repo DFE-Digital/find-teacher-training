@@ -43,7 +43,7 @@ describe '/sitemap.xml', type: :request do
   end
 
   it 'renders sitemap' do
-    expect(response).to have_http_status(200)
+    expect(response).to have_http_status(:ok)
     expect(response.body).to eq(
       <<~XML,
         <?xml version="1.0" encoding="UTF-8"?>

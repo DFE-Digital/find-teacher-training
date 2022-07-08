@@ -9,12 +9,12 @@ RSpec.describe TeacherTrainingPublicAPI::SyncAllProviders do
     it 'calls TeacherTrainingPublicAPI::ProvidersCache and TeacherTrainingPublicAPI::SyncCheck' do
       cached_provider_data = [
         {
-          "name": 'Working together',
-          "code": '26F',
+          name: 'Working together',
+          code: '26F',
         },
         {
-          "name": 'Worlingham Church of England Voluntary Controlled Primary School',
-          "code": '1ZT',
+          name: 'Worlingham Church of England Voluntary Controlled Primary School',
+          code: '1ZT',
         },
       ]
 

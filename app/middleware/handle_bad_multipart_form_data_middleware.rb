@@ -8,10 +8,8 @@ class HandleBadMultipartFormDataMiddleware
   end
 
   def call(env)
-    begin
-      @app.call(env)
-    rescue EOFError
-      [400, { 'Content-Type' => 'text/plain' }, ['Bad Request']]
-    end
+    @app.call(env)
+  rescue EOFError
+    [400, { 'Content-Type' => 'text/plain' }, ['Bad Request']]
   end
 end

@@ -12,7 +12,7 @@ class ProviderDecorator < Draper::Decorator
   def website
     return if object.website.blank?
 
-    object.website.start_with?('http') ? object.website : ('http://' + object.website)
+    object.website.start_with?('http') ? object.website : "http://#{object.website}"
   end
 
 private

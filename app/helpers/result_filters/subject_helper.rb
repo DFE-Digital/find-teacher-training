@@ -3,10 +3,10 @@ module ResultFilters
     include FilterParameters
 
     def subject_is_selected?(subject_code:)
-      if !params['subject_codes']&.length.nil?
-        subject_code.in?(params['subject_codes'])
-      else
+      if params['subject_codes']&.length.nil?
         false
+      else
+        subject_code.in?(params['subject_codes'])
       end
     end
 
