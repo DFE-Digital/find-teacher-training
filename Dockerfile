@@ -37,7 +37,7 @@ RUN apk add --update --no-cache tzdata && \
     echo "Europe/London" > /etc/timezone
 
 # Remove once base image ruby:2.7.5-alpine3.15 has been updated with latest libssl1.1 and libcrypto1.1
-RUN apk add --no-cache libcrypto1.1=1.1.1q-r0 libssl1.1=1.1.1q-r0
+RUN apk add --no-cache libcrypto1.1=1.1.1q-r0 libssl1.1=1.1.1q-r0 ncurses-terminfo-base=6.3_p20211120-r1
 
 COPY --from=base-image ${FREEDESKTOP_MIME_TYPES_PATH} ${FREEDESKTOP_MIME_TYPES_PATH}
 COPY --from=base-image /app /app
