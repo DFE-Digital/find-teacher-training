@@ -31,8 +31,6 @@
 
 <h2 class="govuk-heading-m">Deadlines</h2>
 
-<p class="govuk-body">(Today is <%= Time.zone.today.to_formatted_s(:govuk_date) %>)</p>
-
 <%= render Utility::SummaryListComponent.new(rows: {
   'Apply 1 deadline' => CycleTimetable.apply_1_deadline.to_formatted_s(:govuk_date),
   'Apply 2 deadline' => CycleTimetable.apply_2_deadline.to_formatted_s(:govuk_date),
