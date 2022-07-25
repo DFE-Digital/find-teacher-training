@@ -4,14 +4,13 @@
   <%= form_with model: ChangeCycleForm.new, url: switch_cycle_schedule_path, method: :post do |f| %>
     <%= f.govuk_radio_buttons_fieldset :cycle_schedule_name,
       legend: { text: 'Current point in the recruitment cycle' } do %>
-
       <%= f.govuk_radio_button :cycle_schedule_name, 'real', label: { text: t('cycles.real.name') }, hint: { text: t('cycles.real.description') } %>
-
       <%= f.govuk_radio_divider %>
-
-      <% (CycleTimetable.fake_point_in_recruitment_cycle.map(&:to_s) - %w[real]).each_with_index do |option, i | %>
-        <%= f.govuk_radio_button :cycle_schedule_name, option, label: { text: t("cycles.#{option}.name") }, hint: { text: t("cycles.#{option}.description") }, link_errors: i.zero? %>
-      <% end %>
+      <%= f.govuk_radio_button :cycle_schedule_name, 'today_is_mid_cycle', label: { text: t('cycles.today_is_mid_cycle.name') }, hint: { text:  hint_text_for_mid_cycle } %>
+      <%= f.govuk_radio_button :cycle_schedule_name, 'today_is_after_apply_1_deadline_passed', label: { text: t('cycles.today_is_after_apply_1_deadline_passed.name') }, hint: { text:  hint_text_for_after_apply_1_deadline_passed } %>
+      <%= f.govuk_radio_button :cycle_schedule_name, 'today_is_after_apply_2_deadline_passed', label: { text: t('cycles.today_is_after_apply_2_deadline_passed.name') }, hint: { text:  hint_text_for_after_apply_2_deadline_passed } %>
+      <%= f.govuk_radio_button :cycle_schedule_name, 'today_is_after_find_closes', label: { text: t('cycles.today_is_after_find_closes.name') }, hint: { text:  hint_text_for_today_is_after_find_closes } %>
+      <%= f.govuk_radio_button :cycle_schedule_name, 'today_is_after_find_opens', label: { text: t('cycles.today_is_after_find_opens.name') }, hint: { text:  hint_text_for_today_is_after_find_opens } %>
     <% end %>
 
     <%= f.govuk_submit 'Update point in recruitment cycle' %>
