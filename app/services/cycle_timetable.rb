@@ -148,79 +148,14 @@ class CycleTimetable
     CYCLE_DATES[year]
   end
 
-  def self.fake_schedules
-    {
-      today_is_mid_cycle: {
-        current_year => {
-          find_opens: 7.days.ago,
-          apply_opens: 6.days.ago,
-          first_deadline_banner: 1.day.ago,
-          apply_1_deadline: 1.day.from_now,
-          apply_2_deadline: 2.days.from_now,
-          find_closes: 3.days.from_now,
-        },
-        next_year => {
-          find_opens: 6.days.from_now,
-          apply_opens: 7.days.from_now,
-        },
-      },
-      today_is_after_apply_1_deadline_passed: {
-        current_year => {
-          find_opens: 7.days.ago,
-          apply_opens: 6.days.ago,
-          first_deadline_banner: 3.days.ago,
-          apply_1_deadline: 1.day.ago,
-          apply_2_deadline: 2.days.from_now,
-          find_closes: 3.days.from_now,
-        },
-        next_year => {
-          find_opens: 6.days.from_now,
-          apply_opens: 7.days.from_now,
-        },
-      },
-      today_is_after_apply_2_deadline_passed: {
-        current_year => {
-          find_opens: 7.days.ago,
-          apply_opens: 6.days.ago,
-          first_deadline_banner: 4.days.ago,
-          apply_1_deadline: 3.days.ago,
-          apply_2_deadline: 1.day.ago,
-          find_closes: 1.day.from_now,
-        },
-        next_year => {
-          find_opens: 6.days.from_now,
-          apply_opens: 7.days.from_now,
-        },
-      },
-      today_is_after_find_closes: {
-        current_year => {
-          find_opens: 7.days.ago,
-          apply_opens: 6.days.ago,
-          first_deadline_banner: 5.days.ago,
-          apply_1_deadline: 4.days.ago,
-          apply_2_deadline: 2.days.ago,
-          find_closes: 1.day.ago,
-        },
-        next_year => {
-          find_opens: 6.days.from_now,
-          apply_opens: 7.days.from_now,
-        },
-      },
-      today_is_after_find_opens: {
-        current_year => {
-          find_opens: 9.days.ago,
-          apply_opens: 8.days.from_now,
-          first_deadline_banner: 7.days.ago,
-          apply_1_deadline: 6.days.ago,
-          apply_2_deadline: 5.days.ago,
-          find_closes: 4.days.ago,
-        },
-        next_year => {
-          find_opens: 1.day.ago,
-          apply_opens: 2.days.from_now,
-        },
-      },
-    }
+  def self.fake_point_in_recruitment_cycle
+    %i[
+      today_is_mid_cycle
+      today_is_after_apply_1_deadline_passed
+      today_is_after_apply_2_deadline_passed
+      today_is_after_find_closes
+      today_is_after_find_opens
+    ]
   end
 
   private_class_method :last_recruitment_cycle_year?
