@@ -47,7 +47,7 @@ class CycleTimetable
     end
 
     # If the cycle switcher has been set to 'find has reopened' then
-    # we want request next year's courses from the TTAPI
+    # we want to request next year's courses from the TTAPI
     if SiteSetting.cycle_schedule == :today_is_after_find_opens
       current_year + 1
     else
@@ -92,6 +92,8 @@ class CycleTimetable
   end
 
   def self.find_down?
+    return true if current_cycle_schedule == :today_is_after_find_closes
+
     Time.zone.now.between?(find_closes, find_reopens)
   end
 
@@ -102,25 +104,25 @@ class CycleTimetable
   end
 
   def self.show_apply_1_deadline_banner?
+    return true if current_cycle_schedule == :today_is_mid_cycle
+
     Time.zone.now.between?(first_deadline_banner, apply_1_deadline)
   end
 
   def self.show_apply_2_deadline_banner?
+    return true if current_cycle_schedule == :today_is_after_apply_1_deadline_passed
+
     Time.zone.now.between?(apply_1_deadline, apply_2_deadline)
   end
 
   def self.show_cycle_closed_banner?
+    return true if current_cycle_schedule == :today_is_after_apply_2_deadline_passed
+
     Time.zone.now.between?(apply_2_deadline, find_closes)
   end
 
   def self.date(name, year = current_year)
-    schedule = if current_cycle_schedule == :real
-                 real_schedule_for(year)
-               else
-                 fake_schedules.fetch(current_cycle_schedule).fetch(year)
-               end
-
-    schedule.fetch(name)
+    real_schedule_for(year).fetch(name)
   end
 
   def self.last_recruitment_cycle_year?(year)
