@@ -495,7 +495,7 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
-    sidekiq-cron (1.6.0)
+    sidekiq-cron (1.7.0)
       fugit (~> 1)
       sidekiq (>= 4.2.1)
     signet (0.17.0)
@@ -525,7 +525,7 @@ GEM
     timecop (0.9.5)
     timeout (0.3.0)
     trailblazer-option (0.1.2)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     uber (0.1.0)
     unf (0.1.4)
@@ -616,7 +616,7 @@ DEPENDENCIES
   sentry-rails
   sentry-sidekiq
   sidekiq
-  sidekiq-cron (~> 1.6)
+  sidekiq-cron (~> 1.7)
   simplecov (< 0.18)
   site_prism
   skylight
