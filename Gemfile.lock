@@ -263,7 +263,7 @@ GEM
       html-attributes-utils (~> 0.9.0)
       railties (>= 6.1)
       view_component (~> 2.49.1)
-    govuk_design_system_formbuilder (3.1.0)
+    govuk_design_system_formbuilder (3.1.1)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -350,7 +350,7 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
-    nokogiri (1.13.7)
+    nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     os (1.1.4)
@@ -585,7 +585,7 @@ DEPENDENCIES
   geocoder
   geokit
   govuk-components (~> 3.0.6)
-  govuk_design_system_formbuilder (~> 3.1.0)
+  govuk_design_system_formbuilder (~> 3.1.1)
   http
   json-schema
   json_api_client
