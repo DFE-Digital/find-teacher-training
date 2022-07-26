@@ -16,6 +16,6 @@ module CurrentPointInRecruitmentCycleHelper
   end
 
   def hint_text_for_today_is_after_find_opens
-    "#{I18n.t('cycles.today_is_after_find_opens.description')} (#{CycleTimetable.find_opens.next_year.to_formatted_s(:govuk_date)})"
+    "#{I18n.t('cycles.today_is_after_find_opens.description')} (#{CycleTimetable.find_reopens.to_formatted_s(:govuk_date)})"
   end
 end
