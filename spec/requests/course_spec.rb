@@ -8,7 +8,7 @@ describe '/course', type: :request do
 
       get '/course/fonts/Roboto-Regular.ttf'
 
-      expect(response.status).to eq(404)
+      expect(response).to have_http_status(:not_found)
       expect(response.media_type).to eq('text/html')
     end
   end
