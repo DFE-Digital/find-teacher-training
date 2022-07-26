@@ -12,22 +12,22 @@ class DeadlineBannerComponent < ViewComponent::Base
 private
 
   def apply_1_deadline
-    CycleTimetable.apply_1_deadline.to_formatted_s(:govuk_date_and_time)
+    CycleTimetable.apply_1_deadline.to_fs(:govuk_date_and_time)
   end
 
   def apply_2_deadline
-    CycleTimetable.apply_2_deadline.to_formatted_s(:govuk_date_and_time)
+    CycleTimetable.apply_2_deadline.to_fs(:govuk_date_and_time)
   end
 
   def find_opens
-    CycleTimetable.find_opens.to_formatted_s(:month_and_year)
+    CycleTimetable.find_opens.to_fs(:month_and_year)
   end
 
   def find_reopens
-    CycleTimetable.find_reopens.to_formatted_s(:govuk_date_and_time)
+    CycleTimetable.find_reopens.to_fs(:govuk_date_and_time)
   end
 
   def apply_reopens
-    CycleTimetable.apply_reopens.to_formatted_s(:govuk_date_and_time)
+    CycleTimetable.apply_reopens.to_fs(:govuk_date_and_time)
   end
 end

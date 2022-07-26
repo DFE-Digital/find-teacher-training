@@ -24,7 +24,7 @@ RSpec.describe 'Cycle switcher', type: :feature do
     click_button 'Update point in recruitment cycle'
     visit root_path
 
-    expect(page).to have_text("If you’re applying for the first time since applications opened in #{CycleTimetable.find_opens.to_formatted_s(:month_and_year)}")
+    expect(page).to have_text("If you’re applying for the first time since applications opened in #{CycleTimetable.find_opens.to_fs(:month_and_year)}")
   end
 
   it "shows the 'cycle has closed' banner" do
