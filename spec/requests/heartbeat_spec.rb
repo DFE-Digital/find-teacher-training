@@ -34,7 +34,7 @@ describe 'heartbeat requests', type: :request do
       end
 
       it 'returns HTTP success' do
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status(:ok)
       end
 
       it 'returns JSON' do
@@ -56,7 +56,7 @@ describe 'heartbeat requests', type: :request do
       end
 
       it 'returns status service_unavailable' do
-        expect(response.status).to eq(503)
+        expect(response).to have_http_status(:service_unavailable)
       end
 
       it 'returns the expected response report' do
@@ -74,7 +74,7 @@ describe 'heartbeat requests', type: :request do
       end
 
       it 'returns status service_unavailable' do
-        expect(response.status).to eq(503)
+        expect(response).to have_http_status(:service_unavailable)
       end
 
       it 'returns the expected response report' do
@@ -92,7 +92,7 @@ describe 'heartbeat requests', type: :request do
       end
 
       it 'returns status service_unavailable' do
-        expect(response.status).to eq(503)
+        expect(response).to have_http_status(:service_unavailable)
       end
 
       it 'returns the expected response report' do

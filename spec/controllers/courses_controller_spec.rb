@@ -46,7 +46,7 @@ RSpec.describe CoursesController do
 
       it 'redirects to the not found page' do
         get :apply, params: { provider_code: course.provider_code, course_code: course.course_code }
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end

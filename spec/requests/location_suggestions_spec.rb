@@ -7,7 +7,7 @@ describe '/location-suggestions', type: :request do
     it 'returns bad request (400)' do
       get '/location-suggestions'
 
-      expect(response.status).to eq(400)
+      expect(response).to have_http_status(:bad_request)
       expect(JSON.parse(response.body)).to eq('error' => 'Bad request')
     end
   end
@@ -19,7 +19,7 @@ describe '/location-suggestions', type: :request do
       get "/location-suggestions?query=#{query}"
 
       expect(location_suggestions).to have_been_requested
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 end
