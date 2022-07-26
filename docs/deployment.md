@@ -66,8 +66,8 @@ SETTINGS__GOOGLE__GCP_API_KEY:
 SETTINGS__GOOGLE__MAPS_API_KEY:
 SETTINGS__SKYLIGHT_AUTH_TOKEN:
 ```
-### Download and install terraform
-The project uses terraform 1.2.3, [download](https://www.terraform.io/downloads.html) and verify you have the correct terraform version configured.
+### Download and install Terraform
+The project uses Terraform 1.2.3, [download](https://www.terraform.io/downloads.html) and verify you have the correct Terraform version configured.
 Please make sure you are on `1.2.3`, if not there is a chance the state file could get corrupted.
 Download and install on Linux machines:
 ```sh

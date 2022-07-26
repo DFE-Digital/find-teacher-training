@@ -7,11 +7,11 @@ terraform {
     }
     cloudfoundry = {
       source  = "cloudfoundry-community/cloudfoundry"
-      version = "0.12.6"
+      version = "0.15.3"
     }
     statuscake = {
       source  = "StatusCakeDev/statuscake"
-      version = "1.0.1"
+      version = "2.0.2-pre"
     }
   }
   backend "azurerm" {
@@ -50,8 +50,7 @@ module "paas" {
 }
 
 provider "statuscake" {
-  username = local.infra_secrets.STATUSCAKE_USERNAME
-  apikey   = local.infra_secrets.STATUSCAKE_PASSWORD
+  api_token   = local.infra_secrets.STATUSCAKE_PASSWORD
 }
 
 module "statuscake" {
