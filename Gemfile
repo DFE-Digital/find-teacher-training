@@ -93,7 +93,7 @@ gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v1.2.1'
 # For outgoing http requests
 gem 'http'
 
-group :production do
+group :production, :qa, :sandbox, :staging do
   gem 'cloudfront-rails'
 end
 
