@@ -93,6 +93,10 @@ gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v1.2.1'
 # For outgoing http requests
 gem 'http'
 
+gem "dfe-autocomplete",
+    require: "dfe/autocomplete",
+    github: "DFE-Digital/dfe-autocomplete", tag: 'v0.1.0'
+
 group :production do
   gem 'cloudfront-rails'
 end
