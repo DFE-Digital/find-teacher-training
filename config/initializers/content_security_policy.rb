@@ -16,6 +16,7 @@ Rails.application.configure do
                        "https://www.googletagmanager.com"
 
     policy.connect_src :self,
+                       "https://api.postcodes.io",
                        "https://stats.g.doubleclick.net",
                        "https://*.sentry.io",
                        "https://*.google-analytics.com",
