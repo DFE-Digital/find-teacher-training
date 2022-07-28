@@ -11,12 +11,12 @@ Rails.application.configure do
     policy.img_src     :self, :https, :data
     policy.object_src  :none
     policy.script_src  :self,
-                       :unsafe_inline,
+                       :unsafe_inline, # Backwards compatibility; ignored by modern browsers as we set a nonce for scripts
                        "https://www.google-analytics.com",
                        "https://www.googletagmanager.com"
 
     policy.connect_src :self,
-                       "https://api.postcodes.io",
+                       "https://api.postcodes.io", # Not sure we need this?
                        "https://stats.g.doubleclick.net",
                        "https://*.sentry.io",
                        "https://*.google-analytics.com",
