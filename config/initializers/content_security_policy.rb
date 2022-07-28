@@ -12,29 +12,29 @@ Rails.application.configure do
     policy.object_src  :none
     policy.script_src  :self,
                        :unsafe_inline, # Backwards compatibility; ignored by modern browsers as we set a nonce for scripts
-                       "https://www.google-analytics.com",
-                       "https://www.googletagmanager.com"
+                       'https://www.google-analytics.com',
+                       'https://www.googletagmanager.com'
 
     policy.connect_src :self,
-                       "https://api.postcodes.io", # Not sure we need this?
-                       "https://stats.g.doubleclick.net",
-                       "https://*.sentry.io",
-                       "https://*.google-analytics.com",
-                       "https://*.analytics.google.com"
+                       'https://api.postcodes.io', # Not sure we need this?
+                       'https://stats.g.doubleclick.net',
+                       'https://*.sentry.io',
+                       'https://*.google-analytics.com',
+                       'https://*.analytics.google.com'
 
     policy.style_src   :self
     policy.frame_src   :self,
-                       "https://www.googletagmanager.com"
+                       'https://www.googletagmanager.com'
 
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
   end
-#
-#   # Generate session nonces for permitted importmap and inline scripts
+  #
+  #   # Generate session nonces for permitted importmap and inline scripts
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
-  config.content_security_policy_nonce_directives = %w(script-src)
-#
-#   # Report CSP violations to a specified URI. See:
-#   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
-#   # config.content_security_policy_report_only = true
+  config.content_security_policy_nonce_directives = %w[script-src]
+  #
+  #   # Report CSP violations to a specified URI. See:
+  #   # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
+  #   # config.content_security_policy_report_only = true
 end
