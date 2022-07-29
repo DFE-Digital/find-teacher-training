@@ -1,0 +1,12 @@
+base_url: https://find-loadtest.london.cloudapps.digital
+#assets_url: https://loadtest-assets.london.cloudapps.digital
+apply_base_url: https://apply-loadtest.london.cloudapps.digital
+teacher_training_api:
+  base_url: https://publish-teacher-training-loadtest.london.cloudapps.digital
+valid_referers:
+  - https://find-loadtest.london.cloudapps.digital
+
+# from the previous loadtest setup
+# is this still valid
+feature_flags:
+  send_web_requests_to_big_query: false
