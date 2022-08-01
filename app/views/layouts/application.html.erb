@@ -20,7 +20,9 @@
   </head>
 
   <body class="govuk-template__body ">
-    <%= render "layouts/add_js_enabled_class_to_body" %>
+    <script>
+      document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
+    </script>
 
     <% unless hide_cookie_banner? %>
       <% heading_text = 'Cookies on Find postgraduate teacher training' %>
