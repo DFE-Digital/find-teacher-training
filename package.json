@@ -18,7 +18,7 @@
   },
   "scripts": {
     "test": "jest",
-    "smoke-test": "cypress run --spec cypress/integration/find-teacher-training/**/*"
+    "smoke-test": "cypress run --spec cypress/e2e/find-teacher-training/**/*"
   },
   "jest": {
     "roots": [
