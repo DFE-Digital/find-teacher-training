@@ -11,14 +11,14 @@
     "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
-    "cypress": "^9.6.0",
+    "cypress": "^10.3.1",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
     "typescript": "^4.7.4"
   },
   "scripts": {
     "test": "jest",
-    "smoke-test": "cypress run --spec cypress/integration/find-teacher-training/**/*"
+    "smoke-test": "cypress run --spec cypress/e2e/find-teacher-training/**/*"
   },
   "jest": {
     "roots": [

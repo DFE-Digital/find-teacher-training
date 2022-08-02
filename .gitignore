@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+.ruby-version
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -35,6 +36,7 @@ config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
 coverage
+cypress/videos
 
 # Terraform
 *.tfstate
