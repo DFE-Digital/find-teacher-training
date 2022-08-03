@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '2.7.5'
 
-gem 'pkg-config', '~> 1.4.7'
+gem 'pkg-config', '~> 1.4.9'
 
 # Decorate logic to keep it of the views and helper methods
 gem 'draper'
