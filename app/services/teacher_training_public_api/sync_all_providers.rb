@@ -3,7 +3,7 @@ module TeacherTrainingPublicAPI
     def self.call(recruitment_cycle_year: ::RecruitmentCycle.current_year)
       response = Provider
         .select(:provider_code, :provider_name)
-        .where(recruitment_cycle_year: recruitment_cycle_year)
+        .where(recruitment_cycle_year:)
         .all
 
       sync_providers(providers_from_api: response)

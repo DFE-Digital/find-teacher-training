@@ -19,7 +19,7 @@ class SuggestedSearchLink
   def url
     UnescapedQueryStringService.call(
       base_path: Rails.application.routes.url_helpers.results_path,
-      parameters: suggested_search_link_parameters(radius: radius),
+      parameters: suggested_search_link_parameters(radius:),
     )
   end
 
@@ -39,7 +39,7 @@ private
     return parameters.merge('rad' => radius) if radius.present?
 
     parameters
-      .reject { |k, _v| %w[lat lng rad loc lq].include?(k) }
+      .except('lat', 'lng', 'rad', 'loc', 'lq')
       .merge('l' => 2)
   end
 

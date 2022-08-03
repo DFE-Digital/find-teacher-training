@@ -3,7 +3,7 @@ require 'rails_helper'
 module ResultFilters
   describe FiltersView do
     describe '#qts_only_checked?' do
-      subject { described_class.new(params: params).qts_only_checked? }
+      subject { described_class.new(params:).qts_only_checked? }
 
       context 'when QtsOnly param not present' do
         let(:params) { { qualifications: %w[Other PgdePgceWithQts] } }
@@ -31,7 +31,7 @@ module ResultFilters
     end
 
     describe '#pgde_pgce_with_qts_checked' do
-      subject { described_class.new(params: params).pgde_pgce_with_qts_checked? }
+      subject { described_class.new(params:).pgde_pgce_with_qts_checked? }
 
       context 'when PgdePgceWithQts param not present' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
@@ -59,7 +59,7 @@ module ResultFilters
     end
 
     describe '#other_checked?' do
-      subject { described_class.new(params: params).other_checked? }
+      subject { described_class.new(params:).other_checked? }
 
       context 'when Other param not present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
@@ -87,7 +87,7 @@ module ResultFilters
     end
 
     describe '#qualification_selected?' do
-      subject { described_class.new(params: params).qualification_selected? }
+      subject { described_class.new(params:).qualification_selected? }
 
       context 'when a parameter is selected' do
         let(:params) { { qualifications: %w[Other] } }
@@ -109,7 +109,7 @@ module ResultFilters
     end
 
     describe '#location_query?' do
-      subject { described_class.new(params: params).location_query? }
+      subject { described_class.new(params:).location_query? }
 
       context 'when parameter is present' do
         let(:params) { { l: '1' } }
@@ -125,7 +125,7 @@ module ResultFilters
     end
 
     describe '#across_england_query?' do
-      subject { described_class.new(params: params).across_england_query? }
+      subject { described_class.new(params:).across_england_query? }
 
       context 'when parameter is present' do
         let(:params) { { l: '2' } }
@@ -141,7 +141,7 @@ module ResultFilters
     end
 
     describe '#provider_query?' do
-      subject { described_class.new(params: params).provider_query? }
+      subject { described_class.new(params:).provider_query? }
 
       context 'when parameter is present' do
         let(:params) { { l: '3' } }
@@ -157,7 +157,7 @@ module ResultFilters
     end
 
     describe '#funding_checked?' do
-      subject { described_class.new(params: params).funding_checked? }
+      subject { described_class.new(params:).funding_checked? }
 
       context 'when parameter is present' do
         let(:params) { { funding: '8' } }
@@ -173,7 +173,7 @@ module ResultFilters
     end
 
     describe '#send_checked?' do
-      subject { described_class.new(params: params).send_checked? }
+      subject { described_class.new(params:).send_checked? }
 
       context 'when parameter is present' do
         let(:params) { { senCourses: 'true' } }
@@ -189,7 +189,7 @@ module ResultFilters
     end
 
     describe '#visa_checked?' do
-      subject { described_class.new(params: params).visa_checked? }
+      subject { described_class.new(params:).visa_checked? }
 
       context 'when parameter is present' do
         let(:params) { { can_sponsor_visa: 'true' } }
@@ -205,7 +205,7 @@ module ResultFilters
     end
 
     describe '#has_vacancies_checked?' do
-      subject { described_class.new(params: params).has_vacancies_checked? }
+      subject { described_class.new(params:).has_vacancies_checked? }
 
       context 'when parameter is present' do
         let(:params) { { hasvacancies: 'true' } }
@@ -221,7 +221,7 @@ module ResultFilters
     end
 
     describe '#full_time_checked?' do
-      subject { described_class.new(params: params).full_time_checked? }
+      subject { described_class.new(params:).full_time_checked? }
 
       context 'when parameter is present' do
         let(:params) { { fulltime: 'true' } }
@@ -237,7 +237,7 @@ module ResultFilters
     end
 
     describe '#part_time_checked?' do
-      subject { described_class.new(params: params).part_time_checked? }
+      subject { described_class.new(params:).part_time_checked? }
 
       context 'when parameter is present' do
         let(:params) { { parttime: 'true' } }
@@ -253,7 +253,7 @@ module ResultFilters
     end
 
     describe '#default_study_types_to_true' do
-      subject { described_class.new(params: params).default_study_types_to_true }
+      subject { described_class.new(params:).default_study_types_to_true }
 
       context 'when parameters are not present' do
         let(:params) { {} }
@@ -274,7 +274,7 @@ module ResultFilters
     end
 
     describe '#all_courses_radio_chosen?' do
-      subject { described_class.new(params: params).all_courses_radio_chosen? }
+      subject { described_class.new(params:).all_courses_radio_chosen? }
 
       context 'when parameter is present' do
         let(:params) { { degree_required: 'show_all_courses' } }
@@ -290,7 +290,7 @@ module ResultFilters
     end
 
     describe '#two_two_radio_chosen?' do
-      subject { described_class.new(params: params).two_two_radio_chosen? }
+      subject { described_class.new(params:).two_two_radio_chosen? }
 
       context 'when parameter is present' do
         let(:params) { { degree_required: 'two_two' } }
@@ -306,7 +306,7 @@ module ResultFilters
     end
 
     describe '#third_class_radio_chosen?' do
-      subject { described_class.new(params: params).third_class_radio_chosen? }
+      subject { described_class.new(params:).third_class_radio_chosen? }
 
       context 'when parameter is present' do
         let(:params) { { degree_required: 'third_class' } }
@@ -322,7 +322,7 @@ module ResultFilters
     end
 
     describe '#any_degree_grade_radio_chosen?' do
-      subject { described_class.new(params: params).any_degree_grade_radio_chosen? }
+      subject { described_class.new(params:).any_degree_grade_radio_chosen? }
 
       context 'when parameter is present' do
         let(:params) { { degree_required: 'not_required' } }
@@ -338,7 +338,7 @@ module ResultFilters
     end
 
     describe '#default_all_courses_radio_to_true' do
-      subject { described_class.new(params: params).default_all_courses_radio_to_true }
+      subject { described_class.new(params:).default_all_courses_radio_to_true }
 
       context 'when parameters are not present' do
         let(:params) { {} }

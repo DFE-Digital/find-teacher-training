@@ -18,13 +18,13 @@ RSpec.describe FilterParameters do
     end
   end
   let(:request) do
-    instance_double(ActionDispatch::Request, method: verb, query_parameters: query_parameters, request_parameters: request_parameters)
+    instance_double(ActionDispatch::Request, method: verb, query_parameters:, request_parameters:)
   end
   let(:query_parameters) { {} }
   let(:request_parameters) { {} }
   let(:verb) { 'GET' }
 
-  subject(:test_class_subject) { test_class.new(request: request) }
+  subject(:test_class_subject) { test_class.new(request:) }
 
   describe '#filter_params' do
     context 'GET' do

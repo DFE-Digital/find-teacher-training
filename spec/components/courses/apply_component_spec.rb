@@ -9,7 +9,7 @@ describe Courses::ApplyComponent, type: :component do
     end
 
     it 'renders the apply button when there are vacancies' do
-      course = build(:course, has_vacancies?: true, provider: provider).decorate
+      course = build(:course, has_vacancies?: true, provider:).decorate
 
       result = render_inline(described_class.new(course))
 
@@ -17,7 +17,7 @@ describe Courses::ApplyComponent, type: :component do
     end
 
     it "renders a 'no vacancies' warning when there are no vacancies" do
-      course = build(:course, has_vacancies?: false, provider: provider).decorate
+      course = build(:course, has_vacancies?: false, provider:).decorate
 
       result = render_inline(described_class.new(course))
 

@@ -8,7 +8,7 @@ describe LocationSubjectFilterComponent, type: :component do
     allow(results).to receive(:location_search).and_return('Brighton')
     allow(results).to receive(:subjects).and_return([{ subject_name: 'Art and design' }])
 
-    page = render_inline(described_class.new(results: results))
+    page = render_inline(described_class.new(results:))
 
     expect(page.text).to include('Art and design')
     expect(page.text).to include('Brighton')
@@ -20,7 +20,7 @@ describe LocationSubjectFilterComponent, type: :component do
     allow(results).to receive(:filter_params_with_unescaped_commas).and_return('/')
     allow(results).to receive(:subjects).and_return([{ subject_name: 'Art and design' }])
 
-    page = render_inline(described_class.new(results: results))
+    page = render_inline(described_class.new(results:))
 
     expect(page.text).to include('Art and design')
     expect(page.text).to include('England')
@@ -33,7 +33,7 @@ describe LocationSubjectFilterComponent, type: :component do
     allow(results).to receive(:subjects).and_return([{ subject_name: 'Art and design' }])
     allow(results).to receive(:provider).and_return('University of Brighton')
 
-    page = render_inline(described_class.new(results: results))
+    page = render_inline(described_class.new(results:))
 
     expect(page.text).to include('Art and design')
     expect(page.text).to include('University of Brighton')
@@ -46,7 +46,7 @@ describe LocationSubjectFilterComponent, type: :component do
     allow(results).to receive(:location_search).and_return('Brighton')
     allow(results).to receive(:subjects).and_return([{ subject_name: 'Art and design' }, { subject_name: 'Maths' }])
 
-    page = render_inline(described_class.new(results: results))
+    page = render_inline(described_class.new(results:))
 
     expect(page.text).to include('Art and design and Maths')
     expect(page.text).to include('Brighton')
@@ -59,7 +59,7 @@ describe LocationSubjectFilterComponent, type: :component do
     allow(results).to receive(:location_search).and_return('Brighton')
     allow(results).to receive(:subjects).and_return([{ subject_name: 'Art and design' }, { subject_name: 'Maths' }, { subject_name: 'English' }])
 
-    page = render_inline(described_class.new(results: results))
+    page = render_inline(described_class.new(results:))
 
     expect(page.text).to include('Art and design, Maths and English')
     expect(page.text).to include('Brighton')

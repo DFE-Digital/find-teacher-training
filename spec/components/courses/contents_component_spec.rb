@@ -7,7 +7,7 @@ describe Courses::ContentsComponent, type: :component do
 
       course = build(
         :course,
-        provider: provider,
+        provider:,
         program_type: 'higher_education_programme',
       ).decorate
 
@@ -23,7 +23,7 @@ describe Courses::ContentsComponent, type: :component do
 
       course = build(
         :course,
-        provider: provider,
+        provider:,
         program_type: 'scitt_programme',
       ).decorate
 
@@ -39,7 +39,7 @@ describe Courses::ContentsComponent, type: :component do
 
       course = build(
         :course,
-        provider: provider,
+        provider:,
         program_type: 'tv_programme',
       ).decorate
 
@@ -52,7 +52,7 @@ describe Courses::ContentsComponent, type: :component do
   context 'when the course has vacancies' do
     it 'does render the apply link' do
       provider = build(:provider).decorate
-      course = build(:course, has_vacancies?: true, provider: provider).decorate
+      course = build(:course, has_vacancies?: true, provider:).decorate
       result = render_inline(described_class.new(course))
 
       expect(result.text).to include('Apply')
@@ -62,7 +62,7 @@ describe Courses::ContentsComponent, type: :component do
   context 'when the course does not have vacancies' do
     it 'does not render the apply link' do
       provider = build(:provider).decorate
-      course = build(:course, has_vacancies?: false, provider: provider).decorate
+      course = build(:course, has_vacancies?: false, provider:).decorate
 
       result = render_inline(described_class.new(course))
 

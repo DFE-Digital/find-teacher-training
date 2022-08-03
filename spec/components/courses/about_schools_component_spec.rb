@@ -6,8 +6,8 @@ describe Courses::AboutSchoolsComponent, type: :component do
       %w[higher_education_programme scitt_programme].each do |program_type|
         provider = build(:provider).decorate
         course = build(:course,
-                       provider: provider,
-                       program_type: program_type).decorate
+                       provider:,
+                       program_type:).decorate
 
         result = render_inline(described_class.new(course))
 
@@ -20,7 +20,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
     it 'does not render' do
       provider = build(:provider).decorate
       course = build(:course,
-                     provider: provider,
+                     provider:,
                      program_type: 'tv_programme').decorate
 
       result = render_inline(described_class.new(course))
@@ -33,7 +33,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
     it 'renders the component' do
       provider = build(:provider).decorate
       course = build(:course,
-                     provider: provider,
+                     provider:,
                      site_statuses: [
                        build(:site_status, site: build(:site)),
                        build(:site_status, site: build(:site)),
@@ -49,7 +49,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
     it 'renders the component' do
       provider = build(:provider).decorate
       course = build(:course,
-                     provider: provider,
+                     provider:,
                      site_statuses: [
                        build(:site_status, site: build(:site)),
                      ]).decorate
@@ -65,7 +65,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
       provider = build(:provider).decorate
 
       course = build(:course,
-                     provider: provider,
+                     provider:,
                      program_type: 'higher_education_programme').decorate
 
       result = render_inline(described_class.new(course))
@@ -86,7 +86,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
         ).decorate
 
         course = build(:course,
-                       provider: provider,
+                       provider:,
                        program_type: 'higher_education_programme').decorate
 
         result = render_inline(described_class.new(course))
@@ -101,7 +101,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
       provider = build(:provider).decorate
 
       course = build(:course,
-                     provider: provider,
+                     provider:,
                      program_type: 'scitt_programme').decorate
 
       result = render_inline(described_class.new(course))
@@ -122,7 +122,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
         ).decorate
 
         course = build(:course,
-                       provider: provider,
+                       provider:,
                        program_type: 'scitt_programme').decorate
 
         result = render_inline(described_class.new(course))
@@ -138,7 +138,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
         provider = build(:provider).decorate
 
         course = build(:course,
-                       provider: provider,
+                       provider:,
                        program_type: 'program_type').decorate
 
         result = render_inline(described_class.new(course))

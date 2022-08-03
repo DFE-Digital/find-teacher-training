@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../../app/services/deprecated_parameters_service'
 
 describe DeprecatedParametersService do
-  subject(:service) { described_class.new(parameters: parameters) }
+  subject(:service) { described_class.new(parameters:) }
 
   let(:parameters) do
     {}

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'results/university.html.erb', type: :view do
   let(:html) do
-    render partial: 'results/university', locals: { course: course }
+    render partial: 'results/university', locals: { course: }
   end
 
   let(:site1) do
@@ -38,7 +38,7 @@ describe 'results/university.html.erb', type: :view do
 
   context 'further education course' do
     let(:course) do
-      build(:course, :further_education, provider: build(:provider), site_statuses: site_statuses)
+      build(:course, :further_education, provider: build(:provider), site_statuses:)
     end
 
     it 'renders University' do
@@ -52,7 +52,7 @@ describe 'results/university.html.erb', type: :view do
 
   context 'non further education course' do
     let(:course) do
-      build(:course, provider: build(:provider), site_statuses: site_statuses)
+      build(:course, provider: build(:provider), site_statuses:)
     end
 
     it 'renders Placement schools' do

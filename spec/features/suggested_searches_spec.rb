@@ -12,9 +12,7 @@ describe 'suggested searches', type: :feature do
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
   def suggested_search_count_parameters
-    base_parameters.reject do |k, _v|
-      ['page[page]', 'page[per_page]'].include?(k)
-    end
+    base_parameters.except('page[page]', 'page[per_page]')
   end
 
   before do
@@ -32,7 +30,7 @@ describe 'suggested searches', type: :feature do
       'filter[subjects]' => '00',
     )
 
-    stub_courses(query: query, course_count: results_to_return)
+    stub_courses(query:, course_count: results_to_return)
   end
 
   def results_filter_subjects_request(results_to_return:)
@@ -40,12 +38,12 @@ describe 'suggested searches', type: :feature do
       'filter[subjects]' => '00',
     )
 
-    stub_courses(query: query, course_count: results_to_return)
+    stub_courses(query:, course_count: results_to_return)
   end
 
   def across_england_results_page_request(results_to_return:)
     query = base_parameters.merge('filter[subjects]' => '00')
-    stub_courses(query: query, course_count: results_to_return)
+    stub_courses(query:, course_count: results_to_return)
   end
 
   def suggested_search_count_across_england(results_to_return:)

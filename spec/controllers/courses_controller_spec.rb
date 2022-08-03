@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CoursesController do
   let(:provider) { build(:provider) }
-  let(:course) { build(:course, provider: provider) }
+  let(:course) { build(:course, provider:) }
 
   describe '#apply' do
     context 'when course is found' do

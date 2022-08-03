@@ -17,7 +17,7 @@ module Search
 
       %w[primary secondary further_education].each do |age_group|
         it "is valid when option selected is #{age_group}" do
-          form = described_class.new(age_group: age_group)
+          form = described_class.new(age_group:)
 
           expect(form.valid?).to be(true)
         end

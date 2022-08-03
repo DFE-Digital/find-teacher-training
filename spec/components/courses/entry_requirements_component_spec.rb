@@ -7,7 +7,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         :course,
         accept_pending_gcse: true,
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'We’ll consider candidates with pending GCSEs',
@@ -21,7 +21,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         :course,
         accept_pending_gcse: false,
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'We will not consider candidates with pending GCSEs.',
@@ -36,7 +36,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         provider: build(:provider, provider_code: 'ABC'),
         level: 'primary',
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'Grade 4 (C) or above in English, maths and science, or equivalent qualification.',
@@ -54,7 +54,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         provider: build(:provider, provider_code: 'U80'),
         level: 'secondary',
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'Grade 5 (C) or above in English and maths, or equivalent qualification.',
@@ -70,11 +70,11 @@ describe Courses::EntryRequirementsComponent, type: :component do
         course = build(
           :course,
           provider: build(:provider),
-          accrediting_provider: accrediting_provider,
+          accrediting_provider:,
           level: 'secondary',
         )
 
-        result = render_inline(described_class.new(course: course))
+        result = render_inline(described_class.new(course:))
 
         expect(result.text).to include(
           'Grade 5 (C) or above in English and maths, or equivalent qualification.',
@@ -92,7 +92,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         accept_maths_gcse_equivalency: false,
         accept_science_gcse_equivalency: false,
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'We will not consider candidates who need to take a GCSE equivalency test.',
@@ -109,7 +109,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         accept_maths_gcse_equivalency: true,
         accept_science_gcse_equivalency: true,
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         'We’ll consider candidates who need to take a GCSE equivalency test in maths or science',
@@ -125,7 +125,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         additional_degree_subject_requirements: true,
         degree_subject_requirements: 'Certificate must be printed on green paper.',
       )
-      result = render_inline(described_class.new(course: course))
+      result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
         '2:2 or above, or equivalent.',

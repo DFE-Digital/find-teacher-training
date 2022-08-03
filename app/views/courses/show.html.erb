@@ -2,7 +2,7 @@
 
 <% if permitted_referrer? %>
   <%= content_for(:before_content) do %>
-    <%= govuk_back_link({
+    <%= govuk_back_link(**{
       text: 'Back to search results',
       href: request.referer,
       html_attributes: {

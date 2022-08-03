@@ -8,10 +8,10 @@ describe '/sitemap.xml', type: :request do
     build(
       :course,
       course_code: 'X102',
-      provider: provider,
+      provider:,
       provider_code: provider.provider_code,
       recruitment_cycle: current_recruitment_cycle,
-      changed_at: changed_at,
+      changed_at:,
     )
   end
 

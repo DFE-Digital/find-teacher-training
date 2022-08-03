@@ -3,7 +3,7 @@ module StubbedRequests
     def stub_courses(query:, course_count:)
       fixture_file = course_fixture(course_count)
       stub_request(:get, courses_url)
-        .with(query: query)
+        .with(query:)
         .to_return(
           body: File.new("spec/fixtures/api_responses/#{fixture_file}"),
           headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },

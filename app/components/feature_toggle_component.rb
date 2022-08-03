@@ -13,9 +13,9 @@ class FeatureToggleComponent < ViewComponent::Base
 
   def toggle_link
     if FeatureFlag.active?(feature_name)
-      feature_flags_path(feature_name: feature_name, state: :deactivate)
+      feature_flags_path(feature_name:, state: :deactivate)
     else
-      feature_flags_path(feature_name: feature_name, state: :activate)
+      feature_flags_path(feature_name:, state: :activate)
     end
   end
 

@@ -21,7 +21,7 @@ describe ResultsView do
   end
 
   describe '#query_parameters_with_defaults' do
-    subject(:results_view) { described_class.new(query_parameters: query_parameters).query_parameters_with_defaults }
+    subject(:results_view) { described_class.new(query_parameters:).query_parameters_with_defaults }
 
     context 'params are empty' do
       let(:parameter_hash) { {} }
@@ -493,9 +493,7 @@ describe ResultsView do
 
   describe '#suggested_search_visible?' do
     def suggested_search_count_parameters
-      results_page_parameters.reject do |k, _v|
-        ['page[page]', 'page[per_page]', 'sort'].include?(k)
-      end
+      results_page_parameters.except('page[page]', 'page[per_page]', 'sort')
     end
 
     context 'searching for courses within England' do
@@ -558,7 +556,7 @@ describe ResultsView do
     let(:course) do
       build(
         :course,
-        site_statuses: site_statuses,
+        site_statuses:,
       )
     end
 
@@ -829,7 +827,7 @@ describe ResultsView do
   end
 
   describe '#total_pages' do
-    subject(:results_view) { described_class.new(query_parameters: query_parameters) }
+    subject(:results_view) { described_class.new(query_parameters:) }
 
     let(:parameter_hash) { {} }
 
@@ -837,7 +835,7 @@ describe ResultsView do
       stub_request(:get, courses_url)
         .with(query: results_page_parameters)
         .to_return(
-          body: { meta: { count: count } }.to_json,
+          body: { meta: { count: } }.to_json,
           headers: { 'Content-Type': 'application/vnd.api+json; charset=utf-8' },
         )
     end
@@ -920,7 +918,7 @@ describe ResultsView do
         }
       end
 
-      subject(:results_view) { described_class.new(query_parameters: query_parameters) }
+      subject(:results_view) { described_class.new(query_parameters:) }
 
       it 'returns default params without the location params' do
         expect(results_view.filter_params_for('/')).to eq '/?fulltime=false&hasvacancies=true&parttime=false&qualifications%5B%5D=QtsOnly&qualifications%5B%5D=PgdePgceWithQts&qualifications%5B%5D=Other&senCourses=false'
@@ -939,7 +937,7 @@ describe ResultsView do
         }
       end
 
-      subject(:results_view) { described_class.new(query_parameters: query_parameters) }
+      subject(:results_view) { described_class.new(query_parameters:) }
 
       it 'returns default params without the location params' do
         expect(results_view.filter_params_for('/')).to eq '/?c=England&fulltime=false&hasvacancies=true&l=1&lat=1.23456&loc=Brixton&long=0.54321&lq=Brixton&parttime=false&qualifications%5B%5D=QtsOnly&qualifications%5B%5D=PgdePgceWithQts&qualifications%5B%5D=Other&senCourses=false'

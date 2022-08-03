@@ -22,7 +22,7 @@ class FeatureFlag
 
     def features
       FeatureFlags.all.to_h do |name, description, owner|
-        [name, FeatureFlag.new(name: name, description: description, owner: owner)]
+        [name, FeatureFlag.new(name:, description:, owner:)]
       end.with_indifferent_access
     end
 

@@ -3,7 +3,7 @@ require_relative '../../../app/view_objects/result_filters/qualification_view'
 module ResultFilters
   describe QualificationView do
     describe 'qts_only_checked?' do
-      subject { described_class.new(params: params).qts_only_checked? }
+      subject { described_class.new(params:).qts_only_checked? }
 
       context 'when QtsOnly param not present' do
         let(:params) { { qualifications: %w[Other PgdePgceWithQts] } }
@@ -31,7 +31,7 @@ module ResultFilters
     end
 
     describe 'pgde_pgce_with_qts_checked' do
-      subject { described_class.new(params: params).pgde_pgce_with_qts_checked? }
+      subject { described_class.new(params:).pgde_pgce_with_qts_checked? }
 
       context 'when PgdePgceWithQts param not present' do
         let(:params) { { qualifications: %w[Other QtsOnly] } }
@@ -59,7 +59,7 @@ module ResultFilters
     end
 
     describe '#other_checked?' do
-      subject { described_class.new(params: params).other_checked? }
+      subject { described_class.new(params:).other_checked? }
 
       context 'when Other param not present' do
         let(:params) { { qualifications: %w[QtsOnly PgdePgceWithQts] } }
@@ -87,7 +87,7 @@ module ResultFilters
     end
 
     describe 'qualification_selected?' do
-      subject { described_class.new(params: params).qualification_selected? }
+      subject { described_class.new(params:).qualification_selected? }
 
       context 'when a parameter is selected' do
         let(:params) { { qualifications: %w[Other] } }

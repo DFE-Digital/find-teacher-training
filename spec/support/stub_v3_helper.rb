@@ -4,7 +4,7 @@ module StubV3Helper
 
     stub_request(method, url)
                         .to_return(
-                          status: status,
+                          status:,
                           body: stub.to_json,
                           headers: { 'Content-Type': 'application/vnd.api+json' },
                         )
