@@ -3,8 +3,8 @@ module PageObjects
     class CookiePreferences < SitePrism::Page
       set_url '/cookie_preferences'
 
-      element :cookie_consent_accept, '[data-qa="cookie-consent-accept"]'
-      element :cookie_consent_deny, '[data-qa="cookie-consent-deny"]'
+      element :cookie_consent_accept, '#cookie-preferences-form-cookie-consent-true-field'
+      element :cookie_consent_deny, '#cookie-preferences-form-cookie-consent-false-field'
     end
   end
 end

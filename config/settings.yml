@@ -24,3 +24,8 @@ background_jobs:
     cron: "0 * * * *" # hourly
     class: "SyncProvidersJob"
     queue: sync_providers
+
+cookies:
+  consent:
+    name: "consented-to-cookies"
+    expire_after_days: 182

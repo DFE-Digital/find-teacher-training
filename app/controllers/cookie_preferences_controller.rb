@@ -1,16 +1,21 @@
 class CookiePreferencesController < ApplicationController
-  def new; end
+  def show
+    @cookie_preferences_form = CookiePreferencesForm.new(cookies)
+  end
 
-  def create
-    if params[:cookie_consent].blank?
-      flash[:error] = I18n.t('cookie_preferences.no_option_error')
-      redirect_to(cookie_preferences_path)
+  def update
+    @cookie_preferences_form = CookiePreferencesForm.new(cookies, cookie_preferences_params)
+
+    if @cookie_preferences_form.save
+      redirect_back(fallback_location: root_path, flash: { success: I18n.t('cookie_preferences.success') })
     else
-      user_preference = params[:cookie_consent]
-      cookies['consented-to-cookies'] = { value: user_preference, expires: 6.months.from_now }
-
-      flash[:success] = I18n.t('cookie_preferences.success')
-      redirect_back(fallback_location: root_path)
+      render(:show)
     end
+  end
+
+private
+
+  def cookie_preferences_params
+    params.require(:cookie_preferences_form).permit(:cookie_consent)
   end
 end

@@ -37,6 +37,6 @@ RSpec.describe 'Cookie consent', type: :feature do
     visit cookie_preferences_path
     click_button 'Save cookie settings'
 
-    expect(page).to have_text(I18n.t('cookie_preferences.no_option_error'))
+    expect(page).to have_text('Select yes if you want to accept Google Analytics cookies')
   end
 end

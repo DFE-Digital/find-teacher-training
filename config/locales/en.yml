@@ -67,7 +67,6 @@ en:
     errors:
       no_option: Select at least one qualification
   cookie_preferences:
-    no_option_error: Select yes if you accept Google Analytics cookies
     success: "Your cookie preferences have been saved"
   page_titles:
     error_prefix: "Error: "
@@ -117,3 +116,10 @@ en:
     mathematics:
       body: Institute of Mathematics and its Applications
       url: http://teachingmathsscholars.org/about
+  activemodel:
+    errors:
+      models:
+        cookie_preferences_form:
+          attributes:
+            cookie_consent:
+              blank: Select yes if you want to accept Google Analytics cookies
