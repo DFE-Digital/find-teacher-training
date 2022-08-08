@@ -10,7 +10,7 @@ Rails.application.configure do
     policy.font_src    :self, :data
     policy.img_src     :self, :https, :data
     policy.object_src  :none
-    policy.script_src  'self',
+    policy.script_src  :self,
                        :unsafe_inline, # Backwards compatibility; ignored by modern browsers as we set a nonce for scripts
                        'https://assets.find-postgraduate-teacher-training.service.gov.uk',
                        'https://www.google-analytics.com',
