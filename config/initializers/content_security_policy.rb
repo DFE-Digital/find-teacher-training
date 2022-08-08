@@ -21,7 +21,7 @@ Rails.application.configure do
                        'https://*.sentry.io',
                        'https://*.google-analytics.com',
                        'https://*.analytics.google.com'
-
+    # just a comment
     policy.style_src   :self,
                        'https://assets.find-postgraduate-teacher-training.service.gov.uk'
     policy.frame_src   :self,
