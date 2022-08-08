@@ -1,6 +1,6 @@
 <%= content_for :page_title, title_with_error_prefix(I18n.t('subjects.title'), @subjects_form.errors.any?) %>
 <% content_for :before_content do %>
-  <%= govuk_back_link({
+  <%= govuk_back_link(**{
     text: 'Back',
     href: age_groups_path(@backlink_query_parameters),
     html_attributes: {

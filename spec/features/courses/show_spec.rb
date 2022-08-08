@@ -22,11 +22,11 @@ describe 'Course show', type: :feature do
       :course,
       name: 'Primary',
       course_code: 'X130',
-      provider: provider,
+      provider:,
       provider_code: provider.provider_code,
       provider_type: provider.provider_type,
       recruitment_cycle: current_recruitment_cycle,
-      accrediting_provider: accrediting_provider,
+      accrediting_provider:,
       age_range_in_years: '11_to_16',
       course_length: 'OneYear',
       applications_open_from: '2019-01-01T00:00:00Z',
@@ -296,11 +296,11 @@ describe 'Course show', type: :feature do
             course_code: 'X130',
             fee_uk_eu: '9250.0',
             fee_international: nil,
-            provider: provider,
+            provider:,
             provider_code: provider.provider_code,
             provider_type: provider.provider_type,
             recruitment_cycle: current_recruitment_cycle,
-            accrediting_provider: accrediting_provider)
+            accrediting_provider:)
     end
 
     it 'only displays uk fees' do
@@ -332,6 +332,6 @@ describe 'Course show', type: :feature do
   end
 
   def jsonapi_site_status(name, study_mode, status)
-    build(:site_status, study_mode, site: build(:site, location_name: name), status: status)
+    build(:site_status, study_mode, site: build(:site, location_name: name), status:)
   end
 end

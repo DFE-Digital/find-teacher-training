@@ -33,12 +33,12 @@ class ResultsView
   end
 
   def filter_params_with_unescaped_commas(base_path, parameters: query_parameters_with_defaults)
-    UnescapedQueryStringService.call(base_path: base_path, parameters: parameters)
+    UnescapedQueryStringService.call(base_path:, parameters:)
   end
 
   def stripped_devolved_nation_params(path)
     parameters = query_parameters_with_defaults.except('c', 'lat', 'long', 'loc', 'lq', 'l')
-    filter_params_with_unescaped_commas(path, parameters: parameters)
+    filter_params_with_unescaped_commas(path, parameters:)
   end
 
   def fulltime?
@@ -248,7 +248,7 @@ class ResultsView
       break if filter_links(all_links).count == 2
 
       all_links << SuggestedSearchLink.new(
-        radius: radius,
+        radius:,
         count: course_counter(radius_to_check: radius),
         parameters: query_parameters_with_defaults,
         explicit_salary_filter: with_salaries?,
@@ -427,7 +427,7 @@ private
   end
 
   def course_counter(radius_to_check: nil, include_salary: true)
-    course_query = course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary: include_salary)
+    course_query = course_query(include_location: radius_to_check.present?, radius_to_query: radius_to_check, include_salary:)
     course_query = course_query.order(:distance) if sort_by_distance?
 
     course_query.all.meta['count']
@@ -478,7 +478,7 @@ private
     base_query = base_query.where(recruitment_cycle_year: RecruitmentCycle.current_year)
     base_query = base_query.where(funding: 'salary') if include_salary && with_salaries?
     base_query = base_query.where(has_vacancies: true) if hasvacancies?
-    base_query = base_query.where(study_type: study_type) if study_type.present?
+    base_query = base_query.where(study_type:) if study_type.present?
     base_query = base_query.where(degree_grade: degree_grade_types) if degree_required?
     base_query = base_query.where(can_sponsor_visa: true) if visa_courses?
     base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
@@ -521,8 +521,8 @@ private
       next unless count > course_count
 
       suggested_search_link = SuggestedSearchLink.new(
-        radius: radius,
-        count: count,
+        radius:,
+        count:,
         parameters: query_parameters_with_defaults.except('funding'),
         including_non_salaried: true,
       )

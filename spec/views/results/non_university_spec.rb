@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'results/non_university.html.erb', type: :view do
   let(:html) do
-    render partial: 'results/non_university', locals: { course: course }
+    render partial: 'results/non_university', locals: { course: }
   end
 
   let(:site1) do
@@ -21,7 +21,7 @@ describe 'results/non_university.html.erb', type: :view do
   let(:parameter_hash) { { 'lat' => '51.4975', 'lng' => '0.1357' } }
 
   let(:course) do
-    build(:course, site_statuses: site_statuses)
+    build(:course, site_statuses:)
   end
 
   before do

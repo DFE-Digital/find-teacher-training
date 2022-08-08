@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe SuggestedSearchLink do
   context 'radius is nil' do
-    subject { described_class.new(radius: nil, count: '5', parameters: parameters) }
+    subject { described_class.new(radius: nil, count: '5', parameters:) }
 
     let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
 
@@ -26,7 +26,7 @@ describe SuggestedSearchLink do
   end
 
   context 'radius is 10' do
-    subject(:suggested_search_link) { described_class.new(radius: '10', count: '5', parameters: parameters) }
+    subject(:suggested_search_link) { described_class.new(radius: '10', count: '5', parameters:) }
 
     let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '5', 'loc' => 'Shetlands', 'lq' => '2' } }
 
@@ -58,7 +58,7 @@ describe SuggestedSearchLink do
   end
 
   context 'including_non_salaried is true' do
-    subject { described_class.new(radius: nil, count: '5', parameters: parameters, including_non_salaried: true) }
+    subject { described_class.new(radius: nil, count: '5', parameters:, including_non_salaried: true) }
 
     let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
 
@@ -79,13 +79,13 @@ describe SuggestedSearchLink do
     let(:parameters) { { 'lat' => '5', 'lng' => '-5', 'rad' => '10', 'loc' => 'Shetlands', 'lq' => '2' } }
 
     describe '#text' do
-      subject { described_class.new(radius: nil, count: '5', parameters: parameters, explicit_salary_filter: true).text }
+      subject { described_class.new(radius: nil, count: '5', parameters:, explicit_salary_filter: true).text }
 
       it { is_expected.to eq('5 courses across England with a salary') }
     end
 
     describe '#suffix' do
-      subject { described_class.new(radius: nil, count: '5', parameters: parameters, explicit_salary_filter: true).suffix }
+      subject { described_class.new(radius: nil, count: '5', parameters:, explicit_salary_filter: true).suffix }
 
       it { is_expected.to eq('') }
     end

@@ -4,7 +4,7 @@ describe Courses::SummaryComponent, type: :component do
   it 'renders sub sections' do
     provider = build(:provider).decorate
     course = build(:course,
-                   provider: provider,
+                   provider:,
                    course_length: '1 year').decorate
 
     result = render_inline(described_class.new(course))
@@ -42,7 +42,7 @@ describe Courses::SummaryComponent, type: :component do
 
       course = build(
         :course,
-        provider: provider,
+        provider:,
         accrediting_provider: provider,
       ).decorate
 

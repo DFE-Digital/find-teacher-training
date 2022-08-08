@@ -24,19 +24,19 @@ describe LocationSuggestion do
     end
     let(:url) { "#{Settings.google.places_api_host}#{Settings.google.places_api_path}?#{params}" }
     let(:location_suggestions) { suggest! }
-    let(:query_stub) { stub_query(predictions: predictions) }
+    let(:query_stub) { stub_query(predictions:) }
 
     def suggest!
       LocationSuggestion.suggest(query)
     end
 
     def stub_query(status: 200, predictions: [], error_message: nil)
-      body = { predictions: predictions }
+      body = { predictions: }
       body[:error_message] = error_message if error_message.present?
 
       stub_request(:get, url)
         .to_return(
-          status: status,
+          status:,
           body: body.to_json,
           headers: { 'Content-Type': 'application/json' },
         )
@@ -111,7 +111,7 @@ describe LocationSuggestion do
 
       before do
         allow(Sentry).to receive(:capture_message)
-        stub_query(error_message: error_message)
+        stub_query(error_message:)
       end
 
       it 'sends a sentry error with the received error_message' do
@@ -146,7 +146,7 @@ describe LocationSuggestion do
           predictions.push(description: 'Foo')
         end
 
-        stub_query(predictions: predictions)
+        stub_query(predictions:)
 
         location_suggestions
       end

@@ -34,7 +34,7 @@ describe Results::ResultsComponent, type: :component do
       stub_courses(query: {}, course_count: 0)
       courses = Course.where(recruitment_cycle_year: RecruitmentCycle.current_year).all
       component = render_inline(
-        described_class.new(results: results_view, courses: courses),
+        described_class.new(results: results_view, courses:),
       )
 
       expect(component.text).to include('No courses found')
@@ -44,7 +44,7 @@ describe Results::ResultsComponent, type: :component do
       stub_courses(query: {}, course_count: 0)
       courses = Course.where(recruitment_cycle_year: RecruitmentCycle.current_year).all
       component = render_inline(
-        described_class.new(results: results_view, courses: courses),
+        described_class.new(results: results_view, courses:),
       )
       expect(component.text).to include('event near you')
     end
@@ -78,12 +78,12 @@ describe Results::ResultsComponent, type: :component do
       allow(Results::SearchResultComponent).to receive(:new).and_return(plain: '')
 
       component = render_inline(
-        described_class.new(results: results_view, courses: courses),
+        described_class.new(results: results_view, courses:),
       )
 
       courses.each do |course|
         expect(Results::SearchResultComponent).to have_received(:new).with(
-          course: course,
+          course:,
           has_sites: true,
           filtered_by_location: false,
         )
@@ -94,12 +94,12 @@ describe Results::ResultsComponent, type: :component do
 
     it 'renders the inset text' do
       component = render_inline(
-        described_class.new(results: results_view, courses: courses),
+        described_class.new(results: results_view, courses:),
       )
 
       courses.each do |course|
         expect(Results::SearchResultComponent).to have_received(:new).with(
-          course: course,
+          course:,
           has_sites: true,
           filtered_by_location: false,
         )

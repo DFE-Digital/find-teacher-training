@@ -15,7 +15,7 @@ describe '/location-suggestions', type: :request do
   context 'when location suggestion query is valid' do
     it 'returns success (200)' do
       query = 'london'
-      location_suggestions = stub_location_suggestions(query: query)
+      location_suggestions = stub_location_suggestions(query:)
       get "/location-suggestions?query=#{query}"
 
       expect(location_suggestions).to have_been_requested

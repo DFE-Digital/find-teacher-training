@@ -55,7 +55,7 @@ class LocationSuggestion
       {
         key: Settings.google.gcp_api_key,
         language: 'en',
-        input: input,
+        input:,
         components: 'country:uk',
         types: 'geocode',
       }
