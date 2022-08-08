@@ -7,7 +7,7 @@
 Rails.application.configure do
   config.content_security_policy do |policy|
     policy.default_src :self
-    policy.font_src    :self, :data
+    policy.font_src    :self, :data, 'https://*.find-postgraduate-teacher-training.service.gov.uk'
     policy.img_src     :self, :https, :data
     policy.object_src  :none
     policy.script_src  :self,
@@ -21,9 +21,10 @@ Rails.application.configure do
                        'https://*.sentry.io',
                        'https://*.google-analytics.com',
                        'https://*.analytics.google.com'
-    # just a comment
+
     policy.style_src   :self,
                        'https://*.find-postgraduate-teacher-training.service.gov.uk'
+
     policy.frame_src   :self,
                        'https://www.googletagmanager.com'
 
