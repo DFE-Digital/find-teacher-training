@@ -13,19 +13,20 @@ describe CookiePreferencesController, type: :controller do
 
   describe '#update' do
     it 'sets cookie value' do
-      put :update, params: { cookie_preferences_form: { cookie_consent: 'true' } }
+      put :update, params: { cookie_preferences_form: { analytics_consent: 'true', marketing_consent: 'true' } }
 
-      expect(response.cookies['consented-to-cookies']).to eq('true')
+      expect(response.cookies[Settings.cookies.analytics.name]).to eq('true')
+      expect(response.cookies[Settings.cookies.marketing.name]).to eq('true')
     end
 
     it 'sets cookie expiry' do
       stub_cookie_jar = HashWithIndifferentAccess.new
       allow(controller).to receive(:cookies).and_return(stub_cookie_jar)
 
-      put :update, params: { cookie_preferences_form: { cookie_consent: 'true' } }
-      cookie = stub_cookie_jar['consented-to-cookies']
+      put :update, params: { cookie_preferences_form: { analytics_consent: 'true', marketing_consent: 'true' } }
+      cookie = stub_cookie_jar[Settings.cookies.analytics.name]
 
-      expect(cookie[:expires]).to be_within(1.second).of(Settings.cookies.consent.expire_after_days.days.from_now)
+      expect(cookie[:expires]).to be_within(1.second).of(Settings.cookies.expire_after_days.days.from_now)
     end
   end
 end

@@ -28,67 +28,124 @@
             <td class="govuk-table__cell">Stores encrypted session data</td>
             <td class="govuk-table__cell">When you close your browser</td>
           </tr>
-          <tr>
-            <td class="govuk-table__cell"><%= Settings.cookies.consent.name %></td>
-            <td class="govuk-table__cell">Saves your cookie consent settings</td>
-            <td class="govuk-table__cell">6&nbsp;months</td>
-          </tr>
           </tbody>
         </table>
 
         <h3 class="govuk-heading-m">Analytics cookies (optional)</h3>
 
-        <div class="app-cookie-preferences">
-          <p class="govuk-body">With your permission, we use Google Analytics to collect data about how you use ‘Find postgraduate teacher training’. This information helps us improve our service.</p>
-          <p class="govuk-body">Google is not allowed to use or share our analytics data with anyone.</p>
-          <p class="govuk-body">Google Analytics stores anonymised information about:</p>
-          <ul class="govuk-list govuk-list--bullet">
-            <li>how you got to ‘Find postgraduate teacher training’</li>
-            <li>the pages you visit on this site and how long you spend on them</li>
-            <li>what you click on while you’re visiting the site</li>
-          </ul>
+        <p class="govuk-body">With your permission, we use Google Analytics to collect data about how you use ‘Find postgraduate teacher training’. This information helps us improve our service.</p>
+        <p class="govuk-body">Google is not allowed to use or share our analytics data with anyone.</p>
+        <p class="govuk-body">Google Analytics stores anonymised information about:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how you got to ‘Find postgraduate teacher training’</li>
+          <li>the pages you visit on this site and how long you spend on them</li>
+          <li>what you click on while you’re visiting the site</li>
+        </ul>
 
-          <table class="govuk-table">
-            <thead class="govuk-table__header">
-              <tr>
-                <th class="govuk-table__header govuk-!-width-one-third">Name</th>
-                <th class="govuk-table__header govuk-!-width-one-third">Purpose</th>
-                <th class="govuk-table__header govuk-!-width-one-third">Expires</th>
-              </tr>
-            </thead>
-            <tbody class="govuk-table__body govuk-!-width-one-third">
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">_ga</td>
-                <td class="govuk-table__cell">Distinguishes anonymous&nbsp;users</td>
-                <td class="govuk-table__cell">2&nbsp;years</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">_gid</td>
-                <td class="govuk-table__cell">Distinguishes anonymous&nbsp;users</td>
-                <td class="govuk-table__cell">24&nbsp;hours</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">_gat</td>
-                <td class="govuk-table__cell">Limits requests</td>
-                <td class="govuk-table__cell">10&nbsp;minutes</td>
-              </tr>
-              <tr class="govuk-table__row">
-                <td class="govuk-table__cell">_gat_gtag_UA_112932657_1</td>
-                <td class="govuk-table__cell">Limits requests</td>
-                <td class="govuk-table__cell">10&nbsp;minutes</td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="govuk-table">
+          <thead class="govuk-table__header">
+            <tr>
+              <th class="govuk-table__header govuk-!-width-one-third">Name</th>
+              <th class="govuk-table__header govuk-!-width-one-third">Purpose</th>
+              <th class="govuk-table__header govuk-!-width-one-third">Expires</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body govuk-!-width-one-third">
+            <tr>
+              <td class="govuk-table__cell"><%= Settings.cookies.analytics.name %></td>
+              <td class="govuk-table__cell">Saves your analytics cookie consent settings</td>
+              <td class="govuk-table__cell">6&nbsp;months</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_ga</td>
+              <td class="govuk-table__cell">Distinguishes anonymous&nbsp;users</td>
+              <td class="govuk-table__cell">2&nbsp;years</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gid</td>
+              <td class="govuk-table__cell">Distinguishes anonymous&nbsp;users</td>
+              <td class="govuk-table__cell">24&nbsp;hours</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gat</td>
+              <td class="govuk-table__cell">Limits requests</td>
+              <td class="govuk-table__cell">10&nbsp;minutes</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gat_gtag_UA_112932657_1</td>
+              <td class="govuk-table__cell">Limits requests</td>
+              <td class="govuk-table__cell">10&nbsp;minutes</td>
+            </tr>
+          </tbody>
+        </table>
 
-          <%= f.govuk_collection_radio_buttons :cookie_consent,
-                                              [%w[true Yes], %w[false No]],
-                                              :first,
-                                              :last,
-                                              inline: true,
-                                              legend: { text: 'Do you want to accept Google Analytics cookies?', size: 's' } %>
-                                              
-          <%= f.govuk_submit('Save cookie settings', data: { qa: 'save-changes' }) %>   
-        </div>
+
+        <h3 class="govuk-heading-m">Marketing cookies (optional)</h3>
+
+        <p class="govuk-body">With your permission, we use Google Analytics to collect data about how you use ‘Find postgraduate teacher training’. This information helps us improve our service.</p>
+        <p class="govuk-body">Google is not allowed to use or share our analytics data with anyone.</p>
+        <p class="govuk-body">Google Analytics stores anonymised information about:</p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>how you got to ‘Find postgraduate teacher training’</li>
+          <li>the pages you visit on this site and how long you spend on them</li>
+          <li>what you click on while you’re visiting the site</li>
+        </ul>
+
+        <table class="govuk-table">
+          <thead class="govuk-table__header">
+            <tr>
+              <th class="govuk-table__header govuk-!-width-one-third">Name</th>
+              <th class="govuk-table__header govuk-!-width-one-third">Purpose</th>
+              <th class="govuk-table__header govuk-!-width-one-third">Expires</th>
+            </tr>
+          </thead>
+          <tbody class="govuk-table__body govuk-!-width-one-third">
+            <tr>
+              <td class="govuk-table__cell"><%= Settings.cookies.marketing.name %></td>
+              <td class="govuk-table__cell">Saves your marketing cookie consent settings</td>
+              <td class="govuk-table__cell">6&nbsp;months</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gcl_aw</td>
+              <td class="govuk-table__cell">To store ad click information (only if remarketing cookies are enabled), generate unique IDs for visitors to remember preferences and track and gather statistics and conversion rates through the website.</td>
+              <td class="govuk-table__cell">90&nbsp;Days</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gcl_dc</td>
+              <td class="govuk-table__cell">To store ad click information (only if remarketing cookies are enabled), generate unique IDs for visitors to remember preferences and track and gather statistics and conversion rates through the website.</td>
+              <td class="govuk-table__cell">90&nbsp;Days</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">_gcl_au </td>
+              <td class="govuk-table__cell">Used by Google DoubleClick segment users into audience types and attribute campaign performance to your actions on this website, including conversions.</td>
+              <td class="govuk-table__cell">90&nbsp;Days</td>
+            </tr>
+            <tr class="govuk-table__row">
+              <td class="govuk-table__cell">IDE/ANID/NID</td>
+              <td class="govuk-table__cell">
+                One of the main advertising cookies on non-Google sites is named ‘IDE‘ and is stored in browsers under the domain doubleclick.net. 
+                Another is stored in google.com and is called ANID. We use other cookies with names such as DSID, FLC, AID, TAID, and exchange_uid. 
+                Other Google properties, like YouTube, may also use these cookies to show you more relevant ads. <%= govuk_link_to('https://policies.google.com/technologies/types?hl=en-US', 'https://policies.google.com/technologies/types?hl=en-US') %></td>
+              <td class="govuk-table__cell">2&nbsp;Years</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <%= f.govuk_collection_radio_buttons :analytics_consent,
+                                            [%w[true Yes], %w[false No]],
+                                            :first,
+                                            :last,
+                                            inline: true,
+                                            legend: { text: 'Do you want to accept Google Analytics cookies?', size: 's' } %>
+
+        <%= f.govuk_collection_radio_buttons :marketing_consent,
+                                            [%w[true Yes], %w[false No]],
+                                            :first,
+                                            :last,
+                                            inline: true,
+                                            legend: { text: 'Do you want to accept Marketing cookies?', size: 's' } %>
+                                            
+        <%= f.govuk_submit('Save cookie settings', data: { qa: 'save-changes' }) %>   
       <% end %>
     </div>
   </div>

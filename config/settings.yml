@@ -26,6 +26,11 @@ background_jobs:
     queue: sync_providers
 
 cookies:
-  consent:
+  analytics:
     name: "consented-to-cookies"
-    expire_after_days: 182
+  marketing:
+    name: "consented-to-marketing-cookies"
+  expire_after_days: 182
+
+google_tag_manager:
+  tracking_id: change_me

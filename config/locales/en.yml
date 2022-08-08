@@ -121,5 +121,7 @@ en:
       models:
         cookie_preferences_form:
           attributes:
-            cookie_consent:
+            analytics_consent:
               blank: Select yes if you want to accept Google Analytics cookies
+            marketing_consent:
+              blank: Select yes if you want to accept Marketing cookies
