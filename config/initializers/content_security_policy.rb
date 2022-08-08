@@ -12,8 +12,7 @@ Rails.application.configure do
     policy.object_src  :none
     policy.script_src  :self,
                        :unsafe_inline, # Backwards compatibility; ignored by modern browsers as we set a nonce for scripts
-                       'https://ga-assets.find-postgraduate-teacher-training.service.gov.uk',
-                       'https://assets.find-postgraduate-teacher-training.service.gov.uk',
+                       'https://*.find-postgraduate-teacher-training.service.gov.uk',
                        'https://www.google-analytics.com',
                        'https://www.googletagmanager.com'
 
@@ -24,8 +23,7 @@ Rails.application.configure do
                        'https://*.analytics.google.com'
     # just a comment
     policy.style_src   :self,
-                       'https://ga-assets.find-postgraduate-teacher-training.service.gov.uk',
-                       'https://assets.find-postgraduate-teacher-training.service.gov.uk'
+                       'https://*.find-postgraduate-teacher-training.service.gov.uk'
     policy.frame_src   :self,
                        'https://www.googletagmanager.com'
 
