@@ -22,6 +22,8 @@ variable paas_redis_service_plan {}
 
 variable paas_app_config_file { default = "./workspace_variables/app_config.yml" }
 
+variable "paas_enable_external_logging" { default = true }
+
 variable key_vault_name {}
 
 variable key_vault_resource_group {}

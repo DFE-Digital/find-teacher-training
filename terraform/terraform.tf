@@ -47,6 +47,7 @@ module "paas" {
   redis_service_plan        = var.paas_redis_service_plan
   logstash_url              = local.infra_secrets.LOGSTASH_URL
   app_environment_variables = local.paas_app_environment_variables
+  enable_external_logging   = var.paas_enable_external_logging
 }
 
 provider "statuscake" {
