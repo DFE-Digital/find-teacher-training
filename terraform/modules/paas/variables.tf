@@ -30,6 +30,8 @@ variable logstash_url {}
 
 variable app_environment_variables { type = map }
 
+variable "enable_external_logging" {}
+
 locals {
   app_name_suffix           = var.app_environment_config != "review" ? var.app_environment : "pr-${var.web_app_host_name}"
   web_app_name              = "find-${local.app_name_suffix}"
@@ -68,4 +70,5 @@ locals {
     cloudfoundry_route.web_app_cloudapps_digital_route.id,
     cloudfoundry_route.web_app_assets_service_gov_uk_route.id
   ]
+  logging_service_bindings = var.enable_external_logging ? [cloudfoundry_user_provided_service.logging.id] : []
 }

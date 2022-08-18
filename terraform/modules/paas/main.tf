@@ -33,8 +33,12 @@ resource cloudfoundry_app web_app {
       route = routes.value
     }
   }
-  service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
+
+  dynamic "service_binding" {
+    for_each = local.logging_service_bindings
+    content {
+      service_instance = service_binding.value
+    }
   }
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
@@ -55,9 +59,14 @@ resource cloudfoundry_app worker_app {
   strategy           = "blue-green-v2"
   timeout            = 180
   environment        = local.app_environment_variables
-  service_binding {
-    service_instance = cloudfoundry_user_provided_service.logging.id
+
+  dynamic "service_binding" {
+    for_each = local.logging_service_bindings
+    content {
+      service_instance = service_binding.value
+    }
   }
+
   service_binding {
     service_instance = cloudfoundry_service_instance.redis.id
   }
