@@ -181,7 +181,7 @@ GEM
       rainbow
       rubocop
       smart_properties
-    erubi (1.10.0)
+    erubi (1.11.0)
     et-orbi (1.2.7)
       tzinfo
     factory_bot (6.2.0)
@@ -263,7 +263,7 @@ GEM
       html-attributes-utils (~> 0.9.0)
       railties (>= 6.1)
       view_component (~> 2.49.1)
-    govuk_design_system_formbuilder (3.1.1)
+    govuk_design_system_formbuilder (3.1.2)
       actionview (>= 6.1)
       activemodel (>= 6.1)
       activesupport (>= 6.1)
@@ -585,7 +585,7 @@ DEPENDENCIES
   geocoder
   geokit
   govuk-components (~> 3.0.6)
-  govuk_design_system_formbuilder (~> 3.1.1)
+  govuk_design_system_formbuilder (~> 3.1.2)
   http
   json-schema
   json_api_client
