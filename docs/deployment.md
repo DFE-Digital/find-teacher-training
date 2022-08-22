@@ -31,7 +31,7 @@ All PRs merged will be continuously deployed to `Production` using the below wor
 ## On demand deployments
 
 ### Using the Manual Deploy Action
-Any previously built commit sha can be deployed to any of the three environments from with the Actions page in [GitHub](https://github.com/DFE-Digital/find-teacher-training/actions?query=workflow%3ADeploy).
+Any previously built commit sha can be deployed to any of the three environments from the Actions page in [GitHub](https://github.com/DFE-Digital/find-teacher-training/actions?query=workflow%3ADeploy).
 
 <a href="https://github.com/DFE-Digital/find-teacher-training/actions?query=workflow%3ADeploy">![Deploy](./manual_deploy.png "Deploy Workflow")</a>
 
