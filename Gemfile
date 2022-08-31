@@ -63,7 +63,7 @@ gem 'config'
 gem 'redis'
 
 # Sidekiq for background jobs
-gem 'sidekiq'
+gem 'sidekiq', '~> 6.5'
 
 # Scheduler for sidekiq
 gem 'sidekiq-cron', '~> 1.7'
