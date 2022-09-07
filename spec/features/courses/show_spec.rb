@@ -10,8 +10,6 @@ describe 'Course show', type: :feature do
       website: 'https://scitt.org',
       address1: '1 Long Rd',
       postcode: 'E1 ABC',
-      can_sponsor_student_visa: true,
-      can_sponsor_skilled_worker_visa: false,
     )
   end
   let(:accrediting_provider) { build(:provider) }
@@ -63,6 +61,8 @@ describe 'Course show', type: :feature do
       accept_maths_gcse_equivalency: false,
       accept_science_gcse_equivalency: false,
       additional_gcse_equivalencies: 'You need to work hard',
+      can_sponsor_student_visa: true,
+      can_sponsor_skilled_worker_visa: false,
     )
   end
 

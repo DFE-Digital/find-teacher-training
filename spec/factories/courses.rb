@@ -64,6 +64,8 @@ FactoryBot.define do
     accept_maths_gcse_equivalency { Faker::Boolean.boolean }
     accept_science_gcse_equivalency { Faker::Boolean.boolean }
     additional_gcse_equivalencies { Faker::Lorem.sentence(word_count: 100) }
+    can_sponsor_student_visa { false }
+    can_sponsor_skilled_worker_visa { false }
 
     after :build do |course, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.
