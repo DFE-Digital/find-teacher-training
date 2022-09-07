@@ -25,7 +25,9 @@ describe Results::SearchResultComponent, type: :component do
         :course,
         recruitment_cycle: cycle_2022,
         funding_type: 'salary',
-        provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: true),
+        can_sponsor_student_visa: false,
+        can_sponsor_skilled_worker_visa: true,
+        provider: build(:provider),
       )
       result = render_inline(described_class.new(course:))
 
@@ -41,7 +43,9 @@ describe Results::SearchResultComponent, type: :component do
         :course,
         recruitment_cycle: cycle_2022,
         funding_type: 'fee',
-        provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: true),
+        can_sponsor_student_visa: false,
+        can_sponsor_skilled_worker_visa: true,
+        provider: build(:provider),
       )
       result = render_inline(described_class.new(course:))
 
@@ -56,7 +60,9 @@ describe Results::SearchResultComponent, type: :component do
       course = build(
         :course,
         recruitment_cycle: cycle_2022,
-        provider: build(:provider, can_sponsor_student_visa: true, can_sponsor_skilled_worker_visa: false),
+        can_sponsor_student_visa: true,
+        can_sponsor_skilled_worker_visa: false,
+        provider: build(:provider),
       )
       result = render_inline(described_class.new(course:))
 
@@ -69,7 +75,9 @@ describe Results::SearchResultComponent, type: :component do
       course = build(
         :course,
         recruitment_cycle: cycle_2022,
-        provider: build(:provider, can_sponsor_student_visa: false, can_sponsor_skilled_worker_visa: false),
+        can_sponsor_student_visa: false,
+        can_sponsor_skilled_worker_visa: false,
+        provider: build(:provider),
       )
       result = render_inline(described_class.new(course:))
 

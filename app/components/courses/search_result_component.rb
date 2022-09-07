@@ -38,9 +38,9 @@ module Courses
     end
 
     def visa_sponsorship_status
-      if !course.salaried? && course.provider&.can_sponsor_student_visa
+      if !course.salaried? && course.can_sponsor_student_visa
         'Student visas can be sponsored'
-      elsif course.salaried? && course.provider&.can_sponsor_skilled_worker_visa
+      elsif course.salaried? && course.can_sponsor_skilled_worker_visa
         'Skilled Worker visas can be sponsored'
       else
         'Visas cannot be sponsored'
