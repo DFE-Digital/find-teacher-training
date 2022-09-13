@@ -13,7 +13,9 @@
         "degree_grade": "two_two",
         "provider_code": "1X3",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17837" } },
@@ -41,7 +43,9 @@
         "degree_grade": "not_required",
         "provider_code": "T92",
         "recruitment_cycle_year": "2022",
-        "provider_type": "scitt"
+        "provider_type": "scitt",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17500" } },
@@ -64,7 +68,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -90,7 +96,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -113,7 +121,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -136,7 +146,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -159,7 +171,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -182,7 +196,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -205,7 +221,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -228,7 +246,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -251,7 +271,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -274,7 +296,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -297,7 +321,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -320,7 +346,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -343,7 +371,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -366,7 +396,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -389,7 +421,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -412,7 +446,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -435,7 +471,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -458,7 +496,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -484,7 +524,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -507,7 +549,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -535,7 +579,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -563,7 +609,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -592,7 +640,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -615,7 +665,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -638,7 +690,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -661,7 +715,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -684,7 +740,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
@@ -707,7 +765,9 @@
         "degree_grade": "two_two",
         "provider_code": "1CS",
         "recruitment_cycle_year": "2022",
-        "provider_type": "lead_school"
+        "provider_type": "lead_school",
+        "can_sponsor_skilled_worker_visa": false,
+        "can_sponsor_student_visa": false
       },
       "relationships": {
         "provider": { "data": { "type": "providers", "id": "17513" } },
