@@ -19,7 +19,7 @@ describe CookiePreferencesController, type: :controller do
     end
 
     it 'sets cookie expiry' do
-      stub_cookie_jar = HashWithIndifferentAccess.new
+      stub_cookie_jar = ActiveSupport::HashWithIndifferentAccess.new
       allow(controller).to receive(:cookies).and_return(stub_cookie_jar)
 
       post :create, params: { cookie_consent: 'true' }
