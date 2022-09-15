@@ -44,3 +44,8 @@ Style/HashTransformValues:
 # https://github.com/alphagov/rubocop-govuk/commit/c4a4329d5e44dc98b24f1d344a3532054b1539e0
 Rails/SaveBang:
  Enabled: false
+
+RSpec/NoExpectationExample:
+  Exclude:
+    - 'spec/features/**/*'
+    - 'spec/lib/govuk/markdown_renderer_spec.rb'
