@@ -35,6 +35,14 @@ class CycleTimetable
       apply_2_deadline: Time.zone.local(2024, 9, 21, 18),
       find_closes: Time.zone.local(2024, 10, 4, 23, 59, 59),
     },
+    2025 => {
+      find_opens: Time.zone.local(2024, 10, 5, 9),
+      apply_opens: Time.zone.local(2024, 10, 12, 9),
+      first_deadline_banner: Time.zone.local(2025, 7, 12, 9),
+      apply_1_deadline: Time.zone.local(2025, 9, 7, 18),
+      apply_2_deadline: Time.zone.local(2025, 9, 21, 18),
+      find_closes: Time.zone.local(2025, 10, 4, 23, 59, 59),
+    },
   }.freeze
 
   def self.current_year
