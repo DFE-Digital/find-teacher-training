@@ -50,11 +50,11 @@ runs:
         DEPLOY_ENV: ${{ inputs.environment }}
 
     - name: Use Terraform v1.2.3
-      uses: hashicorp/setup-terraform@v1.3.2
+      uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.2.3
 
-    - uses: azure/login@v1.3.0
+    - uses: azure/login@v1
       id: login_azure
       with:
         creds: ${{ inputs.azure_credentials }}
@@ -97,7 +97,7 @@ runs:
 
     - name: Upload Cypress screenshot and videos
       if:   steps.run_cypress.outcome == 'success' || steps.run_cypress.outcome == 'failure' || steps.run_cypress.outcome == 'cancelled'
-      uses: actions/upload-artifact@v2.3.1
+      uses: actions/upload-artifact@v2
       with:
         name: smoke-test-${{ inputs.environment }}
         path: |
