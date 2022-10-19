@@ -32,13 +32,13 @@ runs:
         if [ -n "${{ inputs.pr }}" ]; then
           DEPLOY_ENV=review
           echo "DEPLOY_ENV=review" >> $GITHUB_ENV
-          echo "::set-output name=deploy_url::https://find-pr-${{ inputs.pr }}.london.cloudapps.digital"
+          echo "deploy_url=https://find-pr-${{ inputs.pr }}.london.cloudapps.digital" >> $GITHUB_OUTPUT
         else
           echo "DEPLOY_ENV=$DEPLOY_ENV" >> $GITHUB_ENV
           if [ ${{ inputs.environment }} == "production" ]; then
-            echo "::set-output name=deploy_url::https://www.find-postgraduate-teacher-training.service.gov.uk"
+            echo "deploy_url=https://www.find-postgraduate-teacher-training.service.gov.uk" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=deploy_url::https://${{ inputs.environment }}.find-postgraduate-teacher-training.service.gov.uk"
+            echo "deploy_url=https://${{ inputs.environment }}.find-postgraduate-teacher-training.service.gov.uk" >> $GITHUB_OUTPUT
           fi
         fi
 
