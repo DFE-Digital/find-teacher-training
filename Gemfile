@@ -66,7 +66,7 @@ gem 'redis'
 gem 'sidekiq'
 
 # Scheduler for sidekiq
-gem 'sidekiq-cron', '~> 1.7'
+gem 'sidekiq-cron', '~> 1.8'
 
 # Calculate distance between two locations
 gem 'geokit'
