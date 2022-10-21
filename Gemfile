@@ -22,7 +22,7 @@ gem 'rails', '~> 7.0.4'
 # Thread-safe global state
 gem 'request_store'
 
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 6.0'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker'
