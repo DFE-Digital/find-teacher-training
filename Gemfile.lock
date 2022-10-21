@@ -219,7 +219,7 @@ GEM
       ffi (>= 1.0.0)
       rake
     foreman (0.87.2)
-    fugit (1.5.3)
+    fugit (1.7.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     geocoder (1.8.1)
@@ -493,7 +493,7 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    sidekiq-cron (1.7.0)
+    sidekiq-cron (1.8.0)
       fugit (~> 1)
       sidekiq (>= 4.2.1)
     signet (0.17.0)
@@ -615,7 +615,7 @@ DEPENDENCIES
   sentry-rails
   sentry-sidekiq
   sidekiq
-  sidekiq-cron (~> 1.7)
+  sidekiq-cron (~> 1.8)
   simplecov (< 0.18)
   site_prism
   skylight
