@@ -45,6 +45,9 @@ Style/HashTransformValues:
 Rails/SaveBang:
  Enabled: false
 
+Rails/ActionControllerFlashBeforeRender:
+  Enabled: false
+
 RSpec/NoExpectationExample:
   Exclude:
     - 'spec/features/**/*'
