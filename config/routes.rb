@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/cycle-has-ended', to: 'pages#cycle_has_ended', as: 'cycle_has_ended'
   get '/maintainance', to: 'pages#maintainance', as: 'maintainance'
 
-  get '/cycle-ending-soon', to: redirect('/', status: 301)
+  get '/cycle-ending-soon', to: redirect('/', status: :moved_permanently)
   # During the cycle there is no need for a separate path for
   # start#location but this was the root path in the
   # legacy c# app so we're redirecting to root

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'ResultFilters::LocationHelper', type: :helper do
+describe 'ResultFilters::LocationHelper' do
   describe '#provider_error?' do
     it 'returns true if provider error is displayed' do
       allow(controller).to receive(:flash).and_return(error: I18n.t('location_filter.fields.provider'))

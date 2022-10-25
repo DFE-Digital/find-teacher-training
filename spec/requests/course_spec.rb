@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/course', type: :request do
+describe '/course' do
   context 'a request with the incorrect format' do
     it 'returns the 404 page in html format' do
       stub_request(:get, /#{Settings.teacher_training_api.base_url}/)

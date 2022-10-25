@@ -4,7 +4,7 @@ FactoryBot.define do
       sites { [] }
       site_statuses { [] }
       subjects { [] }
-      recruitment_cycle { build :recruitment_cycle }
+      recruitment_cycle { build(:recruitment_cycle) }
     end
 
     sequence(:id)

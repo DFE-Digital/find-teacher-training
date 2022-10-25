@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'ResultFilters::SubjectHelper', type: :helper do
+describe 'ResultFilters::SubjectHelper' do
   describe '#subject_is_selected?' do
     it 'indicates that the subject is selected' do
       controller.params[:subject_codes] = '00,01,02'

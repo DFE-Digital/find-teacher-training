@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe '/sitemap.xml', type: :request do
+describe '/sitemap.xml' do
   let(:provider) { build(:provider, provider_code: 'T92') }
-  let(:current_recruitment_cycle) { build :recruitment_cycle }
+  let(:current_recruitment_cycle) { build(:recruitment_cycle) }
   let(:changed_at) { Time.zone.now }
   let(:course) do
     build(

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Cookie consent', type: :feature do
+RSpec.describe 'Cookie consent' do
   let(:cookie_preferences_page) { PageObjects::Page::CookiePreferences.new }
 
   it 'Navigate to cookies' do

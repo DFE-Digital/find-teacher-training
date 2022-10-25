@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'shared/hidden_previous_fields.html.erb', type: :view do
+RSpec.describe 'shared/hidden_previous_fields.html.erb' do
   let(:form_builder) { double }
 
   before do

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :site do
     transient do
-      recruitment_cycle { build :recruitment_cycle }
+      recruitment_cycle { build(:recruitment_cycle) }
     end
 
     sequence(:id, &:to_s)

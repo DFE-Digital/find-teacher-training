@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/results', type: :request do
+describe '/results' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 

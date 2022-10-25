@@ -26,7 +26,7 @@ describe Courses::FinancialSupport::BursaryComponent, type: :component do
         let(:course) { build(:course, subjects: [build(:subject, :modern_languages, bursary_amount: 3000)]).decorate }
 
         it 'does not render duplicate bursary requirements' do
-          expect(rendered_component).to have_no_css('ul.govuk-list.govuk-list--bullet', text: 'a degree of 2:2 or above in any subject')
+          expect(rendered_component).not_to have_css('ul.govuk-list.govuk-list--bullet', text: 'a degree of 2:2 or above in any subject')
           expect(described_class.new(course).duplicate_requirement(requirement)).to be_truthy
         end
       end

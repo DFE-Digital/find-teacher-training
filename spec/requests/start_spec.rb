@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/start', type: :request do
+describe '/start' do
   let(:cached_providers_data_qa_attr) { 'cached-providers-autocomplete' }
 
   it "redirects from '/start/location' to '/'" do

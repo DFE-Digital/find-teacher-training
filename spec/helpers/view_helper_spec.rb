@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'View helpers', type: :helper do
+describe 'View helpers' do
   describe '#permitted_referrer?' do
     context 'With a blank referrer' do
       it 'Returns false' do

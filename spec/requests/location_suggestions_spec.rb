@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/location-suggestions', type: :request do
+describe '/location-suggestions' do
   include StubbedRequests::LocationSuggestions
 
   context 'when provider suggestion is blank' do

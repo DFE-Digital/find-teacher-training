@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe CourseDecorator do
-  let(:current_recruitment_cycle) { build :recruitment_cycle }
-  let(:next_recruitment_cycle) { build :recruitment_cycle, :next_cycle }
+  let(:current_recruitment_cycle) { build(:recruitment_cycle) }
+  let(:next_recruitment_cycle) { build(:recruitment_cycle, :next_cycle) }
   let(:provider) do
     build(
       :provider,
@@ -16,7 +16,7 @@ describe CourseDecorator do
   let(:subjects) { [english, mathematics] }
 
   let(:course) do
-    build :course,
+    build(:course,
           course_code: 'A1',
           name: 'Mathematics',
           qualification: 'pgce_with_qts',
@@ -30,7 +30,7 @@ describe CourseDecorator do
           open_for_applications?: true,
           last_published_at: '2019-03-05T14:42:34Z',
           recruitment_cycle: current_recruitment_cycle,
-          has_vacancies?: true
+          has_vacancies?: true)
   end
   let(:start_date) { Time.zone.local(2019) }
   let(:site) { build(:site) }
@@ -63,19 +63,19 @@ describe CourseDecorator do
     subject { decorated_course }
 
     context 'course is salaried' do
-      let(:course) { build :course, funding_type: 'salary' }
+      let(:course) { build(:course, funding_type: 'salary') }
 
       it { is_expected.to be_salaried }
     end
 
     context 'course is an apprenticeship with salary' do
-      let(:course) { build :course, funding_type: 'apprenticeship' }
+      let(:course) { build(:course, funding_type: 'apprenticeship') }
 
       it { is_expected.to be_salaried }
     end
 
     context 'course is not salaried' do
-      let(:course) { build :course, :with_fees }
+      let(:course) { build(:course, :with_fees) }
 
       it { is_expected.not_to be_salaried }
     end
@@ -85,20 +85,20 @@ describe CourseDecorator do
     subject { decorated_course.funding_option }
 
     context 'Salary' do
-      let(:course) { build :course, funding_type: 'salary' }
+      let(:course) { build(:course, funding_type: 'salary') }
 
       it { is_expected.to eq('Salary') }
     end
 
     context 'Apprenticeship' do
-      let(:course) { build :course, funding_type: 'apprenticeship' }
+      let(:course) { build(:course, funding_type: 'apprenticeship') }
 
       it { is_expected.to eq('Salary') }
     end
 
     context 'Bursary and Scholarship' do
       let(:mathematics) { build(:subject, :mathematics, scholarship: '2000', bursary_amount: '3000') }
-      let(:course) { build :course, subjects: [mathematics] }
+      let(:course) { build(:course, subjects: [mathematics]) }
 
       before { FeatureFlag.activate(:bursaries_and_scholarships_announced) }
 
@@ -113,7 +113,7 @@ describe CourseDecorator do
 
     context 'Bursary' do
       let(:mathematics) { build(:subject, :mathematics, bursary_amount: '3000') }
-      let(:course) { build :course, subjects: [mathematics] }
+      let(:course) { build(:course, subjects: [mathematics]) }
 
       before { FeatureFlag.activate(:bursaries_and_scholarships_announced) }
 
@@ -127,7 +127,7 @@ describe CourseDecorator do
     end
 
     context 'Student finance' do
-      let(:course) { build :course }
+      let(:course) { build(:course) }
 
       it { is_expected.to eq('Student finance if you’re eligible') }
     end
@@ -136,7 +136,7 @@ describe CourseDecorator do
       let(:pe) { build(:subject) }
       let(:english) { build(:subject, :english, bursary_amount: '3000') }
 
-      let(:course) { build :course, name: 'Drama with English', subjects: [pe, english] }
+      let(:course) { build(:course, name: 'Drama with English', subjects: [pe, english]) }
 
       it { is_expected.to eq('Student finance if you’re eligible') }
     end
@@ -150,9 +150,9 @@ describe CourseDecorator do
     end
 
     context 'course has one subject' do
-      subject { build :subject, subject_name: 'Computer Science' }
+      subject { build(:subject, subject_name: 'Computer Science') }
 
-      let(:course) { build :course, subjects: [subject] }
+      let(:course) { build(:course, subjects: [subject]) }
 
       it 'return the subject name' do
         expect(decorated_course.subject_name).to eq('Computer Science')
@@ -164,8 +164,8 @@ describe CourseDecorator do
     subject { decorated_course.bursary_requirements }
 
     context 'Course with mathematics as a subject' do
-      let(:mathematics) { build :subject, :mathematics, subject_name: 'Primary with Mathematics' }
-      let(:english) { build :subject, :english }
+      let(:mathematics) { build(:subject, :mathematics, subject_name: 'Primary with Mathematics') }
+      let(:english) { build(:subject, :english) }
       let(:subjects) { [mathematics, english] }
 
       expected_requirements = [
@@ -177,7 +177,7 @@ describe CourseDecorator do
     end
 
     context 'Course without mathematics as a subject' do
-      let(:english) { build :subject, :english }
+      let(:english) { build(:subject, :english) }
       let(:subjects) { [biology, english] }
 
       expected_requirements = [
@@ -192,8 +192,8 @@ describe CourseDecorator do
     subject { decorated_course.bursary_first_line_ending }
 
     context 'More than one requirement' do
-      let(:mathematics) { build :subject, :mathematics, subject_name: 'Primary with Mathematics' }
-      let(:english) { build :subject, :english }
+      let(:mathematics) { build(:subject, :mathematics, subject_name: 'Primary with Mathematics') }
+      let(:english) { build(:subject, :english) }
       let(:subjects) { [mathematics, english] }
 
       expected_line_ending = ':'
@@ -202,7 +202,7 @@ describe CourseDecorator do
     end
 
     context 'Course without mathematics as a subject' do
-      let(:english) { build :subject, :english }
+      let(:english) { build(:subject, :english) }
       let(:subjects) { [biology, english] }
 
       expected_line_ending = 'a degree of 2:2 or above in any subject.'
@@ -215,16 +215,16 @@ describe CourseDecorator do
     subject { decorated_course }
 
     context 'course only has bursary financial incentives' do
-      let(:mathematics) { build :subject, bursary_amount: '2000' }
-      let(:english) { build :subject, bursary_amount: '4000' }
+      let(:mathematics) { build(:subject, bursary_amount: '2000') }
+      let(:english) { build(:subject, bursary_amount: '4000') }
       let(:subjects) { [mathematics, english] }
 
       it { is_expected.to be_bursary_only }
     end
 
     context 'course has other financial incentives apart from bursaries' do
-      let(:mathematics) { build :subject, bursary_amount: '2000' }
-      let(:english) { build :subject, scholarship: '4000' }
+      let(:mathematics) { build(:subject, bursary_amount: '2000') }
+      let(:english) { build(:subject, scholarship: '4000') }
       let(:subjects) { [mathematics, english] }
 
       it { is_expected.not_to be_bursary_only }
@@ -239,8 +239,8 @@ describe CourseDecorator do
     end
 
     context 'course has bursary' do
-      let(:mathematics) { build :subject, bursary_amount: '2000' }
-      let(:english) { build :subject, bursary_amount: '4000' }
+      let(:mathematics) { build(:subject, bursary_amount: '2000') }
+      let(:english) { build(:subject, bursary_amount: '4000') }
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do
@@ -251,8 +251,8 @@ describe CourseDecorator do
 
   describe '#bursary_amount' do
     context 'course has bursary' do
-      let(:mathematics) { build :subject, bursary_amount: '2000' }
-      let(:english) { build :subject, bursary_amount: '4000' }
+      let(:mathematics) { build(:subject, bursary_amount: '2000') }
+      let(:english) { build(:subject, bursary_amount: '4000') }
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns the maximum bursary amount' do
@@ -264,11 +264,11 @@ describe CourseDecorator do
   describe '#excluded_from_bursary?' do
     subject { decorated_course }
 
-    let(:english) { build :subject, bursary_amount: '30000' }
-    let(:drama) { build :subject, subject_name: 'Drama' }
-    let(:pe) { build :subject, subject_name: 'PE' }
-    let(:physical_education) { build :subject, subject_name: 'Physical Education' }
-    let(:media_studies) { build :subject, subject_name: 'Media Studies' }
+    let(:english) { build(:subject, bursary_amount: '30000') }
+    let(:drama) { build(:subject, subject_name: 'Drama') }
+    let(:pe) { build(:subject, subject_name: 'PE') }
+    let(:physical_education) { build(:subject, subject_name: 'Physical Education') }
+    let(:media_studies) { build(:subject, subject_name: 'Media Studies') }
 
     context 'course name does not qualify for exclusion' do
       let(:course) { build(:course, name: 'Mathematics') }
@@ -349,8 +349,8 @@ describe CourseDecorator do
 
   describe '#scholarship_amount' do
     context 'course has scholarship' do
-      let(:mathematics) { build :subject, scholarship: '2000' }
-      let(:english) { build :subject, scholarship: '4000' }
+      let(:mathematics) { build(:subject, scholarship: '2000') }
+      let(:english) { build(:subject, scholarship: '4000') }
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns the maximum scholarship amount' do
@@ -367,8 +367,8 @@ describe CourseDecorator do
     end
 
     context 'course has scholarship' do
-      let(:mathematics) { build :subject, scholarship: '6000' }
-      let(:english) { build :subject, scholarship: '8000' }
+      let(:mathematics) { build(:subject, scholarship: '6000') }
+      let(:english) { build(:subject, scholarship: '8000') }
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do
@@ -385,7 +385,7 @@ describe CourseDecorator do
     end
 
     context 'course has early career payment option' do
-      let(:english) { build :subject, early_career_payments: '2000' }
+      let(:english) { build(:subject, early_career_payments: '2000') }
       let(:subjects) { [biology, mathematics, english] }
 
       it 'returns true' do

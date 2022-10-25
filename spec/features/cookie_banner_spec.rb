@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'cookie banner', type: :feature do
+describe 'cookie banner' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 

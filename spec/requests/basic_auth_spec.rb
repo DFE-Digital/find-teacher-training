@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Require basic authentication', type: :request do
+RSpec.describe 'Require basic authentication' do
   it 'requests to feature flag path get 401' do
     get feature_flags_path
 

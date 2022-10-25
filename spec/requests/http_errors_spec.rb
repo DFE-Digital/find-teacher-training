@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'HTTP errors', type: :request do
+describe 'HTTP errors' do
   it 'returns not found' do
     get '/404'
     expect(response).to have_http_status(:not_found)
