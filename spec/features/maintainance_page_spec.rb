@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Maintenance mode', type: :feature do
+RSpec.describe 'Maintenance mode' do
   context 'given the maintenance_mode feature flag is active and i arrive at the site' do
     it 'sends me to the maintenance page' do
       FeatureFlag.activate(:maintenance_mode)

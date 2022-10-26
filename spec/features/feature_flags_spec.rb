@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Feature flags', type: :feature do
+RSpec.describe 'Feature flags' do
   around do |example|
     Timecop.freeze(Time.zone.local(2021, 12, 1, 12)) do
       example.run

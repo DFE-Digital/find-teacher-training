@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'suggested searches', type: :feature do
+describe 'suggested searches' do
   include StubbedRequests::Courses
   include StubbedRequests::Providers
   include StubbedRequests::Subjects

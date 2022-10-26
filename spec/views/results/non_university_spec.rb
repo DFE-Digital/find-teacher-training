@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'results/non_university.html.erb', type: :view do
+describe 'results/non_university.html.erb' do
   let(:html) do
     render partial: 'results/non_university', locals: { course: }
   end
@@ -37,7 +37,7 @@ describe 'results/non_university.html.erb', type: :view do
 
     it 'renders dt with Location' do
       expect(html).to have_css('dt.app-description-list__label', text: 'Location')
-      expect(html).to have_no_css('dt.app-description-list__label', text: 'Nearest location')
+      expect(html).not_to have_css('dt.app-description-list__label', text: 'Nearest location')
     end
 
     it "renders '0.1 miles from you'" do
@@ -45,7 +45,7 @@ describe 'results/non_university.html.erb', type: :view do
     end
 
     it "does not renders 'locations to choose from'" do
-      expect(html).to have_no_css('div.govuk-\\!-margin-top-0')
+      expect(html).not_to have_css('div.govuk-\\!-margin-top-0')
       expect(html).not_to match('locations to choose from')
     end
 
@@ -84,7 +84,7 @@ describe 'results/non_university.html.erb', type: :view do
     end
 
     it 'renders dt with Nearest location' do
-      expect(html).to have_no_css('dt.app-description-list__label', text: 'Location')
+      expect(html).not_to have_css('dt.app-description-list__label', text: 'Location')
       expect(html).to have_css('dt.app-description-list__label', text: 'Nearest location')
     end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Course show', type: :feature do
+describe 'Course show' do
   let(:provider) do
     build(
       :provider,
@@ -66,7 +66,7 @@ describe 'Course show', type: :feature do
     )
   end
 
-  let(:current_recruitment_cycle) { build :recruitment_cycle, year: RecruitmentCycle.current_year }
+  let(:current_recruitment_cycle) { build(:recruitment_cycle, year: RecruitmentCycle.current_year) }
 
   let(:course_page) { PageObjects::Page::Course.new }
 

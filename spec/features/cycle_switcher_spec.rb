@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Cycle switcher', type: :feature do
+RSpec.describe 'Cycle switcher' do
   it 'Navigates to the cycle switcher' do
     visit switch_cycle_schedule_path
 

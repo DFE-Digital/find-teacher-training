@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'results/university.html.erb', type: :view do
+describe 'results/university.html.erb' do
   let(:html) do
     render partial: 'results/university', locals: { course: }
   end
@@ -69,7 +69,7 @@ describe 'results/university.html.erb', type: :view do
 
     it 'renders dt with Location' do
       expect(html).to have_css('dt.app-description-list__label', text: 'Location')
-      expect(html).to have_no_css('dt.app-description-list__label', text: 'Nearest location')
+      expect(html).not_to have_css('dt.app-description-list__label', text: 'Nearest location')
     end
 
     context 'site_distance less than 11 miles' do

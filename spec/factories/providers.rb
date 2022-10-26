@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :provider do
     transient do
       sites { [] }
-      recruitment_cycle { build :recruitment_cycle }
+      recruitment_cycle { build(:recruitment_cycle) }
       include_counts { [] }
     end
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '/cycle-has-ended', type: :request do
+describe '/cycle-has-ended' do
   context 'within cycle' do
     it "redirects '/cycle-has-ended' to '/'" do
       get '/cycle-has-ended'

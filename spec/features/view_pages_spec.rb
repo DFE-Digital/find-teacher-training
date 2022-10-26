@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'View pages', type: :feature do
+RSpec.describe 'View pages' do
   it 'Navigate to privacy' do
     visit privacy_path
 

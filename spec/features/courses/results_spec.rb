@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Search results', type: :feature do
+describe 'Search results' do
   include StubbedRequests::Courses
   include StubbedRequests::Subjects
 
