@@ -95,6 +95,10 @@ class ResultsView
     query_parameters['can_sponsor_visa'].present? && query_parameters['can_sponsor_visa'].downcase == 'true'
   end
 
+  def engineers_teach_physics_courses?
+    query_parameters['engineers_teach_physics'].present? && query_parameters['engineers_teach_physics'].downcase == 'true'
+  end
+
   def number_of_extra_subjects
     return 37 if number_of_subjects_selected == MAXIMUM_NUMBER_OF_SUBJECTS
 
@@ -481,6 +485,7 @@ private
     base_query = base_query.where(study_type:) if study_type.present?
     base_query = base_query.where(degree_grade: degree_grade_types) if degree_required?
     base_query = base_query.where(can_sponsor_visa: true) if visa_courses?
+    base_query = base_query.where(engineers_teach_physics: true) if engineers_teach_physics_courses?
     base_query = base_query.where(qualification: qualification.join(',')) unless all_qualifications?
     base_query = base_query.where(subjects: subject_codes.join(',')) if subject_codes.any?
     base_query = base_query.where(send_courses: true) if send_courses?

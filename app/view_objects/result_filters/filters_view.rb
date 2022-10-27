@@ -50,6 +50,10 @@ module ResultFilters
       params[:can_sponsor_visa] == 'true'
     end
 
+    def engineers_teach_physics_checked?
+      params[:engineers_teach_physics] == 'true'
+    end
+
     def has_vacancies_checked?
       params[:hasvacancies] == 'true'
     end

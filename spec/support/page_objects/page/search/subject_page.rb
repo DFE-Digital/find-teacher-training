@@ -24,7 +24,7 @@ module PageObjects
 
         sections :subject_areas, SubjectAreaSection, '[data-qa="subject_area"]'
         section :send_area, SubjectAreaSection, '[data-qa="send_area"]'
-        element :continue, '[data-qa="continue"]'
+        element :find_courses, '.govuk-button'
       end
     end
   end
