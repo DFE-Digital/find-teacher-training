@@ -71,11 +71,11 @@ runs:
       shell: bash
       run: make ${{ env.DEPLOY_ENV }} ci deploy
       env:
-        APP_NAME:                 ${{ inputs.pr }}
-        ARM_ACCESS_KEY:           ${{ inputs.terraform-state-access-key }}
+        APP_NAME: ${{ inputs.pr }}
+        ARM_ACCESS_KEY: ${{ inputs.terraform-state-access-key }}
         TF_VAR_azure_credentials: ${{ inputs.azure_credentials }}
-        IMAGE_TAG :               ${{ inputs.sha }}
-        CONFIRM_PRODUCTION:       yes
+        IMAGE_TAG: ${{ inputs.sha }}
+        CONFIRM_PRODUCTION: yes
 
     - name: Set Cypress environment variable
       shell: bash
@@ -96,7 +96,7 @@ runs:
         npx cypress run ${{ env.CYPRESS_ENV_VARS }}
 
     - name: Upload Cypress screenshot and videos
-      if:   steps.run_cypress.outcome == 'success' || steps.run_cypress.outcome == 'failure' || steps.run_cypress.outcome == 'cancelled'
+      if: steps.run_cypress.outcome == 'success' || steps.run_cypress.outcome == 'failure' || steps.run_cypress.outcome == 'cancelled'
       uses: actions/upload-artifact@v2
       with:
         name: smoke-test-${{ inputs.environment }}
@@ -106,14 +106,14 @@ runs:
         if-no-files-found: ignore
         retention-days: 7
 
-    - name: 'Notify #twd_findpub_tech on failure'
+    - name: "Notify #twd_findpub_tech on failure"
       if: failure() && inputs.pr == ''
       uses: rtCamp/action-slack-notify@master
       env:
         SLACK_CHANNEL: twd_findpub_tech
-        SLACK_COLOR: '#ef5343'
-        SLACK_ICON_EMOJI: ':sad-beaver:'
+        SLACK_COLOR: "#ef5343"
+        SLACK_ICON_EMOJI: ":sad-beaver:"
         SLACK_USERNAME: Find Teacher Training
         SLACK_TITLE: Smoke tests failure
-        SLACK_MESSAGE: ':alert: Smoke tests failure on ${{ inputs.environment }} :sadparrot:'
+        SLACK_MESSAGE: ":alert: Smoke tests failure on ${{ inputs.environment }} :sadparrot:"
         SLACK_WEBHOOK: ${{ inputs.slack-webhook }}
