@@ -49,11 +49,13 @@ describe Courses::EntryRequirementsComponent, type: :component do
 
   context 'when the provider requires grade 5 and the course is secondary' do
     it 'renders correct message' do
-      course = build(
+      raw_course = build(
         :course,
         provider: build(:provider, provider_code: 'U80'),
         level: 'secondary',
       )
+
+      course = raw_course.decorate
       result = render_inline(described_class.new(course:))
 
       expect(result.text).to include(
@@ -67,12 +69,14 @@ describe Courses::EntryRequirementsComponent, type: :component do
     context 'when the accrediting provider requires grade 5 and the course is secondary' do
       it 'renders correct message' do
         accrediting_provider = build(:provider, provider_code: 'U80')
-        course = build(
+        raw_course = build(
           :course,
           provider: build(:provider),
           accrediting_provider:,
           level: 'secondary',
         )
+
+        course = raw_course.decorate
 
         result = render_inline(described_class.new(course:))
 
