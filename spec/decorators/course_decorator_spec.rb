@@ -168,9 +168,9 @@ describe CourseDecorator do
     end
 
     context 'course has one subject' do
-      subject { build :subject, subject_name: 'Computer Science' }
+      subject { build(:subject, subject_name: 'Computer Science') }
 
-      let(:course) { build :course, subjects: [subject] }
+      let(:course) { build(:course, subjects: [subject]) }
 
       it 'return the subject name' do
         expect(decorated_course.subject_name_or_names).to eq('Computer Science')
