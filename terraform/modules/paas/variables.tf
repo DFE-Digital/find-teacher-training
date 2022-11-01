@@ -51,7 +51,6 @@ locals {
     qa       = "qa"
     staging  = "staging"
     sandbox  = "sandbox"
-    rollover = "rollover"
     loadtest = "loadtest"
     prod     = "www"
     review   = local.app_name_suffix
@@ -60,7 +59,6 @@ locals {
     qa       = "qa-assets"
     staging  = "staging-assets"
     sandbox  = "sandbox-assets"
-    rollover = "rollover-assets"
     loadtest = "loadtest-assets"
     prod     = "assets"
     review   = "${local.app_name_suffix}-assets"

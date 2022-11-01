@@ -95,13 +95,6 @@ staging: ## Set DEPLOY_ENV to staging
 	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-test)
 	$(eval SPACE=bat-staging)
 
-.PHONY: rollover
-rollover: ## Set DEPLOY_ENV to rollover
-	$(eval DEPLOY_ENV=rollover)
-	$(eval APP_ENV=rollover)
-	$(eval AZ_SUBSCRIPTION=s121-findpostgraduateteachertraining-production)
-	$(eval SPACE=bat-prod)
-
 .PHONY: production
 production: ## Set DEPLOY_ENV to production
 	$(if $(CONFIRM_PRODUCTION), , $(error Production can only run with CONFIRM_PRODUCTION))
