@@ -21,7 +21,7 @@ RSpec.feature 'Searching across England' do
     when_i_select_the_secondary_radio_button
     and_i_click_continue
     then_i_should_see_the_subjects_form
-    and_i_should_not_see_hidden_subjects
+    and_i_should_not_see_modern_languages
     and_the_correct_subjects_form_page_url_and_query_params_are_present
 
     when_i_click_back
@@ -89,9 +89,7 @@ RSpec.feature 'Searching across England' do
     expect(page).to have_content('Which secondary subjects do you want to teach?')
   end
 
-  def and_i_should_not_see_hidden_subjects
-    expect(page).not_to have_content('Ancient Hebrew')
-    expect(page).not_to have_content('Philosophy')
+  def and_i_should_not_see_modern_languages
     expect(page).not_to have_content('Modern Languages')
   end
 
