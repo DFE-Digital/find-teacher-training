@@ -1,7 +1,7 @@
 <div class="govuk-!-margin-bottom-8">
   <h2 class="govuk-heading-l" id="section-international-students">International candidates</h2>
   <div data-qa="course__international_students">
-    <% if course_is_apprenticeship %>
+    <% if course.apprenticeship? %>
       <p class="govuk-body">To apply for this teaching apprenticeship course, you’ll need to have lived in the UK for at least 3 years before the start of the course.</p>
 
       <p class="govuk-body">EEA nationals with settled or pre-settled status under the
@@ -9,7 +9,7 @@
         EEA, Switzerland, Gibraltar, or the UK for at least the previous 3 years will also be eligible.</p>
     <% end %>
 
-    <p class="govuk-body">You’ll <%= 'also' if course_is_apprenticeship %> need the <%= right_required %> in the UK. You already have this if, for example, you:</p>
+    <p class="govuk-body">You’ll <%= 'also' if course.apprenticeship? %> need the <%= right_required %> in the UK. You already have this if, for example, you:</p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li>are an Irish citizen</li>

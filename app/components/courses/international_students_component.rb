@@ -4,6 +4,8 @@ module Courses
 
     attr_reader :course
 
+    delegate :apprenticeship?, to: :course
+
     def initialize(course:)
       super
       @course = course
@@ -23,10 +25,6 @@ module Courses
 
     def sponsorship_availability
       @sponsorship_availability ||= course.public_send("can_sponsor_#{visa_type}") ? :available : :not_available
-    end
-
-    def course_is_apprenticeship
-      @course.apprenticeship?
     end
   end
 end
