@@ -90,7 +90,7 @@ class CourseDecorator < Draper::Decorator
   end
 
   def apprenticeship?
-    object.funding_type == 'apprenticeship' ? 'Yes' : 'No'
+    object.funding_type == 'apprenticeship'
   end
 
   def length

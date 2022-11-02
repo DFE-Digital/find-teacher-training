@@ -52,7 +52,7 @@ describe CourseDecorator do
   end
 
   it 'returns if course is an apprenticeship' do
-    expect(decorated_course.apprenticeship?).to eq('No')
+    expect(decorated_course.apprenticeship?).to be(false)
   end
 
   it 'returns course length' do
