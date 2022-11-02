@@ -251,27 +251,23 @@ jobs:
           terraform-state-access-key: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY_PRODUCTION }}
 
   deploy-after-production:
-    name: Parallel deployment After production
+    name: Sandbox deployment
     environment:
-      name: ${{ matrix.environment }}
+      name: sandbox
       url: ${{ steps.deploy_app_after_production.outputs.deploy-url }}
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [deploy-production]
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: [sandbox,rollover]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy app to ${{ matrix.environment }}
+      - name: Deploy app to sandbox
         id: deploy_app_after_production
         uses: ./.github/actions/deploy/
         with:
-          azure_credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
-          environment: ${{ matrix.environment }}
+          azure_credentials: ${{ secrets.AZURE_CREDENTIALS_SANDBOX }}
+          environment: sandbox
           sha: ${{ github.sha }}
           slack-webhook: ${{ secrets.SLACK_WEBHOOK }}
-          terraform-state-access-key: ${{ secrets[format('TERRAFORM_STATE_ACCESS_KEY_{0}', matrix.environment)] }}
+          terraform-state-access-key: ${{ secrets.TERRAFORM_STATE_ACCESS_KEY_SANDBOX }}
