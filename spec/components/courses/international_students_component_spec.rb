@@ -12,7 +12,7 @@ describe Courses::InternationalStudentsComponent, type: :component do
     end
 
     it 'tells candidates they’ll need the right to study' do
-      expect(rendered_component).to have_text('You’ll  need the right to study in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to study in the UK')
     end
 
     it 'tells candidates sponsorship is not available' do
@@ -31,7 +31,7 @@ describe Courses::InternationalStudentsComponent, type: :component do
     end
 
     it 'tells candidates they’ll need the right to study' do
-      expect(rendered_component).to have_text('You’ll  need the right to study in the UK')
+      expect(page.text).to have_text('You’ll need the right to study in the UK')
     end
 
     it 'tells candidates visa sponsorship may be available, but they should check' do
@@ -58,7 +58,7 @@ describe Courses::InternationalStudentsComponent, type: :component do
     end
 
     it 'tells candidates they’ll need the right to work' do
-      expect(rendered_component).to have_text('You’ll  need the right to work in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to work in the UK')
     end
 
     it 'tells candidates visa sponsorship may be available, but they should check' do
@@ -77,7 +77,7 @@ describe Courses::InternationalStudentsComponent, type: :component do
     end
 
     it 'tells candidates they’ll need the right to work' do
-      expect(rendered_component).to have_text('You’ll  need the right to work in the UK')
+      expect(rendered_component).to have_text('You’ll need the right to work in the UK')
     end
 
     it 'tells candidates visa sponsorship is not available' do

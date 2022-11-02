@@ -9,7 +9,7 @@
         EEA, Switzerland, Gibraltar, or the UK for at least the previous 3 years will also be eligible.</p>
     <% end %>
 
-    <p class="govuk-body">You’ll <%= 'also' if course.apprenticeship? %> need the <%= right_required %> in the UK. You already have this if, for example, you:</p>
+    <p class="govuk-body"><%= course.apprenticeship? ? 'You’ll also' : 'You’ll' %> need the <%= right_required %> in the UK. You already have this if, for example, you:</p>
 
     <ul class="govuk-list govuk-list--bullet">
       <li>are an Irish citizen</li>
