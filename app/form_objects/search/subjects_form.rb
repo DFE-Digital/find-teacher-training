@@ -6,9 +6,6 @@ module Search
 
     validates :subject_codes, presence: true
 
-    # These subjects don’t currently match any courses, and so can be dropped.
-    IGNORED_SUBJECTS = ['Philosophy', 'Modern Languages', 'Ancient Hebrew', 'Ancient Greek'].freeze
-
     def primary_subjects
       primary_subjects = subject_areas.find { |sa| sa.id == 'PrimarySubject' }.subjects
 
@@ -19,7 +16,7 @@ module Search
 
     def secondary_subjects
       secondary_subjects = subject_areas.find { |sa| sa.id == 'SecondarySubject' }.subjects
-        .reject { |sa| IGNORED_SUBJECTS.include?(sa.subject_name) }
+        .reject { |sa| ['Modern Languages'].include?(sa.subject_name) }
       modern_languages_subjects = subject_areas.find { |sa| sa.id == 'ModernLanguagesSubject' }.subjects
 
       (secondary_subjects + modern_languages_subjects).sort_by(&:subject_name)
