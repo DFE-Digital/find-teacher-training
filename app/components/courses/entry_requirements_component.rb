@@ -4,6 +4,8 @@ module Courses
 
     attr_accessor :course
 
+    delegate :engineers_teach_physics?, to: :course
+
     def initialize(course:)
       @course = course
     end
