@@ -142,6 +142,10 @@ class CourseDecorator < Draper::Decorator
     object.accept_gcse_equivalency
   end
 
+  def engineers_teach_physics?
+    object.campaign_name&.to_sym == :engineers_teach_physics
+  end
+
 private
 
   def find_max(attribute)

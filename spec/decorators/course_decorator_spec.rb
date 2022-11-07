@@ -14,6 +14,7 @@ describe CourseDecorator do
   let(:biology) { build(:subject, :biology) }
   let(:mathematics) { build(:subject, :mathematics) }
   let(:subjects) { [english, mathematics] }
+  let(:campaign_name) { nil }
 
   let(:course) do
     build(:course,
@@ -30,7 +31,8 @@ describe CourseDecorator do
           open_for_applications?: true,
           last_published_at: '2019-03-05T14:42:34Z',
           recruitment_cycle: current_recruitment_cycle,
-          has_vacancies?: true)
+          has_vacancies?: true,
+          campaign_name:)
   end
   let(:start_date) { Time.zone.local(2019) }
   let(:site) { build(:site) }
@@ -78,6 +80,20 @@ describe CourseDecorator do
       let(:course) { build(:course, :with_fees) }
 
       it { is_expected.not_to be_salaried }
+    end
+  end
+
+  describe '#engineers_teach_physics?' do
+    subject { decorated_course.engineers_teach_physics? }
+
+    context 'campaign_name is set to nil' do
+      it { is_expected.to be_falsey }
+    end
+
+    context 'campaign_name is set to engineers_teach_physics' do
+      let(:campaign_name) { 'engineers_teach_physics' }
+
+      it { is_expected.to be_truthy }
     end
   end
 

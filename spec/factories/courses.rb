@@ -66,6 +66,7 @@ FactoryBot.define do
     additional_gcse_equivalencies { Faker::Lorem.sentence(word_count: 100) }
     can_sponsor_student_visa { false }
     can_sponsor_skilled_worker_visa { false }
+    campaign_name { nil }
 
     after :build do |course, evaluator|
       # Necessary gubbins necessary to make JSONAPIClient's associations work.
