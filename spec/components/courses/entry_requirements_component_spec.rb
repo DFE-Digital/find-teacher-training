@@ -79,7 +79,7 @@ describe Courses::EntryRequirementsComponent, type: :component do
         result = render_inline(described_class.new(course:))
 
         expect(result.text).to include(
-          'Your degree subject should be in engineering, material science or a related subject, otherwise you’ll need to prove your subject knowledge in some other way.',
+          'Your degree subject should be in engineering, materials science or a related subject, otherwise you’ll need to prove your subject knowledge in some other way.',
         )
       end
     end
