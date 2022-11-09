@@ -66,6 +66,24 @@ describe Courses::EntryRequirementsComponent, type: :component do
       )
     end
 
+    context 'when the campaign_name is set to engineers_teach_physics' do
+      it 'renders correct message' do
+        raw_course = build(
+          :course,
+          provider: build(:provider, provider_code: 'U80'),
+          level: 'secondary',
+          campaign_name: 'engineers_teach_physics',
+        )
+
+        course = raw_course.decorate
+        result = render_inline(described_class.new(course:))
+
+        expect(result.text).to include(
+          'Your degree subject should be in engineering, materials science or a related subject, otherwise you’ll need to prove your subject knowledge in some other way.',
+        )
+      end
+    end
+
     context 'when the accrediting provider requires grade 5 and the course is secondary' do
       it 'renders correct message' do
         accrediting_provider = build(:provider, provider_code: 'U80')

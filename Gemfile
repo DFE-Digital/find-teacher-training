@@ -146,7 +146,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.1.0'
 
   # For Ruby LSP & IDE
-  gem "ruby-lsp", require: false
+  gem 'ruby-lsp', require: false
 end
 
 group :test do
