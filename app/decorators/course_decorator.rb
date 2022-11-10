@@ -17,14 +17,18 @@ class CourseDecorator < Draper::Decorator
     end
   end
 
-  def subject_name_or_names
-    case object.subjects.size
-    when 1
-      object.subjects.first.subject_name
-    when 2
-      "#{object.subjects.first.subject_name} with #{object.subjects.second.subject_name}"
+  def computed_subject_name_or_names
+    language_subjects_codes = %w[Q3 A0 15 16 17 18 19 20 21 22].freeze
+
+    if number_of_subjects(1) && language_subjects_codes.include?(object.subjects.first.subject_code)
+      first_subject_name(object)
+    elsif number_of_subjects(1) && language_subjects_codes.exclude?(object.subjects.first.subject_code)
+      first_subject_name(object).downcase
+    elsif number_of_subjects(2)
+      transformed_subjects = object.subjects.map { |subject| language_subjects_codes.include?(subject.subject_code) ? subject.subject_name : subject.subject_name.downcase }
+      "#{transformed_subjects.first} with #{transformed_subjects.second}"
     else
-      object.name
+      object.name.gsub('Modern Languages', 'modern languages')
     end
   end
 
@@ -170,5 +174,13 @@ private
     return false unless /with/.match?(object.name)
 
     exclusions.any? { |e| e.match?(object.name) }
+  end
+
+  def number_of_subjects(number)
+    object.subjects.size == number
+  end
+
+  def first_subject_name(object)
+    object.subjects.first.subject_name
   end
 end

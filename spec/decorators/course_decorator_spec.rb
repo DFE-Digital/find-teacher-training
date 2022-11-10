@@ -179,7 +179,7 @@ describe CourseDecorator do
   describe '#subject_name_or_names' do
     context 'course has more than one subject' do
       it "returns both subjects names seperated by a 'with'" do
-        expect(decorated_course.subject_name_or_names).to eq('English with Mathematics')
+        expect(decorated_course.computed_subject_name_or_names).to eq('English with mathematics')
       end
     end
 
@@ -189,7 +189,27 @@ describe CourseDecorator do
       let(:course) { build(:course, subjects: [subject]) }
 
       it 'return the subject name' do
-        expect(decorated_course.subject_name_or_names).to eq('Computer Science')
+        expect(decorated_course.computed_subject_name_or_names).to eq('computer science')
+      end
+    end
+
+    context 'course has a language subject' do
+      subject { build(:subject, :english) }
+
+      let(:course) { build(:course, subjects: [subject]) }
+
+      it 'return the capitalised subject name' do
+        expect(decorated_course.computed_subject_name_or_names).to eq('English')
+      end
+    end
+
+    context 'course is modern languages' do
+      subject { build(:subject, :modern_languages) }
+
+      let(:course) { build(:course, subjects: [subject, build(:subject, :french)]) }
+
+      it 'return lowercase modern languages and capitalised language' do
+        expect(decorated_course.computed_subject_name_or_names).to eq('modern languages with French')
       end
     end
   end
