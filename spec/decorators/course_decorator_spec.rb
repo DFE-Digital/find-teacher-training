@@ -212,6 +212,16 @@ describe CourseDecorator do
         expect(decorated_course.computed_subject_name_or_names).to eq('modern languages with French')
       end
     end
+
+    context 'course is modern languages (other)' do
+      subject { build(:subject, :modern_languages) }
+
+      let(:course) { build(:course, subjects: [subject, build(:subject, subject_name: 'Modern languages (other)', subject_code: '24')]) }
+
+      it 'return one modern languages' do
+        expect(decorated_course.computed_subject_name_or_names).to eq('modern languages')
+      end
+    end
   end
 
   describe '#bursary_requirements' do
