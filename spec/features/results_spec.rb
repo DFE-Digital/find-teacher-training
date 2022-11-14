@@ -41,7 +41,7 @@ describe 'results' do
 
     let(:descending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => '-provider.provider_name,-name'),
+        query: results_page_parameters('sort' => '-provider.provider_name,name'),
         course_count: 10,
       )
     end
@@ -62,7 +62,7 @@ describe 'results' do
     end
 
     context 'descending' do
-      let(:sort) { '-provider.provider_name,-name' }
+      let(:sort) { '-provider.provider_name,name' }
       let(:params) { { sortby: '1', l: '2' } }
 
       it 'requests that the backend sorts the data' do
