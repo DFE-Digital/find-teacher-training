@@ -28,7 +28,7 @@ gem 'puma', '~> 6.0'
 gem 'webpacker'
 
 # Use the GOV UK form builder
-gem 'govuk_design_system_formbuilder', '~> 3.1.2'
+gem 'govuk_design_system_formbuilder', '~> 3.2.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
