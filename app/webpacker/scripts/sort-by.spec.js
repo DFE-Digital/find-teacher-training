@@ -22,7 +22,7 @@ describe('initSortBy', () => {
 
       expect(document.querySelector(".govuk-select").onchange).toBeNull();
 
-      initSortBy({sortby_form_id: "form", sortby_form_select_class: "govuk-select"});
+      initSortBy({sortbyFormId: "form", sortbyFormSelectClass: "govuk-select"});
 
       expect(document.querySelector(".govuk-select").onchange).toBeTruthy();
     })

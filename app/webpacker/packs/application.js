@@ -57,4 +57,4 @@ loadAnalytics();
 
 new initCookieBanner();
 
-initSortBy({sortby_form_id: "sortby_form", sortby_form_select_class: "govuk-select"});
+initSortBy({sortbyFormId: "sortby_form", sortbyFormSelectClass: "govuk-select"});
