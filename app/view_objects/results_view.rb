@@ -171,7 +171,7 @@ class ResultsView
                    else
                      base_query
                        .order('provider.provider_name': results_order)
-                       .order(name: results_order)
+                       .order(name: :asc)
                    end
 
       base_query
