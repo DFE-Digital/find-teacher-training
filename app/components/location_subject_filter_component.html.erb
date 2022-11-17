@@ -13,6 +13,6 @@
         @results.filter_params_for(root_path),
         class: 'govuk-link--no-visited-state govuk-!-margin-left-4',
         data: { qa: 'link' }) do %>
-    Change <span class="govuk-visually-hidden"><%= @results.provider_filter? ? 'subject or provider' : 'subject or location' %></span>
+    Change <span class="govuk-visually-hidden">&nbsp;<%= @results.provider_filter? ? 'subject or provider' : 'subject or location' %></span>
   <% end %>
 </p>
