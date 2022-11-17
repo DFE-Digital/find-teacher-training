@@ -11,7 +11,6 @@ import initAutocomplete from "scripts/autocomplete";
 import {initCachedProvidersAutocomplete} from "scripts/cached-providers-autocomplete";
 import toggle from "scripts/toggle";
 import { FilterToggleButton } from "scripts/filter-toggle-button"
-import initSortBy from "scripts/sort-by"
 import { loadAnalytics } from "scripts/analytics.js";
 import initCookieBanner from "scripts/cookie-banner";
 
@@ -56,5 +55,3 @@ initCachedProvidersAutocomplete();
 loadAnalytics();
 
 new initCookieBanner();
-
-initSortBy({sortbyFormId: "sortby_form", sortbyFormSelectClass: "govuk-select"});

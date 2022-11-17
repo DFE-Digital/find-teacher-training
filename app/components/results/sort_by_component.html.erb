@@ -2,7 +2,7 @@
   <% if results.location_filter? %>
     <p class="govuk-body">Sorted by distance</p>
   <% else %>
-    <%= form_with(id: :sortby_form, url: results_path, method: 'get', skip_enforcing_utf8: true, class: 'app-search-results-header__sort', data: { qa: 'sort-form' }) do |form| %>
+    <%= form_with(url: results_path, method: 'get', skip_enforcing_utf8: true, class: 'app-search-results-header__sort', data: { qa: 'sort-form' }) do |form| %>
       <%= render 'shared/hidden_fields', form: form, exclude_keys: %w[sortby] %>
       <%= form.label(:sortby, 'Sorted by', class: 'govuk-label govuk-!-display-inline-block') %>
       <%= form.select(
