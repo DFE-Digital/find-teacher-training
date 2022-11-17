@@ -1,6 +1,8 @@
 class CourseDecorator < Draper::Decorator
   delegate_all
 
+  LANGUAGE_SUBJECT_CODES = %w[Q3 A0 15 16 17 18 19 20 21 22].freeze
+
   def name_and_code
     "#{object.name} (#{object.course_code})"
   end
@@ -18,14 +20,12 @@ class CourseDecorator < Draper::Decorator
   end
 
   def computed_subject_name_or_names
-    language_subjects_codes = %w[Q3 A0 15 16 17 18 19 20 21 22].freeze
-
-    if (number_of_subjects(1) || modern_languages_other(object)) && language_subjects_codes.include?(object.subjects.first.subject_code)
-      first_subject_name(object)
-    elsif (number_of_subjects(1) || modern_languages_other(object)) && language_subjects_codes.exclude?(object.subjects.first.subject_code)
-      first_subject_name(object).downcase
-    elsif number_of_subjects(2)
-      transformed_subjects = object.subjects.map { |subject| language_subjects_codes.include?(subject.subject_code) ? subject.subject_name : subject.subject_name.downcase }
+    if (number_of_subjects == 1 || modern_languages_other?) && LANGUAGE_SUBJECT_CODES.include?(subjects.first.subject_code)
+      first_subject_name
+    elsif (number_of_subjects == 1 || modern_languages_other?) && LANGUAGE_SUBJECT_CODES.exclude?(subjects.first.subject_code)
+      first_subject_name.downcase
+    elsif number_of_subjects == 2
+      transformed_subjects = subjects.map { |subject| LANGUAGE_SUBJECT_CODES.include?(subject.subject_code) ? subject.subject_name : subject.subject_name.downcase }
       "#{transformed_subjects.first} with #{transformed_subjects.second}"
     else
       object.name.gsub('Modern Languages', 'modern languages')
@@ -176,15 +176,23 @@ private
     exclusions.any? { |e| e.match?(object.name) }
   end
 
-  def number_of_subjects(number)
-    object.subjects.size == number
+  def number_of_subjects
+    subjects.size
   end
 
-  def first_subject_name(object)
-    object.subjects.first.subject_name
+  def first_subject_name
+    subjects.first.subject_name
   end
 
-  def modern_languages_other(object)
-    object.subjects.any? { |subject| subject.subject_code == '24' }
+  def modern_languages_other?
+    subjects.any? { |subject| subject.subject_code == modern_languages_other_id }
+  end
+
+  def modern_languages_other_id
+    '24'
+  end
+
+  def main_subject_is_modern_languages?
+    main_subject.id == SecondarySubject.modern_languages.id
   end
 end
