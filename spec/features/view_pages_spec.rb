@@ -6,7 +6,7 @@ RSpec.describe 'View pages' do
   it 'Navigate to privacy' do
     visit privacy_path
 
-    expect(page).to have_text('Privacy policy')
+    expect(page).to have_text('Find postgraduate teacher training privacy notice')
   end
 
   it 'Navigate to accessibility' do

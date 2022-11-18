@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   get '/terms-conditions', to: 'pages#terms', as: 'terms'
   get '/accessibility', to: 'pages#accessibility', as: 'accessibility'
-  get '/privacy-policy', to: 'pages#privacy', as: 'privacy'
+  get '/privacy', to: 'pages#privacy', as: 'privacy'
 
   get '/cookies', to: 'cookie_preferences#new', as: 'cookie_preferences'
   post '/cookies', to: 'cookie_preferences#create', as: 'create_cookie_preferences'
