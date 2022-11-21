@@ -44,10 +44,14 @@
 .app-search-results-header__sort {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
 
   * {
-    margin: 0 govuk-spacing(2);
+    margin: 0 govuk-spacing(1);
+  }
+
+  .govuk-button {
+    top: -1px;
   }
 
   @include govuk-media-query($until: "mobile") {
