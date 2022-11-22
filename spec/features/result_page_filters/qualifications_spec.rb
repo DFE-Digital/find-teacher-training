@@ -31,7 +31,7 @@ RSpec.feature 'Qualifications filter' do
   end
 
   def then_i_see_all_qualifications_checkboxes_are_selected
-    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications filter')
     expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(true)
     expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(true)
     expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(true)
@@ -51,7 +51,7 @@ RSpec.feature 'Qualifications filter' do
   end
 
   def then_i_see_that_the_pgce_and_further_education_qualification_checkboxes_are_still_unselected
-    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications filter')
     expect(results_page.qualifications_filter.pgce_checkbox.checked?).to be(false)
     expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
   end
@@ -90,7 +90,7 @@ RSpec.feature 'Qualifications filter' do
   end
 
   def then_i_see_that_the_qts_and_further_education_checkboxes_are_still_unselected
-    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications')
+    expect(results_page.qualifications_filter.legend.text).to eq('Qualifications filter')
     expect(results_page.qualifications_filter.qts_checkbox.checked?).to be(false)
     expect(results_page.qualifications_filter.further_education_checkbox.checked?).to be(false)
   end

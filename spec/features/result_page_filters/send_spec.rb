@@ -16,7 +16,7 @@ RSpec.feature 'Results page new SEND filter' do
   end
 
   def then_i_see_that_the_send_checkbox_is_not_selected
-    expect(results_page.send_filter.legend.text).to eq('Special educational needs')
+    expect(results_page.send_filter.legend.text).to eq('Special educational needs filter')
     expect(results_page.send_filter.checkbox.checked?).to be(false)
   end
 

@@ -24,7 +24,7 @@ RSpec.feature 'Study type filter' do
   end
 
   def then_i_see_both_study_type_checkboxes_are_selected
-    expect(results_page.study_type_filter.legend.text).to eq('Study type')
+    expect(results_page.study_type_filter.legend.text).to eq('Study type filter')
     expect(results_page.study_type_filter.parttime_checkbox.checked?).to be(true)
     expect(results_page.study_type_filter.fulltime_checkbox.checked?).to be(true)
   end
