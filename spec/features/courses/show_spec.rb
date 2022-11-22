@@ -119,8 +119,8 @@ describe 'Course show' do
         accrediting_provider.provider_name,
       )
 
-      expect(course_page.description).to have_content(
-        course.description,
+      expect(course_page.extended_qualification_descriptions).to have_content(
+        course.extended_qualification_descriptions,
       )
 
       expect(course_page.qualifications).to have_content(
