@@ -65,7 +65,7 @@ RSpec.feature 'Engineers teach physics' do
   end
 
   def then_i_see_that_the_etp_checkbox_is_unchecked
-    expect(results_page.engineers_teach_physics_filter.legend.text).to eq('Engineers teach physics')
+    expect(results_page.engineers_teach_physics_filter.legend.text).to eq('Engineers teach physics filter')
     expect(results_page.engineers_teach_physics_filter.checkbox.checked?).to be(false)
     expect(results_page).to have_text('Only show Engineers teach physics courses')
   end

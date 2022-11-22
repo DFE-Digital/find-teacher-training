@@ -16,7 +16,7 @@ RSpec.feature 'Visa filter' do
   end
 
   def then_i_see_that_the_visa_checkbox_is_unchecked
-    expect(results_page.visa_filter.legend.text).to eq('Visa sponsorship')
+    expect(results_page.visa_filter.legend.text).to eq('Visa sponsorship filter')
     expect(results_page.visa_filter.checkbox.checked?).to be(false)
   end
 

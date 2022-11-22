@@ -26,7 +26,7 @@ RSpec.feature 'Required degree filter' do
   end
 
   def then_i_see_the_two_one_or_first_degree_radio_checked
-    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
+    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted filter')
     expect(results_page.degree_required_filter.show_all_courses_radio.checked?).to be(true)
   end
 
@@ -43,7 +43,7 @@ RSpec.feature 'Required degree filter' do
   end
 
   def then_i_see_that_the_two_two_degree_radio_is_selected
-    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
+    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted filter')
     expect(results_page.degree_required_filter.two_two_radio.checked?).to be(true)
   end
 
@@ -73,7 +73,7 @@ RSpec.feature 'Required degree filter' do
   end
 
   def then_i_see_that_the_third_degree_radio_is_selected
-    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
+    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted filter')
     expect(results_page.degree_required_filter.third_class_radio.checked?).to be(true)
   end
 
@@ -103,7 +103,7 @@ RSpec.feature 'Required degree filter' do
   end
 
   def then_i_see_that_the_pass_degree_radio_is_selected
-    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted')
+    expect(results_page.degree_required_filter.legend.text).to eq('Degree grade accepted filter')
     expect(results_page.degree_required_filter.not_required_radio.checked?).to be(true)
   end
 

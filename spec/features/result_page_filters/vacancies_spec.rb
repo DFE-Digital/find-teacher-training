@@ -16,7 +16,7 @@ RSpec.feature 'Results page new vacancies filter' do
   end
 
   def then_i_see_the_vacancies_checkbox_is_selected
-    expect(results_page.vacancies_filter.legend.text).to eq('Vacancies')
+    expect(results_page.vacancies_filter.legend.text).to eq('Vacancies filter')
     expect(results_page.vacancies_filter.checkbox.checked?).to be(true)
   end
 
