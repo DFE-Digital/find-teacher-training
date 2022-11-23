@@ -14,7 +14,7 @@
         <p class="govuk-body"><%= course.qualification.humanize %></p>
         <p class="govuk-hint"><%= accredited_body %></p>
       <% else %>
-        <%= course.qualification.humanize %>
+       <%= qualification_description_with_abbreviation[course.qualification].html_safe %>
       <% end %>
     </dd>
 

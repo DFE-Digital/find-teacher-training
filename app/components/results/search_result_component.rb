@@ -52,5 +52,15 @@ module Results
 
       "QTS ratified by #{helpers.smart_quotes(course['accrediting_provider']['provider_name'])}"
     end
+
+    def qualification_description_with_abbreviation
+      {
+        'qts' => I18n.t('find.qualification.description_with_abbreviation.qts'),
+        'pgce_with_qts' => I18n.t('find.qualification.description_with_abbreviation.pgce_with_qts'),
+        'pgde_with_qts' => I18n.t('find.qualification.description_with_abbreviation.pgde_with_qts'),
+        'pgce' => I18n.t('find.qualification.description_with_abbreviation.pgce_without_qts'),
+        'pgde' => I18n.t('find.qualification.description_with_abbreviation.pgde_without_qts'),
+      }
+    end
   end
 end
