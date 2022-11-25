@@ -152,8 +152,8 @@ en:
         qts: <abbr title='Qualified teacher status'>QTS</abbr> only
         pgce_with_qts: <abbr title='Postgraduate certificate in education'>PGCE</abbr> with <abbr title='Qualified teacher status'>QTS</abbr>
         pgde_with_qts: <abbr title='Postgraduate diploma in education'>PGDE</abbr> with <abbr title='Qualified teacher status'>QTS</abbr>
-        pgce_without_qts: <abbr title='Postgraduate certificate in education'>PGCE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>
-        pgde_without_qts: <abbr title='Postgraduate diploma in education'>PGDE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>
+        pgce: <abbr title='Postgraduate certificate in education'>PGCE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>
+        pgde: <abbr title='Postgraduate diploma in education'>PGDE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>
 
 
 
