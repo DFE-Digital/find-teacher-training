@@ -147,3 +147,20 @@ en:
             <p class="govuk-body">If you do not already have the right to study in the UK for the duration of this course, you may need to apply for a Student visa.</p>
             <p class="govuk-body">To do this, you’ll need to be sponsored by your training provider.</p>
             <p class="govuk-body">Before you apply for this course, contact us to check Student visa sponsorship is available. If it is, and you get a place on this course, we’ll help you apply for your visa.</p>
+    qualification:
+      description_with_abbreviation:
+        qts:
+          html:
+            <abbr title='Qualified teacher status'>QTS</abbr> only
+        pgce_with_qts:
+          html:
+            <abbr title='Postgraduate certificate in education'>PGCE</abbr> with <abbr title='Qualified teacher status'>QTS</abbr>
+        pgde_with_qts:
+          html:
+            <abbr title='Postgraduate diploma in education'>PGDE</abbr> with <abbr title='Qualified teacher status'>QTS</abbr>
+        pgce:
+          html:
+            <abbr title='Postgraduate certificate in education'>PGCE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>
+        pgde:
+          html:
+            <abbr title='Postgraduate diploma in education'>PGDE</abbr> without <abbr title='Qualified teacher status'>QTS</abbr>

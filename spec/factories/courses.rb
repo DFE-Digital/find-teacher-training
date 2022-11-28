@@ -15,6 +15,7 @@ FactoryBot.define do
     provider_type { nil }
     name { 'English' }
     description { 'PGCE with QTS full time' }
+    extended_qualification_descriptions { 'Postgraduate certificate in education (PGCE) with qualified teacher status (QTS)' }
     findable? { true }
     open_for_applications? { false }
     has_vacancies? { false }
