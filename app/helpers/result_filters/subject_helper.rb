@@ -13,7 +13,7 @@ module ResultFilters
     def subject_area_is_selected?(subject_area:)
       return false if params['subject_codes'].nil?
 
-      (params['subject_codes'] & subject_area.subjects.map(&:subject_code)).any?
+      params['subject_codes'].intersect?(subject_area.subjects.map(&:subject_code))
     end
 
     def no_subject_selected_error?
