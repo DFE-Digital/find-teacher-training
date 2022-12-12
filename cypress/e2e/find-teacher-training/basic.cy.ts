@@ -1,16 +1,10 @@
 /// <reference types="Cypress" />
 
-Cypress.Cookies.defaults({
-  preserve: "_find_teacher_training_session"
-})
-
 describe("Basic", () => {
-  before(() => {
-    cy.clearCookies()
+  beforeEach(() => {
     cy.visit(URL);
     cy.contains("Continue").click();
   });
-
 
   afterEach(() => {
     cy.checkForDefaultTitle();
@@ -37,22 +31,40 @@ describe("Basic", () => {
   });
 
   it("should show a validation error if user does not select an age group", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
     cy.contains("Continue").click();
     cy.get(".govuk-error-summary").should("exist");
   });
 
   it("should let user select an age group", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
     cy.contains("Secondary").click();
     cy.contains("Continue").click();
     cy.get("h1").should("contain", "Which secondary subjects do you want to teach?");
   });
 
   it("should show a validation error if user does not select a subject", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Secondary").click();
+    cy.contains("Continue").click();
+
     cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("exist");
   });
 
   it("should let user search for Business Studies", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Secondary").click();
+    cy.contains("Continue").click();
+
     cy.contains("Business studies").click();
     cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("not.exist");
@@ -60,11 +72,31 @@ describe("Basic", () => {
   });
 
   it("should let users view a course", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Secondary").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Business studies").click();
+    cy.contains("Find courses").click();
+
     cy.get(".app-search-result__item-title:first").click();
     cy.get("h1").should("contain", "Business");
   });
 
   it("should show an enriched course", () => {
+    cy.contains("Across England").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Secondary").click();
+    cy.contains("Continue").click();
+
+    cy.contains("Business studies").click();
+    cy.contains("Find courses").click();
+
+    cy.get(".app-search-result__item-title:first").click();
+
     cy.contains("Apply").should("exist");
   });
 });
