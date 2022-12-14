@@ -63,5 +63,35 @@ FactoryBot.define do
       subject_name { 'Design and technology' }
       subject_code { 'DT' }
     end
+
+    trait :chemistry do
+      subject_name { 'Chemistry' }
+      subject_code { 'F1' }
+    end
+
+    trait :computing do
+      subject_name { 'Computing' }
+      subject_code { '11' }
+    end
+
+    trait :mathematics do
+      subject_name { 'Mathematics' }
+      subject_code { 'G1' }
+    end
+
+    trait :physics do
+      subject_name { 'Physics' }
+      subject_code { 'F3' }
+    end
+
+    trait :german do
+      subject_name { 'German' }
+      subject_code { '17' }
+    end
+
+    trait :spanish do
+      subject_name { 'Spanish' }
+      subject_code { '22' }
+    end
   end
 end
