@@ -12,7 +12,7 @@ RSpec.describe 'View pages' do
   it 'Navigate to accessibility' do
     visit accessibility_path
 
-    expect(page).to have_text('Accessibility statement for Find postgraduate teacher training')
+    expect(page).to have_text('This statement applies to the Find postgraduate teacher training service (Find)')
   end
 
   it 'Navigate to terms' do
