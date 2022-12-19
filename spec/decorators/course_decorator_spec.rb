@@ -32,7 +32,8 @@ describe CourseDecorator do
           last_published_at: '2019-03-05T14:42:34Z',
           recruitment_cycle: current_recruitment_cycle,
           has_vacancies?: true,
-          campaign_name:)
+          campaign_name:,
+          level:)
   end
   let(:start_date) { Time.zone.local(2019) }
   let(:site) { build(:site) }
@@ -46,6 +47,7 @@ describe CourseDecorator do
       include: %i[sites provider accrediting_provider recruitment_cycle subjects],
     )
   end
+  let(:level) { 'secondary' }
 
   let(:decorated_course) { course.decorate }
 
@@ -92,6 +94,22 @@ describe CourseDecorator do
 
     context 'campaign_name is set to engineers_teach_physics' do
       let(:campaign_name) { 'engineers_teach_physics' }
+
+      it { is_expected.to be_truthy }
+    end
+  end
+
+  describe '#secondary_course?' do
+    subject { decorated_course.secondary_course? }
+
+    context 'level is not set to secondary' do
+      let(:level) { %w[primary further_education].sample }
+
+      it { is_expected.to be_falsey }
+    end
+
+    context 'level is set to secondary' do
+      let(:level) { 'secondary' }
 
       it { is_expected.to be_truthy }
     end
