@@ -1,10 +1,16 @@
-class ResultSummaryComponent < ViewComponent::Base
-  include ViewHelper
+class ResultSummaryService
+  include ActionView::Helpers::NumberHelper
 
   attr_reader :results
 
   def initialize(results:)
     @results = results
+  end
+
+  class << self
+    def call(...)
+      new(...).call
+    end
   end
 
   def call
