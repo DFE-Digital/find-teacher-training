@@ -150,6 +150,10 @@ class CourseDecorator < Draper::Decorator
     object.campaign_name&.to_sym == :engineers_teach_physics
   end
 
+  def secondary_course?
+    object.level.to_sym == :secondary
+  end
+
 private
 
   def find_max(attribute)

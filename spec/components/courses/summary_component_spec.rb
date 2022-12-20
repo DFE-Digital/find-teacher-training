@@ -53,4 +53,32 @@ describe Courses::SummaryComponent, type: :component do
       )
     end
   end
+
+  context 'secondary course' do
+    it 'render the age range and level' do
+      course = build(
+        :course,
+        provider: build(:provider),
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+
+      expect(result.css('[data-qa="course__age_range"]').text).to eq('11 to 16 - secondary')
+    end
+  end
+
+  context 'non-secondary course' do
+    it 'render the age range only' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        level: 'primary',
+        age_range_in_years: '3_to_7',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+
+      expect(result.css('[data-qa="course__age_range"]').text).to eq('3 to 7')
+    end
+  end
 end
