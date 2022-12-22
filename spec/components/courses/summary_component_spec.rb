@@ -145,7 +145,7 @@ describe Courses::SummaryComponent, type: :component do
         provider: build(:provider),
         course_length: '2 year',
         study_mode: 'full_time_or_part_time',
-        ).decorate
+      ).decorate
 
       result = render_inline(described_class.new(course))
       expect(result.css('[data-qa="course__length"]').text).to eq('2 year - full time or part time')
@@ -159,7 +159,7 @@ describe Courses::SummaryComponent, type: :component do
         provider: build(:provider),
         course_length: '1 year',
         study_mode: 'full_time_or_part_time',
-        ).decorate
+      ).decorate
 
       result = render_inline(described_class.new(course))
       expect(result.css('[data-qa="course__length"]').text).to eq('1 year - full time or part time')
