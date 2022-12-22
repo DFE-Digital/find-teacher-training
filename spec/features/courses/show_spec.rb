@@ -136,7 +136,7 @@ describe 'Course show' do
       )
 
       expect(course_page.length).to have_content(
-        decorated_course.length,
+        '1 year - full time',
       )
 
       expect(course_page.applications_open_from).to have_content(
