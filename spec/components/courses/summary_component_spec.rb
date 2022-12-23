@@ -55,7 +55,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context 'secondary course' do
-    it 'render the age range and level' do
+    it 'renders the age range and level' do
       course = build(
         :course,
         provider: build(:provider),
@@ -68,7 +68,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context 'non-secondary course' do
-    it 'render the age range only' do
+    it 'renders the age range only' do
       course = build(
         :course,
         provider: build(:provider),
@@ -83,7 +83,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '1 year full time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
@@ -97,7 +97,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '1 year part time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
@@ -111,7 +111,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '2 year part time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
@@ -125,7 +125,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '2 year full time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
@@ -139,7 +139,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '2 year full time or part time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
@@ -153,7 +153,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context '1 year full time or part time course' do
-    it 'render the correct course_length_with_study_mode_row' do
+    it 'renders the correct course_length_with_study_mode_row' do
       course = build(
         :course,
         provider: build(:provider),
