@@ -55,7 +55,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context 'secondary course' do
-    it 'render the age range and level' do
+    it 'renders the age range and level' do
       course = build(
         :course,
         provider: build(:provider),
@@ -68,7 +68,7 @@ describe Courses::SummaryComponent, type: :component do
   end
 
   context 'non-secondary course' do
-    it 'render the age range only' do
+    it 'renders the age range only' do
       course = build(
         :course,
         provider: build(:provider),
@@ -79,6 +79,90 @@ describe Courses::SummaryComponent, type: :component do
       result = render_inline(described_class.new(course))
 
       expect(result.css('[data-qa="course__age_range"]').text).to eq('3 to 7')
+    end
+  end
+
+  context '1 year full time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '1 year',
+        study_mode: 'full_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('1 year - full time')
+    end
+  end
+
+  context '1 year part time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '1 year',
+        study_mode: 'part_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('1 year - part time')
+    end
+  end
+
+  context '2 year part time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '2 year',
+        study_mode: 'part_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('2 year - part time')
+    end
+  end
+
+  context '2 year full time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '2 year',
+        study_mode: 'full_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('2 year - full time')
+    end
+  end
+
+  context '2 year full time or part time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '2 year',
+        study_mode: 'full_time_or_part_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('2 year - full time or part time')
+    end
+  end
+
+  context '1 year full time or part time course' do
+    it 'renders the correct course_length_with_study_mode_row' do
+      course = build(
+        :course,
+        provider: build(:provider),
+        course_length: '1 year',
+        study_mode: 'full_time_or_part_time',
+      ).decorate
+
+      result = render_inline(described_class.new(course))
+      expect(result.css('[data-qa="course__length"]').text).to eq('1 year - full time or part time')
     end
   end
 end
