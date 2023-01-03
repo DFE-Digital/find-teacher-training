@@ -7,7 +7,7 @@
     "@rails/webpacker": "^5.4.3",
     "accessible-autocomplete": "^2.0.4",
     "govuk-frontend": "^4.4.0",
-    "jquery": "^3.6.2",
+    "jquery": "^3.6.3",
     "lodash.throttle": "^4.1.1"
   },
   "devDependencies": {
