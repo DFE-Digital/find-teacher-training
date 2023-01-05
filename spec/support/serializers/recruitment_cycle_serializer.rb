@@ -3,5 +3,5 @@ class RecruitmentCycleSerializer < JSONAPI::Serializable::Resource
 
   has_many :providers
 
-  attributes(*FactoryBot.attributes_for('recruitment_cycle').keys)
+  attributes(*FactoryBot.attributes_for(:recruitment_cycle).keys)
 end
