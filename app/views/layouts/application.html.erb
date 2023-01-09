@@ -17,11 +17,13 @@
     <%= stylesheet_pack_tag 'application' %>
     <%= content_for(:head) %>
 
+    <%= render("layouts/gtm") %>
   </head>
 
   <body class="govuk-template__body ">
     <%= render "layouts/add_js_enabled_class_to_body" %>
 
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<%= Settings.google_tag_manager.tracking_id %>" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <% unless hide_cookie_banner? %>
       <% heading_text = 'Cookies on Find postgraduate teacher training' %>
       <%= govuk_cookie_banner(
