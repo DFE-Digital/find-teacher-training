@@ -8,3 +8,6 @@ valid_referers:
 basic_auth_username: replace_me
 basic_auth_password: replace_me
 STATE_CHANGE_SLACK_URL: replace_me
+
+google_tag_manager:
+  tracking_id: GTM-TP73392

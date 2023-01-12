@@ -24,3 +24,6 @@ background_jobs:
     cron: "0 * * * *" # hourly
     class: "SyncProvidersJob"
     queue: sync_providers
+
+google_tag_manager:
+  tracking_id: change-me
