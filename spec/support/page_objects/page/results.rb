@@ -82,8 +82,10 @@ module PageObjects
 
       class SortFormSection < SitePrism::Section
         section :options, '[data-qa="sort-form__options"]' do
-          element :ascending, '[data-qa="sort-form__options__ascending_provider"]'
-          element :descending, '[data-qa="sort-form__options__descending_provider"]'
+          element :course_ascending, '[data-qa="sort-form__options__ascending_course"]'
+          element :course_descending, '[data-qa="sort-form__options__descending_course"]'
+          element :provider_ascending, '[data-qa="sort-form__options__ascending_provider"]'
+          element :provider_descending, '[data-qa="sort-form__options__descending_provider"]'
           element :distance, '[data-qa="sort-form__options__distance"]'
         end
         element :submit, '[data-qa="sort-form__submit"]'
