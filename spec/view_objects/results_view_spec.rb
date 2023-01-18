@@ -770,8 +770,10 @@ describe ResultsView do
       it {
         expect(results_view).to eq(
           [
-            ['Training provider (A-Z)', 0, { 'data-qa': 'sort-form__options__ascending' }],
-            ['Training provider (Z-A)', 1, { 'data-qa': 'sort-form__options__descending' }],
+            ['Course name (A-Z)', 'A', { 'data-qa': 'sort-form__options__ascending_course' }],
+            ['Course name (Z-A)', 'B', { 'data-qa': 'sort-form__options__descending_course' }],
+            ['Training provider (A-Z)', 'C', { 'data-qa': 'sort-form__options__ascending_provider' }],
+            ['Training provider (Z-A)', 'D', { 'data-qa': 'sort-form__options__descending_provider' }],
           ],
         )
       }

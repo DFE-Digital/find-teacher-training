@@ -11,6 +11,6 @@ def results_page_parameters(parameters = {})
       },
     'page[page]' => 1,
     'page[per_page]' => 30,
-    'sort' => 'provider.provider_name,name',
+    'sort' => 'name,provider.provider_name',
   }.merge(parameters)
 end

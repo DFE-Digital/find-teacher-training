@@ -6,7 +6,7 @@ describe 'results' do
   include ActiveJob::TestHelper
 
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:sort) { 'provider.provider_name,name' }
+  let(:sort) { 'name,provider.provider_name' }
   let(:params) { nil }
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
@@ -32,28 +32,28 @@ describe 'results' do
   end
 
   context 'provider sorting' do
-    let(:ascending_stub) do
+    let(:provider_ascending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => 'provider.provider_name,name'),
+        query: results_page_parameters('sort' => 'provider.provider_name,order'),
         course_count: 10,
       )
     end
 
-    let(:descending_stub) do
+    let(:provider_descending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => '-provider.provider_name,name'),
+        query: results_page_parameters('sort' => '-provider.provider_name,order'),
         course_count: 10,
       )
     end
 
     before do
-      ascending_stub
-      descending_stub
+      provider_ascending_stub
+      provider_descending_stub
     end
 
     describe 'hides ordering' do
       let(:base_parameters) { results_page_parameters('sort' => sort, 'filter[provider.provider_name]' => '2AT') }
-      let(:sort) { 'provider.provider_name,name' }
+      let(:sort) { 'name,provider.provider_name' }
       let(:params) { { l: '3', query: '2AT' } }
 
       it 'does not display the sort form' do
@@ -61,12 +61,12 @@ describe 'results' do
       end
     end
 
-    context 'descending' do
-      let(:sort) { '-provider.provider_name,name' }
-      let(:params) { { sortby: '1', l: '2' } }
+    context 'provider descending' do
+      let(:sort) { '-provider.provider_name,order' }
+      let(:params) { { sortby: 'D', l: '2' } }
 
       it 'requests that the backend sorts the data' do
-        expect(descending_stub).to have_been_requested
+        expect(provider_descending_stub).to have_been_requested
       end
 
       it 'is automatically selected' do
@@ -78,18 +78,18 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => '0',
+          'sortby' => 'C',
           'l' => '2',
         )
       end
     end
 
-    context 'ascending' do
-      let(:sort) { 'provider.provider_name,name' }
-      let(:params) { { sortby: '0', l: '2' } }
+    context 'provider ascending' do
+      let(:sort) { 'provider.provider_name,order' }
+      let(:params) { { sortby: 'C', l: '2' } }
 
       it 'requests that the backend sorts the data' do
-        expect(ascending_stub).to have_been_requested
+        expect(provider_ascending_stub).to have_been_requested
       end
 
       it 'is automatically selected' do
@@ -101,7 +101,7 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => '1',
+          'sortby' => 'D',
           'l' => '2',
         )
       end
