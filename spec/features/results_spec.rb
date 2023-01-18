@@ -63,7 +63,7 @@ describe 'results' do
 
     context 'descending' do
       let(:sort) { '-provider.provider_name,order' }
-      let(:params) { { sortby: 'D', l: '2' } }
+      let(:params) { { sortby: 'provider_desc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
         expect(provider_descending_stub).to have_been_requested
@@ -78,7 +78,7 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => 'C',
+          'sortby' => 'provider_asc',
           'l' => '2',
         )
       end
@@ -86,7 +86,7 @@ describe 'results' do
 
     context 'ascending' do
       let(:sort) { 'provider.provider_name,order' }
-      let(:params) { { sortby: 'C', l: '2' } }
+      let(:params) { { sortby: 'provider_asc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
         expect(provider_ascending_stub).to have_been_requested
@@ -101,7 +101,7 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => 'D',
+          'sortby' => 'provider_desc',
           'l' => '2',
         )
       end
@@ -130,7 +130,7 @@ describe 'results' do
 
     context 'descending' do
       let(:sort) { '-name,provider.provider_name' }
-      let(:params) { { sortby: 'B', l: '2' } }
+      let(:params) { { sortby: 'course_desc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
         expect(course_descending_stub).to have_been_requested
@@ -145,7 +145,7 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => 'A',
+          'sortby' => 'course_asc',
           'l' => '2',
         )
       end
@@ -153,7 +153,7 @@ describe 'results' do
 
     context 'ascending' do
       let(:sort) { 'name,provider.provider_name' }
-      let(:params) { { sortby: 'A', l: '2' } }
+      let(:params) { { sortby: 'course_asc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
         expect(course_ascending_stub).to have_been_requested
@@ -168,7 +168,7 @@ describe 'results' do
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => 'B',
+          'sortby' => 'course_desc',
           'l' => '2',
         )
       end

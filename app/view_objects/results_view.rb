@@ -157,10 +157,10 @@ class ResultsView
 
   def sort_options
     [
-      ['Course name (A-Z)', 'A', { 'data-qa': 'sort-form__options__ascending_course' }],
-      ['Course name (Z-A)', 'B', { 'data-qa': 'sort-form__options__descending_course' }],
-      ['Training provider (A-Z)', 'C', { 'data-qa': 'sort-form__options__ascending_provider' }],
-      ['Training provider (Z-A)', 'D', { 'data-qa': 'sort-form__options__descending_provider' }],
+      ['Course name (A-Z)', 'course_asc', { 'data-qa': 'sort-form__options__ascending_course' }],
+      ['Course name (Z-A)', 'course_desc', { 'data-qa': 'sort-form__options__descending_course' }],
+      ['Training provider (A-Z)', 'provider_asc', { 'data-qa': 'sort-form__options__ascending_provider' }],
+      ['Training provider (Z-A)', 'provider_desc', { 'data-qa': 'sort-form__options__descending_provider' }],
     ]
   end
 
@@ -169,15 +169,15 @@ class ResultsView
       base_query = course_query(include_location: location_filter?)
       base_query = if sort_by_distance?
                      base_query.order(:distance)
-                   elsif query_parameters[:sortby] == 'B'
+                   elsif query_parameters[:sortby] == 'course_desc'
                      base_query
                                     .order(name: :desc)
                                     .order('provider.provider_name': :asc)
-                   elsif query_parameters[:sortby] == 'C'
+                   elsif query_parameters[:sortby] == 'provider_asc'
                      base_query
                                     .order('provider.provider_name': :asc)
                                     .order(order: :asc)
-                   elsif query_parameters[:sortby] == 'D'
+                   elsif query_parameters[:sortby] == 'provider_desc'
                      base_query
                                     .order('provider.provider_name': :desc)
                                     .order(order: :asc)
