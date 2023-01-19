@@ -171,16 +171,16 @@ class ResultsView
                      base_query.order(:distance)
                    elsif query_parameters[:sortby] == 'course_desc'
                      base_query
-                                    .order(name: :desc)
-                                    .order('provider.provider_name': :asc)
+                      .order(name: :desc)
+                      .order('provider.provider_name': :asc)
                    elsif query_parameters[:sortby] == 'provider_asc'
                      base_query
-                                    .order('provider.provider_name': :asc)
-                                    .order(name: :asc)
+                      .order('provider.provider_name': :asc)
+                      .order(name: :asc)
                    elsif query_parameters[:sortby] == 'provider_desc'
                      base_query
-                                    .order('provider.provider_name': :desc)
-                                    .order(name: :asc)
+                      .order('provider.provider_name': :desc)
+                      .order(name: :asc)
                    else
                      base_query
                        .order(name: :asc)
