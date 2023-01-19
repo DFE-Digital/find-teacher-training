@@ -176,11 +176,11 @@ class ResultsView
                    elsif query_parameters[:sortby] == 'provider_asc'
                      base_query
                                     .order('provider.provider_name': :asc)
-                                    .order(order: :asc)
+                                    .order(name: :asc)
                    elsif query_parameters[:sortby] == 'provider_desc'
                      base_query
                                     .order('provider.provider_name': :desc)
-                                    .order(order: :asc)
+                                    .order(name: :asc)
                    else
                      base_query
                        .order(name: :asc)

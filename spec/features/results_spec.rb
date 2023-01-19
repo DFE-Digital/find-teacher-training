@@ -34,14 +34,14 @@ describe 'results' do
   context 'provider sorting' do
     let(:provider_ascending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => 'provider.provider_name,order'),
+        query: results_page_parameters('sort' => 'provider.provider_name,name'),
         course_count: 10,
       )
     end
 
     let(:provider_descending_stub) do
       stub_courses(
-        query: results_page_parameters('sort' => '-provider.provider_name,order'),
+        query: results_page_parameters('sort' => '-provider.provider_name,name'),
         course_count: 10,
       )
     end
@@ -62,7 +62,7 @@ describe 'results' do
     end
 
     context 'descending' do
-      let(:sort) { '-provider.provider_name,order' }
+      let(:sort) { '-provider.provider_name,name' }
       let(:params) { { sortby: 'provider_desc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
@@ -85,7 +85,7 @@ describe 'results' do
     end
 
     context 'ascending' do
-      let(:sort) { 'provider.provider_name,order' }
+      let(:sort) { 'provider.provider_name,name' }
       let(:params) { { sortby: 'provider_asc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
