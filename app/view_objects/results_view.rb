@@ -157,23 +157,35 @@ class ResultsView
 
   def sort_options
     [
-      ['Training provider (A-Z)', 0, { 'data-qa': 'sort-form__options__ascending' }],
-      ['Training provider (Z-A)', 1, { 'data-qa': 'sort-form__options__descending' }],
+      ['Course name (A-Z)', 'course_asc', { 'data-qa': 'sort-form__options__ascending_course' }],
+      ['Course name (Z-A)', 'course_desc', { 'data-qa': 'sort-form__options__descending_course' }],
+      ['Training provider (A-Z)', 'provider_asc', { 'data-qa': 'sort-form__options__ascending_provider' }],
+      ['Training provider (Z-A)', 'provider_desc', { 'data-qa': 'sort-form__options__descending_provider' }],
     ]
   end
 
   def courses
     @courses ||= begin
       base_query = course_query(include_location: location_filter?)
-
       base_query = if sort_by_distance?
                      base_query.order(:distance)
+                   elsif query_parameters[:sortby] == 'course_desc'
+                     base_query
+                      .order(name: :desc)
+                      .order('provider.provider_name': :asc)
+                   elsif query_parameters[:sortby] == 'provider_asc'
+                     base_query
+                      .order('provider.provider_name': :asc)
+                      .order(name: :asc)
+                   elsif query_parameters[:sortby] == 'provider_desc'
+                     base_query
+                      .order('provider.provider_name': :desc)
+                      .order(name: :asc)
                    else
                      base_query
-                       .order('provider.provider_name': results_order)
                        .order(name: :asc)
+                       .order('provider.provider_name': :asc)
                    end
-
       base_query
         .page(query_parameters[:page] || 1)
         .per(results_per_page)
@@ -348,12 +360,6 @@ private
   end
 
   attr_reader :query_parameters
-
-  def results_order
-    return :desc if query_parameters[:sortby] == '1'
-
-    :asc
-  end
 
   def qualifications_parameters
     { 'qualifications' => query_parameters['qualifications'].presence || %w[QtsOnly PgdePgceWithQts Other] }

@@ -6,7 +6,7 @@ describe 'results' do
   include ActiveJob::TestHelper
 
   let(:results_page) { PageObjects::Page::Results.new }
-  let(:sort) { 'provider.provider_name,name' }
+  let(:sort) { 'name,provider.provider_name' }
   let(:params) { nil }
   let(:base_parameters) { results_page_parameters('sort' => sort) }
 
@@ -32,14 +32,14 @@ describe 'results' do
   end
 
   context 'provider sorting' do
-    let(:ascending_stub) do
+    let(:provider_ascending_stub) do
       stub_courses(
         query: results_page_parameters('sort' => 'provider.provider_name,name'),
         course_count: 10,
       )
     end
 
-    let(:descending_stub) do
+    let(:provider_descending_stub) do
       stub_courses(
         query: results_page_parameters('sort' => '-provider.provider_name,name'),
         course_count: 10,
@@ -47,13 +47,13 @@ describe 'results' do
     end
 
     before do
-      ascending_stub
-      descending_stub
+      provider_ascending_stub
+      provider_descending_stub
     end
 
     describe 'hides ordering' do
       let(:base_parameters) { results_page_parameters('sort' => sort, 'filter[provider.provider_name]' => '2AT') }
-      let(:sort) { 'provider.provider_name,name' }
+      let(:sort) { 'name,provider.provider_name' }
       let(:params) { { l: '3', query: '2AT' } }
 
       it 'does not display the sort form' do
@@ -63,22 +63,22 @@ describe 'results' do
 
     context 'descending' do
       let(:sort) { '-provider.provider_name,name' }
-      let(:params) { { sortby: '1', l: '2' } }
+      let(:params) { { sortby: 'provider_desc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
-        expect(descending_stub).to have_been_requested
+        expect(provider_descending_stub).to have_been_requested
       end
 
       it 'is automatically selected' do
-        expect(results_page.sort_form.options.descending).to be_selected
+        expect(results_page.sort_form.options.provider_descending).to be_selected
       end
 
       it 'can be changed to ascending' do
-        results_page.sort_form.options.ascending.select_option
+        results_page.sort_form.options.provider_ascending.select_option
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => '0',
+          'sortby' => 'provider_asc',
           'l' => '2',
         )
       end
@@ -86,22 +86,89 @@ describe 'results' do
 
     context 'ascending' do
       let(:sort) { 'provider.provider_name,name' }
-      let(:params) { { sortby: '0', l: '2' } }
+      let(:params) { { sortby: 'provider_asc', l: '2' } }
 
       it 'requests that the backend sorts the data' do
-        expect(ascending_stub).to have_been_requested
+        expect(provider_ascending_stub).to have_been_requested
       end
 
       it 'is automatically selected' do
-        expect(results_page.sort_form.options.ascending).to be_selected
+        expect(results_page.sort_form.options.provider_ascending).to be_selected
       end
 
       it 'can be changed to descending' do
-        results_page.sort_form.options.descending.select_option
+        results_page.sort_form.options.provider_descending.select_option
         results_page.sort_form.submit.click
 
         expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
-          'sortby' => '1',
+          'sortby' => 'provider_desc',
+          'l' => '2',
+        )
+      end
+    end
+  end
+
+  context 'course sorting' do
+    let(:course_ascending_stub) do
+      stub_courses(
+        query: results_page_parameters('sort' => 'name,provider.provider_name'),
+        course_count: 10,
+      )
+    end
+
+    let(:course_descending_stub) do
+      stub_courses(
+        query: results_page_parameters('sort' => '-name,provider.provider_name'),
+        course_count: 10,
+      )
+    end
+
+    before do
+      course_ascending_stub
+      course_descending_stub
+    end
+
+    context 'descending' do
+      let(:sort) { '-name,provider.provider_name' }
+      let(:params) { { sortby: 'course_desc', l: '2' } }
+
+      it 'requests that the backend sorts the data' do
+        expect(course_descending_stub).to have_been_requested
+      end
+
+      it 'is automatically selected' do
+        expect(results_page.sort_form.options.course_descending).to be_selected
+      end
+
+      it 'can be changed to ascending' do
+        results_page.sort_form.options.course_ascending.select_option
+        results_page.sort_form.submit.click
+
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          'sortby' => 'course_asc',
+          'l' => '2',
+        )
+      end
+    end
+
+    context 'ascending' do
+      let(:sort) { 'name,provider.provider_name' }
+      let(:params) { { sortby: 'course_asc', l: '2' } }
+
+      it 'requests that the backend sorts the data' do
+        expect(course_ascending_stub).to have_been_requested
+      end
+
+      it 'is automatically selected' do
+        expect(results_page.sort_form.options.course_ascending).to be_selected
+      end
+
+      it 'can be changed to descending' do
+        results_page.sort_form.options.course_descending.select_option
+        results_page.sort_form.submit.click
+
+        expect(Rack::Utils.parse_nested_query(URI(current_url).query)).to eq(
+          'sortby' => 'course_desc',
           'l' => '2',
         )
       end
