@@ -42,7 +42,7 @@ describe("Geocoding", () => {
     cy.contains("Primary with English").click();
     cy.contains("Find courses").click();
     cy.get(".govuk-error-summary").should("not.exist");
-    cy.get("[id=filter-line]").contains("Primary with English courses in Westminster, London");
+    cy.get("[id=filter-line]").contains("Primary with English courses in or near Westminster, London");
   });
 
   it("should let users view a course", () => {
