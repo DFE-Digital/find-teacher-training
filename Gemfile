@@ -88,7 +88,7 @@ gem 'skylight'
 gem 'view_component'
 gem 'govuk-components', '~> 3.3.0'
 
-gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v1.5.3'
+gem 'dfe-analytics', github: 'DFE-Digital/dfe-analytics', tag: 'v1.6.0'
 
 # For outgoing http requests
 gem 'http'
