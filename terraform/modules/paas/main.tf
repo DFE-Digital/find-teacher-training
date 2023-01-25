@@ -30,7 +30,7 @@ resource cloudfoundry_app web_app {
   dynamic "routes" {
     for_each = local.web_app_routes
     content {
-      route = routes.value
+      route = routes.value.id
     }
   }
 
@@ -76,18 +76,24 @@ resource cloudfoundry_app worker_app {
 }
 
 resource cloudfoundry_route web_app_cloudapps_digital_route {
+  count = var.disable_routes == false ? 1 : 0
+
   domain   = data.cloudfoundry_domain.london_cloudapps_digital.id
   space    = data.cloudfoundry_space.space.id
   hostname = local.web_app_name
 }
 
 resource cloudfoundry_route web_app_service_gov_uk_route {
+  count = var.disable_routes == false ? 1 : 0
+
   domain   = data.cloudfoundry_domain.find_service_gov_uk.id
   space    = data.cloudfoundry_space.space.id
   hostname = local.service_gov_uk_host_names[var.app_environment_config]
 }
 
 resource "cloudfoundry_route" "web_app_assets_service_gov_uk_route" {
+  count = var.disable_routes == false ? 1 : 0
+
   domain   = data.cloudfoundry_domain.find_service_gov_uk.id
   space    = data.cloudfoundry_space.space.id
   hostname = local.assets_host_names[var.app_environment_config]

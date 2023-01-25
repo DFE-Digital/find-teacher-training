@@ -34,6 +34,8 @@ variable key_vault_infra_secret_name {}
 
 variable azure_credentials { default = null }
 
+variable "disable_routes" { default = false }
+
 #StatusCake
 variable statuscake_alerts {
   type    = map

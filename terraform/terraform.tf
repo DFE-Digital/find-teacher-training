@@ -48,6 +48,7 @@ module "paas" {
   logstash_url              = local.infra_secrets.LOGSTASH_URL
   app_environment_variables = local.paas_app_environment_variables
   enable_external_logging   = var.paas_enable_external_logging
+  disable_routes            = var.disable_routes
 }
 
 provider "statuscake" {
