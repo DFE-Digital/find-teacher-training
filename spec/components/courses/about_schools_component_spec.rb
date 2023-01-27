@@ -127,7 +127,7 @@ describe Courses::AboutSchoolsComponent, type: :component do
 
         result = render_inline(described_class.new(course))
 
-        expect(result.text).not_to include("You'll be placed in different schools during your training. You can't pick which schools you want to be in")
+        expect(result.text).not_to include("You’ll be placed in different schools during your training. You can’t pick which schools you want to be in")
       end
     end
   end
