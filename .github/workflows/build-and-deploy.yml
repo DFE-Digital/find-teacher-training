@@ -79,7 +79,7 @@ jobs:
           key: SNYK_TOKEN
 
       - name: Build Docker Image - base-image target
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           tags: |
             ${{ env.DOCKER_IMAGE}}:base-image-${{ env.BRANCH_TAG }}
@@ -93,7 +93,7 @@ jobs:
             COMMIT_SHA=${{ env.IMAGE_TAG}}
 
       - name: Build Docker Image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           tags: |
             ${{ env.DOCKER_IMAGE}}:${{ env.IMAGE_TAG}}
